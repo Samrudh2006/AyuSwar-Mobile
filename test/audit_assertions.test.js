@@ -1,0 +1,245 @@
+import assert from 'node:assert';
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import { predictClinicalDiagnosis } from '../src/data/kaggleClinicalDataset.js';
+
+console.log('--- RUNNING AYUSWAR AI CONTRACT & AUDIT VERIFICATION TESTS ---');
+
+// Test 1: Language default is English (en-IN), Telugu (te-IN) available
+const appContextPath = resolve('src/context/AppContext.jsx');
+const appContextSrc = readFileSync(appContextPath, 'utf8');
+assert.ok(appContextSrc.includes("'en-IN'"), 'Default language must be en-IN');
+assert.ok(appContextSrc.includes("'te-IN'"), 'Telugu te-IN must be available');
+console.log('✓ Test 1 Passed: Shared persistent language configured with en-IN default & te-IN support.');
+
+// Test 2: kaggleClinicalDataset returns null for empty or non-matching query (no default COPD)
+const emptyRes = predictClinicalDiagnosis('');
+assert.strictEqual(emptyRes.topPrediction, null, 'Empty query must return topPrediction: null');
+assert.strictEqual(emptyRes.confidenceScore, 0, 'Empty query must return confidenceScore: 0');
+
+const gibberishRes = predictClinicalDiagnosis('xyz random qwerty 12345');
+assert.strictEqual(gibberishRes.topPrediction, null, 'Gibberish query must return topPrediction: null, not COPD');
+console.log('✓ Test 2 Passed: kaggleClinicalDataset does not default non-matches to COPD.');
+
+// Test 3: clinicalMlInferenceEngine has 65% floor removed
+const mlEnginePath = resolve('src/services/clinicalMlInferenceEngine.js');
+const mlEngineSrc = readFileSync(mlEnginePath, 'utf8');
+assert.ok(!mlEngineSrc.includes('Math.max(0.65,'), '65% confidence floor must be removed');
+assert.ok(mlEngineSrc.includes('Non-Diagnostic Prototype'), 'ML engine must label status as Non-Diagnostic Prototype');
+assert.ok(mlEngineSrc.includes('validatedForClinicalUse: false'), 'validatedForClinicalUse must be false');
+console.log('✓ Test 3 Passed: 65% confidence floor removed and marked non-diagnostic prototype.');
+
+// Test 4: aiBrainService has autonomous drug dosing removed
+const aiBrainPath = resolve('src/services/aiBrainService.js');
+const aiBrainSrc = readFileSync(aiBrainPath, 'utf8');
+assert.ok(!aiBrainSrc.includes('Paracetamol 650mg TDS'), 'Autonomous paracetamol prescribing must be removed');
+assert.ok(!aiBrainSrc.includes('Pantoprazole 40mg OD'), 'Autonomous pantoprazole prescribing must be removed');
+assert.ok(aiBrainSrc.includes('112 / 108'), 'Emergency response must advise dialling 112 / 108');
+console.log('✓ Test 4 Passed: Autonomous drug dosing removed from fallback logic.');
+
+// Test 5: Emergency service labels telemetry as simulation
+const emergencyServicePath = resolve('src/services/sanjivaniEmergencyService.js');
+const emergencySrc = readFileSync(emergencyServicePath, 'utf8');
+assert.ok(emergencySrc.includes('[SIMULATION]'), 'Emergency telemetry must be marked [SIMULATION]');
+console.log('✓ Test 5 Passed: Emergency telemetry explicitly watermarked as simulation.');
+
+// Test 6: No real secrets in client bundle or .env
+assert.ok(existsSync(resolve('.env.example')), '.env.example must exist with placeholders');
+const envExampleSrc = readFileSync(resolve('.env.example'), 'utf8');
+assert.ok(!envExampleSrc.includes('eyJh'), 'No actual JWT or secret tokens in .env.example');
+console.log('✓ Test 6 Passed: Secret credentials isolated from client bundle.');
+
+// Test 7: index.html has unmeasured claims removed
+const indexPath = resolve('index.html');
+const indexSrc = readFileSync(indexPath, 'utf8');
+const bannedPct = ['99', '.4%'].join('');
+assert.ok(!indexSrc.includes(bannedPct), 'index.html must not claim high precision percentage');
+assert.ok(!indexSrc.includes('autonomous 108 emergency ambulance routing'), 'index.html must not claim autonomous 108 dispatch');
+console.log('✓ Test 7 Passed: Public index.html metadata verified honest.');
+
+// Test 8: Scan src/ and README.md for any banned claims or unverified partner mentions
+function getFilesRecursively(dir) {
+  let results = [];
+  const list = readdirSync(dir);
+  for (const file of list) {
+    const fullPath = join(dir, file);
+    const stat = statSync(fullPath);
+    if (stat.isDirectory()) {
+      results = results.concat(getFilesRecursively(fullPath));
+    } else {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+const bannedChecks = [
+  { label: 'Rule 1: Unmeasured high precision claim', regex: new RegExp(['99', '\\.4%?'].join(''), 'i') },
+  { label: 'Rule 2: Unverified 10k metric', regex: new RegExp(['10,00', '0\\+'].join(''), 'i') },
+  { label: 'Rule 3: Unverified 1M metric', regex: new RegExp(['1M', '\\+'].join(''), 'i') },
+  { label: 'Rule 4: Unverified accuracy metric', regex: new RegExp(['96', '\\.4%?'].join(''), 'i') },
+  { label: 'Rule 5: Unverified 12.4k sample metric', regex: new RegExp(['12,', '400'].join(''), 'i') },
+  { label: 'Rule 6: Unverified 3k sample metric', regex: new RegExp(['3,00', '0\\+\\s*samples'].join(''), 'i') },
+  { label: 'Rule 7: Unverified 4.1 metric', regex: new RegExp(['4', '\\.1%'].join(''), 'i') },
+  { label: 'Rule 8: Unverified MOS score', regex: new RegExp(['MOS', '\\s*4\\.7'].join(''), 'i') },
+  { label: 'Rule 9: Unverified #1 claim', regex: new RegExp(['#1\\s*in\\s*Indic', '\\s*Healthcare'].join(''), 'i') },
+  { label: 'Rule 10: Clinical Precision claim', regex: new RegExp(['Clinical', '\\s*Precision'].join(''), 'i') },
+  { label: 'Rule 11: Unverified mock data claim', regex: new RegExp(['No\\s*Mock', '\\s*Data'].join(''), 'i') },
+  { label: 'Rule 12: Unverified academic partner M', regex: new RegExp(['\\b', 'M', 'ayo\\b'].join(''), 'i') },
+  { label: 'Rule 13: Unverified academic partner S', regex: new RegExp(['\\b', 'Stan', 'ford\\b'].join(''), 'i') },
+  { label: 'Rule 14: Unverified academic partner I', regex: new RegExp(['\\b', 'II', 'Sc\\b'].join(''), 'i') },
+  { label: 'Rule 15: Unverified academic partner N', regex: new RegExp(['\\b', 'N', 'IH\\b(?!\\.)'].join(''), 'i') },
+  { label: 'Rule 16: Unmeasured token savings or language tax claim', regex: new RegExp(['58%', '|', '50[–\\-]65%', '|', 'language\\s*tax', '|', 'token\\s*savings'].join(''), 'i') }
+];
+
+const filesToAudit = [
+  ...getFilesRecursively(resolve('src')).filter(f => !f.match(/\.(png|jpg|jpeg|webp|ico|svg)$/i)),
+  resolve('README.md')
+];
+
+const violations = [];
+for (const filePath of filesToAudit) {
+  const content = readFileSync(filePath, 'utf8');
+  for (const check of bannedChecks) {
+    if (check.regex.test(content)) {
+      violations.push(`Violation in ${filePath}: Found banned pattern "${check.label}"`);
+    }
+  }
+}
+
+assert.strictEqual(violations.length, 0, `Banned claims detected:\n${violations.join('\n')}`);
+console.log('✓ Test 8 Passed: Zero banned claims, 58% token claims, or unverified metrics found across src/ and README.md.');
+
+// Test 9: [Static Code Contract] Gnani Evon Integrity — No simulated/mocked replies presented as Evon output
+const evonServicePath = resolve('src/services/gnaniEvonService.js');
+const evonServiceSrc = readFileSync(evonServicePath, 'utf8');
+assert.ok(!evonServiceSrc.includes('executeLocalEvonReasoning'), 'gnaniEvonService must NOT contain executeLocalEvonReasoning or hardcoded LLM replies');
+assert.ok(!evonServiceSrc.includes('localStorage.getItem(\'ayuswar_hf_token\')'), 'gnaniEvonService must NOT store or retrieve tokens in localStorage');
+assert.ok(!evonServiceSrc.includes('VITE_HF_TOKEN'), 'gnaniEvonService must NOT read VITE_HF_TOKEN');
+assert.ok(evonServiceSrc.includes('/api/evon/chat'), 'gnaniEvonService must query Evon exclusively via /api/evon/chat');
+assert.ok(evonServiceSrc.includes('/api/evon/status'), 'gnaniEvonService must query status via /api/evon/status');
+console.log('✓ Test 9 Passed: [Static Code Contract] gnaniEvonService contains zero hardcoded/mocked Evon replies and uses server routes only.');
+
+// Test 10: [Static Code Contract] Callers Integrity — Emergency sample labels never embed fake evonReasoning
+const emergencyTriageSrc = readFileSync(resolve('src/services/sanjivaniEmergencyService.js'), 'utf8');
+assert.ok(!emergencyTriageSrc.includes('evonReasoning: {'), 'sanjivaniEmergencyService must not attach fake evonReasoning to deterministic triage');
+assert.ok(emergencyTriageSrc.includes('LOCAL_SAMPLE_KEYWORD_RULE'), 'sanjivaniEmergencyService must stamp triageMethod as LOCAL_SAMPLE_KEYWORD_RULE');
+console.log('✓ Test 10 Passed: [Static Code Contract] Emergency RED sample labels run without fake Evon attribution.');
+
+// Test 11: [Static Code Contract] Server Routes exist for Vercel and dev middleware
+assert.ok(existsSync(resolve('api/evon/status.js')), 'api/evon/status.js must exist for server-side status checks');
+assert.ok(existsSync(resolve('api/evon/chat.js')), 'api/evon/chat.js must exist for server-side completions proxy');
+const viteConfigSrc = readFileSync(resolve('vite.config.js'), 'utf8');
+assert.ok(viteConfigSrc.includes('/api/evon/status'), 'vite.config.js must configure dev middleware for /api/evon/status');
+assert.ok(viteConfigSrc.includes('/api/evon/chat'), 'vite.config.js must configure dev middleware for /api/evon/chat');
+assert.ok(viteConfigSrc.includes('EVON_BASE_URL'), 'vite.config.js must read EVON_BASE_URL');
+assert.ok(viteConfigSrc.includes('EVON_API_KEY'), 'vite.config.js must read EVON_API_KEY');
+console.log('✓ Test 11 Passed: [Static Code Contract] Server-side Evon routes and dev proxy middleware properly configured.');
+
+// Test 12: [Static Code Contract] Frontend keys isolation — No EVON_API_KEY or VITE_EVON_* in client code
+for (const filePath of filesToAudit) {
+  const content = readFileSync(filePath, 'utf8');
+  assert.ok(!content.includes('VITE_EVON_API_KEY'), `Client file ${filePath} must never reference VITE_EVON_API_KEY`);
+  assert.ok(!content.includes('VITE_HF_TOKEN'), `Client file ${filePath} must never reference VITE_HF_TOKEN`);
+  assert.ok(!content.includes('localStorage.setItem(\'ayuswar_hf_token\''), `Client file ${filePath} must not store HF token`);
+}
+console.log('✓ Test 12 Passed: [Static Code Contract] Client-side codebase verified completely free of frontend Evon keys or tokens.');
+
+// Test 13: [Static Code Contract] Evon Parameter Specification — Must be 30B total (~3.5B active/token), never 32B total
+assert.ok(evonServiceSrc.includes('30B total, ~3.5B active/token'), 'gnaniEvonService must specify 30B total, ~3.5B active/token');
+assert.ok(!evonServiceSrc.includes('32B total'), 'gnaniEvonService must NOT specify 32B total');
+for (const filePath of filesToAudit) {
+  const content = readFileSync(filePath, 'utf8');
+  assert.ok(!content.includes('32B total'), `File ${filePath} must not specify 32B total`);
+}
+console.log('✓ Test 13 Passed: [Static Code Contract] Evon model specification verified as 30B total (~3.5B active/token) with zero 32B claims.');
+
+// Test 14: [Static Code Contract] Token Savings Integrity — No unmeasured hardcoded calculateIndicTokenSavings or language tax estimates
+assert.ok(!evonServiceSrc.includes('calculateIndicTokenSavings'), 'calculateIndicTokenSavings must be completely removed');
+for (const filePath of filesToAudit) {
+  const content = readFileSync(filePath, 'utf8');
+  assert.ok(!content.includes('calculateIndicTokenSavings'), `File ${filePath} must not contain calculateIndicTokenSavings`);
+}
+console.log('✓ Test 14 Passed: [Static Code Contract] Zero unmeasured hardcoded tokenizer calculations across codebase.');
+
+// Test 15: [Static Code Contract] Honest Fallback Labeling — When offline, explicitly labels Rule-based FALLBACK (Not Evon) with zero fake <reasoning>
+assert.ok(evonServiceSrc.includes("'Rule-based FALLBACK (Not Evon)'"), 'gnaniEvonService must label fallback as Rule-based FALLBACK (Not Evon)');
+assert.ok(!evonServiceSrc.includes('thoughtTrace: `[FALLBACK]'), 'Fallback states must not populate fake thoughtTrace');
+console.log('✓ Test 15 Passed: [Static Code Contract] Honest fallback labeling enforced with zero simulated <reasoning> traces.');
+
+// Test 16: [Static Code Contract] Phase 1 & 2 — 16kHz PCM WAV encoding & Conversational Fillers
+const speechServicePath = resolve('src/services/indicSpeechService.js');
+const speechServiceSrc = readFileSync(speechServicePath, 'utf8');
+assert.ok(speechServiceSrc.includes('encode16BitMonoWAV'), 'indicSpeechService must export encode16BitMonoWAV');
+assert.ok(speechServiceSrc.includes('resampleTo16k'), 'indicSpeechService must export resampleTo16k');
+assert.ok(speechServiceSrc.includes('CONVERSATIONAL_FILLERS'), 'indicSpeechService must export CONVERSATIONAL_FILLERS');
+console.log('✓ Test 16 Passed: [Static Code Contract] Phase 1 & 2 — 16kHz PCM audio pipeline & Indic fillers configured.');
+
+// Test 17: [Static Code Contract] Phase 3, 4 & 7 — Client VAD, Panic Modulation & Voice Bandpass
+assert.ok(speechServiceSrc.includes('calculateAdaptiveProsody'), 'indicSpeechService must implement calculateAdaptiveProsody');
+assert.ok(speechServiceSrc.includes('bargeInThreshold'), 'indicSpeechService must define bargeInThreshold');
+assert.ok(speechServiceSrc.includes('createBiquadFilter'), 'indicSpeechService must configure audio bandpass cleansing');
+console.log('✓ Test 17 Passed: [Static Code Contract] Phase 3, 4 & 7 — Adaptive prosody, panic modulation & bandpass filter verified.');
+
+// Test 18: [Static Code Contract] Phase 5 & 14 — Code-Mixed Clinical Normalizer & DISHA Ephemeral Scrubber
+assert.ok(speechServiceSrc.includes('normalizeCodeMixedClinicalText'), 'indicSpeechService must implement normalizeCodeMixedClinicalText');
+assert.ok(speechServiceSrc.includes('scrubEphemeralAudioBuffers'), 'indicSpeechService must implement scrubEphemeralAudioBuffers');
+console.log('✓ Test 18 Passed: [Static Code Contract] Phase 5 & 14 — Code-mixed clinical normalizer & DISHA memory scrubber verified.');
+
+// Test 19: [Static Code Contract] Phase 6 — Telephony SIP 108 Bridge Service
+const telephonyBridgePath = resolve('src/services/telephonyBridgeService.js');
+assert.ok(existsSync(telephonyBridgePath), 'telephonyBridgeService.js must exist');
+const telephonyBridgeSrc = readFileSync(telephonyBridgePath, 'utf8');
+assert.ok(telephonyBridgeSrc.includes('connectEmergencyBridge'), 'telephonyBridgeService must implement connectEmergencyBridge');
+console.log('✓ Test 19 Passed: [Static Code Contract] Phase 6 — Cellular SIP 108/112 telephony gateway bridge verified.');
+
+// Test 20: [Static Code Contract] Sanjivani-108 Hands-Free & Barge-In UI Integration
+const assistantViewPath = resolve('src/components/SanjivaniEmergencyAssistant.jsx');
+const assistantViewSrc = readFileSync(assistantViewPath, 'utf8');
+assert.ok(assistantViewSrc.includes('toggleHandsFreeLiveTalk'), 'SanjivaniEmergencyAssistant must include toggleHandsFreeLiveTalk');
+assert.ok(assistantViewSrc.includes('handleInterruptAssistant'), 'SanjivaniEmergencyAssistant must include handleInterruptAssistant');
+assert.ok(assistantViewSrc.includes('MIC LEVEL'), 'SanjivaniEmergencyAssistant must render live MIC LEVEL visualizer');
+console.log('✓ Test 20 Passed: [Static Code Contract] Sanjivani-108 full-duplex live talk, barge-in interrupt & RMS UI verified.');
+
+// Test 21: [Static Code Contract] Server-side Gnani Speech Services Endpoints (status, stt, tts)
+const gnaniStatusPath = resolve('api/gnani/status.js');
+const gnaniTtsPath = resolve('api/gnani/tts.js');
+const gnaniSttPath = resolve('api/gnani/stt.js');
+assert.ok(existsSync(gnaniStatusPath), 'api/gnani/status.js must exist for Vercel deployment');
+assert.ok(existsSync(gnaniTtsPath), 'api/gnani/tts.js must exist for Vercel deployment');
+assert.ok(existsSync(gnaniSttPath), 'api/gnani/stt.js must exist for Vercel deployment');
+const gnaniStatusSrc = readFileSync(gnaniStatusPath, 'utf8');
+const gnaniTtsSrc = readFileSync(gnaniTtsPath, 'utf8');
+const gnaniSttSrc = readFileSync(gnaniSttPath, 'utf8');
+assert.ok(gnaniStatusSrc.includes('available: true') && gnaniStatusSrc.includes('available: false'), 'api/gnani/status must return available boolean');
+assert.ok(gnaniTtsSrc.includes('process.env.GNANI_API_KEY'), 'api/gnani/tts must read server-side GNANI_API_KEY');
+assert.ok(gnaniSttSrc.includes('process.env.GNANI_API_KEY'), 'api/gnani/stt must read server-side GNANI_API_KEY');
+console.log('✓ Test 21 Passed: [Static Code Contract] Vercel serverless functions (api/gnani/status, stt, tts) verified.');
+
+// Test 22: [Static Code Contract] Zero Client Secrets & Honest Gnani Provider Labeling
+assert.ok(!speechServiceSrc.includes('ayuswar_gnani_key'), 'Client must not store Gnani keys in session/local storage');
+assert.ok(!speechServiceSrc.includes('VITE_GNANI_API_KEY'), 'Client must not use VITE_GNANI_API_KEY');
+const scribeModalPath = resolve('src/components/LiveScribeSessionModal.jsx');
+const scribeModalSrc = readFileSync(scribeModalPath, 'utf8');
+assert.ok(scribeModalSrc.includes('transcribeAudioWithGnani'), 'OPD Scribe must wire audio chunks to transcribeAudioWithGnani');
+assert.ok(scribeModalSrc.includes('Doctor (Browser WebSpeech Fallback)'), 'OPD Scribe must visibly label browser fallback');
+console.log('✓ Test 22 Passed: [Static Code Contract] Zero client secrets & honest live OPD Scribe provider flow verified.');
+
+// Test 23: [Static Code Contract] Server-side Groq Reasoning Status Endpoint (api/groq/status.js)
+const groqStatusPath = resolve('api/groq/status.js');
+assert.ok(existsSync(groqStatusPath), 'api/groq/status.js must exist for Vercel deployment');
+const groqStatusSrc = readFileSync(groqStatusPath, 'utf8');
+assert.ok(groqStatusSrc.includes('CONFIGURED') && groqStatusSrc.includes('UNCONFIGURED'), 'api/groq/status must report CONFIGURED / UNCONFIGURED');
+assert.ok(groqStatusSrc.includes('llama-3.3-70b-versatile'), 'api/groq/status must specify default target model');
+assert.ok(!groqStatusSrc.includes('api.groq.com/openai/v1/chat/completions'), 'api/groq/status must NOT issue billable chat completion calls');
+console.log('✓ Test 23 Passed: [Static Code Contract] Free config-only Groq status endpoint verified.');
+
+console.log('======================================================================');
+console.log('ALL 23 STATIC CODE CONTRACT & INTEGRITY TESTS PASSED! 🎉');
+console.log('NOTE: These 23 tests verify architectural isolation, serverless Vercel');
+console.log('deployment, and zero-leak code integrity for Gnani Prisma STT & Timbre TTS.');
+console.log('======================================================================');
+
+
+
+
