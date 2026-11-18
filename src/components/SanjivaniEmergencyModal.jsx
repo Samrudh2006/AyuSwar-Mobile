@@ -1,0 +1,1594 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Siren, 
+  Mic, 
+  MicOff, 
+  MapPin, 
+  Activity, 
+  Clock, 
+  CheckCircle2, 
+  PhoneCall, 
+  Phone,
+  PhoneOff,
+  X, 
+  Heart,
+  Radio,
+  Building2,
+  Navigation,
+  Shield,
+  ChevronRight,
+  AlertTriangle,
+  Car,
+  Check,
+  Info,
+  Layers,
+  ExternalLink,
+  Volume2,
+  VolumeX,
+  Play,
+  Pause,
+  RotateCcw,
+  FastForward,
+  Share2,
+  FileText,
+  Compass,
+  Crosshair,
+  BadgeCheck,
+  Edit3,
+  User,
+  Sparkles,
+  Send
+} from 'lucide-react';
+import EmergencyMap from './EmergencyMap';
+import SanjivaniEmergencyAssistant from './SanjivaniEmergencyAssistant';
+import SanjivaniTransferModal from './SanjivaniTransferModal';
+import { 
+  fetchNearbyHospitalsAPI, 
+  fetchRoadRouteGeoJSON
+} from '../services/emergencyHospitalBackend';
+import { 
+  requestRealDeviceLocation, 
+  reverseGeocodeGPS, 
+  sanjivaniAudio,
+  analyzeEmergencyClinicalTriage
+} from '../services/sanjivaniEmergencyService';
+
+/**
+ * Sanjivani-108 prototype GIS console.
+ * Simulated sample-distress workflow with map place search and handoff preview.
+ * No ABDM/HFR verification, hospital contact, dispatch, bed reservation, or clinical triage is performed.
+ */
+export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
+
+  // Real-Time Auto Live Call State (starts connected at 00:01, auto-incrementing every second)
+  const [callStatus, setCallStatus] = useState('ready'); // 'ready' | 'connected' | 'ended'
+  const [elapsedSec, setElapsedSec] = useState(0);
+  const [isMobileScreen, setIsMobileScreen] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= 860 : false
+  );
+  useEffect(() => {
+    const handleResize = () => setIsMobileScreen(window.innerWidth <= 860);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const [lastGpsUpdateSec, setLastGpsUpdateSec] = useState(2);
+  const [showCliExplainer, setShowCliExplainer] = useState(false);
+  const [showAuditTrail, setShowAuditTrail] = useState(false);
+  const [showCallerPicker, setShowCallerPicker] = useState(false);
+
+  // Dedicated Emergency Copilot Floating State
+  const [isCopilotOpen, setIsCopilotOpen] = useState(false);
+
+  // Auto-Filled Bed Handover Modal State (The WOW feature)
+  const [isHandoverModalOpen, setIsHandoverModalOpen] = useState(false);
+
+  // Dynamic Caller Identity (Works for ANY citizen, editable by operator or test presets)
+  const [callerPhone, setCallerPhone] = useState('+91 00000 00007');
+  const [callerName, setCallerName] = useState('Sample Caller (Demo Profile)');
+  const [isEditingPhone, setIsEditingPhone] = useState(false);
+  // Dynamic timestamp helper (HH:MM:SS)
+  const getNowTimeStr = () => {
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  };
+
+  // Dynamic Initial Location: Prefer saved user location, default to Annavaram (User's location)
+  const getInitialCallerLocation = () => {
+    try {
+      const raw = localStorage.getItem('ayuswar_user_location');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed.lat && parsed.lng) {
+          return {
+            lat: Number(parsed.lat),
+            lng: Number(parsed.lng),
+            name: parsed.name || 'Annavaram, Sankhavaram Mandal, Kakinada District',
+            source: parsed.source || 'preset'
+          };
+        }
+      }
+    } catch {}
+    return {
+      lat: 17.2790,
+      lng: 82.4042,
+      name: 'Annavaram, Sankhavaram Mandal, Kakinada District',
+      source: 'preset'
+    };
+  };
+
+  const initialLoc = getInitialCallerLocation();
+  const [callerCoords, setCallerCoords] = useState({ lat: initialLoc.lat, lng: initialLoc.lng });
+  const [geoAddress, setGeoAddress] = useState(initialLoc.name);
+  const [locationSource, setLocationSource] = useState(initialLoc.source);
+  const [isLocationOutOfRegion, setIsLocationOutOfRegion] = useState(false);
+
+  // GPS Detection State
+  const [isDetectingGps, setIsDetectingGps] = useState(true);
+
+  // ABDM HFR Facility Discovery & Dynamic Regional Capability Matching
+  const [hospitalsList, setHospitalsList] = useState([]);
+  const [recommendedHospital, setRecommendedHospital] = useState(null);
+  const [selectedHospital, setSelectedHospital] = useState(null);
+  const [hospitalFilter, setHospitalFilter] = useState('ALL');
+  const [inspectedHospital, setInspectedHospital] = useState(null);
+
+  // Road Routing Geometry
+  const [routeCoordinates, setRouteCoordinates] = useState([]);
+  const [routeDistanceKm, setRouteDistanceKm] = useState(0.85);
+  const [routeEtaMinutes, setRouteEtaMinutes] = useState(4);
+  const [trafficStatus, setTrafficStatus] = useState('Traffic: Normal Flow');
+
+  // Ambulance & First-Responder Vehicle State
+  const [vehicleType, setVehicleType] = useState('ambulance'); // 'ambulance' | 'bike'
+  const [ambulanceData, setAmbulanceData] = useState({
+    id: 'A-12',
+    lat: Number((initialLoc.lat - 0.005).toFixed(5)),
+    lng: Number((initialLoc.lng - 0.004).toFixed(5)),
+    heading: 52,
+    speed: 46,
+    status: 'STANDBY',
+    driver: 'Rajesh Meena (Senior EMT Specialist)',
+    o2Ventilator: 'Active',
+    defibrillator: 'Ready',
+    cardiacMonitor: '12-Lead ECG Active'
+  });
+
+  // Explicit Two-State Dispatch Workflow: 1 (Before Dispatch) | 2 (After Dispatch)
+  const [dispatchState, setDispatchState] = useState(1);
+  const [hospitalAlertSecondsAgo, setHospitalAlertSecondsAgo] = useState(12);
+  const [panToken, setPanToken] = useState(null);
+
+  // Simulation Controls: speedMultiplier 1 | 2 | 5
+  const [isSimRunning, setIsSimRunning] = useState(true);
+  const [simSpeed, setSimSpeed] = useState(1);
+
+  // Live Audio & Acoustic Distress Telemetry
+  const [liveTranscript, setLiveTranscript] = useState('నాకు గుండె నొప్పిగా ఉంది... శ్వాస తీసుకోవడం కష్టంగా ఉంది...');
+  const [englishTranslation, setEnglishTranslation] = useState('I am having acute chest pain and severe breathlessness...');
+  
+  // Acoustic Distress Metrics
+  const [distressIndex, setDistressIndex] = useState(89);
+  const [vocalPitchHz, setVocalPitchHz] = useState(295);
+  const [respirationRate, setRespirationRate] = useState(38);
+  const [confidenceScore, setConfidenceScore] = useState(94);
+
+  // Incident Decision Trace Ledger (Real-time timestamps)
+  const [auditLogs, setAuditLogs] = useState(() => {
+    const d = new Date();
+    const pad = (n) => String(n).padStart(2, '0');
+    const t0 = `${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    return [
+      { time: t0, event: `Emergency 108 voice call session initialized via Telecom SIP` },
+      { time: t0, event: `Local device/map location lookup starting (simulation console)...` }
+    ];
+  });
+
+  // In-App Toast
+  const [toastNotification, setToastNotification] = useState(null);
+
+  // =========================================================================
+  // 1. AUTO RUNNING LIVE TIMER (Starts from 00:01, auto-increments every second)
+  // =========================================================================
+  useEffect(() => {
+    let t = null;
+    if (callStatus === 'connected') {
+      t = setInterval(() => {
+        setElapsedSec((s) => s + 1);
+        setLastGpsUpdateSec((s) => (s >= 4 ? 1 : s + 1));
+        if (dispatchState >= 2) {
+          setHospitalAlertSecondsAgo((s) => s + 1);
+        }
+      }, 1000);
+    }
+    return () => {
+      if (t) clearInterval(t);
+    };
+  }, [callStatus, dispatchState]);
+
+  const formatElapsed = (sec) => {
+    const mins = Math.floor(sec / 60);
+    const s = sec % 60;
+    return `${String(mins).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
+
+  // =========================================================================
+  // 2. INITIAL REAL HARDWARE GPS DISCOVERY
+  // =========================================================================
+  useEffect(() => {
+    let isMounted = true;
+    async function initGPS() {
+      try {
+        const coords = await requestRealDeviceLocation();
+        if (!isMounted) return;
+        if (coords.isOutOfRegion) setIsLocationOutOfRegion(true);
+
+        const hasSavedLocation = (() => {
+          try { return Boolean(localStorage.getItem('ayuswar_user_location')); } catch { return false; }
+        })();
+
+        // If user already has a saved specific location (e.g. Annavaram),
+        // and background detection is just the coarse ISP gateway (Rajahmundry),
+        // do not overwrite the user's specific town with coarse ISP IP!
+        if (coords.isIpGeo && (hasSavedLocation || geoAddress.includes('Annavaram'))) {
+          const nowStr = getNowTimeStr();
+          setAuditLogs((prev) => [
+            { time: nowStr, event: `Using detected map anchor: ${geoAddress}` },
+            { time: nowStr, event: `ISP Gateway detected at ${coords.city || 'Rajahmundry'} (±${coords.accuracy || 1500}m) - Browser GPS blocked` },
+            ...prev
+          ]);
+          return;
+        }
+
+        setCallerCoords({ lat: coords.latitude, lng: coords.longitude });
+        setLocationSource(coords.isHardwareGps ? 'gps' : 'ip');
+        setAmbulanceData((prev) => ({
+          ...prev,
+          lat: Number((coords.latitude - 0.005).toFixed(5)),
+          lng: Number((coords.longitude - 0.004).toFixed(5))
+        }));
+
+        const addr = await reverseGeocodeGPS(coords.latitude, coords.longitude);
+        if (!isMounted) return;
+        const name = addr.displayName || (coords.city ? `${coords.city}, ${coords.region}` : `${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`);
+        setGeoAddress(name);
+
+        const nowStr = getNowTimeStr();
+        const eventText = coords.isHardwareGps
+ ? `Hardware GPS locked: ${name} (±${coords.accuracy || 6}m accuracy)`
+ : `Network ISP Gateway: ${name} (Est. ±${coords.accuracy || 1500}m - Device GPS denied)`;
+
+        setAuditLogs((prev) => [
+          { time: nowStr, event: eventText },
+          ...prev
+        ]);
+      } catch (e) {
+        // Desktop browsers without GNSS use active coordinates smoothly
+      } finally {
+        if (isMounted) setIsDetectingGps(false);
+      }
+    }
+    initGPS();
+    return () => { isMounted = false; };
+  }, []);
+
+  // =========================================================================
+  // 3. FETCH REAL ABDM HFR HOSPITALS AROUND CURRENT CALLER COORDINATES
+  // =========================================================================
+  const loadHospitals = async (coords = callerCoords, addr = geoAddress, filter = hospitalFilter) => {
+    try {
+      const res = await fetchNearbyHospitalsAPI({
+        lat: coords.lat,
+        lng: coords.lng,
+        geoAddress: addr,
+        filterOption: filter
+      });
+      if (res.success && res.hospitals.length > 0) {
+        setHospitalsList(res.hospitals);
+        const best = res.recommendedHospital || res.hospitals[0];
+        setRecommendedHospital(best);
+        setSelectedHospital(best);
+      }
+    } catch (err) {
+      console.warn('Error loading hospitals:', err);
+    }
+  };
+
+  useEffect(() => {
+    loadHospitals(callerCoords, geoAddress, hospitalFilter);
+  }, [callerCoords.lat, callerCoords.lng, geoAddress, hospitalFilter]);
+
+  // Helper: Calculate forward bearing between two coordinates
+  const calculateBearing = (startLat, startLng, endLat, endLng) => {
+    const toRad = (deg) => (deg * Math.PI) / 180;
+    const toDeg = (rad) => (rad * 180) / Math.PI;
+    const φ1 = toRad(startLat);
+    const φ2 = toRad(endLat);
+    const Δλ = toRad(endLng - startLng);
+    const y = Math.sin(Δλ) * Math.cos(φ2);
+    const x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+    return Math.round((toDeg(Math.atan2(y, x)) + 360) % 360);
+  };
+
+  // =========================================================================
+  // 4. COMPUTE TRAFFIC-AWARE ROAD ROUTE VIA MAPBOX DIRECTIONS API
+  // =========================================================================
+  useEffect(() => {
+    if (!selectedHospital) return;
+    async function updateRoute() {
+      const route = await fetchRoadRouteGeoJSON(
+        ambulanceData.lng,
+        ambulanceData.lat,
+        selectedHospital.lng,
+        selectedHospital.lat
+      );
+      setRouteCoordinates(route.coordinates);
+      setRouteDistanceKm(route.distanceKm);
+      setRouteEtaMinutes(route.durationMinutes);
+      if (route.trafficStatus) setTrafficStatus(route.trafficStatus);
+    }
+    updateRoute();
+  }, [
+    selectedHospital?.id,
+    selectedHospital?.lat,
+    selectedHospital?.lng,
+    ambulanceData.lat,
+    ambulanceData.lng,
+    callerCoords.lat,
+    callerCoords.lng
+  ]);
+
+  // =========================================================================
+  // 5. LIVE MOVING EMERGENCY VEHICLE SIMULATION ALONG ROAD NETWORK
+  // =========================================================================
+  useEffect(() => {
+    if (!isSimRunning || !routeCoordinates || routeCoordinates.length === 0) return;
+
+    let stepIndex = 0;
+    const intervalMs = Math.max(300, 1800 / simSpeed);
+
+    const interval = setInterval(() => {
+      if (stepIndex < routeCoordinates.length) {
+        const [nextLng, nextLat] = routeCoordinates[stepIndex];
+        let newHeading = 52;
+        if (stepIndex + 1 < routeCoordinates.length) {
+          const [futureLng, futureLat] = routeCoordinates[stepIndex + 1];
+          newHeading = calculateBearing(nextLat, nextLng, futureLat, futureLng);
+        }
+        setAmbulanceData((prev) => ({
+          ...prev,
+          lat: nextLat,
+          lng: nextLng,
+          heading: newHeading,
+          status: 'EN_ROUTE',
+          speed: Math.round(52 + Math.random() * 14)
+        }));
+        stepIndex++;
+      } else {
+        stepIndex = 0; // Continuous live transit patrol along road network
+      }
+    }, intervalMs);
+
+    return () => clearInterval(interval);
+  }, [isSimRunning, dispatchState, routeCoordinates, simSpeed]);
+
+  const applyLocation = (arg1, arg2, arg3, arg4 = 'manual') => {
+    let lat, lng, placeName, source;
+    if (typeof arg1 === 'object' && arg1 !== null) {
+      lat = Number(arg1.lat ?? arg1.latitude);
+      lng = Number(arg1.lng ?? arg1.lon ?? arg1.longitude);
+      placeName = arg1.placeName || arg1.address || arg1.name || 'Emergency Coordinates';
+      source = arg1.source || arg2 || 'voice';
+    } else {
+      lat = Number(arg1);
+      lng = Number(arg2);
+      placeName = arg3 || 'Emergency Coordinates';
+      source = arg4 || 'manual';
+    }
+
+    if (isNaN(lat) || isNaN(lng)) return;
+
+    const newCoords = { lat, lng };
+    setCallerCoords(newCoords);
+    setGeoAddress(placeName);
+    setLocationSource(source);
+    setAmbulanceData((prev) => ({
+      ...prev,
+      lat: Number((lat - 0.005).toFixed(5)),
+      lng: Number((lng - 0.004).toFixed(5)),
+      status: 'STANDBY'
+    }));
+
+    try {
+      localStorage.setItem('ayuswar_user_location', JSON.stringify({
+        lat,
+        lng,
+        name: placeName,
+        source,
+        timestamp: Date.now()
+      }));
+    } catch {}
+
+    // Immediately discover ABDM facilities around the new coordinates
+    loadHospitals(newCoords, placeName, hospitalFilter);
+
+    const nowStr = getNowTimeStr();
+    setAuditLogs((prev) => [
+ { time: nowStr, event: `Location anchored in real time: ${placeName} (${lat.toFixed(4)}, ${lng.toFixed(4)})`},
+      ...prev
+    ]);
+
+    setToastNotification({
+      title: 'Location & Map Updated',
+      message: `Sample map anchored to ${placeName}. Recalculating nearby map results and estimated route.`
+    });
+    setTimeout(() => setToastNotification(null), 4000);
+  };
+
+  // Explicit Live GPS Detection trigger
+  const handleDetectLiveGPS = async () => {
+    setIsDetectingGps(true);
+    try {
+      const coords = await requestRealDeviceLocation();
+      const newCoords = { lat: coords.latitude, lng: coords.longitude };
+      setCallerCoords(newCoords);
+      setLocationSource(coords.isHardwareGps ? 'gps' : 'ip');
+      setAmbulanceData((prev) => ({
+        ...prev,
+        lat: Number((coords.latitude - 0.005).toFixed(5)),
+        lng: Number((coords.longitude - 0.004).toFixed(5)),
+        status: 'STANDBY'
+      }));
+
+      const addr = await reverseGeocodeGPS(coords.latitude, coords.longitude);
+      const name = addr.displayName || (coords.city ? `${coords.city}, ${coords.region}` : `${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`);
+      setGeoAddress(name);
+
+      const nowStr = getNowTimeStr();
+      const eventText = coords.isHardwareGps
+ ? `Hardware GPS locked: ${name} (±${coords.accuracy || 6}m accuracy)`
+ : `Network ISP Gateway: ${name} (Est. ±${coords.accuracy || 1500}m - Device GPS denied)`;
+
+      setAuditLogs((prev) => [
+        { time: nowStr, event: eventText },
+        ...prev
+      ]);
+
+      if (coords.isHardwareGps) {
+        try {
+          localStorage.setItem('ayuswar_user_location', JSON.stringify({
+            lat: coords.latitude,
+            lng: coords.longitude,
+            name,
+            source: 'gps',
+            timestamp: Date.now()
+          }));
+        } catch {}
+      }
+
+      setToastNotification({
+        title: coords.isHardwareGps ? 'Live GPS Locked' : 'ISP Gateway Located',
+        message: coords.isHardwareGps
+          ? `Position detected near ${name}. Nearby map results updated.`
+          : `Browser denied device GPS. Using nearest network routing center (${name}).`
+      });
+    } catch (err) {
+      setToastNotification({
+        title: 'GNSS Notice',
+        message: 'Type any street or city in the search bar above to position instantly!'
+      });
+    } finally {
+      setIsDetectingGps(false);
+      setTimeout(() => setToastNotification(null), 4500);
+    }
+  };
+
+  // Dispatch Action Trigger: Automatically Opens the Pre-Arrival Bed Handover Form (The WOW feature)
+  const handleOpenDispatchWorkflow = (hospital = selectedHospital) => {
+    if (!hospital) return;
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      try { navigator.vibrate(20); } catch {}
+    }
+    setSelectedHospital(hospital);
+    setIsHandoverModalOpen(true);
+  };
+
+  // Callback when Handshake Form is confirmed & transmitted
+  const handleConfirmHandshake = (generatedToken) => {
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      try { navigator.vibrate([30, 40, 50]); } catch {}
+    }
+    setPanToken(generatedToken);
+    setDispatchState(2);
+    setHospitalAlertSecondsAgo(2);
+
+    const nowStr = getNowTimeStr();
+    setAuditLogs((prev) => [
+      { time: nowStr, event: `Simulation started locally for ${selectedHospital.name}; no dispatcher was contacted` },
+      { time: nowStr, event: `Local handoff preview token generated: [${generatedToken}] (not transmitted)` },
+      { time: nowStr, event: `No hospital notification sent; no resuscitation bay or bed reserved` },
+      ...prev
+    ]);
+
+    setToastNotification({
+      title: 'Simulation started locally',
+      message: `Preview token ${generatedToken} was generated locally. No ambulance, hospital, bed, or bay was contacted or reserved.`
+    });
+    setTimeout(() => setToastNotification(null), 5000);
+  };
+  if (!isOpen) return null;
+
+
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      background: '#050B14',
+      zIndex: 2500,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 0
+    }}>
+      {/* Toast Notification */}
+      {toastNotification && (
+        <div style={{
+          position: 'absolute',
+          top: '20px',
+          right: '24px',
+          zIndex: 2600,
+          background: '#0F274E',
+          border: '1.5px solid #38BDF8',
+          borderRadius: '10px',
+          padding: '12px 18px',
+          boxShadow: '0 10px 30px rgba(0,0,0,0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          maxWidth: '440px'
+        }}>
+          <CheckCircle2 color="#38BDF8" size={22} style={{ flexShrink: 0 }} />
+          <div>
+            <div style={{ fontSize: '13px', fontWeight: 800, color: '#FFFFFF' }}>
+              {toastNotification.title}
+            </div>
+            <div style={{ fontSize: '11px', color: '#D0DFE2', marginTop: '2px' }}>
+              {toastNotification.message}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Console Container (Full-Bleed Edge-to-Edge Fit) */}
+      <div style={{
+        width: '100vw',
+        maxWidth: '100vw',
+        height: '100vh',
+        background: '#050B14',
+        borderRadius: 0,
+        border: 'none',
+        boxShadow: 'none',
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'hidden',
+        position: 'relative',
+        color: '#F8FAFC',
+        fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
+      }}>
+
+        {/* ========================================================
+            1. TOP OPERATIONAL HEADER (INCIDENT TELEMETRY & CALLER CONTROLS)
+            ======================================================== */}
+        <header style={{
+          minHeight: '52px',
+          background: '#07101E',
+          borderBottom: '1px solid #16243C',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: isMobileScreen ? '6px 10px' : '0 16px',
+          flexWrap: 'wrap',
+          rowGap: '6px',
+          flexShrink: 0
+        }}>
+          {/* Left: Branding & Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              background: '#DC2626',
+              padding: '4px 12px 4px 6px',
+              borderRadius: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: 'none'
+            }}>
+              <img 
+                src="/assets/sanjivani_circular_badge.png" 
+                alt="Sanjivani 108 Emblem" 
+                style={{ width: '34px', height: '34px', objectFit: 'cover', borderRadius: '50%', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))' }} 
+              />
+              <span style={{ fontSize: '13px', fontWeight: 900, letterSpacing: '0.5px' }}>
+                SANJIVANI-108
+              </span>
+            </div>
+
+            <div 
+              className="sanjivani-incident-badge"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                background: '#0B172E',
+                border: '1px solid #1C2D4A',
+                padding: '4px 10px',
+                borderRadius: '6px',
+                fontSize: '11px'
+              }}
+            >
+              <span style={{ color: '#38BDF8', fontWeight: 800, letterSpacing: '0.3px' }}>INCIDENT #108-AP-8902</span>
+              <span style={{ color: '#486770' }}>•</span>
+              <span style={{ color: '#10B981', fontWeight: 700 }}>SAMPLE SESSION</span>
+            </div>
+          </div>
+
+          {/* Center: Live Auto Running Timer & Dynamic Caller Identity */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            {/* Auto Live Timer */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              background: callStatus === 'connected' ? '#0A1C36' : '#261111',
+              border: callStatus === 'connected' ? '1px solid #1E3B68' : '1px solid #5C1D1D',
+              padding: '4px 9px',
+              borderRadius: '8px'
+            }}>
+              <Clock size={13} color={callStatus === 'connected' ? '#38BDF8' : '#FCA5A5'} />
+              <div>
+                <div style={{
+                  fontSize: '13px',
+                  fontWeight: 900,
+                  color: callStatus === 'connected' ? '#FFFFFF' : '#FCA5A5',
+                  fontFamily: 'monospace'
+                }}>
+                  {formatElapsed(elapsedSec)}
+                </div>
+                <div style={{ fontSize: '8px', color: '#94A3B8', textTransform: 'uppercase' }}>
+                  {callStatus === 'connected' ? 'Session active' : 'Session ended'}
+                </div>
+              </div>
+            </div>
+
+            {/* Dynamic Editable Caller Phone & Identity */}
+            <div 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: '#0D1A30',
+                padding: '4px 10px',
+                borderRadius: '8px',
+                border: '1px solid #1E2D48',
+                position: 'relative'
+              }}
+            >
+              <PhoneCall size={13} color="#38BDF8" />
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {isEditingPhone ? (
+                    <input
+                      type="text"
+                      value={callerPhone}
+                      onChange={(e) => setCallerPhone(e.target.value)}
+                      onBlur={() => setIsEditingPhone(false)}
+                      onKeyDown={(e) => e.key === 'Enter' && setIsEditingPhone(false)}
+                      autoFocus
+                      style={{
+                        background: '#071224',
+                        color: '#FFFFFF',
+                        border: '1px solid #38BDF8',
+                        borderRadius: '4px',
+                        padding: '1px 5px',
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        width: '120px',
+                        outline: 'none'
+                      }}
+                    />
+                  ) : (
+                    <span 
+                      onClick={() => setIsEditingPhone(true)}
+                      title="Click to edit caller phone number"
+                      style={{ fontSize: '11.5px', fontWeight: 800, color: '#F1F5F9', cursor: 'pointer' }}
+                    >
+                      {callerPhone}
+                    </span>
+                  )}
+
+                  <button
+                    onClick={() => setIsEditingPhone(!isEditingPhone)}
+                    title="Edit Phone"
+                    style={{ background: 'transparent', border: 'none', color: '#94A3B8', cursor: 'pointer', padding: 0 }}
+                  >
+                    <Edit3 size={10} />
+                  </button>
+
+                  <span style={{
+                    fontSize: '8.5px',
+                    background: callStatus === 'connected' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)',
+                    color: callStatus === 'connected' ? '#34D399' : '#FCA5A5',
+                    padding: '1px 5px',
+                    borderRadius: '4px',
+                    fontWeight: 800
+                  }}>
+                    {callStatus === 'connected' ? 'ACTIVE' : 'ENDED'}
+                  </span>
+                </div>
+
+                <div 
+                  onClick={() => setShowCallerPicker(!showCallerPicker)}
+                  style={{ fontSize: '8px', color: '#38BDF8', fontWeight: 600, cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '3px' }}
+                >
+                  <span>{callerName}</span>
+                  <span>▼</span>
+                </div>
+              </div>
+
+              {/* Caller Preset Dropdown */}
+              {showCallerPicker && (
+                <div style={{
+                  position: 'absolute',
+                  top: '100%',
+                  left: 0,
+                  marginTop: '6px',
+                  background: '#0B172E',
+                  border: '1.5px solid #38BDF8',
+                  borderRadius: '8px',
+                  boxShadow: '0 10px 25px rgba(0,0,0,0.8)',
+                  zIndex: 100,
+                  width: '260px',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{ padding: '6px 10px', fontSize: '9px', fontWeight: 800, color: '#94A3B8', background: '#07101E', borderBottom: '1px solid #16243C' }}>
+                    SWITCH SAMPLE CALLER PROFILE
+                  </div>
+                  {[
+                    { name: 'Rao G. (Sample caller - Kakinada)', phone: '+91 00000 00007' },
+                    { name: 'Kumar V. (Highway NH-16)', phone: '+91 99887 65432' },
+                    { name: 'Anita S. (Rural Community)', phone: '+91 88976 11204' },
+                    { name: 'Device GPS sample caller', phone: '+91 00000 00008' }
+                  ].map((c, idx) => (
+                    <div
+                      key={idx}
+                      onClick={() => {
+                        setCallerName(c.name);
+                        setCallerPhone(c.phone);
+                        setShowCallerPicker(false);
+                        if (c.name.includes('GPS')) {
+                          handleDetectLiveGPS();
+                        }
+                      }}
+                      style={{
+                        padding: '8px 10px',
+                        cursor: 'pointer',
+                        borderBottom: '1px solid #13223A',
+                        fontSize: '10.5px'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.background = '#0E2244'}
+                      onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                    >
+                      <div style={{ fontWeight: 800, color: '#FFF' }}>{c.name}</div>
+                      <div style={{ fontSize: '9px', color: '#38BDF8' }}>{c.phone}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right: Standalone GIS & Exit */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Link
+              to="/emergency"
+              onClick={onClose}
+              style={{
+                background: '#0B172E',
+                border: '1px solid #1E3B68',
+                color: '#38BDF8',
+                padding: '6px 10px',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px',
+                fontSize: '11px',
+                fontWeight: 700
+              }}
+              title="Open Standalone Emergency Simulation View"
+            >
+              <Navigation size={12} />
+              <span>GIS View</span>
+            </Link>
+
+            <button
+              onClick={onClose}
+              title="Exit Console"
+              style={{
+                background: '#1E293B',
+                border: '1px solid #334155',
+                color: '#F1F5F9',
+                padding: '6px 12px',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                fontSize: '11px',
+                fontWeight: 800
+              }}
+            >
+              <span>Exit</span>
+              <X size={14} />
+            </button>
+          </div>
+        </header>
+
+        {/* ========================================================
+            GEOGRAPHIC ANCHOR & LIVE TELEMETRY BAR
+            ======================================================== */}
+        <div style={{
+          background: '#081427',
+          borderBottom: '1px solid #162640',
+          padding: '8px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '14px',
+          flexShrink: 0
+        }}>
+          {/* Left: Verified Location Anchor Pill */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            fontSize: '11px',
+            color: '#94A3B8',
+            flex: 1,
+            overflow: 'hidden'
+          }}>
+            <span style={{
+              background: locationSource === 'gps' ? '#065F46' : '#0B2144',
+              color: locationSource === 'gps' ? '#6EE7B7' : '#38BDF8',
+              border: `1px solid ${locationSource === 'gps' ? '#10B981' : '#1E3B68'}`,
+              padding: '3px 8px',
+              borderRadius: '6px',
+              fontSize: '10px',
+              fontWeight: 800,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              flexShrink: 0
+            }}>
+              <MapPin size={11} />
+ <span>{locationSource === 'gps'? 'Device GPS detected': 'Map anchor'}</span>
+            </span>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#F1F5F9', fontWeight: 600 }}>
+              {geoAddress || callerLocationName}
+            </span>
+          </div>
+
+          {/* Right: Real-time Coordinates & Auto GPS Detection */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            {callerCoords?.lat != null && callerCoords?.lng != null && (
+              <span style={{
+                fontFamily: 'monospace',
+                fontSize: '10.5px',
+                color: '#38BDF8',
+                background: '#0B1E3B',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                border: '1px solid #1E3A68'
+              }}>
+                {callerCoords.lat.toFixed(4)}°N, {callerCoords.lng.toFixed(4)}°E
+              </span>
+            )}
+
+            <button
+              onClick={handleDetectLiveGPS}
+              disabled={isDetectingGps}
+              title="Detect patient GPS location"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px',
+                background: isDetectingGps ? '#0B1E3B' : '#0284C7',
+                border: 'none',
+                color: '#FFFFFF',
+                borderRadius: '6px',
+                padding: '4px 9px',
+                fontSize: '10.5px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
+              }}
+            >
+              <Crosshair size={12} className={isDetectingGps ? 'animate-spin' : ''} />
+              <span>{isDetectingGps ? 'Locating...' : 'Auto GPS'}</span>
+            </button>
+          </div>
+        </div>
+
+        {/* IP Geolocation Warning Strip */}
+        {locationSource === 'ip' && (
+          <div style={{
+            background: 'rgba(245, 158, 11, 0.12)',
+            borderBottom: '1px solid rgba(245, 158, 11, 0.35)',
+            padding: '5px 16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            fontSize: '11px',
+            color: '#FDE68A',
+            flexShrink: 0
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <AlertTriangle size={13} color="#F59E0B" />
+              <span>
+                <strong>Device GPS not granted in browser:</strong> Showing nearest Reliance Jio telecom routing hub (Rajamahendravaram).
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <span>In Annavaram?</span>
+              <button
+                onClick={() => applyLocation(17.2790, 82.4042, 'Annavaram, Sankhavaram Mandal, Kakinada District', 'preset')}
+                style={{
+                  background: '#D97706',
+                  color: '#FFF',
+                  border: 'none',
+                  borderRadius: '4px',
+                  padding: '2px 8px',
+                  fontSize: '10.5px',
+                  fontWeight: 800,
+                  cursor: 'pointer'
+                }}
+              >
+                Switch to Annavaram (Home)
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================
+            2. MAIN OPERATIONAL WORKSPACE (FULL HEIGHT MAP + DECISION PANEL)
+            ======================================================== */}
+        <div 
+          className="sanjivani-main-grid"
+          style={{
+            flex: 1,
+            display: 'grid',
+            gridTemplateColumns: '1.9fr 1.1fr',
+            minHeight: 0,
+            overflow: 'hidden',
+            position: 'relative'
+          }}
+        >
+          {/* --------------------------------------------------------
+              LEFT: DOMINANT MAPBOX HIGH-CONTRAST EMS NAVIGATION MAP (63%)
+              -------------------------------------------------------- */}
+          <div 
+            className="sanjivani-map-panel"
+            style={{ position: 'relative', width: '100%', height: '100%', borderRight: '1px solid #16243C' }}
+          >
+            <EmergencyMap
+              callerCoords={callerCoords}
+              hospitals={hospitalsList}
+              selectedHospital={selectedHospital}
+              onSelectHospital={(hosp) => setSelectedHospital(hosp)}
+              ambulanceData={ambulanceData}
+              vehicleType={vehicleType}
+              routeCoordinates={routeCoordinates}
+              routeDistanceKm={routeDistanceKm}
+              routeEtaMinutes={routeEtaMinutes}
+              trafficStatus={trafficStatus}
+              isDispatched={dispatchState >= 2}
+            />
+          </div>
+
+          {/* --------------------------------------------------------
+              RIGHT: DECISION, DISPATCH & ABDM HFR PANEL (37%)
+              -------------------------------------------------------- */}
+          <div 
+            className="sanjivani-decision-panel"
+            style={{
+              background: '#060D1A',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              padding: '14px',
+              gap: '12px',
+              minHeight: 0
+            }}
+          >
+            {/* CARD 1: ACTION WORKFLOW (TWO-STATE: BEFORE / AFTER DISPATCH) */}
+            <div style={{
+              background: '#09152C',
+              borderRadius: '12px',
+              border: '1px solid #1E2F50',
+              padding: '14px',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.4)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 800, color: dispatchState >= 2 ? '#10B981' : '#EF4444', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+ {dispatchState >= 2 ? 'SIMULATION ACTIVE — PREVIEW ONLY': 'SIMULATION READY — NO DISPATCH'}
+                </span>
+                <span style={{ fontSize: '9.5px', background: 'rgba(16, 185, 129, 0.2)', color: '#34D399', padding: '2px 8px', borderRadius: '10px', fontWeight: 800 }}>
+                  Simulation unit
+                </span>
+              </div>
+
+              {/* State 1: Before Dispatch */}
+              {dispatchState === 1 && selectedHospital && (
+                <div>
+                  {isLocationOutOfRegion && (
+                    <div style={{
+                      background: 'rgba(245, 158, 11, 0.15)',
+                      border: '1px solid rgba(245, 158, 11, 0.4)',
+                      color: '#FDE68A',
+                      padding: '5px 8px',
+                      borderRadius: '6px',
+                      fontSize: '10px',
+                      lineHeight: 1.35,
+                      marginBottom: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}>
+                      <AlertTriangle size={13} color="#F59E0B" style={{ flexShrink: 0 }} />
+                      <span><strong>Reference Simulation:</strong> User GPS outside India. Anchored to an Indian sample map area (Hyderabad demonstration anchor).</span>
+                    </div>
+                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '9px', background: '#0F2547', border: '1px solid #1E3E6E', color: '#38BDF8', padding: '1px 5px', borderRadius: '4px', fontFamily: 'monospace', fontWeight: 700 }}>
+                      Map place: {selectedHospital.id}
+                    </span>
+                    <span style={{ fontSize: '9px', background: selectedHospital.ownership?.toLowerCase().includes('government') ? 'rgba(16, 185, 129, 0.2)' : 'rgba(56, 189, 248, 0.15)', color: selectedHospital.ownership?.toLowerCase().includes('government') ? '#34D399' : '#38BDF8', padding: '1px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                      {selectedHospital.ownership}
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: '15px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.25, marginTop: '4px' }}>
+                    {selectedHospital.name}
+                  </div>
+                  <div style={{ fontSize: '10.5px', color: '#698892', marginTop: '2px' }}>
+                    {selectedHospital.address}
+                  </div>
+
+                  {/* Route & Bed Numbers */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    margin: '10px 0',
+                    background: '#0D1E3A',
+                    padding: '8px 12px',
+                    borderRadius: '8px',
+                    border: '1px solid #1C3860'
+                  }}>
+                    <div>
+                      <div style={{ fontSize: '17px', fontWeight: 900, color: '#38BDF8' }}>
+                        {selectedHospital.etaMinutes} min
+                      </div>
+                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Estimated travel</div>
+                    </div>
+                    <div style={{ width: '1px', height: '22px', background: '#1E3658' }} />
+                    <div>
+                      <div style={{ fontSize: '17px', fontWeight: 900, color: '#FFFFFF' }}>
+                        {selectedHospital.distanceKm} km
+                      </div>
+                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Distance</div>
+                    </div>
+                    <div style={{ width: '1px', height: '22px', background: '#1E3658' }} />
+                    <div>
+                      <div style={{ fontSize: '17px', fontWeight: 900, color: '#10B981' }}>
+                        Not verified
+                      </div>
+                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Beds unknown</div>
+                    </div>
+                  </div>
+
+                  {/* Why A-12 & Why this Real Hospital */}
+                  <div style={{ background: '#071224', padding: '8px 10px', borderRadius: '8px', fontSize: '10px', color: '#D0DFE2', marginBottom: '10px', lineHeight: 1.4 }}>
+                    <div><strong>Why simulation vehicle?</strong> Demonstrates route and ETA concepts only; vehicle type and equipment are not verified.</div>
+                    <div style={{ marginTop: '3px' }}><strong>Why {selectedHospital.shortName}?</strong> {selectedHospital.matchReason}; capability is not verified.</div>
+                  </div>
+
+                  {/* Prominent Dispatch Button (Auto-opens Pre-arrival Bed Handover Form) */}
+                  <button
+                    onClick={() => handleOpenDispatchWorkflow(selectedHospital)}
+                    style={{
+                      width: '100%',
+                      background: '#DC2626',
+                      color: '#FFFFFF',
+                      border: 'none',
+                      borderRadius: '8px',
+                      padding: '12px',
+                      fontSize: '13px',
+                      fontWeight: 900,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      boxShadow: '0 4px 14px rgba(239, 68, 68, 0.45)'
+                    }}
+                  >
+                    <Siren size={16} />
+ <span>Start simulation & preview handoff ➔ {selectedHospital.shortName}</span>
+                  </button>
+                </div>
+              )}
+
+              {/* State 2: After Dispatch */}
+              {dispatchState >= 2 && selectedHospital && (
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <div>
+                      <div style={{ fontSize: '15px', fontWeight: 900, color: '#38BDF8' }}>
+                        Simulation vehicle en route
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#94A3B8' }}>
+                        Speed: {ambulanceData.speed} km/h • ETA: {routeEtaMinutes} min remaining
+                      </div>
+                    </div>
+                    <div style={{ display: 'flex', gap: '6px' }}>
+                      <button
+                        onClick={() => setDispatchState(1)}
+                        style={{ background: '#0E1E38', border: '1px solid #1E3456', color: '#38BDF8', borderRadius: '6px', padding: '4px 8px', fontSize: '10px', fontWeight: 700, cursor: 'pointer' }}
+                      >
+                        Change
+                      </button>
+                      <button
+                        onClick={() => {
+                          setDispatchState(1);
+                          setToastNotification({ title: 'Simulation stopped', message: 'Preview returned to standby; no ambulance was involved.' });
+                        }}
+                        style={{ background: '#3F1212', border: '1px solid #7F1D1D', color: '#FCA5A5', borderRadius: '6px', padding: '4px 8px', fontSize: '10px', fontWeight: 700, cursor: 'pointer' }}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* ABDM Pre-Arrival Notification Status */}
+                  <div style={{
+                    marginTop: '8px',
+                    padding: '8px 10px',
+                    borderRadius: '8px',
+                    background: '#071628',
+                    border: '1px solid #0F2D54',
+                    fontSize: '10.5px'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '3px' }}>
+                      <span style={{ color: '#38BDF8', fontWeight: 800 }}>
+                        Local handoff preview:
+                      </span>
+                      <span style={{ fontSize: '8.5px', background: '#0F2547', color: '#38BDF8', padding: '1px 5px', borderRadius: '4px', fontFamily: 'monospace' }}>
+                        {panToken || 'SIM-PREVIEW-0000'}
+                      </span>
+                    </div>
+                    <div style={{ color: '#10B981', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> NOT SENT</span>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> UNKNOWN</span>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> NO BAY RESERVED</span>
+                    </div>
+                    <div style={{ fontSize: '9px', color: '#698892', marginTop: '3px' }}>
+                      Preview generated locally; no CMO or hospital confirmation
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* CARD 2: NEARBY MAP FACILITIES (CAPABILITY NOT VERIFIED) */}
+            <div style={{
+              background: '#09152C',
+              borderRadius: '12px',
+              border: '1px solid #1E2F50',
+              padding: '14px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '10px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Building2 size={14} color="#38BDF8" />
+                  <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFFFFF' }}>Nearby facility map results</span>
+                </div>
+                <span style={{ fontSize: '9px', color: '#F59E0B', fontWeight: 700 }}>
+                  Demo only • no dispatch
+                </span>
+              </div>
+
+              {/* Fastest estimated nearby map result */}
+              {recommendedHospital && (
+                <div 
+                  onClick={() => setSelectedHospital(recommendedHospital)}
+                  style={{
+                    background: selectedHospital?.id === recommendedHospital.id ? 'rgba(56, 189, 248, 0.12)' : '#0C1A34',
+                    border: selectedHospital?.id === recommendedHospital.id ? '1.5px solid #38BDF8' : '1px solid #1D355C',
+                    borderRadius: '10px',
+                    padding: '10px 12px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span style={{ fontSize: '9.5px', fontWeight: 800, background: '#DC2626', color: '#FFF', padding: '1px 6px', borderRadius: '4px' }}>
+ ★ FASTEST ESTIMATE
+                      </span>
+                      <span style={{ fontSize: '8.5px', background: '#0F2547', color: '#38BDF8', padding: '1px 5px', borderRadius: '4px', fontFamily: 'monospace' }}>
+                        {recommendedHospital.id}
+                      </span>
+                    </div>
+                    <span style={{ fontSize: '11px', fontWeight: 900, color: '#38BDF8' }}>
+                      {recommendedHospital.etaMinutes} min ETA • {recommendedHospital.distanceKm} km
+                    </span>
+                  </div>
+
+                  <div style={{ fontSize: '13.5px', fontWeight: 900, color: '#FFFFFF' }}>
+                    {recommendedHospital.name}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '9.5px', color: '#94A3B8', marginTop: '4px', flexWrap: 'wrap' }}>
+                    <span style={{ color: '#F59E0B', fontWeight: 700 }}>Capability not verified</span>
+                    <span style={{ color: '#F59E0B', fontWeight: 700 }}>Beds not verified</span>
+                    <span style={{ color: '#38BDF8', fontWeight: 700 }}>No bay reserved</span>
+                  </div>
+
+                  <div style={{ marginTop: '6px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '9px', color: '#D0DFE2', marginBottom: '2px' }}>
+                      <span>Capacity</span>
+                      <span style={{ color: '#F59E0B', fontWeight: 700 }}>Not verified</span>
+                    </div>
+                    <div style={{ height: '4px', background: '#132442', borderRadius: '2px', overflow: 'hidden' }}>
+                      <div style={{ width: '0%', height: '100%', background: '#10B981', borderRadius: '2px' }} />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Filter Pills */}
+              <div>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', marginBottom: '4px' }}>
+                  Map results near anchor ({hospitalsList.length} found)
+                </div>
+                <div style={{ display: 'flex', gap: '4px', overflowX: 'auto', paddingBottom: '3px' }}>
+                  {[
+                    { id: 'ALL', label: `All (${hospitalsList.length})` },
+                    { id: 'FASTEST_ETA', label: 'Fastest estimate' },
+                    { id: 'NEAREST', label: 'Nearest' }
+                  ].map((f) => (
+                    <button
+                      key={f.id}
+                      onClick={() => setHospitalFilter(f.id)}
+                      style={{
+                        padding: '3px 7px',
+                        borderRadius: '6px',
+                        border: hospitalFilter === f.id ? '1px solid #38BDF8' : '1px solid #1E2F4C',
+                        background: hospitalFilter === f.id ? '#0284C7' : '#0B172E',
+                        color: hospitalFilter === f.id ? '#FFF' : '#94A3B8',
+                        fontSize: '9px',
+                        fontWeight: 700,
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap'
+                      }}
+                    >
+                      {f.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Complete list of nearby map results */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', maxHeight: '220px', overflowY: 'auto' }}>
+                {hospitalsList.map((hosp, idx) => {
+                  const isSel = selectedHospital?.id === hosp.id;
+                  const isGovt = false;
+                  return (
+                    <div
+                      key={hosp.id}
+                      onClick={() => setSelectedHospital(hosp)}
+                      style={{
+                        background: isSel ? 'rgba(56, 189, 248, 0.12)' : '#0A162C',
+                        border: isSel ? '1px solid #38BDF8' : '1px solid #16243C',
+                        borderRadius: '7px',
+                        padding: '6px 9px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
+                        <span style={{ fontSize: '9.5px', color: '#698892', fontWeight: 800 }}>{idx + 1}.</span>
+                        <div style={{ minWidth: 0 }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                            <div style={{ fontSize: '11px', fontWeight: 700, color: '#F1F5F9', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {hosp.name}
+                            </div>
+                            {isGovt && (
+                              <span style={{ fontSize: '8px', background: 'rgba(16, 185, 129, 0.2)', color: '#34D399', padding: '0 4px', borderRadius: '3px', fontWeight: 700 }}>
+                                GOVT
+                              </span>
+                            )}
+                          </div>
+                          <div style={{ fontSize: '8.5px', color: '#94A3B8' }}>
+                            {hosp.distanceKm} km • map result • capacity not verified
+                          </div>
+                        </div>
+                      </div>
+
+                      <div style={{ textAlign: 'right', flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <div>
+                          <div style={{ fontSize: '11.5px', fontWeight: 800, color: isSel ? '#38BDF8' : '#FFFFFF' }}>
+                            {hosp.etaMinutes} min
+                          </div>
+                        </div>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setInspectedHospital(hosp);
+                          }}
+                          style={{
+                            background: '#0D1C34',
+                            border: '1px solid #1C3358',
+                            color: '#38BDF8',
+                            fontSize: '9px',
+                            cursor: 'pointer',
+                            padding: '2px 5px',
+                            borderRadius: '4px',
+                            fontWeight: 700
+                          }}
+                        >
+                          Details ⓘ
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================================
+            4. DEDICATED SANJIVANI-108 EMERGENCY AI COPILOT
+            (Serious Red Theme • Live Voice • Driver Mobile • Auto Guidance)
+            ======================================================== */}
+        <SanjivaniEmergencyAssistant
+          isOpen={isCopilotOpen}
+          onToggle={() => setIsCopilotOpen(!isCopilotOpen)}
+          callerPhone={callerPhone}
+          callerName={callerName}
+          geoAddress={geoAddress}
+          selectedHospital={selectedHospital}
+          ambulanceData={ambulanceData}
+          hospitalsList={hospitalsList}
+          liveTranscript={liveTranscript}
+          englishTranslation={englishTranslation}
+          onUpdateTranscript={(t, tr) => {
+            setLiveTranscript(t);
+            setEnglishTranslation(tr);
+            if (t) {
+              const triage = analyzeEmergencyClinicalTriage(t);
+              if (triage.triageLevel === 'RED') {
+                setDistressIndex(94);
+                setVocalPitchHz(315);
+                setRespirationRate(38);
+              } else if (triage.triageLevel === 'YELLOW') {
+                setDistressIndex(68);
+                setVocalPitchHz(240);
+                setRespirationRate(26);
+              }
+            }
+          }}
+          onApplyLocation={applyLocation}
+          onSelectHospital={(hosp) => setSelectedHospital(hosp)}
+          onDispatch={handleOpenDispatchWorkflow}
+          onUpdateCallerName={(name) => setCallerName(name)}
+          onUpdateCallerPhone={(phone) => setCallerPhone(phone)}
+          onOpenHandoverModal={() => setIsHandoverModalOpen(true)}
+          distressIndex={distressIndex}
+          vocalPitchHz={vocalPitchHz}
+          respirationRate={respirationRate}
+          isSimRunning={isSimRunning}
+          onToggleSim={() => setIsSimRunning(!isSimRunning)}
+          simSpeed={simSpeed}
+          onChangeSimSpeed={(s) => setSimSpeed(s)}
+          dispatchState={dispatchState}
+        />
+
+        {/* ========================================================
+            5. AUTO-FILLED ABDM PRE-ARRIVAL BED HANDOVER MODAL (ePCR)
+            ======================================================== */}
+        <SanjivaniTransferModal
+          isOpen={isHandoverModalOpen}
+          onClose={() => setIsHandoverModalOpen(false)}
+          hospital={selectedHospital}
+          callerPhone={callerPhone}
+          geoAddress={geoAddress}
+          liveTranscript={liveTranscript}
+          englishTranslation={englishTranslation}
+          distressIndex={distressIndex}
+          vocalPitchHz={vocalPitchHz}
+          respirationRate={respirationRate}
+          ambulanceData={ambulanceData}
+          onConfirmHandshake={handleConfirmHandshake}
+        />
+
+        {/* ========================================================
+            INCIDENT AUDIT TRAIL / DECISION TRACE DRAWER
+            ======================================================== */}
+        {showAuditTrail && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.8)',
+            backdropFilter: 'blur(8px)',
+            zIndex: 140,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '24px'
+          }}>
+            <div style={{
+              background: '#09152B',
+              border: '1px solid #1E3456',
+              borderRadius: '14px',
+              padding: '20px',
+              maxWidth: '620px',
+              width: '100%',
+              maxHeight: '80vh',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.9)'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px', borderBottom: '1px solid #16243C', paddingBottom: '8px' }}>
+                <div style={{ fontSize: '15px', fontWeight: 900, color: '#FFF' }}>
+                  Incident Decision Trace & Audit Trail (#108-AP-8902)
+                </div>
+ <button onClick={() => setShowAuditTrail(false)} style={{ background: 'transparent', border: 'none', color: '#94A3B8', cursor: 'pointer', fontSize: '16px'}}>✕</button>
+              </div>
+
+              <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {auditLogs.map((log, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', fontSize: '11px', background: '#0B172E', padding: '8px 12px', borderRadius: '6px' }}>
+                    <span style={{ color: '#38BDF8', fontFamily: 'monospace', fontWeight: 800 }}>{log.time}</span>
+                    <span style={{ color: '#D0DFE2' }}>{log.event}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ========================================================
+            MAP FACILITY DETAILS (CAPABILITY NOT VERIFIED)
+            ======================================================== */}
+        {inspectedHospital && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(0, 0, 0, 0.8)',
+            backdropFilter: 'blur(10px)',
+            zIndex: 150,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}>
+            <div style={{
+              background: '#09152B',
+              border: '1.5px solid #1E3E6E',
+              borderRadius: '16px',
+              padding: '22px',
+              maxWidth: '580px',
+              width: '100%',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.95)'
+            }}>
+              {/* Header */}
+              <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '12px' }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '9px', background: '#0284C7', color: '#FFF', padding: '2px 6px', borderRadius: '4px', fontWeight: 800, fontFamily: 'monospace' }}>
+                      Map result: {inspectedHospital.id}
+                    </span>
+                    <span style={{ fontSize: '9px', background: inspectedHospital.ownership?.toLowerCase().includes('government') ? 'rgba(16, 185, 129, 0.2)' : 'rgba(56, 189, 248, 0.2)', color: inspectedHospital.ownership?.toLowerCase().includes('government') ? '#34D399' : '#38BDF8', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>
+                      {inspectedHospital.ownership}
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '16px', fontWeight: 900, color: '#FFF', marginTop: '4px' }}>
+                    {inspectedHospital.officialName || inspectedHospital.name}
+                  </div>
+                  <div style={{ fontSize: '10.5px', color: '#94A3B8', marginTop: '2px' }}>
+                    {inspectedHospital.address}
+                  </div>
+                </div>
+ <button onClick={() => setInspectedHospital(null)} style={{ background: 'transparent', border: 'none', color: '#94A3B8', cursor: 'pointer', fontSize: '16px'}}>✕</button>
+              </div>
+
+              {/* Map distance and estimated travel time */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', margin: '12px 0', background: '#0B172E', padding: '10px', borderRadius: '8px', border: '1px solid #162947' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '9.5px', color: '#94A3B8' }}>Distance</div>
+                  <div style={{ fontSize: '15px', fontWeight: 900, color: '#38BDF8' }}>{inspectedHospital.distanceKm} km</div>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '9.5px', color: '#94A3B8' }}>Estimated travel</div>
+                  <div style={{ fontSize: '15px', fontWeight: 900, color: '#FFFFFF' }}>{inspectedHospital.etaMinutes} min</div>
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <div style={{ fontSize: '9.5px', color: '#94A3B8' }}>Beds</div>
+                  <div style={{ fontSize: '13px', fontWeight: 900, color: '#F59E0B' }}>Not verified</div>
+                </div>
+              </div>
+
+              {/* Capability status */}
+              <div style={{ background: '#061020', border: '1px solid #142845', borderRadius: '8px', padding: '10px', marginBottom: '10px' }}>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#38BDF8', textTransform: 'uppercase', marginBottom: '6px' }}>
+                  Capability status (not verified)
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '5px', fontSize: '10px', color: '#D0DFE2' }}>
+                  <div>• <strong>Trauma/critical care:</strong> not verified</div>
+                  <div>• <strong>Cath lab:</strong> not verified</div>
+                  <div>• <strong>ICU/ventilators:</strong> not verified</div>
+                  <div>• <strong>Blood bank:</strong> not verified</div>
+                </div>
+              </div>
+
+              {/* Operational status */}
+              <div style={{ background: '#061020', border: '1px solid #142845', borderRadius: '8px', padding: '10px', marginBottom: '12px' }}>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#10B981', textTransform: 'uppercase', marginBottom: '6px' }}>
+                  Operational status (no live telemetry)
+                </div>
+                <div style={{ fontSize: '10px', color: '#D0DFE2', lineHeight: 1.5 }}>
+                  <div>• <strong>Emergency acceptance:</strong> <span style={{ color: '#F59E0B', fontWeight: 700 }}>unknown; call 112/108</span></div>
+                  <div>• <strong>Resuscitation bay:</strong> <span style={{ color: '#F59E0B', fontWeight: 700 }}>not reserved</span></div>
+                  <div>• <strong>Match rationale:</strong> {inspectedHospital.matchReason}</div>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  setSelectedHospital(inspectedHospital);
+                  setInspectedHospital(null);
+                  handleOpenDispatchWorkflow(inspectedHospital);
+                }}
+                style={{
+                  width: '100%',
+                  background: '#DC2626',
+                  color: '#FFF',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '10px',
+                  fontSize: '12.5px',
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Siren size={15} />
+                <span>Select Route & Open Handover Form Here</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
