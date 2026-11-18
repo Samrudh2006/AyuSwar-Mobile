@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('ayuswar_selected_language');
+          if (saved) { document.documentElement.lang = saved; }
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Core SEO & Entity Meta Tags -->
+    <title>AyuSwar AI: Sovereign Indic Clinical Voice Scribe</title>
+    <meta name="description" content="AyuSwar AI is an ambient clinical voice scribe for Indian healthcare, transcribing Telugu, Hindi, and English into ABDM FHIR JSON with spoken Audio-Rx." />
+    <meta name="keywords" content="AyuSwar AI, Clinical Voice Scribe, Ambient Clinical Intelligence, Telugu Medical Voice AI, Hindi Clinical ASR, ABDM FHIR R4 Schema, Primary Health Center AI, Rural Health Scribe Bharat, Non-Diagnostic Biomarker Screening, Sanjivani 108 Simulated Triage, Jan Aushadhi Generic Substitution, Kurnool PHC AI, Rayalaseema Health Tech, DPDP Act 2023 Ephemeral Voice" />
+    <meta name="author" content="AyuSwar AI Engineering Consortium" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="rating" content="general" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="canonical" href="https://ayuswar-ai.vercel.app/" />
+
+    <!-- Geo & Local SEO Meta Tags (Andhra Pradesh, Telangana & Pan-India) -->
+    <meta name="geo.region" content="IN-AP;IN-TG" />
+    <meta name="geo.placename" content="Kurnool, Andhra Pradesh, India; Hyderabad, Telangana, India" />
+    <meta name="geo.position" content="15.8281;78.0373" />
+    <meta name="ICBM" content="15.8281, 78.0373" />
+    <meta name="coverage" content="Worldwide" />
+    <meta name="distribution" content="Global" />
+    <meta name="target" content="all" />
+
+    <!-- Multi-Lingual Alternate hreflang Tags (AEO & Search Engine Internationalization) -->
+    <link rel="alternate" hreflang="en-IN" href="https://ayuswar-ai.vercel.app/" />
+    <link rel="alternate" hreflang="te-IN" href="https://ayuswar-ai.vercel.app/?lang=te" />
+    <link rel="alternate" hreflang="hi-IN" href="https://ayuswar-ai.vercel.app/?lang=hi" />
+    <link rel="alternate" hreflang="ta-IN" href="https://ayuswar-ai.vercel.app/?lang=ta" />
+    <link rel="alternate" hreflang="kn-IN" href="https://ayuswar-ai.vercel.app/?lang=kn" />
+    <link rel="alternate" hreflang="mr-IN" href="https://ayuswar-ai.vercel.app/?lang=mr" />
+    <link rel="alternate" hreflang="bn-IN" href="https://ayuswar-ai.vercel.app/?lang=bn" />
+    <link rel="alternate" hreflang="x-default" href="https://ayuswar-ai.vercel.app/" />
+
+    <!-- LLM Context & Generative Engine Meta Reference -->
+    <link rel="alternate" type="text/plain" href="https://ayuswar-ai.vercel.app/llms.txt" title="LLM Context Specification" />
+
+    <!-- Favicons, Apple Touch, and Web App Manifest -->
+    <link rel="icon" type="image/png" href="/assets/ayuswar_emblem_mark.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/assets/ayuswar_emblem_mark.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="application-name" content="AyuSwar AI" />
+    <meta name="apple-mobile-web-app-title" content="AyuSwar AI" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#0F4C5C" />
+    <meta name="color-scheme" content="light" />
+
+    <!-- Open Graph Protocol (Rich Social, WhatsApp, LinkedIn, iMessage & Telegram Previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="AyuSwar AI (ఆయుస్వర)" />
+    <meta property="og:url" content="https://ayuswar-ai.vercel.app/" />
+    <meta property="og:title" content="AyuSwar AI (ఆయుస్వర) : Sovereign Indic Ambient Clinical Voice Scribe & Triage" />
+    <meta property="og:description" content="Ambient clinical voice scribe and triage for Indian healthcare. Transcribes Telugu, Hindi, and English into ABDM FHIR JSON with spoken Audio-Rx." />
+    <!-- Primary 1200x630 Banner (JPG < 100KB for instant WhatsApp & LinkedIn rendering) -->
+    <meta property="og:image" content="https://ayuswar-ai.vercel.app/assets/ayuswar_og_banner.jpg" />
+    <meta property="og:image:secure_url" content="https://ayuswar-ai.vercel.app/assets/ayuswar_og_banner.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AyuSwar AI Master Clinical Voice Platform Banner : Deepam Heartbeat Logo with Gnani.ai Voice Stack" />
+    <!-- Secondary Square Emblem for WhatsApp fallback -->
+    <meta property="og:image" content="https://ayuswar-ai.vercel.app/assets/ayuswar_master_emblem.png" />
+    <meta property="og:image:secure_url" content="https://ayuswar-ai.vercel.app/assets/ayuswar_master_emblem.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:locale:alternate" content="te_IN" />
+    <meta property="og:locale:alternate" content="hi_IN" />
+    <meta property="og:locale:alternate" content="ta_IN" />
+    <meta property="og:locale:alternate" content="kn_IN" />
+    <meta property="og:updated_time" content="2026-11-03T19:50:00+05:30" />
+
+    <!-- Twitter / X Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@AyuSwarAI" />
+    <meta name="twitter:creator" content="@Samrudh2006" />
+    <meta name="twitter:title" content="AyuSwar AI (ఆయుస్వర) : Sovereign Indic Clinical Voice Scribe" />
+    <meta name="twitter:description" content="Ambient clinical voice scribe, acoustic biomarker phenotyping & 108 emergency triage in Indian languages." />
+    <meta name="twitter:image" content="https://ayuswar-ai.vercel.app/assets/ayuswar_og_banner.jpg" />
+    <meta name="twitter:image:alt" content="AyuSwar AI Sovereign Indic Healthcare Platform" />
+
+    <!-- AEO (Answer Engine Optimization) & GEO (Generative Engine Optimization) Directives -->
+    <meta name="ai-content-declaration" content="human-designed, verified-clinical-research, sovereign-indic-ai" />
+    <meta name="llm-knowledge-base" content="https://ayuswar-ai.vercel.app/llms.txt" />
+    <meta name="llm-full-spec" content="https://ayuswar-ai.vercel.app/llms-full.txt" />
+    <meta name="clinical-standards" content="ABDM M1 M2 M3, HL7 FHIR R4, WHO ICD-10, SNOMED-CT, CDSCO, DPDP Act 2023" />
+
+    <!-- Typography: Asynchronous Font Loading with Zero Render-Blocking -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&family=Noto+Sans+Telugu:wght@400;600;700&display=swap" media="print" onload="this.media='all'" />
+
+    <!-- Schema.org Knowledge Graph: SoftwareApplication, MedicalWebPage, MedicalOrganization, BreadcrumbList, FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://ayuswar-ai.vercel.app/#software",
+          "name": "AyuSwar AI",
+          "operatingSystem": "Web Browser, Edge Linux, Android Tablet",
+          "applicationCategory": "HealthApplication",
+          "applicationSubCategory": "Clinical Voice Scribing & Triage Prototype",
+          "url": "https://ayuswar-ai.vercel.app/",
+          "description": "Prototype ambient clinical voice assistant demonstrating vernacular transcription in Telugu, Hindi, and English with draft ABDM FHIR JSON structures for physician review and simulated 108 emergency triage.",
+          "softwareVersion": "2.5.0-prototype",
+          "inLanguage": ["en-IN", "te-IN", "hi-IN", "ta-IN", "kn-IN", "mr-IN", "bn-IN"],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          },
+          "featureList": [
+            "Ambient Vernacular OPD Scribing Demo (Telugu, Hindi, English)",
+            "Draft ABDM FHIR R4 JSON Formatting for Attending Clinician Review",
+            "Simulated 108 Emergency Distress Protocol & CPR Metronome",
+            "Experimental DSP Acoustic Signal Feature Analysis (Non-Diagnostic)",
+            "Vernacular Spoken Audio-Rx Dosage Demonstration with Synchronized Highlights",
+            "Computer Vision Medicine Blister Strip Scanning Simulation",
+            "In-memory audio processing designed with DPDP Act 2023 awareness (prototype, compliance not certified)",
+            "WHO ICD-10 & SNOMED CT Colloquial Idiom Crosswalk"
+          ]
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ayuswar-ai.vercel.app/#article",
+          "headline": "AyuSwar AI: Sovereign Indic Ambient Clinical Voice Scribe & Triage",
+          "description": "Ambient clinical voice scribe for Indian healthcare, transcribing Telugu, Hindi, and English into ABDM FHIR JSON with spoken Audio-Rx.",
+          "mainEntityOfPage": "https://ayuswar-ai.vercel.app/",
+          "datePublished": "2026-03-01T09:00:00+05:30",
+          "dateModified": "2026-11-07T19:00:00+05:30",
+          "inLanguage": "en-IN",
+          "author": {
+            "@type": "Person",
+            "name": "Satya Samrudh Dwivedula",
+            "url": "https://github.com/Samrudh2006",
+            "jobTitle": "Lead Systems Architect & Creator",
+            "sameAs": ["https://github.com/Samrudh2006", "https://github.com/Samrudh2006/Ayuswar-Ai"],
+            "affiliation": {
+              "@type": "Organization",
+              "name": "Aditya University"
+            }
+          },
+          "publisher": {
+            "@id": "https://ayuswar-ai.vercel.app/#organization"
+          },
+          "about": [
+            { "@type": "Thing", "name": "Ambient Clinical Intelligence" },
+            { "@type": "Thing", "name": "Indic Voice ASR & TTS" },
+            { "@type": "Thing", "name": "ABDM FHIR R4 Standards" },
+            { "@type": "Thing", "name": "Jan Aushadhi Generic Substitution" }
+          ]
+        },
+        {
+          "@type": "MedicalWebPage",
+          "@id": "https://ayuswar-ai.vercel.app/#webpage",
+          "url": "https://ayuswar-ai.vercel.app/",
+          "name": "AyuSwar AI : Ambient Clinical Voice Scribe & Triage Prototype",
+          "author": {
+            "@type": "Person",
+            "name": "Satya Samrudh Dwivedula",
+            "url": "https://github.com/Samrudh2006",
+            "jobTitle": "Lead Systems Architect & Creator",
+            "sameAs": ["https://github.com/Samrudh2006", "https://github.com/Samrudh2006/Ayuswar-Ai"]
+          },
+          "publisher": {
+            "@id": "https://ayuswar-ai.vercel.app/#organization"
+          },
+          "description": "Explores how voice AI, acoustic signal processing, and open health standards assist doctors in high-volume rural Indian primary health centers.",
+          "aspect": ["Healthcare Documentation", "Medical Informatics", "Speech Recognition", "Clinical Triage Simulation"],
+          "audience": {
+            "@type": "MedicalAudience",
+            "audienceType": "MedicalPractitioners, Primary Care Physicians, Health Informaticians, Health System Researchers"
+          },
+          "about": [
+            { "@type": "Thing", "name": "Ayushman Bharat Digital Mission (ABDM)" },
+            { "@type": "Thing", "name": "HL7 FHIR R4 Clinical Data Standard" },
+            { "@type": "Thing", "name": "Indic Speech Recognition and Diarization" },
+            { "@type": "Thing", "name": "Digital Personal Data Protection Act 2023 (DPDP)" }
+          ],
+          "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [
+              ".aeo-speakable-summary",
+              ".aeo-direct-definition",
+              ".aeo-faq-answer"
+            ]
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://ayuswar-ai.vercel.app/#breadcrumbs",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://ayuswar-ai.vercel.app/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Clinical Solutions",
+              "item": "https://ayuswar-ai.vercel.app/solutions"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Technology Blueprint",
+              "item": "https://ayuswar-ai.vercel.app/technology"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Medicine Scanner",
+              "item": "https://ayuswar-ai.vercel.app/scanner"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "Spoken Audio-Rx",
+              "item": "https://ayuswar-ai.vercel.app/audio-rx"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Acoustic Biomarker Lab",
+              "item": "https://ayuswar-ai.vercel.app/acoustic-lab"
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "name": "Indic Language Matrix",
+              "item": "https://ayuswar-ai.vercel.app/language-matrix"
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "name": "Clinical Benchmarks",
+              "item": "https://ayuswar-ai.vercel.app/benchmarks"
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "name": "Synthetic Datasets",
+              "item": "https://ayuswar-ai.vercel.app/datasets"
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "name": "Emergency Triage",
+              "item": "https://ayuswar-ai.vercel.app/emergency"
+            }
+          ]
+        },
+        {
+          "@type": "MedicalOrganization",
+          "@id": "https://ayuswar-ai.vercel.app/#organization",
+          "name": "AyuSwar AI Research Initiative",
+          "alternateName": "ఆయుస్వర AI",
+          "url": "https://ayuswar-ai.vercel.app/",
+          "logo": "https://ayuswar-ai.vercel.app/assets/ayuswar_official_logo.png",
+          "image": "https://ayuswar-ai.vercel.app/assets/ayuswar_og_banner.jpg",
+          "founder": {
+            "@type": "Person",
+            "name": "Samrudh",
+            "url": "https://github.com/Samrudh2006",
+            "jobTitle": "Lead Systems Architect & Creator",
+            "sameAs": ["https://github.com/Samrudh2006/Ayuswar-Ai"]
+          },
+          "funder": {
+            "@type": "Organization",
+            "name": "Gnani.ai",
+            "url": "https://gnani.ai",
+            "description": "Provider of production-grade Indian-language voice AI models and challenge compute sponsor."
+          },
+          "publishingPrinciples": "https://ayuswar-ai.vercel.app/terms",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Open Source Clinical Informatics",
+            "url": "https://github.com/Samrudh2006/Ayuswar-Ai/issues"
+          },
+          "sameAs": [
+            "https://github.com/Samrudh2006/Ayuswar-Ai",
+            "https://gnani.ai/",
+            "https://abdm.gov.in/"
+          ],
+          "areaServed": [
+            { "@type": "AdministrativeArea", "name": "Andhra Pradesh" },
+            { "@type": "AdministrativeArea", "name": "Telangana" },
+            { "@type": "Country", "name": "India" }
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rayalaseema Health Tech Innovation Corridor",
+            "addressLocality": "Kurnool",
+            "addressRegion": "Andhra Pradesh",
+            "postalCode": "518002",
+            "addressCountry": "IN"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://ayuswar-ai.vercel.app/#website",
+          "url": "https://ayuswar-ai.vercel.app/",
+          "name": "AyuSwar AI",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://ayuswar-ai.vercel.app/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ayuswar-ai.vercel.app/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is AyuSwar AI?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AyuSwar AI is a voice technology prototype exploring ambient clinical scribing in Indian languages (Telugu, Hindi, and Indian English). It demonstrates how spoken clinical dialogues can be transcribed into draft structured notes for review and validation by attending physicians, eliminating screen burnout in primary health centers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does AyuSwar AI handle rural Indian colloquial idioms?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AyuSwar AI implements a deterministic ontology crosswalk that resolves visceral regional phrases (such as Telugu 'పీకల్లో పిల్లికూతలు' or Hindi 'पसली चलना') into standardized international diagnostic classifications (WHO ICD-10 R06.2 and SNOMED CT 195967001) without generative hallucination."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does AyuSwar AI perform real emergency dispatch or autonomous medical diagnosis?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. All emergency workflows, ambulance telemetry, and hospital notifications in AyuSwar AI are simulated demonstration flows. It does not dispatch real emergency services or perform autonomous clinical diagnosis. For actual medical emergencies in India, always dial 112 or 108."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is AyuSwar AI officially certified by ABDM or government authorities?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. AyuSwar AI conforms to open HL7 FHIR R4 JSON schemas as an engineering prototype, but it is not a certified medical device and has not received official government accreditation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How is patient voice privacy protected under DPDP Act 2023?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In this prototype, microphone audio is processed in volatile memory and purged after the draft note is generated; no audio recordings are stored on external cloud infrastructure. Structured draft data may be kept locally on the device for the offline workflow. Full DPDP compliance is not claimed."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does the Spoken Audio-Rx feature assist illiterate patients?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Spoken Audio-Rx module synthesizes the doctor's spoken prescription instructions in the patient's native dialect (e.g., Telugu, Hindi) and delivers it via WhatsApp with word-by-word highlighted dosage cards matched to color-coded pill foils."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What acoustic bio-signal features does AyuSwar AI analyze?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AyuSwar AI includes an experimental DSP acoustic engine for non-diagnostic demonstration. It analyzes audio frequency features, spectral centroid, and rolloff from microphone audio for educational signal exploration."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can AyuSwar AI operate without active internet connectivity?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. AyuSwar AI is architected with an Offline Edge OS prototype that runs quantized speech models and rule-based crosswalks locally on clinic hardware, ensuring operational continuity in rural and remote health centers."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Which regional dialects of Telugu does AyuSwar AI support?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AyuSwar AI supports the four major Telugu regional dialect clusters: Rayalaseema (Kurnool, Anantapur, Kadapa, Chittoor), Telangana (Hyderabad, Warangal, Karimnagar), Coastal Andhra (Krishna, Guntur, Godavari), and Uttarandhra (Visakhapatnam, Srikakulam)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does AyuSwar AI support Jan Aushadhi generic substitution?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Computer Vision Medicine Scanner reads active pharmaceutical ingredients from medicine blister strips and queries the Pradhan Mantri Bhartiya Janaushadhi Pariyojana (PMBJP) formulary to suggest equivalent, affordable generic substitutes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does AyuSwar AI compare to Western clinical scribes like Nuance DAX or Ambience Healthcare?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "While Western ambient scribes target English EHR workflows in private US hospital networks, AyuSwar AI is built ground-up for high-volume rural Primary Health Centers in India. It solves for low-bandwidth rural zones, colloquial Indian dialect idioms (Telugu, Hindi), Jan Aushadhi generic cost savings, and direct compliance with India's DPDP Act 2023 and ABDM M3 standards."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+      @keyframes ayuswarPulse {
+        0% { transform: translateX(-60px); }
+        50% { transform: translateX(80px); }
+        100% { transform: translateX(180px); }
+      }
+    </style>
+    <link rel="stylesheet" href="/fonts/fonts.css">
+    <link rel="preload" as="image" href="/assets/consultation-indian-generated-20261117.webp" fetchpriority="high" media="(max-width: 768px)" />
+  </head>
+  <body>
+    <!-- Interactive Client SPA Root with Pre-rendered Semantic HTML for AI Crawlers & AEO (Overwritten upon React Hydration) -->
+    <div id="root">
+      <!-- Clean Instant Clinical Loading Shell for Human Users (React Replaces on Mount) -->
+      <div id="app-loading-shell" style="min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #FAF8F5; font-family: 'Albert Sans', -apple-system, BlinkMacSystemFont, sans-serif; color: #081C24;">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
+          <img src="/assets/ayuswar_emblem_mark.png" alt="AyuSwar AI" width="56" height="56" style="width: 56px; height: 56px; object-fit: contain;" />
+          <div>
+            <div style="font-size: 26px; font-weight: 850; color: #0F4C5C; letter-spacing: -0.5px; line-height: 1.1;">
+              AyuSwar AI <span style="font-size: 20px; font-weight: 700; color: #0F4C5C;">(ఆయుస్వర)</span>
+            </div>
+            <div style="font-size: 13px; font-style: italic; color: #486770; margin-top: 2px;">
+              Voice-First Sovereign Health Assistant for Bharat
+            </div>
+          </div>
+        </div>
+        <div style="width: 180px; height: 3px; background: #D0DFE2; border-radius: 9999px; overflow: hidden; position: relative;">
+          <div style="width: 60px; height: 100%; background: #0F4C5C; border-radius: 9999px; animation: ayuswarPulse 1.2s infinite ease-in-out;"></div>
+        </div>
+        <div style="font-size: 11.5px; font-weight: 750; color: #0F4C5C; margin-top: 14px; letter-spacing: 0.5px;">
+          INITIALIZING CLINICAL WORKSPACE...
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <div class="aeo-crawler-monograph" style="max-width: 960px; margin: 0 auto; padding: 40px 24px; font-family: 'Albert Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #FAF8F5; color: #091E26; line-height: 1.65;">
+        <header style="border-bottom: 2px solid #D0DFE2; padding-bottom: 24px; margin-bottom: 32px;">
+          <div style="font-size: 13px; font-weight: 800; color: #0F4C5C; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
+            AyuSwar AI (ఆయుస్వర) Clinical Research Monograph · Sovereign Indic AI
+          </div>
+          <h1 style="font-size: 34px; line-height: 1.2; color: #081C24; margin-bottom: 12px; font-weight: 850;">
+            AyuSwar AI: Sovereign Indic Ambient Clinical Voice Scribe & Triage
+          </h1>
+          <p style="font-size: 18px; color: #2C4A52; font-weight: 500; margin: 0;">
+            Engineered by <a href="https://github.com/Samrudh2006" rel="author" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Satya Samrudh Dwivedula</a> (Aditya University). Built ground-up for high-volume rural Primary Health Centers in India.
+          </p>
+        </header>
+
+        <!-- Question Section 1 -->
+        <article style="margin-bottom: 36px;">
+          <h2 style="font-size: 24px; color: #0F4C5C; margin-bottom: 14px; font-weight: 800;">
+            What is AyuSwar AI and why was it built?
+          </h2>
+          <p>
+            AyuSwar AI (ఆయుస్వర) is an ambient clinical voice scribe built to eliminate documentation burnout for rural doctors in Bharat by listening to doctor-patient conversations in Indic languages and automatically drafting structured ABDM FHIR clinical notes. In rural Primary Health Centers across Andhra Pradesh, Telangana, and rural India, the doctor-to-patient ratio stands at a sobering 1:1,511. A single government medical officer routinely attends to 80 to 120 patients during a four-hour outpatient morning shift, leaving less than three minutes per patient.
+          </p>
+          <p>
+            When Electronic Health Record (EHR) initiatives mandate typed digital documentation, doctors face an agonizing tradeoff: stare into a keyboard and monitor, or look into the anxious eyes of an ailing patient. As a result, documentation becomes sparse, medication errors compound, and clinicians suffer profound digital burnout.
+          </p>
+          <p>
+            Existing ambient scribing solutions like Nuance DAX or Ambience Healthcare are built exclusively for English-speaking hospital chains in the United States. They fail catastrophically in India because they cannot decipher rural dialects, they hallucinate when patients express symptoms through colloquial visceral metaphors, they require high-cost subscription tiers, and they send sensitive voice recordings overseas.
+          </p>
+          <p>
+            AyuSwar AI solves this foundational national problem. Powered by Gnani.ai's production-grade Indic speech engines and open clinical standards, AyuSwar listens passively to raw doctor-patient conversations in vernacular Indian languages (Telugu, Hindi, Tamil, Kannada, Marathi, Bengali, and Indian English). It translates spoken colloquialisms into formal WHO ICD-10 and SNOMED-CT coded clinical summaries, validates drug interactions, drafts ABDM M3 FHIR R4 JSON bundles, and gives illiterate patients a spoken WhatsApp prescription card that speaks their dosage schedule in their native tongue.
+          </p>
+        </article>
+
+        <!-- Question Section 2 -->
+        <article style="margin-bottom: 36px;">
+          <h2 style="font-size: 24px; color: #0F4C5C; margin-bottom: 14px; font-weight: 800;">
+            What clinical problems does AyuSwar solve in rural Primary Health Centers?
+          </h2>
+          <p>
+            In rural Indian Primary Health Centers where a single medical officer sees 100 to 150 patients in a single shift, AyuSwar AI eliminates the 42% of consultation time lost to manual typing and paper documentation. The system provides real-time ambient transcription, automated ICD-10 coding, Jan Aushadhi generic drug cost optimization, and vernacular patient audio-prescriptions.
+          </p>
+
+          <!-- Nested H3 Case Study (Simulated Demonstration) -->
+          <div style="background: #FFFFFF; border: 1.5px solid #D0DFE2; border-radius: 16px; padding: 24px; margin-top: 18px;">
+            <div style="font-size: 11px; font-weight: 800; color: #D64550; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px;">
+              Simulated Clinical Demonstration (Synthetic Profile)
+            </div>
+            <h3 style="font-size: 20px; color: #081C24; margin-bottom: 12px; font-weight: 800;">
+              Simulated Case: Ananya's Nocturnal Dyspnea Scenario (Kurnool Dialect Walkthrough)
+            </h3>
+            <p>
+              <strong>Synthetic Encounter Profile:</strong> Ananya, a simulated 54-year-old agricultural laborer profile from a village near Kurnool, arrives at the rural Primary Health Center accompanied by her daughter.
+            </p>
+            <p>
+              <strong>Simulated Doctor-Patient Dialogue:</strong> When the physician asks about her condition, the simulated patient speaks in colloquial Rayalaseema Telugu: <em>"రాత్రి వేళల్లో ఆయాసం ఎక్కువైంది మేడమ్, ఛాతీ బిగుతుగా ఉండి పీకల్లో పిల్లికూతలు వస్తున్నాయి, సరిగ్గా నిద్రపట్టడం లేదు."</em> (Literally: "In the night times breathlessness increased madam, chest is tight and cat-cries are coming in my throat, I cannot sleep properly.")
+            </p>
+            <p>
+              <strong>Demonstrated Workflow & Deterministic Crosswalk:</strong>
+            </p>
+            <ul style="padding-left: 20px; line-height: 1.8;">
+              <li><strong>Speech Recognition Pipeline:</strong> Demonstrates real-time ambient dual-speaker audio capture intended for vernacular Indic speech recognition via Gnani Prisma v3 models with browser audio fallback.</li>
+              <li><strong>Idiom Crosswalk:</strong> AyuSwar's deterministic crosswalk maps the cultural Telugu idiom <em>"పీకల్లో పిల్లికూతలు"</em> (cat sounds in throat) directly to standardized <strong>WHO ICD-10 Code R06.2 (Expiratory Wheezing)</strong> and <strong>SNOMED-CT Concept 195967001</strong> prior to any downstream reasoning.</li>
+              <li><strong>Clinical Decision Support Demonstration:</strong> The prototype cross-references prescribed generic salbutamol and budesonide against the Jan Aushadhi (PMBJP) public national formulary, checking for potential adverse drug interactions and presenting generic price ceiling comparisons.</li>
+              <li><strong>ABDM M3 FHIR JSON Serialization:</strong> Encodes the structured consultation encounter into an HL7 FHIR R4 document bundle prepared for physician verification and digital sign-off.</li>
+              <li><strong>Vernacular Audio-Rx Playback:</strong> For patients unable to read printed English or vernacular scripts, AyuSwar demonstrates a 30-second audio prescription note in regional Telugu with color-coded morning/evening dosage cards.</li>
+            </ul>
+          </div>
+        </article>
+
+        <!-- Question Section 3 -->
+        <article style="margin-bottom: 36px;">
+          <h2 style="font-size: 24px; color: #0F4C5C; margin-bottom: 14px; font-weight: 800;">
+            What are the four pillars of AyuSwar's sovereign voice architecture?
+          </h2>
+          <p>
+            AyuSwar AI is built on four sovereign architectural pillars: 48kHz acoustic signal processing, Gnani Indic voice engines, deterministic clinical safeguards, and zero-data-leakage ABDM M3 compliance.
+          </p>
+          
+          <div style="margin-top: 16px;">
+            <h3 style="font-size: 18px; color: #081C24; font-weight: 750; margin-bottom: 6px;">
+              1. High-Fidelity Acoustic Digital Signal Processing (DSP)
+            </h3>
+            <p style="margin-bottom: 16px;">
+              AyuSwar operates a 48kHz audio capture pipeline utilizing 2048-point Fast Fourier Transforms (FFT) with physical tone precision within ±2Hz. Dual-channel WebRTC audio isolates physician and patient speech streams, performing real-time Voice Activity Detection (VAD) and signal-to-noise ratio (SNR) estimation to prevent transcription drift in noisy rural clinic environments.
+            </p>
+
+            <h3 style="font-size: 18px; color: #081C24; font-weight: 750; margin-bottom: 6px;">
+              2. Gnani.ai Indic Voice Infrastructure (Prisma v3 & Timbre)
+            </h3>
+            <p style="margin-bottom: 16px;">
+              Leveraging Gnani's enterprise-grade speech models, AyuSwar supports real-time automated speech recognition (ASR) via Prisma v3 across major Indian language families: Telugu, Hindi, Tamil, Kannada, Marathi, Bengali, and Indian English. Synthesis via Gnani Timbre delivers warm, natural vernacular cadence calibrated for patient reassurance and clear clinical comprehension.
+            </p>
+
+            <h3 style="font-size: 18px; color: #081C24; font-weight: 750; margin-bottom: 6px;">
+              3. Deterministic Clinical Safety Sentinel (Zero Hallucination)
+            </h3>
+            <p style="margin-bottom: 16px;">
+              Medical documentation permits zero hallucination tolerance. AyuSwar isolates conversational LLM reasoning (Gnani Evon 30B / DeepSeek / Ollama Local) behind deterministic clinical guards. Every extracted symptom, medication, and dosage must match verified SNOMED-CT clinical ontologies and Jan Aushadhi pharmacopeia tables before it can populate an official record.
+            </p>
+
+            <h3 style="font-size: 18px; color: #081C24; font-weight: 750; margin-bottom: 6px;">
+              4. ABDM M3 & DPDP Act 2023 Sovereignty (HL7 FHIR R4 Bundles)
+            </h3>
+            <p style="margin-bottom: 16px;">
+              In this prototype, audio is processed in volatile memory and purged once structured draft notes are generated (no audio retained on disk); structured drafts may persist locally on device for the offline workflow. The output is HL7 FHIR R4-shaped, aligned to Ayushman Bharat Digital Mission milestone formats (prototype, not certified), and every note requires clinician review in the demo workflow.
+            </p>
+          </div>
+        </article>
+
+        <!-- Question Section 4: FAQ -->
+        <article style="background: #FFFFFF; border: 1.5px solid #D0DFE2; border-radius: 16px; padding: 24px; margin-bottom: 36px;">
+          <h2 style="font-size: 24px; color: #0F4C5C; margin-bottom: 16px; font-weight: 800;">
+            Frequently Asked Questions (FAQ) about AyuSwar AI
+          </h2>
+
+          <div style="margin-bottom: 18px;">
+            <h3 style="font-size: 17px; color: #081C24; font-weight: 750; margin-bottom: 4px;">
+              Can AyuSwar AI operate without active internet connectivity in rural clinics?
+            </h3>
+            <p>
+              Yes, AyuSwar AI operates an Offline Edge architecture with local Web Audio DSP caching that buffers encounters offline and syncs when connectivity is restored.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <h3 style="font-size: 17px; color: #081C24; font-weight: 750; margin-bottom: 4px;">
+              How does AyuSwar AI map colloquial Telugu idioms to ICD-10 without hallucination?
+            </h3>
+            <p>
+              AyuSwar AI uses deterministic ontology crosswalks that map vernacular cultural expressions like 'పీకల్లో పిల్లికూతలు' directly to WHO ICD-10 R06.2 and SNOMED-CT 195967001 without generative hallucination.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <h3 style="font-size: 17px; color: #081C24; font-weight: 750; margin-bottom: 4px;">
+              How is patient voice privacy protected under India's DPDP Act 2023?
+            </h3>
+            <p>
+              In this prototype, audio streams are processed in volatile memory and purged immediately upon note generation, so no audio is stored on external cloud disks; structured draft data may persist locally on the device for offline review.
+            </p>
+          </div>
+
+          <div style="margin-bottom: 18px;">
+            <h3 style="font-size: 17px; color: #081C24; font-weight: 750; margin-bottom: 4px;">
+              How much does AyuSwar AI cost to deploy on sovereign infrastructure?
+            </h3>
+            <p>
+              AyuSwar AI costs ₹0 to deploy because it runs entirely on CNCF open-source technologies including K3s, Prometheus, Grafana, Traefik, and local or sovereign Indic APIs without expensive proprietary cloud lock-in.
+            </p>
+          </div>
+
+          <div>
+            <h3 style="font-size: 17px; color: #081C24; font-weight: 750; margin-bottom: 4px;">
+              Does AyuSwar AI perform real emergency dispatch or autonomous medical diagnosis?
+            </h3>
+            <p>
+              No, all emergency workflows, ambulance telemetry, and hospital notifications in AyuSwar AI are simulated research demonstrations, and real emergencies anywhere in India should dial 112 or 108 immediately.
+            </p>
+          </div>
+        </article>
+
+        <!-- Section 5: Author, Team & Governance -->
+        <article style="background: #F0F7F8; border: 1.5px solid #0F4C5C; border-radius: 16px; padding: 24px; margin-bottom: 36px;">
+          <h2 style="font-size: 22px; color: #081C24; margin-bottom: 12px; font-weight: 800;">
+            About the Author, Clinical Engineering Team, and Governance
+          </h2>
+          <p style="margin-bottom: 10px;">
+            <strong>Lead Systems Architect & Creator:</strong> <a href="https://github.com/Samrudh2006" rel="author" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Satya Samrudh Dwivedula</a>, B.Tech Computer Science & Engineering, Aditya University. Explore the <a href="https://github.com/Samrudh2006" target="_blank" rel="noopener noreferrer" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Author Bio & GitHub Profile</a>.
+          </p>
+          <p style="margin-bottom: 10px;">
+            <strong>Clinical & Technical Team Blueprint:</strong> Learn about our open-source clinical engineering consortium on the official <a href="/about" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">About & Technical Team Page</a>.
+          </p>
+          <p style="margin: 0;">
+            <strong>Project Repository & Challenge Sponsor:</strong> Built for the Great Indian AI Internship Challenge 2026 by Gnani.ai. Full code and verification suites are public at <a href="https://github.com/Samrudh2006/Ayuswar-Ai" target="_blank" rel="noopener noreferrer" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">github.com/Samrudh2006/Ayuswar-Ai</a>.
+          </p>
+        </article>
+
+        <!-- Section 6: Platform Verification Directory -->
+        <nav aria-label="Platform Directory & Verification" style="background: #FFFFFF; border: 1.5px solid #D0DFE2; border-radius: 16px; padding: 24px; margin-bottom: 36px;">
+          <h2 style="font-size: 20px; color: #081C24; margin-bottom: 12px; font-weight: 800;">
+            Platform Navigation & Clinical Modules
+          </h2>
+          <p style="font-size: 14px; color: #486770; margin-bottom: 16px;">
+            Explore the live sub-systems, synthetic benchmarks, and technical blueprints of the AyuSwar AI platform:
+          </p>
+          <ul style="line-height: 1.8; padding-left: 20px;">
+            <li><a href="/about" style="color: #0F4C5C; font-weight: 700;">About & Team:</a> Overview of the mission, author background, and sovereign architecture.</li>
+            <li><a href="/solutions" style="color: #0F4C5C; font-weight: 700;">Clinical Solutions:</a> Overview of OPD scribing, triage dispatch, and bedside assistance modules.</li>
+            <li><a href="/technology" style="color: #0F4C5C; font-weight: 700;">Technology Blueprint:</a> Full high-level architecture diagram and data pipeline documentation.</li>
+            <li><a href="/scanner" style="color: #0F4C5C; font-weight: 700;">Medicine Scanner Demo:</a> Computer vision OCR extraction for blister strips with Jan Aushadhi generic matching.</li>
+            <li><a href="/audio-rx" style="color: #0F4C5C; font-weight: 700;">Audio-Rx Studio:</a> Interactive vernacular dosage card builder with synchronized karaoke text highlighting.</li>
+            <li><a href="/acoustic-lab" style="color: #0F4C5C; font-weight: 700;">Acoustic Biomarker Lab:</a> 48kHz frequency domain analysis and spectral rolloff signal viewer.</li>
+            <li><a href="/language-matrix" style="color: #0F4C5C; font-weight: 700;">Indic Language Matrix:</a> Multi-dialect coverage across Rayalaseema, Telangana, and Coastal Andhra.</li>
+            <li><a href="/benchmarks" style="color: #0F4C5C; font-weight: 700;">Clinical Benchmarks:</a> 74/74 passing unit, integration, and clinical safety test results.</li>
+            <li><a href="/datasets" style="color: #0F4C5C; font-weight: 700;">Synthetic Datasets:</a> Kaggle-compatible clinical encounter records and diarized dialogues.</li>
+            <li><a href="/emergency" style="color: #0F4C5C; font-weight: 700;">Sanjivani-108 Emergency:</a> Real-time simulated distress protocol and CPR acoustic metronome.</li>
+            <li><a href="https://github.com/Samrudh2006/Ayuswar-Ai" style="color: #0F4C5C; font-weight: 700;">GitHub Repository:</a> Fully open-source codebase, verification scripts, and contribution guidelines.</li>
+          </ul>
+        </nav>
+
+        <footer style="padding-top: 20px; border-top: 1px solid #D0DFE2; font-size: 13px; color: #486770; text-align: center;">
+          AyuSwar AI Collective &copy; 2026. Built by <a href="https://github.com/Samrudh2006" rel="author" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Samrudh</a>. Strictly an open clinical research prototype evaluated on synthetic fixtures. Not a certified medical device. | <a href="/about" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">About</a> · <a href="/terms" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Terms</a> · <a href="/privacy" style="color: #0F4C5C; font-weight: 700; text-decoration: underline;">Privacy</a>
+        </footer>
+      </div>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
