@@ -1,0 +1,17 @@
+# NOTE: This file is NOT consumed by Vercel. vercel.json is the effective header configuration
+# for the deployed site; keep both in sync. These rules apply only to Netlify-style static hosts.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(self), microphone=(self), geolocation=()
+  Cross-Origin-Opener-Policy: same-origin
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https: wss: blob: data:; media-src 'self' blob: data:; worker-src 'self' blob:; frame-ancestors 'self';
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+/models/*
+  Cache-Control: public, max-age=86400
+/sw.js
+  Cache-Control: no-cache
