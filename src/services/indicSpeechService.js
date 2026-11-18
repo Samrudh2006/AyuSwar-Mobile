@@ -1197,6 +1197,28 @@ export class IndicSpeechService {
           }
         }
 
+        // Honest availability gate: never pretend playback. If the browser has
+        // no usable voices (headless, kiosk, stripped builds), fail loudly
+        // through onError instead of a silent speak() + fake watchdog success.
+        let availableVoices = window.speechSynthesis.getVoices();
+        if (!availableVoices || availableVoices.length === 0) {
+          await new Promise((resolve) => {
+            const t = setTimeout(resolve, 1200);
+            window.speechSynthesis.addEventListener('voiceschanged', () => { clearTimeout(t); resolve(); }, { once: true });
+          });
+          availableVoices = window.speechSynthesis.getVoices();
+        }
+        if (!availableVoices || availableVoices.length === 0) {
+          this.isSpeaking = false;
+          this.lastSpeechEndTime = Date.now();
+          if (this.conversationState === 'SPEAKING') {
+            this.setConversationState('LISTENING');
+          }
+          recordDiagnosticStage({ stage: 'browser_fallback', outcomeCode: 'NO_VOICES', elapsedMs: 0, component: 'indicSpeechService' });
+          onError('Audio preview is unavailable: this browser has no speech voice installed. The text remains readable on screen.');
+          return;
+        }
+
         // Pre-compute word boundaries for live synchronized karaoke tracking
         const words = cleanSpeechText.split(/\s+/).filter(Boolean);
         const wordOffsets = [];
@@ -1211,9 +1233,11 @@ export class IndicSpeechService {
           let resolved = false;
           const speechStartTime = Date.now();
 
+          let startWatchdogRef = null;
           const complete = (status) => {
             if (resolved) return;
             resolved = true;
+            if (startWatchdogRef) { try { clearTimeout(startWatchdogRef); } catch {} }
             window._ayuswarActiveUtterance = null;
             this.lastSpeechEndTime = Date.now();
             this.isSpeaking = false;
@@ -1231,6 +1255,7 @@ export class IndicSpeechService {
           };
 
           utterance.onstart = () => {
+            playbackStarted = true;
             this.isSpeaking = true;
             this.setConversationState('SPEAKING');
             onStart({ provider: 'browser_voice', isDemo: false, label: 'Browser Voice' });
@@ -1264,6 +1289,18 @@ export class IndicSpeechService {
             complete('SPEECH_ERROR');
             onError(e?.error || 'Browser speech synthesis error');
           };
+
+          // Start watchdog: some engines accept speak() but never emit
+          // onstart/onerror (no audio stack). That must read as failure,
+          // not as a completed playback.
+          let playbackStarted = false;
+          startWatchdogRef = setTimeout(() => {
+            if (!playbackStarted && !resolved) {
+              try { window.speechSynthesis.cancel(); } catch {}
+              complete('START_TIMEOUT');
+              onError('Audio preview could not start in this browser. The text remains readable on screen.');
+            }
+          }, 2500);
 
           // Watchdog timer: estimate duration based on words + 4s buffer
           const words = cleanSpeechText.split(/\s+/).length;

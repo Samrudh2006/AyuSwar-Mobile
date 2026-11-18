@@ -39,6 +39,7 @@ export default function AudioRxStudioView() {
   const [studioStatus, setStudioStatus] = useState('');
   const [activeLang, setActiveLang] = useState(selectedLanguage === 'hi-IN' ? 'hi-IN' : selectedLanguage === 'te-IN' ? 'te-IN' : 'en-IN');
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
+  const [audioNotice, setAudioNotice] = useState(null);
   const [karaokeActiveIndex, setKaraokeActiveIndex] = useState(-1);
   const [activePillHighlight, setActivePillHighlight] = useState(null); // 'morning' | 'night'
   const [recipientPhone, setRecipientPhone] = useState('');
@@ -420,33 +421,40 @@ export default function AudioRxStudioView() {
     }
 
     stopLiveMicRecording();
-    setIsPlayingAudio(true);
+    setAudioNotice(null);
     setKaraokeActiveIndex(0);
 
     const tokens = currentScript.tokens;
     let idx = 0;
 
-    // Pacing timer fallback for smooth visual token progression
-    const estimatedDurationMs = Math.max(7000, Math.round((tokens.length / 2.0) * 1000));
-    const wordIntervalMs = Math.round(estimatedDurationMs / Math.max(1, tokens.length));
-    karaokeTimerRef.current = setInterval(() => {
-      idx++;
-      if (idx < tokens.length) {
-        setKaraokeActiveIndex(idx);
-        setActivePillHighlight(tokens[idx].pill);
-      } else {
-        if (karaokeTimerRef.current) {
-          clearInterval(karaokeTimerRef.current);
-          karaokeTimerRef.current = null;
+    // Pacing timer fallback for smooth visual token progression.
+    // HONESTY: starts only from onStart (real playback began) - the karaoke
+    // must never advance while no audio is actually playing.
+    const startPacingTimer = () => {
+      if (karaokeTimerRef.current) return;
+      const estimatedDurationMs = Math.max(7000, Math.round((tokens.length / 2.0) * 1000));
+      const wordIntervalMs = Math.round(estimatedDurationMs / Math.max(1, tokens.length));
+      karaokeTimerRef.current = setInterval(() => {
+        idx++;
+        if (idx < tokens.length) {
+          setKaraokeActiveIndex(idx);
+          setActivePillHighlight(tokens[idx].pill);
+        } else {
+          if (karaokeTimerRef.current) {
+            clearInterval(karaokeTimerRef.current);
+            karaokeTimerRef.current = null;
+          }
         }
-      }
-    }, wordIntervalMs);
+      }, wordIntervalMs);
+    };
 
     // Trigger Speech via Unified Service with onTimeUpdate for exact acoustic alignment
+    setIsPlayingAudio(true);
     speechService.speak(currentScript.fullText, {
       langCode: activeLang,
       voice: selectedGnaniVoice,
       rate: 0.92,
+      onStart: () => startPacingTimer(),
       onTimeUpdate: (currentTimeMs, durationMs) => {
         if (durationMs > 0 && tokens.length > 0) {
           if (karaokeTimerRef.current) {
@@ -462,7 +470,13 @@ export default function AudioRxStudioView() {
         }
       },
       onEnd: () => handleStopAudio(),
-      onError: () => handleStopAudio()
+      onError: (err) => {
+        handleStopAudio();
+        const msg = (typeof err === 'string' && err.length > 4)
+          ? err
+          : 'Audio preview is unavailable in this browser right now. The practice text above remains readable.';
+        setAudioNotice(msg);
+      }
     });
   };
 
@@ -1015,6 +1029,22 @@ Text only. No audio attachment. Not automatically sent.`;
                 {isPlayingAudio ? <Square size={16} fill="#FFF" /> : <Play size={16} fill="#FFF" />}
                 <span>{isPlayingAudio ? 'Stop Synthetic Audio' : 'Play reviewed practice text'}</span>
               </button>
+
+              {audioNotice && (
+                <div role="status" style={{
+                  marginTop: '10px',
+                  padding: '10px 12px',
+                  borderRadius: '10px',
+                  border: '1.5px solid #B45309',
+                  background: '#FFF7ED',
+                  color: '#92400E',
+                  fontSize: '12.5px',
+                  fontWeight: 600,
+                  lineHeight: 1.45
+                }}>
+                  {audioNotice}
+                </div>
+              )}
 
               <button
                 onClick={handleExportAudioRxWav}

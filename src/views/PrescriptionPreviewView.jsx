@@ -187,7 +187,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
 
     setIsSpeaking(true);
     try {
-      await speechService.speak(teluguText, 'te');
+      await speechService.speak(teluguText, { langCode: 'te-IN' });
     } catch {
       // Fallback completed
     } finally {

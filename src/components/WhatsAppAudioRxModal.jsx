@@ -229,6 +229,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
   // text is exactly the canonical bundled sample. Edited or patient-entered text must
   // never ship with packaged sample audio.
   const [audioDownloadError, setAudioDownloadError] = useState('');
+  const [audioNotice, setAudioNotice] = useState('');
   const handleDownloadAudioRxWav = async () => {
     setAudioDownloadError('');
     if (effectivePrescriptionText && effectivePrescriptionText.trim() !== (baseRx.speechText || '').trim()) {
@@ -276,6 +277,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
 
   const startAudio = () => {
     stopAudio();
+    setAudioNotice('');
     audioMutex.acquire('whatsapp-audio-rx', () => stopAudio());
     setIsPlayingAudio(true);
     const tokens = currentRx.karaokeTokens;
@@ -301,25 +303,30 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
           setAudioProgress(Math.floor(progress * 100));
         }
       },
+      onStart: () => {
+        // Pacing fallback for visual word progression starts only once real
+        // audio playback has begun (never on click alone).
+        const intervalTime = Math.max(250, Math.floor(750 / audioPlaybackRate));
+        karaokeTimerRef.current = setInterval(() => {
+          tokenIdx++;
+          if (tokenIdx < tokens.length) {
+            setKaraokeActiveIndex(tokenIdx);
+            setActivePillHighlight(tokens[tokenIdx]?.pill || null);
+            setAudioProgress(Math.floor((tokenIdx / tokens.length) * 100));
+          } else {
+            if (karaokeTimerRef.current) {
+              clearInterval(karaokeTimerRef.current);
+              karaokeTimerRef.current = null;
+            }
+          }
+        }, intervalTime);
+      },
       onEnd: () => stopAudio(),
-      onError: () => stopAudio()
-    });
-
-    // Pacing interval fallback for visual word token progression
-    const intervalTime = Math.max(250, Math.floor(750 / audioPlaybackRate));
-    karaokeTimerRef.current = setInterval(() => {
-      tokenIdx++;
-      if (tokenIdx < tokens.length) {
-        setKaraokeActiveIndex(tokenIdx);
-        setActivePillHighlight(tokens[tokenIdx]?.pill || null);
-        setAudioProgress(Math.floor((tokenIdx / tokens.length) * 100));
-      } else {
-        if (karaokeTimerRef.current) {
-          clearInterval(karaokeTimerRef.current);
-          karaokeTimerRef.current = null;
-        }
+      onError: (msg) => {
+        stopAudio();
+        setAudioNotice(msg || 'Voice playback is unavailable right now. No audio was played.');
       }
-    }, intervalTime);
+    });
   };
 
   useEffect(() => {
@@ -1119,6 +1126,21 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                 <Download size={13} />
                 <span>Audio (.wav)</span>
               </button>
+
+              {audioNotice && (
+                <div style={{
+                  gridColumn: '1 / -1',
+                  fontSize: '11px',
+                  fontWeight: 650,
+                  color: '#92400E',
+                  background: '#FEF3C7',
+                  border: '1px solid #F59E0B',
+                  borderRadius: '8px',
+                  padding: '6px 10px'
+                }}>
+                  {audioNotice}
+                </div>
+              )}
 
               {audioDownloadError && (
                 <div style={{
