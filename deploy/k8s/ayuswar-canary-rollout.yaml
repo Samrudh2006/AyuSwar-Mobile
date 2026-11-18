@@ -1,0 +1,111 @@
+# ==============================================================================
+# AYUSWAR AI — ARGO ROLLOUTS CANARY DEPLOYMENT SPECIFICATION
+# Progressive Zero-Downtime Delivery with Automated Prometheus Health Analysis
+# ==============================================================================
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: ayuswar-canary-rollout
+  namespace: ayuswar-health
+  labels:
+    app.kubernetes.io/name: ayuswar-ai
+    app.kubernetes.io/instance: ayuswar-canary
+    app.kubernetes.io/component: sovereign-clinical-runtime
+spec:
+  replicas: 10
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ayuswar-ai
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ayuswar-ai
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
+        prometheus.io/path: "/metrics"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+      containers:
+        - name: ayuswar-core
+          image: ghcr.io/samrudh2006/ayuswar-ai:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+            - name: metrics
+              containerPort: 80
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  strategy:
+    canary:
+      # Ingress and Service mapping for traffic splitting
+      canaryService: ayuswar-canary-service
+      stableService: ayuswar-stable-service
+      trafficRouting:
+        traefik:
+          weightedTraefikServiceName: ayuswar-weighted-service
+      # Progressive Canary Steps
+      steps:
+        # Step 1: Route 10% traffic to new clinical version
+        - setWeight: 10
+        - pause: { duration: 5m }
+        # Step 2: Automated Prometheus Analysis (check latency & errors)
+        - analysis:
+            templates:
+              - templateName: ayuswar-prometheus-latency-check
+        # Step 3: Shift to 25% traffic
+        - setWeight: 25
+        - pause: { duration: 10m }
+        # Step 4: Shift to 50% traffic
+        - setWeight: 50
+        - pause: { duration: 10m }
+        # Step 5: Complete rollout to 100%
+        - setWeight: 100
+---
+# Prometheus Analysis Template for Canary Gate
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: ayuswar-prometheus-latency-check
+  namespace: ayuswar-health
+spec:
+  metrics:
+    - name: audio-rtf-p99-latency
+      interval: 30s
+      successCondition: result[0] <= 0.35
+      failureLimit: 3
+      provider:
+        prometheus:
+          address: http://prometheus:9090
+          query: ayuswar_audio_rtf
+    - name: fhir-validation-errors
+      interval: 30s
+      successCondition: result[0] == 0
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://prometheus:9090
+          query: rate(ayuswar_fhir_validation_errors_total[2m])
+

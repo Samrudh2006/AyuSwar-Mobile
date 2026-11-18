@@ -1,0 +1,130 @@
+# ==============================================================================
+# AYUSWAR AI — ARGO ROLLOUTS BLUE/GREEN DEPLOYMENT SPECIFICATION
+# Zero-Downtime Instant Promotion with Pre-Promotion Clinical Safety Gate
+# ==============================================================================
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: ayuswar-bluegreen-rollout
+  namespace: ayuswar-health
+  labels:
+    app.kubernetes.io/name: ayuswar-ai
+    app.kubernetes.io/instance: ayuswar-bluegreen
+    app.kubernetes.io/component: sovereign-clinical-runtime
+spec:
+  replicas: 6
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: ayuswar-ai
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: ayuswar-ai
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "80"
+        prometheus.io/path: "/metrics"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+      containers:
+        - name: ayuswar-core
+          image: ghcr.io/samrudh2006/ayuswar-ai:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+            - name: metrics
+              containerPort: 80
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "256Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          livenessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  strategy:
+    blueGreen:
+      # Active service serves live production clinical traffic (Blue)
+      activeService: ayuswar-active-service
+      # Preview service serves staged new release for verification (Green)
+      previewService: ayuswar-preview-service
+      # Auto-promotion disabled to allow pre-promotion clinical safety gates
+      autoPromotionEnabled: false
+      # Time to retain old stack after switch before scaling down
+      scaleDownDelaySeconds: 300
+      # Automated Pre-Promotion Analysis Check (Runs against Preview service)
+      prePromotionAnalysis:
+        templates:
+          - templateName: ayuswar-bluegreen-smoke-check
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ayuswar-active-service
+  namespace: ayuswar-health
+  labels:
+    app.kubernetes.io/name: ayuswar-ai
+    role: active
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app.kubernetes.io/name: ayuswar-ai
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ayuswar-preview-service
+  namespace: ayuswar-health
+  labels:
+    app.kubernetes.io/name: ayuswar-ai
+    role: preview
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app.kubernetes.io/name: ayuswar-ai
+---
+# Pre-Promotion Verification Template (Ensures 0 error rate on preview stack)
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: ayuswar-bluegreen-smoke-check
+  namespace: ayuswar-health
+spec:
+  metrics:
+    - name: preview-http-error-rate
+      interval: 15s
+      count: 4
+      successCondition: result[0] < 0.01
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://prometheus.ayuswar-monitoring.svc.cluster.local:9090
+          query: |
+            sum(rate(nginx_ingress_controller_requests{status=~"5.*",service="ayuswar-preview-service"}[1m]))
+            /
+            sum(rate(nginx_ingress_controller_requests{service="ayuswar-preview-service"}[1m]))
+
