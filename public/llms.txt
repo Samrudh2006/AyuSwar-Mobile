@@ -1,0 +1,27 @@
+# AyuSwar AI (ఆయుస్వర)
+
+> Sovereign Indic ambient clinical voice scribe, acoustic signal reasoning, and 108 emergency triage prototype for Indian healthcare.
+
+AyuSwar AI is an ambient clinical voice intelligence, acoustic signal reasoning, and health informatics prototype designed for rural Primary Health Centers (PHCs) in India. It supports colloquial comprehension across major Indic language families (Telugu, Hindi, Tamil, Kannada, Marathi, Bengali, and Indian English), demonstrating how doctor-patient dialogues can be transcribed into draft ABDM FHIR R4 clinical summaries and vernacular audio-prescriptions for clinician validation.
+
+> **Research Prototype Watermark**: AyuSwar AI is evaluated strictly on synthetic benchmarks and open government formularies. It is not an approved medical device and does not provide autonomous clinical diagnosis. Emergency dispatches are educational simulations. For real emergencies anywhere in India, dial 112 or 108.
+
+## Public Platform Modules & Documentation
+
+- [Clinical Solutions & Workflows](https://ayuswar-ai.vercel.app/solutions): Ambient consultation scribing, patient audio-adherence cards, blister pack computer vision scanning, and simulated 108 triage protocols.
+- [Deep-Tech Architectural Blueprint](https://ayuswar-ai.vercel.app/technology): Monograph covering 48kHz acoustic DSP, Gnani Indic voice pipeline, and in-memory audio processing designed with DPDP Act 2023 awareness (prototype, compliance not certified).
+- [About the Author & Sovereign Consortium](https://ayuswar-ai.vercel.app/about): Mission background, creator bio (Satya Samrudh Dwivedula, Aditya University), and open-source governance.
+- [Spoken Audio-Rx Studio](https://ayuswar-ai.vercel.app/audio-rx): Vernacular spoken dosage instruction generator with word-by-word visual synchronization.
+- [Computer Vision Medicine Scanner](https://ayuswar-ai.vercel.app/scanner): Optical recognition of pharmaceutical blister packaging with Jan Aushadhi (PMBJP) generic cost savings crosswalk.
+- [Acoustic Biomarker Lab](https://ayuswar-ai.vercel.app/acoustic-lab): Non-diagnostic signal exploration for respiratory audio frequencies (wheeze harmonics, spectral centroid).
+- [Indic Language & Dialect Matrix](https://ayuswar-ai.vercel.app/language-matrix): Dialect coverage across Rayalaseema, Telangana, Coastal Andhra, and colloquial idiom crosswalks.
+- [Clinical & Architectural Benchmarks](https://ayuswar-ai.vercel.app/benchmarks): 74 passing automated test specs verifying FHIR schemas, triage floors, and dialect crosswalks.
+- [Synthetic Datasets & Lexicon](https://ayuswar-ai.vercel.app/datasets): Open synthetic consultation transcripts, bilingual dialogues, and ICD-10 ontology mappings.
+- [Sanjivani 108 Emergency Triage](https://ayuswar-ai.vercel.app/emergency): Simulated distress acuity triage demonstration with CPR acoustic metronome.
+- [Privacy Policy & Data Sovereignty](https://ayuswar-ai.vercel.app/privacy): In-memory audio processing with purge after note generation; no persistent audio storage, structured drafts may persist locally on device. Prototype; DPDP compliance not certified.
+- [Terms of Service](https://ayuswar-ai.vercel.app/terms): Prototype research terms, liability limitations, and open-source license.
+
+## Machine-Readable Manifests
+
+- [XML Sitemap](https://ayuswar-ai.vercel.app/sitemap.xml): Search engine indexing manifest.
+- [Full LLM Technical Reference](https://ayuswar-ai.vercel.app/llms-full.txt): Comprehensive architecture specification.

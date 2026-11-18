@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+body{background:#fff;font-family:sans-serif;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(4,140px);gap:14px}
+.cell{border:1px solid #ddd;border-radius:8px;padding:8px;text-align:center}
+.cell img{width:24px;height:24px;display:block;margin:0 auto 4px}
+.cell img.big{width:48px;height:48px}
+.cell .nm{font-size:10px;color:#333}
+.row{display:flex;gap:10px;align-items:flex-end;justify-content:center}
+</style></head><body><div class="grid" id="g"></div>
+<script>
+const names=["voice-assistant","opd-scribe","doctor","patient","appointments","health-records","medicines","vitals","acoustic-analysis","languages","emergency","privacy-consent"];
+const g=document.getElementById('g');
+names.forEach(n=>{const c=document.createElement('div');c.className='cell';
+ c.innerHTML='<div class="row"><img src="/assets/icons/'+n+'.svg"><img class="big" src="/assets/icons/'+n+'.svg"></div><div class="nm">'+n+'</div>';
+ g.appendChild(c);});
+</script></body></html>

@@ -1,0 +1,66 @@
+# AyuSwar AI — Robots.txt for Search Engines, Answer Engines (AEO), and AI Crawlers
+# Protects private/clinical portal paths while allowing public informational routes.
+
+User-agent: *
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /login
+Disallow: /auth/
+Disallow: /prescription/
+Disallow: /rx/
+Disallow: /emergency/handover
+Disallow: /api/
+Allow: /
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /auth/
+Disallow: /rx/
+Disallow: /api/
+Allow: /
+
+# Perplexity AI Answer Engine
+User-agent: PerplexityBot
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /auth/
+Disallow: /rx/
+Disallow: /api/
+Allow: /
+
+# Anthropic Claude & Research Agents
+User-agent: ClaudeBot
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /auth/
+Disallow: /rx/
+Disallow: /api/
+Allow: /
+
+# Google & Gemini SGE
+User-agent: Googlebot
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /auth/
+Disallow: /rx/
+Disallow: /api/
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /doctor-portal
+Disallow: /patient-portal
+Disallow: /clinical-console
+Disallow: /auth/
+Disallow: /rx/
+Disallow: /api/
+Allow: /
+
+# Machine-Readable Maps & AI Documentation
+Sitemap: https://ayuswar-ai.vercel.app/sitemap.xml
