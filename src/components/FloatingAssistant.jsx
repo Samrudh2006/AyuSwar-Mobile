@@ -1,0 +1,1874 @@
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  Mic,
+  MicOff,
+  PhoneOff,
+  MessageSquare,
+  Check,
+  X,
+  Minus,
+  Volume2,
+  VolumeX,
+  Send,
+  Languages,
+  FileText,
+  Calendar,
+  User,
+  Heart,
+  Pill,
+  CheckCircle2,
+  ChevronRight,
+  Activity,
+  Settings,
+  Cpu,
+  ShieldCheck,
+  Stethoscope,
+  Globe,
+  BookOpen
+} from 'lucide-react';
+import { askAyuSwarBrain, getAiConfig, saveAiConfig, AI_PROVIDERS } from '../services/aiBrainService';
+import { speakHumanized } from '../utils/speechSanitizer';
+import { speechService } from '../services/indicSpeechService';
+import { CLINICAL_RAG_AUDIO_MATRIX, matrixContent } from '../services/clinicalRagAudioMatrix';
+import StructuredAnswer from './assistant/StructuredAnswer';
+import { mapQueryToStructuredAnswer, blocksToOpenUILang } from '../services/structuredAnswerService';
+import { translate } from '../i18n';
+import { useApp } from '../context/AppContext';
+import { Renderer, createParser } from '@openuidev/react-lang';
+import { ayuswarUiLibrary, ayuswarUiSystemPrompt } from '../services/ayuswarUiLibrary.jsx';
+import { queryGroqApi, getGroqApiKey } from '../services/aiBrainService';
+import { useNavigate } from 'react-router-dom';
+
+/**
+ * 4K Sharp Vector Emblem for AyuSwar AI
+ * Precision SVG with glowing radial gradient, acoustic frequency nodes, and sacred lotus acoustics.
+ * Never pixelated at any resolution (Retina / 4K Ultra-HD ready).
+ */
+export function AyuSwarOrbLogo({ size = 28, glow = true }) {
+  return (
+    <div className="ayuswar-orb-logo" style={{
+      width: `${size}px`,
+      height: `${size}px`,
+      borderRadius: '50%',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: '#0F4C5C',
+      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)',
+      flexShrink: 0
+    }}>
+      <svg width={size * 0.72} height={size * 0.72} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        {/* Outer Acoustic Petals */}
+        <path d="M18 4 C15 11 11 15 4 18 C11 21 15 25 18 32 C21 25 25 21 32 18 C25 15 21 11 18 4 Z" fill="rgba(255,255,255,0.95)" />
+        {/* Core Soundwave Ring */}
+        <circle cx="18" cy="18" r="6" stroke="#0A2540" strokeWidth="1.8" fill="#D4AF37" />
+        {/* Center Neural Acoustic Dot */}
+        <circle cx="18" cy="18" r="2.4" fill="#0A2540" />
+      </svg>
+      {/* Mobile dock candidate: simplified assistant mark (user-selected direction 2026-11-18); hidden by default */}
+      <img className="floating-assistant-mark-img" src="/assets/assistant-voice-icon.png" alt="" aria-hidden="true" />
+    </div>
+  );
+}
+
+/**
+ * FloatingAssistant Component
+ * Implements the 5-state Ambient Clinical Voice Intelligence Assistant matching the reference:
+ * 1. Collapsed State: Floating pill ("Talk to AyuSwar" with glowing emblem + mic button)
+ * 2. Expanded State: Context-aware greeting + dynamic soundwave + action pills (Doctor vs Patient)
+ * 3. Active Listening: Concentric pulsing rings + live timer countdown + SpeechRecognition API
+ * 4. Speaking (AI Reply): Live audio waveform + responsive vernacular dialogue + SpeechSynthesis
+ * 5. Call Ended: Summary card with discussion bullets + [View Summary / Details] action
+ */
+// Explainer-type questions are where interactive structured answers (OpenUI) add value;
+// navigation/simple queries stay on the deterministic mapper or plain text.
+const EXPLAINER_RE = /\b(what is|what are|explain|how does|how do|tell me about|describe|compare|difference between| vs\.? )\b/i;
+const EXPLAINER_INDIC_RE = /(ఏమిటి|ఏంటి|వివరించు|చెప్పు|గురించి|क्या है|समझाओ|बताओ)/;
+function isExplainerQuery(text) {
+  return EXPLAINER_RE.test(text || '') || EXPLAINER_INDIC_RE.test(text || '');
+}
+
+export default function FloatingAssistant({
+  activeView = 'landing',
+  doctorProfile = null,
+  patientProfile = null,
+  onNavigateTab = null,
+  onOpenDoctorPortal = null,
+  onOpenPatientPortal = null,
+  onOpenSanjivani = null,
+  onOpenClinicalConsole = null,
+  onOpenWhatsAppRx = null,
+  mobileFull = false
+}) {
+  // Assistant states: 'collapsed' | 'expanded' | 'listening' | 'speaking' | 'ended'
+  const [assistantState, setAssistantState] = useState('collapsed');
+  useEffect(() => {
+    const onSummon = () => setAssistantState('expanded');
+    window.addEventListener('ayuswar:open-assistant', onSummon);
+    return () => window.removeEventListener('ayuswar:open-assistant', onSummon);
+  }, []);
+  const [isMuted, setIsMuted] = useState(false);
+  const [showTextInput, setShowTextInput] = useState(false);
+  const [textInputValue, setTextInputValue] = useState('');
+  const [isAiVoiceEnabled, setIsAiVoiceEnabled] = useState(true);
+  const [isMeSpeaking, setIsMeSpeaking] = useState(false);
+  const [elapsedVoiceSec, setElapsedVoiceSec] = useState(0);
+  const [liveTranscript, setLiveTranscript] = useState('');
+  const [speechLanguage, setSpeechLanguage] = useState(() => {
+    try {
+      return localStorage.getItem('ayuswar_language') || 'en-IN';
+    } catch {
+      return 'en-IN';
+    }
+  });
+  const [sessionActiveSec, setSessionActiveSec] = useState(0);
+  const [lastUserQuery, setLastUserQuery] = useState('');
+  const sessionTimerRef = useRef(null);
+  const [currentAiReply, setCurrentAiReply] = useState('');
+  const [currentReplySource, setCurrentReplySource] = useState(null); // 'sample' | 'generated' | 'offline' | null
+  const [showSampleLibrary, setShowSampleLibrary] = useState(false);
+  // Assistant chrome follows the app UI locale; the voice-language selector only
+  // chooses the speech recognition/synthesis language and must not change UI text.
+  const { selectedLanguage: uiLocale } = useApp();
+  const tt = (key, params) => translate(key, uiLocale || 'en-IN', params);
+  const [currentAnswerBlocks, setCurrentAnswerBlocks] = useState(null);
+  const [currentAnswerLang, setCurrentAnswerLang] = useState(null);
+  const [officialRenderFailed, setOfficialRenderFailed] = useState(false);
+  // TTS health: null = untested this session, true = last synthesis played, false = last failed
+  const [voiceOk, setVoiceOk] = useState(null);
+  const navigate = useNavigate();
+  const INTERNAL_ROUTES = new Set(['/sanjivani', '/emergency', '/emergency/handover', '/scanner', '/audio-rx', '/acoustic-lab', '/clinical-console', '/doctor-portal', '/patient-portal', '/solutions']);
+  const handleStructuredAction = (event) => {
+    if (event && event.type === 'open_screen' && event.params && INTERNAL_ROUTES.has(event.params.route)) {
+      navigate(event.params.route);
+    }
+  };
+  const [isProcessingQuery, setIsProcessingQuery] = useState(false);
+  const [showAiSettingsModal, setShowAiSettingsModal] = useState(false);
+
+  // AI Provider & Key Settings
+  const [selectedProvider, setSelectedProvider] = useState(() => getAiConfig().provider);
+  const [keySavedToast, setKeySavedToast] = useState(false);
+
+  // Coordinate with active bottom banners on mobile
+  const [hasBottomBanner, setHasBottomBanner] = useState(() => {
+    try {
+      return !localStorage.getItem('ayuswar_cookie_consent');
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    const handleActive = () => setHasBottomBanner(true);
+    const handleDismissed = () => setHasBottomBanner(false);
+    window.addEventListener('ayuswar:bottom-banner-active', handleActive);
+    window.addEventListener('ayuswar:bottom-banner-dismissed', handleDismissed);
+    return () => {
+      window.removeEventListener('ayuswar:bottom-banner-active', handleActive);
+      window.removeEventListener('ayuswar:bottom-banner-dismissed', handleDismissed);
+    };
+  }, []);
+
+  // Determine role: Doctor mode vs Patient mode vs Landing page
+  const isDoctorMode = activeView === 'doctor_portal' || activeView === 'console';
+  const isPatientMode = activeView === 'patient_portal';
+  const effectiveRole = isDoctorMode ? 'doctor' : (isPatientMode ? 'patient' : 'landing');
+
+  const doctorName = doctorProfile?.doctorName || 'Doctor';
+  const patientName = (patientProfile?.patientName || patientProfile?.name || 'Lakshmi Amma').split(' ')[0];
+
+  // Timer reference for listening countdown and speech simulation
+  const timerRef = useRef(null);
+  const handleProcessQuestionRef = useRef(null);
+  const speechRecognitionRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const speechSessionDispatchedRef = useRef(false);
+  const activeSpeechGenRef = useRef(0);
+
+  // Role/profile/logout transition: clear the displayed conversation so one
+  // context's private exchange never remains visible in another (landing after
+  // logout, doctor after patient, account switch), and invalidate in-flight
+  // async replies/audio so a stale response cannot repopulate afterwards.
+  // Profile shapes grounded in UnifiedAuthView sign-up/login + AppContext defaults:
+  // signup reuses shared ids (pat_new/doc_new), so id alone collides across
+  // accounts - key on the composite of every stable identity field present.
+  const patientKey = patientProfile
+    ? [patientProfile.id, patientProfile.patientId, patientProfile.abhaId, patientProfile.phone, patientProfile.patientName, patientProfile.name].filter(Boolean).join('|')
+    : '';
+  const doctorKey = doctorProfile
+    ? [doctorProfile.id, doctorProfile.hprId, doctorProfile.nmcRegNo, doctorProfile.doctorName].filter(Boolean).join('|')
+    : '';
+  const identityKey = `${effectiveRole}:${patientKey}:${doctorKey}`;
+  const prevIdentityRef = useRef(identityKey);
+  useEffect(() => {
+    if (prevIdentityRef.current === identityKey) return;
+    prevIdentityRef.current = identityKey;
+    activeSpeechGenRef.current++;
+    speechService.stopSpeaking();
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
+    if (speechRecognitionRef.current) {
+      try { speechRecognitionRef.current.onresult = null; speechRecognitionRef.current.onerror = null; speechRecognitionRef.current.onend = null; speechRecognitionRef.current.abort(); } catch { }
+      speechRecognitionRef.current = null;
+    }
+    if (mediaRecorderRef.current) {
+      try {
+        if (mediaRecorderRef.current.recorder) mediaRecorderRef.current.recorder.onstop = null;
+        mediaRecorderRef.current.stream?.getTracks?.().forEach(t => { try { t.stop(); } catch { } });
+        mediaRecorderRef.current.recorder?.stop();
+      } catch { }
+      mediaRecorderRef.current = null;
+    }
+    setLastUserQuery('');
+    setCurrentAiReply('');
+    setLiveTranscript('');
+    setCurrentAnswerBlocks(null);
+    setCurrentAnswerLang(null);
+    setOfficialRenderFailed(false);
+    setIsProcessingQuery(false);
+    setShowSampleLibrary(false);
+    setAssistantState('collapsed');
+  }, [identityKey]);
+
+  // Clean speech synthesis and active audio playback on unmount
+  useEffect(() => {
+    return () => {
+      speechService.stopSpeaking();
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
+      if (speechRecognitionRef.current) {
+        speechRecognitionRef.current.onresult = null;
+        speechRecognitionRef.current.onerror = null;
+        speechRecognitionRef.current.onend = null;
+        try { speechRecognitionRef.current.abort(); } catch { }
+        speechRecognitionRef.current = null;
+      }
+      if (mediaRecorderRef.current) {
+        try {
+          mediaRecorderRef.current.stream?.getTracks?.().forEach(t => {
+            try { t.stop(); t.enabled = false; } catch { }
+          });
+          mediaRecorderRef.current.recorder?.stop();
+        } catch { }
+        mediaRecorderRef.current = null;
+      }
+    };
+  }, []);
+
+  // Process question via AyuSwar Brain (API / Open-Source / Local Indic NLP)
+  const handleProcessQuestion = async (queryText) => {
+    if (!queryText || isProcessingQuery) return;
+    handleProcessQuestionRef.current = handleProcessQuestion;
+    setLastUserQuery(queryText);
+    setIsProcessingQuery(true);
+    setAssistantState('speaking');
+
+    // Ensure any previously playing speech is halted before generating new reply
+    speechService.stopSpeaking();
+    const currentGen = ++activeSpeechGenRef.current;
+
+    // Live queries never route to bundled sample answers: no symptom-to-canned-answer
+    // or urgency classification. Bundled samples are only reachable through the
+    // explicitly user-selected educational Sample Q&A library below.
+    setShowSampleLibrary(false);
+
+    try {
+      const answer = await askAyuSwarBrain(queryText, effectiveRole, {
+        patientProfile: effectiveRole === 'patient' ? patientProfile : null,
+        doctorProfile: effectiveRole === 'doctor' ? doctorProfile : null,
+        skipGroq: true,
+        source: 'floating_assistant'
+      });
+      if (activeSpeechGenRef.current !== currentGen) return;
+      const mapped = mapQueryToStructuredAnswer(queryText);
+      setCurrentAnswerBlocks(mapped?.blocks || null);
+      setCurrentAnswerLang(mapped ? blocksToOpenUILang(mapped.summary, mapped.blocks) : null);
+      setOfficialRenderFailed(false);
+
+      let replyText = answer;
+      // Model-generated structured answer (official OpenUI Lang) for explainer-type questions
+      // when the deterministic mapper did not fire. Parse-checked; any failure keeps plain text.
+      if (!mapped && getGroqApiKey() && isExplainerQuery(queryText)) {
+        try {
+          const langOut = await queryGroqApi(
+            `Question: "${queryText.slice(0, 400)}"\nGround your answer strictly in this AyuSwar knowledge (do not contradict it): ${String(answer).slice(0, 900)}`,
+            ayuswarUiSystemPrompt
+          );
+          if (activeSpeechGenRef.current !== currentGen) return;
+          if (langOut && typeof langOut === 'string' && langOut.length < 4000) {
+            const parser = createParser(ayuswarUiLibrary.toJSONSchema(), 'Answer');
+            const result = parser.parse(langOut);
+            if (result?.root && result.root.typeName === 'Answer' && (result.meta?.errors || []).length === 0) {
+              replyText = typeof result.root.props?.text === 'string' && result.root.props.text.trim()
+                ? result.root.props.text : answer;
+              setCurrentAnswerLang(langOut);
+              setOfficialRenderFailed(false);
+            }
+          }
+        } catch (genErr) {
+          console.warn('OpenUI structured generation skipped:', genErr?.message);
+        }
+      }
+
+      setCurrentReplySource('generated');
+      setCurrentAiReply(replyText);
+      if (isAiVoiceEnabled && !isMuted) {
+        speakOutLoud(replyText, currentGen);
+      }
+    } catch {
+      if (activeSpeechGenRef.current !== currentGen) return;
+      const fallback = effectiveRole === 'receptionist'
+        ? "Namaste! Welcome to AyuSwar. I am a demo reception assistant for this prototype. I can answer general questions about appointments, medicine information and clinic visits. I cannot issue OPD tokens or assess symptoms."
+        : "AyuSwar Assistant is currently operating offline. Please consult the attending doctor at your local PHC for medical advice. For emergencies, dial 108 or 112 immediately.";
+      setCurrentReplySource('offline');
+      setCurrentAiReply(fallback);
+      setCurrentAnswerBlocks(null);
+      setCurrentAnswerLang(null);
+      if (isAiVoiceEnabled && !isMuted) {
+        speakOutLoud(fallback, currentGen);
+      }
+    } finally {
+      setIsProcessingQuery(false);
+    }
+  };
+
+  // Explicitly user-selected educational sample playback (bundled Sample Q&A library).
+  // Kept fully separate from live query assessment: selecting a sample only displays
+  // and optionally reads aloud that labeled sample; it never answers a live query.
+  const handleSelectSample = (entry) => {
+    speechService.stopSpeaking();
+    const currentGen = ++activeSpeechGenRef.current;
+    const content = matrixContent(entry, uiLocale);
+    setShowSampleLibrary(false);
+    setLastUserQuery(content.question);
+    setCurrentReplySource('sample');
+    setCurrentAiReply(content.answer);
+    setCurrentAnswerBlocks(null);
+    setCurrentAnswerLang(null);
+    setOfficialRenderFailed(false);
+    setAssistantState('speaking');
+    if (isAiVoiceEnabled && !isMuted) {
+      speakOutLoud(content.answer, currentGen);
+    }
+  };
+
+  const speakOutLoud = (text, genId = activeSpeechGenRef.current) => {
+    if (!isAiVoiceEnabled || isMuted) return;
+    speechService.speak(text, {
+      channel: 'floating_assistant',
+      langCode: speechLanguage || 'en-IN',
+      rate: 1.02,
+      pitch: 1.0,
+      onStart: () => {
+        setVoiceOk(true);
+        if (activeSpeechGenRef.current === genId) {
+          setAssistantState('speaking');
+        }
+      },
+      onEnd: () => {
+        if (activeSpeechGenRef.current === genId) {
+          setAssistantState('expanded');
+        }
+      },
+      onError: (err) => {
+        console.warn('Voice notification:', err);
+        setVoiceOk(false);
+        if (activeSpeechGenRef.current === genId) {
+          setAssistantState('expanded');
+        }
+      }
+    });
+  };
+
+  // Dedicated Toggle: Me to Speak (starts timer cleanly at 00:00 only when speaking)
+  const handleToggleSpeak = () => {
+    if (isMeSpeaking) {
+      // User finished speaking -> stop mic, stop timer, submit to AI
+      setIsMeSpeaking(false);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      if (speechRecognitionRef.current) {
+        try { speechRecognitionRef.current.stop(); } catch { }
+        speechRecognitionRef.current = null;
+      }
+
+      const cleaned = liveTranscript.trim();
+      const isPlaceholder = !cleaned ||
+        cleaned.startsWith('Listening') ||
+        cleaned.startsWith('తెలుగులో') ||
+        cleaned.startsWith('हिन्दी में') ||
+        cleaned.startsWith('Tap');
+
+      let dispatched = false;
+      if (!isPlaceholder && cleaned.length > 1) {
+        dispatched = true;
+        speechSessionDispatchedRef.current = true;
+        handleProcessQuestion(cleaned);
+      }
+
+      // Check MediaRecorder for Gnani Prisma STT transcription if speech recognition missed it
+      if (mediaRecorderRef.current) {
+        const { recorder, chunks, stream } = mediaRecorderRef.current;
+        mediaRecorderRef.current = null;
+        const recorderGen = activeSpeechGenRef.current;
+        recorder.onstop = async () => {
+          try { stream?.getTracks?.().forEach(t => t.stop()); } catch { }
+          // A role/profile/logout reset bumps the generation: stale sessions do nothing.
+          if (recorderGen !== activeSpeechGenRef.current) return;
+          if (!dispatched && !speechSessionDispatchedRef.current && chunks.length > 0) {
+            const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+            if (audioBlob.size > 800) {
+              setLiveTranscript('Transcribing speech with Gnani Prisma STT...');
+              const sttRes = await speechService.transcribeAudioWithGnani(audioBlob, speechLanguage);
+              if (recorderGen !== activeSpeechGenRef.current) return;
+              if (!speechSessionDispatchedRef.current && sttRes && sttRes.transcript && sttRes.transcript.trim().length > 1) {
+                speechSessionDispatchedRef.current = true;
+                setLiveTranscript(sttRes.transcript);
+                handleProcessQuestion(sttRes.transcript);
+                return;
+              }
+            }
+          }
+        };
+        try { recorder.stop(); } catch { }
+      }
+
+      if (!dispatched) {
+        const noSpeechMsg = speechLanguage === 'te-IN'
+          ? "మీ మాటలు స్పష్టంగా రికార్డ్ కాలేదు. దయచేసి 'Me to Speak' బటన్ నొక్కి మళ్లీ మాట్లాడండి."
+          : (speechLanguage === 'hi-IN'
+            ? "आपकी आवाज़ साफ़ सुनाई नहीं दी। कृपया 'Me to Speak' दबाकर दोबारा बोलें।"
+            : "Could not detect clear speech. Please tap 'Me to Speak' and speak into your mic, or type your query below.");
+        setCurrentReplySource(null);
+        setCurrentAiReply(noSpeechMsg);
+        setAssistantState('expanded');
+      }
+    } else {
+      // User initiates speaking -> timer starts at 00:00
+      speechService.stopSpeaking();
+      speechSessionDispatchedRef.current = false;
+      setIsMeSpeaking(true);
+      setAssistantState('listening');
+      setElapsedVoiceSec(0);
+      const promptText = speechLanguage === 'te-IN'
+        ? 'తెలుగులో మాట్లాడండి... మీ ప్రశ్న లేదా సమస్య చెప్పండి'
+        : (speechLanguage === 'hi-IN'
+          ? 'हिन्दी में बोलें... अपनी समस्या या सवाल पूछें'
+          : 'Listening in English... Speak your symptoms or hospital query');
+      setLiveTranscript(promptText);
+
+      if (timerRef.current) clearInterval(timerRef.current);
+      if (sessionTimerRef.current) clearInterval(sessionTimerRef.current);
+      if (speechRecognitionRef.current) {
+        speechRecognitionRef.current.onresult = null;
+        speechRecognitionRef.current.onerror = null;
+        speechRecognitionRef.current.onend = null;
+        try { speechRecognitionRef.current.abort(); } catch { }
+        speechRecognitionRef.current = null;
+      }
+      if (mediaRecorderRef.current) {
+        try {
+          mediaRecorderRef.current.stream?.getTracks?.().forEach(t => {
+            try { t.stop(); t.enabled = false; } catch { }
+          });
+          mediaRecorderRef.current.recorder?.stop();
+        } catch { }
+        mediaRecorderRef.current = null;
+      }
+      timerRef.current = setInterval(() => {
+        setElapsedVoiceSec(prev => prev + 1);
+      }, 1000);
+
+      // Start MediaRecorder for high-fidelity Gnani Prisma STT
+      if (typeof window !== 'undefined' && navigator.mediaDevices?.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ audio: true })
+          .then(stream => {
+            try {
+              const rec = new MediaRecorder(stream);
+              const chunks = [];
+              rec.ondataavailable = e => { if (e.data.size > 0) chunks.push(e.data); };
+              rec.start();
+              mediaRecorderRef.current = { recorder: rec, chunks, stream };
+            } catch (recErr) {
+              console.warn('Gnani STT recorder init:', recErr);
+            }
+          })
+          .catch(micErr => {
+            console.warn('Microphone permission:', micErr);
+            setIsMeSpeaking(false);
+            if (timerRef.current) {
+              clearInterval(timerRef.current);
+              timerRef.current = null;
+            }
+            setCurrentReplySource(null);
+              setCurrentAiReply("Microphone access was denied. Please allow microphone permission in your browser or type your query below.");
+            setAssistantState('expanded');
+          });
+      }
+
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        try {
+          const recognition = new SpeechRecognition();
+          recognition.continuous = true;
+          recognition.interimResults = true;
+          recognition.lang = speechLanguage;
+
+          recognition.onresult = (event) => {
+            const current = event.resultIndex;
+            const transcript = event.results[current][0].transcript;
+            setLiveTranscript(transcript);
+          };
+
+          recognition.onerror = (e) => {
+            console.warn('Speech recognition warning:', e);
+            if (e.error === 'not-allowed' || e.error === 'service-not-allowed') {
+              setIsMeSpeaking(false);
+              if (timerRef.current) {
+                clearInterval(timerRef.current);
+                timerRef.current = null;
+              }
+              setCurrentReplySource(null);
+              setCurrentAiReply("Microphone access was denied. Please allow microphone permission in your browser or type your query below.");
+              setAssistantState('expanded');
+            }
+          };
+
+          recognition.start();
+          speechRecognitionRef.current = recognition;
+        } catch (err) {
+          console.warn('SpeechRecognition start error:', err);
+        }
+      }
+    }
+  };
+
+  // Trigger Speaking (AI Reply) state with Voice Synthesis
+  const triggerAiSpeakingReply = (customQuery = null) => {
+    if (customQuery) {
+      handleProcessQuestion(customQuery);
+    } else {
+      const defaultQ = effectiveRole === 'doctor'
+        ? 'latest patient reports and asthma GINA guidelines'
+        : (effectiveRole === 'patient' ? 'my appointment and medications' : 'book opd token for doctor');
+      handleProcessQuestion(defaultQ);
+    }
+  };
+
+  // Honest navigation/workflow notes for quick actions: plain assistant confirmations
+  // that never narrate fabricated patient data, diagnoses, dosages, or clearances.
+  const triggerNavigationNote = (text) => {
+    speechService.stopSpeaking();
+    const currentGen = ++activeSpeechGenRef.current;
+    setShowSampleLibrary(false);
+    setLastUserQuery('');
+    setCurrentReplySource('generated');
+    setCurrentAiReply(text);
+    setCurrentAnswerBlocks(null);
+    setCurrentAnswerLang(null);
+    setOfficialRenderFailed(false);
+    setAssistantState('speaking');
+    if (isAiVoiceEnabled && !isMuted) {
+      speakOutLoud(text, currentGen);
+    }
+  };
+
+  const handleEndCall = () => {
+    speechService.stopSpeaking();
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    if (sessionTimerRef.current) {
+      clearInterval(sessionTimerRef.current);
+      sessionTimerRef.current = null;
+    }
+    if (speechRecognitionRef.current) {
+      try { speechRecognitionRef.current.stop(); } catch { }
+      speechRecognitionRef.current = null;
+    }
+    if (mediaRecorderRef.current) {
+      try {
+        mediaRecorderRef.current.stream?.getTracks?.().forEach(t => t.stop());
+        mediaRecorderRef.current.recorder?.stop();
+      } catch { }
+      mediaRecorderRef.current = null;
+    }
+    setIsMeSpeaking(false);
+    setElapsedVoiceSec(0);
+    setAssistantState('ended');
+  };
+
+  const handleQuickAction = (action) => {
+    if (effectiveRole === 'doctor') {
+      if (action === 'SOAP Note') {
+        if (onOpenClinicalConsole) onOpenClinicalConsole();
+        triggerNavigationNote("Opening the clinical console. The scribe drafts SOAP notes only from your live dictation, for your review and signature.");
+      } else if (action === 'Drug Interaction') {
+        if (onOpenClinicalConsole) onOpenClinicalConsole();
+        triggerNavigationNote("The interaction-check workspace is in the Clinical Console. This prototype does not perform live drug-interaction checks; verify with standard references before prescribing.");
+      } else if (action === 'Telugu Crosswalk') {
+        navigate('/datasets');
+        triggerNavigationNote("Opening the dataset explorer with the bundled vernacular dictionary (sample reference data).");
+      } else if (action === 'Next Patient') {
+        if (onNavigateTab) onNavigateTab('patients');
+        triggerNavigationNote("Opening the patient queue.");
+      } else if (action === 'Reports') {
+        if (onNavigateTab) onNavigateTab('reports');
+        triggerNavigationNote("Opening the reports list.");
+      }
+    } else if (effectiveRole === 'patient') {
+      if (action === 'Medicines') {
+        if (onNavigateTab) onNavigateTab('medications');
+        triggerNavigationNote("Opening your medicines view. Follow the timings written on your own prescription; ask your doctor or pharmacist if anything is unclear.");
+      } else if (action === 'Reports') {
+        if (onNavigateTab) onNavigateTab('reports');
+        triggerNavigationNote("Opening your reports view. A clinician should explain what any result means for you.");
+      } else if (action === 'Dose Timing') {
+        if (onNavigateTab) onNavigateTab('medications');
+        triggerNavigationNote("Opening your medication schedule. Dose timings come from your own prescription, not from this assistant.");
+      } else if (action === 'Emergency') {
+        if (onOpenSanjivani) onOpenSanjivani();
+        triggerNavigationNote("Opening the Sanjivani 108 emergency simulation. No location was transmitted; call 112 or 108 for a real emergency.");
+      }
+    } else {
+      // Landing page / Concierge
+      if (action === 'OPD Scribe' || action === 'Indic Scribe') {
+        setAssistantState('collapsed');
+        if (onOpenClinicalConsole) {
+          onOpenClinicalConsole();
+        } else {
+          window.location.href = '/clinical-console';
+        }
+      } else if (action === 'WhatsApp Audio-Rx') {
+        setAssistantState('collapsed');
+        if (onOpenWhatsAppRx) {
+          onOpenWhatsAppRx();
+        } else {
+          window.location.href = '/audio-rx';
+        }
+      } else if (action === 'Doctor Portal') {
+        setAssistantState('collapsed');
+        if (onOpenDoctorPortal) onOpenDoctorPortal();
+      } else if (action === 'Patient Portal') {
+        setAssistantState('collapsed');
+        if (onOpenPatientPortal) onOpenPatientPortal();
+      } else if (action === 'Sanjivani 108') {
+        if (onOpenSanjivani) onOpenSanjivani();
+      }
+    }
+  };
+
+  const handleSendText = (e) => {
+    e?.preventDefault();
+    if (!textInputValue.trim() || isProcessingQuery) return;
+    const query = textInputValue.trim();
+    setTextInputValue('');
+    setShowTextInput(false);
+    triggerAiSpeakingReply(query);
+  };
+
+  return (
+    <div
+      className={`floating-assistant-container ${hasBottomBanner ? 'has-bottom-banner' : ''}`}
+      data-assistant-state={assistantState}
+      style={{
+        position: 'fixed',
+        bottom: hasBottomBanner ? '84px' : '24px',
+        right: '26px',
+        zIndex: 1200,
+        fontFamily: 'var(--font-main)'
+      }}
+    >
+      {/* =========================================================================
+          STATE 1: COLLAPSED STATE (FLOATING PILL BUTTON / MOBILE CIRCULAR FAB)
+          ========================================================================= */}
+      {assistantState === 'collapsed' && (
+        <div
+          className="floating-assistant-pill"
+          role="button"
+          tabIndex={0}
+          aria-label="Open AyuSwar AI Help voice assistant"
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setAssistantState('expanded'); } }}
+          onClick={() => setAssistantState('expanded')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
+            background: '#ffffff',
+            border: '1.5px solid #D4AF37',
+            padding: '8px 10px 8px 12px',
+            borderRadius: '40px',
+            boxShadow: '0 12px 36px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.08)',
+            cursor: 'pointer',
+            transition: 'all 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: 'scale(1)'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.04)'}
+          onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          title="Click to talk with AyuSwar Ambient Clinical Assistant"
+        >
+          {/* Glowing 4K Vector Emblem */}
+          <AyuSwarOrbLogo size={32} glow={true} />
+
+          {/* Assistant Label */}
+          <div className="floating-assistant-label" style={{ display: 'flex', flexDirection: 'column' }}>
+            <span style={{
+              fontSize: '14px',
+              fontWeight: 800,
+              color: '#081C24',
+              letterSpacing: '-0.2px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <span>Talk to AyuSwar</span>
+              <span style={{
+                fontSize: '9.5px',
+                fontWeight: 800,
+                background: effectiveRole === 'doctor' ? '#0F4C5C' : (effectiveRole === 'patient' ? '#D97706' : '#0D9488'),
+                color: '#ffffff',
+                padding: '1px 6px',
+                borderRadius: '8px',
+                textTransform: 'uppercase'
+              }}>
+                AyuSwar
+              </span>
+            </span>
+            <span style={{ fontSize: '10px', color: '#698892', fontWeight: 600 }}>
+              {effectiveRole === 'doctor'
+                ? 'Documentation assistant'
+                : (effectiveRole === 'patient' ? 'Your Health Companion' : 'AI Clinic Helpdesk')}
+            </span>
+          </div>
+
+          {/* Mobile-only compact label (portal floating button) */}
+          <span className="floating-assistant-mobile-label">AI Help</span>
+
+          {/* Mic Button Circle */}
+          <button
+            type="button"
+            className="floating-assistant-mic"
+            onClick={(e) => {
+              e.stopPropagation();
+              if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                  .then(() => setAssistantState('listening'))
+                  .catch(() => setAssistantState('listening'));
+              } else {
+                setAssistantState('listening');
+              }
+            }}
+            title="Click to speak with AyuSwar Voice Assistant"
+            style={{
+              width: '34px',
+              height: '34px',
+              borderRadius: '50%',
+              background: '#0F4C5C',
+              color: '#ffffff',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.16)',
+              transition: 'transform 150ms ease'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.1)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
+          >
+            <Mic size={17} />
+          </button>
+        </div>
+      )}
+
+      {/* =========================================================================
+          STATES 2 - 5: EXPANDED FLOATING WINDOW (CLEAN, ROLE-AWARE, COMPACT)
+          ========================================================================= */}
+      {/* =========================================================================
+          STATES 2 - 5: EXPANDED FLOATING WINDOW (CLEAN, VOICE-FIRST, AMBIENT SCRIBE)
+          ========================================================================= */}
+      {assistantState !== 'collapsed' && (
+        <div className="fa-panel" style={{
+          width: '385px',
+          maxWidth: '96vw',
+          background: '#ffffff',
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.14), 0 8px 24px rgba(0, 0, 0, 0.11)',
+          border: '1.5px solid #CCFBF1',
+          display: 'flex',
+          flexDirection: 'column',
+          transition: 'all 260ms cubic-bezier(0.16, 1, 0.3, 1)',
+          animation: 'modalSlideUp 220ms ease forwards'
+        }}>
+          {/* Top Bar / Header */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '12px 16px',
+            borderBottom: '1px solid #F1F5F9',
+            background: '#F0FDFA'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <AyuSwarOrbLogo size={24} glow={false} />
+              <div>
+                <span style={{ fontSize: '13.5px', fontWeight: 800, color: '#081C24' }}>
+                  Ayu<span style={{ color: '#0F4C5C' }}>Swar</span> AI
+                </span>
+                <span style={{
+                  fontSize: '9.5px',
+                  color: effectiveRole === 'doctor' ? '#0F4C5C' : (effectiveRole === 'patient' ? '#D97706' : '#0D9488'),
+                  background: effectiveRole === 'doctor' ? 'rgba(0, 0, 0, 0.07)' : (effectiveRole === 'patient' ? 'rgba(217,119,6,0.1)' : 'rgba(13,148,136,0.1)'),
+                  padding: '2px 6px',
+                  borderRadius: '6px',
+                  fontWeight: 750,
+                  marginLeft: '6px'
+                }}>
+                  {effectiveRole === 'doctor'
+                    ? `Doctor assistant · ${doctorName}`
+                    : (effectiveRole === 'patient' ? `Health Companion · ${patientName}` : 'Indic Ambient Scribe')}
+                </span>
+              </div>
+            </div>
+
+            {/* Window Controls: Minimize, Close */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <button
+                onClick={() => setAssistantState('collapsed')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#698892',
+                  cursor: 'pointer',
+                  padding: '3px',
+                  borderRadius: '6px'
+                }}
+                title="Minimize"
+              >
+                <Minus size={15} />
+              </button>
+
+              <button
+                onClick={() => setAssistantState('collapsed')}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#698892',
+                  cursor: 'pointer',
+                  padding: '3px',
+                  borderRadius: '6px'
+                }}
+                title="Close"
+              >
+                <X size={15} />
+              </button>
+            </div>
+          </div>
+
+          {/* =====================================================================
+              ACTIVE CONSULTATION / SCRIBE VIEW (STATES 2, 3, 4)
+              ===================================================================== */}
+          {assistantState !== 'ended' && (
+            <div className="fa-body" style={{ display: 'flex', flexDirection: 'column' }}>
+              {mobileFull && assistantState === 'expanded' && !currentAiReply && !lastUserQuery && (
+                <div className="fa-welcome" style={{ textAlign: 'center', padding: '26px 22px 6px' }}>
+                  <img src="/assets/assistant-voice-icon.png" alt="" aria-hidden="true" style={{ width: '74px', height: 'auto', marginBottom: '10px' }} />
+                  <div style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', fontFamily: 'var(--font-main)', letterSpacing: '-0.3px' }}>
+                    {effectiveRole === 'doctor' ? `Namaste, ${doctorName}!` : (effectiveRole === 'patient' ? `Namaste ${patientName}!` : 'Namaste!')}
+                  </div>
+                  <div style={{ fontSize: '12.5px', color: '#486770', marginTop: '4px', lineHeight: 1.5 }}>
+                    {effectiveRole === 'doctor'
+                      ? 'Ask about the scribe demo, sample queue or consultation summaries - type below or tap the mic and speak.'
+                      : (effectiveRole === 'patient'
+                        ? 'Ask about sample medicines, test reports, dose timing or diet - type below or tap the mic and speak in your own language.'
+                        : 'Ask anything about AyuSwar - features, languages or the demo flows. Type below or tap the mic and speak.')}
+                  </div>
+                </div>
+              )}
+              {/* Ultra-Clean Acoustic Voice Intelligence Interface */}
+              <div style={{
+                padding: '16px 18px 12px 18px',
+                background: '#FFFFFF',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px'
+              }}>
+                {/* Acoustic Status & Mute Audio Bar */}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <Volume2 size={13} color="#0F4C5C" />
+                    <span style={{ fontSize: '11px', fontWeight: 750, color: '#0F766E' }}>
+                      {voiceOk === false
+                        ? tt('assistant.voiceUnavailable')
+                        : (voiceOk === true ? tt('assistant.audioOn') : tt('assistant.voiceUntested'))}
+                    </span>
+                  </div>
+
+                  {/* Mute Audio Output Toggle */}
+                  <button
+                    onClick={() => {
+                      setIsMuted(prev => !prev);
+                      if (!isMuted) speechService.stopSpeaking();
+                    }}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: isMuted ? '#EF4444' : '#0F4C5C',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontSize: '11px',
+                      fontWeight: 700
+                    }}
+                    title={isMuted ? "Unmute Voice" : "Mute Voice"}
+                  >
+                    {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                    <span>{isMuted ? tt('assistant.muted') : tt('assistant.mute')}</span>
+                  </button>
+                </div>
+
+                {/* Indic Speech Language Selector (English / Telugu / Hindi) */}
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  background: 'rgba(0, 0, 0, 0.03)',
+                  borderRadius: '12px',
+                  padding: '5px 8px',
+                  border: '1px solid rgba(0, 0, 0, 0.08)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11px', fontWeight: 800, color: '#0F4C5C' }}>
+                    <Globe size={13} color="#0F4C5C" />
+                    <span>{tt('assistant.voiceLanguage')}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '4px' }}>
+                    {[
+                      { id: 'en-IN', label: 'English', badge: 'EN' },
+                      { id: 'te-IN', label: 'తెలుగు', badge: 'TE' },
+                      { id: 'hi-IN', label: 'हिन्दी', badge: 'HI' }
+                    ].map(lang => (
+                      <button
+                        key={lang.id}
+                        type="button"
+                        onClick={() => {
+                          setSpeechLanguage(lang.id);
+                          try { localStorage.setItem('ayuswar_language', lang.id); } catch { }
+                          if (speechRecognitionRef.current) {
+                            speechRecognitionRef.current.lang = lang.id;
+                          }
+                        }}
+                        style={{
+                          background: speechLanguage === lang.id ? '#0F4C5C' : '#FFFFFF',
+                          color: speechLanguage === lang.id ? '#FFFFFF' : '#486770',
+                          border: speechLanguage === lang.id ? '1px solid #0F4C5C' : '1px solid #D0DFE2',
+                          borderRadius: '8px',
+                          padding: '3px 8px',
+                          fontSize: '10.5px',
+                          fontWeight: speechLanguage === lang.id ? 800 : 650,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '3px',
+                          boxShadow: speechLanguage === lang.id ? '0 1px 4px rgba(0, 0, 0, 0.16)' : 'none',
+                          transition: 'all 0.15s ease'
+                        }}
+                        title={`Switch speech transcription to ${lang.label}`}
+                      >
+                        <span style={{ fontSize: '9px', opacity: 0.8 }}>{lang.badge}</span>
+                        <span>{lang.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Soundwave Frequency Visualizer Box */}
+                <div style={{
+                  background: 'radial-gradient(ellipse at center, #091E26 0%, #0A2540 100%)',
+                  borderRadius: '16px',
+                  padding: '16px 14px',
+                  color: '#ffffff',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.4)'
+                }}>
+                  {/* Animated Equalizer Frequency Bars */}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '3.5px', height: '36px', marginBottom: '8px' }}>
+                    {[18, 28, 14, 32, 22, 36, 16, 30, 24, 18, 26, 34, 12, 28, 20].map((h, i) => (
+                      <div
+                        key={i}
+                        style={{
+                          width: '3.5px',
+                          height: (assistantState === 'speaking' || isMeSpeaking) ? `${h}px` : '6px',
+                          borderRadius: '3px',
+                          background: isMeSpeaking ? '#EF4444' : (assistantState === 'speaking' ? '#0F4C5C' : '#2C4A52'),
+                          transition: 'height 180ms ease',
+                          animation: (assistantState === 'speaking' || isMeSpeaking)
+                            ? `pulseBar 0.${4 + (i % 5)}s infinite alternate ease-in-out`
+                            : 'none'
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Status Pill */}
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    color: assistantState === 'listening' ? '#FCA5A5' : (assistantState === 'speaking' ? '#5EEAD4' : '#94A3B8')
+                  }}>
+                    <span style={{
+                      width: '7px',
+                      height: '7px',
+                      borderRadius: '50%',
+                      background: assistantState === 'listening' ? '#EF4444' : (assistantState === 'speaking' ? '#D4AF37' : '#698892'),
+                      boxShadow: (assistantState === 'listening' || assistantState === 'speaking') ? '0 0 8px currentColor' : 'none'
+                    }}></span>
+                    <span>
+                      {isMeSpeaking
+                        ? tt('assistant.recording', { time: `${String(Math.floor(elapsedVoiceSec / 60)).padStart(2, '0')}:${String(elapsedVoiceSec % 60).padStart(2, '0')}` })
+                        : (assistantState === 'speaking' ? tt('assistant.speaking') : tt('assistant.ready', { time: '00:00' }))}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Dynamic Dialogue / Transcript Card */}
+                <div className="fa-answercard" style={{
+                  background: '#FFFFFF',
+                  border: '1.5px solid #D0DFE2',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                  fontSize: '12.5px',
+                  lineHeight: 1.55,
+                  color: '#081C24',
+                  minHeight: '62px',
+                  maxHeight: mobileFull ? 'none' : ((currentAnswerBlocks || showSampleLibrary) ? '320px' : '120px'),
+                  overflowY: 'auto',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)'
+                }}>
+                  {showSampleLibrary ? (
+                    <div>
+                      <div style={{ fontSize: '10px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', marginBottom: '3px' }}>
+                        {tt('assistant.sampleLibraryHeader')}
+                      </div>
+                      <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FEF3C7', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px', fontWeight: 650 }}>
+                        {tt('assistant.sampleNote')}
+                      </div>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                        {CLINICAL_RAG_AUDIO_MATRIX.map((entry) => {
+                          const content = matrixContent(entry, uiLocale);
+                          return (
+                            <button
+                              key={entry.id}
+                              onClick={() => handleSelectSample(entry)}
+                              style={{
+                                textAlign: 'left',
+                                background: '#F0F7F4',
+                                border: '1px solid #BFD8CE',
+                                borderRadius: '8px',
+                                padding: '7px 9px',
+                                fontSize: '11.5px',
+                                fontWeight: 650,
+                                color: '#081C24',
+                                cursor: 'pointer'
+                              }}
+                            >
+                              {content.question}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : assistantState === 'listening' ? null : (assistantState === 'speaking' || currentAiReply) ? (
+                    <div>
+                      <div style={{ fontSize: '10px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', marginBottom: '3px' }}>
+                        {currentReplySource === 'sample' ? tt('assistant.sampleReplyHeader') : currentReplySource === 'offline' ? tt('assistant.offlineHeader') : tt('assistant.replyHeader')}
+                      </div>
+                      {currentReplySource === 'sample' && (
+                        <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FEF3C7', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px', fontWeight: 650 }}>
+                          {tt('assistant.sampleNote')}
+                        </div>
+                      )}
+                      {(!currentAnswerLang || officialRenderFailed) ? (
+                        <div style={{ fontWeight: 600 }}>
+                          {isProcessingQuery && !currentAiReply && (
+                            <>
+                              <img src="/assets/icons/sheet/load-assistant-wait.png" alt="" aria-hidden="true"
+                                className="ayu-loadart-breathe"
+                                style={{ width: '86px', height: 'auto', display: 'block', margin: '2px auto 4px' }} />
+                              <div className="ayu-loadbars" aria-hidden="true" style={{ margin: '0 auto 8px' }}><span></span><span></span><span></span><span></span><span></span></div>
+                            </>
+                          )}
+                          {currentAiReply || "Analyzing clinical query..."}
+                        </div>
+                      ) : null}
+                      {currentAnswerLang && !officialRenderFailed ? (
+                        <Renderer
+                          response={currentAnswerLang}
+                          library={ayuswarUiLibrary}
+                          onAction={handleStructuredAction}
+                          onError={() => setOfficialRenderFailed(true)}
+                        />
+                      ) : currentAnswerBlocks ? (
+                        <StructuredAnswer blocks={currentAnswerBlocks} />
+                      ) : null}
+                    </div>
+                  ) : assistantState === 'listening' ? (
+                    <div>
+                      <div style={{ fontSize: '10px', fontWeight: 800, color: '#DC2626', textTransform: 'uppercase', marginBottom: '3px' }}>
+                        {tt('assistant.liveTranscript')}
+                      </div>
+                      <div style={{ fontStyle: 'italic', color: '#486770' }}>{liveTranscript}</div>
+                    </div>
+                  ) : (
+                    <div style={{ color: '#486770' }}>
+                      {effectiveRole === 'doctor'
+                        ? `Good day, ${doctorName}. Ambient scribe demo, on standby. Tap "Me to Speak" to try dictation, or open a shortcut below for sample checks.`
+                        : (effectiveRole === 'patient'
+                          ? `Namaste ${patientName}! Your health assistant demo is ready. Ask about the sample medicines, test reports, or diet in your own language.`
+                          : 'Namaste! Welcome to AyuSwar AI. Try the bilingual ambient clinical voice scribe demo for Indian hospital OPDs.')}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Role-Specific Quick Action Pills */}
+              <div style={{
+                padding: '10px 14px',
+                background: '#FAF8F5',
+                borderTop: '1px solid #D0DFE2',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#486770'
+                }}>
+                  <span>
+                    {effectiveRole === 'doctor'
+                      ? tt('assistant.shortcutsClinician')
+                      : (effectiveRole === 'patient' ? tt('assistant.shortcutsHealth') : tt('assistant.shortcutsExplore'))}
+                  </span>
+                  <button
+                    className="fa-typetoggle"
+                    onClick={() => setShowTextInput(!showTextInput)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#0F4C5C',
+                      fontSize: '11px',
+                      fontWeight: 750,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <MessageSquare size={12} />
+                    <span>{showTextInput ? tt('assistant.hideChat') : tt('assistant.typeMessage')}</span>
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <button
+                    onClick={() => setShowSampleLibrary(!showSampleLibrary)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      color: '#0F4C5C',
+                      fontSize: '11px',
+                      fontWeight: 750,
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}
+                  >
+                    <BookOpen size={12} />
+                    <span>{showSampleLibrary ? tt('assistant.hideSampleQa') : tt('assistant.sampleQa')}</span>
+                  </button>
+                </div>
+
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  {effectiveRole === 'doctor' ? (
+                    <>
+                      <button
+                        onClick={() => handleQuickAction('SOAP Note')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <FileText size={12} color="#0F4C5C" />
+                        <span>SOAP Note</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Drug Interaction')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Pill size={12} color="#0F4C5C" />
+                        <span>Drug Safety</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Telugu Crosswalk')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Languages size={12} color="#0F4C5C" />
+                        <span>తెలుగు Crosswalk</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Next Patient')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <User size={12} color="#0F4C5C" />
+                        <span>Queue</span>
+                      </button>
+                    </>
+                  ) : effectiveRole === 'patient' ? (
+                    <>
+                      <button
+                        onClick={() => handleQuickAction('Medicines')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Pill size={12} color="#D97706" />
+                        <span>Today's Medicines</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Reports')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <FileText size={12} color="#D97706" />
+                        <span>My Reports</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Dose Timing')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #D0DFE2',
+                          background: '#ffffff',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#081C24',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Calendar size={12} color="#D97706" />
+                        <span>Dose Timing</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Emergency')}
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #FCA5A5',
+                          background: '#FEF2F2',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#DC2626',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Activity size={12} color="#DC2626" />
+                        <span>108</span>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        onClick={() => handleQuickAction('OPD Scribe')}
+                        title="Launch Live Ambient Clinical Voice Scribe for OPD Consultations"
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1.5px solid #D4AF37',
+                          background: '#F0FDFA',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#0F766E',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Mic size={12} color="#0F4C5C" />
+                        <span>OPD Scribe</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('WhatsApp Audio-Rx')}
+                        title="Test Vernacular Spoken Prescription on WhatsApp"
+                        style={{
+                          flex: 1,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '5px',
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1.5px solid #86EFAC',
+                          background: '#F0FDF4',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#166534',
+                          cursor: 'pointer'
+                        }}
+                      >
+                        <Send size={12} color="#16A34A" />
+                        <span>WhatsApp Rx</span>
+                      </button>
+                      <button
+                        onClick={() => handleQuickAction('Sanjivani 108')}
+                        style={{
+                          padding: '7px 9px',
+                          borderRadius: '14px',
+                          border: '1px solid #FCA5A5',
+                          background: '#FEF2F2',
+                          fontSize: '11px',
+                          fontWeight: 750,
+                          color: '#DC2626',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        <Activity size={12} color="#DC2626" />
+                        <span>108</span>
+                      </button>
+                    </>
+                  )}
+                </div>
+
+                {/* Inline Text Query Drawer */}
+                {(showTextInput || mobileFull) && (
+                  <form
+                    className="fa-typeform"
+                    onSubmit={handleSendText}
+                    style={{
+                      marginTop: '6px',
+                      display: 'flex',
+                      gap: '6px'
+                    }}
+                  >
+                    <input
+                      type="text"
+                      placeholder={effectiveRole === 'doctor' ? "Ask clinical question, dosage, or SNOMED..." : "Describe health query in Telugu or English..."}
+                      value={textInputValue}
+                      onChange={e => setTextInputValue(e.target.value)}
+                      autoFocus
+                      style={{
+                        flex: 1,
+                        padding: '8px 12px',
+                        borderRadius: '10px',
+                        border: '1.5px solid #D0DFE2',
+                        fontSize: '12px',
+                        outline: 'none'
+                      }}
+                    />
+                    <button
+                      type="submit"
+                      style={{
+                        background: '#0F4C5C',
+                        border: 'none',
+                        color: '#ffffff',
+                        borderRadius: '10px',
+                        padding: '0 12px',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Send size={14} />
+                    </button>
+                  </form>
+                )}
+
+                {/* Two Distinct Control Buttons: Me to Speak & AI Voice Output Toggle */}
+                <div className="fa-controls" style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '8px',
+                  paddingTop: '10px',
+                  borderTop: '1px solid #D0DFE2'
+                }}>
+                  {/* Button 1: Me to Speak (User Mic Input) */}
+                  <button
+                    onClick={handleToggleSpeak}
+                    style={{
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '7px',
+                      padding: '9px 12px',
+                      borderRadius: '20px',
+                      border: isMeSpeaking ? '1.5px solid #EF4444' : '1.5px solid #0F4C5C',
+                      background: isMeSpeaking
+                        ? '#DC2626'
+                        : '#0F4C5C',
+                      color: '#ffffff',
+                      fontSize: '11.5px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.16)',
+                      transition: 'all 0.2s ease'
+                    }}
+                    title={isMeSpeaking ? "Stop speaking and submit to AI" : "Tap to speak your query"}
+                  >
+                    {isMeSpeaking ? <MicOff size={15} /> : <Mic size={15} />}
+                    <span>
+                      {isMeSpeaking
+                        ? tt('assistant.stopSend', { time: `${String(Math.floor(elapsedVoiceSec / 60)).padStart(2, '0')}:${String(elapsedVoiceSec % 60).padStart(2, '0')}` })
+                        : tt('assistant.meToSpeak')}
+                    </span>
+                  </button>
+
+                  {/* Button 2: Enable AI to Speak (AI Voice Reply Toggle) */}
+                  <button
+                    onClick={() => {
+                      setIsAiVoiceEnabled(prev => {
+                        const next = !prev;
+                        if (!next && 'speechSynthesis' in window) {
+                          window.speechSynthesis.cancel();
+                        }
+                        return next;
+                      });
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '5px',
+                      padding: '9px 12px',
+                      borderRadius: '20px',
+                      border: isAiVoiceEnabled ? '1.5px solid #10B981' : '1.5px solid #D0DFE2',
+                      background: isAiVoiceEnabled ? '#ECFDF5' : '#F1F5F9',
+                      color: isAiVoiceEnabled ? '#065F46' : '#698892',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease'
+                    }}
+                    title={isAiVoiceEnabled ? "AI Voice Reply is Enabled (Audio Speech)" : "AI Voice Reply is Disabled (Silent Text Only)"}
+                  >
+                    {isAiVoiceEnabled ? <Volume2 size={15} color="#059669" /> : <VolumeX size={15} color="#94A3B8" />}
+                    <span>{isAiVoiceEnabled ? (voiceOk === true ? tt('assistant.aiVoiceOn') : (voiceOk === false ? tt('assistant.aiVoiceUnavailable') : tt('assistant.aiVoiceUntested'))) : tt('assistant.aiVoiceOff')}</span>
+                  </button>
+
+                  {/* Done / End Button */}
+                  <button
+                    onClick={handleEndCall}
+                    style={{
+                      padding: '9px 12px',
+                      borderRadius: '20px',
+                      background: '#FAF8F5',
+                      border: '1px solid #D0DFE2',
+                      color: '#486770',
+                      fontSize: '11px',
+                      fontWeight: 750,
+                      cursor: 'pointer'
+                    }}
+                    title="Finish discussion"
+                  >
+                    {tt('assistant.done')}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* =====================================================================
+              STATE 5: CALL ENDED (SUMMARY CHECKLIST CARD)
+              ===================================================================== */}
+          {assistantState === 'ended' && (
+            <div style={{
+              padding: '24px 20px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center'
+            }}>
+              {/* Green Checkmark Circle */}
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                background: 'rgba(15, 76, 92, 0.10)',
+                color: '#0F4C5C',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px'
+              }}>
+                <FileText size={22} strokeWidth={2} />
+              </div>
+
+              <div style={{ fontSize: '17px', fontWeight: 800, color: '#081C24' }}>
+                {effectiveRole === 'doctor' ? 'Demo Scribe Session Ended' : 'Demo Session Ended'}
+              </div>
+              <div style={{ fontSize: '11px', color: '#698892', marginTop: '2px', fontFamily: 'monospace' }}>
+                {String(Math.floor(sessionActiveSec / 60)).padStart(2, '0')}:{String(sessionActiveSec % 60).padStart(2, '0')}
+              </div>
+
+              {/* Discussion Recap Box */}
+              <div style={{
+                width: '100%',
+                background: '#FAF8F5',
+                border: '1px solid #D0DFE2',
+                borderRadius: '12px',
+                padding: '12px 14px',
+                textAlign: 'left',
+                marginTop: '16px',
+                marginBottom: '18px'
+              }}>
+                <div style={{ fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
+                  {"Session recap (demo):"}
+                </div>
+                <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '11px', color: '#486770', lineHeight: 1.6 }}>
+                  {lastUserQuery ? (
+                    <>
+                      <li><strong>Query:</strong> &ldquo;{lastUserQuery.slice(0, 50)}{lastUserQuery.length > 50 ? '...' : ''}&rdquo;</li>
+                      <li><strong>Guidance:</strong> {currentAiReply ? currentAiReply.split('\n')[0].replace(/^[*#_\s]+/, '').slice(0, 68) : 'Sample guidance shown (demo, unvalidated)'}</li>
+                      <li><strong>Channel:</strong> {speechLanguage === 'te-IN' ? 'Telugu (te-IN)' : (speechLanguage === 'hi-IN' ? 'Hindi (hi-IN)' : 'English (en-IN)')} · sample knowledge pack, not a validated screening</li>
+                    </>
+                  ) : (
+                    <>
+                      <li><strong>Session:</strong> Demo standby - no voice input was analysed</li>
+                      <li><strong>Language:</strong> {speechLanguage === 'te-IN' ? 'Telugu (te-IN)' : (speechLanguage === 'hi-IN' ? 'Hindi (hi-IN)' : 'English (en-IN)')}</li>
+                      <li><strong>Assessment:</strong> none made - no triage or safety screening ran in this session</li>
+                    </>
+                  )}
+                </ul>
+              </div>
+
+              {/* Primary Action Button */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '100%' }}>
+                <button
+                  onClick={() => {
+                    if (effectiveRole === 'doctor' && onNavigateTab) {
+                      onNavigateTab('reports');
+                    } else if (effectiveRole === 'patient' && onNavigateTab) {
+                      onNavigateTab('medications');
+                    }
+                    setAssistantState('collapsed');
+                  }}
+                  style={{
+                    width: '100%',
+                    background: '#0A2540',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '10px',
+                    padding: '10px',
+                    fontSize: '12.5px',
+                    fontWeight: 750,
+                    cursor: 'pointer'
+                  }}
+                >
+                  {effectiveRole === 'doctor' ? 'View Patient Summary' : (effectiveRole === 'patient' ? 'View Details' : 'Close & Continue')}
+                </button>
+
+                <button
+                  onClick={() => {
+                    setAssistantState('expanded');
+                    setSessionActiveSec(0);
+                    setLastUserQuery('');
+                    setCurrentAiReply('');
+                    setLiveTranscript('');
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#0F4C5C',
+                    fontSize: '11.5px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    padding: '4px'
+                  }}
+                >
+                  Start New Inquiry
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* =========================================================================
+          AI BRAIN & OPEN-SOURCE MODEL SETTINGS MODAL
+          ========================================================================= */}
+      {showAiSettingsModal && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.14)',
+          backdropFilter: 'blur(4px)',
+          zIndex: 1400,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '20px'
+        }}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '20px',
+            width: '460px',
+            maxWidth: '95vw',
+            boxShadow: '0 25px 60px rgba(0,0,0,0.25)',
+            border: '2px solid #0F4C5C',
+            overflow: 'hidden'
+          }}>
+            {/* Modal Header */}
+            <div style={{
+              background: '#0F4C5C',
+              color: '#ffffff',
+              padding: '16px 20px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Cpu size={18} color="#D4AF37" />
+                <span style={{ fontSize: '15px', fontWeight: 800 }}>AyuSwar AI Brain Settings</span>
+              </div>
+              <button
+                onClick={() => setShowAiSettingsModal(false)}
+                style={{ background: 'none', border: 'none', color: '#ffffff', cursor: 'pointer', fontSize: '16px' }}
+              >
+                x
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div style={{ padding: '20px 22px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div>
+                <label style={{ display: 'block', fontSize: '12px', fontWeight: 800, color: '#081C24', marginBottom: '6px' }}>
+                  Select AI LLM Engine / Provider:
+                </label>
+                <select
+                  value={selectedProvider}
+                  onChange={(e) => setSelectedProvider(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '9px 12px',
+                    borderRadius: '10px',
+                    border: '1.5px solid #D0DFE2',
+                    fontSize: '12.5px',
+                    fontWeight: 650,
+                    color: '#081C24',
+                    outline: 'none'
+                  }}
+                >
+                  {AI_PROVIDERS.map(prov => (
+                    <option key={prov.id} value={prov.id}>
+                      {prov.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div style={{
+                background: 'rgba(0, 0, 0, 0.04)',
+                border: '1px solid rgba(0, 0, 0, 0.10)',
+                borderRadius: '10px',
+                padding: '12px',
+                fontSize: '12px',
+                color: '#081C24',
+                lineHeight: 1.5
+              }}>
+                <strong>Zero-Client-Key Security Architecture:</strong>
+                <div style={{ fontSize: '11px', color: '#5A7184', marginTop: '4px' }}>
+                  All AI and speech reasoning models run exclusively via authenticated server proxy routes (<code style={{ background: 'rgba(0,0,0,0.06)', padding: '1px 4px', borderRadius: '4px' }}>/api/evon/*</code>). API credentials are never exposed, queried, or stored in your browser.
+                </div>
+              </div>
+
+              {selectedProvider === 'gnani_evon_30b' && (
+                <div style={{
+                  background: 'rgba(0, 245, 212, 0.08)',
+                  border: '1px solid rgba(0, 245, 212, 0.3)',
+                  borderRadius: '10px',
+                  padding: '10px 14px',
+                  fontSize: '11.5px',
+                  color: '#0F766E'
+                }}>
+                  <strong>Server-Side Security Guarantee:</strong> In accordance with clinical privacy standards, Gnani Evon credentials (<code>EVON_BASE_URL</code>, <code>EVON_API_KEY</code>) are configured exclusively on the server. If unset, requests fall back to deterministic safety rules labelled FALLBACK.
+                </div>
+              )}
+
+              <div style={{
+                background: selectedProvider === 'gnani_evon_30b' ? '#F0FDFA' : (selectedProvider === 'local_offline' ? '#ECFDF5' : '#F0F9FF'),
+                border: selectedProvider === 'gnani_evon_30b' ? '1.5px solid #0D9488' : (selectedProvider === 'local_offline' ? '1px solid #A7F3D0' : '1px solid #BAE6FD'),
+                borderRadius: '10px',
+                padding: '10px 14px',
+                fontSize: '12px',
+                color: selectedProvider === 'gnani_evon_30b' ? '#0F766E' : (selectedProvider === 'local_offline' ? '#065F46' : '#0369A1'),
+                lineHeight: 1.45
+              }}>
+                {selectedProvider === 'gnani_evon_30b' ? (
+                  <>
+                    <strong>Gnani Evon 30B [ACTIVE GATEWAY / SERVER PROXY]:</strong> Official Gnani foundation model gateway (<code>/api/evon/chat</code>) powered by <code>gnani/gnani-evon-v3.3-30B-A3B</code> with deterministic clinical safety verification.
+                  </>
+                ) : selectedProvider === 'local_offline' ? (
+                  <>
+                    <strong>Autonomous Local Indic Engine Active (SIMULATION):</strong> Uses AyuSwar's built-in Indic Clinical Ontology & Triage Rule Engine. No external API keys required.
+                  </>
+                ) : (
+                  <>
+                    <strong>Live LLM Mode Active:</strong> Queries will be routed through the selected open-source/free API model with autonomous fallback if limits are reached.
+                  </>
+                )}
+              </div>
+
+              {keySavedToast && (
+                <div style={{ background: '#DCFCE7', color: '#166534', padding: '8px 12px', borderRadius: '8px', fontSize: '12px', fontWeight: 750, textAlign: 'center' }}>
+                  AI Brain settings saved successfully!
+                </div>
+              )}
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '10px', marginTop: '6px' }}>
+                <button
+                  onClick={() => {
+                    saveAiConfig(selectedProvider);
+                    setKeySavedToast(true);
+                    setTimeout(() => {
+                      setKeySavedToast(false);
+                      setShowAiSettingsModal(false);
+                    }, 1200);
+                  }}
+                  className="btn-primary"
+                  style={{ flex: 1, padding: '10px', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
+                >
+                  <ShieldCheck size={16} />
+                  <span>Save AI Engine</span>
+                </button>
+                <button
+                  onClick={() => setShowAiSettingsModal(false)}
+                  className="btn-outline"
+                  style={{ padding: '10px 16px', fontSize: '13px' }}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
