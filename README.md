@@ -157,6 +157,9 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 
 ## ⚠️ Known limitations (the honest list)
 
+- **Transcript preservation is not accuracy validation:** `normalizeCodeMixedClinicalText` does not rewrite supplied text into medicine names, strengths or diagnostic codes. Recognition errors still require clinician review. Browser/Android speech processing depends on the provider and device settings and is not guaranteed to stay on-device.
+- **Benchmark fixtures are not clinical evidence:** bundled CSVs and historical example annotations do not establish live recognizer accuracy, preservation of medical intent or absence of harm. See [benchmark verification limits](benchmarks/RESULTS.md).
+
 - **Native Android runtime untested:** the APK is built and its bundled assets verified, but installation, audio playback, microphone and camera permissions have not been exercised on a physical device. All native verification is pending.
 - **Uploaded reports are not read:** the report organizer stores what you type; it never interprets an uploaded file and says so on screen.
 - **Scanner OCR is English-model only** and its dictionary matches are unverified candidates, not medicine identification.

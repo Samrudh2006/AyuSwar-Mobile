@@ -115,14 +115,30 @@ console.log('--- RUNNING PHASE 11: HERO FLOW TURN-TAKING & ROBUSTNESS TESTS ---'
   console.log('✓ Test 3 Passed: Clinician edits strictly persist and override static defaults across summaries.');
 }
 
-// 4. Code-Mixed Telugu-English Speech Normalization & Linguistic Role Classification
+// 4. Code-mixed transcript preservation and heuristic role classification
 {
   const codeMixedSample = 'Doctor garu, naku severe chest pain and fever vachindi since 2 days.';
   const normalized = normalizeCodeMixedClinicalText(codeMixedSample);
 
   // Must not throw or produce invalid characters
   assert.strictEqual(typeof normalized, 'string');
-  assert.ok(normalized.length > 0);
+  assert.strictEqual(normalized, codeMixedSample, 'Recognition text must not be rewritten');
+
+  // No aliases, strengths, diagnoses or negation changes may be injected.
+  const unchangedSamples = [
+    'panto', 'pantoprazole', 'metformin', 'telma', 'dolo', 'amox',
+    'azithro', 'aspirin', 'No panto or antibiotics',
+    'Doctor said panto, strength unknown', 'panto 20 mg?',
+    'not metformin 500 mg', '  dolo 250 mg  ',
+    'షుగర్ మందు', 'బీపీ టాబ్లెట్', 'జ్వరం',
+    'fever and stomach pain', 'vomiting', 'accident', ''
+  ];
+  for (const sample of unchangedSamples) {
+    assert.strictEqual(normalizeCodeMixedClinicalText(sample), sample,
+      'Preserve the exact supplied text, including dose, negation and whitespace');
+  }
+  assert.strictEqual(normalizeCodeMixedClinicalText(), '');
+  assert.strictEqual(normalizeCodeMixedClinicalText(null), '');
 
   // Linguistic classifier detects patient expressing symptoms
   const patientRole = classifyClinicalRoleLinguistically('డాక్టర్ గారు, నాకు నిన్నటి నుంచి తీవ్రమైన దగ్గు మరియు జ్వరం ఉంది.');
@@ -137,7 +153,7 @@ console.log('--- RUNNING PHASE 11: HERO FLOW TURN-TAKING & ROBUSTNESS TESTS ---'
   const noiseRole = classifyClinicalRoleLinguistically(corruptedNoise);
   assert.strictEqual(noiseRole, null, 'Unintelligible acoustic noise must degrade gracefully to null role');
 
-  console.log('✓ Test 4 Passed: Code-mixed speech normalizes safely and degrades gracefully on noise.');
+  console.log('✓ Test 4 Passed: Supplied transcripts are unchanged; heuristic roles handle the noise fixture.');
 }
 
 // 5. Idempotent DSC Digital Signature & Save Workflow

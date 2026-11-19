@@ -6,7 +6,7 @@
  * - Phase 2: Natural Indic Conversational Latency Masking (Conversational Fillers & Acoustic Chimes).
  * - Phase 3: Adaptive Conversational Prosody & Pitch Tuning (Timbre v2.5 contextual pacing & Indic numerals).
  * - Phase 4: Acoustic Distress & Panic Modulation (Dynamic vocal pitch F0 / panic-aware cadence slowing).
- * - Phase 5: Dialect & Code-Mixed Vernacular Optimization (Telugu-English / Hinglish clinical normalizer).
+ * - Phase 5: Code-mixed transcript preservation (no drug-strength or diagnostic-code rewriting).
  * - Phase 7: Real-Time Audio Artifact & Echo Cleansing (WebRTC AGC + 80Hz-3800Hz Voice Bandpass).
  * - Phase 12: Offline-First Fail-Safe Voice Engine (Web Speech & cached emergency audio fallbacks).
  * - Phase 14: End-to-End Enterprise Security & DISHA / HIPAA Sovereign Ephemeral Scrubber.
@@ -137,8 +137,9 @@ export const CONVERSATIONAL_FILLERS = {
 };
 
 /**
- * Phase 5: Code-Mixed Clinical Normalizer (Tenglish / Hinglish / Regional Lexicon)
- * Standardizes informal phonetics and colloquial drug names to National Formulary of India (NFI) & ICD-10 ontologies.
+ * Historical code-mixed mapping data, retained for compatibility only.
+ * Not applied to transcripts. These entries include inferred strengths/diagnoses
+ * and must not be treated as verified clinical mappings or prescribing guidance.
  */
 export const CODE_MIXED_CLINICAL_LEXICON = [
   // 1. Common Indian & NFI Prescription Drugs & Phonetic Slangs

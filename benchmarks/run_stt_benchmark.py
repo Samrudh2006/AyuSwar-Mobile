@@ -49,8 +49,10 @@ def calculate_wer_cer(refs_df, hyps_df, hyp_col="browser_stt", ref_col="ref_n"):
 
 def calculate_term_accuracy(refs_df, hyps_df, hyp_col="browser_stt"):
     """
-    Computes Medical-Term Accuracy (MTA) — the critical clinical patient-safety metric.
-    Tracks exact alias matching across drug names, diagnoses, and medical abbreviations.
+    Computes a fixture text-match statistic, not a clinical safety measure.
+    Matches listed aliases as substrings in supplied hypotheses. This does not
+    invoke the application normalizer, check negation/dose correctness, run an
+    acoustic recognizer, or establish clinical entity/intent preservation.
     """
     h = hyps_df.set_index("id")[hyp_col].map(norm)
     total = 0

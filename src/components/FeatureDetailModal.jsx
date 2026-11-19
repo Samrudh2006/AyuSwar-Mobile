@@ -41,9 +41,9 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
       icon: Languages,
       color: '#0F4C5C',
       problem: 'Indian patients rarely speak pure English or textbook regional languages; they speak colloquial hybrids (Tenglish, Hinglish, Tanglish) blending native slang with English pharmaceutical terms.',
-      solution: 'Gnani Indic Voice Services (Prisma v3 ASR). Explores Indic code-switching and recognizes phoneme patterns to transcribe mixed sentences into normalized text.',
-      scientificMetric: 'High-accuracy speech interface testing code-mixed dialect patterns.',
-      techSpec: 'Gnani Prisma v3 ASR • Indic neural speech models • Phonetic normalization'
+      solution: 'Recognition depends on the selected workflow: browser or Android speech recognition, or a configured server transcription service. Audio processing depends on the provider and device settings; browser or Android recognition is not guaranteed to stay on-device. Configured cloud paths send audio to a server. Recognized text is not rewritten into medicine names, strengths or diagnostic codes; review errors before using a draft.',
+      scientificMetric: 'Prototype only. Recognition accuracy and live provider availability are not established by this feature card.',
+      techSpec: 'Workflow-dependent recognition • Optional configured server path • Transcript review required'
     },
     'acoustic_biomarkers': {
       title: 'Acoustic Respiratory Biomarkers & Digital Stethoscope',

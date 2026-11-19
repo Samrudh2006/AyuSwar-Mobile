@@ -473,7 +473,7 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
         }
       }
 
-      // 5. Continuous Speech Recognition with Post-ASR Clinical Normalizer & NLP Role Classification
+      // 5. Continuous recognition with transcript preservation and heuristic role classification
       const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (SpeechRec) {
         try {
@@ -494,7 +494,7 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
             if (finalStr.trim()) {
               const rawTrimmed = finalStr.trim();
 
-              // A. Post-ASR Clinical Normalizer (Phonetic Auto-Correction with NFI Drugs & ICD-10)
+              // A. Preserve recognized text; do not infer medicines, strengths or diagnostic codes
               const normalizedText = normalizeCodeMixedClinicalText(rawTrimmed);
 
               // B. Linguistic NLP Role Classifier (questions/prescriptions vs symptoms/complaints)
