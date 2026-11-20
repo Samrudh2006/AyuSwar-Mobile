@@ -9,6 +9,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(AyuSwarSharePlugin.class);
         registerPlugin(AyuSwarKeystorePlugin.class);
         registerPlugin(AyuSwarSpeechPlugin.class);
+        registerPlugin(AyuSwarBackgroundAudioPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }

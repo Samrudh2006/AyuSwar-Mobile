@@ -1543,6 +1543,18 @@ export class IndicSpeechService {
     this.currentAudio = null;
   }
 
+  // Network speech policy (privacy fail-closed): live recognition through a
+  // network-backed engine (browser Web Speech or the community native
+  // plugin, and the AyuSwarSpeech plugin's allowNetwork path) only runs
+  // after an explicit user opt-in. Offline-unsupported paths report visibly
+  // unavailable instead of silently using the network.
+  isNetworkSpeechAllowed() {
+    try { return globalThis.localStorage?.getItem('ayuswar_network_speech_allowed') === 'true'; } catch { return false; }
+  }
+  setNetworkSpeechAllowed(allowed) {
+    try { globalThis.localStorage?.setItem('ayuswar_network_speech_allowed', allowed === true ? 'true' : 'false'); } catch {}
+  }
+
   startLiveRecognition({
     langCode = 'en-IN',
     onResult = () => {},
@@ -1553,7 +1565,7 @@ export class IndicSpeechService {
     this.activeLiveRecognitionConfig = { langCode, onResult, onError, onStatusChange };
 
     if (Capacitor.isNativePlatform()) {
-      this.startNativeRecognition({ langCode, onResult, onError, onStatusChange });
+      this.startNativeRecognition({ langCode, onResult, onError, onStatusChange, allowNetworkRecognition: this.isNetworkSpeechAllowed() });
       return this.currentRecognition;
     }
 
@@ -1563,6 +1575,13 @@ export class IndicSpeechService {
 
     if (!SpeechRecognition) {
       onError('Browser SpeechRecognition API is not supported in this browser. Please use Chrome, Edge, or a compatible browser.');
+      return null;
+    }
+
+    if (!this.isNetworkSpeechAllowed()) {
+      // Fail closed, visibly: browser Web Speech may send audio off this
+      // device, so it needs the explicit Settings opt-in first.
+      onError('Live voice uses the browser speech service, which may send audio off this device. It stays off until you enable network speech in Settings. Recorded consultations stay on-device.');
       return null;
     }
 
@@ -1685,6 +1704,12 @@ export class IndicSpeechService {
       // plugin's own start() report - never assumed.
       const useOnDeviceEngine = ayuswarSpeechAvailable();
       const Engine = useOnDeviceEngine ? AyuSwarSpeech : NativeSpeechRecognition;
+      if (!useOnDeviceEngine && !allowNetworkRecognition) {
+        // The only available engine is network-backed; fail closed with a
+        // visible reason instead of silently using the network.
+        onError('On-device speech recognition is not available on this device, and network speech is off. Enable network speech in Settings (audio goes to the Android speech service) or install the offline speech pack in system settings.');
+        return null;
+      }
       const perm = await Engine.requestPermissions();
       if (perm.speechRecognition !== 'granted') {
         onError('Microphone / speech recognition permission denied. Please grant it in Android app settings.');
@@ -1704,6 +1729,7 @@ export class IndicSpeechService {
       this.nativeStateListener = await Engine.addListener('listeningState', (data) => {
         if (data.status === 'stopped') {
           this.isRecognitionRunning = false;
+          if (data.errorMessage) onError(data.errorMessage); // real reason, never a silent stop
           onStatusChange({ isListening: false, langCode });
           const finalText = this.lastNativeTranscript || '';
           if (finalText) {

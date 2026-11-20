@@ -5,6 +5,7 @@ import { mt } from './mobileTranslations';
 import { CLINICAL_ENCOUNTERS } from '../data/clinicalEncounters';
 import { speechService } from '../services/indicSpeechService';
 import { openConsultationRecorder } from './consultationRecorder';
+import { startBackgroundAudio, stopBackgroundAudio } from './backgroundAudio.js';
 import { getRecordingConsent, grantRecordingConsent, revokeRecordingConsent, RecordingConsentRequiredError, CONSENT_TEXT_VERSION } from './recordingConsent';
 import { IconMic, IconChevronR, IconHeart } from './MIcons';
 
@@ -88,6 +89,7 @@ export default function MClinical() {
   React.useEffect(() => () => { if (audio?.url) URL.revokeObjectURL(audio.url); }, [audio]);
 
   const stop = () => {
+    stopBackgroundAudio();
     const result = recorder.current?.stop();
     recorder.current = null;
     setLevel(0);
@@ -110,6 +112,12 @@ export default function MClinical() {
       }, { noiseGate });
       if (!mounted.current) { capture.stop(); return; }
       recorder.current = capture; setPhase('recording');
+      // Background recording (rural-PHC must-have): on native builds a
+      // microphone-type foreground service with the OS persistent
+      // notification keeps capture alive if the app is backgrounded. It
+      // holds no audio; all consent/lifecycle rules still apply. A
+      // foreground-service rejection never blocks a foreground recording.
+      startBackgroundAudio();
       setStatus(t('recordingActual'));
     } catch (error) {
       setPhase('idle'); setLevel(0);
@@ -126,6 +134,7 @@ export default function MClinical() {
   };
   const declineConsent = () => setPhase('idle');
   const withdrawConsent = () => {
+    stopBackgroundAudio();
     revokeRecordingConsent();
     setConsentGiven(false);
     // Explicit, labeled destruction: any unshared recording and transcript are

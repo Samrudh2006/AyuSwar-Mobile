@@ -83,9 +83,33 @@ public class AyuSwarSpeechPlugin extends Plugin {
         @Override public void onBufferReceived(byte[] buffer) {}
         @Override public void onEndOfSpeech() {}
         @Override public void onError(int error) {
+            // Expose the real reason instead of a silent stop so the UI can
+            // tell the user what actually happened.
             JSObject event = new JSObject();
             event.put("status", "stopped");
+            event.put("errorCode", error);
+            event.put("errorMessage", errorReason(error));
             notifyListeners("listeningState", event);
+        }
+
+        private String errorReason(int error) {
+            switch (error) {
+                case SpeechRecognizer.ERROR_NETWORK_TIMEOUT: return "Network timeout during recognition.";
+                case SpeechRecognizer.ERROR_NETWORK: return "Network error during recognition.";
+                case SpeechRecognizer.ERROR_AUDIO: return "Audio capture error.";
+                case SpeechRecognizer.ERROR_SERVER: return "Speech service error.";
+                case SpeechRecognizer.ERROR_CLIENT: return "Recognition client error.";
+                case SpeechRecognizer.ERROR_SPEECH_TIMEOUT: return "No speech heard before timeout.";
+                case SpeechRecognizer.ERROR_NO_MATCH: return "No speech matched.";
+                case SpeechRecognizer.ERROR_RECOGNIZER_BUSY: return "Recognizer is busy.";
+                case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS: return "Microphone permission missing.";
+                case SpeechRecognizer.ERROR_TOO_MANY_REQUESTS: return "Too many recognition requests.";
+                case SpeechRecognizer.ERROR_SERVER_DISCONNECTED: return "Speech service disconnected.";
+                case SpeechRecognizer.ERROR_LANGUAGE_NOT_SUPPORTED: return "Language not supported by the recognizer.";
+                case SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE: return "Language pack unavailable (offline model not installed).";
+                case SpeechRecognizer.ERROR_CANNOT_CHECK_SUPPORT: return "Cannot check language support.";
+                default: return "Recognition stopped (code " + error + ").";
+            }
         }
         @Override public void onPartialResults(Bundle partialResults) {
             ArrayList<String> matches = partialResults.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);

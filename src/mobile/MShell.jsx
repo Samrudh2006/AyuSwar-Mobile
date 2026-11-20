@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext';
 import { triggerHaptic } from '../utils/haptics';
 import { mt } from './mobileTranslations';
 import { AppLockSettings } from './MAppLock';
+import { NetworkSpeechSettings } from './MSpeechSettings';
 import {
   IconHome, IconWave, IconMic, IconMenu, IconClose, IconChevronR,
   IconStethoscope, IconUser, IconScan, IconSpeaker, IconLab, IconSiren,
@@ -33,6 +34,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
   const { doctorProfile, patientProfile, setDoctorProfile, setPatientProfile, selectedLanguage, setSelectedLanguage, supportedLanguages } = useApp();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [lockSettingsOpen, setLockSettingsOpen] = React.useState(false);
+  const [speechSettingsOpen, setSpeechSettingsOpen] = React.useState(false);
   const [languageNotice, setLanguageNotice] = React.useState('');
   const activeTab = tabForPath(location.pathname);
   const t = key => mt(key, selectedLanguage);
@@ -200,6 +202,9 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setLockSettingsOpen(true); }}>
             <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'App lock', 'te-IN': 'యాప్ లాక్', 'hi-IN': 'ऐप लॉक' }[selectedLanguage] || 'App lock'}
           </button>
+          <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setSpeechSettingsOpen(true); }}>
+            <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'Network speech', 'te-IN': 'నెట్‌వర్క్ స్పీచ్', 'hi-IN': 'नेटवर्क स्पीच' }[selectedLanguage] || 'Network speech'}
+          </button>
 
           <div className="m-drawer-section">{t('legal')}</div>
           <button className="m-drawer-item" onClick={() => go('/privacy')}>
@@ -224,6 +229,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
         </div>
       </aside>
       {lockSettingsOpen && <AppLockSettings lang={selectedLanguage} onClose={() => setLockSettingsOpen(false)} />}
+      {speechSettingsOpen && <NetworkSpeechSettings lang={selectedLanguage} onClose={() => setSpeechSettingsOpen(false)} />}
     </div>
   );
 }
