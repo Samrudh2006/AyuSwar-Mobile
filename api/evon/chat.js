@@ -11,7 +11,7 @@
  * - Non-diagnostic guardrail: Enforces emergency 112/108 routing and forbids autonomous drug dosing.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization } from '../_lib/security.js';
 
 export const config = {
   api: {
@@ -48,6 +48,13 @@ export default async function handler(req, res) {
       error: 'Too Many Requests. Please pause between queries.',
       retryAfterSec: rateLimitResult.retryAfterSec
     });
+  }
+
+  // Caller authorization (opt-in enforcement via API_REQUIRE_AUTH=true; fail-closed when on)
+  const callerAuth = await verifyCallerAuthorization(req);
+  if (!callerAuth.authorized) {
+    logSafeApiAccess({ route, method: req.method, status: callerAuth.status, durationMs: Date.now() - startTime, clientNote: 'Caller auth rejected' });
+    return res.status(callerAuth.status).json({ error: callerAuth.error });
   }
 
   // 4. Server-Side Environment Variables Only (Header keys/URLs strictly removed)

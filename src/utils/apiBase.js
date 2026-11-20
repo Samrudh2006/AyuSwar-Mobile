@@ -15,3 +15,22 @@ export function apiUrl(path) {
   }
   return path;
 }
+
+/**
+ * Caller-auth headers for provider-quota proxy routes.
+ * The server fails closed without a valid Supabase session JWT whenever an
+ * auth provider is configured, so authenticated calls must attach it.
+ * In local synthetic demo mode (no Supabase) this returns no header and the
+ * proxy routes answer 503 instead of forwarding to paid upstreams.
+ */
+export async function authHeaders() {
+  try {
+    const { supabase, isSupabaseConfigured } = await import('../services/supabaseClient.js');
+    if (!isSupabaseConfigured) return {};
+    const { data } = await supabase.auth.getSession();
+    const token = data?.session?.access_token;
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  } catch {
+    return {};
+  }
+}

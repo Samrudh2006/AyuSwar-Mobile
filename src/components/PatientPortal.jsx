@@ -5550,7 +5550,7 @@ export default function PatientPortal({
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <AuthenticQrCode 
-                    value={`https://ayuswar-ai.vercel.app/patient-portal?abha=${abhaId}&pt=${encodeURIComponent(patientName)}`}
+                    value={`https://ayuswar-ai.vercel.app/patient-portal`}
                     size={68}
                     isDoctor={false}
                     showCenterBadge={false}

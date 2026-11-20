@@ -15,7 +15,7 @@
  */
 
 import { queryGroqApi, getGroqApiKey } from './aiBrainService.js';
-import { apiUrl } from '../utils/apiBase.js';
+import { apiUrl, authHeaders } from '../utils/apiBase.js';
 import { recordDiagnosticStage } from '../utils/diagnosticLogger.js';
 
 export const EVON_MODEL_METADATA = {
@@ -121,7 +121,7 @@ export async function queryEvonServer(prompt, systemInstruction = '', options = 
   try {
     const response = await fetch(apiUrl('/api/evon/chat'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...(await authHeaders()), 'Content-Type': 'application/json' },
       body: JSON.stringify({
         prompt,
         systemInstruction,

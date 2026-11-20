@@ -12,7 +12,7 @@
  */
 
 import { queryEvonServer, EVON_MODEL_METADATA } from './gnaniEvonService.js';
-import { apiUrl } from '../utils/apiBase.js';
+import { apiUrl, authHeaders } from '../utils/apiBase.js';
 import { retrieveGroundedClinicalKnowledge } from '../data/clinicalRagKnowledgeBase.js';
 import { recordDiagnosticStage } from '../utils/diagnosticLogger.js';
 
@@ -223,7 +223,7 @@ export async function queryGroqApi(prompt, systemInstruction = '', preferredMode
   try {
     const res = await fetch(apiUrl('/api/groq/chat'), {
       method: 'POST',
-      headers: {
+      headers: { ...(await authHeaders()),
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
@@ -416,7 +416,7 @@ export async function transcribeAudioWithGroqWhisper(audioBlob, language = 'te')
 
   const res = await fetch(apiUrl('/api/groq/transcribe'), {
     method: 'POST',
-    headers: {
+    headers: { ...(await authHeaders()),
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({

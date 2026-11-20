@@ -8,7 +8,7 @@
  * - Upstream host (api.groq.com) is validated against security allowlist.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization } from '../_lib/security.js';
 
 export const config = {
   api: {
@@ -36,6 +36,13 @@ export default async function handler(req, res) {
       error: 'Audio processing rate limit exceeded. Please wait before retrying.',
       retryAfterSec: rateLimitResult.retryAfterSec
     });
+  }
+
+  // Caller authorization (fail-closed; see api/_lib/security.js verifyCallerAuthorization)
+  const callerAuth = await verifyCallerAuthorization(req);
+  if (!callerAuth.authorized) {
+    logSafeApiAccess({ route, method: req.method, status: callerAuth.status, durationMs: Date.now() - startTime, clientNote: 'Caller auth rejected' });
+    return res.status(callerAuth.status).json({ error: callerAuth.error });
   }
 
   const apiKey = process.env.GROQ_API_KEY;

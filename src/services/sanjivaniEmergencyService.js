@@ -7,7 +7,7 @@
  */
 
 import { EVON_MODEL_METADATA } from './gnaniEvonService.js';
-import { apiUrl } from '../utils/apiBase.js';
+import { apiUrl, authHeaders } from '../utils/apiBase.js';
 import { cleanTextForSpeech, getBestVoice } from '../utils/speechSanitizer.js';
 import { speechService } from './indicSpeechService.js';
 
@@ -315,7 +315,7 @@ export async function fetchServerTriage(transcript, acousticPanicIndex = 70) {
   try {
     const res = await fetch(apiUrl('/api/triage'), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { ...(await authHeaders()), 'Content-Type': 'application/json' },
       body: JSON.stringify({ transcript, acousticPanicIndex })
     });
     if (res.ok) {

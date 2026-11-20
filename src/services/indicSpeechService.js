@@ -12,7 +12,7 @@
  * - Phase 14: End-to-End Enterprise Security & DISHA / HIPAA Sovereign Ephemeral Scrubber.
  */
 import { cleanTextForSpeech, getBestVoice } from '../utils/speechSanitizer.js';
-import { apiUrl } from '../utils/apiBase.js';
+import { apiUrl, authHeaders } from '../utils/apiBase.js';
 import { clinicalVad } from './clinicalVadEngine.js';
 import { Capacitor } from '@capacitor/core';
 import { SpeechRecognition as NativeSpeechRecognition } from '@capacitor-community/speech-recognition';
@@ -640,7 +640,7 @@ export class IndicSpeechService {
 
       const res = await fetch(apiUrl('/api/gnani/stt'), {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...(await authHeaders()), 'Content-Type': 'application/json' },
         body: JSON.stringify({
           audioBase64: base64Audio,
           language_code: langCode
@@ -1008,7 +1008,7 @@ export class IndicSpeechService {
 
         const response = await fetch(apiUrl('/api/gnani/tts'), {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { ...(await authHeaders()), 'Content-Type': 'application/json' },
           body: JSON.stringify({
             text: cleanSpeechText,
             language: langCode,

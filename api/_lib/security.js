@@ -111,6 +111,60 @@ export function logSafeApiAccess({ route, method, status, durationMs, clientNote
 }
 
 /**
+ * Shared caller authorization for provider-quota proxy routes.
+ *
+ * Why: /api/gnani/*, /api/groq/*, /api/evon/* and /api/triage forward to paid
+ * upstream providers with server-side keys. Without caller authentication,
+ * anyone who finds the deployment URL can spend that quota; the in-memory
+ * rate limiter above is per-instance best-effort only.
+ *
+ * Fail-closed policy (no opt-out flag by design):
+ * - Supabase server credentials configured -> a valid Supabase session JWT is
+ *   REQUIRED. Missing/invalid token: 401. Auth provider unreachable: 503.
+ *   Expiry and revocation are enforced by the provider's /auth/v1/user check
+ *   on every call.
+ * - Supabase NOT configured -> local synthetic demo mode. There is no identity
+ *   system, so these routes NEVER forward to a paid upstream; they answer
+ *   503 with an honest demo-mode message instead.
+ *
+ * No shared app token or client-embedded key is supported on purpose: a
+ * secret shipped in the APK/WebView would be extractable.
+ */
+export async function verifyCallerAuthorization(req) {
+  const supabaseUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
+  const apiKey = process.env.SUPABASE_ANON_KEY || process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseConfigured = Boolean(supabaseUrl && apiKey && !apiKey.includes('placeholder'));
+
+  if (!supabaseConfigured) {
+    return {
+      mode: 'local-demo',
+      authorized: false,
+      status: 503,
+      error: 'Local synthetic demo mode: paid upstream forwarding is disabled because caller authentication is not configured.'
+    };
+  }
+
+  const authHeader = req.headers?.authorization || '';
+  const token = authHeader.replace(/^Bearer\s+/i, '').trim();
+  if (!token) {
+    return { mode: 'production', authorized: false, status: 401, error: 'Missing authorization bearer token.' };
+  }
+
+  try {
+    const response = await fetch(`${supabaseUrl.replace(/\/+$/, '')}/auth/v1/user`, {
+      headers: { 'Authorization': `Bearer ${token}`, 'apikey': apiKey }
+    });
+    if (response.ok) {
+      const user = await response.json();
+      return { mode: 'production', authorized: true, user: { id: user.id, role: user.user_metadata?.role || 'patient' } };
+    }
+    return { mode: 'production', authorized: false, status: 401, error: 'Invalid or expired session token.' };
+  } catch {
+    return { mode: 'production', authorized: false, status: 503, error: 'Auth provider unreachable; request safely rejected.' };
+  }
+}
+
+/**
  * Sanitizes errors returned to clients.
  * Prevents internal tokens, upstream stack traces, or secret URLs from leaking.
  */

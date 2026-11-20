@@ -35,7 +35,8 @@ const suites = [
   { name: 'Phase 13: Rendered-DOM Localization & Route Truth', file: 'test/rendered_dom_i18n.test.js', count: 5 },
   { name: 'Phase 14: Audio, Assistant & Layout Diagnostics', file: 'test/audio_assistant_diagnostics.test.js', count: 6 },
   { name: 'Phase 15: Data Provenance & STT Metric Engine', file: 'test/data_provenance.test.js', count: 4 },
-  { name: 'Phase 16: Synthetic FHIR R4 Bundles', file: 'test/fhir_synthetic.test.js', count: 2, skip: 1 }
+  { name: 'Phase 16: Synthetic FHIR R4 Bundles', file: 'test/fhir_synthetic.test.js', count: 2, skip: 1 },
+  { name: 'Phase 17: Provider-Proxy Caller Authorization', file: 'test/api_caller_auth.test.js', count: 5 }
 ];
 
 console.clear();
