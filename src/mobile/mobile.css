@@ -814,11 +814,8 @@
 
 /* --- OPD scribe flow rework (22:36): pastel layered surfaces, review/edit --- */
 .m-flow-page {
-  background:
-    radial-gradient(420px 300px at 110% -60px, rgba(201, 162, 39, 0.14), transparent 65%),
-    radial-gradient(360px 280px at -30% 30%, rgba(21, 92, 62, 0.10), transparent 65%),
-    radial-gradient(400px 320px at 115% 78%, rgba(222, 138, 51, 0.12), transparent 65%),
-    linear-gradient(180deg, #EAF3EC 0%, #FAF5EA 38%, #FBF0E2 72%, #F3EDDC 100%);
+  /* app-wide illustrated backdrop shows through; per-page pastel layer removed */
+  background: transparent;
   min-height: 100%;
 }
 .m-flow-patient-card {
@@ -904,7 +901,7 @@
 .m-tint-mint { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
 .m-tint-peach { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
 .m-tint-sky { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
-.m-flow-page { background: radial-gradient(ellipse at 108% 5%,#d6e7d2 0 14%,transparent 14.3%),radial-gradient(ellipse at -18% 76%,#f4dcbd 0 24%,transparent 24.3%),linear-gradient(165deg,#ecf3df,#fbefd9 65%,#e5eedc); }
+.m-flow-page { background: transparent; }
 .m-consultation-photo { margin: 12px 0; }
 .m-consultation-photo img { width:100%; aspect-ratio: 2.15; object-fit:cover; object-position:center 40%; border:1px solid #b1a287; border-radius:12px; }
 .m-consultation-photo figcaption { font:10px/1.5 var(--m-font-ui); color:#61715d; margin-top:3px; }
