@@ -1196,6 +1196,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
  Patient Audio-Rx Language:
               </span>
               <select
+                aria-label="Patient Audio-Rx Language"
                 value={selectedEncounterIndex}
                 onChange={(e) => setSelectedEncounterIndex(Number(e.target.value))}
                 style={{
