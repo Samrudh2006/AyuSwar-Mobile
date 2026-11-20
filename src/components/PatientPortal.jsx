@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { buildManualVital, formatManualVital } from '../utils/vitalsEntry';
 import { useApp, SUPPORTED_LANGUAGES } from '../context/AppContext';
 import { Globe, Sunrise, Sun, Video, Building2, Lock, Scan, User } from 'lucide-react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
@@ -447,17 +448,20 @@ export default function PatientPortal({
 
   // Modal State for Manual Vitals Entry
   const [isAddVitalsModalOpen, setIsAddVitalsModalOpen] = useState(false);
-  const [vitalsForm, setVitalsForm] = useState({
+  const EMPTY_VITALS_FORM = {
     date: formatDemoDate(0),
     time: '09:30 AM',
-    systolic: '120',
-    diastolic: '80',
-    pulse: '74',
-    spo2: '98',
-    weight: '63',
+    systolic: '',
+    diastolic: '',
+    pulse: '',
+    spo2: '',
+    weight: '',
     bloodSugar: '',
     sourceNote: 'Self-measured at home'
-  });
+  };
+  const [vitalsForm, setVitalsForm] = useState(EMPTY_VITALS_FORM);
+  const [vitalsErrors, setVitalsErrors] = useState({});
+  const vitalsSavingRef = useRef(false);
   const [vitalsToastMessage, setVitalsToastMessage] = useState(null);
 
   const showVitalsToast = (msg) => {
@@ -467,37 +471,28 @@ export default function PatientPortal({
 
   const handleSaveManualVitals = (e) => {
     e?.preventDefault();
-    const sys = parseInt(vitalsForm.systolic) || 120;
-    const dia = parseInt(vitalsForm.diastolic) || 80;
-    const pul = parseInt(vitalsForm.pulse) || 72;
-    const sp = parseInt(vitalsForm.spo2) || 98;
-    const wt = vitalsForm.weight ? `${vitalsForm.weight} kg` : '63 kg';
-
-    let bpStatus = 'Normal';
-    if (sys >= 140 || dia >= 90) bpStatus = 'Stage 2 HTN';
-    else if (sys >= 130 || dia >= 80) bpStatus = 'Stage 1 HTN';
-    else if (sys >= 120 && dia < 80) bpStatus = 'Elevated';
-
-    const newVital = {
-      id: 'vit_manual_' + Date.now(),
-      date: vitalsForm.date || formatDemoDate(0),
-      relativeLabel: 'Just now',
-      offsetDays: 0,
-      bp: `${sys}/${dia} mmHg`,
-      systolic: sys,
-      diastolic: dia,
-      pulse: `${pul} bpm`,
-      spo2: `${sp}%`,
-      weight: wt,
-      bloodSugar: vitalsForm.bloodSugar ? `${vitalsForm.bloodSugar} mg/dL` : undefined,
-      source: vitalsForm.sourceNote || 'Self-entered manual entry',
-      sourceType: 'manual',
-      status: bpStatus
-    };
-
+    // Duplicate-save guard: one in-flight save at a time.
+    if (vitalsSavingRef.current) return;
+    const result = buildManualVital(vitalsForm);
+    if (!result.valid) {
+      // Keep every entered value for correction; nothing is saved or invented.
+      setVitalsErrors(result.errors);
+      return;
+    }
+    vitalsSavingRef.current = true;
+    setVitalsErrors({});
+    const newVital = formatManualVital(result.values, 'vit_manual_' + Date.now());
     setVitalsHistory(prev => [newVital, ...prev]);
     setIsAddVitalsModalOpen(false);
+    vitalsSavingRef.current = false;
     showVitalsToast('New vitals recorded manually and saved to longitudinal history!');
+  };
+
+  const handleClearVitalsForm = () => {
+    // Explicit confirm before any entered draft is discarded.
+    if (!window.confirm('Clear every value you entered in this form?')) return;
+    setVitalsForm(EMPTY_VITALS_FORM);
+    setVitalsErrors({});
   };
 
   const handleSyncVitalsFromReports = () => {
@@ -2545,7 +2540,19 @@ export default function PatientPortal({
                     </div>
 
                     {/* Form Body */}
-                    <form onSubmit={handleSaveManualVitals} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <form noValidate onSubmit={handleSaveManualVitals} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      {Object.keys(vitalsErrors).length > 0 && (
+                        <div role="alert" aria-live="assertive" style={{ background: '#FEF2F2', border: '1px solid #B91C1C', borderRadius: '10px', padding: '10px 14px' }}>
+                          <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#B91C1C', marginBottom: '4px' }}>
+                            Please correct {Object.keys(vitalsErrors).length} field{Object.keys(vitalsErrors).length > 1 ? 's' : ''} — nothing was saved:
+                          </div>
+                          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#7F1D1D' }}>
+                            {Object.entries(vitalsErrors).map(([field, msg]) => (
+                              <li key={field}><strong>{field}</strong>: {msg}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                       {/* Date & Recording Context */}
                       <div className="patient-vitals-modal-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', width: '100%' }}>
                         <div>
@@ -2582,31 +2589,9 @@ export default function PatientPortal({
                       <div style={{ background: '#FAF8F5', padding: '14px', borderRadius: '12px', border: '1px solid rgba(0, 0, 0, 0.06)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
                           <span style={{ fontSize: '12px', fontWeight: 750, color: '#081C24' }}>Blood Pressure (BP)</span>
-                          {(() => {
-                            const sys = parseInt(vitalsForm.systolic) || 0;
-                            const dia = parseInt(vitalsForm.diastolic) || 0;
-                            let status = 'Normal (< 120/80)';
-                            let bg = '#ECFDF5';
-                            let fg = '#065F46';
-                            if (sys >= 140 || dia >= 90) {
-                              status = 'Stage 2 HTN (≥ 140/90)';
-                              bg = '#FEF2F2';
-                              fg = '#991B1B';
-                            } else if (sys >= 130 || dia >= 80) {
-                              status = 'Stage 1 HTN (130-139/80-89)';
-                              bg = '#FFFBEB';
-                              fg = '#92400E';
-                            } else if (sys >= 120) {
-                              status = 'Elevated (120-129/<80)';
-                              bg = '#FEF3C7';
-                              fg = '#B45309';
-                            }
-                            return (
-                              <span style={{ fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px', background: bg, color: fg }}>
-                                {status}
-                              </span>
-                            );
-                          })()}
+                          <span style={{ fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px', background: '#F1F5F9', color: '#52707C' }}>
+                            Self-reported; not clinically reviewed
+                          </span>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                           <div>
@@ -2710,6 +2695,13 @@ export default function PatientPortal({
                           }}
                         >
                           Cancel
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleClearVitalsForm}
+                          style={{ flex: 1, padding: '10px', borderRadius: '10px', border: '1px solid #B91C1C', background: '#FFFFFF', color: '#B91C1C', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
+                        >
+                          Clear
                         </button>
                         <button
                           type="submit"

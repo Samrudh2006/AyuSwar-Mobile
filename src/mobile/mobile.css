@@ -1553,3 +1553,9 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
     transform: rotate(90deg);
   }
 }
+
+/* Modal focus: the docked assistant pill must never cover modal actions.
+   When any modal overlay is open, the pill steps aside until it closes. */
+body:has(.modal-overlay) .m-assistant {
+  display: none !important;
+}
