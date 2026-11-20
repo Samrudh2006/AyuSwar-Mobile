@@ -64,8 +64,14 @@ OUT_DIR = os.path.join(
 )
 
 
+# Deterministic UUIDs (uuid5 over a fixed namespace + call sequence) so
+# regenerating the fixtures is byte-stable and produces no git churn.
+_UUID_NAMESPACE = uuid.UUID("6f1a2b3c-4d5e-6f70-8192-a3b4c5d6e7f8")
+_uuid_counter = [0]
+
 def _uuid():
-    return "urn:uuid:" + str(uuid.uuid4())
+    _uuid_counter[0] += 1
+    return "urn:uuid:" + str(uuid.uuid5(_UUID_NAMESPACE, f"ayuswar-synthetic-fhir-{_uuid_counter[0]}"))
 
 
 def build_bundle(spec):

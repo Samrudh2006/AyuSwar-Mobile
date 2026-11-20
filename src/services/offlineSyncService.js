@@ -10,7 +10,7 @@
  */
 
 import { supabase } from './supabaseClient.js';
-import { encryptRecord, decryptRecord } from './secureOfflineStorage.js';
+import { encryptRecord, decryptRecord, purgeWithConfirmation } from './secureOfflineStorage.js';
 import { assertOfflineDataConsent, isBackgroundSyncApproved } from './offlineDataConsent.js';
 
 const DB_NAME = 'ayuswar_clinical_offline_db';
@@ -320,6 +320,28 @@ export const getCachedClinicalRecord = async (storeName, id) => {
  */
 export const enqueueOfflineAction = async (action) => {
   return saveOfflineRecord(action.type || 'encounter', action.payload || action);
+};
+
+/**
+ * Purge every pending local offline record from IndexedDB and the LocalStorage
+ * fallback, returning a purge receipt per record (explicit user action only).
+ * Local-only: cannot undo records already synced elsewhere.
+ */
+export const purgeAllPendingRecords = async () => {
+  const queue = await getPendingOfflineQueue();
+  const receipts = [];
+  for (const item of queue) {
+    try {
+      receipts.push(await purgeWithConfirmation(DB_NAME, 'pending_sync_queue', item.id));
+    } catch {
+      receipts.push({ purged: false, id: item.id, store: 'pending_sync_queue', deletedAt: new Date().toISOString(), scope: 'this-device-local-storage', note: 'Purge failed for this record.' });
+    }
+  }
+  try {
+    localStorage.removeItem(STORAGE_FALLBACK_KEY);
+  } catch {}
+  notifyQueueUpdate(0);
+  return receipts;
 };
 
 export const getPendingSyncQueue = getPendingOfflineQueue;

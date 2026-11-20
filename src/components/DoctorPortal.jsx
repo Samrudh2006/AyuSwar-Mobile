@@ -87,6 +87,9 @@ import { triggerHaptic } from '../utils/haptics';
 import { audioMutex } from '../services/clinicalTelemetry';
 import { downloadAbdmWhitepaper, printAbdmDossier } from '../utils/abdmWhitepaperExport';
 import { clinicalOfflineStorage } from '../services/clinicalOfflineStorage';
+import { queueSampleRuralEncounters } from '../services/offlineSimulationQueue';
+import { grantOfflineDataConsent } from '../services/offlineDataConsent';
+import { purgeAllPendingRecords } from '../services/offlineSyncService';
 import { opdQueueService, STANDARD_OPD_TIME_SLOTS } from '../services/opdQueueService';
 import { loadLocalPreferences, saveLocalPreferences } from '../services/localPreferences';
 
@@ -283,6 +286,7 @@ export default function DoctorPortal({
   const [pendingOfflineCount, setPendingOfflineCount] = useState(0);
   const [isSyncingOffline, setIsSyncingOffline] = useState(false);
   const [lastSyncAuditHash, setLastSyncAuditHash] = useState(null);
+  const [offlineConsentPrompt, setOfflineConsentPrompt] = useState(false);
 
   // Monitor offline queue count from IndexedDB
   useEffect(() => {
@@ -307,54 +311,46 @@ export default function DoctorPortal({
   const handleToggleOfflineSimulation = async () => {
     triggerHaptic('medium');
     if (!isSimulatingOffline) {
-      setIsSimulatingOffline(true);
-      // Durably queue 3 realistic rural OPD consultations into IndexedDB
-      const sampleRuralEncounters = [
-        {
-          id: `ENC_RURAL_${Date.now()}_1`,
-          token: 'OPD-101',
-          patientName: 'Narayana Rao',
-          age: 68,
-          gender: 'Male',
-          chiefComplaint: 'గుండెల్లో మంట, దడ (Chest tightness & palpitations)',
-          diagnosis: 'Sample presentation: palpitations/chest discomfort (clinician review required)',
-          prescription: 'Sample medication text only; no dose or substitution recommendation',
-          timestamp: Date.now()
-        },
-        {
-          id: `ENC_RURAL_${Date.now()}_2`,
-          token: 'OPD-102',
-          patientName: 'Lakshmi Devi',
-          age: 54,
-          gender: 'Female',
-          chiefComplaint: 'కాళ్ల వాపు, నిద్రలేమి (T2DM Review, peripheral tingling)',
-          diagnosis: 'Sample presentation: diabetes review with tingling (clinician review required)',
-          prescription: 'Sample medication text only; no dose or substitution recommendation',
-          timestamp: Date.now() + 1000
-        },
-        {
-          id: `ENC_RURAL_${Date.now()}_3`,
-          token: 'OPD-103',
-          patientName: 'Venkat Ramana',
-          age: 47,
-          gender: 'Male',
-          chiefComplaint: 'దగ్గు, ఆయాసం (Severe nocturnal wheezing)',
-          diagnosis: 'Sample presentation: nocturnal wheeze (clinician review required)',
-          prescription: 'Sample medication text only; no dose recommendation',
-          timestamp: Date.now() + 2000
+      // Durably queue 3 realistic rural OPD consultations into IndexedDB.
+      // The write is consent-gated: without an explicit grant we revert the
+      // toggle and surface a reachable consent prompt (never a silent stuck flow).
+      const result = await queueSampleRuralEncounters();
+      if (!result.ok) {
+        setIsSimulatingOffline(false);
+        if (result.reason === 'CONSENT_REQUIRED') {
+          setOfflineConsentPrompt(true);
+          setFhirToast('On-device encrypted storage consent is required before saving offline encounters.');
+        } else {
+          setFhirToast('Offline encounter write failed. Nothing was queued.');
         }
-      ];
-
-      for (const enc of sampleRuralEncounters) {
-        await clinicalOfflineStorage.saveEncounter(enc);
+        setTimeout(() => setFhirToast(null), 4500);
+        return;
       }
-      const count = await clinicalOfflineStorage.getPendingCount();
-      setPendingOfflineCount(count);
-      setFhirToast('Rural Zero-Network Simulation Active. 3 Encounters saved locally to IndexedDB (ayuswar_clinical_offline_db).');
-      setTimeout(() => setFhirToast(null), 4500);
+      setIsSimulatingOffline(true);
+      setPendingOfflineCount(result.count);
+      setFhirToast('Rural Zero-Network Simulation Active. 3 Encounters saved locally, AES-256-GCM encrypted (ayuswar_clinical_offline_db).');
     } else {
       await handleTriggerAbdmSync();
     }
+  };
+
+  const handleGrantOfflineConsentAndRetry = async () => {
+    grantOfflineDataConsent();
+    setOfflineConsentPrompt(false);
+    setFhirToast('On-device encrypted storage consent granted. Revocable any time.');
+    setTimeout(() => setFhirToast(null), 3000);
+    await handleToggleOfflineSimulation();
+  };
+
+  const handlePurgeOfflineRecords = async () => {
+    triggerHaptic('heavy');
+    const receipts = await purgeAllPendingRecords();
+    const purged = receipts.filter((r) => r.purged).length;
+    setPendingOfflineCount(0);
+    setFhirToast(purged > 0
+      ? `Purged ${purged} local offline record(s) from this device at ${receipts[0]?.deletedAt}. Local-only: does not undo past syncs.`
+      : 'No local offline records found to purge on this device.');
+    setTimeout(() => setFhirToast(null), 4500);
   };
 
   const handleTriggerAbdmSync = async () => {
@@ -3131,6 +3127,34 @@ export default function DoctorPortal({
 
                   {/* Simulator Controls */}
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                    {offlineConsentPrompt && (
+                      <div style={{ flexBasis: '100%', background: '#FEF3C7', color: '#92400E', borderRadius: '10px', padding: '10px 12px', fontSize: '12px', lineHeight: 1.5 }}>
+                        Offline encounters are stored AES-256-GCM encrypted on this device only. Explicit consent is required before saving.
+                        <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                          <button onClick={handleGrantOfflineConsentAndRetry} style={{ background: '#047857', color: '#fff', border: 'none', borderRadius: '8px', padding: '6px 10px', fontSize: '11.5px', fontWeight: 700, cursor: 'pointer' }}>
+                            Allow encrypted on-device storage & retry
+                          </button>
+                          <button onClick={() => setOfflineConsentPrompt(false)} style={{ background: 'transparent', color: '#92400E', border: '1px solid #D97706', borderRadius: '8px', padding: '6px 10px', fontSize: '11.5px', fontWeight: 700, cursor: 'pointer' }}>
+                            Not now
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    <button
+                      onClick={handlePurgeOfflineRecords}
+                      style={{
+                        background: 'rgba(220, 38, 38, 0.18)',
+                        color: '#FCA5A5',
+                        border: '1px solid rgba(248, 113, 113, 0.5)',
+                        borderRadius: '10px',
+                        padding: '10px 14px',
+                        fontSize: '12.5px',
+                        fontWeight: 750,
+                        cursor: 'pointer'
+                      }}
+                    >
+                      Purge Local Records
+                    </button>
                     <button
                       onClick={handleToggleOfflineSimulation}
                       style={{

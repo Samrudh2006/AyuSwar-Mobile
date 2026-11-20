@@ -13,7 +13,7 @@
   "type": "collection",
   "entry": [
     {
-      "fullUrl": "urn:uuid:6a817b54-2ef8-489c-a096-760cf3aca3a8",
+      "fullUrl": "urn:uuid:8521a420-3c38-5f42-8f57-b0a33bfddbd0",
       "resource": {
         "resourceType": "Patient",
         "id": "syn-patient-001",
@@ -56,7 +56,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:288a029b-4dd4-4836-a727-acb6f72c9576",
+      "fullUrl": "urn:uuid:11404ab9-0272-54f2-82d4-0105ba35853e",
       "resource": {
         "resourceType": "Encounter",
         "id": "syn-patient-001-enc",
@@ -73,7 +73,7 @@
           "display": "ambulatory"
         },
         "subject": {
-          "reference": "urn:uuid:6a817b54-2ef8-489c-a096-760cf3aca3a8"
+          "reference": "urn:uuid:8521a420-3c38-5f42-8f57-b0a33bfddbd0"
         },
         "period": {
           "start": "2026-11-20T09:30:00+05:30",
@@ -82,7 +82,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:8bc2536c-bcc5-4de3-8119-f950f7115501",
+      "fullUrl": "urn:uuid:be3c4355-aff1-52e1-ac90-c467e662219c",
       "resource": {
         "resourceType": "Condition",
         "id": "syn-patient-001-cond",
@@ -112,15 +112,15 @@
           "text": "Essential (primary) hypertension"
         },
         "subject": {
-          "reference": "urn:uuid:6a817b54-2ef8-489c-a096-760cf3aca3a8"
+          "reference": "urn:uuid:8521a420-3c38-5f42-8f57-b0a33bfddbd0"
         },
         "encounter": {
-          "reference": "urn:uuid:288a029b-4dd4-4836-a727-acb6f72c9576"
+          "reference": "urn:uuid:11404ab9-0272-54f2-82d4-0105ba35853e"
         }
       }
     },
     {
-      "fullUrl": "urn:uuid:50cc3c6b-1b17-43fe-a307-474dcfc284bc",
+      "fullUrl": "urn:uuid:e56f23cd-1143-5060-a440-9e73ac44b692",
       "resource": {
         "resourceType": "Observation",
         "id": "syn-patient-001-obs",
@@ -142,10 +142,10 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:6a817b54-2ef8-489c-a096-760cf3aca3a8"
+          "reference": "urn:uuid:8521a420-3c38-5f42-8f57-b0a33bfddbd0"
         },
         "encounter": {
-          "reference": "urn:uuid:288a029b-4dd4-4836-a727-acb6f72c9576"
+          "reference": "urn:uuid:11404ab9-0272-54f2-82d4-0105ba35853e"
         },
         "valueQuantity": {
           "value": 142,
@@ -156,7 +156,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:83cfa571-e16a-4941-b975-d90d79ddf1f9",
+      "fullUrl": "urn:uuid:63cef26a-f6bc-5240-8853-539a21dd2b84",
       "resource": {
         "resourceType": "MedicationRequest",
         "id": "syn-patient-001-med",
@@ -173,10 +173,10 @@
           "text": "Amlodipine 5mg oral tablet"
         },
         "subject": {
-          "reference": "urn:uuid:6a817b54-2ef8-489c-a096-760cf3aca3a8"
+          "reference": "urn:uuid:8521a420-3c38-5f42-8f57-b0a33bfddbd0"
         },
         "encounter": {
-          "reference": "urn:uuid:288a029b-4dd4-4836-a727-acb6f72c9576"
+          "reference": "urn:uuid:11404ab9-0272-54f2-82d4-0105ba35853e"
         }
       }
     }

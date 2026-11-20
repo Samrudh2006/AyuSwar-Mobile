@@ -13,7 +13,7 @@
   "type": "collection",
   "entry": [
     {
-      "fullUrl": "urn:uuid:45a6746d-baab-44e7-8c78-e425dc8b9331",
+      "fullUrl": "urn:uuid:f9ef5d42-24ef-5e24-ac27-085d1cb8ca02",
       "resource": {
         "resourceType": "Patient",
         "id": "syn-patient-002",
@@ -56,7 +56,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:501841f0-e7d6-40b3-8fd8-5c43786e54b3",
+      "fullUrl": "urn:uuid:283afb05-1d36-52ab-b70d-6adad2537ba2",
       "resource": {
         "resourceType": "Encounter",
         "id": "syn-patient-002-enc",
@@ -73,7 +73,7 @@
           "display": "ambulatory"
         },
         "subject": {
-          "reference": "urn:uuid:45a6746d-baab-44e7-8c78-e425dc8b9331"
+          "reference": "urn:uuid:f9ef5d42-24ef-5e24-ac27-085d1cb8ca02"
         },
         "period": {
           "start": "2026-11-20T09:30:00+05:30",
@@ -82,7 +82,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:7c5e6c57-611a-41dc-8860-a79c4135b378",
+      "fullUrl": "urn:uuid:b03763a2-7b99-539f-8f62-4b3f036c5d02",
       "resource": {
         "resourceType": "Condition",
         "id": "syn-patient-002-cond",
@@ -112,15 +112,15 @@
           "text": "Type 2 diabetes mellitus without complications"
         },
         "subject": {
-          "reference": "urn:uuid:45a6746d-baab-44e7-8c78-e425dc8b9331"
+          "reference": "urn:uuid:f9ef5d42-24ef-5e24-ac27-085d1cb8ca02"
         },
         "encounter": {
-          "reference": "urn:uuid:501841f0-e7d6-40b3-8fd8-5c43786e54b3"
+          "reference": "urn:uuid:283afb05-1d36-52ab-b70d-6adad2537ba2"
         }
       }
     },
     {
-      "fullUrl": "urn:uuid:15b7ea9f-d723-4de5-bb18-db39322ba483",
+      "fullUrl": "urn:uuid:48ece23a-b908-5ce7-b00e-0a7c56553a9d",
       "resource": {
         "resourceType": "Observation",
         "id": "syn-patient-002-obs",
@@ -142,10 +142,10 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:45a6746d-baab-44e7-8c78-e425dc8b9331"
+          "reference": "urn:uuid:f9ef5d42-24ef-5e24-ac27-085d1cb8ca02"
         },
         "encounter": {
-          "reference": "urn:uuid:501841f0-e7d6-40b3-8fd8-5c43786e54b3"
+          "reference": "urn:uuid:283afb05-1d36-52ab-b70d-6adad2537ba2"
         },
         "valueQuantity": {
           "value": 168,
@@ -156,7 +156,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:b0454904-24cc-4023-9456-13af2fd5a209",
+      "fullUrl": "urn:uuid:b9cc4e04-e4bb-537d-8056-12d7739f14ae",
       "resource": {
         "resourceType": "MedicationRequest",
         "id": "syn-patient-002-med",
@@ -173,10 +173,10 @@
           "text": "Metformin hydrochloride 500mg oral tablet"
         },
         "subject": {
-          "reference": "urn:uuid:45a6746d-baab-44e7-8c78-e425dc8b9331"
+          "reference": "urn:uuid:f9ef5d42-24ef-5e24-ac27-085d1cb8ca02"
         },
         "encounter": {
-          "reference": "urn:uuid:501841f0-e7d6-40b3-8fd8-5c43786e54b3"
+          "reference": "urn:uuid:283afb05-1d36-52ab-b70d-6adad2537ba2"
         }
       }
     }
