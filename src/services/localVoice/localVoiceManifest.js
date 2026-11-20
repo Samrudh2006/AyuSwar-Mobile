@@ -49,6 +49,11 @@ export const TTS_MODELS = Object.freeze({
     }),
     // Small JSON sidecars are pinned too: config drives speaker/language ids,
     // manifest drives runtime bounds. Substituting them changes behavior.
+    // Voice identity is EXPLICITLY pinned to the pilot-qualified voice
+    // (speaker te_M, id 13, length_scale 1.0022 from the model config).
+    // The worker refuses any config whose values drift from this pin, so a
+    // model/config substitution cannot silently change the shipping voice.
+    qualifiedVoice: Object.freeze({ speaker: 'te_M', speakerId: 13, lengthScale: 1.0022 }),
     files: Object.freeze([
       Object.freeze({ key: 'text_encoder', url: `${HF}/${TTS_REPO}/resolve/${TTS_REV}/onnx/text_encoder.onnx`, bytes: 17692254, sha256: '728d9c2529e00d30de480c598369fad24919f83cd0ac44994a64724bbd3e3839' }),
       Object.freeze({ key: 'flow_decoder', url: `${HF}/${TTS_REPO}/resolve/${TTS_REV}/onnx/flow_decoder.onnx`, bytes: 19169253, sha256: 'a523c39fe6b5df3a8cc76953fce9572ea6b7d3b8677d9232a4d5968fec75c40d' }),

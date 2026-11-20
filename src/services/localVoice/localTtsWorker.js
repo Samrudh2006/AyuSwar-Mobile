@@ -1,29 +1,36 @@
 /**
  * AyuSwar AI — Local TTS inference worker (onnxruntime-web/WASM, bundled, no CDN).
  *
- * Ported from the independent pilot core with ONE deliberate change: the pilot
- * hardcoded the te_M speaker slot; this worker derives the speaker and its
- * length_scale from the model's own config (first declared speaker), so the
- * same code serves any qualified single-speaker language pack. The fixed
- * prompt gate lives in localTtsService.js on the caller side; this worker
- * still re-checks membership as defense-in-depth.
+ * Ported from the independent pilot core. Voice identity is PINNED: the app
+ * manifest names the pilot-qualified speaker (te_M, id 13, length_scale
+ * 1.0022) and this worker refuses any model config that disagrees, so the
+ * shipping voice is exactly the qualified one, never a config-default drift.
+ * The fixed prompt gate is single-sourced from localVoiceManifest.js and
+ * re-checked here as defense-in-depth.
  *
  * Determinism: fixed-seed noise (same as pilot) so output is reproducible.
  */
 import * as ort from 'onnxruntime-web';
 import FFT from 'fft.js';
+import { QUALIFIED_INTERFACE_PROMPTS, TTS_MODELS } from './localVoiceManifest.js';
 
 // WASM must be served from the app's own origin, never a CDN. Builds (or test
 // harnesses) set the base path before this module loads.
-if (typeof self !== 'undefined' && self.ORT_WASM_PATH) {
-  ort.env.wasm.wasmPaths = self.ORT_WASM_PATH;
+// WASM assets are served same-origin from <base>/ort-wasm/ (copied from
+// node_modules at build time by the vite 'copy-ort-wasm' hook). An external
+// bootstrap may override via self.ORT_WASM_PATH (test harnesses); the app
+// default below is what production uses. The worker must NEVER resolve wasm
+// from a CDN.
+if (typeof self !== 'undefined') {
+  if (self.ORT_WASM_PATH) {
+    ort.env.wasm.wasmPaths = self.ORT_WASM_PATH;
+  } else {
+    const base = (import.meta.env && import.meta.env.BASE_URL) || '/';
+    ort.env.wasm.wasmPaths = new URL(base + 'ort-wasm/', self.location.origin).href;
+  }
 }
 
-const PROMPTS = new Set([
-  'నమస్కారం. మీ ఆరోగ్య వివరాలను నమోదు చేయండి.',
-  'మళ్లీ ప్రయత్నించండి.',
-  'దయచేసి వివరాలను చదవండి.'
-]);
+const PROMPTS = new Set(QUALIFIED_INTERFACE_PROMPTS);
 
 class WorkerVoiceError extends Error { constructor(code, message) { super(message); this.code = code; } }
 
@@ -56,7 +63,7 @@ function istft(real, imag, bins, frames, nfft = 1024, hop = 256) {
   return out;
 }
 
-async function synthesize({ text, encoder, decoder, vocoder, configText, manifestText }) {
+export async function synthesize({ text, language = 'te', encoder, decoder, vocoder, configText, manifestText }) {
   if (!PROMPTS.has(text)) throw new WorkerVoiceError('TEXT_NOT_QUALIFIED', 'Blocked: not a qualified interface prompt.');
   const cfg = JSON.parse(configText);
   const manifest = JSON.parse(manifestText);
@@ -75,14 +82,21 @@ async function synthesize({ text, encoder, decoder, vocoder, configText, manifes
   chars.forEach((ch, i) => ids[2 * i + 1] = BigInt(vocab.get('c:' + ch)));
   if (ids.length > manifest.max_tokens) throw new WorkerVoiceError('TEXT_TOO_LONG', 'Text exceeds tested bound');
 
-  // Config-driven speaker selection (replaces the pilot's hardcoded te_M):
-  // use the first declared speaker id and its matching length_scale entry.
-  const speakerKeys = Object.keys(cfg.ids.speakers);
-  if (speakerKeys.length === 0) throw new WorkerVoiceError('BAD_CONFIG', 'Model config declares no speakers');
-  const speakerKey = speakerKeys[0];
-  const speakerId = cfg.ids.speakers[speakerKey];
-  const scale = cfg.synthesis.length_scale[speakerKey];
-  if (typeof scale !== 'number') throw new WorkerVoiceError('BAD_CONFIG', `No length_scale for speaker '${speakerKey}'`);
+  // Voice identity pinned to the pilot-qualified speaker. The APP manifest
+  // (localVoiceManifest.js) names the qualified speaker; the MODEL config
+  // must agree (id + length_scale) or the pack is rejected as substituted.
+  // Never fall back to "first declared speaker" — that is how the unqualified
+  // te_F default drifted in.
+  const pinned = (TTS_MODELS[language] && TTS_MODELS[language].qualifiedVoice) || null;
+  if (!pinned) throw new WorkerVoiceError('BAD_CONFIG', `No qualified voice pin for language '${language}'`);
+  const speakerId = cfg.ids && cfg.ids.speakers ? cfg.ids.speakers[pinned.speaker] : undefined;
+  if (speakerId === undefined || speakerId !== pinned.speakerId) {
+    throw new WorkerVoiceError('BAD_CONFIG', `Model config speaker '${pinned.speaker}' id ${speakerId} does not match the qualified pin (${pinned.speakerId}); refusing substituted voice.`);
+  }
+  const scale = cfg.synthesis.length_scale[pinned.speaker];
+  if (typeof scale !== 'number' || Math.abs(scale - pinned.lengthScale) > 1e-9) {
+    throw new WorkerVoiceError('BAD_CONFIG', `length_scale for '${pinned.speaker}' is ${scale}, qualified pin is ${pinned.lengthScale}; refusing drifted voice.`);
+  }
 
   const enc = await encS.run({
     tokens: T('int64', ids, [1, ids.length]),
@@ -117,12 +131,14 @@ async function synthesize({ text, encoder, decoder, vocoder, configText, manifes
   return { samples, sampleRate: cfg.sample_rate };
 }
 
-self.onmessage = async (ev) => {
-  const msg = ev.data || {};
-  try {
-    const out = await synthesize(msg);
-    self.postMessage({ jobId: msg.jobId, ok: true, samples: out.samples.buffer, sampleRate: out.sampleRate }, [out.samples.buffer]);
-  } catch (err) {
-    self.postMessage({ jobId: msg.jobId, ok: false, code: err.code || 'INFERENCE_FAILED', error: String(err.message || err) });
-  }
-};
+if (typeof self !== 'undefined' && typeof self.postMessage === 'function') {
+  self.onmessage = async (ev) => {
+    const msg = ev.data || {};
+    try {
+      const out = await synthesize(msg);
+      self.postMessage({ jobId: msg.jobId, ok: true, samples: out.samples.buffer, sampleRate: out.sampleRate }, [out.samples.buffer]);
+    } catch (err) {
+      self.postMessage({ jobId: msg.jobId, ok: false, code: err.code || 'INFERENCE_FAILED', error: String(err.message || err) });
+    }
+  };
+}

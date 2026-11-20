@@ -18,6 +18,7 @@ import { Capacitor } from '@capacitor/core';
 import { SpeechRecognition as NativeSpeechRecognition } from '@capacitor-community/speech-recognition';
 import { ayuswarSpeechAvailable, AyuSwarSpeech } from '../mobile/ayuswarSpeech.js';
 import { recordDiagnosticStage } from '../utils/diagnosticLogger.js';
+import { float32ToWavArrayBuffer } from './localVoice/pcm16Wav.js';
 
 /**
  * Global Sovereign Audio Mutex Coordinator
@@ -1158,6 +1159,56 @@ export class IndicSpeechService {
         this.setConversationState('LISTENING');
       }
       onError('Gnani TTS did not complete; browser voice suppressed per strict Gnani setting.');
+      return;
+    }
+
+    // 4. On-device local OSS tier (opt-in). Speaks ONLY the fixed qualified
+    //    interface prompts and ONLY when the user has explicitly installed the
+    //    integrity-verified on-device model. TEXT_NOT_QUALIFIED (any clinical,
+    //    patient-specific, or edited text) and MODELS_NOT_INSTALLED are
+    //    expected, silent fall-throughs to the browser voice below — this tier
+    //    must never surface an error for ordinary speech. Placed AFTER the
+    //    strict-Gnani early-return so strict mode keeps its exact semantics.
+    try {
+      const { synthesizeQualifiedPrompt } = await import('./localVoice/localTtsService.js');
+      const localLanguage = (langObj && langObj.gnaniLang) || String(langCode || '').split('-')[0] || 'te';
+      const localResult = await synthesizeQualifiedPrompt(cleanSpeechText, { signal: combinedSignal, language: localLanguage });
+      if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
+        return;
+      }
+      this.activeProvider = 'local_oss_onnx';
+      recordDiagnosticStage({
+        stage: 'local_oss_tts',
+        outcomeCode: 'PLAYBACK_START',
+        elapsedMs: 0,
+        component: 'indicSpeechService'
+      });
+      const wavBuffer = float32ToWavArrayBuffer(localResult.samples, localResult.sampleRate);
+      return await this.playAudioBuffer(wavBuffer, {
+        rate: options.rate || rate,
+        onStart: (info) => onStart({ ...info, provider: 'local_oss_onnx', localOnDevice: true, clinicalPlayback: false }),
+        onEnd,
+        onError,
+        onTimeUpdate
+      });
+    } catch (localErr) {
+      if (localErr && (localErr.name === 'AbortError' || localErr.code === 'ABORTED')) {
+        return;
+      }
+      if (localErr && (localErr.code === 'TEXT_NOT_QUALIFIED' || localErr.code === 'MODELS_NOT_INSTALLED')) {
+        // Expected: this text/state does not use the local tier. Fall through.
+      } else {
+        recordDiagnosticStage({
+          stage: 'local_oss_tts',
+          outcomeCode: (localErr && localErr.code) || 'ERROR',
+          elapsedMs: 0,
+          component: 'indicSpeechService'
+        });
+        console.warn('Local on-device TTS failed; falling through to browser voice:', localErr && localErr.message);
+      }
+    }
+
+    if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
       return;
     }
 

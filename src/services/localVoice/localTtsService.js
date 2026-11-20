@@ -64,8 +64,10 @@ export async function synthesizeQualifiedPrompt(text, { signal, language = 'te' 
   const m = TTS_MODELS[language];
   const files = {};
   for (const f of m.files) {
+    if (signal?.aborted) throw new LocalVoiceError('ABORTED', 'Local voice synthesis cancelled.');
     files[f.key] = await getVerifiedModelFile(`${language}/${f.key}`, f.sha256); // re-verified on every load
   }
+  if (signal?.aborted) throw new LocalVoiceError('ABORTED', 'Local voice synthesis cancelled.');
 
   const worker = createWorker();
   const jobId = `tts-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;

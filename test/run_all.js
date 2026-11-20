@@ -48,7 +48,8 @@ const suites = [
   { name: 'Phase 26: Network Speech Privacy Gate', file: 'test/phase26_network_speech_gate.test.js', count: 6 },
   { name: 'Phase 27: Transcribe Upload Consent', file: 'test/phase27_transcribe_upload_consent.test.js', count: 4 },
   { name: 'Phase 28: Certificate Pinning Config', file: 'test/phase28_certificate_pinning.test.js', count: 4 },
-  { name: 'Phase 29: Local OSS Voice Fallback', file: 'test/phase29_local_voice_fallback.test.js', count: 11 }
+  { name: 'Phase 29: Local OSS Voice Fallback', file: 'test/phase29_local_voice_fallback.test.js', count: 12 },
+  { name: 'Phase 30: Local Voice Integration & Production Packaging', file: 'test/phase30_local_voice_integration.test.js', count: 6 }
 ];
 
 console.clear();

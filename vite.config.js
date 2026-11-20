@@ -1,5 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
+import { copyFileSync, mkdirSync } from 'node:fs'
+import { join } from 'node:path'
 import gnaniStatusHandler from './api/gnani/status.js'
 import gnaniTtsHandler from './api/gnani/tts.js'
 import gnaniSttHandler from './api/gnani/stt.js'
@@ -49,6 +51,8 @@ function vercelDevAdapter(handler) {
   };
 }
 
+let outDir = null;
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -56,6 +60,33 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       react(),
+      {
+        // onnxruntime-web resolves its WASM runtime from ort.env.wasm.wasmPaths,
+        // which the local TTS worker pins to <base>/ort-wasm/ so inference can
+        // NEVER fall back to a CDN. Copy the grounded variant set from
+        // node_modules at build time:
+        //   jsep pair        = primary (WebAssembly-exception engine, ort 1.31 default)
+        //   plain pair       = fallback when jsep init fails (older WebViews)
+        // asyncify (28.7MB) and jspi (17.9MB, flag-gated) variants are
+        // deliberately NOT shipped; verified against the actual requests the
+        // runtime makes in the built-app check.
+        name: 'copy-ort-wasm',
+        apply: 'build',
+        configResolved(config) { outDir = join(config.root, config.build.outDir); },
+        closeBundle() {
+          const src = join(process.cwd(), 'node_modules', 'onnxruntime-web', 'dist');
+          const dest = join(outDir, 'ort-wasm');
+          mkdirSync(dest, { recursive: true });
+          for (const f of [
+            'ort-wasm-simd-threaded.jsep.mjs',
+            'ort-wasm-simd-threaded.jsep.wasm',
+            'ort-wasm-simd-threaded.mjs',
+            'ort-wasm-simd-threaded.wasm'
+          ]) {
+            copyFileSync(join(src, f), join(dest, f));
+          }
+        }
+      },
       {
         name: 'ayuswar-api-dev-middleware',
         configureServer(server) {

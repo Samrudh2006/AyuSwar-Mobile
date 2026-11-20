@@ -79,7 +79,7 @@ function freshEnv({ fetchImpl, connection, subtle } = {}) {
     fetchFn: fetchImpl || (async () => new Response(new Uint8Array([1, 2, 3]))),
     cachesFn: () => caches,
     storageFn: () => storage,
-    connectionFn: () => connection || null,
+    connectionFn: () => connection || { type: 'wifi' }, // default test network is KNOWN wifi; pass explicit connection to exercise gates
     cryptoFn: () => subtle || realSubtle
   });
 }
@@ -102,6 +102,20 @@ await record('consent: no download without recorded consent shown the size', asy
   freshEnv();
   const e = await expectCode(installLocalVoiceModel('te'), 'CONSENT_REQUIRED');
   assert(e.details.totalBytes === 91017873, `TTS-only size must be exact (got ${e.details.totalBytes})`);
+});
+
+await record('consent: unknown network state is treated as metered (no silent Wi-Fi assumption)', async () => {
+  freshEnv({ connection: null });
+  // connectionFn returns connection || wifi... simulate truly unknown by overriding:
+  _setEnvForTests({ connectionFn: () => null });
+  recordLocalVoiceConsent({ language: 'te', allowCellular: false });
+  await expectCode(installLocalVoiceModel('te'), 'CELLULAR_BLOCKED');
+  _setEnvForTests({ connectionFn: () => ({}) }); // unrecognized object = unknown
+  recordLocalVoiceConsent({ language: 'te', allowCellular: false });
+  await expectCode(installLocalVoiceModel('te'), 'CELLULAR_BLOCKED');
+  recordLocalVoiceConsent({ language: 'te', allowCellular: true });
+  // allowCellular permits the download even when the network type is unknown
+  freshEnv({ connection: { type: 'wifi' } }); // restore sane env; download path itself is covered by other cases
 });
 
 await record('consent: cellular blocked unless explicitly allowed', async () => {

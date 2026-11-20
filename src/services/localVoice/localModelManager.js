@@ -70,10 +70,20 @@ function assertUsableConsent(language) {
   if (!c || c.language !== language) {
     throw new LocalVoiceError('CONSENT_REQUIRED', 'Explicit consent required before downloading voice models.', { totalBytes: ttsTotalBytes(language) });
   }
+  // The consent record pins the exact pack size the user was shown. If the
+  // manifest's size changed since consent (different pack), consent is stale
+  // and the user must re-confirm the new size.
+  const currentBytes = ttsTotalBytes(language);
+  if (c.totalBytes !== currentBytes) {
+    throw new LocalVoiceError('CONSENT_REQUIRED', 'Voice pack size changed since consent; the new size must be shown and re-confirmed.', { totalBytes: currentBytes });
+  }
+  // Network gate: download is unmetered-connection-only by default. UNKNOWN
+  // network state (API absent or unrecognized) must NOT be treated as Wi-Fi;
+  // only an explicitly known wifi/ethernet type passes without allowCellular.
   const conn = env.connectionFn();
-  const onCellular = conn && (conn.type === 'cellular' || conn.effectiveType === '2g' || conn.effectiveType === '3g');
-  if (onCellular && !c.allowCellular) {
-    throw new LocalVoiceError('CELLULAR_BLOCKED', 'On mobile data: voice model download is Wi-Fi-only unless the user explicitly allows mobile data.');
+  const knownUnmetered = Boolean(conn) && (conn.type === 'wifi' || conn.type === 'ethernet');
+  if (!knownUnmetered && !c.allowCellular) {
+    throw new LocalVoiceError('CELLULAR_BLOCKED', 'Voice model download needs a known Wi-Fi connection unless the user explicitly allows mobile data (network state unknown counts as mobile data).', { totalBytes: currentBytes });
   }
   return c;
 }
