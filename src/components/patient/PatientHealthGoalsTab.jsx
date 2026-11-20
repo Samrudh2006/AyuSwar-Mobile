@@ -316,7 +316,7 @@ export default function PatientHealthGoalsTab({
               {bpSystolic} / {bpDiastolic} <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>mmHg</span>
             </div>
             <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
-              {t('patient.goals.restingHr')}: <strong>{restingPulse} bpm</strong> {t('patient.goals.sampleValue')}
+              {t('patient.goals.restingHr')}: <strong>{restingPulse} bpm</strong> {!bpEdited && t('patient.goals.sampleValue')}
             </div>
 
             <div className="patient-bp-subgrid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', marginBottom: '12px', width: '100%' }}>
