@@ -1,0 +1,184 @@
+{
+  "resourceType": "Bundle",
+  "id": "syn-patient-003-bundle",
+  "meta": {
+    "lastUpdated": "2026-11-20T10:00:00+05:30",
+    "tag": [
+      {
+        "code": "synthetic-demo-fixture",
+        "display": "AyuSwar synthetic demo data; no real person"
+      }
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "syn-patient-003",
+        "meta": {
+          "tag": [
+            {
+              "code": "synthetic-demo-fixture"
+            }
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://ayuswar.example/synthetic-patient-id",
+            "value": "syn-patient-003"
+          }
+        ],
+        "name": [
+          {
+            "use": "usual",
+            "family": "RuralPatientC",
+            "given": [
+              "Demo"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1990-07-27",
+        "communication": [
+          {
+            "language": {
+              "coding": [
+                {
+                  "system": "urn:ietf:bcp:47",
+                  "code": "te"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "syn-patient-003-enc",
+        "meta": {
+          "tag": [
+            {
+              "code": "synthetic-demo-fixture"
+            }
+          ]
+        },
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+        },
+        "period": {
+          "start": "2026-11-20T09:30:00+05:30",
+          "end": "2026-11-20T09:45:00+05:30"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d8dee3b2-d880-425a-8e81-7f03520fe9e1",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "syn-patient-003-cond",
+        "meta": {
+          "tag": [
+            {
+              "code": "synthetic-demo-fixture"
+            }
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/sid/icd-10",
+              "code": "J06.9",
+              "display": "Acute upper respiratory infection, unspecified"
+            }
+          ],
+          "text": "Acute upper respiratory infection, unspecified"
+        },
+        "subject": {
+          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+        },
+        "encounter": {
+          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a2efe324-d517-452c-97b0-1b577664d399",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "syn-patient-003-obs",
+        "meta": {
+          "tag": [
+            {
+              "code": "synthetic-demo-fixture"
+            }
+          ]
+        },
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "8310-5",
+              "display": "Body temperature"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+        },
+        "encounter": {
+          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+        },
+        "valueQuantity": {
+          "value": 38.4,
+          "unit": "Cel",
+          "system": "http://unitsofmeasure.org",
+          "code": "Cel"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:35c39d75-da03-4722-8124-fcbad9edd094",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "syn-patient-003-med",
+        "meta": {
+          "tag": [
+            {
+              "code": "synthetic-demo-fixture"
+            }
+          ]
+        },
+        "status": "completed",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Paracetamol 500mg oral tablet"
+        },
+        "subject": {
+          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+        },
+        "encounter": {
+          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+        }
+      }
+    }
+  ]
+}
