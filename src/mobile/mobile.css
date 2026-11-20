@@ -61,6 +61,20 @@
 
 /* Page-level headings/text sit on the illustrated backdrop: soft light halo keeps
    them readable over leaves/sky without boxing them. Card interiors unchanged. */
+/* Soft light wash at the top of non-hero pages: small breadcrumbs/eyebrows and
+   inline-styled view headers sit over the strongest leaves/sky region. */
+.m-page { position: relative; }
+.m-page:not(:has(> .m-hero)):not(:has(> .m-sanj-hero))::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 190px;
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.74), rgba(255, 253, 246, 0.38) 62%, rgba(255, 253, 246, 0));
+  pointer-events: none;
+  z-index: 0;
+}
+.m-page > * { position: relative; z-index: 1; }
+
 /* Soft halo under every page heading: invisible on light hero text, lifts dark
    view headings (inline-styled, no classes) off the leaves/sky. */
 .m-page h1, .m-page h2 {

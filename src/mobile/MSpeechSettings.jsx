@@ -239,7 +239,7 @@ export function LocalVoicePackSettings({ lang, onClose }) {
         <p className="m-record-intro">{c.body}</p>
         <p className="m-record-intro">{c.size(mb, mib, totalBytes.toLocaleString('en-IN'))}</p>
 
-        {status.state !== 'installed' && !downloading && (
+        {status.state !== 'installed' && !downloading && ASR_PACK_DOWNLOAD_AVAILABLE && (
           <div className="m-record-modes" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
             <p className="m-applock-msg">{c.wifiOnly}</p>
             <label style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -258,12 +258,16 @@ export function LocalVoicePackSettings({ lang, onClose }) {
         <p className="m-applock-msg" role="status">
           {status.state === 'installed' ? c.statusInstalled
             : status.state === 'unsupported' || status.state === 'unavailable_no_cache_api' ? c.statusUnsupported
+            : !ASR_PACK_DOWNLOAD_AVAILABLE ? c.statusUnavailable
             : !downloading ? c.statusNotInstalled : ''}
         </p>
 
         <div className="m-record-modes">
-          {status.state !== 'installed' && !downloading && status.state !== 'unsupported' && status.state !== 'unavailable_no_cache_api' && (
+          {status.state !== 'installed' && !downloading && status.state !== 'unsupported' && status.state !== 'unavailable_no_cache_api' && ASR_PACK_DOWNLOAD_AVAILABLE && (
             <button className="m-btn m-btn-primary" onClick={startInstall}>{c.install}</button>
+          )}
+          {status.state !== 'installed' && !downloading && !ASR_PACK_DOWNLOAD_AVAILABLE && (
+            <button className="m-btn m-btn-primary" disabled title={c.statusUnavailable}>{c.install}</button>
           )}
           {downloading && <button className="m-btn m-btn-soft" onClick={cancelInstall}>{c.cancel}</button>}
           {status.state === 'installed' && <button className="m-btn m-btn-soft" onClick={removePack}>{c.uninstall}</button>}
@@ -288,7 +292,7 @@ import {
   recordLocalAsrConsent,
   clearLocalAsrConsent
 } from '../services/localVoice/localAsrPackManager';
-import { ASR_MODELS, asrTotalBytes } from '../services/localVoice/localAsrManifest';
+import { ASR_MODELS, asrTotalBytes, ASR_PACK_DOWNLOAD_AVAILABLE } from '../services/localVoice/localAsrManifest';
 
 const ASR_COPY = {
   'en-IN': {
@@ -304,6 +308,7 @@ const ASR_COPY = {
     close: 'Close',
     statusInstalled: 'Installed. Recorded clips can be transcribed on-device as drafts for review.',
     statusNotInstalled: 'Not installed. This pack is optional; transcription uses the network service when available.',
+    statusUnavailable: 'Download unavailable in this build: the pack files are not published on a server yet. Nothing is missing on your phone - network transcription still works normally.',
     statusUnsupported: 'This browser cannot store the pack (Cache API missing).',
     errCellular: 'Connection type is unknown or metered, so the download is blocked. Connect to a known Wi-Fi network or tick "Allow mobile data".',
     errHash: 'A downloaded file failed its integrity check and was deleted. Nothing was kept; please try again on a stable connection.',
@@ -324,6 +329,7 @@ const ASR_COPY = {
     close: 'మూసివేయండి',
     statusInstalled: 'ఇన్‌స్టాల్ అయింది. రికార్డ్ చేసిన క్లిప్‌లు సమీక్ష కోసం ఆన్-డివైస్ డ్రాఫ్ట్‌లుగా ట్రాన్స్‌క్రైబ్ చేయబడతాయి.',
     statusNotInstalled: 'ఇన్‌స్టాల్ కాలేదు. ఈ ప్యాక్ ఐచ్ఛికం; నెట్‌వర్క్ సర్వీస్ అందుబాటులో ఉన్నప్పుడు ట్రాన్స్‌క్రిప్షన్ దాన్నే వాడుతుంది.',
+    statusUnavailable: 'ఈ బిల్డ్‌లో డౌన్‌లోడ్ అందుబాటులో లేదు: ప్యాక్ ఫైళ్లు ఇంకా సర్వర్‌లో ప్రచురించబడలేదు. మీ ఫోన్‌లో ఏమీ లోపం లేదు - నెట్‌వర్క్ ట్రాన్స్‌క్రిప్షన్ అలాగే పనిచేస్తుంది.',
     statusUnsupported: 'ఈ బ్రౌజర్ ప్యాక్‌ను నిలువ చేయలేదు (Cache API లేదు).',
     errCellular: 'కనెక్షన్ రకం తెలియదు లేదా మీటర్డ్ గా ఉంది, కాబట్టి డౌన్‌లోడ్ బ్లాక్ చేయబడింది. తెలిసిన Wi-Fi కు కనెక్ట్ అవ్వండి లేదా "మొబైల్ డేటాను అనుమతించండి" టిక్ చేయండి.',
     errHash: 'డౌన్‌లోడ్ చేసిన ఫైల్ దాని ఇంటెగ్రిటీ తనిఖీలో విఫలమై తొలగించబడింది. ఏమీ నిలువ లేదు; స్థిరమైన కనెక్షన్‌లో మళ్లీ ప్రయత్నించండి.',
@@ -344,6 +350,7 @@ const ASR_COPY = {
     close: 'बंद करें',
     statusInstalled: 'इंस्टॉल हो गया। रिकॉर्ड की गई क्लिप समीक्षा के लिए ऑन-डिवाइस ड्राफ़्ट के रूप में ट्रांसक्राइब हो सकती हैं।',
     statusNotInstalled: 'इंस्टॉल नहीं है। यह पैक वैकल्पिक है; नेटवर्क सेवा उपलब्ध होने पर ट्रांसक्रिप्शन उसी से होता है।',
+    statusUnavailable: 'इस बिल्ड में डाउनलोड उपलब्ध नहीं है: पैक फ़ाइलें अभी सर्वर पर प्रकाशित नहीं हैं। आपके फ़ोन में कुछ भी कम नहीं है - नेटवर्क ट्रांसक्रिप्शन ठीक से काम करता है।',
     statusUnsupported: 'यह ब्राउज़र पैक सहेज नहीं सकता (Cache API उपलब्ध नहीं)।',
     errCellular: 'कनेक्शन प्रकार अज्ञात या मीटर्ड है, इसलिए डाउनलोड अवरुद्ध है। किसी ज्ञात Wi-Fi से जुड़ें या "मोबाइल डेटा अनुमत करें" चुनें।',
     errHash: 'डाउनलोड की गई फ़ाइल इंटीग्रिटी जाँच में असफल होकर हटा दी गई। कुछ भी सहेजा नहीं गया; स्थिर कनेक्शन पर पुनः प्रयास करें।',
@@ -405,7 +412,7 @@ export function LocalAsrPackSettings({ lang, onClose }) {
         <p className="m-record-intro">{c.body}</p>
         <p className="m-record-intro">{c.size(mb, mib, totalBytes.toLocaleString('en-IN'))}</p>
 
-        {status.state !== 'installed' && !downloading && (
+        {status.state !== 'installed' && !downloading && ASR_PACK_DOWNLOAD_AVAILABLE && (
           <div className="m-record-modes" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
             <p className="m-applock-msg">{c.wifiOnly}</p>
             <label style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -424,12 +431,16 @@ export function LocalAsrPackSettings({ lang, onClose }) {
         <p className="m-applock-msg" role="status">
           {status.state === 'installed' ? c.statusInstalled
             : status.state === 'unsupported' || status.state === 'unavailable_no_cache_api' ? c.statusUnsupported
+            : !ASR_PACK_DOWNLOAD_AVAILABLE ? c.statusUnavailable
             : !downloading ? c.statusNotInstalled : ''}
         </p>
 
         <div className="m-record-modes">
-          {status.state !== 'installed' && !downloading && status.state !== 'unsupported' && status.state !== 'unavailable_no_cache_api' && (
+          {status.state !== 'installed' && !downloading && status.state !== 'unsupported' && status.state !== 'unavailable_no_cache_api' && ASR_PACK_DOWNLOAD_AVAILABLE && (
             <button className="m-btn m-btn-primary" onClick={startInstall}>{c.install}</button>
+          )}
+          {status.state !== 'installed' && !downloading && !ASR_PACK_DOWNLOAD_AVAILABLE && (
+            <button className="m-btn m-btn-primary" disabled title={c.statusUnavailable}>{c.install}</button>
           )}
           {downloading && <button className="m-btn m-btn-soft" onClick={cancelInstall}>{c.cancel}</button>}
           {status.state === 'installed' && <button className="m-btn m-btn-soft" onClick={removePack}>{c.uninstall}</button>}

@@ -25,6 +25,11 @@
  */
 
 export const ASR_RELEASE_TAG = 'v0.1.0';
+// Pack files are intentionally NOT published (unpublished Release assets).
+// Until a deliberate release ships them, the in-app install action is
+// presented as unavailable instead of failing a 187 MB download at 0 bytes.
+export const ASR_PACK_DOWNLOAD_AVAILABLE = false;
+
 export const ASR_RELEASE_BASE = `https://github.com/Samrudh2006/AyuSwar-Mobile/releases/download/${ASR_RELEASE_TAG}`;
 const OVOS = 'https://huggingface.co/OpenVoiceOS/ai4bharat-indicconformer-te-onnx/resolve/d952dec2a1d256a1569cdfc9a9615cba05a1a2e3';
 
