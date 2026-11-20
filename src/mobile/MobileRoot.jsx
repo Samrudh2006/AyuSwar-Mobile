@@ -57,6 +57,19 @@ export default function MobileRoot() {
   const location = useLocation();
   const { doctorProfile, patientProfile, setDoctorProfile, setPatientProfile, selectedLanguage } = useApp();
   const [appLocked, setAppLocked] = React.useState(() => isAppLockEnabled());
+  // Shared-phone hardening: re-lock whenever the app goes to the background
+  // (tab hidden, WebView paused, page hidden) so an unlocked app is never left
+  // open on the home screen of a shared clinic phone.
+  React.useEffect(() => {
+    const relock = () => { if (isAppLockEnabled()) setAppLocked(true); };
+    const onVisibility = () => { if (document.hidden) relock(); };
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', relock);
+    return () => {
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pagehide', relock);
+    };
+  }, []);
   const loadingLabel = mt('loading', selectedLanguage);
 
   const sanjivani = (

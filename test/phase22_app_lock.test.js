@@ -97,6 +97,66 @@ await record('FloatingAssistant FAB uses assistant-mark-original.png', async () 
   assert(!src.includes('assistant-voice-icon.png'), 'old hidden mark reference must be gone');
 });
 
+// 7. Wrong-PIN guard: 5 consecutive failures trigger a cooldown; even the
+//    correct PIN is refused while locked out; the guard stores no PIN material.
+await record('verifyAppLockGuarded bounds wrong attempts with cooldown', async () => {
+  store.clear();
+  await lock.enableAppLock('246810');
+  for (let i = 0; i < 4; i++) {
+    const r = await lock.verifyAppLockGuarded('000000');
+    assert(!r.ok && r.reason === 'PIN_MISMATCH', `attempt ${i + 1} should be PIN_MISMATCH, got ${r.reason}`);
+  }
+  const fifth = await lock.verifyAppLockGuarded('000000');
+  assert(fifth.reason === 'LOCKED_OUT' && fifth.retryAfterSeconds >= 30, `5th failure must lock out, got ${JSON.stringify(fifth)}`);
+  const correctDuringLockout = await lock.verifyAppLockGuarded('246810');
+  assert(correctDuringLockout.reason === 'LOCKED_OUT', 'correct PIN must still be refused during cooldown');
+  const guardRaw = store.get('ayuswar_app_lock_guard_v1');
+  assert(guardRaw && !guardRaw.includes('246810') && !guardRaw.includes('hash'), 'guard record must not carry PIN material');
+});
+
+// 8. Lockout expires and a correct PIN then clears the guard.
+await record('lockout expires and success clears guard', async () => {
+  const future = Date.now() + 31000;
+  assert(!lock.getLockoutState(globalThis.localStorage, future).lockedOut, 'lockout must expire after cooldown');
+  // simulate expiry by clearing the cooldown manually
+  const guard = JSON.parse(store.get('ayuswar_app_lock_guard_v1'));
+  guard.cooldownUntil = Date.now() - 1;
+  store.set('ayuswar_app_lock_guard_v1', JSON.stringify(guard));
+  const ok = await lock.verifyAppLockGuarded('246810');
+  assert(ok.ok, 'correct PIN must unlock after cooldown expires');
+  assert(!store.has('ayuswar_app_lock_guard_v1'), 'guard record must be cleared on success');
+});
+
+// 9. MobileRoot re-locks on backgrounding.
+await record('MobileRoot relocks on visibilitychange/pagehide', async () => {
+  const src = readFileSync(new URL('../src/mobile/MobileRoot.jsx', import.meta.url), 'utf8');
+  assert(src.includes("addEventListener('visibilitychange'"), 'visibilitychange relock listener missing');
+  assert(src.includes("addEventListener('pagehide'"), 'pagehide relock listener missing');
+  assert(src.includes('document.hidden'), 'relock must trigger only when hidden');
+});
+
+// 10. Recorder noise gate (rural-PHC must-have) is implemented, not just documented.
+await record('consultationRecorder implements an RMS noise gate', async () => {
+  const src = readFileSync(new URL('../src/mobile/consultationRecorder.js', import.meta.url), 'utf8');
+  assert(src.includes('GATE_THRESHOLD') && src.includes('GATE_HOLD_FRAMES'), 'noise gate constants missing');
+  assert(src.includes('frame.fill(0)'), 'gate must silence sub-threshold frames');
+  assert(src.includes('channelCount: 1'), 'mono capture constraint missing');
+});
+
+// 11. Assistant input placeholder is demo-safe (no clinical/dosage invitation).
+await record('assistant placeholder is demo-safe', async () => {
+  const src = readFileSync(new URL('../src/components/FloatingAssistant.jsx', import.meta.url), 'utf8');
+  assert(src.includes('synthetic demo (no clinical advice or dosage)'), 'demo-safe placeholder missing');
+  assert(!src.includes('Ask clinical question, dosage'), 'old clinical placeholder must be gone');
+});
+
+// 12. Lock settings: localized Close key and forgot-PIN data-loss note.
+await record('lock settings localizes Close and documents forgot-PIN data loss', async () => {
+  const src = readFileSync(new URL('../src/mobile/MAppLock.jsx', import.meta.url), 'utf8');
+  assert(src.includes("close: 'Close'") && src.includes("close: 'మూసివేయండి'") && src.includes("close: 'बंद करें'"), 'localized Close key missing');
+  assert(src.includes('forgot:') && src.includes('clears') || src.includes('clearing'), 'forgot-PIN data-loss note missing');
+});
+
 let failed = 0;
 for (const r of results) {
   if (!r.ok) {

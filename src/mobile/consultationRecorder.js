@@ -17,14 +17,26 @@ export async function openConsultationRecorder(onLevel) {
     mute.gain.value = 0;
     const frames = [];
     let samples = 0;
+    // Rural-PHC must-have (noise gate): fixed-threshold RMS gate with a short
+    // hold so word tails are not chopped. Frames below the threshold after the
+    // hold expires are written as silence. Honest scope: a simple energy gate,
+    // NOT adaptive noise cancellation; echoCancellation/noiseSuppression above
+    // remain platform noise reduction on top of this.
+    const GATE_THRESHOLD = 0.012; // RMS (~ -38 dBFS): drops steady room hum/fan noise between speech
+    const GATE_HOLD_FRAMES = 6;   // ~250 ms at 4096-sample frames: keeps word tails
+    let gateHold = 0;
     processor.onaudioprocess = (event) => {
       const input = event.inputBuffer.getChannelData(0);
       const frame = new Float32Array(input);
-      frames.push(frame);
-      samples += frame.length;
       let sum = 0;
       for (let i = 0; i < frame.length; i++) sum += frame[i] * frame[i];
-      onLevel(Math.sqrt(sum / frame.length), samples / ctx.sampleRate);
+      const rms = Math.sqrt(sum / frame.length);
+      if (rms >= GATE_THRESHOLD) gateHold = GATE_HOLD_FRAMES;
+      else if (gateHold > 0) gateHold -= 1;
+      else frame.fill(0);
+      frames.push(frame);
+      samples += frame.length;
+      onLevel(rms, samples / ctx.sampleRate);
     };
     source.connect(processor);
     processor.connect(mute);

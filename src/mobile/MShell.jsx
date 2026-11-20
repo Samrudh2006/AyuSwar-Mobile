@@ -196,10 +196,12 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
             <IconInfo /> {t('about')}
           </button>
 
-          <div className="m-drawer-section">{t('legal')}</div>
+          <div className="m-drawer-section">{{ 'en-IN': 'Settings', 'te-IN': 'సెట్టింగ్స్', 'hi-IN': 'सेटिंग्स' }[selectedLanguage] || 'Settings'}</div>
           <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setLockSettingsOpen(true); }}>
             <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'App lock', 'te-IN': 'యాప్ లాక్', 'hi-IN': 'ऐप लॉक' }[selectedLanguage] || 'App lock'}
           </button>
+
+          <div className="m-drawer-section">{t('legal')}</div>
           <button className="m-drawer-item" onClick={() => go('/privacy')}>
             <SheetIcon name="privacy-consent" /> {t('privacy')}
           </button>

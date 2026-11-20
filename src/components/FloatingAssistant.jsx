@@ -1457,7 +1457,7 @@ export default function FloatingAssistant({
                   >
                     <input
                       type="text"
-                      placeholder={effectiveRole === 'doctor' ? "Ask clinical question, dosage, or SNOMED..." : "Describe health query in Telugu or English..."}
+                      placeholder={effectiveRole === 'doctor' ? "Ask about this synthetic demo (no clinical advice or dosage)..." : "Describe health query in Telugu or English..."}
                       value={textInputValue}
                       onChange={e => setTextInputValue(e.target.value)}
                       autoFocus

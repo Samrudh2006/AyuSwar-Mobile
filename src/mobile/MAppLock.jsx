@@ -3,12 +3,15 @@
 // phone. It is WebView-local (PBKDF2 hash in localStorage), NOT
 // Android-Keystore-backed, and no biometric claim is made.
 import React from 'react';
-import { enableAppLock, disableAppLock, verifyAppLock, isAppLockEnabled } from './appLock';
+import { enableAppLock, disableAppLock, verifyAppLockGuarded, isAppLockEnabled } from './appLock';
 
 const COPY = {
   'en-IN': {
     lockTitle: 'App locked', lockBody: 'Enter the app PIN to continue.', unlock: 'Unlock',
     wrongPin: 'Incorrect PIN. Try again.',
+    close: 'Close',
+    lockedOut: (s) => `Too many wrong attempts. Try again in ${s}s.`,
+    forgot: 'Forgot the PIN? There is no recovery: clearing this app\'s data in Android settings removes the lock and all locally stored demo data.',
     settingsTitle: 'App lock', setPin: 'Set a 4-6 digit PIN', confirmPin: 'Confirm PIN',
     enable: 'Turn on app lock', disable: 'Turn off app lock', enterCurrent: 'Enter current PIN to turn off',
     mismatch: 'PINs do not match.', enabled: 'App lock is on. The app asks for this PIN on every open.',
@@ -17,6 +20,9 @@ const COPY = {
   'te-IN': {
     lockTitle: 'యాప్ లాక్ చేయబడింది', lockBody: 'కొనసాగడానికి యాప్ PIN నమోదు చేయండి.', unlock: 'అన్‌లాక్',
     wrongPin: 'తప్పు PIN. మళ్లీ ప్రయత్నించండి.',
+    close: 'మూసివేయండి',
+    lockedOut: (s) => `చాలా తప్పు ప్రయత్నాలు. ${s}సె తర్వాత మళ్లీ ప్రయత్నించండి.`,
+    forgot: 'PIN మర్చిపోయారా? రికవరీ లేదు: Android సెట్టింగ్స్‌లో ఈ యాప్ డేటా క్లియర్ చేస్తే లాక్ తో పాటు స్థానికంగా ఉన్న డెమో డేటా అంతా తొలగిపోతుంది.',
     settingsTitle: 'యాప్ లాక్', setPin: '4-6 అంకెల PIN పెట్టండి', confirmPin: 'PIN నిర్ధారించండి',
     enable: 'యాప్ లాక్ ఆన్ చేయండి', disable: 'యాప్ లాక్ ఆఫ్ చేయండి', enterCurrent: 'ఆఫ్ చేయడానికి ప్రస్తుత PIN నమోదు చేయండి',
     mismatch: 'PINలు సరిపోలలేదు.', enabled: 'యాప్ లాక్ ఆన్ ఉంది. ప్రతీ సారీ యాప్ ఓపెన్ చేసినప్పుడు ఈ PIN అడుగుతుంది.',
@@ -25,6 +31,9 @@ const COPY = {
   'hi-IN': {
     lockTitle: 'ऐप लॉक है', lockBody: 'जारी रखने के लिए ऐप PIN डालें।', unlock: 'अनलॉक',
     wrongPin: 'गलत PIN। फिर कोशिश करें।',
+    close: 'बंद करें',
+    lockedOut: (s) => `बहुत सारे गलत प्रयास। ${s} सेकंड बाद फिर कोशिश करें।`,
+    forgot: 'PIN भूल गए? कोई रिकवरी नहीं: Android सेटिंग्स में इस ऐप का डेटा साफ़ करने से लॉक और स्थानीय रूप से सहेजा गया सारा डेमो डेटा हट जाता है।',
     settingsTitle: 'ऐप लॉक', setPin: '4-6 अंकों का PIN सेट करें', confirmPin: 'PIN की पुष्टि करें',
     enable: 'ऐप लॉक चालू करें', disable: 'ऐप लॉक बंद करें', enterCurrent: 'बंद करने के लिए वर्तमान PIN डालें',
     mismatch: 'PIN मेल नहीं खाते।', enabled: 'ऐप लॉक चालू है। हर बार ऐप खोलने पर यह PIN मांगा जाएगा।',
@@ -42,9 +51,11 @@ export function AppLockScreen({ lang, onUnlock }) {
     if (busy) return;
     setBusy(true);
     try {
-      const ok = await verifyAppLock(pin);
-      if (ok) { onUnlock(); return; }
-      setError(c.wrongPin); setPin('');
+      const result = await verifyAppLockGuarded(pin);
+      if (result.ok) { onUnlock(); return; }
+      if (result.reason === 'LOCKED_OUT') setError(c.lockedOut(result.retryAfterSeconds));
+      else setError(result.attemptsLeft > 0 ? `${c.wrongPin} (${result.attemptsLeft})` : c.wrongPin);
+      setPin('');
     } finally {
       setBusy(false);
     }
@@ -108,8 +119,9 @@ export function AppLockSettings({ lang, onClose }) {
               maxLength={6} value={pin} aria-label="PIN" onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))} />
             <div className="m-record-modes">
               <button className="m-btn m-btn-primary" disabled={busy || pin.length < 4} onClick={disable}>{c.disable}</button>
-              <button className="m-btn m-btn-soft" onClick={onClose}>{copy(lang).later || 'Close'}</button>
+              <button className="m-btn m-btn-soft" onClick={onClose}>{c.close}</button>
             </div>
+            <p className="m-record-intro" style={{ marginTop: 10 }}>{c.forgot}</p>
           </>
         ) : (
           <>
@@ -121,7 +133,7 @@ export function AppLockSettings({ lang, onClose }) {
               maxLength={6} value={confirm} aria-label="Confirm PIN" onChange={(e) => { setConfirm(e.target.value.replace(/\D/g, '')); setMessage(''); }} />
             <div className="m-record-modes">
               <button className="m-btn m-btn-primary" disabled={busy || pin.length < 4} onClick={enable}>{c.enable}</button>
-              <button className="m-btn m-btn-soft" onClick={onClose}>{copy(lang).later || 'Close'}</button>
+              <button className="m-btn m-btn-soft" onClick={onClose}>{c.close}</button>
             </div>
           </>
         )}
