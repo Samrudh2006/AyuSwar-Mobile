@@ -1,0 +1,25 @@
+AyuSwar AI (AyuSwar-Mobile)
+Copyright 2026 Satya Samrudh Dwivedula
+
+This product includes software developed by Satya Samrudh Dwivedula
+(https://github.com/Samrudh2006).
+
+Third-party components and data with their own licenses:
+
+- Tesseract OCR and tessdata language data (eng.traineddata):
+  Apache License 2.0 (https://github.com/tesseract-ocr/tesseract)
+- YAMNet (TensorFlow/TensorFlow.js model, public/models/yamnet-v1):
+  Apache License 2.0 (https://github.com/tensorflow/models)
+- Capacitor (Ionic): MIT License
+- React: MIT License
+- PMBJP / Jan Aushadhi product reference data (src/data/pmbjpOfficialProducts.js):
+  product names, drug codes and prices fetched from the public PMBI
+  (Pharmaceuticals & Medical Devices Bureau of India) ProductList search,
+  https://www.pmbi.co.in/ProductList.aspx, fetched 2026-11-20; factual data,
+  not medical, dosage or substitution guidance.
+- Synthetic benchmark corpora and FHIR-shaped fixtures under benchmarks/:
+  synthetic demo content created for this project, no real patient data.
+
+Clinical safety: AyuSwar AI is a synthetic demo prototype. It is not a
+certified medical device and provides no diagnosis, dosage, or substitution
+guidance. In emergencies dial 112 / 108 (India).

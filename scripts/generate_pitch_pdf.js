@@ -12,13 +12,13 @@ if (!CHROME_PATH) {
   process.exit(1);
 }
 
-const htmlPath = path.resolve(process.cwd(), 'pitch.html');
+const htmlPath = path.resolve(process.cwd(), 'docs/pitch/pitch.html');
 if (!fs.existsSync(htmlPath)) {
   console.error(`Error: pitch.html not found at ${htmlPath}`);
   process.exit(1);
 }
 
-const localPdfPath = path.resolve(process.cwd(), 'AyuSwar_AI_Solution_Pitch.pdf');
+const localPdfPath = path.resolve(process.cwd(), 'docs/pitch/AyuSwar_AI_Solution_Pitch.pdf');
 const userDownloadsDir = 'C:\\Users\\HP\\Downloads';
 const downloadsPdfPath = path.join(userDownloadsDir, 'AyuSwar_AI_Solution_Pitch.pdf');
 const tempProfileDir = path.resolve(process.cwd(), '.puppeteer_pdf_profile');
