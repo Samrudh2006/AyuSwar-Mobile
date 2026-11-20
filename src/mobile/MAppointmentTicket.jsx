@@ -32,13 +32,39 @@ const SAMPLE_TICKET = {
 export default function MAppointmentTicket() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { appointmentsQueue, patientProfile, selectedLanguage } = useApp();
+  const { appointmentsQueue, setAppointmentsQueue, isDemoMode, patientProfile, selectedLanguage } = useApp();
   const t = key => mt(key, selectedLanguage);
   const [qrUrl, setQrUrl] = React.useState('');
+  // Chosen queue entry: last by default, switchable via the chooser below.
+  const [selectedIdx, setSelectedIdx] = React.useState(() => (Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 ? appointmentsQueue.length - 1 : -1));
 
   // Real local booking wins; otherwise a clearly labelled sample.
   const fromState = location.state?.ticket;
-  const fromQueue = Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 ? appointmentsQueue[appointmentsQueue.length - 1] : null;
+  const fromQueue = !fromState && Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0
+    ? appointmentsQueue[Math.min(Math.max(selectedIdx, 0), appointmentsQueue.length - 1)]
+    : null;
+
+  // Demo booking action: creates a SYNTHETIC queue entry locally and selects it.
+  // Nothing is sent anywhere; the entry and ticket are both marked synthetic.
+  const bookDemoSlot = () => {
+    const n = (Array.isArray(appointmentsQueue) ? appointmentsQueue.length : 0) + 1;
+    const entry = {
+      id: `demo_appt_${100 + n}`,
+      token: `DEMO-${100 + n}`,
+      patientName: patientProfile?.name || `Demo Patient ${String(n).padStart(2, '0')}`,
+      age: null,
+      gender: '',
+      doctorName: 'Dr. Demo Clinician (synthetic)',
+      specialty: 'General Medicine (demo)',
+      date: 'Tomorrow',
+      time: '11:00 AM',
+      status: 'Waiting',
+      isSyntheticFixture: true
+    };
+    const next = [...(Array.isArray(appointmentsQueue) ? appointmentsQueue : []), entry];
+    setAppointmentsQueue(next);
+    setSelectedIdx(next.length - 1);
+  };
   // Exact date, never a floating "Today"/"Tomorrow" on a saved or printed ticket.
   const exactDate = d => (d === 'Today' || d === 'Tomorrow')
     ? new Date(Date.now() + (d === 'Tomorrow' ? 86400000 : 0)).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
@@ -102,6 +128,26 @@ export default function MAppointmentTicket() {
       `}</style>
 
       <section className="m-tkt-wrap">
+        {!fromState && Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 && (
+          <div style={{ marginBottom: 10 }}>
+            <p style={{ fontSize: 11.5, fontWeight: 700, color: '#5B7183', margin: '0 0 6px' }}>
+              {t('Demo queue - choose the appointment for this ticket (synthetic entries):')}
+            </p>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+              {appointmentsQueue.map((a, i) => (
+                <button key={a.id || i} className={i === selectedIdx ? 'm-btn m-btn-primary' : 'm-btn m-btn-ghost'} style={{ padding: '6px 10px', fontSize: 12 }}
+                  onClick={() => setSelectedIdx(i)}>
+                  {a.token || a.id}
+                </button>
+              ))}
+              {isDemoMode && (
+                <button className="m-btn m-btn-ghost" style={{ padding: '6px 10px', fontSize: 12, borderStyle: 'dashed' }} onClick={bookDemoSlot}>
+                  {t('+ Book demo slot (synthetic, stays on this device)')}
+                </button>
+              )}
+            </div>
+          </div>
+        )}
         <div className="m-tkt">
           <div className="m-tkt-demo">
             {ticket.sample || ticket.synthetic ? t('DEMO · SYNTHETIC PREVIEW · NOT A REAL HOSPITAL APPOINTMENT') : t('LOCAL BOOKING REQUEST · HOSPITAL CONFIRMATION PENDING')}
