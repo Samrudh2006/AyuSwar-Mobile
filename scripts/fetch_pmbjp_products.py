@@ -120,7 +120,9 @@ def parse_rows(page):
                     "drugCode": cells[1],
                     "genericName": cells[2],
                     "unitSize": cells[3],
-                    "mrpInr": float(cells[4]) if re.match(r"^\d+(\.\d+)?$", cells[4]) else None,
+                    # PMBI states zero-MRP products are "under process"; represent as unknown
+                    "mrpInr": (float(cells[4]) if float(cells[4]) > 0 else None) if re.match(r"^\d+(\.\d+)?$", cells[4]) else None,
+                    "mrpNote": ("zero MRP on PMBI: under process, price not published" if re.match(r"^0(\.0+)?$", cells[4]) else None),
                 }
             )
     return rows

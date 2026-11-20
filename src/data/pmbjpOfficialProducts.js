@@ -21,7 +21,8 @@ export const PMBJP_OFFICIAL_PRODUCTS = {
         "drugCode": "2491",
         "genericName": "Cetirizine Tablets IP 5mg",
         "unitSize": "10's",
-        "mrpInr": 0.0
+        "mrpInr": null,
+        "mrpNote": "zero MRP on PMBI: under process, price not published"
       }
     },
     "pmbjp-ah-002": {

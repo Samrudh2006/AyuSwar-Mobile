@@ -41,7 +41,12 @@ check('PMBJP entries: match typing honest, matched rows fully sourced', () => {
       assert(e.official === null, `${id}: not-found but official data present`);
     } else {
       assert(e.official && e.official.drugCode && e.official.genericName, `${id}: missing official identity`);
-      assert(typeof e.official.mrpInr === 'number' && e.official.mrpInr >= 0, `${id}: invalid MRP`);
+      // PMBI marks zero-MRP products 'under process'; price must be null-with-note, never a silent 0
+      if (e.official.mrpInr === null) {
+        assert(e.official.mrpNote, `${id}: null MRP without explanatory note`);
+      } else {
+        assert(typeof e.official.mrpInr === 'number' && e.official.mrpInr > 0, `${id}: invalid MRP`);
+      }
     }
   }
 });
