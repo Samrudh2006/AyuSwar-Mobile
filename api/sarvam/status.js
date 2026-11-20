@@ -2,16 +2,16 @@
  * AyuSwar AI — Sarvam Indic Speech Services Status Endpoint
  * GET /api/sarvam/status
  *
- * Reports Sarvam (Bulbul TTS / Saaras STT) availability with the honest
- * 3-state schema (LIVE | UNAVAILABLE | UNCONFIGURED). The subscription key
- * (SARVAM_API_KEY) is configured exclusively server-side and NEVER exposed
- * to clients. Unauthenticated callers get a config-only answer: no upstream
- * fetch, no key-validity detail.
+ * Reports Sarvam (Bulbul TTS / Saaras STT) availability with an honest
+ * schema. The subscription key (SARVAM_API_KEY) is configured exclusively
+ * server-side and NEVER exposed to clients.
  *
- * Cost note: a LIVE probe performs one minimal (few-character) Bulbul
- * synthesis, billed per character by Sarvam (see
- * https://docs.sarvam.ai/api/getting-started/pricing). Probes only run for
- * authorized callers; config checks are free.
+ * COST POSTURE (deliberate): a LIVE probe spends real credits (billed per
+ * character by Sarvam). Normal status checks must therefore NEVER probe —
+ * UI health checks, startup banners and polls get the free config-only
+ * answer (CONFIGURED / UNCONFIGURED, no upstream fetch, no key-validity
+ * detail). A probe runs ONLY when the caller is authorized AND explicitly
+ * passes ?probe=live, i.e. a bounded test action, never automatic.
  */
 
 import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
@@ -48,7 +48,6 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Rate limit exceeded for status probes.' });
   }
 
-  const callerAuth = await verifyCallerAuthorization(req);
   const apiKey = process.env.SARVAM_API_KEY;
 
   if (!apiKey || apiKey.includes('placeholder')) {
@@ -56,17 +55,36 @@ export default async function handler(req, res) {
     return res.status(200).json(UNCONFIGURED_BODY);
   }
 
+  // FREE default: credentials exist, but nothing has been verified live and
+  // no credit is spent. This is the answer normal UI health checks get.
+  const wantsLiveProbe = (() => { try { return new URL(req.url, 'http://localhost').searchParams.get('probe') === 'live'; } catch { return false; } })();
+  if (!wantsLiveProbe) {
+    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (no probe, no spend)' });
+    return res.status(200).json({
+      available: false,
+      status: 'CONFIGURED_NOT_PROBED',
+      provider: 'sarvam',
+      tts: { configured: true, status: 'CONFIGURED_NOT_PROBED', model: 'Sarvam Bulbul v3' },
+      stt: { configured: true, status: 'CONFIGURED_NOT_PROBED', model: 'Sarvam Saaras v4' },
+      latencyMs: null,
+      lastSuccessTime,
+      reason: 'Credentials configured; live status intentionally not probed (a probe spends credits). Explicit authorized probe=live required.'
+    });
+  }
+
+  // Explicit live probe path: authorized caller + probe=live only.
+  const callerAuth = await verifyCallerAuthorization(req);
   if (!callerAuth.authorized) {
-    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (caller not authenticated)' });
+    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Probe rejected (caller not authenticated); no spend' });
     return res.status(200).json({
       available: false,
       status: 'AUTH_REQUIRED',
       provider: 'sarvam',
-      tts: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Bulbul' },
-      stt: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Saaras' },
+      tts: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Bulbul v3' },
+      stt: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Saaras v4' },
       latencyMs: null,
       lastSuccessTime: null,
-      reason: 'Sign in required to check live Sarvam provider status.'
+      reason: 'Sign in required for a live Sarvam probe. Config status is free; probing is not.'
     });
   }
 
