@@ -11,7 +11,7 @@ export default function TermsOfServiceView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Terms of Clinical Use</span>
       </div>
 
@@ -21,7 +21,7 @@ export default function TermsOfServiceView() {
             Terms of Clinical Use & Research Sandbox
           </h1>
         </div>
-        <p style={{ fontSize: '14px', color: '#698892', margin: 0 }}>
+        <p style={{ fontSize: '14px', color: '#37525C', margin: 0 }}>
           Last updated: October 2026 • AyuSwar AI Open Source Clinical Architecture
         </p>
       </div>

@@ -83,7 +83,7 @@ export default function DoctorClinicalLibraryTab({ onShowToast }) {
               33 Mapped Indic Expressions • 7 Indic Languages
             </span>
           </div>
-          <p style={{ fontSize: '13px', color: '#698892' }}>
+          <p style={{ fontSize: '13px', color: '#2E4753' }}>
             Bundled lookup matrix mapping regional colloquial expressions to reference WHO ICD-10 and SNOMED-CT codes. Exact-match demo over a fixed sample set; not a validated clinical NLP model.
           </p>
         </div>

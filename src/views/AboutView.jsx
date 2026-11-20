@@ -31,9 +31,9 @@ export default function AboutView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
-        <Link to="/about" style={{ color: '#698892', fontSize: '13px', textDecoration: 'none', fontWeight: 600 }}>About</Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
+        <Link to="/about" style={{ color: '#122028', fontSize: '13px', textDecoration: 'none', fontWeight: 600 }}>About</Link>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Lead Architect & Creator</span>
       </div>
 

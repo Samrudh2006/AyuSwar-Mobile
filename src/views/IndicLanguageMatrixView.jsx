@@ -87,9 +87,9 @@ export default function IndicLanguageMatrixView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#D1E1E6' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#3D545E', fontSize: '13px' }}>Resources</span>
-        <span style={{ color: '#D1E1E6' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#0F4C5C', fontSize: '13px', fontWeight: 700 }}>Indic Language Matrix</span>
       </div>
 

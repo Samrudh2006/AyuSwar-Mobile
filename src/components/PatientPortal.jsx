@@ -2154,7 +2154,7 @@ export default function PatientPortal({
                   </h2>
                   <SampleDataChip text={t('patient.common.sampleData')} />
                 </div>
-                <p style={{ fontSize: '13px', color: '#698892', margin: '4px 0 0 0' }}>
+                <p style={{ fontSize: '13px', color: '#2E4753', margin: '4px 0 0 0' }}>
                   {t('patient.home.idCardSub')}
                 </p>
               </div>
@@ -2754,7 +2754,7 @@ export default function PatientPortal({
                     </h2>
                     <SampleDataChip text={t('patient.common.sampleData')} />
                   </div>
-                  <p style={{ fontSize: '13px', color: '#698892', margin: '4px 0 0 0' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753', margin: '4px 0 0 0' }}>
                     {t('patient.appts.subtitle')}
                   </p>
                 </div>
@@ -3562,7 +3562,7 @@ export default function PatientPortal({
                   <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#081C24', fontFamily: 'var(--font-main)' }}>
                     {t('patient.reports.title')}
                   </h2>
-                  <p style={{ fontSize: '13px', color: '#698892' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753' }}>
                     {t('patient.reports.subtitle')}
                   </p>
                 </div>
@@ -4187,7 +4187,7 @@ export default function PatientPortal({
                   <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#081C24', fontFamily: 'var(--font-main)' }}>
                     {t('patient.meds.title')}
                   </h2>
-                  <p style={{ fontSize: '13px', color: '#698892' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753' }}>
                     {t('patient.meds.subtitle')}
                   </p>
                 </div>
@@ -4695,7 +4695,7 @@ export default function PatientPortal({
                 <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#081C24', fontFamily: 'var(--font-main)' }}>
                   {t('patient.assistant.hdr')}
                 </h2>
-                <p style={{ fontSize: '13px', color: '#698892' }}>
+                <p style={{ fontSize: '13px', color: '#2E4753' }}>
                   {t('patient.assistant.sub')}
                 </p>
                 <SampleDataChip text={t('patient.common.sampleData')} />

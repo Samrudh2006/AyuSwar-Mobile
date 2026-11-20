@@ -18,7 +18,7 @@ export default function EmergencyHandoverView() {
           <ArrowLeft size={16} />
           <span>Emergency Triage</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Paramedic Handover Record</span>
       </div>
 
@@ -28,7 +28,7 @@ export default function EmergencyHandoverView() {
           <h1 style={{ fontSize: '26px', fontWeight: 850, color: '#081C24', marginBottom: '4px' }}>
             Emergency Pre-Hospital Handover Record
           </h1>
-          <p style={{ fontSize: '13px', color: '#698892' }}>
+          <p style={{ fontSize: '13px', color: '#2E4753' }}>
             Standardized digital clinical transfer document between 108 ALS paramedics and receiving hospital trauma bay.
           </p>
         </div>

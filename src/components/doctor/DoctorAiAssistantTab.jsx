@@ -22,7 +22,7 @@ export default function DoctorAiAssistantTab({
             AI Clinical Co-Pilot & Decision Support
           </h2>
         </div>
-        <p style={{ fontSize: '13px', color: '#698892' }}>
+        <p style={{ fontSize: '13px', color: '#2E4753' }}>
           Demo assistant over bundled sample references only. Not verified clinical guidance; a qualified clinician must review every answer.
         </p>
       </div>

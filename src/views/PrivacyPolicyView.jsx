@@ -11,7 +11,7 @@ export default function PrivacyPolicyView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Privacy Policy</span>
       </div>
 
@@ -32,7 +32,7 @@ export default function PrivacyPolicyView() {
             Prototype privacy notes
           </span>
         </div>
-        <p style={{ fontSize: '14px', color: '#698892', margin: 0 }}>
+        <p style={{ fontSize: '14px', color: '#37525C', margin: 0 }}>
           Last updated: October 2026 • AyuSwar AI Engineering & Open Clinical Research Consortium
         </p>
       </div>
@@ -91,7 +91,7 @@ export default function PrivacyPolicyView() {
         </div>
 
         {/* Contact Information */}
-        <div style={{ borderTop: '1px solid #D0DFE2', paddingTop: '20px', fontSize: '13px', color: '#698892' }}>
+        <div style={{ borderTop: '1px solid #D0DFE2', paddingTop: '20px', fontSize: '13px', color: '#37525C' }}>
           For privacy or security research inquiries, visit the open repository at{' '}
           <a href="https://github.com/Samrudh2006/Ayuswar-Ai" target="_blank" rel="noopener noreferrer" style={{ color: '#0F4C5C', fontWeight: 700 }}>
             github.com/Samrudh2006/Ayuswar-Ai

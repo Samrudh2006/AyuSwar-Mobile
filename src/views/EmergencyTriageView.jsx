@@ -343,9 +343,9 @@ export default function EmergencyTriageView({ onOpenFullConsole }) {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
-        <span style={{ color: '#698892', fontSize: '13px' }}>Emergency</span>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
+        <span style={{ color: '#122028', fontSize: '13px' }}>Emergency</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Sanjivani-108 Simulator</span>
       </div>
 
@@ -367,7 +367,7 @@ export default function EmergencyTriageView({ onOpenFullConsole }) {
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '32px' }}>
         <div style={{ minWidth: 0, flex: '1 1 260px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(220, 38, 38, 0.1)', color: '#DC2626', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800, marginBottom: '12px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(220, 38, 38, 0.1)', color: '#991B1B', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800, marginBottom: '12px' }}>
             <Activity size={14} />
             <span>INTERACTIVE SIMULATION PROTOTYPE</span>
           </div>

@@ -577,9 +577,9 @@ export default function ClinicalBenchmarkView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#122028', fontSize: '13px' }}>Clinical Impact</span>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>
           {activeTab === 'clinical' ? 'Real-World Efficacy & Field Studies' : `${TEST_CASES.length}-Point Software QA Assertions`}
         </span>

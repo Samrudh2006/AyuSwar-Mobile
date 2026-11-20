@@ -2206,7 +2206,7 @@ export default function DoctorPortal({
                           {t('doctor.home.sampleData')}
                         </span>
                       </div>
-                      <p style={{ fontSize: '12.5px', color: '#486770', marginTop: '4px', fontWeight: 500, lineHeight: 1.4 }}>
+                      <p style={{ fontSize: '12.5px', color: '#2E4753', marginTop: '4px', fontWeight: 500, lineHeight: 1.4 }}>
                         {t('doctor.home.facilityLine')}
                       </p>
                       <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '6px', fontSize: '11.5px', color: '#0F4C5C', fontWeight: 650 }}>
@@ -3049,7 +3049,7 @@ export default function DoctorPortal({
                     </h2>
                     <SampleDataChip text={t('doctor.home.sampleData')} />
                   </div>
-                  <p style={{ fontSize: '13px', color: '#698892', margin: '4px 0 0 0' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753', margin: '4px 0 0 0' }}>
                     {t('doctor.opd.hdr.subtitle')}
                   </p>
                 </div>
@@ -4024,7 +4024,7 @@ export default function DoctorPortal({
                       Synthetic Diagnostic Records ({recentReports.length} demo records)
                     </span>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#698892' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753' }}>
                     {selectedReportPatient 
                       ? `Viewing individual diagnostic repository for ${selectedReportPatient.name} (ABHA: ${selectedReportPatient.abhaId})`
                       : "Browse patient diagnostic profiles. Click any patient's card or arrow to review their individual lab tests, radiography, and DICOM series."}
@@ -4929,7 +4929,7 @@ export default function DoctorPortal({
                       Bundled sample references
                     </span>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#698892' }}>
+                  <p style={{ fontSize: '13px', color: '#2E4753' }}>
                     Bundled sample comparisons for medicine packaging and prescription text demos; the lens does not read uploaded images. No live price, stock, formulary or substitution check.
                   </p>
                 </div>

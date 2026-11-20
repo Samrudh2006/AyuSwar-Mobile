@@ -68,9 +68,9 @@ export default function ArchitectureView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
-        <span style={{ color: '#698892', fontSize: '13px' }}>Technology</span>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
+        <span style={{ color: '#122028', fontSize: '13px' }}>Technology</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Architecture Pipeline</span>
       </div>
 
@@ -83,7 +83,7 @@ export default function ArchitectureView() {
         <h1 className="page-main-heading" style={{ fontSize: '32px', fontWeight: 850, color: '#081C24', marginBottom: '8px', letterSpacing: '-0.4px' }}>
           Technical Architecture & Intake Pipeline
         </h1>
-        <p className="page-main-subtext" style={{ fontSize: '15px', color: '#5A7184', maxWidth: '850px', lineHeight: 1.5, margin: 0 }}>
+        <p className="page-main-subtext" style={{ fontSize: '15px', color: '#37525C', maxWidth: '850px', lineHeight: 1.5, margin: 0 }}>
           Interactive architectural blueprint detailing the 4-stage data pipeline from practice consultation audio capture to a local FHIR-shaped research draft.
         </p>
       </div>
@@ -195,14 +195,14 @@ export default function ArchitectureView() {
       {/* Proposed open-source deployment architecture */}
       <div style={{ marginTop: '36px', marginBottom: '40px' }}>
         <div style={{ marginBottom: '18px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(2, 132, 199, 0.1)', color: '#0284C7', padding: '4px 10px', borderRadius: '12px', fontSize: '11.5px', fontWeight: 800, marginBottom: '8px' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(2, 132, 199, 0.1)', color: '#075985', padding: '4px 10px', borderRadius: '12px', fontSize: '11.5px', fontWeight: 800, marginBottom: '8px' }}>
             <Activity size={14} />
             <span>PROPOSED OPEN-SOURCE CLOUD-NATIVE STACK</span>
           </div>
           <h2 style={{ fontSize: '22px', fontWeight: 850, color: '#081C24', margin: '0 0 6px 0', letterSpacing: '-0.3px' }}>
             Proposed DevOps, Observability & GitOps Infrastructure
           </h2>
-          <p style={{ fontSize: '13.5px', color: '#5A7184', maxWidth: '850px', lineHeight: 1.5, margin: 0 }}>
+          <p style={{ fontSize: '13.5px', color: '#37525C', maxWidth: '850px', lineHeight: 1.5, margin: 0 }}>
             Review deployment configuration files in <code style={{ background: '#F1F5F9', padding: '2px 6px', borderRadius: '4px', fontSize: '12.5px', color: '#0F4C5C' }}>deploy/</code>. This workspace did not deploy or verify the topology; production security and data-residency claims remain pending.
           </p>
         </div>
@@ -335,7 +335,7 @@ export default function ArchitectureView() {
           <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#081C24', margin: '0 0 4px 0' }}>
             Core Interoperability & Clinical Schema Standards
           </h2>
-          <p style={{ fontSize: '13.5px', color: '#698892', margin: 0 }}>
+          <p style={{ fontSize: '13.5px', color: '#37525C', margin: 0 }}>
             Standard specifications implemented across the client runtime and clinical data exchange layer.
           </p>
         </div>

@@ -1310,7 +1310,7 @@ export default function AcousticBiomarkerLabView() {
           <h1 style={{ fontSize: '32px', fontWeight: 850, color: '#081C24', marginBottom: '10px' }}>
             Vocal Biomarker & Acoustic Signal Lab
           </h1>
-          <p style={{ fontSize: '15px', color: '#5A7184', maxWidth: '850px', lineHeight: 1.6, marginBottom: '10px' }}>
+          <p style={{ fontSize: '15px', color: '#37525C', maxWidth: '850px', lineHeight: 1.6, marginBottom: '10px' }}>
             Real-time physical digital signal processing (DSP) extracting fundamental frequency (F0), HNR estimate (YIN residual), and perturbation metrics. Research signal viewer, not for clinical diagnosis.
           </p>
         </div>

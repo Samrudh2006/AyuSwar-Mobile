@@ -502,20 +502,20 @@ export default function PrescriptionScannerView() {
           <ArrowLeft size={16} />
           <span>Home</span>
         </Link>
-        <span style={{ color: '#94A3B8' }}>/</span>
-        <span style={{ color: '#698892', fontSize: '13px' }}>Solutions</span>
-        <span style={{ color: '#94A3B8' }}>/</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
+        <span style={{ color: '#122028', fontSize: '13px' }}>Solutions</span>
+        <span style={{ color: '#4A5A50' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Blister Strip & Paper Rx Scanner</span>
       </div>
 
       {/* Header */}
       <div style={{ marginBottom: '28px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '12px' }}>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(217, 119, 6, 0.1)', color: '#D97706', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(217, 119, 6, 0.1)', color: '#92400E', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
             <Scan size={14} />
             <span>REAL IN-BROWSER TESSERACT OCR WORKSPACE</span>
           </div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#059669', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 750 }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#065F46', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 750 }}>
             <ShieldCheck size={14} />
             <span>Designed for client-side OCR processing</span>
           </div>
@@ -523,7 +523,7 @@ export default function PrescriptionScannerView() {
         <h1 style={{ fontSize: '32px', fontWeight: 850, color: '#081C24', marginBottom: '10px' }}>
           AyuVision Blister Strip & Prescription Scanner
         </h1>
-        <p style={{ fontSize: '14.5px', color: '#5A7184', maxWidth: '850px', lineHeight: 1.6 }}>
+        <p style={{ fontSize: '14.5px', color: '#37525C', maxWidth: '850px', lineHeight: 1.6 }}>
           Read packaging or prescription text on your device with Tesseract OCR. Check every word against the original. Local dictionary suggestions are unverified candidates, not medicine identification, substitution, live pricing or stock checks.
         </p>
       </div>

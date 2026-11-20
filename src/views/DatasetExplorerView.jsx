@@ -204,7 +204,7 @@ export default function DatasetExplorerView() {
               </span>
             </div>
 
-            <p className="page-main-subtext" style={{ margin: '0 0 14px 0', color: '#486770', fontSize: '0.925rem', lineHeight: 1.55 }}>
+            <p className="page-main-subtext" style={{ margin: '0 0 14px 0', color: '#2E4753', fontSize: '0.925rem', lineHeight: 1.55 }}>
               AyuSwar synthetic Indic speech and symptom-mapping sample. It includes bundled colloquial symptom examples across six Indian languages, mapped by deterministic rules to ICD-10/SNOMED CT reference concepts and sample generic-drug labels. No ICMR, WHO, ABDM, IndiaAI, or MeitY endorsement is claimed.
             </p>
 
@@ -241,7 +241,7 @@ export default function DatasetExplorerView() {
             borderBottom: activeTab === 'dictionary' ? '2px solid #0e7490' : '2px solid transparent',
             marginBottom: -2,
             background: 'none',
-            color: activeTab === 'dictionary' ? '#0e7490' : '#698892',
+            color: activeTab === 'dictionary' ? '#155E75' : '#2E4753',
             fontWeight: activeTab === 'dictionary' ? 700 : 500,
             cursor: 'pointer',
             display: 'flex',
@@ -262,7 +262,7 @@ export default function DatasetExplorerView() {
             borderBottom: activeTab === 'diseases' ? '2px solid #0e7490' : '2px solid transparent',
             marginBottom: -2,
             background: 'none',
-            color: activeTab === 'diseases' ? '#0e7490' : '#698892',
+            color: activeTab === 'diseases' ? '#155E75' : '#2E4753',
             fontWeight: activeTab === 'diseases' ? 700 : 500,
             cursor: 'pointer',
             display: 'flex',
@@ -283,7 +283,7 @@ export default function DatasetExplorerView() {
             borderBottom: activeTab === 'matcher' ? '2px solid #0e7490' : '2px solid transparent',
             marginBottom: -2,
             background: 'none',
-            color: activeTab === 'matcher' ? '#0e7490' : '#698892',
+            color: activeTab === 'matcher' ? '#155E75' : '#2E4753',
             fontWeight: activeTab === 'matcher' ? 700 : 500,
             cursor: 'pointer',
             display: 'flex',
@@ -304,7 +304,7 @@ export default function DatasetExplorerView() {
             borderBottom: activeTab === 'papers' ? '2px solid #0e7490' : '2px solid transparent',
             marginBottom: -2,
             background: 'none',
-            color: activeTab === 'papers' ? '#0e7490' : '#698892',
+            color: activeTab === 'papers' ? '#155E75' : '#2E4753',
             fontWeight: activeTab === 'papers' ? 700 : 500,
             cursor: 'pointer',
             display: 'flex',
@@ -323,7 +323,7 @@ export default function DatasetExplorerView() {
         <div>
           {/* Pan-Indic Language Filter Bar */}
           <div style={{ marginBottom: 16 }}>
-            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#486770', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#2E4753', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Filter by Indic Language & Script:
             </div>
             <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
