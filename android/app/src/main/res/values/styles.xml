@@ -13,6 +13,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:background">@null</item>
+        <!-- Device-reported: Android nav buttons render white-on-pale (invisible) over the
+             app backdrop. Ask the system for dark nav-bar icons. API 27+; ignored below.
+             NOT device-verified yet. -->
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
 

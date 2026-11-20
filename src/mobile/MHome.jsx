@@ -48,7 +48,7 @@ export default function MHome() {
         </span>
         <span style={{ flex: 1 }}>
           <b style={{ display: 'block', fontSize: 15, color: 'var(--m-danger)' }}>{t('emergency')}</b>
-          <span style={{ fontSize: 11.5, color: 'var(--m-muted)', lineHeight: 1.4, display: 'block', marginTop: 2 }}>
+          <span style={{ fontSize: 11.5, color: 'var(--m-ink)', lineHeight: 1.4, display: 'block', marginTop: 2 }}>
             {t('emergencyDesc')}
           </span>
         </span>
