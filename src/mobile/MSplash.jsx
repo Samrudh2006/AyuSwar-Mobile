@@ -13,13 +13,9 @@ export default function MSplash({ done }) {
     <div className={`m-splash ${done ? 'hide' : ''}`} aria-hidden={done}>
       <img className="m-splash-mark" src="/assets/ayuswar_emblem_mark.webp" width="140" height="140" alt="AyuSwar logo" />
       <b className="m-splash-word">AyuSwar <i>AI</i></b>
+      <span className="m-splash-tag">{t('tagline')}</span>
       <div className="m-splash-voice" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
       <div className="m-splash-art" aria-hidden="true">
-        <svg className="m-splash-waves" viewBox="0 0 390 110" preserveAspectRatio="none">
-          <path d="M0,46 C70,24 150,68 225,50 C295,34 340,60 390,42 L390,110 L0,110 Z" fill="#BFE8DC" opacity="0.3" />
-          <path d="M0,0 L390,0 L390,38 C340,56 295,30 225,46 C150,64 70,20 0,42 Z" fill="#FAF5EA" />
-          <path d="M0,42 C70,20 150,64 225,46 C295,30 340,56 390,38" fill="none" stroke="#E8A33D" strokeWidth="2.5" opacity="0.9" />
-        </svg>
         <img src="/assets/ayuswar-hospital-crop.jpg" alt="" />
       </div>
       <div className="m-splash-foot">
