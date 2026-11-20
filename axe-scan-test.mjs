@@ -38,5 +38,33 @@ for (const tab of TABS) {
     if (first) console.log(`    e.g. ${first.target.join(' ').slice(0, 140)}`);
   }
 }
+// Modal-open states: scanner the overlays users actually open.
+const MODALS = [
+  { name: 'modal-upload-report', tab: 'reports', opener: 'Upload New Diagnostic Report' },
+  { name: 'modal-add-medication', tab: 'medications', opener: 'Add Medication Manually' },
+  { name: 'modal-add-vitals', tab: 'my_health', opener: 'Add Vitals Manually' },
+];
+for (const m of MODALS) {
+  await page.goto(`${BASE}?tab=${m.tab}`, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(3200);
+  await page.locator('button', { hasText: m.opener }).first().click();
+  await page.waitForTimeout(700);
+  await page.evaluate(AXE);
+  const res = await page.evaluate(async () => {
+    return await axe.run(document, {
+      runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'] },
+      resultTypes: ['violations']
+    });
+  });
+  const byImpact = {};
+  for (const v of res.violations) byImpact[v.impact] = (byImpact[v.impact] || 0) + 1;
+  summary.push({ tab: m.name, violations: res.violations.length, byImpact });
+  console.log(`STATE ${m.name}: ${res.violations.length} violation rule(s) ${JSON.stringify(byImpact)}`);
+  for (const v of res.violations) {
+    console.log(`  - ${v.id} [${v.impact}] ${v.nodes.length} node(s): ${v.help}`);
+    for (const n of v.nodes.slice(0, 4)) console.log(`    ${n.html.slice(0, 150).replace(/\n/g, ' ')}`);
+  }
+}
+
 await browser.close();
 console.log('AXE-SUMMARY ' + JSON.stringify(summary.map(s => ({ tab: s.tab, violations: s.violations, byImpact: s.byImpact }))));

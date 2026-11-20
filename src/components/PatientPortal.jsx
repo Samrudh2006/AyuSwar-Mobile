@@ -2263,16 +2263,15 @@ export default function PatientPortal({
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '6px',
-                        background: 'rgba(16, 185, 129, 0.1)',
-                        color: '#065F46',
+                        background: 'rgba(148, 163, 184, 0.12)',
+                        color: '#475569',
                         padding: '3px 10px',
                         borderRadius: '12px',
                         fontSize: '11px',
                         fontWeight: 700,
-                        border: '1px solid rgba(16, 185, 129, 0.2)'
+                        border: '1px solid rgba(148, 163, 184, 0.3)'
                       }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#047857', display: 'inline-block' }}></span>
-                        Auto-Sync from Reports Active
+                        Bundled sample import (manual)
                       </div>
                     </div>
                     <p style={{ fontSize: '12px', color: '#52707C', margin: '4px 0 0 0' }}>
@@ -2301,7 +2300,7 @@ export default function PatientPortal({
                       title="Preview sample report parsing; verify every value"
                     >
                       <Zap size={14} color="#0F4C5C" />
-                      <span>Auto-Sync from Reports</span>
+                      <span>Import bundled sample vitals</span>
                     </button>
 
                     <button
@@ -2593,6 +2592,7 @@ export default function PatientPortal({
                           </label>
                           <select
                             {...registerVital('sourceNote')}
+                            aria-label={t('vitals.source')}
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                           >
                             <option value="Self-measured at home">{t('vitals.src.home')}</option>
@@ -4072,6 +4072,7 @@ export default function PatientPortal({
                             type="text"
                             value={newReportDate}
                             onChange={e => setNewReportDate(e.target.value)}
+                            aria-label="Test Date"
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12.5px' }}
                           />
                         </div>
@@ -4144,6 +4145,7 @@ export default function PatientPortal({
                           rows={2}
                           value={newReportSummary}
                           onChange={e => setNewReportSummary(e.target.value)}
+                          aria-label="Clinical Findings & Summary"
                           style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
@@ -4157,6 +4159,7 @@ export default function PatientPortal({
                           type="text"
                           value={newReportTelugu}
                           onChange={e => setNewReportTelugu(e.target.value)}
+                          aria-label="Telugu Audio Script"
                           style={{ width: '100%', padding: '8px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
@@ -4490,6 +4493,7 @@ export default function PatientPortal({
                           type="text"
                           value={manualTeluguAudio}
                           onChange={e => setManualTeluguAudio(e.target.value)}
+                          aria-label="Telugu Voice Instruction"
                           style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
