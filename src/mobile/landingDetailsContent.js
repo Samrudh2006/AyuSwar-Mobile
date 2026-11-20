@@ -1,0 +1,171 @@
+// Locale content for MLandingDetails. English is the source of truth; other
+// locales fall back to English per key group when missing.
+
+const en = {
+  voiceFirstTitle: 'Why voice-first?',
+  voiceFirstCaption: 'Illustration from the AyuSwar website: typing burden vs voice-first consultation.',
+  voiceFirstIntro: "Explore the website's documentation problem and proposed workflow. This is a qualitative comparison, not a measured time-saving or clinical result.",
+  manualNotes: 'Manual notes',
+  voiceWorkflow: 'Voice workflow',
+  afterText: 'Speak a practice conversation, check its transcript, review an editable draft and choose how to share it.',
+  beforeText: 'Typing and handwritten instructions can add work, and language or reading barriers can make instructions harder to follow.',
+  flowsTitle: 'How the consultation flows',
+  flowsCaption: 'Illustration from the AyuSwar website: spoken words to a reviewed draft. A concept graphic, not a measured pipeline.',
+  openWalkthrough: 'Open the four-step walkthrough',
+  exploreTitle: 'Explore each capability',
+  exploreIntro: 'Open a detail panel before entering a workspace.',
+  languagesTitle: 'Languages & voice samples',
+  languagesIntro: 'Try a short research-demo sentence. Listed choices are not a guarantee of dialect accuracy. Word-aligned karaoke and native audible playback still need validation.',
+  sampleLanguage: 'Sample language',
+  playSample: 'Play language sample',
+  stopSample: 'Stop sample',
+  preparingAudio: 'Preparing audio...',
+  voiceUnavailable: 'Voice is unavailable here. No prerecorded replacement was substituted.',
+  openMatrix: 'Open full language matrix',
+  reviewTitle: 'Review, privacy & uncertainty',
+  standardsTitle: 'Standards & implementation limits',
+  openRxPreview: 'Open prescription preview demo',
+  faqTitle: 'Questions & answers',
+  faqCaption: 'Illustration from the AyuSwar website FAQ. Fictional person, not a real clinician.',
+  resourcesTitle: 'Resources',
+  footnote: "Consultation illustration generated with Gemini at the user's request. Fictional people, not a real patient or testimonial. Original provenance mark retained.",
+  walkthroughTitle: 'Consultation walkthrough',
+  purpose: 'Purpose',
+  workflow: 'Workflow',
+  limitsTitle: 'Limits to keep visible',
+  openWorkspace: 'Open this workspace',
+  previous: 'Previous',
+  next: 'Next',
+  startPractice: 'Start practice consultation',
+  closeDetail: 'Close detail panel',
+  resources: [['Technology','/technology'],['Datasets','/datasets'],['Language matrix','/language-matrix'],['Benchmarks','/benchmarks'],['About & credits','/about'],['Privacy','/privacy'],['Terms','/terms']],
+  stages: [
+    ['Record & check','Capture practice audio, listen back, request transcription and correct the source words. No draft without input.'],
+    ['Generate & review','A connected AI service prepares a draft from the source. Check each field; errors do not substitute a bundled patient.'],
+    ['Edit & listen','Edit the authoritative fields. SOAP changes clear stale voice text so it must be reviewed again before playback.'],
+    ['Acknowledge & share','Demo sign is not a digital signature. Review final content, choose an app and recipient yourself, or download the current research draft.']
+  ],
+  features: [
+    ['ambient_listening','Ambient listening','Record a synthetic practice consultation before any draft is generated.','Microphone permission, real PCM capture, amplitude meter, playback and user-initiated transcription. Check the transcript before continuing.','Automatic speaker separation and noisy-room performance are not established.','/clinical-console'],
+    ['multilingual_transcription','Indic transcription','Preserve spoken meaning while moving from audio into a checked transcript.','Choose a language, record, then request transcription. Source text stays visible for corrections.','Language choices do not establish measured accuracy for every language or dialect.','/clinical-console'],
+    ['acoustic_biomarkers','Acoustic signal research','Explore recorded audio without turning sound patterns into a diagnosis.','FFT spectral centroid, experimental YIN and Pitchy pitch candidates, clarity, frame variation and optional local YAMNet event hints.','Pitch octave ambiguity remains. YAMNet tags are uncertain sound events, not diseases.','/acoustic-lab'],
+    ['prescription_scanner','Packaging and prescription OCR','Read label text before considering a medicine candidate.','Upload or capture an image, inspect extracted text, then verify ingredient, strength and release form against the original.','No automatic substitution, clinical clearance, live stock or price verification.','/scanner'],
+    ['spoken_audio_rx','Spoken practice instructions','Review the words before speaking or sharing them.','Choose a bundled example or record audio, edit the practice text, play speech, and export only real recorded audio.','Sample quiz results do not prove understanding or adherence. WhatsApp delivery is not confirmed.','/audio-rx'],
+    ['cdss_safety','Medication review boundaries','Medication identity and safety need qualified review.','OCR preserves source text and marks dictionary candidates unverified. Hypothetical age and renal settings remain available for exploring the interface.','No dispensing approval, dose recommendation or complete interaction screening is provided.','/scanner'],
+    ['abdm_fhir','FHIR research export','Inspect structured data without implying national health-system access.','Review and edit the consultation draft, acknowledge the demo sign step, then download the current fields in a research FHIR-format collection.','Not ABDM validated or dispatched. No real ABHA verification, digital signature or registry sign-off.','/clinical-console'],
+    ['clinical_studio_overview','Complete consultation journey','Follow the same source through recording, transcript, draft and review.','Recording -> transcript check -> AI draft -> doctor edits -> reviewed voice summary -> demo acknowledgement -> share/export.','Android physical-device tests remain pending. Never use this prototype for clinical care.','/clinical-console']
+  ],
+  faq: [
+    ['Does AyuSwar replace doctors?','No. This is a synthetic-data research prototype. AI drafts require review and are not clinical records or real prescriptions.'],
+    ['How is practice audio handled?','OPD audio is held in memory on the recording screen. Transcribe sends it to the speech service when requested. AI draft generation sends transcript text to its configured service. No blanket DPDP certification or server-deletion guarantee is claimed.'],
+    ['What about code-mixed speech?','Language choices include Indic and code-mixed examples. Recognition may make errors; review source text. Broad dialect accuracy has not been established.'],
+    ['Does it work in a noisy room?','Capture uses the microphone and browser audio settings. Real noisy-clinic and multi-speaker performance is not validated.'],
+    ['How can a doctor check the draft?','Source transcript and editable SOAP fields are shown. Every field can be corrected before voice/share. Word-level audio anchoring is not yet verified.'],
+    ['Is it connected to ABDM?','No verified national-registry lookup or health-exchange dispatch is provided. FHIR-format output is for research inspection, not ABDM certification.'],
+    ['What happens when AI fails?','The consultation flow shows an error and retry. It does not silently replace missing input or a failed draft with a sample patient.'],
+    ['Can it speak instructions?','The speech service can speak reviewed practice text. Availability and audio playback vary by device. Native Android audible playback is still unverified.'],
+    ['Can OCR choose a cheaper equivalent medicine?','No. Inspect extracted text and ask a pharmacist or qualified clinician to verify exact ingredient, strength and release form. Stock, pricing and equivalence are not live-checked.'],
+    ['Which devices are tested?','Mobile-size browser layouts have been checked. APK packaging is checked; native Android runtime tests remain blocked. No universal device-performance claim is made.'],
+    ['Can edits be made after signing?','Yes, but editing invalidates the demo acknowledgement. SOAP edits clear the voice text to prevent stale spoken output.']
+  ],
+  governance: [
+    ['Review','Doctor review & edits','The source and draft stay visible. Edits flow into the voice summary and research export; changing a signed draft requires a fresh demo acknowledgement.'],
+    ['Privacy','Explicit service boundaries','Recording is local until Transcribe. Speech/AI service use is disclosed. Local YAMNet tags do not upload audio. No unverified compliance seal is shown.'],
+    ['Evidence','Source before generation','A missing transcript blocks draft generation. AI service failure is shown instead of synthetic clinical success. This does not guarantee that model outputs are always correct.'],
+    ['Uncertainty','Unavailable stays unavailable','Experimental pitch and model tags carry limits. Missing formants, unsupported clinical scores, national-registry verification and real dispatch are not fabricated.']
+  ],
+  standards: [
+    ['Acoustics','Experimental pitch and frame-level variation, not cycle jitter/shimmer or disease biomarkers.'],
+    ['FHIR','Research JSON collection with reviewed fields, not a certified ABDM prescription or a dispatched record.'],
+    ['Clinical codes','Codes in bundled sample records are examples. The app does not establish a diagnosis or validate a clinical code assignment.'],
+    ['Medicine reference','A bundled dictionary may suggest a candidate. It does not establish identity, dose safety, equivalence, live stock or current price.'],
+    ['Speech input','Microphone capture and configured transcription service. Check recognition errors against the source recording.'],
+    ['Speech output','Reviewed text goes to the configured speech service. Opening a share flow is not proof of sending or delivery.']
+  ]
+};
+
+const te = {
+  voiceFirstTitle: 'వాయిస్-ఫస్ట్ ఎందుకు?',
+  voiceFirstCaption: 'AyuSwar వెబ్‌సైట్ నుండి ఉదాహరణ చిత్రం: టైపింగ్ భారం vs వాయిస్-ఫస్ట్ కన్సల్టేషన్.',
+  voiceFirstIntro: 'వెబ్‌సైట్ లోని డాక్యుమెంటేషన్ సమస్యను, ప్రతిపాదిత విధానాన్ని చూడండి. ఇది కేవలం గుణాత్మక పోలిక మాత్రమే, కొలిచిన సమయ ఆదా లేదా క్లినికల్ ఫలితం కాదు.',
+  manualNotes: 'మాన్యువల్ నోట్స్',
+  voiceWorkflow: 'వాయిస్ వర్క్‌ఫ్లో',
+  afterText: 'ప్రాక్టీస్ సంభాషణ మాట్లాడండి, దాని ట్రాన్స్‌క్రిప్ట్ తనిఖీ చేసి, సవరించగల డ్రాఫ్ట్‌ను సమీక్షించి, ఎలా షేర్ చేయాలో మీరే ఎంచుకోండి.',
+  beforeText: 'టైపింగ్, చేతితో రాసిన సూచనలు పనిని పెంచుతాయి; భాషా లేదా అక్షరాస్యత అడ్డంకులు సూచనలను అర్థం చేసుకోవడాన్ని కష్టతరం చేస్తాయి.',
+  flowsTitle: 'కన్సల్టేషన్ ఎలా సాగుతుంది',
+  flowsCaption: 'AyuSwar వెబ్‌సైట్ నుండి ఉదాహరణ చిత్రం: మాట్లాడిన మాటల నుండి సమీక్షిత డ్రాఫ్ట్ వరకు. ఇది భావనా చిత్రం మాత్రమే, కొలిచిన పైప్‌లైన్ కాదు.',
+  openWalkthrough: 'నాలుగు దశల వివరణ తెరవండి',
+  exploreTitle: 'ప్రతి సామర్థ్యాన్ని చూడండి',
+  exploreIntro: 'వర్క్‌స్పేస్‌లోకి వెళ్ళే ముందు వివరాల ప్యానెల్ తెరవండి.',
+  languagesTitle: 'భాషలు & వాయిస్ నమూనాలు',
+  languagesIntro: 'చిన్న పరిశోధన-డెమో వాక్యాన్ని ప్రయత్నించండి. జాబితా చేసిన ఎంపికలు మాండలిక ఖచ్చితత్వానికి హామీ కాదు. పదాలతో సరిపోలే కరోకే, నేటివ్ ఆడియో ప్లేబ్యాక్ ఇంకా ధృవీకరణ అవసరం.',
+  sampleLanguage: 'నమూనా భాష',
+  playSample: 'భాషా నమూనా ప్లే చేయండి',
+  stopSample: 'నమూనా ఆపండి',
+  preparingAudio: 'ఆడియో సిద్ధమవుతోంది...',
+  voiceUnavailable: 'ఇక్కడ వాయిస్ అందుబాటులో లేదు. దాని స్థానంలో ముందుగా రికార్డ్ చేసినది ఏమీ ఉంచలేదు.',
+  openMatrix: 'పూర్తి భాషా మ్యాట్రిక్స్ తెరవండి',
+  reviewTitle: 'సమీక్ష, గోప్యత & అనిశ్చితి',
+  standardsTitle: 'ప్రమాణాలు & అమలు హద్దులు',
+  openRxPreview: 'ప్రిస్క్రిప్షన్ ప్రివ్యూ డెమో తెరవండి',
+  faqTitle: 'ప్రశ్నలు & సమాధానాలు',
+  faqCaption: 'AyuSwar వెబ్‌సైట్ FAQ నుండి ఉదాహరణ చిత్రం. ఇది ఊహా పాత్ర, నిజమైన వైద్యుడు కాదు.',
+  resourcesTitle: 'వనరులు',
+  footnote: 'కన్సల్టేషన్ చిత్రం వినియోగదారు అభ్యర్థనతో Gemini ద్వారా తయారైంది. ఊహా పాత్రలు, నిజమైన రోగి లేదా అభిప్రాయం కాదు. అసలు మూల గుర్తు అలాగే ఉంచబడింది.',
+  walkthroughTitle: 'కన్సల్టేషన్ దశల వివరణ',
+  purpose: 'ఉద్దేశ్యం',
+  workflow: 'విధానం',
+  limitsTitle: 'గుర్తుంచుకోవాల్సిన హద్దులు',
+  openWorkspace: 'ఈ వర్క్‌స్పేస్ తెరవండి',
+  previous: 'మునుపటిది',
+  next: 'తదుపరి',
+  startPractice: 'ప్రాక్టీస్ కన్సల్టేషన్ ప్రారంభించండి',
+  closeDetail: 'వివరాల ప్యానెల్ మూయండి',
+  resources: [['టెక్నాలజీ','/technology'],['డేటాసెట్లు','/datasets'],['భాషా మ్యాట్రిక్స్','/language-matrix'],['బెంచ్‌మార్క్‌లు','/benchmarks'],['గురించి & క్రెడిట్స్','/about'],['గోప్యత','/privacy'],['నిబంధనలు','/terms']],
+  stages: [
+    ['రికార్డ్ & తనిఖీ','ప్రాక్టీస్ ఆడియో రికార్డ్ చేసి, విని, ట్రాన్స్‌క్రిప్షన్ అడిగి, మూల మాటలను సరిచేయండి. ఇన్‌పుట్ లేకుండా డ్రాఫ్ట్ ఉండదు.'],
+    ['జనరేట్ & సమీక్ష','అనుసంధానిత AI సేవ మూలం నుండి డ్రాఫ్ట్ సిద్ధం చేస్తుంది. ప్రతి ఫీల్డ్ తనిఖీ చేయండి; లోపాలు ఉన్న రోగి స్థానంలో నమూనా రోగిని ఉంచవు.'],
+    ['సవరణ & వినడం','ప్రధాన ఫీల్డ్స్ సవరించండి. SOAP మార్పులు పాత వాయిస్ టెక్స్ట్‌ను తుడిచేస్తాయి, కాబట్టి ప్లేబ్యాక్ ముందు మళ్లీ సమీక్ష అవసరం.'],
+    ['ధృవీకరణ & షేర్','డెమో సైన్ డిజిటల్ సంతకం కాదు. తుది కంటెంట్ సమీక్షించి, యాప్, గ్రహీతను మీరే ఎంచుకోండి లేదా ప్రస్తుత పరిశోధన డ్రాఫ్ట్ డౌన్‌లోడ్ చేసుకోండి.']
+  ],
+  features: [
+    ['ambient_listening','యాంబియంట్ లిజనింగ్','ఏ డ్రాఫ్ట్ తయారవ్వక ముందే సింథటిక్ ప్రాక్టీస్ కన్సల్టేషన్ రికార్డ్ చేయండి.','మైక్రోఫోన్ అనుమతి, నిజమైన PCM క్యాప్చర్, తీవ్రత మీటర్, ప్లేబ్యాక్, వినియోగదారు ప్రారంభించే ట్రాన్స్‌క్రిప్షన్. కొనసాగే ముందు ట్రాన్స్‌క్రిప్ట్ తనిఖీ చేయండి.','ఆటోమేటిక్ స్పీకర్ వేర్పాటు, శబ్దంతో కూడిన గదిలో పనితీరు ఇంకా నిర్ధారించబడలేదు.','/clinical-console'],
+    ['multilingual_transcription','ఇండిక్ ట్రాన్స్‌క్రిప్షన్','ఆడియో నుండి తనిఖీ చేసిన ట్రాన్స్‌క్రిప్ట్‌లోకి వెళ్ళేటప్పుడు మాట్లాడిన భావాన్ని కాపాడండి.','భాష ఎంచుకోండి, రికార్డ్ చేసి, ట్రాన్స్‌క్రిప్షన్ అడగండి. సరిదిద్దుకోవడానికి మూల టెక్స్ట్ కనిపిస్తూనే ఉంటుంది.','భాషా ఎంపికలు ప్రతి భాష లేదా మాండలికానికి కొలిచిన ఖచ్చితత్వాన్ని ఇవ్వవు.','/clinical-console'],
+    ['acoustic_biomarkers','అకూస్టిక్ సిగ్నల్ పరిశోధన','శబ్ద నమూనాలను రోగనిర్ధారణగా మార్చకుండా రికార్డ్ చేసిన ఆడియోను అన్వేషించండి.','FFT స్పెక్ట్రల్ సెంట్రాయిడ్, ప్రయోగాత్మక YIN, Pitchy పిచ్ అంచనాలు, స్పష్టత, ఫ్రేమ్ వ్యత్యాసం, ఐచ్ఛిక స్థానిక YAMNet ఈవెంట్ సూచనలు.','పిచ్ ఆక్టేవ్ గందరగోళం ఉంటుంది. YAMNet ట్యాగ్‌లు అనిశ్చిత శబ్ద సంఘటనలు, వ్యాధులు కావు.','/acoustic-lab'],
+    ['prescription_scanner','ప్యాకేజింగ్ & ప్రిస్క్రిప్షన్ OCR','మందు అభ్యర్థిని పరిగణించే ముందు లేబుల్ టెక్స్ట్ చదవండి.','చిత్రం అప్‌లోడ్ లేదా క్యాప్చర్ చేసి, సంగ్రహించిన టెక్స్ట్ చూసి, అసలుతో పదార్థం, బలం, రిలీజ్ రూపం సరిపోల్చండి.','ఆటోమేటిక్ ప్రత్యామ్నాయం, క్లినికల్ క్లియరెన్స్, లైవ్ స్టాక్ లేదా ధర ధృవీకరణ లేదు.','/scanner'],
+    ['spoken_audio_rx','మాట్లాడే ప్రాక్టీస్ సూచనలు','మాట్లాడే ముందు లేదా షేర్ చేసే ముందు మాటలను సమీక్షించండి.','చేర్చిన నమూనా ఎంచుకోండి లేదా ఆడియో రికార్డ్ చేసి, ప్రాక్టీస్ టెక్స్ట్ సవరించి, స్పీచ్ ప్లే చేసి, నిజంగా రికార్డ్ చేసిన ఆడియోనే ఎగుమతి చేయండి.','నమూనా క్విజ్ ఫలితాలు అవగాహన లేదా పాటింపును నిరూపించవు. WhatsApp డెలివరీ నిర్ధారించబడలేదు.','/audio-rx'],
+    ['cdss_safety','మందుల సమీక్ష హద్దులు','మందు గుర్తింపు, భద్రతకు అర్హత గల సమీక్ష అవసరం.','OCR మూల టెక్స్ట్‌ను అలాగే ఉంచుతుంది, డిక్షనరీ అభ్యర్థులను ధృవీకరించనివిగా గుర్తిస్తుంది. ఊహాత్మక వయస్సు, కిడ్నీ సెట్టింగులు ఇంటర్‌ఫేస్ అన్వేషణ కోసం మాత్రమే అందుబాటులో ఉంటాయి.','డిస్పెన్సింగ్ ఆమోదం, డోస్ సిఫార్సు లేదా పూర్తి ఇంటరాక్షన్ స్క్రీనింగ్ ఇవ్వబడదు.','/scanner'],
+    ['abdm_fhir','FHIR పరిశోధన ఎగుమతి','జాతీయ ఆరోగ్య వ్యవస్థ యాక్సెస్ ఉన్నట్లు ఇమ్ప్లై చేయకుండా నిర్మాణాత్మక డేటాను పరిశీలించండి.','కన్సల్టేషన్ డ్రాఫ్ట్ సమీక్షించి సవరించి, డెమో సైన్ దశ ధృవీకరించి, ప్రస్తుత ఫీల్డ్స్‌ను పరిశోధన FHIR-ఫార్మాట్ సేకరణగా డౌన్‌లోడ్ చేసుకోండి.','ABDM ధృవీకరణ లేదా పంపిణీ కాదు. నిజమైన ABHA ధృవీకరణ, డిజిటల్ సంతకం లేదా రిజిస్ట్రీ సైన్-ఆఫ్ లేదు.','/clinical-console'],
+    ['clinical_studio_overview','పూర్తి కన్సల్టేషన్ ప్రయాణం','అదే మూలాన్ని రికార్డింగ్, ట్రాన్స్‌క్రిప్ట్, డ్రాఫ్ట్, సమీక్ష గుండా అనుసరించండి.','రికార్డింగ్ -> ట్రాన్స్‌క్రిప్ట్ తనిఖీ -> AI డ్రాఫ్ట్ -> డాక్టర్ సవరణలు -> సమీక్షిత వాయిస్ సారాంశం -> డెమో ధృవీకరణ -> షేర్/ఎగుమతి.','Android ఫిజికల్-డివైస్ పరీక్షలు ఇంకా పెండింగ్. ఈ ప్రోటోటైప్‌ను వైద్య సేవ కోసం ఎప్పుడూ వాడవద్దు.','/clinical-console']
+  ],
+  faq: [
+    ['AyuSwar డాక్టర్లను భర్తీ చేస్తుందా?','లేదు. ఇది సింథటిక్-డేటా పరిశోధన ప్రోటోటైప్. AI డ్రాఫ్ట్‌లకు సమీక్ష తప్పనిసరి; అవి క్లినికల్ రికార్డులు లేదా నిజమైన ప్రిస్క్రిప్షన్‌లు కావు.'],
+    ['ప్రాక్టీస్ ఆడియో ఎలా నిర్వహించబడుతుంది?','OPD ఆడియో రికార్డింగ్ స్క్రీన్ మెమరీలోనే ఉంటుంది. అడిగినప్పుడే Transcribe దాన్ని స్పీచ్ సేవకు పంపుతుంది. AI డ్రాఫ్ట్ తయారీ ట్రాన్స్‌క్రిప్ట్ టెక్స్ట్‌ను దాని కాన్ఫిగర్ చేసిన సేవకు పంపుతుంది. పూర్తి-స్థాయి DPDP ధృవీకరణ లేదా సర్వర్-డిలీషన్ హామీ ఇవ్వబడలేదు.'],
+    ['కోడ్-మిక్స్డ్ స్పీచ్ గురించి?','భాషా ఎంపికల్లో ఇండిక్, కోడ్-మిక్స్డ్ ఉదాహరణలు ఉన్నాయి. గుర్తింపులో లోపాలు రావచ్చు; మూల టెక్స్ట్ సమీక్షించండి. విస్తృత మాండలిక ఖచ్చితత్వం నిర్ధారించబడలేదు.'],
+    ['శబ్దంతో కూడిన గదిలో పనిచేస్తుందా?','క్యాప్చర్ మైక్రోఫోన్, బ్రౌజర్ ఆడియో సెట్టింగులను వాడుతుంది. నిజమైన శబ్దంతో కూడిన క్లినిక్, బహుళ-స్పీకర్ పనితీరు ధృవీకరించబడలేదు.'],
+    ['డాక్టర్ డ్రాఫ్ట్‌ను ఎలా తనిఖీ చేయగలరు?','మూల ట్రాన్స్‌క్రిప్ట్, సవరించగల SOAP ఫీల్డ్స్ చూపబడతాయి. వాయిస్/షేర్ ముందు ప్రతి ఫీల్డ్ సరిచేయవచ్చు. పద-స్థాయి ఆడియో యాంకరింగ్ ఇంకా ధృవీకరించబడలేదు.'],
+    ['ఇది ABDMకి అనుసంధానమై ఉందా?','ధృవీకరించబడిన జాతీయ-రిజిస్ట్రీ శోధన లేదా హెల్త్-ఎక్స్‌ఛేంజ్ పంపిణీ ఇవ్వబడలేదు. FHIR-ఫార్మాట్ అవుట్‌పుట్ పరిశోధన పరిశీలన కోసమే, ABDM ధృవీకరణ కాదు.'],
+    ['AI విఫలమైతే ఏమవుతుంది?','కన్సల్టేషన్ ఫ్లో లోపం, మళ్లీ ప్రయత్నం చూపుతుంది. లోపించిన ఇన్‌పుట్ లేదా విఫలమైన డ్రాఫ్ట్ స్థానంలో నమూనా రోగిని నిశ్శబ్దంగా ఉంచదు.'],
+    ['ఇది సూచనలు చెబుతుందా?','స్పీచ్ సేవ సమీక్షిత ప్రాక్టీస్ టెక్స్ట్‌ను చెప్పగలదు. లభ్యత, ఆడియో ప్లేబ్యాక్ డివైస్ మీద ఆధారపడతాయి. నేటివ్ Android వినగలిగే ప్లేబ్యాక్ ఇంకా ధృవీకరించబడలేదు.'],
+    ['OCR చౌకైన సమాన మందును ఎంచుకుంటుందా?','లేదు. సంగ్రహించిన టెక్స్ట్ పరిశీలించి, ఖచ్చితమైన పదార్థం, బలం, రిలీజ్ రూపం ధృవీకరణ కోసం ఫార్మాసిస్ట్ లేదా అర్హత గల వైద్యుడిని అడగండి. స్టాక్, ధర, సమానత్వం లైవ్‌గా తనిఖీ చేయబడవు.'],
+    ['ఏ డివైజ్‌లు పరీక్షించబడ్డాయి?','మొబైల్-సైజు బ్రౌజర్ లేఅవుట్‌లు తనిఖీ చేయబడ్డాయి. APK ప్యాకేజింగ్ తనిఖీ చేయబడింది; నేటివ్ Android రన్‌టైమ్ పరీక్షలు ఇంకా మిగిలే ఉన్నాయి. సార్వత్రిక డివైస్-పనితీరు క్లెయిమ్ చేయబడలేదు.'],
+    ['సైన్ చేసిన తర్వాత సవరణలు చేయవచ్చా?','అవును, కానీ సవరణ డెమో ధృవీకరణను చెల్లదుగా చేస్తుంది. SOAP సవరణలు పాత వాయిస్ టెక్స్ట్‌ను తుడిచేస్తాయి, పాతది ప్లే అవకుండా.']
+  ],
+  governance: [
+    ['సమీక్ష','డాక్టర్ సమీక్ష & సవరణలు','మూలం, డ్రాఫ్ట్ కనిపిస్తూనే ఉంటాయి. సవరణలు వాయిస్ సారాంశం, పరిశోధన ఎగుమతిలోకి వెళ్తాయి; సైన్ చేసిన డ్రాఫ్ట్ మార్చడానికి కొత్త డెమో ధృవీకరణ అవసరం.'],
+    ['గోప్యత','స్పష్టమైన సేవా హద్దులు','Transcribe వరకు రికార్డింగ్ స్థానికంగానే ఉంటుంది. స్పీచ్/AI సేవా వినియోగం బహిర్గతం చేయబడింది. స్థానిక YAMNet ట్యాగ్‌లు ఆడియో అప్‌లోడ్ చేయవు. ధృవీకరించని కంప్లయన్స్ ముద్ర చూపబడదు.'],
+    ['సాక్ష్యం','జనరేషన్ కంటే ముందు మూలం','ట్రాన్స్‌క్రిప్ట్ లేకపోతే డ్రాఫ్ట్ తయారీ ఆగిపోతుంది. AI సేవా వైఫల్యం సింథటిక్ విజయంగా కాకుండా చూపబడుతుంది. మోడల్ అవుట్‌పుట్‌లు ఎల్లప్పుడూ సరిగ్గానే ఉంటాయని ఇది హామీ ఇవ్వదు.'],
+    ['అనిశ్చితి','అందుబాటులో లేనిది అలాగే ఉంటుంది','ప్రయోగాత్మక పిచ్, మోడల్ ట్యాగ్‌లకు హద్దులు ఉన్నాయి. లోపించిన ఫార్మంట్లు, మద్దతు లేని క్లినికల్ స్కోర్లు, జాతీయ-రిజిస్ట్రీ ధృవీకరణ, నిజమైన పంపిణీ కనిపించనివి కనిపించేలా చేయబడవు.']
+  ],
+  standards: [
+    ['అకూస్టిక్స్','ప్రయోగాత్మక పిచ్, ఫ్రేమ్-స్థాయి వ్యత్యాసం; సైకిల్ జిట్టర్/షిమ్మర్ లేదా వ్యాధి బయోమార్కర్లు కావు.'],
+    ['FHIR','సమీక్షిత ఫీల్డ్స్‌తో పరిశోధన JSON సేకరణ; ధృవీకరించబడిన ABDM ప్రిస్క్రిప్షన్ లేదా పంపిన రికార్డు కాదు.'],
+    ['క్లినికల్ కోడ్‌లు','చేర్చిన నమూనా రికార్డుల్లోని కోడ్‌లు ఉదాహరణలు. యాప్ రోగనిర్ధారణ చేయదు లేదా క్లినికల్ కోడ్ కేటాయింపును ధృవీకరించదు.'],
+    ['మందుల సూచన','చేర్చిన డిక్షనరీ ఒక అభ్యర్థిని సూచించవచ్చు. గుర్తింపు, డోస్ భద్రత, సమానత్వం, లైవ్ స్టాక్ లేదా ప్రస్తుత ధరను అది నిర్ధారించదు.'],
+    ['స్పీచ్ ఇన్‌పుట్','మైక్రోఫోన్ క్యాప్చర్, కాన్ఫిగర్ చేసిన ట్రాన్స్‌క్రిప్షన్ సేవ. గుర్తింపు లోపాలను మూల రికార్డింగ్‌తో సరిపోల్చండి.'],
+    ['స్పీచ్ అవుట్‌పుట్','సమీక్షిత టెక్స్ట్ కాన్ఫిగర్ చేసిన స్పీచ్ సేవకు వెళ్తుంది. షేర్ ఫ్లో తెరవడం పంపడం లేదా డెలివరీకి నిరూపణ కాదు.']
+  ]
+};
+
+const CONTENT = { 'en-IN': en, 'te-IN': te };
+export const landingContent = lang => CONTENT[lang] || en;

@@ -240,7 +240,7 @@ export default function MClinical() {
           <section className="m-consent-modal" role="dialog" aria-modal="true" aria-label={consentCopy(selectedLanguage).title} onClick={e => e.stopPropagation()}>
             <h2 className="m-steps-title">{consentCopy(selectedLanguage).title}</h2>
             <p className="m-record-intro">{consentCopy(selectedLanguage).body}</p>
-            <p className="m-record-intro">Consent text version: {CONSENT_TEXT_VERSION}</p>
+            <p className="m-record-intro">{t('Consent text version')}: {CONSENT_TEXT_VERSION}</p>
             <div className="m-record-modes">
               <button ref={consentAgreeRef} className="m-btn m-btn-primary" onClick={grantAndStart}>{consentCopy(selectedLanguage).agree}</button>
               <button className="m-btn m-btn-soft" onClick={declineConsent}>{consentCopy(selectedLanguage).later}</button>

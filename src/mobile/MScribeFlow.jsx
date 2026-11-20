@@ -13,6 +13,8 @@ import { buildDraftBundle, draftSummary } from './scribeDraft';
 import { triggerHaptic } from '../utils/haptics';
 import { checkNotificationPermission, requestNotificationPermission, sendLocalDemoNotification } from '../services/deviceNotificationService';
 import { IconChevronR, IconMic, IconHeart } from './MIcons';
+import { useApp } from '../context/AppContext';
+import { mt } from './mobileTranslations';
 
 // Full 4-stage journey. Stage 1 (record) is already complete when this screen opens.
 const AyuSwarShare = registerPlugin('AyuSwarShare');
@@ -28,6 +30,8 @@ const SOAP_FIELDS = [
 export default function MScribeFlow() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { selectedLanguage } = useApp();
+  const t = key => mt(key, selectedLanguage);
   const state = location.state || {};
   const encounter = state.encounter;
   const turns = Array.isArray(state.turns) ? state.turns.filter(t => t.text?.trim()) : [];
@@ -218,7 +222,7 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
     }
   };
 
-  if (!validInput) return <main className="m-page m-flow-page"><section className="m-card m-card-pad m-tint-peach"><h2 className="m-steps-title">A consultation is needed first</h2><p>Record practice audio and check its transcript, or explicitly choose the sample demo. No draft is generated without source input.</p><button className="m-btn m-btn-primary" onClick={() => navigate('/clinical-console')}>Start consultation</button></section></main>;
+  if (!validInput) return <main className="m-page m-flow-page"><section className="m-card m-card-pad m-tint-peach"><h2 className="m-steps-title">{t('A consultation is needed first')}</h2><p>{t('Record practice audio and check its transcript, or explicitly choose the sample demo. No draft is generated without source input.')}</p><button className="m-btn m-btn-primary" onClick={() => navigate('/clinical-console')}>{t('Start consultation')}</button></section></main>;
 
   const whatsappSummary = async () => {
     if (!signed) return;

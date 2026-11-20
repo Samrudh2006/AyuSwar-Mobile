@@ -44,7 +44,7 @@ function Embedded({ children, title, subtitle, showBack, hideTabs }) {
   const { selectedLanguage } = useApp();
   const loadingLabel = mt('loading', selectedLanguage);
   return (
-    <MShell title={title} subtitle={subtitle} showBack={showBack} hideTabs={hideTabs}>
+    <MShell title={title ? mt(title, selectedLanguage) : title} subtitle={subtitle ? mt(subtitle, selectedLanguage) : subtitle} showBack={showBack} hideTabs={hideTabs}>
       <React.Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'var(--m-muted)' }}>{loadingLabel}</div>}>
         {children}
       </React.Suspense>
