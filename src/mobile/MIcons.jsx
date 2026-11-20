@@ -7,6 +7,9 @@ import React from 'react';
 const GOLD = '#C8921A';
 const WINE = '#B3261E';
 
+// Signature gold swoosh arc under the glyph, from the navy/gold reference icon sheets.
+const Swoosh = () => <path d="M4.5 21c4.4 2 10 2.1 15 .3" stroke={GOLD} strokeWidth="1.5" />;
+
 const I = ({ children, size = 24, ...props }) => (
   <svg
     width={size} height={size} viewBox="0 0 24 24" fill="none"
@@ -20,11 +23,11 @@ export const IconHome = (p) => (
 );
 
 export const IconStethoscope = (p) => (
-  <I {...p}><path d="M5 3.5v5.2c0 3 2.2 5.3 5.2 5.3s5.2-2.3 5.2-5.3V3.5" /><path d="M5 3.5H3.6M5 3.5h1.4m9-1.4h-1.4m1.4 0h1.4" /><path d="M10.2 14v2.1c0 2.6 2 4.6 4.6 4.6s4.6-2 4.6-4.6v-1.6" /><circle cx="19.4" cy="11.6" r="1.9" stroke={GOLD} /></I>
+  <I {...p}><path d="M5 3.5v5.2c0 3 2.2 5.3 5.2 5.3s5.2-2.3 5.2-5.3V3.5" /><path d="M5 3.5H3.6M5 3.5h1.4m9-1.4h-1.4m1.4 0h1.4" /><path d="M10.2 14v2.1c0 2.6 2 4.6 4.6 4.6s4.6-2 4.6-4.6v-1.6" /><circle cx="19.4" cy="11.6" r="1.9" stroke={GOLD} /><Swoosh /></I>
 );
 
 export const IconMic = (p) => (
-  <I {...p}><rect x="9" y="2.8" width="6" height="11.4" rx="3" /><path d="M5.6 10.8a6.4 6.4 0 0 0 12.8 0" stroke={GOLD} /><path d="M12 17.2v3.6" /><path d="M8.8 20.8h6.4" /></I>
+  <I {...p}><rect x="9" y="2.8" width="6" height="11.4" rx="3" /><path d="M5.6 10.8a6.4 6.4 0 0 0 12.8 0" stroke={GOLD} /><path d="M12 17.2v3.6" /><path d="M8.8 20.8h6.4" /><Swoosh /></I>
 );
 
 export const IconWave = (p) => (
@@ -32,7 +35,7 @@ export const IconWave = (p) => (
 );
 
 export const IconScan = (p) => (
-  <I {...p}><path d="M3.4 7.6V5.8c0-1.3 1.1-2.4 2.4-2.4h1.8" /><path d="M16.4 3.4h1.8c1.3 0 2.4 1.1 2.4 2.4v1.8" /><path d="M20.6 16.4v1.8c0 1.3-1.1 2.4-2.4 2.4h-1.8" /><path d="M7.6 20.6H5.8c-1.3 0-2.4-1.1-2.4-2.4v-1.8" /><path d="M7 12h10" /><path d="M7 8.8h6M7 15.2h8" /></I>
+  <I {...p}><path d="M3.4 7.6V5.8c0-1.3 1.1-2.4 2.4-2.4h1.8" /><path d="M16.4 3.4h1.8c1.3 0 2.4 1.1 2.4 2.4v1.8" /><path d="M20.6 16.4v1.8c0 1.3-1.1 2.4-2.4 2.4h-1.8" /><path d="M7.6 20.6H5.8c-1.3 0-2.4-1.1-2.4-2.4v-1.8" /><path d="M7 12h10" /><path d="M7 8.8h6M7 15.2h8" /><Swoosh /></I>
 );
 
 export const IconSiren = (p) => (
@@ -52,7 +55,7 @@ export const IconPulseHeart = (p) => (
 );
 
 export const IconCalendar = (p) => (
-  <I {...p}><rect x="3.4" y="5" width="17.2" height="15.6" rx="2.4" /><path d="M3.4 9.8h17.2" /><path d="M8 3v3.6M16 3v3.6" /><path d="M7.4 13.6h3v3h-3z" stroke={GOLD} /></I>
+  <I {...p}><rect x="3.4" y="5" width="17.2" height="15.6" rx="2.4" /><path d="M3.4 9.8h17.2" /><path d="M8 3v3.6M16 3v3.6" /><path d="M7.4 13.6h3v3h-3z" stroke={GOLD} /><Swoosh /></I>
 );
 
 export const IconFile = (p) => (
@@ -64,7 +67,7 @@ export const IconUpload = (p) => (
 );
 
 export const IconUser = (p) => (
-  <I {...p}><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.2c.8-3.4 3.8-5.4 7.2-5.4s6.4 2 7.2 5.4" stroke={GOLD} /></I>
+  <I {...p}><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.2c.8-3.4 3.8-5.4 7.2-5.4s6.4 2 7.2 5.4" stroke={GOLD} /><Swoosh /></I>
 );
 
 export const IconUsers = (p) => (
@@ -104,7 +107,7 @@ export const IconShield = (p) => (
 );
 
 export const IconLab = (p) => (
-  <I {...p}><path d="M9.4 3.4h5.2" /><path d="M10.4 3.4v5L5.2 17.6c-.9 1.4.2 3.2 1.9 3.2h9.8c1.7 0 2.8-1.8 1.9-3.2L13.6 8.4v-5" /><path d="M7.6 14.4h8.8" /></I>
+  <I {...p}><path d="M9.4 3.4h5.2" /><path d="M10.4 3.4v5L5.2 17.6c-.9 1.4.2 3.2 1.9 3.2h9.8c1.7 0 2.8-1.8 1.9-3.2L13.6 8.4v-5" /><path d="M7.6 14.4h8.8" /><Swoosh /></I>
 );
 
 export const IconBook = (p) => (
@@ -112,7 +115,7 @@ export const IconBook = (p) => (
 );
 
 export const IconSettings = (p) => (
-  <I {...p}><circle cx="12" cy="12" r="3" /><path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2 5.5 5.5" /></I>
+  <I {...p}><circle cx="12" cy="12" r="3" /><path d="M12 2.8v2.4M12 18.8v2.4M21.2 12h-2.4M5.2 12H2.8M18.5 5.5l-1.7 1.7M7.2 16.8l-1.7 1.7M18.5 18.5l-1.7-1.7M7.2 7.2 5.5 5.5" /><Swoosh /></I>
 );
 
 export const IconInfo = (p) => (
@@ -140,7 +143,7 @@ export const IconClock = (p) => (
 );
 
 export const IconBell = (p) => (
-  <I {...p}><path d="M18.4 15.4v-5.2c0-3.4-2.5-6.3-6-6.8a.6.6 0 0 0-.8 0c-3.5.5-6 3.4-6 6.8v5.2l-1.8 2.4c-.3.5.1 1.2.7 1.2h15c.6 0 1-.7.7-1.2z" /><path d="M9.8 19a2.4 2.4 0 0 0 4.4 0" stroke={GOLD} /></I>
+  <I {...p}><path d="M18.4 15.4v-5.2c0-3.4-2.5-6.3-6-6.8a.6.6 0 0 0-.8 0c-3.5.5-6 3.4-6 6.8v5.2l-1.8 2.4c-.3.5.1 1.2.7 1.2h15c.6 0 1-.7.7-1.2z" /><path d="M9.8 19a2.4 2.4 0 0 0 4.4 0" stroke={GOLD} /><Swoosh /></I>
 );
 
 export const IconMapPin = (p) => (
@@ -148,7 +151,7 @@ export const IconMapPin = (p) => (
 );
 
 export const IconLogout = (p) => (
-  <I {...p}><path d="M14 3.6H6.8c-1 0-1.8.8-1.8 1.8v13.2c0 1 .8 1.8 1.8 1.8H14" /><path d="m16.8 8.4 3.6 3.6-3.6 3.6" /><path d="M20.4 12H9.6" /></I>
+  <I {...p}><path d="M14 3.6H6.8c-1 0-1.8.8-1.8 1.8v13.2c0 1 .8 1.8 1.8 1.8H14" /><path d="m16.8 8.4 3.6 3.6-3.6 3.6" /><path d="M20.4 12H9.6" /><Swoosh /></I>
 );
 
 export const IconDiya = (p) => (
@@ -180,5 +183,5 @@ export const IconCpu = (p) => (
 );
 
 export const IconSpeaker = (p) => (
-  <I {...p}><path d="M4 9.6v4.8c0 .7.5 1.2 1.2 1.2h2.4l4.6 3.8c.6.5 1.6.1 1.6-.7V5.3c0-.8-1-1.2-1.6-.7L7.6 8.4H5.2c-.7 0-1.2.5-1.2 1.2z" /><path d="M16.8 8.8a4.4 4.4 0 0 1 0 6.4" /><path d="M19.2 6.4a8 8 0 0 1 0 11.2" /></I>
+  <I {...p}><path d="M4 9.6v4.8c0 .7.5 1.2 1.2 1.2h2.4l4.6 3.8c.6.5 1.6.1 1.6-.7V5.3c0-.8-1-1.2-1.6-.7L7.6 8.4H5.2c-.7 0-1.2.5-1.2 1.2z" /><path d="M16.8 8.8a4.4 4.4 0 0 1 0 6.4" /><path d="M19.2 6.4a8 8 0 0 1 0 11.2" /><Swoosh /></I>
 );
