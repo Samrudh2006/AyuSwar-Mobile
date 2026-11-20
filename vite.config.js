@@ -11,6 +11,8 @@ import groqStatusHandler from './api/groq/status.js'
 import groqChatHandler from './api/groq/chat.js'
 import groqTranscribeHandler from './api/groq/transcribe.js'
 import triageHandler from './api/triage.js'
+import sarvamStatusHandler from './api/sarvam/status.js'
+import sarvamTtsHandler from './api/sarvam/tts.js'
 
 // Dev-server adapter: run the REAL Vercel-style handlers from api/ inside the
 // vite dev server. Local development exercises the exact same code path as
@@ -105,6 +107,8 @@ export default defineConfig(({ mode }) => {
           server.middlewares.use('/api/groq/chat', vercelDevAdapter(groqChatHandler));
           server.middlewares.use('/api/groq/transcribe', vercelDevAdapter(groqTranscribeHandler));
           server.middlewares.use('/api/triage', vercelDevAdapter(triageHandler));
+          server.middlewares.use('/api/sarvam/status', vercelDevAdapter(sarvamStatusHandler));
+          server.middlewares.use('/api/sarvam/tts', vercelDevAdapter(sarvamTtsHandler));
         }
       }
     ],

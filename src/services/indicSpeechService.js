@@ -411,6 +411,7 @@ export class IndicSpeechService {
     this.gnaniStatusData = null;
     this.lastGnaniSuccessTime = null;
     this._gnaniTtsDisabled = false;
+    this._sarvamTtsDisabled = false;
 
     // Acoustic Echo Cancellation & Loopback Suppressor State
     this.currentlySpeakingText = '';
@@ -1096,6 +1097,71 @@ export class IndicSpeechService {
     } else {
       recordDiagnosticStage({
         stage: 'gnani_tts',
+        outcomeCode: 'FAST_FALLBACK_UNCONFIGURED',
+        elapsedMs: 0,
+        component: 'indicSpeechService'
+      });
+    }
+
+    if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
+      return;
+    }
+
+    // 1b. Sarvam Bulbul TTS tier (/api/sarvam/tts) — a second network
+    //    provider the user explicitly asked to integrate. Same honest
+    //    content gate as Gnani; 503/402 are cached so subsequent turns
+    //    degrade instantly instead of retrying a billable path. Never
+    //    replaces the Gnani tier or the on-device/browser fallbacks below.
+    if (!this._sarvamTtsDisabled && !options.skipSarvam) {
+      const sarvamStartTime = Date.now();
+      try {
+        const sarvamRes = await fetch(apiUrl('/api/sarvam/tts'), {
+          method: 'POST',
+          headers: { ...(await authHeaders()), 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: cleanSpeechText,
+            language: langCode,
+            model: 'bulbul:v3',
+            pace: 1.0
+          }),
+          signal: combinedSignal
+        });
+        if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
+          return;
+        }
+        const elapsedMs = Date.now() - sarvamStartTime;
+        if (sarvamRes.ok) {
+          const sarvamContentType = (sarvamRes.headers.get('content-type') || '').toLowerCase();
+          const sarvamLooksAudio = sarvamContentType.startsWith('audio/') || sarvamContentType.includes('octet-stream');
+          if (!sarvamLooksAudio) {
+            recordDiagnosticStage({ stage: 'sarvam_tts', outcomeCode: 'INVALID_CONTENT_TYPE', elapsedMs, component: 'indicSpeechService' });
+            console.warn(`Sarvam TTS returned 200 with non-audio content-type "${sarvamContentType}"; treating as unavailable.`);
+          } else {
+            const sarvamBuf = await sarvamRes.arrayBuffer();
+            if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
+              return;
+            }
+            this.activeProvider = 'sarvam_tts_live';
+            recordDiagnosticStage({ stage: 'sarvam_tts', outcomeCode: 200, elapsedMs, component: 'indicSpeechService' });
+            return await this.playAudioBuffer(sarvamBuf, { rate: options.rate || rate, onStart, onEnd, onError, onTimeUpdate });
+          }
+        } else {
+          if (sarvamRes.status === 503 || sarvamRes.status === 402) {
+            this._sarvamTtsDisabled = true; // unconfigured or quota exhausted: stop spending probes
+          }
+          recordDiagnosticStage({ stage: 'sarvam_tts', outcomeCode: sarvamRes.status, elapsedMs, component: 'indicSpeechService' });
+        }
+      } catch (err) {
+        if (err.name === 'AbortError' || combinedSignal.aborted) {
+          return;
+        }
+        const isTimeout = err.name === 'TimeoutError' || err.message?.includes('timeout');
+        recordDiagnosticStage({ stage: 'sarvam_tts', outcomeCode: isTimeout ? 'TIMEOUT' : 'ERROR', elapsedMs: Date.now() - sarvamStartTime, component: 'indicSpeechService' });
+        console.warn('Sarvam TTS unavailable; continuing fallback chain:', err.message);
+      }
+    } else {
+      recordDiagnosticStage({
+        stage: 'sarvam_tts',
         outcomeCode: 'FAST_FALLBACK_UNCONFIGURED',
         elapsedMs: 0,
         component: 'indicSpeechService'

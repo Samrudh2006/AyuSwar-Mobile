@@ -16,7 +16,8 @@ export const ALLOWED_UPSTREAM_HOSTS = new Set([
   'router.huggingface.co',
   'api.vachana.ai',
   'api.groq.com',
-  'generativelanguage.googleapis.com'
+  'generativelanguage.googleapis.com',
+  'api.sarvam.ai'
 ]);
 
 /**
