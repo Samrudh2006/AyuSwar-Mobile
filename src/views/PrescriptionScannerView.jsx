@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { importPdfText } from '../services/pdfDocumentImport';
 import { Link } from 'react-router-dom';
 import { 
   ArrowLeft, 
@@ -206,7 +207,7 @@ export default function PrescriptionScannerView() {
   // scan that produced nothing, or the explicitly selected bundled sample.
   const EMPTY_SCAN_RESULT = { id: 'empty-scan', brand: 'No result from this scan', keywords: [], boundingBoxes: [], extractedText: '', genericSalt: 'No text recognized - try a clearer, well-lit photo', dosageForm: '-', nfiCode: 'NO RESULT', matchType: 'No candidate', imagePlaceholderColor: '#F1F5F9', realImageUrl: null, batchNumber: 'Not identified', expiryDate: 'Not identified', vernacularTe: null, ddiConflict: null, pillColor: '#94A3B8' };
   const baseSample = liveOcrResult || (userScanAttempted ? EMPTY_SCAN_RESULT : OCR_SAMPLES[selectedSampleIdx]);
-  const currentSample = { ...baseSample, nfiCode: liveOcrResult ? 'UNVERIFIED OCR CANDIDATE' : (userScanAttempted ? 'NO RESULT' : 'BUNDLED SAMPLE'), vectorConfidence: 'Verify exact ingredient, strength and release form', brandedPrice: 'Not checked', janAushadhiPrice: 'Not checked', savingsPct: 'Not measured', janAushadhiGeneric: 'No live stock, price or equivalence check', vernacularTe: null };
+  const currentSample = { ...baseSample, nfiCode: liveOcrResult ? (liveOcrResult.sourceKind === 'pdf-text-layer' ? 'UNVERIFIED PDF TEXT IMPORT' : 'UNVERIFIED OCR CANDIDATE') : (userScanAttempted ? 'NO RESULT' : 'BUNDLED SAMPLE'), vectorConfidence: 'Verify exact ingredient, strength and release form', brandedPrice: 'Not checked', janAushadhiPrice: 'Not checked', savingsPct: 'Not measured', janAushadhiGeneric: 'No live stock, price or equivalence check', vernacularTe: null };
 
   // Evaluate Beers Criteria & KDIGO Renal Safety
   const activeKeywords = currentSample.keywords || [currentSample.id || '', currentSample.brand || ''];
@@ -494,6 +495,58 @@ export default function PrescriptionScannerView() {
     }
   };
 
+  // Local PDF import (bounded): extract text layer on-device, review before use.
+  const [pdfImport, setPdfImport] = useState({ status: 'idle' });
+  const pdfCancelRef = useRef(false);
+  const handlePdfUpload = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    pdfCancelRef.current = false;
+    setPdfImport({ status: 'extracting', fileName: file.name, done: 0, total: 0 });
+    try {
+      const res = await importPdfText(file, {
+        onProgress: (done, total) => { if (!pdfCancelRef.current) setPdfImport(p => p.status === 'extracting' ? { ...p, done, total } : p); }
+      });
+      if (pdfCancelRef.current) { setPdfImport({ status: 'idle' }); return; }
+      if (!res.ok) { setPdfImport({ status: 'error', kind: res.kind, pageCount: res.pageCount }); return; }
+      setPdfImport({
+        status: 'review',
+        fileName: res.fileName,
+        pageCount: res.pageCount,
+        truncated: res.truncated,
+        text: res.pages.map(pg => `[Page ${pg.page}] ${pg.text}`).join('\n\n')
+      });
+    } catch (err) {
+      if (!pdfCancelRef.current) setPdfImport({ status: 'error', kind: 'corrupt' });
+    }
+  };
+  const usePdfDraft = () => {
+    const text = (pdfImport.text || '').trim();
+    if (text.length < 3) return;
+    const { batch, expiry } = extractBatchAndExpiry(text);
+    const matchedDrug = matchDrugFromOcrText(text);
+    setUserScanAttempted(true);
+    setLiveOcrResult({
+      isLiveExtraction: true,
+      brand: `PDF import: ${pdfImport.fileName || 'document'}`,
+      genericSalt: matchedDrug ? `${matchedDrug.brand} (unverified dictionary candidate)` : 'Unverified document text - no medicine match',
+      nfiCode: 'UNVERIFIED PDF TEXT LAYER',
+      dosageForm: 'Document text, not OCR',
+      realImageUrl: null,
+      janAushadhiGeneric: 'Text came from the PDF text layer, not image OCR. Check every word against the original document.',
+      brandedPrice: 'Not checked',
+      janAushadhiPrice: 'Not checked',
+      savingsPct: 'Not measured',
+      extractedText: text,
+      batchNumber: batch || 'None found',
+      expiryDate: expiry || 'None found',
+      vernacularTe: null,
+      sourceKind: 'pdf-text-layer'
+    });
+    setPdfImport({ status: 'idle' });
+  };
+
   return (
     <div className="scanner-view-container" style={{ padding: '36px 24px', maxWidth: '1200px', margin: '0 auto' }}>
       {/* Breadcrumb Navigation */}
@@ -655,7 +708,60 @@ export default function PrescriptionScannerView() {
               <Upload size={13} />
               <span>Upload Foil</span>
               <input type="file" accept="image/*" onChange={handleFileUpload} style={{ display: 'none' }} />
+              <input type="file" accept="application/pdf" onChange={handlePdfUpload} style={{ display: 'none' }} data-pdf-input="true" />
             </label>
+          </div>
+
+          {/* Local PDF import: bounded text-layer extraction, reviewed before use */}
+          <div style={{ marginTop: '10px' }}>
+            {pdfImport.status === 'idle' && (
+              <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '8px', background: '#F1F5F9', border: '1px dashed #94A3B8', color: '#0F4C5C', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}>
+                <Upload size={13} />
+                <span>Import PDF (text layer, on-device)</span>
+                <input type="file" accept="application/pdf" onChange={handlePdfUpload} style={{ display: 'none' }} />
+              </label>
+            )}
+            {pdfImport.status === 'extracting' && (
+              <div style={{ padding: '10px 12px', borderRadius: '8px', background: '#F0F9FF', border: '1px solid #BAE6FD', fontSize: '12px', color: '#075985' }}>
+                <b>Extracting text from {pdfImport.fileName} on this device...</b>
+                {pdfImport.total ? <span> Page {pdfImport.done} of {pdfImport.total} (measured).</span> : <span> Preparing document...</span>}
+                <button onClick={() => { pdfCancelRef.current = true; setPdfImport({ status: 'idle' }); }} style={{ marginLeft: 10, fontSize: '11px', fontWeight: 800, color: '#991B1B', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Cancel</button>
+              </div>
+            )}
+            {pdfImport.status === 'error' && (
+              <div style={{ padding: '10px 12px', borderRadius: '8px', background: '#FEF2F2', border: '1px solid #FECACA', fontSize: '12px', color: '#991B1B' }}>
+                {pdfImport.kind === 'password' && 'This PDF is password-protected. It was not opened.'}
+                {pdfImport.kind === 'oversize' && 'This PDF is larger than 15 MB. Import a smaller document.'}
+                {pdfImport.kind === 'not-pdf' && 'That file is not a PDF.'}
+                {pdfImport.kind === 'no-text' && `No readable text layer found${pdfImport.pageCount ? ` in ${pdfImport.pageCount} page(s)` : ''}. Scanned-image PDFs are not OCR-imported here; use the image upload instead.`}
+                {pdfImport.kind === 'corrupt' && <>This PDF could not be read (corrupt or unsupported). Try a different file, or a clear photo or scan of the prescription instead.</>}
+                <button onClick={() => setPdfImport({ status: 'idle' })} style={{ marginLeft: 10, fontSize: '11px', fontWeight: 800, color: '#0F4C5C', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Dismiss</button>
+              </div>
+            )}
+            {pdfImport.status === 'review' && (
+              <div style={{ padding: '12px', borderRadius: '10px', background: '#FFFFFF', border: '1.5px solid #D0DFE2' }}>
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#081C24', marginBottom: 4 }}>
+                  {pdfImport.fileName} - {pdfImport.pageCount} page(s){pdfImport.truncated ? ' (first 20 pages only)' : ''}
+                </div>
+                <div style={{ fontSize: '11px', color: '#698892', marginBottom: 8 }}>
+                  Extracted from the PDF text layer on this device. This is not OCR output and not verified medicine information - review and correct before use.
+                </div>
+                <textarea
+                  value={pdfImport.text}
+                  onChange={e => setPdfImport(p => ({ ...p, text: e.target.value }))}
+                  rows={7}
+                  style={{ width: '100%', fontSize: '12px', padding: '8px', borderRadius: '8px', border: '1px solid #D0DFE2', fontFamily: 'monospace', boxSizing: 'border-box' }}
+                />
+                <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
+                  <button onClick={usePdfDraft} style={{ padding: '8px 14px', borderRadius: '8px', background: '#0A2540', color: '#fff', border: 'none', fontSize: '12px', fontWeight: 800, cursor: 'pointer' }}>
+                    Use as unverified draft
+                  </button>
+                  <button onClick={() => setPdfImport({ status: 'idle' })} style={{ padding: '8px 14px', borderRadius: '8px', background: 'none', color: '#486770', border: '1px solid #D0DFE2', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}>
+                    Clear
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Camera Error Message */}
@@ -822,7 +928,14 @@ export default function PrescriptionScannerView() {
               justifyContent: 'center',
               overflow: 'hidden'
             }}>
-              {!uploadedImage && (
+              {!uploadedImage && liveOcrResult?.sourceKind === 'pdf-text-layer' && (
+                <div style={{ width: '100%', height: '100%', padding: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ fontSize: '12px', fontWeight: 800, color: '#486770', textAlign: 'center', lineHeight: 1.6 }}>
+                    Imported from a PDF text layer.<br />No optical inspection was run - there is no packaging image for this result.
+                  </div>
+                </div>
+              )}
+              {!uploadedImage && liveOcrResult?.sourceKind !== 'pdf-text-layer' && (
                 <div style={{ width: '100%', height: '100%', padding: '20px', position: 'relative' }}>
                   <div style={{ fontSize: '12px', fontWeight: 900, color: '#081C24', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
@@ -1058,9 +1171,9 @@ export default function PrescriptionScannerView() {
             {/* Raw Extracted Bounding Box / OCR Tokens */}
             <div style={{ background: '#0A2540', color: '#F1F5F9', padding: '12px 14px', borderRadius: '10px', fontSize: '11.5px', fontFamily: 'monospace', marginBottom: '18px', lineHeight: 1.5 }}>
               <div style={{ color: '#00A896', fontWeight: 800, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <span>// Tesseract.js Extracted Text Tokens:</span>
+                <span>{liveOcrResult?.sourceKind === 'pdf-text-layer' ? '// PDF Text Layer Import (not OCR):' : '// Tesseract.js Extracted Text Tokens:'}</span>
                 {liveOcrResult && (
-                  <span style={{ color: '#065F46', fontSize: '10.5px' }}>● LIVE WASM EXTRACTION</span>
+                  <span style={{ color: '#065F46', fontSize: '10.5px' }}>{liveOcrResult.sourceKind === 'pdf-text-layer' ? '● LOCAL PDF TEXT LAYER' : '● LIVE WASM EXTRACTION'}</span>
                 )}
               </div>
               <div style={{ maxHeight: '80px', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
@@ -1073,7 +1186,7 @@ export default function PrescriptionScannerView() {
           <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ fontSize: '12px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                OCR text and unverified dictionary candidate
+                {currentSample.sourceKind === 'pdf-text-layer' ? 'PDF text import and unverified dictionary candidate' : 'OCR text and unverified dictionary candidate'}
               </div>
               <span style={{ fontSize: '11px', fontWeight: 750, color: '#091E26', background: '#FAF8F5', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace' }}>
                 {currentSample.nfiCode}
