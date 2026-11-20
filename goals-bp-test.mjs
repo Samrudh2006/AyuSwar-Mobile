@@ -74,9 +74,11 @@ const hrLine = await bpCard.locator('strong', { hasText: 'bpm' }).evaluate(el =>
 assert(!hrLine.includes('(sample value)'), 'sample-value tag dropped after edit: ' + hrLine);
 ok('edited pulse drops the sample-value tag');
 
-// 8. whitespace-only input collapses and is rejected (value injected through the
-// native setter + input event so React's onChange receives it, since a number
-// input cannot be typed whitespace into)
+// 8. unsupported input (whitespace) is sanitized to empty by the browser before
+// React's onChange sees it (verified: the handler receives ''), then rejected.
+// Injected via native setter + input event because a number input cannot be
+// typed whitespace into. This exercises the same handler path as the blank
+// scenario, not a distinct guard branch.
 await waitToastGone();
 await inputs.nth(0).evaluate(el => {
   const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -91,9 +93,12 @@ await inputs.nth(0).fill('118'); await inputs.nth(0).evaluate(el => {
 await logBtn.click();
 await p.waitForTimeout(500);
 assert((await bannerText()).includes('Nothing was logged'), 'whitespace rejected');
-ok('whitespace-only input rejected (programmatic injection)');
+ok('whitespace input sanitized to empty by browser, rejected');
 
-// 9. non-finite value (1e999 -> Infinity) rejected
+// 9. unsupported input (1e999) is also sanitized to empty by the browser before
+// the handler sees it (verified at dispatch time), then rejected. The
+// Number.isFinite guard's non-finite branch is therefore NOT runtime-exercised
+// through this UI; it is code-reviewed only.
 await waitToastGone();
 await inputs.nth(0).evaluate(el => {
   const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
@@ -103,7 +108,7 @@ await inputs.nth(0).evaluate(el => {
 await logBtn.click();
 await p.waitForTimeout(500);
 assert((await bannerText()).includes('Nothing was logged'), 'non-finite rejected');
-ok('non-finite value rejected (programmatic injection)');
+ok('1e999 input sanitized to empty by browser, rejected');
 
 console.log(`\nBP CARD PROBE: ${passed}/9 scenarios passed`);
 await b.close();
