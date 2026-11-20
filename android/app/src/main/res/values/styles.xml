@@ -17,7 +17,10 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
-        <!-- Android 11 and earlier: full-scene bitmap from drawable-port-*/splash.png -->
+        <!-- Android 11 and earlier: windowBackground bitmap from drawable-port-*/splash.png.
+             The compat splash lib is dormant here (installSplashScreen is never called),
+             so it does not shadow windowBackground on pre-31. Expected standard
+             windowBackground behavior, but NOT runtime-verified on hardware yet. -->
         <item name="android:background">@drawable/splash</item>
         <!-- Android 12+ system splash: color background + emblem as the centered icon.
              (developer.android.com: image windowBackground is ignored on API 31+;
