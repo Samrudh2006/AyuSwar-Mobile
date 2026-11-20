@@ -22,7 +22,7 @@ export default function MHome() {
   return (
     <main className="m-page m-flow-page m-home-page">
       <section className="m-hero">
-        <div className="m-hero-eyebrow">AyuSwar AI · ఆయుస్వర</div>
+        <div className="m-hero-eyebrow">{t('brandScript')}</div>
         <h1>{greeting()}.<br />{t('heroTitle')}</h1>
         <p>{t('heroBody')}</p>
         <div className="m-hero-actions">
