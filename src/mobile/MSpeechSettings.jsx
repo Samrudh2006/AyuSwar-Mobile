@@ -124,7 +124,7 @@ const LV_COPY = {
   'en-IN': {
     title: 'Offline voice pack (Telugu)',
     body: 'An optional on-device voice for fixed interface prompts (greeting, retry, read-aloud instructions) when the network voice is unavailable. It never speaks patient or clinical text, runs entirely on this device after download, and adds nothing to your recordings.',
-    size: (mb, mib) => `Download size: exactly ${mb} (${mib}). Voice: qualified te_M speaker. License: CC-BY-4.0 weights, MIT code (sulabhkatiyar/indic-tiny-tts-telugu).`,
+    size: (mb, mib, exact) => `Download size: ${exact} bytes (about ${mb} / ${mib}). Voice: fixed prompt-tested te_M speaker (non-clinical interface prompts only). License: CC-BY-4.0 weights, MIT code (sulabhkatiyar/indic-tiny-tts-telugu).`,
     wifiOnly: 'Download over Wi-Fi only (recommended)',
     allowCellular: 'Allow mobile data for this download',
     install: 'Download & install',
@@ -133,9 +133,9 @@ const LV_COPY = {
     uninstall: 'Remove pack',
     close: 'Close',
     statusInstalled: 'Installed. The offline voice can speak the fixed interface prompts.',
-    statusNotInstalled: 'Not installed. The app works fully without this pack.',
+    statusNotInstalled: 'Not installed. This pack is optional; the core app is available without offline readout.',
     statusUnsupported: 'This browser cannot store the pack (Cache API missing).',
-    errCellular: 'Mobile data is blocked for this download. Connect to Wi-Fi or tick "Allow mobile data".',
+    errCellular: 'Connection type is unknown or metered, so the download is blocked. Connect to a known Wi-Fi network or tick "Allow mobile data".',
     errHash: 'A downloaded file failed its integrity check and was deleted. Nothing was kept; please try again on a stable connection.',
     errDownload: 'The download failed. Please try again on a stable connection.',
     errCancelled: 'Download cancelled. Partial files were not kept.',
@@ -144,7 +144,7 @@ const LV_COPY = {
   'te-IN': {
     title: 'ఆఫ్‌లైన్ వాయిస్ ప్యాక్ (తెలుగు)',
     body: 'నెట్‌వర్క్ వాయిస్ అందుబాటులో లేనప్పుడు స్థిర ఇంటర్ఫేస్ ప్రాంప్టులు (స్వాగతం, మళ్లీ ప్రయత్నించండి, చదవండి సూచన) కోసం ఐచ్ఛిక ఆన్-డివైస్ వాయిస్. ఇది పేషెంట్ లేదా క్లినికల్ టెక్స్ట్‌ను ఎప్పుడూ చదవదు; డౌన్‌లోడ్ తర్వాత పూర్తిగా ఈ పరికరంలోనే నడుస్తుంది; మీ రికార్డింగ్‌లకు ఏమీ జోడించదు.',
-    size: (mb, mib) => `డౌన్‌లోడ్ పరిమాణం: ఖచ్చితంగా ${mb} (${mib}). వాయిస్: క్వాలిఫైడ్ te_M స్పీకర్. లైసెన్స్: CC-BY-4.0 వెయిట్స్, MIT కోడ్ (sulabhkatiyar/indic-tiny-tts-telugu).`,
+    size: (mb, mib, exact) => `డౌన్‌లోడ్ పరిమాణం: ${exact} బైట్లు (సుమారు ${mb} / ${mib}). వాయిస్: ఫిక్స్డ్ ప్రాంప్ట్-టెస్టెడ్ te_M స్పీకర్ (నాన్-క్లినికల్ ఇంటర్ఫేస్ ప్రాంప్టులు మాత్రమే). లైసెన్స్: CC-BY-4.0 వెయిట్స్, MIT కోడ్ (sulabhkatiyar/indic-tiny-tts-telugu).`,
     wifiOnly: 'Wi-Fi లో మాత్రమే డౌన్‌లోడ్ (సిఫార్సు)',
     allowCellular: 'ఈ డౌన్‌లోడ్ కోసం మొబైల్ డేటాను అనుమతించండి',
     install: 'డౌన్‌లోడ్ & ఇన్‌స్టాల్',
@@ -153,9 +153,9 @@ const LV_COPY = {
     uninstall: 'ప్యాక్ తొలగించండి',
     close: 'మూసివేయండి',
     statusInstalled: 'ఇన్‌స్టాల్ అయింది. ఆఫ్‌లైన్ వాయిస్ స్థిర ఇంటర్ఫేస్ ప్రాంప్టులు మాట్లాడగలదు.',
-    statusNotInstalled: 'ఇన్‌స్టాల్ కాలేదు. ఈ ప్యాక్ లేకుండానే యాప్ పూర్తిగా పనిచేస్తుంది.',
+    statusNotInstalled: 'ఇన్‌స్టాల్ కాలేదు. ఈ ప్యాక్ ఐచ్ఛికం; ఆఫ్‌లైన్ రీడ్‌అవుట్ లేకుండానే కోర్ యాప్ అందుబాటులో ఉంటుంది.',
     statusUnsupported: 'ఈ బ్రౌజర్ ప్యాక్‌ను నిలువ చేయలేదు (Cache API లేదు).',
-    errCellular: 'ఈ డౌన్‌లోడ్‌కు మొబైల్ డేటా బ్లాక్ చేయబడింది. Wi-Fi కు కనెక్ట్ అవ్వండి లేదా "మొబైల్ డేటాను అనుమతించండి" టిక్ చేయండి.',
+    errCellular: 'కనెక్షన్ రకం తెలియదు లేదా మీటర్డ్ గా ఉంది, కాబట్టి డౌన్‌లోడ్ బ్లాక్ చేయబడింది. తెలిసిన Wi-Fi కు కనెక్ట్ అవ్వండి లేదా "మొబైల్ డేటాను అనుమతించండి" టిక్ చేయండి.',
     errHash: 'డౌన్‌లోడ్ చేసిన ఫైల్ దాని ఇంటెగ్రిటీ తనిఖీలో విఫలమై తొలగించబడింది. ఏమీ నిలువ లేదు; స్థిరమైన కనెక్షన్‌లో మళ్లీ ప్రయత్నించండి.',
     errDownload: 'డౌన్‌లోడ్ విఫలమైంది. స్థిరమైన కనెక్షన్‌లో మళ్లీ ప్రయత్నించండి.',
     errCancelled: 'డౌన్‌లోడ్ రద్దు చేయబడింది. పాక్షిక ఫైళ్లు నిలువ చేయబడలేదు.',
@@ -164,7 +164,7 @@ const LV_COPY = {
   'hi-IN': {
     title: 'ऑफ़लाइन वॉइस पैक (तेलुगु)',
     body: 'नेटवर्क वॉइस उपलब्ध न होने पर तय इंटरफ़ेस प्रॉम्प्ट (अभिवादन, पुनः प्रयास, पढ़ने के निर्देश) के लिए वैकल्पिक ऑन-डिवाइस वॉइस। यह कभी भी मरीज़ या क्लिनिकल टेक्स्ट नहीं बोलती; डाउनलोड के बाद पूरी तरह इसी डिवाइस पर चलती है; आपकी रिकॉर्डिंग में कुछ नहीं जोड़ती।',
-    size: (mb, mib) => `डाउनलोड आकार: ठीक ${mb} (${mib})। वॉइस: qualified te_M स्पीकर। लाइसेंस: CC-BY-4.0 वेट्स, MIT कोड (sulabhkatiyar/indic-tiny-tts-telugu).`,
+    size: (mb, mib, exact) => `डाउनलोड आकार: ${exact} बाइट्स (लगभग ${mb} / ${mib})। वॉइस: फिक्स्ड प्रॉम्प्ट-टेस्टेड te_M स्पीकर (केवल नॉन-क्लिनिकल इंटरफ़ेस प्रॉम्प्ट)। लाइसेंस: CC-BY-4.0 वेट्स, MIT कोड (sulabhkatiyar/indic-tiny-tts-telugu).`,
     wifiOnly: 'केवल Wi-Fi पर डाउनलोड (अनुशंसित)',
     allowCellular: 'इस डाउनलोड के लिए मोबाइल डेटा अनुमत करें',
     install: 'डाउनलोड और इंस्टॉल',
@@ -173,9 +173,9 @@ const LV_COPY = {
     uninstall: 'पैक हटाएं',
     close: 'बंद करें',
     statusInstalled: 'इंस्टॉल हो गया। ऑफ़लाइन वॉइस तय इंटरफ़ेस प्रॉम्प्ट बोल सकती है।',
-    statusNotInstalled: 'इंस्टॉल नहीं है। ऐप इस पैक के बिना पूरी तरह काम करता है।',
+    statusNotInstalled: 'इंस्टॉल नहीं है। यह पैक वैकल्पिक है; ऑफ़लाइन रीडआउट के बिना भी कोर ऐप उपलब्ध है।',
     statusUnsupported: 'यह ब्राउज़र पैक सहेज नहीं सकता (Cache API उपलब्ध नहीं)।',
-    errCellular: 'इस डाउनलोड के लिए मोबाइल डेटा अवरुद्ध है। Wi-Fi से जुड़ें या "मोबाइल डेटा अनुमत करें" चुनें।',
+    errCellular: 'कनेक्शन प्रकार अज्ञात या मीटर्ड है, इसलिए डाउनलोड अवरुद्ध है। किसी ज्ञात Wi-Fi से जुड़ें या "मोबाइल डेटा अनुमत करें" चुनें।',
     errHash: 'डाउनलोड की गई फ़ाइल इंटीग्रिटी जाँच में असफल होकर हटा दी गई। कुछ भी सहेजा नहीं गया; स्थिर कनेक्शन पर पुनः प्रयास करें।',
     errDownload: 'डाउनलोड विफल। स्थिर कनेक्शन पर पुनः प्रयास करें।',
     errCancelled: 'डाउनलोड रद्द किया गया। आंशिक फ़ाइलें सहेजी नहीं गईं।',
@@ -237,7 +237,7 @@ export function LocalVoicePackSettings({ lang, onClose }) {
       <section className="m-consent-modal" role="dialog" aria-modal="true" aria-label={c.title} onClick={(e) => e.stopPropagation()}>
         <h2 className="m-steps-title">{c.title}</h2>
         <p className="m-record-intro">{c.body}</p>
-        <p className="m-record-intro">{c.size(mb, mib)}</p>
+        <p className="m-record-intro">{c.size(mb, mib, totalBytes.toLocaleString('en-IN'))}</p>
 
         {status.state !== 'installed' && !downloading && (
           <div className="m-record-modes" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>

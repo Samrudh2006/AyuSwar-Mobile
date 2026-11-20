@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { mixDownToMono, resampleTo16k, prepareClipForOnDeviceAsr } from '../src/services/localVoice/resample16k.js';
+import { resampleTo16k as indicResampleTo16k } from '../src/services/indicSpeechService.js';
 
 console.log('--- RUNNING PHASE 33: 16kHz ASR RESAMPLER TESTS ---');
 let executed = 0;
@@ -85,7 +86,24 @@ let executed = 0;
   assert.ok(!ttsWorker.includes('resampleTo16k'), 'TTS worker must not resample (24k output is intentional)');
   const svc = readFileSync(resolve('src/services/localVoice/resample16k.js'), 'utf8');
   assert.ok(svc.includes('TARGET = 16000'), 'single 16k target constant');
-  console.log('✓ Test 6 Passed: resampler is single-sourced for the on-device ASR front-end.');
+  // Behavioral dedupe: the Gnani ASR front-end delegates to this module
+  // (F-a: no second near-identical implementation with a different signature).
+  const indic = readFileSync(resolve('src/services/indicSpeechService.js'), 'utf8');
+  assert.ok(
+    indic.includes("from './localVoice/resample16k.js'"),
+    'indicSpeechService must import the shared resampler'
+  );
+  const indicBody = indic.slice(indic.indexOf('export function resampleTo16k'));
+  assert.ok(
+    !indicBody.includes('const ratio = sourceRate / targetSampleRate'),
+    'indicSpeechService must not keep its own interpolation loop'
+  );
+  // Cross-implementation agreement: AudioBuffer wrapper == direct float call.
+  const buf = { sampleRate: 24000, getChannelData: () => Float32Array.from({ length: 480 }, (_, i) => Math.sin(i / 10)) };
+  const viaBuffer = indicResampleTo16k(buf, 16000);
+  const viaFloat = resampleTo16k(buf.getChannelData(0), 24000, 16000);
+  assert.deepStrictEqual([...viaBuffer], [...viaFloat], 'both ASR front-ends must produce identical output');
+  console.log('✓ Test 6 Passed: resampler single-sourced; Gnani + on-device ASR share one implementation.');
   executed++;
 }
 

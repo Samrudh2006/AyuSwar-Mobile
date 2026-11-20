@@ -19,6 +19,7 @@ import { SpeechRecognition as NativeSpeechRecognition } from '@capacitor-communi
 import { ayuswarSpeechAvailable, AyuSwarSpeech } from '../mobile/ayuswarSpeech.js';
 import { recordDiagnosticStage } from '../utils/diagnosticLogger.js';
 import { float32ToWavArrayBuffer } from './localVoice/pcm16Wav.js';
+import { resampleTo16k as resampleFloatTo16k } from './localVoice/resample16k.js';
 
 /**
  * Global Sovereign Audio Mutex Coordinator
@@ -340,28 +341,12 @@ export function encode16BitMonoWAV(float32Samples, sampleRate = 16000) {
 }
 
 /**
- * Resamples any audio buffer to 16,000 Hz for Gnani Prisma ASR
+ * Resamples any audio buffer to 16,000 Hz for Gnani Prisma ASR.
+ * Single-sourced: delegates to the shared localVoice resampler so both
+ * ASR front-ends use one implementation (F-a dedupe).
  */
 export function resampleTo16k(audioBuffer, targetSampleRate = 16000) {
-  const sourceRate = audioBuffer.sampleRate;
-  if (sourceRate === targetSampleRate) {
-    return audioBuffer.getChannelData(0);
-  }
-
-  const channelData = audioBuffer.getChannelData(0);
-  const ratio = sourceRate / targetSampleRate;
-  const newLength = Math.round(channelData.length / ratio);
-  const result = new Float32Array(newLength);
-
-  for (let i = 0; i < newLength; i++) {
-    const origIndex = i * ratio;
-    const lower = Math.floor(origIndex);
-    const upper = Math.min(lower + 1, channelData.length - 1);
-    const weight = origIndex - lower;
-    result[i] = channelData[lower] * (1 - weight) + channelData[upper] * weight;
-  }
-
-  return result;
+  return resampleFloatTo16k(audioBuffer.getChannelData(0), audioBuffer.sampleRate, targetSampleRate);
 }
 
 // Bundled sample recordings are bound to their exact canonical scripts.
