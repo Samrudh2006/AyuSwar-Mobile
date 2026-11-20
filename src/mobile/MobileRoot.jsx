@@ -208,9 +208,14 @@ export default function MobileRoot() {
   }, [location.pathname, placeAssistant]);
   React.useEffect(() => {
     if (freezeSplash) return;
-    // Short branding beat only - never a gate. Tap the splash to skip it.
-    const t = setTimeout(() => setSplash(false), 1200);
-    return () => clearTimeout(t);
+    // Branding beat only - never a gate. The splash dismisses as soon as the
+    // app shell has actually painted (double rAF), tap-to-skip stays, and a
+    // 1200ms cap only bounds slow first paints; it never forces a wait.
+    let dismissed = false;
+    const hide = () => { if (!dismissed) { dismissed = true; setSplash(false); } };
+    const raf1 = requestAnimationFrame(() => requestAnimationFrame(hide));
+    const t = setTimeout(hide, 1200);
+    return () => { cancelAnimationFrame(raf1); clearTimeout(t); };
   }, [freezeSplash]);
 
   // Warm up Indic webfont faces (all weights) so first bold Telugu/Indic paint never shows tofu.

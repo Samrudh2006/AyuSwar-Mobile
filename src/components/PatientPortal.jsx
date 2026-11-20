@@ -485,8 +485,10 @@ export default function PatientPortal({
     const result = buildManualVital(data);
     if (!result.valid) {
       // Keep every entered value for correction; nothing is saved or invented.
-      Object.entries(result.errors).forEach(([field, message]) =>
-        setVitalError(field, { type: 'validation', message })
+      const order = ['date', 'systolic', 'diastolic', 'pulse', 'spo2', 'weight', 'bloodSugar'];
+      const badFields = order.filter(f => result.errors[f]);
+      badFields.forEach((field, i) =>
+        setVitalError(field, { type: 'validation', message: t(result.errors[field]) }, { shouldFocus: i === 0 })
       );
       return;
     }
@@ -2554,7 +2556,7 @@ export default function PatientPortal({
                       {Object.keys(vitalsErrors).length > 0 && (
                         <div role="alert" aria-live="assertive" style={{ background: '#FEF2F2', border: '1px solid #B91C1C', borderRadius: '10px', padding: '10px 14px' }}>
                           <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#B91C1C', marginBottom: '4px' }}>
-                            Please correct {Object.keys(vitalsErrors).length} field{Object.keys(vitalsErrors).length > 1 ? 's' : ''} — nothing was saved:
+                            {t('vitals.err.summary', { count: Object.keys(vitalsErrors).length })}
                           </div>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#7F1D1D' }}>
                             {Object.entries(vitalsErrors).map(([field, err]) => (
@@ -2572,10 +2574,17 @@ export default function PatientPortal({
                           <input
                             type="text"
                             {...registerVital('date')}
+                              aria-invalid={vitalsErrors.date ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.date ? 'vitals-err-date' : undefined}
                             placeholder="e.g. 23 Oct 2026"
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
+                          {vitalsErrors.date && (
+                            <div id="vitals-err-date" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.date?.message ?? '')}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
@@ -2607,20 +2616,34 @@ export default function PatientPortal({
                             <input
                               type="number"
                               {...registerVital('systolic')}
+                              aria-invalid={vitalsErrors.systolic ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.systolic ? 'vitals-err-systolic' : undefined}
                               placeholder="e.g. 120"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
                             />
+                          {vitalsErrors.systolic && (
+                            <div id="vitals-err-systolic" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.systolic?.message ?? '')}
+                            </div>
+                          )}
                           </div>
                           <div>
                             <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>Diastolic (mmHg)</label>
                             <input
                               type="number"
                               {...registerVital('diastolic')}
+                              aria-invalid={vitalsErrors.diastolic ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.diastolic ? 'vitals-err-diastolic' : undefined}
                               placeholder="e.g. 80"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
                             />
+                          {vitalsErrors.diastolic && (
+                            <div id="vitals-err-diastolic" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.diastolic?.message ?? '')}
+                            </div>
+                          )}
                           </div>
                         </div>
                       </div>
@@ -2634,10 +2657,17 @@ export default function PatientPortal({
                           <input
                             type="number"
                             {...registerVital('pulse')}
+                              aria-invalid={vitalsErrors.pulse ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.pulse ? 'vitals-err-pulse' : undefined}
                             placeholder="e.g. 74"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
+                          {vitalsErrors.pulse && (
+                            <div id="vitals-err-pulse" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.pulse?.message ?? '')}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
@@ -2646,10 +2676,17 @@ export default function PatientPortal({
                           <input
                             type="number"
                             {...registerVital('spo2')}
+                              aria-invalid={vitalsErrors.spo2 ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.spo2 ? 'vitals-err-spo2' : undefined}
                             placeholder="e.g. 98"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
+                          {vitalsErrors.spo2 && (
+                            <div id="vitals-err-spo2" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.spo2?.message ?? '')}
+                            </div>
+                          )}
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
@@ -2659,10 +2696,17 @@ export default function PatientPortal({
                             type="number"
                             step="0.5"
                             {...registerVital('weight')}
+                              aria-invalid={vitalsErrors.weight ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.weight ? 'vitals-err-weight' : undefined}
                             placeholder="e.g. 63"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
+                          {vitalsErrors.weight && (
+                            <div id="vitals-err-weight" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.weight?.message ?? '')}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -2674,9 +2718,16 @@ export default function PatientPortal({
                         <input
                           type="number"
                           {...registerVital('bloodSugar')}
+                              aria-invalid={vitalsErrors.bloodSugar ? 'true' : undefined}
+                              aria-describedby={vitalsErrors.bloodSugar ? 'vitals-err-bloodSugar' : undefined}
                           placeholder="e.g. 104"
                           style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                         />
+                          {vitalsErrors.bloodSugar && (
+                            <div id="vitals-err-bloodSugar" style={{ fontSize: '11.5px', color: '#B91C1C', marginTop: '4px', fontWeight: 600 }}>
+                              {String(vitalsErrors.bloodSugar?.message ?? '')}
+                            </div>
+                          )}
                       </div>
 
                       {/* Action Buttons */}

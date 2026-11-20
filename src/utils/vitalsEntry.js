@@ -16,32 +16,38 @@ export function parseVitalNumber(raw) {
   return { ok: true, value };
 }
 
-const REQUIRED_MESSAGE = 'Enter a number, or leave the whole entry unsaved.';
-const POSITIVE_MESSAGE = 'Must be a number greater than zero.';
+// Errors are i18n keys (translated at render via t()); see src/i18n/translations.js.
+export const VITALS_ERR = {
+  dateRequired: 'vitals.err.dateRequired',
+  required: 'vitals.err.required',
+  positive: 'vitals.err.positive',
+  spo2Max: 'vitals.err.spo2Max',
+  diaGtSys: 'vitals.err.diaGtSys'
+};
 
 export function buildManualVital(form) {
   const errors = {};
   const values = {};
 
   const date = (form.date ?? '').trim();
-  if (!date) errors.date = 'Measurement date is required.';
+  if (!date) errors.date = VITALS_ERR.dateRequired;
   else values.date = date;
 
   for (const field of ['systolic', 'diastolic', 'pulse', 'spo2']) {
     const r = parseVitalNumber(form[field]);
-    if (!r.ok) errors[field] = r.reason === 'empty' ? REQUIRED_MESSAGE : POSITIVE_MESSAGE;
+    if (!r.ok) errors[field] = r.reason === 'empty' ? VITALS_ERR.required : VITALS_ERR.positive;
     else values[field] = r.value;
   }
 
   // SpO2 is a percentage of saturation: above 100 is impossible by definition.
   if (values.spo2 != null && values.spo2 > 100) {
-    errors.spo2 = 'SpO2 is a percentage and cannot exceed 100.';
+    errors.spo2 = VITALS_ERR.spo2Max;
     delete values.spo2;
   }
 
   // Systolic is by definition the higher of the two pressures.
   if (values.systolic != null && values.diastolic != null && values.systolic < values.diastolic) {
-    errors.diastolic = 'Diastolic cannot be higher than systolic.';
+    errors.diastolic = VITALS_ERR.diaGtSys;
   }
 
   // Optional metrics: blank stays absent; if present, must be a valid positive number.
@@ -49,7 +55,7 @@ export function buildManualVital(form) {
     const text = (form[field] ?? '').trim();
     if (text === '') continue;
     const r = parseVitalNumber(form[field]);
-    if (!r.ok) errors[field] = POSITIVE_MESSAGE;
+    if (!r.ok) errors[field] = VITALS_ERR.positive;
     else values[field] = r.value;
   }
 
