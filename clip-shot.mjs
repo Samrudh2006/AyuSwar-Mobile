@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
+const p = await (await b.newContext({ viewport:{width:390,height:844} })).newPage();
+await p.goto('http://localhost:4173/clinical-console/full', { waitUntil:'domcontentloaded' });
+await p.waitForTimeout(3000);
+await p.screenshot({ path:'/tmp/clipfix-top.png' });
+await p.evaluate(() => window.scrollTo(0, 900));
+await p.waitForTimeout(400);
+await p.screenshot({ path:'/tmp/clipfix-mid.png' });
+await b.close();
+console.log('done');

@@ -1,0 +1,22 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
+const p = await (await b.newContext({ viewport:{width:390,height:844} })).newPage();
+await p.goto('http://localhost:4173/scanner', { waitUntil:'domcontentloaded' });
+await p.waitForTimeout(2200);
+const input = await p.$('label:has-text("Import PDF") input[type="file"]');
+await input.setInputFiles('/tmp/fix-21pages.pdf');
+await p.waitForTimeout(6000);
+// Use must be disabled before acknowledgement
+const disabled = await p.evaluate(() => [...document.querySelectorAll('button')].find(b => b.textContent.includes('Use as unverified draft'))?.disabled);
+console.log('use disabled before ack:', disabled);
+await p.screenshot({ path:'/tmp/trunc-1-gated.png' });
+await p.evaluate(() => { const cb = [...document.querySelectorAll('input[type=checkbox]')].find(c => c.closest('label')?.textContent.includes('incomplete')); cb?.click(); });
+await p.waitForTimeout(400);
+const enabled = await p.evaluate(() => [...document.querySelectorAll('button')].find(b => b.textContent.includes('Use as unverified draft'))?.disabled === false);
+console.log('use enabled after ack:', enabled);
+await p.evaluate(() => [...document.querySelectorAll('button')].find(b => b.textContent.includes('Use as unverified draft'))?.click());
+await p.waitForTimeout(1200);
+await p.screenshot({ path:'/tmp/trunc-2-used.png' });
+const partial = await p.evaluate(() => document.body.innerText.includes('partial - first 20 of 21 pages'));
+console.log('partial provenance in result:', partial);
+await b.close();

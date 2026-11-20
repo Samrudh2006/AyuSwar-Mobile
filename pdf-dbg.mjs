@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ executablePath: '/usr/bin/google-chrome' });
+const p = await (await b.newContext({ viewport:{width:390,height:844} })).newPage();
+p.on('console', m => console.log('PAGE:', m.type(), m.text().slice(0,300)));
+p.on('pageerror', e => console.log('PAGEERR:', String(e).slice(0,300)));
+await p.goto('http://localhost:4173/scanner', { waitUntil:'domcontentloaded' });
+await p.waitForTimeout(2500);
+const input = await p.$('label:has-text("Import PDF") input[type="file"]');
+await input.setInputFiles('/tmp/test-rx.pdf');
+await p.waitForTimeout(5000);
+await b.close();
