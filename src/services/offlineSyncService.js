@@ -6,7 +6,8 @@
  * 2. Dedicated object stores for pending sync, encounters, vitals, prescriptions, and ontology.
  * 3. Bidirectional offline synchronization with Supabase backend upon network reconnection.
  * 4. Cross-tab synchronization via BroadcastChannel.
- * 5. Full compliance with ABDM M3 offline clinic workflow specifications.
+ * 5. Offline-first workflow inspired by ABDM M3 offline clinic concepts;
+ *    no ABDM certification, sandbox verification, or compliance is claimed.
  */
 
 import { supabase } from './supabaseClient.js';

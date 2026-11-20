@@ -1,8 +1,12 @@
 /**
  * auditLedgerService.js
- * Implements Phase 15: Cryptographic SHA-256 tamper-evident clinical audit ledger.
- * Chains every emergency dispatch, prescription issuance, and vital recording
- * into a cryptographic blockchain-like block ledger to prove non-tampering under DPDP Act 2023.
+ * Implements Phase 15: SHA-256 hash-chained local audit ledger (demo wiring).
+ * Actual coverage today: only the Innovation Hub demo "Add Audit Block" button
+ * writes synthetic CONSULTATION_SIGN blocks. No live clinical flow (emergency
+ * dispatch, prescription issuance, or vital recording) records blocks yet.
+ * The chain is stored in localStorage, so a break in the chain only shows the
+ * page's own stored copy was rewritten; it cannot prove non-tampering against
+ * someone with device access, and no DPDP Act 2023 compliance is claimed.
  */
 
 const LEDGER_STORAGE_KEY = 'ayuswar_clinical_audit_ledger_v1';
