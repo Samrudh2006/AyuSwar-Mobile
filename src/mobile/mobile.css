@@ -36,19 +36,33 @@
 
 @media (max-width: 768px) {
   body {
-    background: var(--m-cream);
+    background: #F6EFDD url("/assets/ayuswar-app-bg.webp") center top / cover no-repeat fixed;
   }
 }
 
+/* Rich app-wide backdrop: illustrated scene-derived background (sky + leaves top,
+   warm light middle, deep green waves bottom) fixed behind every screen.
+   Content sits on readable cards/surfaces above it. */
+.m-appbg { display: none; }
+
 .m-app {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22460%22%20height%3D%22460%22%20viewBox%3D%220%200%20460%20460%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%230F4C5C%22%20stroke-opacity%3D%220.05%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M120%2C60%20C170%2C110%20185%2C160%20120%2C215%20C55%2C160%2070%2C110%20120%2C60%20Z%22/%3E%3Cpath%20d%3D%22M120%2C105%20C148%2C135%20155%2C162%20120%2C192%20C85%2C162%2092%2C135%20120%2C105%20Z%22/%3E%3Cpath%20d%3D%22M340%2C270%20C390%2C320%20405%2C370%20340%2C425%20C275%2C370%20290%2C320%20340%2C270%20Z%22/%3E%3Cpath%20d%3D%22M340%2C315%20C368%2C345%20375%2C372%20340%2C402%20C305%2C372%20312%2C345%20340%2C315%20Z%22/%3E%3C/g%3E%3Cg%20fill%3D%22%23E07B39%22%20fill-opacity%3D%220.05%22%3E%3Ccircle%20cx%3D%22120%22%20cy%3D%22150%22%20r%3D%227%22/%3E%3Ccircle%20cx%3D%22340%22%20cy%3D%22360%22%20r%3D%227%22/%3E%3Ccircle%20cx%3D%2260%22%20cy%3D%22380%22%20r%3D%224%22/%3E%3Ccircle%20cx%3D%22400%22%20cy%3D%22120%22%20r%3D%224%22/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat;
   min-height: 100vh;
-  background: var(--m-cream);
+  background: transparent;
   color: var(--m-ink);
   font-family: var(--m-font-ui);
   -webkit-font-smoothing: antialiased;
   padding-bottom: calc(var(--m-tabbar-h) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Page-level headings/text sit on the illustrated backdrop: soft light halo keeps
+   them readable over leaves/sky without boxing them. Card interiors unchanged. */
+.m-page > .m-section-title,
+.m-page > .m-display,
+.m-page > .m-sub,
+.m-page > .m-eyebrow,
+.m-page > h1, .m-page > h2, .m-page > h3,
+.m-page > p {
+  text-shadow: 0 0 7px rgba(255, 253, 246, 0.9), 0 0 14px rgba(255, 253, 246, 0.65), 0 1px 2px rgba(255, 253, 246, 0.6);
 }
 
 /* ---------- Top app bar ---------- */
@@ -61,8 +75,10 @@
   gap: 10px;
   padding: 12px 16px;
   padding-top: calc(12px + env(safe-area-inset-top, 0px));
-  background: var(--m-cream);
-  border-bottom: 1px solid var(--m-border-soft);
+  background: rgba(250, 245, 234, 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.25);
+  backdrop-filter: blur(10px) saturate(1.25);
+  border-bottom: 1px solid rgba(185, 196, 165, 0.55);
 }
 .m-topbar-logo {
   width: 36px; height: 36px;
@@ -108,8 +124,10 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
   display: flex;
   align-items: stretch;
-  background: #FFFCF6;
-  border-top: 1px solid var(--m-border-soft);
+  background: rgba(255, 252, 246, 0.78);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  border-top: 1px solid rgba(185, 196, 165, 0.6);
   box-shadow: 0 -4px 20px rgba(28, 43, 35, 0.06);
 }
 .m-tab {
@@ -175,7 +193,9 @@
 .m-drawer {
   position: fixed; top: 0; left: 0; bottom: 0; z-index: 90;
   width: min(82vw, 320px);
-  background: var(--m-cream);
+  background: rgba(250, 245, 234, 0.94);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-right: 1px solid var(--m-border);
   transform: translateX(-102%);
   transition: transform 260ms var(--m-ease);
@@ -1149,9 +1169,9 @@
 .m-auth2-autofill { height: 40px; border: 1.5px dashed #E8A33D; border-radius: 12px; background: #FEF7E8; color: #92400E; font-size: 12.5px; font-weight: 800; cursor: pointer; }
 button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: pointer; }
 /* Website-parity auth on mobile: hero becomes a top band, form fills below */
-.m-uawrap { height: 100vh; overflow-y: auto; overflow-x: hidden; }
+.m-uawrap { height: 100vh; overflow-y: auto; overflow-x: hidden; background: #F6EFDD url("/assets/ayuswar-app-bg.webp") center / cover no-repeat; }
 .m-uawrap .auth-hero-panel { max-height: 216px !important; overflow: hidden !important; }
-.m-uawrap .auth-layout-container { overflow: visible !important; height: auto !important; min-height: 100% !important; }
+.m-uawrap .auth-layout-container { overflow: visible !important; height: auto !important; min-height: 100% !important; background: transparent !important; }
 
 /* Unified auth mobile skin: compact bright banner, form primary */
 .m-uawrap .auth-hero-panel {
@@ -1169,9 +1189,11 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 .m-uawrap .auth-hero-panel h1,
 .m-uawrap .auth-hero-panel p { text-shadow: 0 1px 6px rgba(8, 40, 45, 0.45) !important; }
 .m-uawrap .auth-form-panel {
-  border: none !important;
-  box-shadow: none !important;
-  background: #F7FAF8 !important;
+  border: 1px solid rgba(185, 196, 165, 0.6) !important;
+  box-shadow: var(--m-shadow-2) !important;
+  background: rgba(255, 253, 248, 0.93) !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 .m-uawrap .auth-form-container { padding-top: 18px !important; }
 
@@ -1196,7 +1218,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
   padding: 6px 14px !important;
 }
 .m-uawrap .auth-form-container { padding-bottom: 56px !important; }
-.m-uawrap .auth-form-panel-wrapper { padding-bottom: 24px !important; }
+.m-uawrap .auth-form-panel-wrapper { padding-bottom: 24px !important; background: transparent !important; }
 
 /* auth form wrapper fills remaining height instead of 100vh (fixes CTA crop) */
 .m-uawrap .auth-form-panel-wrapper {

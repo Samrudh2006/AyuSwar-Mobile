@@ -74,6 +74,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
 
   return (
     <div className={`m-app ${hideTabs ? 'm-app-no-tabs' : ''}`}>
+      <div className="m-appbg" aria-hidden="true" />
       <header className="m-topbar">
         {showBack ? (
           <button className="m-iconbtn" aria-label={t('back')} onClick={() => { triggerHaptic('light'); onBack ? onBack() : navigate(-1); }}>
@@ -109,11 +110,6 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-tab-sos" aria-label={t('emergency')} onClick={openSanjivani}>
             <span className="m-tab-sos-btn"><IconSiren size={20} />108</span>
           </button>
-          {location.pathname !== '/' && (
-            <button className={`m-tab ${activeTab === TAB_VOICE ? 'active' : ''}`} onClick={() => go('/clinical-console')}>
-              <IconMic /><span>{t('scribe')}</span>
-            </button>
-          )}
           <button className="m-tab" aria-label={t('assistant')} onClick={() => { triggerHaptic('light'); window.dispatchEvent(new CustomEvent('ayuswar:open-assistant')); }}>
             <IconCpu /><span>{t('assistant')}</span>
           </button>
