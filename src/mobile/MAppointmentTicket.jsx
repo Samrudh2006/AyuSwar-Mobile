@@ -11,6 +11,9 @@ import QRCode from 'qrcode';
 import { useApp } from '../context/AppContext';
 import { mt } from './mobileTranslations';
 
+// Exact sample date resolved at render, never a floating "Tomorrow".
+const sampleDate = () => new Date(Date.now() + 86400000).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+
 const SAMPLE_TICKET = {
   sample: true,
   patient: 'Lakshmi Amma',
@@ -18,11 +21,12 @@ const SAMPLE_TICKET = {
   bookingRef: 'AS-DEMO-CFFC',
   doctor: 'Dr. Demo Clinician (synthetic)',
   department: 'General Medicine (demo)',
-  date: 'Tomorrow',
+  date: sampleDate(),
   time: '10:00 AM',
   mode: 'In-Person OPD',
   token: 'PUL-066',
-  status: 'Request sent · hospital confirms'
+  // No request is actually sent anywhere in this build; the status says so.
+  status: 'Simulated demo status - no request was sent. A hospital would confirm a real slot.'
 };
 
 export default function MAppointmentTicket() {
@@ -79,14 +83,18 @@ export default function MAppointmentTicket() {
         .m-tkt-qr h5 { margin: 6px 0 2px; font-size: 13px; color: #12324F; }
         .m-tkt-qr p { margin: 0; font-size: 11px; color: #5B7183; line-height: 1.45; }
         .m-tkt-foot { margin-top: 12px; border-top: 1px dashed #C6D2DB; padding-top: 9px; font-size: 11px; color: #5B7183; line-height: 1.5; }
+        .m-tkt-wrap { max-width: 420px; margin: 0 auto; }
         @media print {
           body * { visibility: hidden; }
           .m-tkt, .m-tkt * { visibility: visible; }
-          .m-tkt { position: absolute; inset: 0 auto auto 0; width: 100%; box-shadow: none; }
+          .m-tkt-wrap { max-width: none; width: 620px; margin: 0; }
+          .m-tkt { position: absolute; inset: 0 auto auto 0; width: 620px; box-shadow: none; }
+          .m-tkt-cell p { font-size: 15px; white-space: normal; }
+          .m-tkt-qr img { width: 190px; height: 190px; }
         }
       `}</style>
 
-      <section style={{ maxWidth: 420, margin: '0 auto' }}>
+      <section className="m-tkt-wrap">
         <div className="m-tkt">
           <div className="m-tkt-demo">
             {ticket.sample ? t('DEMO · PROTOTYPE PREVIEW · NOT A REAL HOSPITAL APPOINTMENT') : t('LOCAL BOOKING REQUEST · HOSPITAL CONFIRMATION PENDING')}
