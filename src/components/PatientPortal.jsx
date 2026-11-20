@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { buildManualVital, formatManualVital } from '../utils/vitalsEntry';
+import { useForm } from 'react-hook-form';
 import { useApp, SUPPORTED_LANGUAGES } from '../context/AppContext';
 import { Globe, Sunrise, Sun, Video, Building2, Lock, Scan, User } from 'lucide-react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
@@ -459,8 +460,16 @@ export default function PatientPortal({
     bloodSugar: '',
     sourceNote: 'Self-measured at home'
   };
-  const [vitalsForm, setVitalsForm] = useState(EMPTY_VITALS_FORM);
-  const [vitalsErrors, setVitalsErrors] = useState({});
+  // react-hook-form pilot: uncontrolled inputs, submit-time validation via
+  // the pure buildManualVital module mapped into RHF field errors.
+  const {
+    register: registerVital,
+    handleSubmit: handleVitalsSubmit,
+    reset: resetVitalsForm,
+    setError: setVitalError,
+    clearErrors: clearVitalsErrors,
+    formState: { errors: vitalsErrors }
+  } = useForm({ defaultValues: EMPTY_VITALS_FORM, mode: 'onSubmit' });
   const vitalsSavingRef = useRef(false);
   const [vitalsToastMessage, setVitalsToastMessage] = useState(null);
 
@@ -469,30 +478,31 @@ export default function PatientPortal({
     setTimeout(() => setVitalsToastMessage(null), 3500);
   };
 
-  const handleSaveManualVitals = (e) => {
-    e?.preventDefault();
+  const handleSaveManualVitals = (data) => {
     // Duplicate-save guard: one in-flight save at a time.
     if (vitalsSavingRef.current) return;
-    const result = buildManualVital(vitalsForm);
+    clearVitalsErrors();
+    const result = buildManualVital(data);
     if (!result.valid) {
       // Keep every entered value for correction; nothing is saved or invented.
-      setVitalsErrors(result.errors);
+      Object.entries(result.errors).forEach(([field, message]) =>
+        setVitalError(field, { type: 'validation', message })
+      );
       return;
     }
     vitalsSavingRef.current = true;
-    setVitalsErrors({});
     const newVital = formatManualVital(result.values, 'vit_manual_' + Date.now());
     setVitalsHistory(prev => [newVital, ...prev]);
     setIsAddVitalsModalOpen(false);
     vitalsSavingRef.current = false;
+    resetVitalsForm(EMPTY_VITALS_FORM);
     showVitalsToast('New vitals recorded manually and saved to longitudinal history!');
   };
 
   const handleClearVitalsForm = () => {
     // Explicit confirm before any entered draft is discarded.
     if (!window.confirm('Clear every value you entered in this form?')) return;
-    setVitalsForm(EMPTY_VITALS_FORM);
-    setVitalsErrors({});
+    resetVitalsForm(EMPTY_VITALS_FORM);
   };
 
   const handleSyncVitalsFromReports = () => {
@@ -2540,15 +2550,15 @@ export default function PatientPortal({
                     </div>
 
                     {/* Form Body */}
-                    <form noValidate onSubmit={handleSaveManualVitals} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <form noValidate onSubmit={handleVitalsSubmit(handleSaveManualVitals)} style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       {Object.keys(vitalsErrors).length > 0 && (
                         <div role="alert" aria-live="assertive" style={{ background: '#FEF2F2', border: '1px solid #B91C1C', borderRadius: '10px', padding: '10px 14px' }}>
                           <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#B91C1C', marginBottom: '4px' }}>
                             Please correct {Object.keys(vitalsErrors).length} field{Object.keys(vitalsErrors).length > 1 ? 's' : ''} — nothing was saved:
                           </div>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#7F1D1D' }}>
-                            {Object.entries(vitalsErrors).map(([field, msg]) => (
-                              <li key={field}><strong>{field}</strong>: {msg}</li>
+                            {Object.entries(vitalsErrors).map(([field, err]) => (
+                              <li key={field}><strong>{field}</strong>: {String(err?.message ?? '')}</li>
                             ))}
                           </ul>
                         </div>
@@ -2561,8 +2571,7 @@ export default function PatientPortal({
                           </label>
                           <input
                             type="text"
-                            value={vitalsForm.date}
-                            onChange={e => setVitalsForm({ ...vitalsForm, date: e.target.value })}
+                            {...registerVital('date')}
                             placeholder="e.g. 23 Oct 2026"
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
@@ -2573,8 +2582,7 @@ export default function PatientPortal({
                             Recording Source / Location
                           </label>
                           <select
-                            value={vitalsForm.sourceNote}
-                            onChange={e => setVitalsForm({ ...vitalsForm, sourceNote: e.target.value })}
+                            {...registerVital('sourceNote')}
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                           >
                             <option value="Self-measured at home">Home Self-Check (Digital Meter)</option>
@@ -2598,8 +2606,7 @@ export default function PatientPortal({
                             <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>Systolic (mmHg)</label>
                             <input
                               type="number"
-                              value={vitalsForm.systolic}
-                              onChange={e => setVitalsForm({ ...vitalsForm, systolic: e.target.value })}
+                              {...registerVital('systolic')}
                               placeholder="e.g. 120"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
@@ -2609,8 +2616,7 @@ export default function PatientPortal({
                             <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>Diastolic (mmHg)</label>
                             <input
                               type="number"
-                              value={vitalsForm.diastolic}
-                              onChange={e => setVitalsForm({ ...vitalsForm, diastolic: e.target.value })}
+                              {...registerVital('diastolic')}
                               placeholder="e.g. 80"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
@@ -2627,8 +2633,7 @@ export default function PatientPortal({
                           </label>
                           <input
                             type="number"
-                            value={vitalsForm.pulse}
-                            onChange={e => setVitalsForm({ ...vitalsForm, pulse: e.target.value })}
+                            {...registerVital('pulse')}
                             placeholder="e.g. 74"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
@@ -2640,8 +2645,7 @@ export default function PatientPortal({
                           </label>
                           <input
                             type="number"
-                            value={vitalsForm.spo2}
-                            onChange={e => setVitalsForm({ ...vitalsForm, spo2: e.target.value })}
+                            {...registerVital('spo2')}
                             placeholder="e.g. 98"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
@@ -2654,8 +2658,7 @@ export default function PatientPortal({
                           <input
                             type="number"
                             step="0.5"
-                            value={vitalsForm.weight}
-                            onChange={e => setVitalsForm({ ...vitalsForm, weight: e.target.value })}
+                            {...registerVital('weight')}
                             placeholder="e.g. 63"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
@@ -2670,8 +2673,7 @@ export default function PatientPortal({
                         </label>
                         <input
                           type="number"
-                          value={vitalsForm.bloodSugar}
-                          onChange={e => setVitalsForm({ ...vitalsForm, bloodSugar: e.target.value })}
+                          {...registerVital('bloodSugar')}
                           placeholder="e.g. 104"
                           style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                         />
