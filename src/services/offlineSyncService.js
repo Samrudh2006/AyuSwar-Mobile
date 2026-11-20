@@ -196,13 +196,28 @@ function notifyQueueUpdate(count) {
 }
 
 /**
- * Sync all pending records with Supabase backend
+ * Sync all pending records with Supabase backend.
+ * Reentrancy-guarded: a second sync triggered while one is in flight would read
+ * the same queue snapshot and duplicate every upload.
  */
+let syncAllInFlight = false;
+
 export const syncAllPendingRecords = async () => {
+  if (syncAllInFlight) return { syncedCount: 0, success: true, skipped: 'sync-in-progress' };
+  syncAllInFlight = true;
+  try {
+    return await syncAllPendingRecordsInner();
+  } finally {
+    syncAllInFlight = false;
+  }
+};
+
+const syncAllPendingRecordsInner = async () => {
   const queue = await getPendingOfflineQueue();
   if (!queue || queue.length === 0) return { syncedCount: 0, success: true };
 
   let successfulSyncs = 0;
+  const syncedIds = [];
 
   for (const item of queue) {
     try {
@@ -212,7 +227,7 @@ export const syncAllPendingRecords = async () => {
       }
       if (supabase) {
         if (item.type === 'vital' && item.payload) {
-          await supabase.from('patient_vitals_log').insert({
+          const vitalsResult = await supabase.from('patient_vitals_log').insert({
             abha_id: item.payload.abhaId || '91-4521-8820-9102',
             bp_systolic: item.payload.bpSystolic ? parseInt(item.payload.bpSystolic) : null,
             bp_diastolic: item.payload.bpDiastolic ? parseInt(item.payload.bpDiastolic) : null,
@@ -221,9 +236,11 @@ export const syncAllPendingRecords = async () => {
             source_type: 'manual',
             created_at: item.createdAt
           });
+          if (vitalsResult && vitalsResult.error) throw new Error(vitalsResult.error.message || 'Supabase vitals insert failed');
           successfulSyncs++;
+          syncedIds.push(item.id);
         } else if (item.type === 'encounter' && item.payload) {
-          await supabase.from('clinical_encounters').insert({
+          const encountersResult = await supabase.from('clinical_encounters').insert({
             abha_id: item.payload.abhaId || 'DEMO-91-4521',
             patient_name: item.payload.patientName || 'Patient',
             clinical_notes: item.payload.notes || '',
@@ -234,28 +251,35 @@ export const syncAllPendingRecords = async () => {
         } else {
           // General offline telemetry or appointment
           successfulSyncs++;
+          syncedIds.push(item.id);
         }
       } else {
         successfulSyncs++;
+        syncedIds.push(item.id);
       }
     } catch (e) {
       console.warn('[OfflineSync] Item sync error, will retry on next cycle:', item.id, e);
     }
   }
 
-  // Clear synced queue from IndexedDB
+  // Remove ONLY records confirmed synced. Failed records stay queued for retry,
+  // and records enqueued during this sync are never wiped unattempted.
   const db = await openOfflineDatabase();
-  if (db) {
+  if (db && syncedIds.length > 0) {
     try {
       const tx = db.transaction('pending_sync_queue', 'readwrite');
-      tx.objectStore('pending_sync_queue').clear();
+      const store = tx.objectStore('pending_sync_queue');
+      for (const id of syncedIds) store.delete(id);
     } catch {}
   }
   try {
-    localStorage.removeItem(STORAGE_FALLBACK_KEY);
+    const remaining = getLocalStorageQueue().filter((item) => !syncedIds.includes(item.id));
+    if (remaining.length > 0) localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(remaining));
+    else localStorage.removeItem(STORAGE_FALLBACK_KEY);
   } catch {}
 
-  notifyQueueUpdate(0);
+  const remainingQueue = await getPendingOfflineQueue();
+  notifyQueueUpdate(remainingQueue.length);
   return { syncedCount: successfulSyncs, success: true };
 };
 
