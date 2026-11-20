@@ -750,7 +750,26 @@
 .m-cpr-disc.beating { animation: m-cpr-beat 0.545s ease-in-out infinite; background: var(--m-danger); color: #fff; }
 @keyframes m-cpr-beat { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.14); } }
 .m-btn-red { background: var(--m-danger); color: #fff; border: none; }
-.m-sanj-note { font-size: 10.5px; color: var(--m-muted); line-height: 1.5; text-align: center; margin: 2px 8px 0; }
+/* Page-bottom disclaimers can land over the backdrop's dark green waves (device
+   report: illegible dull-on-dark). Give the note the same soft light surface
+   used for page headings so it stays readable on any backdrop region. */
+.m-sanj-note {
+  font-size: 10.5px;
+  color: var(--m-ink);
+  line-height: 1.5;
+  text-align: center;
+  margin: 2px 8px 0;
+  display: block;
+  width: fit-content;
+  max-width: calc(100% - 16px);
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 253, 246, 0.82);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  backdrop-filter: blur(8px) saturate(1.15);
+  border-radius: 12px;
+  padding: 4px 12px 6px;
+}
 .m-steps { display: flex; flex-direction: column; gap: 0; }
 .m-steps-title { font-family: var(--m-font-display); font-size: 14px; color: var(--m-ink); margin: 0 0 8px; }
 .m-step { display: flex; align-items: flex-start; gap: 11px; padding: 7px 0; }
@@ -910,7 +929,7 @@
 .m-record-continue { margin-top: auto; }
 .m-flow-page button:disabled { cursor: not-allowed; opacity: .55; }
 .m-record-page .m-clin-chips { flex-wrap: wrap; }
-.m-record-page .m-sanj-note { margin: 0; }
+.m-record-page .m-sanj-note { margin: 0 auto; }
 .m-record-language { display: block; font-size: 11px; letter-spacing: .04em; text-transform: uppercase; font-weight: 700; color: var(--m-muted); margin-bottom: 12px; }
 .m-record-language select { display: block; width: 100%; margin-top: 5px; padding: 11px 12px; border: 1px solid var(--m-border); border-radius: 10px; color: var(--m-green-deep); background: #fffdf8; font: 600 14px var(--m-font-ui); text-transform: none; letter-spacing: 0; }
 .m-yamnet-panel { padding: 16px; background: #f0f6ed; border: 1px solid #cadbc6; border-radius: 18px; margin: 18px 0; color: var(--m-ink); }
