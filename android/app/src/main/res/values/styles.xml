@@ -17,6 +17,14 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="Theme.SplashScreen">
+        <!-- Android 11 and earlier: full-scene bitmap from drawable-port-*/splash.png -->
         <item name="android:background">@drawable/splash</item>
+        <!-- Android 12+ system splash: color background + emblem as the centered icon.
+             (developer.android.com: image windowBackground is ignored on API 31+;
+             only windowSplashScreenBackground color + windowSplashScreenAnimatedIcon apply.) -->
+        <item name="windowSplashScreenBackground">#FAF5EA</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <item name="windowSplashScreenIconBackgroundColor">#FAF5EA</item>
+        <item name="postSplashScreenTheme">@style/AppTheme.NoActionBar</item>
     </style>
 </resources>
