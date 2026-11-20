@@ -247,7 +247,7 @@ export default function MobileInnovationHubModal({
     {
       num: '7',
       title: 'Pill-Vision',
-      desc: 'Computer vision pill color/shape identification with Jan Aushadhi (80% savings).',
+      desc: 'On-device strip OCR and text extraction; Jan Aushadhi price-comparison concept, matches are unverified candidates.',
       icon: Pill,
       color: '#E11D48',
       action: onOpenPillVision,
