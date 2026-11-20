@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { triggerHaptic } from '../utils/haptics';
 import { mt } from './mobileTranslations';
+import { AppLockSettings } from './MAppLock';
 import {
   IconHome, IconWave, IconMic, IconMenu, IconClose, IconChevronR,
   IconStethoscope, IconUser, IconScan, IconSpeaker, IconLab, IconSiren,
@@ -31,6 +32,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
   const location = useLocation();
   const { doctorProfile, patientProfile, setDoctorProfile, setPatientProfile, selectedLanguage, setSelectedLanguage, supportedLanguages } = useApp();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [lockSettingsOpen, setLockSettingsOpen] = React.useState(false);
   const [languageNotice, setLanguageNotice] = React.useState('');
   const activeTab = tabForPath(location.pathname);
   const t = key => mt(key, selectedLanguage);
@@ -195,6 +197,9 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           </button>
 
           <div className="m-drawer-section">{t('legal')}</div>
+          <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setLockSettingsOpen(true); }}>
+            <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'App lock', 'te-IN': 'యాప్ లాక్', 'hi-IN': 'ऐप लॉक' }[selectedLanguage] || 'App lock'}
+          </button>
           <button className="m-drawer-item" onClick={() => go('/privacy')}>
             <SheetIcon name="privacy-consent" /> {t('privacy')}
           </button>
@@ -216,6 +221,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           {t('drawerFoot')}
         </div>
       </aside>
+      {lockSettingsOpen && <AppLockSettings lang={selectedLanguage} onClose={() => setLockSettingsOpen(false)} />}
     </div>
   );
 }

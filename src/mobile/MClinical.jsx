@@ -11,27 +11,27 @@ import { IconMic, IconChevronR, IconHeart } from './MIcons';
 const CONSENT_COPY = {
   'en-IN': {
     title: 'Recording consent',
-    body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. You can withdraw this consent at any time.',
+    body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. You can withdraw this consent whenever you are not recording; withdrawing discards any unshared recording.',
     agree: 'I agree, start recording',
     later: 'Not now',
-    withdraw: 'Withdraw recording consent',
-    withdrawn: 'Recording consent withdrawn. Microphone recording stays off until you agree again.'
+    withdraw: 'Withdraw consent & discard recording',
+    withdrawn: 'Recording consent withdrawn. Any unshared recording was discarded and microphone recording stays off until you agree again.'
   },
   'te-IN': {
     title: 'రికార్డింగ్ సమ్మతి',
-    body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు ఎప్పుడైనా ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు.',
+    body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు రికార్డింగ్ చేయని సమయంలో ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు; ఉపసంహరించుకుంటే షేర్ చేయని రికార్డింగ్ తొలగించబడుతుంది.',
     agree: 'నేను అంగీకరిస్తున్నాను, రికార్డింగ్ ప్రారంభించండి',
     later: 'ఇప్పుడు వద్దు',
-    withdraw: 'రికార్డింగ్ సమ్మతి ఉపసంహరించండి',
-    withdrawn: 'రికార్డింగ్ సమ్మతి ఉపసంహరించబడింది. మీరు మళ్లీ అంగీకరించే వరకు మైక్రోఫోన్ రికార్డింగ్ ఆగిపోతుంది.'
+    withdraw: 'సమ్మతి ఉపసంహరించి రికార్డింగ్ తొలగించండి',
+    withdrawn: 'రికార్డింగ్ సమ్మతి ఉపసంహరించబడింది. షేర్ చేయని రికార్డింగ్ తొలగించబడింది, మీరు మళ్లీ అంగీకరించే వరకు మైక్రోఫోన్ రికార్డింగ్ ఆగిపోతుంది.'
   },
   'hi-IN': {
     title: 'रिकॉर्डिंग सहमति',
-    body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। आप कभी भी यह सहमति वापस ले सकते हैं।',
+    body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। जब आप रिकॉर्ड नहीं कर रहे हों, तब आप यह सहमति वापस ले सकते हैं; वापस लेने पर साझा न की गई रिकॉर्डिंग हटा दी जाती है।',
     agree: 'मैं सहमत हूँ, रिकॉर्डिंग शुरू करें',
     later: 'अभी नहीं',
-    withdraw: 'रिकॉर्डिंग सहमति वापस लें',
-    withdrawn: 'रिकॉर्डिंग सहमति वापस ले ली गई। जब तक आप फिर सहमत न हों, माइक्रोफ़ोन रिकॉर्डिंग बंद रहेगी.'
+    withdraw: 'सहमति वापस लें और रिकॉर्डिंग हटाएँ',
+    withdrawn: 'रिकॉर्डिंग सहमति वापस ले ली गई। साझा न की गई रिकॉर्डिंग हटा दी गई और जब तक आप फिर सहमत न हों, माइक्रोफ़ोन रिकॉर्डिंग बंद रहेगी.'
   }
 };
 const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
@@ -101,6 +101,10 @@ export default function MClinical() {
   const withdrawConsent = () => {
     revokeRecordingConsent();
     setConsentGiven(false);
+    // Explicit, labeled destruction: any unshared recording and transcript are
+    // discarded on withdraw, so nothing remains uploadable after consent ends.
+    if (audio?.url) URL.revokeObjectURL(audio.url);
+    setAudio(null); setTurns([]); setPhase('idle');
     setStatus(consentCopy(selectedLanguage).withdrawn);
   };
   // Consent modal accessibility: focus the agree action on open, Escape declines.

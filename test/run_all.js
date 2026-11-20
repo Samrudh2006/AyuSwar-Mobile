@@ -40,7 +40,8 @@ const suites = [
   { name: 'Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity', file: 'test/status_cors_devproxy.test.js', count: 9 },
   { name: 'Phase 19: Offline Consent & Encrypted Storage', file: 'test/offline_consent_storage.test.js', count: 8 },
   { name: 'Phase 20: DoctorPortal Offline Consent Regression & Purge', file: 'test/doctor_portal_offline_consent.test.js', count: 6 },
-  { name: 'Phase 21: Recording Consent Gate, Modal & Withdraw', file: 'test/phase21_recording_consent.test.js', count: 6 }
+  { name: 'Phase 21: Recording Consent Gate, Modal & Withdraw', file: 'test/phase21_recording_consent.test.js', count: 6 },
+  { name: 'Phase 22: PIN App Lock & Withdraw Semantics', file: 'test/phase22_app_lock.test.js', count: 6 }
 ];
 
 console.clear();

@@ -56,18 +56,12 @@ export function AyuSwarOrbLogo({ size = 28, glow = true }) {
       justifyContent: 'center',
       background: '#0F4C5C',
       boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12)',
-      flexShrink: 0
+      flexShrink: 0,
+      overflow: 'hidden'
     }}>
-      <svg width={size * 0.72} height={size * 0.72} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Outer Acoustic Petals */}
-        <path d="M18 4 C15 11 11 15 4 18 C11 21 15 25 18 32 C21 25 25 21 32 18 C25 15 21 11 18 4 Z" fill="rgba(255,255,255,0.95)" />
-        {/* Core Soundwave Ring */}
-        <circle cx="18" cy="18" r="6" stroke="#0A2540" strokeWidth="1.8" fill="#D4AF37" />
-        {/* Center Neural Acoustic Dot */}
-        <circle cx="18" cy="18" r="2.4" fill="#0A2540" />
-      </svg>
-      {/* Mobile dock candidate: simplified assistant mark (user-selected direction 2026-11-18); hidden by default */}
-      <img className="floating-assistant-mark-img" src="/assets/assistant-voice-icon.png" alt="" aria-hidden="true" />
+      {/* Assistant mark selected by the user (2026-11-20, option 1): repo asset assistant-mark-original.png */}
+      <img className="floating-assistant-mark-img" src="/assets/assistant-mark-original.png" alt="AyuSwar assistant"
+        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
     </div>
   );
 }
@@ -877,7 +871,7 @@ export default function FloatingAssistant({
             <div className="fa-body" style={{ display: 'flex', flexDirection: 'column' }}>
               {mobileFull && assistantState === 'expanded' && !currentAiReply && !lastUserQuery && (
                 <div className="fa-welcome" style={{ textAlign: 'center', padding: '26px 22px 6px' }}>
-                  <img src="/assets/assistant-voice-icon.png" alt="" aria-hidden="true" style={{ width: '74px', height: 'auto', marginBottom: '10px' }} />
+                  <img src="/assets/assistant-mark-original.png" alt="AyuSwar assistant" style={{ width: '74px', height: '74px', objectFit: 'cover', borderRadius: '50%', marginBottom: '10px' }} />
                   <div style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', fontFamily: 'var(--font-main)', letterSpacing: '-0.3px' }}>
                     {effectiveRole === 'doctor' ? `Namaste, ${doctorName}!` : (effectiveRole === 'patient' ? `Namaste ${patientName}!` : 'Namaste!')}
                   </div>

@@ -11,6 +11,8 @@ const MSanjivani = lazyWithRetry(() => import('./MSanjivani'));
 const MClinical = lazyWithRetry(() => import('./MClinical'));
 const MScribeFlow = lazyWithRetry(() => import('./MScribeFlow'));
 import FloatingAssistant from '../components/FloatingAssistant';
+import { AppLockScreen } from './MAppLock';
+import { isAppLockEnabled } from './appLock';
 import { useApp } from '../context/AppContext';
 import { lazyWithRetry } from '../utils/routePreloader';
 import { mt } from './mobileTranslations';
@@ -54,6 +56,7 @@ export default function MobileRoot() {
   const navigate = useNavigate();
   const location = useLocation();
   const { doctorProfile, patientProfile, setDoctorProfile, setPatientProfile, selectedLanguage } = useApp();
+  const [appLocked, setAppLocked] = React.useState(() => isAppLockEnabled());
   const loadingLabel = mt('loading', selectedLanguage);
 
   const sanjivani = (
@@ -320,6 +323,7 @@ export default function MobileRoot() {
           />
         </React.Suspense>
       )}
+      {appLocked && <AppLockScreen lang={selectedLanguage} onUnlock={() => setAppLocked(false)} />}
     </>
   );
 }
