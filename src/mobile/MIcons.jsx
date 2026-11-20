@@ -1,7 +1,8 @@
-// AyuSwar Mobile — custom hand-tuned icon set.
-// Stroke-based, rounded joins, slightly organic curves. 24x24 grid, 1.8px stroke.
-// Navy/gold family per user-approved icon sheet (2026-11-18): base stroke stays
-// currentColor; gold #C8921A accents; wine #B3261E reserved for emergency.
+// AyuSwar Mobile — custom hand-tuned icon set. 24x24 grid.
+// Navy/gold family per icon reference sheets approved by the user on 2026-11-18:
+// feature/action glyphs are filled navy (fill=currentColor, inherits context)
+// with gold #C8921A secondary elements and the signature swoosh arc; utility
+// icons keep the 1.8px rounded-stroke style; wine #B3261E reserved for emergency.
 import React from 'react';
 
 const GOLD = '#C8921A';
@@ -27,11 +28,23 @@ export const IconStethoscope = (p) => (
 );
 
 export const IconMic = (p) => (
-  <I {...p}><rect x="9" y="2.8" width="6" height="11.4" rx="3" /><path d="M5.6 10.8a6.4 6.4 0 0 0 12.8 0" stroke={GOLD} /><path d="M12 17.2v3.6" /><path d="M8.8 20.8h6.4" /><Swoosh /></I>
+  <I {...p}>
+    <rect x="13.4" y="3.6" width="7.6" height="11.6" rx="1.5" />
+    <path d="M15.2 6.6h4M15.2 9.4h4M15.2 12.2h2.6" stroke={GOLD} strokeWidth="1.3" />
+    <rect x="4.2" y="2.6" width="6" height="10.8" rx="3" fill="currentColor" stroke="none" />
+    <path d="M1.9 10.4a5.3 5.3 0 0 0 10.6 0" stroke={GOLD} />
+    <path d="M7.2 15.7v2.6M4.8 18.3h4.8" strokeWidth="1.7" />
+    <Swoosh />
+  </I>
 );
 
 export const IconWave = (p) => (
-  <I {...p}><path d="M3 12h2.2l1.8-4.6c.2-.6 1-.6 1.3 0l3.4 9.2c.3.6 1.1.6 1.3 0L16 8.4c.2-.6 1.1-.6 1.3 0L18.6 12H21" /></I>
+  <I {...p}>
+    <path d="M3.4 10v4M6.2 7.4v9.2M9 4.6v14.8M11.8 8.2v7.6" strokeWidth="2.1" />
+    <circle cx="17.3" cy="10.2" r="3.4" stroke={GOLD} strokeWidth="1.8" />
+    <path d="m19.9 12.8 2.3 2.3" stroke={GOLD} strokeWidth="1.8" />
+    <Swoosh />
+  </I>
 );
 
 export const IconScan = (p) => (
@@ -43,7 +56,13 @@ export const IconSiren = (p) => (
 );
 
 export const IconPill = (p) => (
-  <I {...p}><rect x="3.6" y="8.6" width="16.8" height="6.8" rx="3.4" transform="rotate(-45 12 12)" /><path d="m8.5 8.5 7 7" stroke={GOLD} /></I>
+  <I {...p}>
+    <rect x="2.6" y="9.4" width="13.4" height="6.4" rx="3.2" transform="rotate(-45 9.3 12.6)" fill="currentColor" stroke="none" />
+    <path d="m7 9.6 4.6 4.6" stroke={GOLD} strokeWidth="1.6" />
+    <path d="M18.9 11.4c1.5.3 2.6 1.6 2.6 3.2v1.9l.8 1c.2.4-.1.9-.5.9h-5.4c-.4 0-.7-.5-.5-.9l.8-1v-1.9c0-1.6 1.1-2.9 2.2-3.2z" fill={GOLD} stroke="none" />
+    <path d="M18.4 19.4a1 1 0 0 0 2 0" stroke={GOLD} strokeWidth="1.4" />
+    <Swoosh />
+  </I>
 );
 
 export const IconHeart = (p) => (
@@ -51,15 +70,33 @@ export const IconHeart = (p) => (
 );
 
 export const IconPulseHeart = (p) => (
-  <I {...p}><path d="M12 20.2S4.4 15.4 3 10.9C2 7.6 4.2 4.6 7.4 4.6c1.9 0 3.6 1 4.6 2.7 1-1.7 2.7-2.7 4.6-2.7 3.2 0 5.4 3 4.4 6.3-1.4 4.5-9 9.3-9 9.3z" /><path d="M6.5 12h2l1-2.2 1.8 4.2 1-2h2.2" /></I>
+  <I {...p}>
+    <path d="M2.6 12.6h3.4l1.6-4.2c.2-.6 1-.6 1.3 0l3 8.6c.3.6 1.1.6 1.3 0l1.5-4.4h2.1" strokeWidth="1.9" />
+    <path d="M19.4 15.8s-3.2-2-3.2-4.1c0-1.1.9-2 1.9-2 .6 0 1 .3 1.3.7.3-.4.7-.7 1.3-.7 1 0 1.9.9 1.9 2 0 2.1-3.2 4.1-3.2 4.1z" fill={GOLD} stroke="none" />
+    <Swoosh />
+  </I>
 );
 
 export const IconCalendar = (p) => (
-  <I {...p}><rect x="3.4" y="5" width="17.2" height="15.6" rx="2.4" /><path d="M3.4 9.8h17.2" /><path d="M8 3v3.6M16 3v3.6" /><path d="M7.4 13.6h3v3h-3z" stroke={GOLD} /><Swoosh /></I>
+  <I {...p}>
+    <rect x="3.2" y="4.6" width="14.6" height="15.2" rx="2.2" />
+    <path d="M3.2 9.2h14.6" />
+    <path d="M7.2 2.8v3.4M13.8 2.8v3.4" strokeWidth="2" />
+    <path d="M6 12.4h2.6M6 15.6h2.6M10.4 12.4h2.6" strokeWidth="1.5" />
+    <circle cx="17.2" cy="16.4" r="4.1" fill={GOLD} stroke="none" />
+    <path d="M17.2 13.9v2.5l1.7 1" stroke="#FFFDF6" strokeWidth="1.5" />
+    <Swoosh />
+  </I>
 );
 
 export const IconFile = (p) => (
-  <I {...p}><path d="M13.4 3.2H7.2c-1 0-1.8.8-1.8 1.8v14c0 1 .8 1.8 1.8 1.8h9.6c1 0 1.8-.8 1.8-1.8V8.6z" /><path d="M13.4 3.2v5.4h5.2" stroke={GOLD} /><path d="M8.6 13h6.8M8.6 16.4h4.8" /></I>
+  <I {...p}>
+    <rect x="2.6" y="5" width="18.8" height="13.6" rx="2.2" />
+    <circle cx="7.8" cy="10.2" r="1.9" fill="currentColor" stroke="none" />
+    <path d="M4.6 15.6c.4-1.7 1.6-2.6 3.2-2.6s2.8.9 3.2 2.6" stroke="currentColor" strokeWidth="1.7" />
+    <path d="M13.2 8.8h5.4M13.2 11.8h5.4M13.2 14.8h3.6" stroke={GOLD} strokeWidth="1.4" />
+    <Swoosh />
+  </I>
 );
 
 export const IconUpload = (p) => (
@@ -67,7 +104,12 @@ export const IconUpload = (p) => (
 );
 
 export const IconUser = (p) => (
-  <I {...p}><circle cx="12" cy="8" r="3.6" /><path d="M4.8 20.2c.8-3.4 3.8-5.4 7.2-5.4s6.4 2 7.2 5.4" stroke={GOLD} /><Swoosh /></I>
+  <I {...p}>
+    <circle cx="12" cy="7.2" r="3.4" fill="currentColor" stroke="none" />
+    <path d="M5 19.6c.9-3.6 3.8-5.6 7-5.6s6.1 2 7 5.6c.1.6-.3 1.1-1 1.1H6c-.7 0-1.1-.5-1-1.1z" fill="currentColor" stroke="none" />
+    <path d="M12 18.6s-1.9-1.2-1.9-2.4c0-.7.5-1.2 1.1-1.2.3 0 .6.2.8.4.2-.2.5-.4.8-.4.6 0 1.1.5 1.1 1.2 0 1.2-1.9 2.4-1.9 2.4z" fill={GOLD} stroke="none" />
+    <Swoosh />
+  </I>
 );
 
 export const IconUsers = (p) => (
@@ -99,11 +141,20 @@ export const IconHospital = (p) => (
 );
 
 export const IconPhone = (p) => (
-  <I {...p}><path d="M7.4 3.6c.6-.5 1.5-.4 2 .2l1.6 2c.4.6.4 1.4-.1 1.9l-1 1.1c.8 1.9 2.3 3.4 4.2 4.2l1.1-1c.5-.5 1.3-.5 1.9-.1l2 1.6c.6.5.7 1.4.2 2l-1.1 1.3c-.6.7-1.5 1-2.3.8-5.4-1.4-9.6-5.6-11-11-.2-.8.1-1.7.8-2.3z" /></I>
+  <I {...p}>
+    <path d="M6.8 3.4c.6-.5 1.5-.4 2 .2l1.7 2.1c.4.6.4 1.4-.1 1.9l-1.1 1.2c.9 2 2.4 3.5 4.4 4.4l1.2-1.1c.5-.5 1.3-.5 1.9-.1l2.1 1.7c.6.5.7 1.4.2 2l-1.2 1.4c-.6.7-1.6 1-2.4.8C10 16.4 6.6 13 6.1 7.5c-.2-.8.1-1.7.7-2.3z" fill="currentColor" stroke="none" />
+    <path d="M13.6 3.2c2.6.8 4.5 2.7 5.3 5.3M13.2 6.2c1.5.6 2.6 1.7 3.2 3.2" stroke={GOLD} />
+    <Swoosh />
+  </I>
 );
 
 export const IconShield = (p) => (
-  <I {...p}><path d="M12 3.2 5 5.8v5.6c0 4.4 2.9 7.7 7 9.4 4.1-1.7 7-5 7-9.4V5.8z" /><path d="m8.8 11.6 2.2 2.2 4-4.2" stroke={GOLD} /></I>
+  <I {...p}>
+    <path d="M12 2.8 4.8 5.4v5.8c0 4.6 3 8.1 7.2 9.9 4.2-1.8 7.2-5.3 7.2-9.9V5.4z" fill="currentColor" stroke="none" />
+    <rect x="9" y="10.6" width="6" height="5" rx="1.2" fill={GOLD} stroke="none" />
+    <path d="M10.2 10.6V9.4a1.8 1.8 0 0 1 3.6 0v1.2" stroke={GOLD} strokeWidth="1.5" />
+    <Swoosh />
+  </I>
 );
 
 export const IconLab = (p) => (
