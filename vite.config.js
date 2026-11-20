@@ -90,6 +90,22 @@ export default defineConfig(({ mode }) => {
         }
       },
       {
+        // The worker pins ort.env.wasm.wasmPaths to the static same-origin
+        // <base>/ort-wasm/ set above, so the hashed duplicate rollup emits
+        // (from ort's internal import.meta.url reference) is never fetched at
+        // runtime. Strip it from the bundle: it was adding 29.5MB dead weight
+        // to dist/ and the APK (auditor-confirmed duplicate).
+        name: 'dedupe-ort-wasm',
+        apply: 'build',
+        generateBundle(_options, bundle) {
+          for (const fileName of Object.keys(bundle)) {
+            if (/^assets\/ort-wasm-simd-threaded(\.jsep)?-[A-Za-z0-9_-]+\.wasm$/.test(fileName)) {
+              delete bundle[fileName];
+            }
+          }
+        }
+      },
+      {
         name: 'ayuswar-api-dev-middleware',
         configureServer(server) {
           // Make .env values visible to the real handlers (they read process.env),
