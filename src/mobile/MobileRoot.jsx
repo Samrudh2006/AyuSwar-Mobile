@@ -278,7 +278,7 @@ export default function MobileRoot() {
           <Route path="*" element={<Embedded title="Not found"><NotFoundView /></Embedded>} />
         </Routes>
       </React.Suspense>
-      {!location.pathname.startsWith('/sanjivani') && !location.pathname.startsWith('/emergency') && !location.pathname.startsWith('/auth') && !location.pathname.startsWith('/login') && !location.pathname.startsWith('/audio-rx') && !location.pathname.startsWith('/scanner') && !location.pathname.startsWith('/acoustic-lab') && (
+      {(location.pathname === '/' || location.pathname.startsWith('/clinical-console') || location.pathname.startsWith('/patient-portal') || location.pathname.startsWith('/doctor-portal')) && (
         <div className={`m-assistant summon-only${portalScrolling ? ' scrolling' : ''}${(location.pathname.startsWith('/patient-portal') || location.pathname.startsWith('/doctor-portal')) ? ' portal-edge docked' : ''}${location.pathname.startsWith('/clinical-console') ? ' lift-more' : ''}${fieldFocused ? ' kb-hide' : ''}`}>
           <FloatingAssistant
             activeView={

@@ -5,7 +5,7 @@ import { mt } from './mobileTranslations';
 import { CLINICAL_ENCOUNTERS } from '../data/clinicalEncounters';
 import { speechService } from '../services/indicSpeechService';
 import { openConsultationRecorder } from './consultationRecorder';
-import { grantRecordingConsent, RecordingConsentRequiredError, CONSENT_TEXT_VERSION } from './recordingConsent';
+import { getRecordingConsent, grantRecordingConsent, revokeRecordingConsent, RecordingConsentRequiredError, CONSENT_TEXT_VERSION } from './recordingConsent';
 import { IconMic, IconChevronR, IconHeart } from './MIcons';
 
 const CONSENT_COPY = {
@@ -13,19 +13,25 @@ const CONSENT_COPY = {
     title: 'Recording consent',
     body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. You can withdraw this consent at any time.',
     agree: 'I agree, start recording',
-    later: 'Not now'
+    later: 'Not now',
+    withdraw: 'Withdraw recording consent',
+    withdrawn: 'Recording consent withdrawn. Microphone recording stays off until you agree again.'
   },
   'te-IN': {
     title: 'రికార్డింగ్ సమ్మతి',
     body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు ఎప్పుడైనా ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు.',
     agree: 'నేను అంగీకరిస్తున్నాను, రికార్డింగ్ ప్రారంభించండి',
-    later: 'ఇప్పుడు వద్దు'
+    later: 'ఇప్పుడు వద్దు',
+    withdraw: 'రికార్డింగ్ సమ్మతి ఉపసంహరించండి',
+    withdrawn: 'రికార్డింగ్ సమ్మతి ఉపసంహరించబడింది. మీరు మళ్లీ అంగీకరించే వరకు మైక్రోఫోన్ రికార్డింగ్ ఆగిపోతుంది.'
   },
   'hi-IN': {
     title: 'रिकॉर्डिंग सहमति',
     body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। आप कभी भी यह सहमति वापस ले सकते हैं।',
     agree: 'मैं सहमत हूँ, रिकॉर्डिंग शुरू करें',
-    later: 'अभी नहीं'
+    later: 'अभी नहीं',
+    withdraw: 'रिकॉर्डिंग सहमति वापस लें',
+    withdrawn: 'रिकॉर्डिंग सहमति वापस ले ली गई। जब तक आप फिर सहमत न हों, माइक्रोफ़ोन रिकॉर्डिंग बंद रहेगी.'
   }
 };
 const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
@@ -43,6 +49,8 @@ export default function MClinical() {
   const [level, setLevel] = React.useState(0);
   const [seconds, setSeconds] = React.useState(0);
   const recorder = React.useRef(null);
+  const consentAgreeRef = React.useRef(null);
+  const [consentGiven, setConsentGiven] = React.useState(() => !!getRecordingConsent());
   const mounted = React.useRef(true);
   const signalSeen = React.useRef(false);
   const english = { id: 'english_practice', language: 'English', langCode: 'en-IN', patient: { name: t('practiceParticipant') }, dialogue: [] };
@@ -86,8 +94,23 @@ export default function MClinical() {
   };
   const grantAndStart = () => {
     grantRecordingConsent();
+    setConsentGiven(true);
     start();
   };
+  const declineConsent = () => setPhase('idle');
+  const withdrawConsent = () => {
+    revokeRecordingConsent();
+    setConsentGiven(false);
+    setStatus(consentCopy(selectedLanguage).withdrawn);
+  };
+  // Consent modal accessibility: focus the agree action on open, Escape declines.
+  React.useEffect(() => {
+    if (phase !== 'consent') return undefined;
+    consentAgreeRef.current?.focus();
+    const onKey = (event) => { if (event.key === 'Escape') declineConsent(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [phase]);
   const transcribe = async () => {
     if (!audio?.blob || !audio.signalSeen) return;
     if (!navigator.onLine) { setStatus(t('offlineTranscribe')); return; }
@@ -128,15 +151,17 @@ export default function MClinical() {
         </div>
       </section>
       {phase === 'consent' && (
-        <section className="m-card m-card-pad m-tint-mint" role="dialog" aria-label={consentCopy(selectedLanguage).title}>
-          <h2 className="m-steps-title">{consentCopy(selectedLanguage).title}</h2>
-          <p className="m-record-intro">{consentCopy(selectedLanguage).body}</p>
-          <p className="m-record-intro">Consent text version: {CONSENT_TEXT_VERSION}</p>
-          <div className="m-record-modes">
-            <button className="m-btn m-btn-primary" onClick={grantAndStart}>{consentCopy(selectedLanguage).agree}</button>
-            <button className="m-btn m-btn-soft" onClick={() => setPhase('idle')}>{consentCopy(selectedLanguage).later}</button>
-          </div>
-        </section>
+        <div className="m-consent-backdrop" onClick={declineConsent}>
+          <section className="m-consent-modal" role="dialog" aria-modal="true" aria-label={consentCopy(selectedLanguage).title} onClick={e => e.stopPropagation()}>
+            <h2 className="m-steps-title">{consentCopy(selectedLanguage).title}</h2>
+            <p className="m-record-intro">{consentCopy(selectedLanguage).body}</p>
+            <p className="m-record-intro">Consent text version: {CONSENT_TEXT_VERSION}</p>
+            <div className="m-record-modes">
+              <button ref={consentAgreeRef} className="m-btn m-btn-primary" onClick={grantAndStart}>{consentCopy(selectedLanguage).agree}</button>
+              <button className="m-btn m-btn-soft" onClick={declineConsent}>{consentCopy(selectedLanguage).later}</button>
+            </div>
+          </section>
+        </div>
       )}
       <section className="m-card m-card-pad m-tint-peach">
         <label className="m-record-language">{t('consultationLanguage')}
@@ -151,6 +176,9 @@ export default function MClinical() {
             <span style={{ width: `${Math.min(100, level * 500)}%` }} />
           </div>
           <p className="m-record-clock">{Math.floor(seconds / 60)}:{String(Math.floor(seconds % 60)).padStart(2, '0')} <span>{phase === 'recording' ? t('recording') : t('stopped')}</span></p>
+          {consentGiven && !['recording', 'requesting', 'transcribing', 'consent'].includes(phase) && (
+            <button className="m-btn m-btn-ghost m-consent-withdraw" onClick={withdrawConsent}>{consentCopy(selectedLanguage).withdraw}</button>
+          )}
           <button className="m-clin-rec" disabled={phase === 'requesting' || phase === 'transcribing'} onClick={phase === 'recording' ? stop : start}>
             <span className="m-clin-rec-disc"><IconMic size={24} /></span>
             <span><b>{phase === 'recording' ? t('stopRecording') : phase === 'requesting' ? t('openingMic') : audio ? t('recordAgain') : t('recordConsultation')}</b><em>{phase === 'recording' ? 'Tap to finish and keep the audio' : t('practiceParticipant')}</em></span>
