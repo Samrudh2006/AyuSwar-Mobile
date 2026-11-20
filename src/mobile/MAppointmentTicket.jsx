@@ -39,18 +39,25 @@ export default function MAppointmentTicket() {
   // Real local booking wins; otherwise a clearly labelled sample.
   const fromState = location.state?.ticket;
   const fromQueue = Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 ? appointmentsQueue[appointmentsQueue.length - 1] : null;
+  // Exact date, never a floating "Today"/"Tomorrow" on a saved or printed ticket.
+  const exactDate = d => (d === 'Today' || d === 'Tomorrow')
+    ? new Date(Date.now() + (d === 'Tomorrow' ? 86400000 : 0)).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
+    : d;
   const ticket = fromState || (fromQueue && {
     sample: false,
+    synthetic: !!fromQueue.isSyntheticFixture,
     patient: fromQueue.patientName || patientProfile?.name || '',
-    ageGender: fromQueue.ageGender || '',
+    ageGender: fromQueue.ageGender || [fromQueue.age && `${fromQueue.age}`, fromQueue.gender].filter(Boolean).join(' / '),
     bookingRef: fromQueue.bookingRef || fromQueue.id || fromQueue.token || '',
     doctor: fromQueue.doctorName || '',
-    department: fromQueue.department || '',
-    date: fromQueue.date || '',
+    department: fromQueue.department || fromQueue.specialty || '',
+    date: exactDate(fromQueue.date || ''),
     time: fromQueue.time || '',
-    mode: fromQueue.mode || '',
+    mode: fromQueue.mode || 'In-Person OPD',
     token: fromQueue.token || '',
-    status: fromQueue.status || t('Request sent · hospital confirms')
+    status: fromQueue.isSyntheticFixture
+      ? `${fromQueue.status || 'Waiting'} · synthetic demo queue entry - no hospital involved.`
+      : (fromQueue.status || t('Request sent · hospital confirms'))
   }) || SAMPLE_TICKET;
 
   React.useEffect(() => {
@@ -97,7 +104,7 @@ export default function MAppointmentTicket() {
       <section className="m-tkt-wrap">
         <div className="m-tkt">
           <div className="m-tkt-demo">
-            {ticket.sample ? t('DEMO · PROTOTYPE PREVIEW · NOT A REAL HOSPITAL APPOINTMENT') : t('LOCAL BOOKING REQUEST · HOSPITAL CONFIRMATION PENDING')}
+            {ticket.sample || ticket.synthetic ? t('DEMO · SYNTHETIC PREVIEW · NOT A REAL HOSPITAL APPOINTMENT') : t('LOCAL BOOKING REQUEST · HOSPITAL CONFIRMATION PENDING')}
           </div>
           <div className="m-tkt-body">
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
@@ -125,13 +132,15 @@ export default function MAppointmentTicket() {
             </div>
             <div className="m-tkt-qr">
               {qrUrl ? <img src={qrUrl} alt={`QR code carrying booking reference ${ticket.bookingRef}`} /> : <p>{t('QR unavailable on this device.')}</p>}
-              <h5>{ticket.sample ? t('Demo preview QR') : t('Ticket QR')}</h5>
+              <h5>{ticket.sample || ticket.synthetic ? t('Demo preview QR') : t('Ticket QR')}</h5>
               <p>{t('Carries only the booking reference for ticket lookup. No health details stored in this code.')}</p>
             </div>
             <div className="m-tkt-foot">
               {ticket.sample
                 ? t('Prototype ticket with sample details. A real ticket is issued only after the hospital confirms the slot. This image is a layout preview of the planned ticket.')
-                : t('This ticket shows a local booking request. It becomes valid only after the hospital confirms the slot. No confirmation has been received in this build.')}
+                : ticket.synthetic
+                  ? t('This ticket renders the current synthetic demo queue entry. No booking was sent anywhere; a real ticket is issued only after a hospital confirms a slot.')
+                  : t('This ticket shows a local booking request. It becomes valid only after the hospital confirms the slot. No confirmation has been received in this build.')}
             </div>
           </div>
         </div>
