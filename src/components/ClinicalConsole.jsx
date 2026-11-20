@@ -1101,6 +1101,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             <div style={{
               width: '46px',
               height: '46px',
+              flexShrink: 0,
               borderRadius: '12px',
               background: '#0F4C5C',
               color: '#ffffff',
@@ -1147,7 +1148,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
           </div>
 
           {/* Asymmetric Cross-Lingual Language Bridge */}
-          <div style={{
+          <div className="cc-language-bridge" style={{
             display: 'flex',
             alignItems: 'center',
             gap: '12px',
@@ -1187,7 +1188,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               </div>
             </div>
 
-            <ArrowRight size={14} color="#698892" />
+            <ArrowRight className="cc-bridge-arrow" size={14} color="#698892" style={{ flexShrink: 0 }} />
 
             {/* Output: Patient Vernacular Mother Tongue */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>

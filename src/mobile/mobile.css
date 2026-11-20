@@ -1534,3 +1534,17 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
     white-space: normal !important;
   }
 }
+
+/* Language bridge in embedded consoles: stack vertically on narrow screens
+   so the connector arrow never orphans on its own line; point it down. */
+@media (max-width: 640px) {
+  .m-embed-responsive .cc-language-bridge {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    flex-wrap: nowrap !important;
+  }
+  .m-embed-responsive .cc-language-bridge .cc-bridge-arrow {
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}

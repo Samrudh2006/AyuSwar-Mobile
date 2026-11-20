@@ -577,7 +577,7 @@ export default function PrescriptionScannerView() {
           AyuVision Blister Strip & Prescription Scanner
         </h1>
         <p style={{ fontSize: '14.5px', color: '#37525C', maxWidth: '850px', lineHeight: 1.6 }}>
-          Read packaging or prescription text on your device with Tesseract OCR. Check every word against the original. Local dictionary suggestions are unverified candidates, not medicine identification, substitution, live pricing or stock checks.
+          This scanner can read packaging or prescription photos on your device with Tesseract OCR, or import the text layer of a prescription PDF locally. Check every word against the original. Local dictionary suggestions are unverified candidates, not medicine identification, substitution, live pricing or stock checks.
         </p>
       </div>
 
@@ -599,10 +599,12 @@ export default function PrescriptionScannerView() {
             <Sparkles size={18} color="#0D9488" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#0F766E' }}>
-                Live In-Browser OCR Result Active
+                {liveOcrResult.sourceKind === 'pdf-text-layer' ? 'PDF Text Import Active' : 'Live In-Browser OCR Result Active'}
               </div>
               <div style={{ fontSize: '12px', color: '#134E4A' }}>
-                Parsed from your uploaded image / camera frame in WebAssembly.
+                {liveOcrResult.sourceKind === 'pdf-text-layer'
+                  ? 'Imported from the PDF text layer on this device. No OCR or optical inspection was run.'
+                  : 'Parsed from your uploaded image / camera frame in WebAssembly.'}
               </div>
             </div>
           </div>
@@ -1098,7 +1100,9 @@ export default function PrescriptionScannerView() {
             </div>
           )}
 
-          {/* OpenCV.js Computer Vision Preprocessing Badge & Toggle */}
+          {/* OpenCV.js Computer Vision Preprocessing Badge & Toggle - image scans only,
+              hidden while a PDF text import is active (no image to preprocess) */}
+          {liveOcrResult?.sourceKind !== 'pdf-text-layer' && (
           <div style={{
             background: useCvEnhancement ? '#F0FDF4' : '#F8FAFC',
             border: useCvEnhancement ? '1px solid #BBF7D0' : '1px solid #D0DFE2',
@@ -1138,6 +1142,7 @@ export default function PrescriptionScannerView() {
               {useCvEnhancement ? 'Preprocessing on' : 'CV: OFF'}
             </button>
           </div>
+          )}
 
           {/* Action Button */}
           {uploadedImage && (
