@@ -293,7 +293,7 @@ import { ASR_MODELS, asrTotalBytes } from '../services/localVoice/localAsrManife
 const ASR_COPY = {
   'en-IN': {
     title: 'Offline transcription pack (Telugu)',
-    body: 'An optional on-device transcriber for short recorded clips (up to 15 seconds) when the network transcription is unavailable. After download it runs entirely on this device and your audio never leaves it. Every result is a DRAFT that a person must review: the model can omit or substitute words, so it is never applied to a record automatically.',
+    body: 'An optional on-device transcriber for short recorded clips (up to 15 seconds) when the network transcription is unavailable. Clips this pack transcribes are processed entirely on this device and that audio never leaves it. The network transcription service stays the default whenever it is available - installing this pack does not turn it off. Every result is a DRAFT that a person must review: the model can omit or substitute words, so it is never applied to a record automatically.',
     size: (mb, mib, exact) => `Download size: ${exact} bytes (about ${mb} / ${mib}). Model: AI4Bharat Telugu IndicConformer, community ONNX conversion (OpenVoiceOS), locally converted to a smaller INT8 build by this project - not an official AI4Bharat/OpenVoiceOS artifact. License: MIT.`,
     wifiOnly: 'Download over Wi-Fi only (recommended)',
     allowCellular: 'Allow mobile data for this download',
@@ -313,7 +313,7 @@ const ASR_COPY = {
   },
   'te-IN': {
     title: 'ఆఫ్‌లైన్ ట్రాన్స్‌క్రిప్షన్ ప్యాక్ (తెలుగు)',
-    body: 'నెట్‌వర్క్ ట్రాన్స్‌క్రిప్షన్ అందుబాటులో లేనప్పుడు చిన్న రికార్డ్ చేసిన క్లిప్‌లను (15 సెకన్ల వరకు) ఆన్-డివైస్‌లో ట్రాన్స్‌క్రైబ్ చేసే ఐచ్ఛిక ప్యాక్. డౌన్‌లోడ్ తర్వాత ఇది పూర్తిగా ఈ పరికరంలోనే నడుస్తుంది; మీ ఆడియో బయటకు వెళ్లదు. ప్రతి ఫలితం డ్రాఫ్ట్ మాత్రమే - ఒక వ్యక్తి తప్పనిసరిగా సమీక్షించాలి: మోడల్ పదాలను విడిచిపెట్టవచ్చు లేదా మార్చవచ్చు, కాబట్టి ఇది ఎప్పుడూ ఆటోమ్యాటిక్‌గా రికార్డ్‌లోకి వర్తింపబడదు.',
+    body: 'నెట్‌వర్క్ ట్రాన్స్‌క్రిప్షన్ అందుబాటులో లేనప్పుడు చిన్న రికార్డ్ చేసిన క్లిప్‌లను (15 సెకన్ల వరకు) ఆన్-డివైస్‌లో ట్రాన్స్‌క్రైబ్ చేసే ఐచ్ఛిక ప్యాక్. ఈ ప్యాక్ ట్రాన్స్‌క్రైబ్ చేసే క్లిప్‌లు పూర్తిగా ఈ పరికరంలోనే ప్రాసెస్ అవుతాయి; ఆ ఆడియో బయటకు వెళ్లదు. నెట్‌వర్క్ ట్రాన్స్‌క్రిప్షన్ సర్వీస్ అందుబాటులో ఉన్నప్పుడల్లా అదే డిఫాల్ట్ - ఈ ప్యాక్ ఇన్‌స్టాల్ చేయడం దాన్ని ఆపదు. ప్రతి ఫలితం డ్రాఫ్ట్ మాత్రమే - ఒక వ్యక్తి తప్పనిసరిగా సమీక్షించాలి: మోడల్ పదాలను విడిచిపెట్టవచ్చు లేదా మార్చవచ్చు, కాబట్టి ఇది ఎప్పుడూ ఆటోమ్యాటిక్‌గా రికార్డ్‌లోకి వర్తింపబడదు.',
     size: (mb, mib, exact) => `డౌన్‌లోడ్ పరిమాణం: ${exact} బైట్లు (సుమారు ${mb} / ${mib}). మోడల్: AI4Bharat తెలుగు IndicConformer, కమ్యూనిటీ ONNX కన్వర్షన్ (OpenVoiceOS), ఈ ప్రాజెక్ట్ చేత స్థానికంగా చిన్న INT8 బిల్డ్‌గా మార్చబడింది - ఇది అధికారిక AI4Bharat/OpenVoiceOS ఆర్టిఫాక్ట్ కాదు. లైసెన్స్: MIT.`,
     wifiOnly: 'Wi-Fi లో మాత్రమే డౌన్‌లోడ్ (సిఫార్సు)',
     allowCellular: 'ఈ డౌన్‌లోడ్ కోసం మొబైల్ డేటాను అనుమతించండి',
@@ -333,7 +333,7 @@ const ASR_COPY = {
   },
   'hi-IN': {
     title: 'ऑफ़लाइन ट्रांसक्रिप्शन पैक (तेलुगु)',
-    body: 'नेटवर्क ट्रांसक्रिप्शन उपलब्ध न होने पर छोटी रिकॉर्ड की गई क्लिप (15 सेकंड तक) के लिए वैकल्पिक ऑन-डिवाइस ट्रांसक्राइबर। डाउनलोड के बाद यह पूरी तरह इसी डिवाइस पर चलता है और आपका ऑडियो बाहर नहीं जाता। हर परिणाम एक ड्राफ़्ट है जिसे किसी व्यक्ति को ज़रूर देखना होगा: मॉडल शब्द छोड़ या बदल सकता है, इसलिए इसे कभी भी अपने-आप रिकॉर्ड पर लागू नहीं किया जाता।',
+    body: 'नेटवर्क ट्रांसक्रिप्शन उपलब्ध न होने पर छोटी रिकॉर्ड की गई क्लिप (15 सेकंड तक) के लिए वैकल्पिक ऑन-डिवाइस ट्रांसक्राइबर। यह पैक जो क्लिप ट्रांसक्राइब करता है वे पूरी तरह इसी डिवाइस पर प्रोसेस होती हैं और वह ऑडियो बाहर नहीं जाता। नेटवर्क ट्रांसक्रिप्शन सेवा उपलब्ध होने पर हमेशा डिफ़ॉल्ट रहती है - यह पैक इंस्टॉल करने से वह बंद नहीं होती। हर परिणाम एक ड्राफ़्ट है जिसे किसी व्यक्ति को ज़रूर देखना होगा: मॉडल शब्द छोड़ या बदल सकता है, इसलिए इसे कभी भी अपने-आप रिकॉर्ड पर लागू नहीं किया जाता।',
     size: (mb, mib, exact) => `डाउनलोड आकार: ${exact} बाइट्स (लगभग ${mb} / ${mib})। मॉडल: AI4Bharat तेलुगु IndicConformer, कम्युनिटी ONNX कन्वर्ज़न (OpenVoiceOS), इस प्रोजेक्ट द्वारा स्थानीय रूप से छोटे INT8 बिल्ड में बदला गया - यह आधिकारिक AI4Bharat/OpenVoiceOS आर्टिफैक्ट नहीं है। लाइसेंस: MIT.`,
     wifiOnly: 'केवल Wi-Fi पर डाउनलोड (अनुशंसित)',
     allowCellular: 'इस डाउनलोड के लिए मोबाइल डेटा अनुमत करें',

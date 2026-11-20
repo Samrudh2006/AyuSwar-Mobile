@@ -10,7 +10,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fraunces&weight=600&size=22&duration=2600&pause=900&color=0F4C5C&center=true&vCenter=true&width=640&height=45&lines=Ambient+clinical+voice+scribe+for+Indian+healthcare;%E0%B0%86%E0%B0%AF%E0%B1%81%E0%B0%B8%E0%B1%8D%E0%B0%B5%E0%B0%B0%3A+%E0%B0%AE%E0%B1%80+%E0%B0%B5%E0%B0%BE%E0%B0%A3%E0%B0%BF%2C+%E0%B0%AE%E0%B1%80+%E0%B0%AD%E0%B0%BE%E0%B0%B7%E0%B0%B2%E0%B1%8B;Spoken+Audio-Rx+%C2%B7+Blister+OCR+%C2%B7+Patient+portal;Synthetic+data+only+-+honest+by+design" alt="Typing banner" />
 </a>
 
-![Test suite](https://img.shields.io/badge/tests-98%20passed%20%C2%B7%202%20conditional%20skips%20(18%20Nov%202026)-0F4C5C)
+![Test suite](https://img.shields.io/badge/tests-237%20passed%20%C2%B7%203%20conditional%20skips%20(20%20Nov%202026)-0F4C5C)
 ![Build](https://img.shields.io/badge/build-passing-0D9488)
 ![Platform](https://img.shields.io/badge/platform-Android%20(Capacitor)%20%2B%20web-D97706)
 ![Data](https://img.shields.io/badge/demo%20data-synthetic%20samples-486770)
@@ -127,16 +127,29 @@ cd android && ./gradlew assembleDebug   # verified with JDK 21
 Tests:
 
 ```bash
-npm test    # 98 specs + 2 conditional skips (see metrics below)
+npm test    # 237 specs + 3 conditional skips (see metrics below)
 ```
 
 ---
+
+## 📦 Offline voice packs (optional, on-device)
+
+Two optional packs run inference entirely on-device after download (WASM, no network). Both are opt-in: nothing downloads without an explicit consent screen that shows the exact byte size; Wi-Fi only unless you tick "allow mobile data"; every file is sha256-verified against the pinned manifest on download and again on every load; a mismatch deletes the file and keeps nothing. Install from the app menu (Menu → Offline voice pack / Offline transcription pack).
+
+| Pack | Size | What it does | Hard limits |
+|---|---|---|---|
+| Offline voice pack (Telugu TTS) | 91,017,873 bytes | Speaks ONLY three fixed qualified interface prompts (greeting, retry, read-aloud instruction) when the network voice is unavailable | Never speaks patient/clinical/arbitrary text; CC-BY-4.0 weights, MIT code (sulabhkatiyar/indic-tiny-tts-telugu) |
+| Offline transcription pack (Telugu ASR) | 187,133,682 bytes | Draft transcription of short recorded clips when network STT is unavailable | **0.1-15 second clips only** (resampled to 16 kHz mono); every result is a DRAFT a person must review - the model omits/substitutes words and output is never auto-applied to a record; MIT (AI4Bharat IndicConformer, community ONNX conversion by OpenVoiceOS, locally converted to INT8 by this project - not an official artifact) |
+
+**Pack hosting status (honest):** the TTS pack downloads today from its pinned Hugging Face revision. The ASR transcription pack's large files are prepared for publication as GitHub Release assets on this repository but are **not yet published** - the ASR pack cannot download until that Release exists. The tiny vocab file pins to the original repo. Local INT8 quantization of the ASR model is byte-reproducible from the pinned sources with onnxruntime 1.23.2 (`quantize_dynamic`, MatMul/Gemm only).
+
+Measured on desktop (single runs, exploratory - NOT phone numbers): built-app browser worker transcribed a 10 s fixture in ~3.5 s (WASM, same-origin assets only); TTS worker synthesized the qualified 3.1 s prompt in ~1.6-8.4 s depending on run. Across machines/runtimes the same pinned ASR model bytes produce transcripts differing by a few characters on borderline frames - one more reason the tier is draft-only.
 
 ## 🏗️ Architecture
 
 - **Front end:** React + Vite, custom mobile lens (390px-first), Fraunces + Albert Sans, cream/teal/saffron design system
 - **Mobile shell:** Capacitor 6, native splash, local asset bundle, live API calls pointed at the deployed backend
-- **Voice:** Gnani proxy (`/api/gnani/tts`, `/api/gnani/stt`), then a clearly-labeled browser Web Speech fallback, then an honest unavailable state. No silent failures: playback that does not start says so on screen. Browser speech recognition behavior depends on the browser and OS
+- **Voice:** Gnani proxy (`/api/gnani/tts`, `/api/gnani/stt`), then clearly-labeled fallbacks: an explicit opt-in Sarvam TTS tier (third-party processor, per-character cost, off by default), on-device offline packs (below), then the browser Web Speech fallback, then an honest unavailable state. No silent failures: playback that does not start says so on screen. Browser speech recognition behavior depends on the browser and OS
 - **OCR:** Tesseract.js running fully on-device; results labeled as unverified candidates until checked against the original label
 - **Data:** patient-portal entries persist in the browser/app `localStorage` on the device. Voice features call the listed remote endpoints (`/api/gnani/tts`, `/api/gnani/stt`) on the deployed origin, and browser speech recognition uses the browser/OS recognizer, which may send audio to the OS vendor. A full network-traffic inventory has not been independently audited.
 
@@ -146,8 +159,9 @@ npm test    # 98 specs + 2 conditional skips (see metrics below)
 
 | Metric | Result | Scope |
 |---|---|---|
-| Test suite | **98 passed, 2 conditional skips, 0 failed** | `npm test` on this repo, 18:16 IST |
-| Production build | Green, 132 prerendered/offline URLs | `npm run build`, 18:16 IST |
+| Test suite | **237 passed, 3 conditional skips, 0 failed** | `npm test` on this repo, 20 Nov 2026 |
+| Production build | Green, 181 static shell assets | `npm run build`, 20 Nov 2026 |
+| Debug APK (working tree) | 69,594,976 bytes after packaging dedupe (was 78,886,799 before; published candidate is 57,009,839 with a different feature set) | `gradlew assembleDebug`, 20 Nov 2026 |
 | TTS endpoint | HTTP 200, valid 38 KB WAV returned | Live `POST /api/gnani/tts`, 18 Nov |
 | Runtime failure honesty | Blank-scan and no-voice cases show explicit notices, no fake progress | Headless Chromium checks, 18 Nov |
 
@@ -160,7 +174,8 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 - **Transcript preservation is not accuracy validation:** `normalizeCodeMixedClinicalText` does not rewrite supplied text into medicine names, strengths or diagnostic codes. Recognition errors still require clinician review. Browser/Android speech processing depends on the provider and device settings and is not guaranteed to stay on-device.
 - **Benchmark fixtures are not clinical evidence:** bundled CSVs and historical example annotations do not establish live recognizer accuracy, preservation of medical intent or absence of harm. See [benchmark verification limits](benchmarks/RESULTS.md).
 
-- **Native Android runtime untested:** the APK is built and its bundled assets verified, but installation, audio playback, microphone and camera permissions have not been exercised on a physical device. All native verification is pending.
+- **Native Android runtime untested:** the APK is built and its bundled assets verified, but installation, audio playback, microphone and camera permissions have not been exercised on a physical device. All native verification is pending. Offline-pack inference is verified in desktop browser WASM and Node only - not on Android WebView, not on low-RAM hardware, and no device WER/latency numbers exist.
+- **Offline ASR is draft-quality:** the on-device transcription pack produces drafts with observed omissions and substitutions; identical model bytes give slightly different transcripts across machines/runtimes (observed, cause unconfirmed). Output is labeled draft and requires human review everywhere it appears.
 - **Uploaded reports are not read:** the report organizer stores what you type; it never interprets an uploaded file and says so on screen.
 - **Scanner OCR is English-model only** and its dictionary matches are unverified candidates, not medicine identification.
 - **Synthetic sample data:** bundled vitals, reports, clinicians and consultations are demo data; the app is for demo use only, not real care.
@@ -172,7 +187,7 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 - Consent-based medicine reminders
 - Sandbox-verified external integrations before any "live" label
 - Clinician-led validation before anything resembling real use
-- Open-source Telugu voice fallback (under active qualification)
+- Physical-device verification of the offline voice/transcription packs (desktop-verified only today)
 
 ---
 
