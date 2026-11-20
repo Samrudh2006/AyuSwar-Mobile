@@ -36,6 +36,26 @@ const CONSENT_COPY = {
 };
 const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
 
+// Noise gate copy: honest, off by default, warns about quiet speech.
+const GATE_COPY = {
+  'en-IN': {
+    toggle: 'Noise gate (beta)',
+    hint: 'Off by default. When on, steady background hum between speech is reduced at export; quiet voices below the threshold may be softened. Raw audio is always captured first.',
+    onTag: 'Noise gate on (beta)'
+  },
+  'te-IN': {
+    toggle: 'నాయిజ్ గేట్ (బీటా)',
+    hint: 'డిఫాల్ట్‌గా ఆఫ్. ఆన్ చేస్తే, మాటల మధ్య నిలిచే బ్యాక్‌గ్రౌండ్ శబ్దం ఎక్స్‌పోర్ట్ సమయంలో తగ్గుతుంది; మెల్లగా మాట్లాడే స్వరం కొంత తగ్గొచ్చు. ముందు ఎల్లప్పుడూ అసలు ఆడియో రికార్డ్ అవుతుంది.',
+    onTag: 'నాయిజ్ గేట్ ఆన్ (బీటా)'
+  },
+  'hi-IN': {
+    toggle: 'नॉइज़ गेट (बीटा)',
+    hint: 'डिफ़ॉल्ट रूप से बंद। चालू करने पर, बोलने के बीच की स्थिर पृष्ठभूमि आवाज़ एक्सपोर्ट के समय घटती है; धीमी आवाज़ थोड़ी कम हो सकती है। मूल ऑडियो हमेशा पहले रिकॉर्ड होता है।',
+    onTag: 'नॉइज़ गेट चालू (बीटा)'
+  }
+};
+const gateCopy = lang => GATE_COPY[lang] || GATE_COPY['en-IN'];
+
 export default function MClinical() {
   const navigate = useNavigate();
   const { selectedLanguage } = useApp();
@@ -43,6 +63,7 @@ export default function MClinical() {
   const [encId, setEncId] = React.useState(CLINICAL_ENCOUNTERS[0].id);
   const [mode, setMode] = React.useState('mic');
   const [phase, setPhase] = React.useState('idle');
+  const [noiseGate, setNoiseGate] = React.useState(false);
   const [status, setStatus] = React.useState('');
   const [turns, setTurns] = React.useState([]);
   const [audio, setAudio] = React.useState(null);
@@ -80,7 +101,7 @@ export default function MClinical() {
         if (rms > 0.002) signalSeen.current = true;
         setLevel(rms); setSeconds(duration);
         if (duration >= 180 && recorder.current) stop();
-      });
+      }, { noiseGate });
       if (!mounted.current) { capture.stop(); return; }
       recorder.current = capture; setPhase('recording');
       setStatus(t('recordingActual'));
@@ -187,7 +208,11 @@ export default function MClinical() {
             <span className="m-clin-rec-disc"><IconMic size={24} /></span>
             <span><b>{phase === 'recording' ? t('stopRecording') : phase === 'requesting' ? t('openingMic') : audio ? t('recordAgain') : t('recordConsultation')}</b><em>{phase === 'recording' ? 'Tap to finish and keep the audio' : t('practiceParticipant')}</em></span>
           </button>
-          {audio && <div className="m-record-playback"><label>{t('sourceRecording')} · {audio.duration.toFixed(1)} {t('secondsLabel')}</label><audio controls src={audio.url} /><button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={transcribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
+          <label className="m-noisegate-toggle">
+            <input type="checkbox" checked={noiseGate} disabled={phase === 'recording' || phase === 'requesting'} onChange={(e) => setNoiseGate(e.target.checked)} />
+            <span><b>{gateCopy(selectedLanguage).toggle}</b> · {gateCopy(selectedLanguage).hint}</span>
+          </label>
+          {audio && <div className="m-record-playback"><label>{t('sourceRecording')} · {audio.duration.toFixed(1)} {t('secondsLabel')}{audio.noiseGate ? ` · ${gateCopy(selectedLanguage).onTag}` : ''}</label><audio controls src={audio.url} /><button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={transcribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
         </> : <>
           <h2 className="m-steps-title">{t('trySample')}</h2>
           <p className="m-record-intro">{encounter.patient.name} · {encounter.patient.age}y · {t('noMicSample')}</p>

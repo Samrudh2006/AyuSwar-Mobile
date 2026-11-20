@@ -1446,3 +1446,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 }
 .m-applock-error { color: #B91C1C; font-size: 13px; margin: 0; }
 .m-applock-msg { color: #0F4C5C; font-size: 13px; margin: 8px 0 0; }
+
+/* Noise gate toggle (recording screen) */
+.m-noisegate-toggle { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 13px; line-height: 1.45; color: #33523f; }
+.m-noisegate-toggle input { margin-top: 2px; flex: none; }

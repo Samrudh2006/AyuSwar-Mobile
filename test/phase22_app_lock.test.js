@@ -135,12 +135,37 @@ await record('MobileRoot relocks on visibilitychange/pagehide', async () => {
   assert(src.includes('document.hidden'), 'relock must trigger only when hidden');
 });
 
-// 10. Recorder noise gate (rural-PHC must-have) is implemented, not just documented.
-await record('consultationRecorder implements an RMS noise gate', async () => {
+// 10. Recorder noise gate (rural-PHC must-have): off by default,
+//     user-controllable, raw frames always captured, gate applied only at
+//     export on a copy, and honestly labeled (no denoiser claim).
+await record('consultationRecorder noise gate is conservative and export-time only', async () => {
   const src = readFileSync(new URL('../src/mobile/consultationRecorder.js', import.meta.url), 'utf8');
-  assert(src.includes('GATE_THRESHOLD') && src.includes('GATE_HOLD_FRAMES'), 'noise gate constants missing');
-  assert(src.includes('frame.fill(0)'), 'gate must silence sub-threshold frames');
+  assert(src.includes('options.noiseGate === true'), 'gate must default to off');
+  assert(src.includes('applyNoiseGate'), 'gate export function missing');
+  assert(!src.includes('frame.fill(0)'), 'gate must not destroy audio during capture');
+  assert(src.includes('RAW frame, always retained'), 'raw-capture guarantee missing');
+  assert(src.includes('NOT a validated speech denoiser'), 'honest no-denoiser-claim wording missing');
   assert(src.includes('channelCount: 1'), 'mono capture constraint missing');
+  const { applyNoiseGate, GATE_THRESHOLD, GATE_HOLD_FRAMES } = await import('../src/mobile/consultationRecorder.js');
+  assert(GATE_THRESHOLD > 0 && GATE_HOLD_FRAMES > 0, 'gate constants must be exported for review');
+  const loud = new Float32Array(64).fill(0.5);
+  const quiet = new Float32Array(64).fill(0.001);
+  const raw = [loud, quiet, quiet, quiet, quiet, quiet, quiet, quiet];
+  const gated = applyNoiseGate(raw);
+  assert(gated[0] === loud, 'loud frame must pass through');
+  assert(gated[7].every((v) => v === 0), 'frame after hold expiry must be silenced');
+  assert(raw[7].some((v) => v !== 0), 'raw source must remain unmodified');
+});
+
+// 10b. Recording UI exposes the toggle (off by default) and a visible
+//      indicator on the playback card when the gate was on.
+await record('recording UI shows noise gate toggle and honest indicator', async () => {
+  const src = readFileSync(new URL('../src/mobile/MClinical.jsx', import.meta.url), 'utf8');
+  assert(src.includes('m-noisegate-toggle'), 'toggle element missing');
+  assert(src.includes("useState(false)"), 'toggle must default to off');
+  assert(src.includes('{ noiseGate }'), 'option must be passed to recorder');
+  assert(src.includes('audio.noiseGate'), 'playback indicator missing');
+  assert(src.includes('(beta)'), 'honest beta labeling missing');
 });
 
 // 11. Assistant input placeholder is demo-safe (no clinical/dosage invitation).
