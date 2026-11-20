@@ -1,5 +1,9 @@
 // Memory-only PCM recorder. No upload until the user taps Transcribe.
+// Recording requires explicit on-device recording consent (rural-PHC must-have).
+import { assertRecordingConsent } from './recordingConsent';
+
 export async function openConsultationRecorder(onLevel) {
+  assertRecordingConsent();
   if (!navigator.mediaDevices?.getUserMedia) throw new Error('Microphone recording is unavailable in this browser.');
   const stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } });
   let ctx;

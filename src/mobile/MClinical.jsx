@@ -5,7 +5,30 @@ import { mt } from './mobileTranslations';
 import { CLINICAL_ENCOUNTERS } from '../data/clinicalEncounters';
 import { speechService } from '../services/indicSpeechService';
 import { openConsultationRecorder } from './consultationRecorder';
+import { grantRecordingConsent, RecordingConsentRequiredError, CONSENT_TEXT_VERSION } from './recordingConsent';
 import { IconMic, IconChevronR, IconHeart } from './MIcons';
+
+const CONSENT_COPY = {
+  'en-IN': {
+    title: 'Recording consent',
+    body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. You can withdraw this consent at any time.',
+    agree: 'I agree, start recording',
+    later: 'Not now'
+  },
+  'te-IN': {
+    title: 'రికార్డింగ్ సమ్మతి',
+    body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు ఎప్పుడైనా ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు.',
+    agree: 'నేను అంగీకరిస్తున్నాను, రికార్డింగ్ ప్రారంభించండి',
+    later: 'ఇప్పుడు వద్దు'
+  },
+  'hi-IN': {
+    title: 'रिकॉर्डिंग सहमति',
+    body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। आप कभी भी यह सहमति वापस ले सकते हैं।',
+    agree: 'मैं सहमत हूँ, रिकॉर्डिंग शुरू करें',
+    later: 'अभी नहीं'
+  }
+};
+const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
 
 export default function MClinical() {
   const navigate = useNavigate();
@@ -55,8 +78,15 @@ export default function MClinical() {
       setStatus(t('recordingActual'));
     } catch (error) {
       setPhase('idle'); setLevel(0);
+      if (error instanceof RecordingConsentRequiredError || error.name === 'RecordingConsentRequiredError') {
+        setPhase('consent'); setStatus(''); return;
+      }
       setStatus(error.name === 'NotAllowedError' ? t('micDenied') : `${t('recordingUnavailable')}: ${error.message}`);
     }
+  };
+  const grantAndStart = () => {
+    grantRecordingConsent();
+    start();
   };
   const transcribe = async () => {
     if (!audio?.blob || !audio.signalSeen) return;
@@ -97,6 +127,17 @@ export default function MClinical() {
           <button className={`m-btn ${mode === 'sample' ? 'm-btn-primary' : 'm-btn-soft'}`} disabled={busy} onClick={() => chooseMode('sample')}>{t('sampleDemo')}</button>
         </div>
       </section>
+      {phase === 'consent' && (
+        <section className="m-card m-card-pad m-tint-mint" role="dialog" aria-label={consentCopy(selectedLanguage).title}>
+          <h2 className="m-steps-title">{consentCopy(selectedLanguage).title}</h2>
+          <p className="m-record-intro">{consentCopy(selectedLanguage).body}</p>
+          <p className="m-record-intro">Consent text version: {CONSENT_TEXT_VERSION}</p>
+          <div className="m-record-modes">
+            <button className="m-btn m-btn-primary" onClick={grantAndStart}>{consentCopy(selectedLanguage).agree}</button>
+            <button className="m-btn m-btn-soft" onClick={() => setPhase('idle')}>{consentCopy(selectedLanguage).later}</button>
+          </div>
+        </section>
+      )}
       <section className="m-card m-card-pad m-tint-peach">
         <label className="m-record-language">{t('consultationLanguage')}
           <select disabled={busy} value={encounter.id} onChange={e => { setEncId(e.target.value); setTurns([]); setAudio(null); setPhase('idle'); setStatus(''); }}>
