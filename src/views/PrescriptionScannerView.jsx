@@ -566,11 +566,11 @@ export default function PrescriptionScannerView() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '12px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(217, 119, 6, 0.1)', color: '#92400E', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
             <Scan size={14} />
-            <span>REAL IN-BROWSER TESSERACT OCR WORKSPACE</span>
+            <span>REAL IN-BROWSER OCR + PDF TEXT WORKSPACE</span>
           </div>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#065F46', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 750 }}>
             <ShieldCheck size={14} />
-            <span>Designed for client-side OCR processing</span>
+            <span>Designed for client-side OCR and PDF text processing</span>
           </div>
         </div>
         <h1 style={{ fontSize: '32px', fontWeight: 850, color: '#081C24', marginBottom: '10px' }}>

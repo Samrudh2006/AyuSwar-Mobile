@@ -23,7 +23,8 @@ const loadPdfjs = () => {
 };
 
 // Returns { ok, fileName, pageCount, pages: [{page, text}], truncated }
-// or { ok: false, kind: 'oversize'|'not-pdf'|'password'|'corrupt'|'no-text'|'cancelled' }
+// or { ok: false, kind: 'oversize'|'not-pdf'|'password'|'corrupt'|'no-text' }.
+// Cancellation is caller-side: the caller destroys the loading task and drops state.
 export async function importPdfText(file, { onProgress } = {}) {
   if (!file || file.type !== 'application/pdf') return { ok: false, kind: 'not-pdf' };
   if (file.size > MAX_BYTES) return { ok: false, kind: 'oversize' };
