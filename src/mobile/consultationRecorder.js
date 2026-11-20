@@ -1,6 +1,7 @@
 // Memory-only PCM recorder. No upload until the user taps Transcribe.
 // Recording requires explicit on-device recording consent (rural-PHC must-have).
 import { assertRecordingConsent } from './recordingConsent.js';
+import { resampleTo16k } from '../services/localVoice/resample16k.js';
 
 // Rural-PHC must-have (noise gate), implemented conservatively after audit:
 // the gate is OFF BY DEFAULT and user-controllable from the recording UI.
@@ -69,11 +70,11 @@ export async function openConsultationRecorder(onLevel, options = {}) {
       const pcm = new Float32Array(samples);
       let offset = 0;
       for (const frame of exportFrames) { pcm.set(frame, offset); offset += frame.length; }
+      // Single-sourced resampler (auditor: no third inline copy); raw frames
+      // stay untouched - `pcm` above is already the derived export copy.
+      const resampled = resampleTo16k(pcm, rate, 16000);
       for (let i = 0; i < count; i++) {
-        const position = i * rate / 16000;
-        const index = Math.floor(position);
-        const frac = position - index;
-        const value = Math.max(-1, Math.min(1, pcm[index] * (1 - frac) + (pcm[Math.min(index + 1, samples - 1)] || 0) * frac));
+        const value = Math.max(-1, Math.min(1, resampled[i] || 0));
         view.setInt16(44 + i * 2, Math.round(value * (value < 0 ? 32768 : 32767)), true);
       }
       return new Blob([buffer], { type: 'audio/wav' });
