@@ -786,7 +786,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   marginBottom: '-2px',
                   fontSize: '13.5px',
                   fontWeight: 800,
-                  color: '#698892',
+                  color: '#41606B',
                   cursor: 'pointer'
                 }}
               >
@@ -1744,7 +1744,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   marginBottom: '-2px',
                   fontSize: '15px',
                   fontWeight: 800,
-                  color: '#698892',
+                  color: '#41606B',
                   cursor: 'pointer',
                   transition: 'all 150ms ease'
                 }}
