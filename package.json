@@ -1,7 +1,7 @@
 {
   "name": "ayuswar-ai",
   "private": true,
-  "version": "0.3.13-debug",
+  "version": "0.3.14-debug",
   "type": "module",
   "scripts": {
     "dev": "vite",
