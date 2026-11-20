@@ -157,8 +157,8 @@ export async function verifyCallerAuthorization(req) {
     if (response.ok) {
       const user = await response.json();
       // user_metadata is editable by the user themselves in Supabase and MUST NOT
-        // drive authorization; read role from app_metadata (server-controlled) only.
-        return { mode: 'production', authorized: true, user: { id: user.id, role: user.app_metadata?.role || 'patient' } };
+      // drive authorization; read role from app_metadata (server-controlled) only.
+      return { mode: 'production', authorized: true, user: { id: user.id, role: user.app_metadata?.role || 'patient' } };
     }
     return { mode: 'production', authorized: false, status: 401, error: 'Invalid or expired session token.' };
   } catch {

@@ -75,7 +75,7 @@ export default async function handler(req, res) {
           id: user.id,
           email: user.email,
           phone: user.phone,
-          role: user.user_metadata?.role || 'patient'
+          role: user.app_metadata?.role || 'patient' // app_metadata only: user_metadata is self-editable
         }
       });
     }
