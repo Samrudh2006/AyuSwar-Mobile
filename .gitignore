@@ -57,3 +57,6 @@ FINAL_SCORECARD.md
 # Private Verification Evidence & Archives
 evidence/
 *.zip
+
+__pycache__/
+*.pyc

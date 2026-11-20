@@ -1,0 +1,81 @@
+/**
+ * AyuSwar AI — Data Provenance & STT Metric Engine Verification
+ * test/data_provenance.test.js
+ *
+ * 1. PMBJP official product reference (src/data/pmbjpOfficialProducts.js)
+ *    must carry live-source provenance and honest match typing, and must
+ *    never present an unmatched formulary entry as verified.
+ * 2. The STT benchmark must run dependency-free (stdlib metric engine)
+ *    and report corpus + per-language WER/CER.
+ * 3. stt_metrics known-answer checks (identity, substitution, empty hyp).
+ */
+
+import { execSync } from 'node:child_process';
+import { PMBJP_OFFICIAL_PRODUCTS } from '../src/data/pmbjpOfficialProducts.js';
+
+const results = [];
+const check = (name, fn) => {
+  try {
+    fn();
+    results.push({ name, ok: true });
+  } catch (err) {
+    results.push({ name, ok: false, err });
+  }
+};
+const assert = (cond, msg) => {
+  if (!cond) throw new Error(msg);
+};
+
+check('PMBJP reference carries live source URL and fetch date', () => {
+  assert(PMBJP_OFFICIAL_PRODUCTS.source === 'https://www.pmbi.co.in/ProductList.aspx', 'source URL changed');
+  assert(/^\d{4}-\d{2}-\d{2}$/.test(PMBJP_OFFICIAL_PRODUCTS.fetchedAt), 'fetchedAt must be ISO date');
+});
+
+check('PMBJP entries: match typing honest, matched rows fully sourced', () => {
+  const entries = Object.entries(PMBJP_OFFICIAL_PRODUCTS.entries);
+  assert(entries.length === 39, `expected 39 formulary links, got ${entries.length}`);
+  const allowed = new Set(['exact-strength', 'same-salt-different-strength', 'salt-only', 'not-found']);
+  for (const [id, e] of entries) {
+    assert(allowed.has(e.matchType), `${id}: unknown matchType ${e.matchType}`);
+    if (e.matchType === 'not-found') {
+      assert(e.official === null, `${id}: not-found but official data present`);
+    } else {
+      assert(e.official && e.official.drugCode && e.official.genericName, `${id}: missing official identity`);
+      assert(typeof e.official.mrpInr === 'number' && e.official.mrpInr >= 0, `${id}: invalid MRP`);
+    }
+  }
+});
+
+check('STT benchmark runs stdlib-only with per-language breakdown', () => {
+  const out = execSync('python3 benchmarks/run_stt_benchmark.py', { encoding: 'utf-8' });
+  assert(out.includes('Metric engine:'), 'engine line missing');
+  assert(out.includes('Per-language breakdown:'), 'language breakdown missing');
+  assert(/Telugu\s+n=20/.test(out), 'Telugu group missing');
+  assert(/Hindi\s+n=15/.test(out), 'Hindi group missing');
+  assert(/Code-Mixed\s+n=15/.test(out), 'Code-Mixed group missing');
+  assert(/Word Error Rate \(WER\)\s+: 0\.\d+/.test(out), 'corpus WER missing');
+});
+
+check('stt_metrics known-answer identities hold', () => {
+  const out = execSync(
+    `python3 -c "import sys; sys.path.insert(0,'benchmarks'); import stt_metrics as m; ` +
+    `assert m.wer(['a b c'],['a b c'])==0.0; ` +
+    `assert abs(m.wer(['a b c'],['a x c'])-1/3)<1e-9; ` +
+    `assert m.sentence_wer('a b','')==1.0; ` +
+    `assert m.wer(['Hello, World!'],['hello world'])==0.0; ` +
+    `print('ok')"`,
+    { encoding: 'utf-8' }
+  );
+  assert(out.trim() === 'ok', 'known-answer checks failed');
+});
+
+let failed = 0;
+for (const r of results) {
+  if (r.ok) console.log(`  ✓ ${r.name}`);
+  else {
+    failed += 1;
+    console.error(`  ✗ ${r.name}: ${r.err.message}`);
+  }
+}
+console.log(`data_provenance: ${results.length - failed}/${results.length} passed`);
+process.exit(failed ? 1 : 0);
