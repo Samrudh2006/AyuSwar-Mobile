@@ -1201,10 +1201,10 @@ export default function PrescriptionScannerView() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Raw Extracted Bounding Box / OCR Tokens */}
             <div style={{ background: '#0A2540', color: '#F1F5F9', padding: '12px 14px', borderRadius: '10px', fontSize: '11.5px', fontFamily: 'monospace', marginBottom: '18px', lineHeight: 1.5 }}>
-              <div style={{ color: '#00A896', fontWeight: 800, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ color: '#5EEAD4', fontWeight: 800, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span>{liveOcrResult?.sourceKind === 'pdf-text-layer' ? '// PDF Text Layer Import (not OCR):' : '// Tesseract.js Extracted Text Tokens:'}</span>
                 {liveOcrResult && (
-                  <span style={{ color: '#065F46', fontSize: '10.5px' }}>{liveOcrResult.sourceKind === 'pdf-text-layer' ? '● LOCAL PDF TEXT LAYER' : '● LIVE WASM EXTRACTION'}</span>
+                  <span style={{ color: '#6EE7B7', fontSize: '10.5px' }}>{liveOcrResult.sourceKind === 'pdf-text-layer' ? '● LOCAL PDF TEXT LAYER' : '● LIVE WASM EXTRACTION'}</span>
                 )}
               </div>
               <div style={{ maxHeight: '80px', overflowY: 'auto', whiteSpace: 'pre-wrap' }}>
@@ -1594,9 +1594,9 @@ export default function PrescriptionScannerView() {
         .ayuswar-liquid-privacy-badge {
           font-size: 9.5px;
           font-weight: 750;
-          color: #0F4C5C;
-          background: rgba(45, 212, 191, 0.12);
-          border: 1px solid rgba(45, 212, 191, 0.25);
+          color: #99F6E4;
+          background: rgba(45, 212, 191, 0.16);
+          border: 1px solid rgba(45, 212, 191, 0.45);
           padding: 2px 8px;
           border-radius: 6px;
           margin-top: 2px;
