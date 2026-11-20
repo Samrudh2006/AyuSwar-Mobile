@@ -145,6 +145,7 @@ await record('consultationRecorder noise gate is conservative and export-time on
   assert(!src.includes('frame.fill(0)'), 'gate must not destroy audio during capture');
   assert(src.includes('RAW frame, always retained'), 'raw-capture guarantee missing');
   assert(src.includes('NOT a validated speech denoiser'), 'honest no-denoiser-claim wording missing');
+  assert(src.includes('reexport('), 'working re-export control (raw PCM retained with the result) missing');
   assert(src.includes('channelCount: 1'), 'mono capture constraint missing');
   const { applyNoiseGate, GATE_THRESHOLD, GATE_HOLD_FRAMES } = await import('../src/mobile/consultationRecorder.js');
   assert(GATE_THRESHOLD > 0 && GATE_HOLD_FRAMES > 0, 'gate constants must be exported for review');
@@ -165,6 +166,7 @@ await record('recording UI shows noise gate toggle and honest indicator', async 
   assert(src.includes("useState(false)"), 'toggle must default to off');
   assert(src.includes('{ noiseGate }'), 'option must be passed to recorder');
   assert(src.includes('audio.noiseGate'), 'playback indicator missing');
+  assert(src.includes('audio.reexport'), 're-export control on the playback card missing');
   assert(src.includes('(beta)'), 'honest beta labeling missing');
 });
 

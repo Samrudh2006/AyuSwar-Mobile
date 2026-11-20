@@ -40,18 +40,24 @@ const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
 const GATE_COPY = {
   'en-IN': {
     toggle: 'Noise gate (beta)',
-    hint: 'Off by default. When on, steady background hum between speech is reduced at export; quiet voices below the threshold may be softened. Raw audio is always captured first.',
-    onTag: 'Noise gate on (beta)'
+    hint: 'Off by default. When on, steady background hum between speech is reduced at export; quiet voices below the threshold may be cut short or silenced. Raw audio stays with this recording until you leave or discard, so you can switch the gate before transcribing.',
+    onTag: 'Noise gate on (beta)',
+    remove: 'Remove noise gate',
+    apply: 'Apply noise gate (beta)'
   },
   'te-IN': {
     toggle: 'నాయిజ్ గేట్ (బీటా)',
-    hint: 'డిఫాల్ట్‌గా ఆఫ్. ఆన్ చేస్తే, మాటల మధ్య నిలిచే బ్యాక్‌గ్రౌండ్ శబ్దం ఎక్స్‌పోర్ట్ సమయంలో తగ్గుతుంది; మెల్లగా మాట్లాడే స్వరం కొంత తగ్గొచ్చు. ముందు ఎల్లప్పుడూ అసలు ఆడియో రికార్డ్ అవుతుంది.',
-    onTag: 'నాయిజ్ గేట్ ఆన్ (బీటా)'
+    hint: 'డిఫాల్ట్‌గా ఆఫ్. ఆన్ చేస్తే, మాటల మధ్య నిలిచే బ్యాక్‌గ్రౌండ్ శబ్దం ఎక్స్‌పోర్ట్ సమయంలో తగ్గుతుంది; మెల్లగా మాట్లాడే స్వరం కోతపడి లేదా నిశ్శబ్దం కావచ్చు. మీరు వదిలే లేదా తొలగించే వరకు అసలు ఆడియో ఈ రికార్డింగ్‌తోనే ఉంటుంది, కాబట్టి ట్రాన్స్క్రైబ్ చేయడానికి ముందు గేట్ మార్చవచ్చు.',
+    onTag: 'నాయిజ్ గేట్ ఆన్ (బీటా)',
+    remove: 'నాయిజ్ గేట్ తీసివేయండి',
+    apply: 'నాయిజ్ గేట్ వర్తింపజేయండి (బీటా)'
   },
   'hi-IN': {
     toggle: 'नॉइज़ गेट (बीटा)',
-    hint: 'डिफ़ॉल्ट रूप से बंद। चालू करने पर, बोलने के बीच की स्थिर पृष्ठभूमि आवाज़ एक्सपोर्ट के समय घटती है; धीमी आवाज़ थोड़ी कम हो सकती है। मूल ऑडियो हमेशा पहले रिकॉर्ड होता है।',
-    onTag: 'नॉइज़ गेट चालू (बीटा)'
+    hint: 'डिफ़ॉल्ट रूप से बंद। चालू करने पर, बोलने के बीच की स्थिर पृष्ठभूमि आवाज़ एक्सपोर्ट के समय घटती है; धीमी आवाज़ कट सकती है या खामोश हो सकती है। मूल ऑडियो इस रिकॉर्डिंग के साथ तब तक रहता है जब तक आप छोड़ें या हटाएँ नहीं, इसलिए ट्रांसक्राइब करने से पहले गेट बदल सकते हैं।',
+    onTag: 'नॉइज़ गेट चालू (बीटा)',
+    remove: 'नॉइज़ गेट हटाएँ',
+    apply: 'नॉइज़ गेट लागू करें (बीटा)'
   }
 };
 const gateCopy = lang => GATE_COPY[lang] || GATE_COPY['en-IN'];
@@ -212,7 +218,16 @@ export default function MClinical() {
             <input type="checkbox" checked={noiseGate} disabled={phase === 'recording' || phase === 'requesting'} onChange={(e) => setNoiseGate(e.target.checked)} />
             <span><b>{gateCopy(selectedLanguage).toggle}</b> · {gateCopy(selectedLanguage).hint}</span>
           </label>
-          {audio && <div className="m-record-playback"><label>{t('sourceRecording')} · {audio.duration.toFixed(1)} {t('secondsLabel')}{audio.noiseGate ? ` · ${gateCopy(selectedLanguage).onTag}` : ''}</label><audio controls src={audio.url} /><button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={transcribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
+          {audio && <div className="m-record-playback"><label>{t('sourceRecording')} · {audio.duration.toFixed(1)} {t('secondsLabel')}{audio.noiseGate ? ` · ${gateCopy(selectedLanguage).onTag}` : ''}</label><audio controls src={audio.url} />
+            {typeof audio.reexport === 'function' && (
+              <button className="m-btn m-btn-ghost" onClick={() => {
+                const next = audio.reexport(!audio.noiseGate);
+                if (!next) return;
+                URL.revokeObjectURL(audio.url);
+                setAudio({ ...audio, ...next, url: URL.createObjectURL(next.blob) });
+              }}>{audio.noiseGate ? gateCopy(selectedLanguage).remove : gateCopy(selectedLanguage).apply}</button>
+            )}
+            <button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={transcribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
         </> : <>
           <h2 className="m-steps-title">{t('trySample')}</h2>
           <p className="m-record-intro">{encounter.patient.name} · {encounter.patient.age}y · {t('noMicSample')}</p>

@@ -54,6 +54,30 @@ export async function openConsultationRecorder(onLevel, options = {}) {
     processor.connect(mute);
     mute.connect(ctx.destination);
     let closed = false;
+    // Builds a 16kHz/16-bit mono WAV from the retained RAW frames. The gate,
+    // when requested, is applied on a derived copy - raw frames never change.
+    const buildWav = (gateOn, rate) => {
+      const count = Math.floor(samples * 16000 / rate);
+      const buffer = new ArrayBuffer(44 + count * 2);
+      const view = new DataView(buffer);
+      const text = (offset, value) => { for (let i = 0; i < value.length; i++) view.setUint8(offset + i, value.charCodeAt(i)); };
+      text(0, 'RIFF'); view.setUint32(4, 36 + count * 2, true); text(8, 'WAVE'); text(12, 'fmt ');
+      view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+      view.setUint32(24, 16000, true); view.setUint32(28, 32000, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true);
+      text(36, 'data'); view.setUint32(40, count * 2, true);
+      const exportFrames = gateOn ? applyNoiseGate(frames) : frames;
+      const pcm = new Float32Array(samples);
+      let offset = 0;
+      for (const frame of exportFrames) { pcm.set(frame, offset); offset += frame.length; }
+      for (let i = 0; i < count; i++) {
+        const position = i * rate / 16000;
+        const index = Math.floor(position);
+        const frac = position - index;
+        const value = Math.max(-1, Math.min(1, pcm[index] * (1 - frac) + (pcm[Math.min(index + 1, samples - 1)] || 0) * frac));
+        view.setInt16(44 + i * 2, Math.round(value * (value < 0 ? 32768 : 32767)), true);
+      }
+      return new Blob([buffer], { type: 'audio/wav' });
+    };
     return {
       stop() {
         if (closed) return null;
@@ -63,28 +87,18 @@ export async function openConsultationRecorder(onLevel, options = {}) {
         stream.getTracks().forEach(t => t.stop());
         const rate = ctx.sampleRate;
         ctx.close();
-        const count = Math.floor(samples * 16000 / rate);
-        const buffer = new ArrayBuffer(44 + count * 2);
-        const view = new DataView(buffer);
-        const text = (offset, value) => { for (let i = 0; i < value.length; i++) view.setUint8(offset + i, value.charCodeAt(i)); };
-        text(0, 'RIFF'); view.setUint32(4, 36 + count * 2, true); text(8, 'WAVE'); text(12, 'fmt ');
-        view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
-        view.setUint32(24, 16000, true); view.setUint32(28, 32000, true); view.setUint16(32, 2, true); view.setUint16(34, 16, true);
-        text(36, 'data'); view.setUint32(40, count * 2, true);
-        const pcm = new Float32Array(samples);
-        let offset = 0;
-        // Gate (when the user enabled it) is applied here, at export, on a
-        // derived copy - the raw frames above are never modified.
-        const exportFrames = noiseGate ? applyNoiseGate(frames) : frames;
-        for (const frame of exportFrames) { pcm.set(frame, offset); offset += frame.length; }
-        for (let i = 0; i < count; i++) {
-          const position = i * rate / 16000;
-          const index = Math.floor(position);
-          const frac = position - index;
-          const value = Math.max(-1, Math.min(1, pcm[index] * (1 - frac) + (pcm[Math.min(index + 1, samples - 1)] || 0) * frac));
-          view.setInt16(44 + i * 2, Math.round(value * (value < 0 ? 32768 : 32767)), true);
-        }
-        return { blob: new Blob([buffer], { type: 'audio/wav' }), duration: samples / rate, noiseGate };
+        // The RAW frames stay in memory with this result until the caller
+        // drops it (same lifecycle as the recording on screen), so the user
+        // can switch the gate on or off before transcribing without
+        // re-recording. Nothing is written to disk or uploaded here.
+        return {
+          blob: buildWav(noiseGate, rate),
+          duration: samples / rate,
+          noiseGate,
+          reexport(gateOn) {
+            return { blob: buildWav(gateOn === true, rate), duration: samples / rate, noiseGate: gateOn === true };
+          }
+        };
       }
     };
   } catch (error) {
