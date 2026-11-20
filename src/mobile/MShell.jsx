@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 import { triggerHaptic } from '../utils/haptics';
 import { mt } from './mobileTranslations';
 import { AppLockSettings } from './MAppLock';
-import { NetworkSpeechSettings, LocalVoicePackSettings } from './MSpeechSettings';
+import { NetworkSpeechSettings, LocalVoicePackSettings, LocalAsrPackSettings } from './MSpeechSettings';
 import {
   IconHome, IconWave, IconMic, IconMenu, IconClose, IconChevronR,
   IconStethoscope, IconUser, IconScan, IconSpeaker, IconLab, IconSiren,
@@ -36,6 +36,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
   const [lockSettingsOpen, setLockSettingsOpen] = React.useState(false);
   const [speechSettingsOpen, setSpeechSettingsOpen] = React.useState(false);
   const [voicePackOpen, setVoicePackOpen] = React.useState(false);
+  const [asrPackOpen, setAsrPackOpen] = React.useState(false);
   const [languageNotice, setLanguageNotice] = React.useState('');
   const activeTab = tabForPath(location.pathname);
   const t = key => mt(key, selectedLanguage);
@@ -213,6 +214,9 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setVoicePackOpen(true); }}>
             <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'Offline voice pack', 'te-IN': 'ఆఫ్‌లైన్ వాయిస్ ప్యాక్', 'hi-IN': 'ऑफ़लाइन वॉइस पैक' }[selectedLanguage] || 'Offline voice pack'}
           </button>
+          <button className="m-drawer-item" onClick={() => { setDrawerOpen(false); setAsrPackOpen(true); }}>
+            <SheetIcon name="privacy-consent" /> {{ 'en-IN': 'Offline transcription pack', 'te-IN': 'ఆఫ్‌లైన్ ట్రాన్స్‌క్రిప్షన్ ప్యాక్', 'hi-IN': 'ऑफ़लाइन ट्रांसक्रिप्शन पैक' }[selectedLanguage] || 'Offline transcription pack'}
+          </button>
 
           <div className="m-drawer-section">{t('legal')}</div>
           <button className="m-drawer-item" onClick={() => go('/privacy')}>
@@ -239,6 +243,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
       {lockSettingsOpen && <AppLockSettings lang={selectedLanguage} onClose={() => setLockSettingsOpen(false)} />}
       {speechSettingsOpen && <NetworkSpeechSettings lang={selectedLanguage} onClose={() => setSpeechSettingsOpen(false)} />}
       {voicePackOpen && <LocalVoicePackSettings lang={selectedLanguage} onClose={() => setVoicePackOpen(false)} />}
+      {asrPackOpen && <LocalAsrPackSettings lang={selectedLanguage} onClose={() => setAsrPackOpen(false)} />}
     </div>
   );
 }

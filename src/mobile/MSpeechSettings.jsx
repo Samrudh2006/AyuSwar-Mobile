@@ -273,3 +273,169 @@ export function LocalVoicePackSettings({ lang, onClose }) {
     </div>
   );
 }
+
+// Offline transcription pack (on-device ASR): explicit-consent installer.
+// The pack transcribes RECORDED CLIPS entirely on-device. Output is ALWAYS a
+// draft transcript that a person must review - it is never auto-applied to a
+// clinical record, and the pilot qualification observed omissions and
+// substitutions. Download requires explicit consent shown the exact byte size;
+// Wi-Fi by default, mobile data only if the user explicitly allows it.
+// Integrity is hash-verified on download and on every load (localAsrPackManager).
+import {
+  getAsrPackStatus,
+  installLocalAsrPack,
+  uninstallLocalAsrPack,
+  recordLocalAsrConsent,
+  clearLocalAsrConsent
+} from '../services/localVoice/localAsrPackManager';
+import { ASR_MODELS, asrTotalBytes } from '../services/localVoice/localAsrManifest';
+
+const ASR_COPY = {
+  'en-IN': {
+    title: 'Offline transcription pack (Telugu)',
+    body: 'An optional on-device transcriber for short recorded clips (up to 15 seconds) when the network transcription is unavailable. After download it runs entirely on this device and your audio never leaves it. Every result is a DRAFT that a person must review: the model can omit or substitute words, so it is never applied to a record automatically.',
+    size: (mb, mib, exact) => `Download size: ${exact} bytes (about ${mb} / ${mib}). Model: AI4Bharat Telugu IndicConformer, community ONNX conversion (OpenVoiceOS), locally converted to a smaller INT8 build by this project - not an official AI4Bharat/OpenVoiceOS artifact. License: MIT.`,
+    wifiOnly: 'Download over Wi-Fi only (recommended)',
+    allowCellular: 'Allow mobile data for this download',
+    install: 'Download & install',
+    installing: 'Downloading…',
+    cancel: 'Cancel',
+    uninstall: 'Remove pack',
+    close: 'Close',
+    statusInstalled: 'Installed. Recorded clips can be transcribed on-device as drafts for review.',
+    statusNotInstalled: 'Not installed. This pack is optional; transcription uses the network service when available.',
+    statusUnsupported: 'This browser cannot store the pack (Cache API missing).',
+    errCellular: 'Connection type is unknown or metered, so the download is blocked. Connect to a known Wi-Fi network or tick "Allow mobile data".',
+    errHash: 'A downloaded file failed its integrity check and was deleted. Nothing was kept; please try again on a stable connection.',
+    errDownload: 'The download failed. Please try again on a stable connection.',
+    errCancelled: 'Download cancelled. Partial files were not kept.',
+    progress: (file, files, pct) => `File ${file} of ${files} — ${pct}%`
+  },
+  'te-IN': {
+    title: 'ఆఫ్‌లైన్ ట్రాన్స్‌క్రిప్షన్ ప్యాక్ (తెలుగు)',
+    body: 'నెట్‌వర్క్ ట్రాన్స్‌క్రిప్షన్ అందుబాటులో లేనప్పుడు చిన్న రికార్డ్ చేసిన క్లిప్‌లను (15 సెకన్ల వరకు) ఆన్-డివైస్‌లో ట్రాన్స్‌క్రైబ్ చేసే ఐచ్ఛిక ప్యాక్. డౌన్‌లోడ్ తర్వాత ఇది పూర్తిగా ఈ పరికరంలోనే నడుస్తుంది; మీ ఆడియో బయటకు వెళ్లదు. ప్రతి ఫలితం డ్రాఫ్ట్ మాత్రమే - ఒక వ్యక్తి తప్పనిసరిగా సమీక్షించాలి: మోడల్ పదాలను విడిచిపెట్టవచ్చు లేదా మార్చవచ్చు, కాబట్టి ఇది ఎప్పుడూ ఆటోమ్యాటిక్‌గా రికార్డ్‌లోకి వర్తింపబడదు.',
+    size: (mb, mib, exact) => `డౌన్‌లోడ్ పరిమాణం: ${exact} బైట్లు (సుమారు ${mb} / ${mib}). మోడల్: AI4Bharat తెలుగు IndicConformer, కమ్యూనిటీ ONNX కన్వర్షన్ (OpenVoiceOS), ఈ ప్రాజెక్ట్ చేత స్థానికంగా చిన్న INT8 బిల్డ్‌గా మార్చబడింది - ఇది అధికారిక AI4Bharat/OpenVoiceOS ఆర్టిఫాక్ట్ కాదు. లైసెన్స్: MIT.`,
+    wifiOnly: 'Wi-Fi లో మాత్రమే డౌన్‌లోడ్ (సిఫార్సు)',
+    allowCellular: 'ఈ డౌన్‌లోడ్ కోసం మొబైల్ డేటాను అనుమతించండి',
+    install: 'డౌన్‌లోడ్ & ఇన్‌స్టాల్',
+    installing: 'డౌన్‌లోడ్ అవుతోంది…',
+    cancel: 'రద్దు',
+    uninstall: 'ప్యాక్ తొలగించండి',
+    close: 'మూసివేయండి',
+    statusInstalled: 'ఇన్‌స్టాల్ అయింది. రికార్డ్ చేసిన క్లిప్‌లు సమీక్ష కోసం ఆన్-డివైస్ డ్రాఫ్ట్‌లుగా ట్రాన్స్‌క్రైబ్ చేయబడతాయి.',
+    statusNotInstalled: 'ఇన్‌స్టాల్ కాలేదు. ఈ ప్యాక్ ఐచ్ఛికం; నెట్‌వర్క్ సర్వీస్ అందుబాటులో ఉన్నప్పుడు ట్రాన్స్‌క్రిప్షన్ దాన్నే వాడుతుంది.',
+    statusUnsupported: 'ఈ బ్రౌజర్ ప్యాక్‌ను నిలువ చేయలేదు (Cache API లేదు).',
+    errCellular: 'కనెక్షన్ రకం తెలియదు లేదా మీటర్డ్ గా ఉంది, కాబట్టి డౌన్‌లోడ్ బ్లాక్ చేయబడింది. తెలిసిన Wi-Fi కు కనెక్ట్ అవ్వండి లేదా "మొబైల్ డేటాను అనుమతించండి" టిక్ చేయండి.',
+    errHash: 'డౌన్‌లోడ్ చేసిన ఫైల్ దాని ఇంటెగ్రిటీ తనిఖీలో విఫలమై తొలగించబడింది. ఏమీ నిలువ లేదు; స్థిరమైన కనెక్షన్‌లో మళ్లీ ప్రయత్నించండి.',
+    errDownload: 'డౌన్‌లోడ్ విఫలమైంది. స్థిరమైన కనెక్షన్‌లో మళ్లీ ప్రయత్నించండి.',
+    errCancelled: 'డౌన్‌లోడ్ రద్దు చేయబడింది. పాక్షిక ఫైళ్లు నిలువ చేయబడలేదు.',
+    progress: (file, files, pct) => `ఫైల్ ${file} / ${files} — ${pct}%`
+  },
+  'hi-IN': {
+    title: 'ऑफ़लाइन ट्रांसक्रिप्शन पैक (तेलुगु)',
+    body: 'नेटवर्क ट्रांसक्रिप्शन उपलब्ध न होने पर छोटी रिकॉर्ड की गई क्लिप (15 सेकंड तक) के लिए वैकल्पिक ऑन-डिवाइस ट्रांसक्राइबर। डाउनलोड के बाद यह पूरी तरह इसी डिवाइस पर चलता है और आपका ऑडियो बाहर नहीं जाता। हर परिणाम एक ड्राफ़्ट है जिसे किसी व्यक्ति को ज़रूर देखना होगा: मॉडल शब्द छोड़ या बदल सकता है, इसलिए इसे कभी भी अपने-आप रिकॉर्ड पर लागू नहीं किया जाता।',
+    size: (mb, mib, exact) => `डाउनलोड आकार: ${exact} बाइट्स (लगभग ${mb} / ${mib})। मॉडल: AI4Bharat तेलुगु IndicConformer, कम्युनिटी ONNX कन्वर्ज़न (OpenVoiceOS), इस प्रोजेक्ट द्वारा स्थानीय रूप से छोटे INT8 बिल्ड में बदला गया - यह आधिकारिक AI4Bharat/OpenVoiceOS आर्टिफैक्ट नहीं है। लाइसेंस: MIT.`,
+    wifiOnly: 'केवल Wi-Fi पर डाउनलोड (अनुशंसित)',
+    allowCellular: 'इस डाउनलोड के लिए मोबाइल डेटा अनुमत करें',
+    install: 'डाउनलोड और इंस्टॉल',
+    installing: 'डाउनलोड हो रहा है…',
+    cancel: 'रद्द करें',
+    uninstall: 'पैक हटाएं',
+    close: 'बंद करें',
+    statusInstalled: 'इंस्टॉल हो गया। रिकॉर्ड की गई क्लिप समीक्षा के लिए ऑन-डिवाइस ड्राफ़्ट के रूप में ट्रांसक्राइब हो सकती हैं।',
+    statusNotInstalled: 'इंस्टॉल नहीं है। यह पैक वैकल्पिक है; नेटवर्क सेवा उपलब्ध होने पर ट्रांसक्रिप्शन उसी से होता है।',
+    statusUnsupported: 'यह ब्राउज़र पैक सहेज नहीं सकता (Cache API उपलब्ध नहीं)।',
+    errCellular: 'कनेक्शन प्रकार अज्ञात या मीटर्ड है, इसलिए डाउनलोड अवरुद्ध है। किसी ज्ञात Wi-Fi से जुड़ें या "मोबाइल डेटा अनुमत करें" चुनें।',
+    errHash: 'डाउनलोड की गई फ़ाइल इंटीग्रिटी जाँच में असफल होकर हटा दी गई। कुछ भी सहेजा नहीं गया; स्थिर कनेक्शन पर पुनः प्रयास करें।',
+    errDownload: 'डाउनलोड विफल। स्थिर कनेक्शन पर पुनः प्रयास करें।',
+    errCancelled: 'डाउनलोड रद्द किया गया। आंशिक फ़ाइलें सहेजी नहीं गईं।',
+    progress: (file, files, pct) => `फ़ाइल ${file} / ${files} — ${pct}%`
+  }
+};
+const asrCopy = (lang) => ASR_COPY[lang] || ASR_COPY['en-IN'];
+
+export function LocalAsrPackSettings({ lang, onClose }) {
+  const c = asrCopy(lang);
+  const totalBytes = asrTotalBytes('te');
+  const [mb, mib] = formatBytes(totalBytes);
+  const [status, setStatus] = React.useState({ state: 'loading' });
+  const [allowCellular, setAllowCellular] = React.useState(false);
+  const [progress, setProgress] = React.useState(null);
+  const [errorCode, setErrorCode] = React.useState(null);
+  const abortRef = React.useRef(null);
+
+  const refresh = React.useCallback(async () => {
+    try { setStatus(await getAsrPackStatus('te')); } catch { setStatus({ state: 'unavailable_no_cache_api' }); }
+  }, []);
+  React.useEffect(() => { refresh(); return () => { try { abortRef.current?.abort(); } catch {} }; }, [refresh]);
+
+  const startInstall = async () => {
+    setErrorCode(null);
+    recordLocalAsrConsent({ language: 'te', allowCellular });
+    const controller = new AbortController();
+    abortRef.current = controller;
+    setStatus({ state: 'downloading' });
+    try {
+      await installLocalAsrPack('te', {
+        signal: controller.signal,
+        onProgress: (p) => setProgress(p)
+      });
+      setProgress(null);
+      await refresh();
+    } catch (err) {
+      setProgress(null);
+      setErrorCode(err && err.code ? err.code : 'DOWNLOAD_FAILED');
+      await refresh();
+    }
+  };
+
+  const cancelInstall = () => { try { abortRef.current?.abort(); } catch {} };
+  const removePack = async () => { await uninstallLocalAsrPack('te'); clearLocalAsrConsent(); await refresh(); };
+
+  const errMsg = errorCode === 'CELLULAR_BLOCKED' ? c.errCellular
+    : errorCode === 'HASH_MISMATCH' ? c.errHash
+    : errorCode === 'ABORTED' ? c.errCancelled
+    : errorCode ? c.errDownload : null;
+
+  const downloading = status.state === 'downloading';
+  return (
+    <div className="m-consent-backdrop" onClick={downloading ? undefined : onClose}>
+      <section className="m-consent-modal" role="dialog" aria-modal="true" aria-label={c.title} onClick={(e) => e.stopPropagation()}>
+        <h2 className="m-steps-title">{c.title}</h2>
+        <p className="m-record-intro">{c.body}</p>
+        <p className="m-record-intro">{c.size(mb, mib, totalBytes.toLocaleString('en-IN'))}</p>
+
+        {status.state !== 'installed' && !downloading && (
+          <div className="m-record-modes" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 8 }}>
+            <p className="m-applock-msg">{c.wifiOnly}</p>
+            <label style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+              <input type="checkbox" checked={allowCellular} onChange={(e) => setAllowCellular(e.target.checked)} />
+              <span>{c.allowCellular}</span>
+            </label>
+          </div>
+        )}
+
+        {downloading && progress && (
+          <p className="m-applock-msg" role="status">
+            {c.installing} {c.progress(progress.fileIndex + 1, progress.fileCount, Math.min(100, Math.round((progress.received / Math.max(1, progress.total)) * 100)))}
+          </p>
+        )}
+        {errMsg && <p className="m-applock-msg" role="alert">{errMsg}</p>}
+        <p className="m-applock-msg" role="status">
+          {status.state === 'installed' ? c.statusInstalled
+            : status.state === 'unsupported' || status.state === 'unavailable_no_cache_api' ? c.statusUnsupported
+            : !downloading ? c.statusNotInstalled : ''}
+        </p>
+
+        <div className="m-record-modes">
+          {status.state !== 'installed' && !downloading && status.state !== 'unsupported' && status.state !== 'unavailable_no_cache_api' && (
+            <button className="m-btn m-btn-primary" onClick={startInstall}>{c.install}</button>
+          )}
+          {downloading && <button className="m-btn m-btn-soft" onClick={cancelInstall}>{c.cancel}</button>}
+          {status.state === 'installed' && <button className="m-btn m-btn-soft" onClick={removePack}>{c.uninstall}</button>}
+          {!downloading && <button className="m-btn m-btn-soft" onClick={onClose}>{c.close}</button>}
+        </div>
+      </section>
+    </div>
+  );
+}
