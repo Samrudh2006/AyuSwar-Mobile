@@ -11,12 +11,14 @@ export default function MSplash({ done }) {
   const t = key => mt(key, selectedLanguage);
   return (
     <div className={`m-splash ${done ? 'hide' : ''}`} aria-hidden={done}>
-      <img className="m-splash-mark" src="/assets/ayuswar_emblem_mark.webp" width="140" height="140" alt="AyuSwar logo" />
+      <img className="m-splash-mark" src="/assets/ayuswar_emblem_mark.webp" width="156" height="156" alt="AyuSwar logo" />
       <b className="m-splash-word">AyuSwar <i>AI</i></b>
-      <span className="m-splash-tag">{t('tagline')}</span>
+      <span className="m-splash-tag">{t('tagline').split('. ').map((part, i, arr) => (
+        <React.Fragment key={i}>{i > 0 && '. '}<i className={i === arr.length - 1 && arr.length > 1 ? 'accent' : ''}>{part}</i></React.Fragment>
+      ))}</span>
       <div className="m-splash-voice" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
       <div className="m-splash-art" aria-hidden="true">
-        <img src="/assets/ayuswar-hospital-crop.jpg" alt="" />
+        <img src="/assets/ayuswar-welcome-doctor-patient.jpg" alt="" />
       </div>
       <div className="m-splash-foot">
         <span className="m-splash-flag" aria-hidden="true" />

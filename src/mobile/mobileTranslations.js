@@ -7,7 +7,7 @@ export const MOBILE_TRANSLATIONS = {
     doctorSigninTitle: 'Doctor sign in', patientSigninTitle: 'Patient sign in', 
     authDemo: 'Demo accounts, synthetic data. No real records.', roleDoctor: 'Doctor', rolePatient: 'Patient', hprId: 'Demo doctor ID', abhaId: 'Demo patient ID', password: 'Password', show: 'Show', hide: 'Hide', signingIn: 'Signing in…', signInDoctor: 'Sign in as doctor', signInPatient: 'Sign in as patient', authDemoDoctor: 'Demo credentials are prefilled. Signing in opens the doctor portal with sample data.', authDemoPatient: 'Demo credentials are prefilled. Signing in opens the patient portal with sample data.', backHome: 'Back to home', enterHpr: 'Enter the demo doctor ID', enterAbha: 'Enter the demo patient ID', enterPassword: 'Enter your password', 
     emergencyDesc: 'Sample symptom categories, pacing beat and handoff preview', tapOpen: 'tap to open',
-    tagline: 'Voice-first health companion',
+    tagline: 'Every Voice. Better Care.',
     emergency: 'Sanjivani 108 Emergency',
     services: 'Services',
     portals: 'Portals',
