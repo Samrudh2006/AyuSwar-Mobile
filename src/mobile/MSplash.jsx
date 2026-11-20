@@ -11,16 +11,14 @@ export default function MSplash({ done }) {
   const t = key => mt(key, selectedLanguage);
   return (
     <div className={`m-splash ${done ? 'hide' : ''}`} aria-hidden={done}>
-      <span className="m-splash-tri" aria-hidden="true"><i /><i /><i /></span>
-      <img className="m-splash-mark" src="/assets/ayuswar_emblem_mark.webp" width="120" height="120" alt="AyuSwar logo" />
+      <img className="m-splash-mark" src="/assets/ayuswar_emblem_mark.webp" width="140" height="140" alt="AyuSwar logo" />
       <b className="m-splash-word">AyuSwar <i>AI</i></b>
-      <span className="m-splash-tag">{t('tagline')}</span>
       <div className="m-splash-voice" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /></div>
       <div className="m-splash-art" aria-hidden="true">
-        <svg className="m-splash-waves" viewBox="0 0 390 90" preserveAspectRatio="none">
-          <path d="M0,34 C70,10 140,56 210,36 C280,18 330,48 390,26 L390,90 L0,90 Z" fill="#BFE8DC" opacity="0.8" />
-          <path d="M0,52 C80,32 150,70 225,52 C295,36 340,62 390,44 L390,90 L0,90 Z" fill="#5FB4A3" opacity="0.6" />
-          <path d="M0,48 C80,28 150,66 225,48 C295,32 340,58 390,40" fill="none" stroke="#E8A33D" strokeWidth="2.5" opacity="0.85" />
+        <svg className="m-splash-waves" viewBox="0 0 390 110" preserveAspectRatio="none">
+          <path d="M0,46 C70,24 150,68 225,50 C295,34 340,60 390,42 L390,110 L0,110 Z" fill="#BFE8DC" opacity="0.3" />
+          <path d="M0,0 L390,0 L390,38 C340,56 295,30 225,46 C150,64 70,20 0,42 Z" fill="#FAF5EA" />
+          <path d="M0,42 C70,20 150,64 225,46 C295,30 340,56 390,38" fill="none" stroke="#E8A33D" strokeWidth="2.5" opacity="0.9" />
         </svg>
         <img src="/assets/ayuswar-hospital-crop.jpg" alt="" />
       </div>
