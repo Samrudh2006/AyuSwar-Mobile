@@ -1094,6 +1094,11 @@ export default function FloatingAssistant({
                       <div style={{ fontSize: '10px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', marginBottom: '3px' }}>
                         {currentReplySource === 'sample' ? tt('assistant.sampleReplyHeader') : currentReplySource === 'offline' ? tt('assistant.offlineHeader') : tt('assistant.replyHeader')}
                       </div>
+                      {/\(local draft\)$/.test(liveTranscript || '') && (
+                        <div style={{ fontSize: '11px', fontStyle: 'italic', color: '#486770', marginBottom: '6px' }}>
+                          {liveTranscript}
+                        </div>
+                      )}
                       {currentReplySource === 'sample' && (
                         <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FEF3C7', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px', fontWeight: 650 }}>
                           {tt('assistant.sampleNote')}
