@@ -7,12 +7,20 @@
     certificate chain on 2026-11-20:
       pin 1: GTS Root R1 (root CA of the served chain)
       pin 2: WR1 (Google Trust Services intermediate that issued the leaf)
+      pin 3: ISRG Root X1 (BACKUP, independent hierarchy). Vercel's docs
+        state certificates are issued by Let's Encrypt while the chain
+        actually served on 2026-11-20 was Google Trust Services, so the
+        issuer CAN switch. Without a pin from a second hierarchy such a
+        switch would hard-fail the app. Pin computed from the official
+        root certificate fetched from letsencrypt.org on 2026-11-20
+        (self-signed, valid 2015-06-04 to 2035-06-04).
     The leaf certificate itself is NOT pinned - Vercel rotates it often.
   - MAINTENANCE: if the backend moves hosts or Vercel changes issuing CA
-    (e.g. to Let's Encrypt), these pins MUST be updated or the app loses
-    backend connectivity. As a safety valve the pin-set expires 2026-08-20;
-    after that Android falls back to normal system trust instead of
-    hard-failing. Re-verify the chain and refresh pins before that date.
+    (e.g. fully to Let's Encrypt), the ISRG backup keeps connectivity,
+    but the GTS pins should then be refreshed. As a safety valve the
+    pin-set expires 2027-05-20; after that Android falls back to normal
+    system trust instead of hard-failing. Re-verify the served chain and
+    refresh pins before that date (rotation review).
     Trust scope: Android accepts the connection when ANY pin matches
     anywhere in the chain, so this pins trust to the named root/intermediate
     CAs as a whole, not to one specific server certificate.
@@ -27,6 +35,7 @@
         <pin-set expiration="2027-05-20">
             <pin digest="SHA-256">hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=</pin>
             <pin digest="SHA-256">yDu9og255NN5GEf+Bwa9rTrqFQ0EydZ0r1FCh9TdAW4=</pin>
+            <pin digest="SHA-256">C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M=</pin>
         </pin-set>
         <certificates src="system" />
     </domain-config>

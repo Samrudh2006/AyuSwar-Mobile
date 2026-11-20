@@ -36,6 +36,10 @@ await record('pinning config disables cleartext and carries >=2 pins', async () 
   const pins = xml.match(/<pin digest="SHA-256">[^<]+<\/pin>/g) || [];
   assert(pins.length >= 2, 'need at least two non-leaf pins (root + intermediate)');
   assert(!xml.includes('ED02jY6POswcMjticCshf50ywurppjVGa00Y+Oqf8ho='), 'leaf certificate must not be pinned');
+  // Backup must be an INDEPENDENT hierarchy, not a second pin of the same CA:
+  // GTS Root R1 (live chain today) AND ISRG Root X1 (Vercel-documented issuer).
+  assert(xml.includes('hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc='), 'GTS Root R1 pin missing');
+  assert(xml.includes('C5+lpZ7tcVwmwQIMcRtPbsQtWLABXhQzejna0wHFr8M='), 'ISRG Root X1 backup pin missing (independent hierarchy)');
 });
 
 await record('manifest wires the network security config', async () => {
