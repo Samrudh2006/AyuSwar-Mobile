@@ -15,6 +15,7 @@ import { checkNotificationPermission, requestNotificationPermission, sendLocalDe
 import { IconChevronR, IconMic, IconHeart } from './MIcons';
 import { useApp } from '../context/AppContext';
 import { mt } from './mobileTranslations';
+import { MStateStyles, StateProcessing, StateError } from './MStateAnimations.jsx';
 
 // Full 4-stage journey. Stage 1 (record) is already complete when this screen opens.
 const AyuSwarShare = registerPlugin('AyuSwarShare');
@@ -241,6 +242,7 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
 
   return (
     <main className={`m-page m-flow-page ${step > 0 ? 'm-flow-short' : ''}`}>
+      <MStateStyles />
       <div className="m-flow-steps">
         {JOURNEY_KEYS.map((rawLabel, i) => { const label = t(rawLabel);
           const isDone = i === 0 || i < step + 1;
@@ -266,11 +268,10 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
         <section>
           {processing ? (
             <div className="m-card m-card-pad m-tint-mint">
-              <h2 className="m-steps-title">{t('AI processing')}</h2>
-              <p className="m-clin-status">{stage}</p>
+              <StateProcessing title={t('AI processing')} hint={stage} />
             </div>
           ) : failure ? (
-            <div className="m-card m-card-pad m-tint-peach" role="alert"><h2 className="m-steps-title">{t('Draft not generated')}</h2><p>{failure}</p><button className="m-btn m-btn-primary" onClick={() => setAttempt(a => a + 1)}>{t('Retry with same transcript')}</button><button className="m-btn m-btn-primary" onClick={startManualDraft}>{t('Enter manual draft from source transcript')}</button><button className="m-btn m-btn-ghost" onClick={() => navigate('/clinical-console')}>{t('Back to recording')}</button></div>
+            <div className="m-card m-card-pad m-tint-peach" role="alert"><StateError title={t('Draft not generated')} hint={failure} /><button className="m-btn m-btn-primary" onClick={() => setAttempt(a => a + 1)}>{t('Retry with same transcript')}</button><button className="m-btn m-btn-primary" onClick={startManualDraft}>{t('Enter manual draft from source transcript')}</button><button className="m-btn m-btn-ghost" onClick={() => navigate('/clinical-console')}>{t('Back to recording')}</button></div>
           ) : (
             <>
               <details className="m-flow-source"><summary>{t('View source transcript')} · {state.sourceMode === 'sample' ? t('sample') : t('recorded audio')}</summary>{turns.map((t, i) => <p key={i}><b>{t.speaker}:</b> {t.text}</p>)}</details>

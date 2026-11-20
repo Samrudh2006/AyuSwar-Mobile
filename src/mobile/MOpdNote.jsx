@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { mt } from './mobileTranslations';
 import { exportTextFile } from '../services/exportFileService';
+import { MStateStyles, StateSuccess, StateError } from './MStateAnimations.jsx';
 // Kalam (OFL, Indian Type Foundry) - bundled so the handwritten style renders
 // identically on every device, no runtime font download.
 import kalamUrl from '../assets/fonts/Kalam-Regular.ttf';
@@ -167,9 +168,10 @@ export default function MOpdNote() {
           <button className="m-btn m-btn-ghost" onClick={() => window.print()}>{t('Print / Save PDF')}</button>
           <button className="m-btn m-btn-ghost" onClick={exportNote}>{t('Export text')}</button>
         </div>
+        <MStateStyles />
         <div aria-live="polite" style={{ fontSize: '12.5px', minHeight: 18, marginBottom: 8 }}>
-          {saveState === 'saved' && t('Saved on this device.')}
-          {saveState === 'failed' && t('Save failed - browser storage refused the write. Your text is still on screen.')}
+          {saveState === 'saved' && <StateSuccess title={t('Note saved')} hint={t('Saved on this device. Operation complete, not a medical record.')} />}
+          {saveState === 'failed' && <StateError title={t('Save failed')} hint={t('Browser storage refused the write. Your text is still on screen.')} />}
           {exportState}
         </div>
 
