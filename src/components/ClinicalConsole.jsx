@@ -35,7 +35,8 @@ import {
   RefreshCw,
   Layers,
   Edit3,
-  Globe
+  Globe,
+  Lock
 } from 'lucide-react';
 import AuthenticQrCode from './AuthenticQrCode';
 import AbdmRegistryBadgeRow from './AbdmRegistryBadgeRow';
@@ -1317,6 +1318,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             return (
               <button
                 key={item.step}
+                  aria-disabled={item.step > maxCompletedStep}
                 onClick={() => {
                   if (item.step <= maxCompletedStep) {
                     setActiveStep(item.step);
@@ -1362,6 +1364,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 <div style={{ overflow: 'hidden' }}>
                   <div style={{ fontSize: '12px', fontWeight: 800, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
                     {item.title}
+                    {item.step > maxCompletedStep && <Lock size={10} style={{ display: 'inline', marginLeft: '5px', verticalAlign: '-1px' }} aria-hidden="true" />}
                   </div>
                   <div style={{ fontSize: '10.5px', color: isCurrent ? '#F0D078' : '#D0DFE2', whiteSpace: 'nowrap' }}>
                     {item.desc}

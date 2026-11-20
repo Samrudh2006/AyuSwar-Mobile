@@ -144,6 +144,11 @@
 }
 .m-topbar-title {
   display: flex; flex-direction: column; line-height: 1.15;
+  background: rgba(255, 253, 246, 0.88);
+  border-radius: 12px;
+  padding: 5px 11px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 8px rgba(8, 28, 36, 0.08);
 }
 .m-topbar-title b {
   font-family: var(--m-font-display);

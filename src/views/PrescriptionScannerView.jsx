@@ -550,6 +550,7 @@ export default function PrescriptionScannerView() {
 
   return (
     <div className="scanner-view-container" style={{ padding: '36px 24px', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ background: 'rgba(255,253,246,0.92)', borderRadius: '16px', padding: '14px 18px 18px', marginBottom: '28px', boxShadow: '0 2px 12px rgba(8,28,36,0.08)', backdropFilter: 'blur(6px)' }}>
       {/* Breadcrumb Navigation */}
       <div className="m-view-breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#0F4C5C', textDecoration: 'none', fontSize: '13px', fontWeight: 700 }}>
@@ -563,7 +564,7 @@ export default function PrescriptionScannerView() {
       </div>
 
       {/* Header */}
-      <div style={{ marginBottom: '28px' }}>
+      <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '12px' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFF7ED', color: '#92400E', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800 }}>
             <Scan size={14} />
@@ -580,6 +581,7 @@ export default function PrescriptionScannerView() {
         <p style={{ fontSize: '14.5px', color: '#37525C', maxWidth: '850px', lineHeight: 1.6 }}>
           This scanner can read packaging or prescription photos on your device with Tesseract OCR, or import the text layer of a prescription PDF locally. Check every word against the original. Local dictionary suggestions are unverified candidates, not medicine identification, substitution, live pricing or stock checks.
         </p>
+      </div>
       </div>
 
       {/* Live OCR Active Notification Banner */}
