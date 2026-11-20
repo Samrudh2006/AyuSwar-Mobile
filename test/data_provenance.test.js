@@ -74,6 +74,22 @@ check('stt_metrics known-answer identities hold', () => {
   assert(out.trim() === 'ok', 'known-answer checks failed');
 });
 
+check('fleurs_eval ingests FLEURS-format TSV with known-answer WER and pair accounting', () => {
+  const out = execSync(
+    'python3 benchmarks/fleurs_eval.py --refs benchmarks/data/fleurs_format_fixture.tsv ' +
+    '--hyps benchmarks/data/fleurs_format_fixture_hyps.tsv --model fixture-stub --split dev',
+    { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'ignore'] });
+  const j = JSON.parse(out);
+  assert(j.matched === 3, `expected 3 matched pairs, got ${j.matched}`);
+  assert(j.unmatched_references.length === 1 && j.unmatched_references[0] === 'c.wav', 'unmatched reference not surfaced');
+  assert(j.unmatched_hypotheses.length === 1 && j.unmatched_hypotheses[0] === 'zzz.wav', 'unmatched hypothesis not surfaced');
+  assert(Math.abs(j.corpus.wer - 2 / 9) < 1e-9, `corpus WER ${j.corpus.wer} != 2/9`);
+  assert(j.per_gender.FEMALE.wer === 0.0, 'identity pair must score 0');
+  assert(Math.abs(j.per_gender.MALE.wer - 1 / 3) < 1e-9, `MALE WER ${j.per_gender.MALE.wer} != 1/3`);
+  assert(typeof j.corpus.cer === 'number' && j.corpus.cer > 0 && j.corpus.cer < 1, 'CER missing or out of range');
+  assert(j.model === 'fixture-stub' && j.split === 'dev', 'output must be self-describing');
+});
+
 let failed = 0;
 for (const r of results) {
   if (r.ok) console.log(`  ✓ ${r.name}`);
