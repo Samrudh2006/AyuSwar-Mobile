@@ -6,12 +6,16 @@
  * and audio metadata are not stored in plaintext on the device.
  *
  * Honest scope:
- * - The device key is a non-extractable CryptoKey persisted in a dedicated
- *   IndexedDB store. This protects data at rest against casual inspection
- *   and offline DB extraction; it is not a hardware-backed keystore and
- *   does not replace server-side security. On native Android builds the
- *   SQLCipher path (user-suggested plugin) is the stronger option and is
- *   tracked separately.
+ * - On native Android builds, encryption runs through the Android Keystore
+ *   plugin (keystoreNative.js): the AES-256-GCM key is generated inside
+ *   AndroidKeyStore and never leaves it; hardware-backed status is whatever
+ *   the device's KeyInfo reports at runtime (true/false/null=unknown) and is
+ *   never upgraded to a guarantee. Envelope algorithm: 'AES-256-GCM-KEYSTORE'.
+ * - On web/preview builds the device key is a non-extractable CryptoKey
+ *   persisted in a dedicated IndexedDB store. This protects data at rest
+ *   against casual inspection and offline DB extraction; it is not a
+ *   hardware-backed keystore and does not replace server-side security.
+ *   Envelope algorithm: 'AES-256-GCM'.
  * - purgeWithConfirmation() actually deletes records and returns a purge
  *   receipt the UI can surface as the "audio deleted" confirmation the
  *   rural-PHC requirements call for. It cannot guarantee erasure of data
@@ -71,10 +75,30 @@ async function getOrCreateDeviceKey() {
 const toB64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
 const fromB64 = (b64) => Uint8Array.from(atob(b64), (ch) => ch.charCodeAt(0));
 
+// Native Keystore path (lazy import keeps web bundles free of Capacitor deps).
+let keystoreBridge = null;
+async function keystore() {
+  if (keystoreBridge) return keystoreBridge;
+  try {
+    keystoreBridge = await import('../mobile/keystoreNative.js');
+  } catch {
+    keystoreBridge = { nativeAvailable: () => false };
+  }
+  return keystoreBridge;
+}
+
 export async function encryptRecord(plainObject) {
+  const encoded = new TextEncoder().encode(JSON.stringify(plainObject));
+  const bridge = await keystore();
+  if (bridge.nativeAvailable()) {
+    const packed = await bridge.keystoreEncrypt(encoded);
+    if (packed) {
+      return { __encrypted: true, algorithm: 'AES-256-GCM-KEYSTORE', ciphertext: packed };
+    }
+    // Native encrypt failed: fall through to WebCrypto rather than store plaintext.
+  }
   const key = await getOrCreateDeviceKey();
   const iv = globalThis.crypto.getRandomValues(new Uint8Array(GCM_IV_BYTES));
-  const encoded = new TextEncoder().encode(JSON.stringify(plainObject));
   const cipher = await subtle().encrypt({ name: 'AES-GCM', iv }, key, encoded);
   return {
     __encrypted: true,
@@ -86,6 +110,12 @@ export async function encryptRecord(plainObject) {
 
 export async function decryptRecord(record) {
   if (!record || record.__encrypted !== true) return record; // legacy plaintext row
+  if (record.algorithm === 'AES-256-GCM-KEYSTORE') {
+    const bridge = await keystore();
+    const plain = await bridge.keystoreDecrypt(record.ciphertext);
+    if (!plain) throw new Error('Native Keystore decryption unavailable for this record.');
+    return JSON.parse(new TextDecoder().decode(plain));
+  }
   const key = await getOrCreateDeviceKey();
   const plain = await subtle().decrypt(
     { name: 'AES-GCM', iv: fromB64(record.iv) },
