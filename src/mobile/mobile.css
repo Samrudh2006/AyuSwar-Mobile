@@ -28,8 +28,8 @@
   --m-radius-xl: 26px;
   --m-shadow-1: 0 1px 2px rgba(28, 43, 35, 0.06), 0 2px 8px rgba(28, 43, 35, 0.05);
   --m-shadow-2: 0 2px 6px rgba(28, 43, 35, 0.07), 0 8px 24px rgba(28, 43, 35, 0.08);
-  --m-font-ui: 'Albert Sans', 'Noto Sans Telugu', system-ui, -apple-system, sans-serif;
-  --m-font-display: 'Fraunces', 'Noto Sans Telugu', Georgia, serif;
+  --m-font-ui: 'Albert Sans', var(--font-indic-locale, 'Noto Sans Telugu'), 'Noto Sans Kannada', 'Noto Sans Tamil', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+  --m-font-display: 'Fraunces', var(--font-indic-locale, 'Noto Sans Telugu'), 'Noto Sans Kannada', 'Noto Sans Tamil', 'Noto Sans Devanagari', Georgia, serif;
   --m-ease: cubic-bezier(0.23, 1, 0.32, 1);
   --m-tabbar-h: 64px;
 }
