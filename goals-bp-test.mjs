@@ -74,5 +74,36 @@ const hrLine = await bpCard.locator('strong', { hasText: 'bpm' }).evaluate(el =>
 assert(!hrLine.includes('(sample value)'), 'sample-value tag dropped after edit: ' + hrLine);
 ok('edited pulse drops the sample-value tag');
 
-console.log(`\nBP CARD PROBE: ${passed}/7 scenarios passed`);
+// 8. whitespace-only input collapses and is rejected (value injected through the
+// native setter + input event so React's onChange receives it, since a number
+// input cannot be typed whitespace into)
+await waitToastGone();
+await inputs.nth(0).evaluate(el => {
+  const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+  setter.call(el, '   ');
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+});
+await inputs.nth(0).fill('118'); await inputs.nth(0).evaluate(el => {
+  const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+  setter.call(el, '   ');
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+});
+await logBtn.click();
+await p.waitForTimeout(500);
+assert((await bannerText()).includes('Nothing was logged'), 'whitespace rejected');
+ok('whitespace-only input rejected (programmatic injection)');
+
+// 9. non-finite value (1e999 -> Infinity) rejected
+await waitToastGone();
+await inputs.nth(0).evaluate(el => {
+  const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+  setter.call(el, '1e999');
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+});
+await logBtn.click();
+await p.waitForTimeout(500);
+assert((await bannerText()).includes('Nothing was logged'), 'non-finite rejected');
+ok('non-finite value rejected (programmatic injection)');
+
+console.log(`\nBP CARD PROBE: ${passed}/9 scenarios passed`);
 await b.close();
