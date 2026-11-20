@@ -42,7 +42,8 @@ const suites = [
   { name: 'Phase 20: DoctorPortal Offline Consent Regression & Purge', file: 'test/doctor_portal_offline_consent.test.js', count: 6 },
   { name: 'Phase 21: Recording Consent Gate, Modal & Withdraw', file: 'test/phase21_recording_consent.test.js', count: 6 },
   { name: 'Phase 22: PIN App Lock & Withdraw Semantics', file: 'test/phase22_app_lock.test.js', count: 13 },
-  { name: 'Phase 23: Native Keystore At-Rest Protection', file: 'test/phase23_keystore.test.js', count: 10 }
+  { name: 'Phase 23: Native Keystore At-Rest Protection', file: 'test/phase23_keystore.test.js', count: 10 },
+  { name: 'Phase 24: On-Device-First Speech Recognition', file: 'test/phase24_ondevice_asr.test.js', count: 6 }
 ];
 
 console.clear();

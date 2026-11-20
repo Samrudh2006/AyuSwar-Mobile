@@ -350,7 +350,11 @@ export default function DoctorPortal({
     if (result.attempted === 0) {
       setFhirToast('No local offline records found to purge on this device.');
     } else if (result.failed > 0) {
-      setFhirToast(`Purged ${result.purged} of ${result.attempted} local record(s); ${result.failed} deletion(s) FAILED and ${result.remainingQueueCount} remain queued. Retry or contact support.`);
+      const keys = result.deviceKeys || {};
+      const keyNote = result.erasureComplete
+        ? 'Both device keys are gone, so the contents of any surviving record are NOT recoverable; retrying deletes those records but cannot restore their contents.'
+        : 'Key purge incomplete; surviving records may remain readable - retry the purge.';
+      setFhirToast(`Purged ${result.purged} of ${result.attempted} local record(s); ${result.failed} deletion(s) FAILED and ${result.remainingQueueCount} remain queued. Device keys - IndexedDB: ${keys.indexedDbDeviceKey}, native Keystore: ${keys.nativeKeystoreKey}. ${keyNote}`);
     } else {
       const keys = result.deviceKeys || {};
       const bothGone = ['deleted', 'absent'].includes(keys.indexedDbDeviceKey) && ['deleted', 'not-applicable'].includes(keys.nativeKeystoreKey);

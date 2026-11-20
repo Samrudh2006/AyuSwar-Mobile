@@ -16,6 +16,7 @@ import { apiUrl, authHeaders } from '../utils/apiBase.js';
 import { clinicalVad } from './clinicalVadEngine.js';
 import { Capacitor } from '@capacitor/core';
 import { SpeechRecognition as NativeSpeechRecognition } from '@capacitor-community/speech-recognition';
+import { ayuswarSpeechAvailable, AyuSwarSpeech } from '../mobile/ayuswarSpeech.js';
 import { recordDiagnosticStage } from '../utils/diagnosticLogger.js';
 
 /**
@@ -1676,15 +1677,21 @@ export class IndicSpeechService {
     }
   }
 
-  async startNativeRecognition({ langCode, onResult, onError, onStatusChange }) {
+  async startNativeRecognition({ langCode, onResult, onError, onStatusChange, allowNetworkRecognition = false }) {
     try {
-      const perm = await NativeSpeechRecognition.requestPermissions();
+      // On-device-first engine when the AyuSwarSpeech plugin is available
+      // (rural-PHC must-have); the community plugin remains the fallback.
+      // The provider label reflects the ACTUAL recognizer used, from the
+      // plugin's own start() report - never assumed.
+      const useOnDeviceEngine = ayuswarSpeechAvailable();
+      const Engine = useOnDeviceEngine ? AyuSwarSpeech : NativeSpeechRecognition;
+      const perm = await Engine.requestPermissions();
       if (perm.speechRecognition !== 'granted') {
         onError('Microphone / speech recognition permission denied. Please grant it in Android app settings.');
         return null;
       }
 
-      this.nativePartialListener = await NativeSpeechRecognition.addListener('partialResults', (data) => {
+      this.nativePartialListener = await Engine.addListener('partialResults', (data) => {
         const text = (data.matches && data.matches[0]) || '';
         this.lastNativeTranscript = text;
         onResult({
@@ -1694,7 +1701,7 @@ export class IndicSpeechService {
           langCode
         });
       });
-      this.nativeStateListener = await NativeSpeechRecognition.addListener('listeningState', (data) => {
+      this.nativeStateListener = await Engine.addListener('listeningState', (data) => {
         if (data.status === 'stopped') {
           this.isRecognitionRunning = false;
           onStatusChange({ isListening: false, langCode });
@@ -1715,24 +1722,30 @@ export class IndicSpeechService {
         }
       });
 
-      await NativeSpeechRecognition.start({
+      const started = await Engine.start({
         language: langCode,
         maxResults: 1,
         prompt: '',
         popup: false,
-        partialResults: true
+        partialResults: true,
+        // Network recognition only on explicit caller choice (user consent
+        // with disclosure); default false keeps offline claims honest.
+        allowNetwork: allowNetworkRecognition === true
       });
       this.isRecognitionRunning = true;
       this.currentLanguage = langCode;
-      this.currentRecognition = { native: true, stop: () => NativeSpeechRecognition.stop() };
+      this.currentRecognition = { native: true, stop: () => Engine.stop() };
+      // Honest provider label: on-device only when the plugin says an
+      // on-device recognizer was actually created for this session.
+      const provider = useOnDeviceEngine && started?.onDevice === true ? 'capacitor_native_ondevice' : 'capacitor_native';
       recordDiagnosticStage({
         stage: 'stt_mic',
         micState: 'granted',
-        recognizer: 'capacitor_native',
+        recognizer: provider,
         outcomeCode: 'STARTED',
         component: 'indicSpeechService'
       });
-      onStatusChange({ isListening: true, langCode, provider: 'capacitor_native' });
+      onStatusChange({ isListening: true, langCode, provider });
       return this.currentRecognition;
     } catch (err) {
       this.isRecognitionRunning = false;
