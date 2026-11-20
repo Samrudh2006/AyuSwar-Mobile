@@ -33,6 +33,7 @@ export default function PatientHealthGoalsTab({
 
   // Circadian Sleep & Recovery
   const [sleepHours, setSleepHours] = useState(7.5);
+  const [sleepEdited, setSleepEdited] = useState(false);
   const deepSleepPercent = 24;
   const sleepScore = 88;
 
@@ -287,7 +288,7 @@ export default function PatientHealthGoalsTab({
 
           <button
             onClick={() => {
-              alert('Audio Feedback: మీ మందుల క్రమం అద్భుతంగా ఉంది! డాక్టర్ ప్రియా గారు సూచించిన విధంగా అన్ని మందులు సమయానికి వేసుకుంటున్నారు.');
+              alert(t('patient.goals.sampleTag') + ' Audio Feedback: మీ మందుల క్రమం అద్భుతంగా ఉంది! డాక్టర్ ప్రియా గారు సూచించిన విధంగా అన్ని మందులు సమయానికి వేసుకుంటున్నారు.');
             }}
             style={{ background: '#F0FDF4', border: '1px solid #BBF7D0', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 750, color: '#166534', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}
           >
@@ -419,15 +420,17 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.sleepTitle')}</span>
-              <span style={{ background: 'rgba(15, 76, 92, 0.1)', color: '#0F4C5C', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
-                {t('patient.goals.sleepQuality')}
+              <span style={{ background: sleepEdited ? '#F1F5F9' : 'rgba(15, 76, 92, 0.1)', color: sleepEdited ? '#52707C' : '#0F4C5C', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+                {sleepEdited ? t('patient.goals.bpNotEvaluated') : t('patient.goals.sleepQuality')}
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#0F4C5C', margin: '4px 0 2px 0' }}>
-              {sleepHours} hrs <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>(Score: {sleepScore}/100)</span>
+              {sleepHours} hrs {!sleepEdited && <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>(Score: {sleepScore}/100) {t('patient.goals.sampleValue')}</span>}
             </div>
             <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
-              {t('patient.goals.deepSleep')} <strong>{deepSleepPercent}% (1h 48m)</strong> • {t('patient.goals.rem')} <strong>22%</strong> • {t('patient.goals.sleepDebt')} 0m
+              {sleepEdited
+                ? t('patient.goals.bpNotEvaluated')
+                : <>{t('patient.goals.deepSleep')} <strong>{deepSleepPercent}% (1h 48m)</strong> • {t('patient.goals.rem')} <strong>22%</strong> • {t('patient.goals.sleepDebt')} 0m {t('patient.goals.sampleValue')}</>}
             </div>
 
             <div style={{ background: '#FAF8F5', padding: '8px 10px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '11px', color: '#0F4C5C', marginBottom: '12px' }}>
@@ -437,13 +440,13 @@ export default function PatientHealthGoalsTab({
 
           <div style={{ display: 'flex', gap: '6px' }}>
             <button
-              onClick={() => setSleepHours(h => +(h + 0.5).toFixed(1))}
+              onClick={() => { setSleepEdited(true); setSleepHours(h => +(h + 0.5).toFixed(1)); }}
               style={{ flex: 1, background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 750, color: '#166534', cursor: 'pointer' }}
             >
               {t('patient.goals.sleepPlus30')}
             </button>
             <button
-              onClick={() => setSleepHours(h => Math.max(4, +(h - 0.5).toFixed(1)))}
+              onClick={() => { setSleepEdited(true); setSleepHours(h => Math.max(4, +(h - 0.5).toFixed(1))); }}
               style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 700, color: '#52707C', cursor: 'pointer' }}
             >
               {t('patient.goals.sleepMinus30')}
