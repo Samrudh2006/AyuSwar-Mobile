@@ -2891,7 +2891,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
  <span> <strong>Night:</strong> {nightReminderTime} (Dinner)</span>
                   </div>
 
-                  {/* Control 2: 1-Tap audible simulation button */}
+                  {/* Control 2: 1-Tap audible simulation button; plays a fixed synthetic sample script locally. Nothing is scheduled, sent, or delivered to any patient. */}
                   <button
                     type="button"
                     onClick={handleTestDailyVoiceAlert}
@@ -2912,7 +2912,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     }}
                   >
                     <Volume2 size={12} />
- <span>{isTestingDailyAlert ? 'Playing...': 'Test 8:30 AM Alert'}</span>
+ <span>{isTestingDailyAlert ? 'Playing sample...' : 'Play sample alert (synthetic script)'}</span>
                   </button>
                 </div>
               )}
