@@ -160,7 +160,7 @@ Measured on desktop (single runs, exploratory - NOT phone numbers): built-app br
 | Metric | Result | Scope |
 |---|---|---|
 | Test suite | **237 passed, 3 conditional skips, 0 failed** | `npm test` on this repo, 20 Nov 2026 |
-| Production build | Green, 181 static shell assets | `npm run build`, 20 Nov 2026 |
+| Production build | Green | `npm run build`, 20 Nov 2026 |
 | Debug APK (working tree) | 69,594,976 bytes after packaging dedupe (was 78,886,799 before; published candidate is 57,009,839 with a different feature set) | `gradlew assembleDebug`, 20 Nov 2026 |
 | TTS endpoint | HTTP 200, valid 38 KB WAV returned | Live `POST /api/gnani/tts`, 18 Nov |
 | Runtime failure honesty | Blank-scan and no-voice cases show explicit notices, no fake progress | Headless Chromium checks, 18 Nov |
