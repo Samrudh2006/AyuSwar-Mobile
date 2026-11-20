@@ -8,9 +8,11 @@
  * Keys are NEVER sent to the client.
  */
 
-import { checkRateLimit, logSafeApiAccess } from '../_lib/security.js';
+import { checkRateLimit, logSafeApiAccess, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/groq/status';
 

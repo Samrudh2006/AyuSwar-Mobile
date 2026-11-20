@@ -168,6 +168,39 @@ export async function verifyCallerAuthorization(req) {
  * Sanitizes errors returned to clients.
  * Prevents internal tokens, upstream stack traces, or secret URLs from leaking.
  */
+
+// Browser origins the Capacitor app and hosted web build are served from.
+// Only these may make cross-origin browser requests carrying Authorization.
+const ALLOWED_BROWSER_ORIGINS = new Set([
+  'https://localhost',        // Capacitor Android WebView default origin
+  'capacitor://localhost',    // Capacitor iOS WebView default origin
+  'http://localhost',         // local development
+  'https://ayuswar-ai.vercel.app'
+]);
+
+// Echoes the request Origin only when it is on the allowlist (never '*',
+// because requests carry Authorization headers). Static vercel.json headers
+// cannot echo per-origin and would risk duplicate ACAO values, so CORS is
+// applied here at the route level for every /api/* function.
+export function applyCorsHeaders(req, res) {
+  const origin = req.headers?.origin || '';
+  if (ALLOWED_BROWSER_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Vary', 'Origin');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Max-Age', '86400');
+  }
+}
+
+// Returns true when the request was an OPTIONS preflight and has been answered.
+export function handleCorsPreflight(req, res) {
+  if (req.method !== 'OPTIONS') return false;
+  applyCorsHeaders(req, res);
+  res.status(204).end();
+  return true;
+}
+
 export function sanitizeClientError(error, defaultMessage = 'An internal service error occurred.') {
   if (!error) return defaultMessage;
   const message = typeof error === 'string' ? error : error.message || '';

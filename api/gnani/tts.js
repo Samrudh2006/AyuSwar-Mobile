@@ -10,7 +10,7 @@
  * - Zero-leak audit logging: Never logs synthesized text.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 export const config = {
   api: {
@@ -21,6 +21,8 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/gnani/tts';
 

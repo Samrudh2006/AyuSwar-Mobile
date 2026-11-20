@@ -11,7 +11,7 @@
  * - Non-diagnostic guardrail: Enforces emergency 112/108 routing and forbids autonomous drug dosing.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, sanitizeClientError, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 export const config = {
   api: {
@@ -22,6 +22,8 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/evon/chat';
 
@@ -50,7 +52,7 @@ export default async function handler(req, res) {
     });
   }
 
-  // Caller authorization (opt-in enforcement via API_REQUIRE_AUTH=true; fail-closed when on)
+  // Caller authorization (mandatory for all callers, fail-closed, no opt-out flag)
   const callerAuth = await verifyCallerAuthorization(req);
   if (!callerAuth.authorized) {
     logSafeApiAccess({ route, method: req.method, status: callerAuth.status, durationMs: Date.now() - startTime, clientNote: 'Caller auth rejected' });

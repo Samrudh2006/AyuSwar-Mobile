@@ -6,7 +6,7 @@
  * Keys (SUPABASE_SERVICE_ROLE_KEY) are NEVER bundled or exposed to frontend clients.
  */
 
-import { checkRateLimit, logSafeApiAccess, sanitizeClientError } from '../_lib/security.js';
+import { checkRateLimit, logSafeApiAccess, sanitizeClientError, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 export const config = {
   api: {
@@ -17,6 +17,8 @@ export const config = {
 };
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/auth/verify';
 

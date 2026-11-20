@@ -6,12 +6,14 @@
  * Keys (GNANI_API_KEY / GNANI_TTS_KEY / GNANI_STT_KEY) are configured exclusively server-side and NEVER exposed to clients.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 let lastSuccessTime = null;
 let lastSttSuccessTime = null;
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/gnani/status';
 
@@ -28,6 +30,11 @@ export default async function handler(req, res) {
     logSafeApiAccess({ route, method: req.method, status: 429, durationMs: Date.now() - startTime });
     return res.status(429).json({ error: 'Rate limit exceeded for status probes.' });
   }
+
+  // Live status probes spend server keys against paid upstreams, so they are
+  // gated behind caller auth exactly like the quota routes. Unauthenticated
+  // callers receive a config-only answer: no upstream fetch, no key-validity detail.
+  const callerAuth = await verifyCallerAuthorization(req);
 
   const ttsKey = process.env.GNANI_TTS_KEY || process.env.GNANI_API_KEY;
   const sttKey = process.env.GNANI_STT_KEY || process.env.GNANI_API_KEY;
@@ -56,6 +63,32 @@ export default async function handler(req, res) {
       latencyMs: null,
       lastSuccessTime: lastSuccessTime,
       reason: 'GNANI_API_KEY unset on server. Using safe browser speech fallback.'
+    });
+  }
+
+  if (!callerAuth.authorized) {
+    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (caller not authenticated)' });
+    return res.status(200).json({
+      available: false,
+      status: 'AUTH_REQUIRED',
+      provider: 'browser_fallback',
+      tts: {
+        configured: Boolean(ttsKey),
+        status: 'AUTH_REQUIRED',
+        model: 'Browser Web SpeechSynthesis (Client Fallback)'
+      },
+      stt: {
+        configured: Boolean(sttKey),
+        status: 'AUTH_REQUIRED',
+        model: 'Browser Web SpeechRecognition (Client Fallback)'
+      },
+      models: {
+        stt: 'Browser Web SpeechRecognition (Client Fallback)',
+        tts: 'Browser Web SpeechSynthesis (Client Fallback)'
+      },
+      latencyMs: null,
+      lastSuccessTime: null,
+      reason: 'Sign in required to check live speech provider status. Using safe browser speech fallback.'
     });
   }
 

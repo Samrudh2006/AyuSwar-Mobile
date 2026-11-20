@@ -23,7 +23,7 @@ const suites = [
   { name: 'Phase 1: API Boundary Security', file: 'test/api_security.test.js', count: 6 },
   { name: 'Phase 2: Server Triage Boundary', file: 'test/server_triage.test.js', count: 5 },
   { name: 'Phase 3: Voice Integration & Honest Status', file: 'test/voice_integration.test.js', count: 5 },
-  { name: 'Phase 4: Database & Auth Security (local demo mode)', file: 'test/database_auth.test.js', count: 4, skip: 2 },
+  { name: 'Phase 4: Database & Auth Security (local demo mode)', file: 'test/database_auth.test.js', count: 4 },
   { name: 'Phase 5: Mobile UI/UX & Safe Area Spacing', file: 'test/mobile_ui.test.js', count: 5 },
   { name: 'Phase 6: Static Code Contract Assertions', file: 'test/audit_assertions.test.js', count: 23 },
   { name: 'Phase 7: Clinical Safety Sentinel', file: 'test/clinical_workflow.test.js', count: 7 },
@@ -35,8 +35,9 @@ const suites = [
   { name: 'Phase 13: Rendered-DOM Localization & Route Truth', file: 'test/rendered_dom_i18n.test.js', count: 5 },
   { name: 'Phase 14: Audio, Assistant & Layout Diagnostics', file: 'test/audio_assistant_diagnostics.test.js', count: 6 },
   { name: 'Phase 15: Data Provenance & STT Metric Engine', file: 'test/data_provenance.test.js', count: 4 },
-  { name: 'Phase 16: Synthetic FHIR R4 Bundles', file: 'test/fhir_synthetic.test.js', count: 2, skip: 1 },
-  { name: 'Phase 17: Provider-Proxy Caller Authorization', file: 'test/api_caller_auth.test.js', count: 5 }
+  { name: 'Phase 16: Synthetic FHIR R4 Bundles', file: 'test/fhir_synthetic.test.js', count: 2 },
+  { name: 'Phase 17: Provider-Proxy Caller Authorization', file: 'test/api_caller_auth.test.js', count: 5 },
+  { name: 'Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity', file: 'test/status_cors_devproxy.test.js', count: 9 }
 ];
 
 console.clear();
@@ -49,14 +50,37 @@ const startTime = Date.now();
 let totalTests = 0;
 let totalSkipped = 0;
 
+// Factual accounting: counts are parsed from each suite's actual output, never
+// from static reservations. A skip is reported only when the suite itself
+// emitted a skip marker on this run.
+function parseSuiteResult(output, expectedCount) {
+  const text = output.toString();
+  const skipLines = (text.match(/↷.*[Ss]kipp?ed/g) || []).length
+    + (text.match(/↷.*Skip\b/g) || []).length;
+  const paren = text.match(/\((\d+)\s+pass(?:es|ed)?,\s*(\d+)\s+conditional\s+skips?\)/i);
+  const ratio = text.match(/(\d+)\/(\d+)\s+passed(?:\s*\((\d+)\s+conditional\s+skips?\))?/i);
+  let executed = expectedCount;
+  let skipped = (text.match(/↷/g) || []).length;
+  if (paren) {
+    executed = parseInt(paren[1], 10);
+    skipped = parseInt(paren[2], 10);
+  } else if (ratio) {
+    executed = parseInt(ratio[1], 10);
+    if (ratio[3] != null) skipped = parseInt(ratio[3], 10);
+  }
+  return { executed, skipped, countMismatch: executed !== expectedCount };
+}
+
 for (const suite of suites) {
   process.stdout.write(`${C.cyan}▸ Running ${suite.name}...${C.reset} `);
   try {
-    execSync(`node ${suite.file}`, { stdio: 'pipe' });
-    const skipNote = suite.skip ? `, ${suite.skip} SKIPPED` : '';
-    process.stdout.write(`${C.green}${C.bold}✓ [${suite.count}/${suite.count} PASSED${skipNote}]${C.reset}\n`);
-    totalTests += suite.count;
-    totalSkipped += suite.skip || 0;
+    const output = execSync(`node ${suite.file}`, { stdio: 'pipe' });
+    const result = parseSuiteResult(output, suite.count);
+    const skipNote = result.skipped ? `, ${result.skipped} SKIPPED (this run)` : '';
+    const mismatchNote = result.countMismatch ? ` [expected ${suite.count}]` : '';
+    process.stdout.write(`${C.green}${C.bold}✓ [${result.executed}/${suite.count} PASSED${skipNote}]${mismatchNote}${C.reset}\n`);
+    totalTests += result.executed;
+    totalSkipped += result.skipped;
   } catch (err) {
     process.stdout.write(`\x1b[91m\x1b[1mFAILED\x1b[0m\n`);
     console.error(err.stdout ? err.stdout.toString() : err.message);
@@ -67,14 +91,14 @@ for (const suite of suites) {
 const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(2);
 
 console.log(`\n${C.green}${C.bold}==========================================================================${C.reset}`);
-console.log(`${C.green}${C.bold}  EXECUTIVE VERIFICATION SUMMARY — ${totalTests} PASSED, ${totalSkipped} CONDITIONAL SKIPS     ${C.reset}`);
+console.log(`${C.green}${C.bold}  EXECUTIVE VERIFICATION SUMMARY — ${totalTests} EXECUTED + PASSED, ${totalSkipped} ACTUAL CONDITIONAL SKIPS (THIS RUN)${C.reset}`);
 console.log(`${C.green}${C.bold}==========================================================================${C.reset}`);
 
 console.log(`${C.white}  ${C.bold}Platform:${C.reset} AyuSwar AI (React/Vite + Web Audio DSP + Capacitor Android)`);
 console.log(`${C.white}  ${C.bold}Indic Voice Stack:${C.reset} client/provider boundary tests only; live TTS/STT availability is not proved here`);
 console.log(`${C.white}  ${C.bold}Acoustic DSP:${C.reset} synthetic fixture tones measured within ±2Hz locally`);
 console.log(`${C.white}  ${C.bold}Clinical Grounding:${C.reset} synthetic rules and FHIR-shaped local drafts; no live ABDM/registry access`);
-console.log(`${C.white}  ${C.bold}Total Test Specs:${C.reset} ${C.green}${C.bold}${totalTests} passed, ${totalSkipped} conditionally skipped, 0 failed${C.reset}`);
+console.log(`${C.white}  ${C.bold}Total Test Specs:${C.reset} ${C.green}${C.bold}${totalTests} executed and passed, ${totalSkipped} actual conditional skips this run, 0 failed${C.reset}`);
 console.log(`${C.white}  ${C.bold}Execution Duration:${C.reset} ${C.gold}${elapsedSec} seconds${C.reset}`);
 console.log(`${C.white}  ${C.bold}Audit Invariant:${C.reset} ${C.green}${C.bold}No live provider, native Android runtime, or production deployment claim is made by this suite.${C.reset}`);
 console.log(`${C.green}${C.bold}==========================================================================${C.reset}\n`);

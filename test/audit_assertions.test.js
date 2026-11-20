@@ -132,8 +132,12 @@ assert.ok(existsSync(resolve('api/evon/chat.js')), 'api/evon/chat.js must exist 
 const viteConfigSrc = readFileSync(resolve('vite.config.js'), 'utf8');
 assert.ok(viteConfigSrc.includes('/api/evon/status'), 'vite.config.js must configure dev middleware for /api/evon/status');
 assert.ok(viteConfigSrc.includes('/api/evon/chat'), 'vite.config.js must configure dev middleware for /api/evon/chat');
-assert.ok(viteConfigSrc.includes('EVON_BASE_URL'), 'vite.config.js must read EVON_BASE_URL');
-assert.ok(viteConfigSrc.includes('EVON_API_KEY'), 'vite.config.js must read EVON_API_KEY');
+// Dev middleware delegates to the real api/ handlers, so the env reads live in the handlers:
+assert.ok(viteConfigSrc.includes('vercelDevAdapter'), 'vite.config.js must delegate dev API routes to the real handlers via vercelDevAdapter');
+const evonChatSrc = readFileSync(resolve('api/evon/chat.js'), 'utf8');
+const evonStatusSrc = readFileSync(resolve('api/evon/status.js'), 'utf8');
+assert.ok(evonChatSrc.includes('EVON_BASE_URL') || evonStatusSrc.includes('EVON_BASE_URL'), 'Evon handlers must read EVON_BASE_URL');
+assert.ok(evonChatSrc.includes('EVON_API_KEY') || evonStatusSrc.includes('EVON_API_KEY'), 'Evon handlers must read EVON_API_KEY');
 console.log('✓ Test 11 Passed: [Static Code Contract] Server-side Evon routes and dev proxy middleware properly configured.');
 
 // Test 12: [Static Code Contract] Frontend keys isolation — No EVON_API_KEY or VITE_EVON_* in client code

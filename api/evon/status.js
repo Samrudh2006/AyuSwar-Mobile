@@ -7,11 +7,13 @@
  * Header-supplied keys or base URLs are strictly forbidden.
  */
 
-import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess } from '../_lib/security.js';
+import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
 
 let lastSuccessTime = null;
 
 export default async function handler(req, res) {
+  applyCorsHeaders(req, res);
+  if (handleCorsPreflight(req, res)) return;
   const startTime = Date.now();
   const route = '/api/evon/status';
 
@@ -29,6 +31,11 @@ export default async function handler(req, res) {
     return res.status(429).json({ error: 'Rate limit exceeded for status probes.' });
   }
 
+  // Live status probes spend server keys against paid upstreams, so they are
+  // gated behind caller auth exactly like the quota routes. Unauthenticated
+  // callers receive a config-only answer: no upstream fetch, no key-validity detail.
+  const callerAuth = await verifyCallerAuthorization(req);
+
   const baseUrl = process.env.EVON_BASE_URL || 'https://router.huggingface.co/v1';
   const apiKey = process.env.EVON_API_KEY;
   const modelName = process.env.EVON_MODEL_NAME || 'gnani/gnani-evon-v3.3-30B-A3B';
@@ -42,6 +49,18 @@ export default async function handler(req, res) {
       latencyMs: null,
       lastSuccessTime: lastSuccessTime,
       reason: 'EVON_BASE_URL or EVON_API_KEY unset on server. Using safe rule-based fallback.'
+    });
+  }
+
+  if (!callerAuth.authorized) {
+    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (caller not authenticated)' });
+    return res.status(200).json({
+      status: 'AUTH_REQUIRED',
+      available: false,
+      model: modelName,
+      latencyMs: null,
+      lastSuccessTime: null,
+      reason: 'Sign in required to check live reasoner status. Using safe rule-based fallback.'
     });
   }
 

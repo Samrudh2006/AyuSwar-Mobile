@@ -47,12 +47,22 @@ const OSM_STYLE = {
 };
 
 // Realistic Top-Down Moving Vehicle Generator (Ambulance Van or First-Responder Motorcycle)
+const escapeHtml = (value) => String(value ?? '')
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
 const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
+  // Coerce heading to a finite number: a non-numeric value would otherwise be
+  // interpolated raw into the rotate() CSS below (injection sink).
+  const safeHeading = Number.isFinite(Number(heading)) ? Number(heading) : 52;
   if (type === 'bike') {
     return `
       <div class="emergency-vehicle-marker" style="display: flex; flex-direction: column; align-items: center; position: relative; width: 50px; height: 84px; cursor: pointer; filter: drop-shadow(0 6px 14px rgba(0,0,0,0.85));">
         <!-- ROTATING VEHICLE CHASSIS -->
-        <div class="vehicle-rotator" style="position: absolute; top: 0; left: 0; width: 50px; height: 84px; transform: rotate(${heading}deg); transform-origin: 25px 42px; transition: transform 0.22s ease-out; pointer-events: none;">
+        <div class="vehicle-rotator" style="position: absolute; top: 0; left: 0; width: 50px; height: 84px; transform: rotate(${safeHeading}deg); transform-origin: 25px 42px; transition: transform 0.22s ease-out; pointer-events: none;">
           <svg viewBox="0 0 50 84" width="50" height="84" style="overflow: visible;">
             <defs>
               <linearGradient id="bike-beam" x1="0%" y1="100%" x2="0%" y2="0%">
@@ -114,7 +124,7 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
   return `
     <div class="emergency-vehicle-marker" style="display: flex; flex-direction: column; align-items: center; position: relative; width: 60px; height: 96px; cursor: pointer; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.85));">
       <!-- ROTATING VEHICLE CHASSIS -->
-      <div class="vehicle-rotator" style="position: absolute; top: 0; left: 0; width: 60px; height: 96px; transform: rotate(${heading}deg); transform-origin: 30px 48px; transition: transform 0.22s ease-out; pointer-events: none;">
+      <div class="vehicle-rotator" style="position: absolute; top: 0; left: 0; width: 60px; height: 96px; transform: rotate(${safeHeading}deg); transform-origin: 30px 48px; transition: transform 0.22s ease-out; pointer-events: none;">
         <svg viewBox="0 0 60 96" width="60" height="96" style="overflow: visible;">
           <defs>
             <linearGradient id="amb-beam-l" x1="0%" y1="100%" x2="0%" y2="0%">
@@ -488,7 +498,7 @@ export default function EmergencyMap({
           ">
  <span style="font-size: 12px; line-height: 1;"></span>
             <span style="font-size: 10.5px; font-weight: 800; color: #FFFFFF;">
- ${hosp.shortName || hosp.name.split(' ')[0]} ${isTop ? '★': ''}
+ ${escapeHtml(hosp.shortName || String(hosp.name || '').split(' ')[0])} ${isTop ? '★': ''}
             </span>
             <span style="
               font-size: 9px; 
@@ -498,7 +508,7 @@ export default function EmergencyMap({
               padding: 1px 5px;
               border-radius: 6px;
             ">
-              ${hosp.etaMinutes}m
+              ${escapeHtml(hosp.etaMinutes)}m
             </span>
           </div>
           <div style="width: 2px; height: 6px; background: ${isSelected ? '#38BDF8' : '#1E3A5F'};"></div>
