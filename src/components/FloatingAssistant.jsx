@@ -420,7 +420,11 @@ export default function FloatingAssistant({
               if (recorderGen !== activeSpeechGenRef.current) return;
               if (!speechSessionDispatchedRef.current && sttRes && sttRes.transcript && sttRes.transcript.trim().length > 1) {
                 speechSessionDispatchedRef.current = true;
-                setLiveTranscript(sttRes.transcript);
+                // Local on-device transcripts are drafts (may omit/substitute
+                // words); the transcript itself stays visible so the user can
+                // see and correct what was heard. The dispatched text is the
+                // transcript unchanged - the bubble the user sees IS the review.
+                setLiveTranscript(sttRes.draft ? `${sttRes.transcript} (local draft)` : sttRes.transcript);
                 handleProcessQuestion(sttRes.transcript);
                 return;
               }

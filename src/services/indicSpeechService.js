@@ -598,7 +598,10 @@ export class IndicSpeechService {
       const { transcribeInstalledClip } = await import('./localVoice/localAsrService.js');
       const language = String(langCode || 'te-IN').split('-')[0] || 'te';
       const r = await transcribeInstalledClip(audioBlob, { signal, language });
-      this.activeProvider = 'local_oss_onnx_asr';
+      // NOTE: do NOT set this.activeProvider here - it tracks PLAYBACK (TTS)
+      // provenance for getPlaybackProvenance/getProviderInfo; an STT result
+      // would mislabel the speaking status. Transcript provenance travels in
+      // this result object only.
       return {
         transcript: r.transcript,
         provider: r.provider,

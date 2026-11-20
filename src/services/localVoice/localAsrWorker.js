@@ -18,23 +18,26 @@
 
 /* global self */
 
+import * as ort from 'onnxruntime-web';
+
+// WASM must be served from the app's own origin, never a CDN. Same approach
+// as localTtsWorker: builds (or test harnesses) may override via
+// self.ORT_WASM_PATH; the app default resolves <base>/ort-wasm/ (populated at
+// build time by the vite 'copy-ort-wasm' hook) against this origin.
+if (typeof self !== 'undefined') {
+  if (self.ORT_WASM_PATH) {
+    ort.env.wasm.wasmPaths = self.ORT_WASM_PATH;
+  } else {
+    const base = (import.meta.env && import.meta.env.BASE_URL) || '/';
+    ort.env.wasm.wasmPaths = new URL(base + 'ort-wasm/', self.location.origin).href;
+  }
+}
+
 const SAMPLE_RATE = 16000;
 const MAX_SECONDS = 15;
 const MIN_SECONDS = 0.1;
 
-let ort = null;
-
 function post(message) { self.postMessage(message); }
-
-const wasmEnv = () => {
-  const base = (self.location?.origin ? `${self.location.origin}/` : '/');
-  const o = {
-    wasmPaths: { mjs: `${base}ort-wasm-simd-threaded.jsep.mjs`, wasm: `${base}ort-wasm-simd-threaded.jsep.wasm` },
-    proxy: false
-  };
-  try { o.numThreads = 1; } catch { /* ignore */ }
-  return o;
-};
 
 function parseVocab(text) {
   const lines = String(text).split(/\r?\n/).filter(l => l.trim().length > 0);
@@ -53,11 +56,6 @@ self.onmessage = async (event) => {
     if (pcmFloat32.length < Math.round(MIN_SECONDS * SAMPLE_RATE)) throw new Error('clip below minimum supported length');
     if (pcmFloat32.length > Math.round(MAX_SECONDS * SAMPLE_RATE)) throw new Error('clip exceeds maximum supported length');
 
-    if (!ort) {
-      const mod = await import('./ortBundle.js');
-      ort = mod.default;
-      ort.env.wasm = wasmEnv();
-    }
     const vocab = parseVocab(vocabText);
     if (typeof expectedVocabSize === 'number' && vocab.size !== expectedVocabSize) {
       throw new Error(`vocab size ${vocab.size} != pinned ${expectedVocabSize}`);

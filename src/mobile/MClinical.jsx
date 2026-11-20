@@ -185,14 +185,27 @@ export default function MClinical() {
   const confirmTranscribe = () => { setTranscribeConsentOpen(false); transcribe(); };
   const transcribe = async () => {
     if (!audio?.blob || !audio.signalSeen) return;
-    if (!navigator.onLine) { setStatus(t('offlineTranscribe')); return; }
+    // No navigator.onLine hard block: when an offline transcription pack is
+    // installed+consented the service's local tier works fully offline; when
+    // it is not, the network path fails fast and the honest statuses below
+    // still apply.
     setPhase('transcribing'); setStatus(t('transcribing'));
     try {
       const result = await speechService.transcribeAudioWithGnani(audio.blob, encounter.langCode || 'te-IN', { timeoutMs: 20000 });
       if (!mounted.current) return;
       const text = result?.transcript?.trim();
-      if (!text) { setPhase('recorded'); setStatus(t('noTranscript')); return; }
-      setTurns([{ speaker: 'Consultation', text, live: true }]);
+      if (!text) {
+        setPhase('recorded');
+        setStatus(navigator.onLine ? t('noTranscript') : t('offlineTranscribe'));
+        return;
+      }
+      const isDraft = Boolean(result?.draft);
+      setTurns([{
+        speaker: isDraft ? 'Consultation (local on-device DRAFT - review required)' : 'Consultation',
+        text,
+        live: !isDraft,
+        isLocalDraft: isDraft
+      }]);
       setPhase('ready'); setStatus(t('transcriptReady'));
     } catch {
       if (!mounted.current) return;
