@@ -13,7 +13,7 @@
   "type": "collection",
   "entry": [
     {
-      "fullUrl": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab",
+      "fullUrl": "urn:uuid:3f4521b0-dfea-45bf-9ab4-b27487dcc181",
       "resource": {
         "resourceType": "Patient",
         "id": "syn-patient-003",
@@ -56,7 +56,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74",
+      "fullUrl": "urn:uuid:caeb6179-53f1-4089-bcb6-ddb84c07736d",
       "resource": {
         "resourceType": "Encounter",
         "id": "syn-patient-003-enc",
@@ -73,7 +73,7 @@
           "display": "ambulatory"
         },
         "subject": {
-          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+          "reference": "urn:uuid:3f4521b0-dfea-45bf-9ab4-b27487dcc181"
         },
         "period": {
           "start": "2026-11-20T09:30:00+05:30",
@@ -82,7 +82,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:d8dee3b2-d880-425a-8e81-7f03520fe9e1",
+      "fullUrl": "urn:uuid:3ef627f3-c664-43b2-8126-f98f6f49cc26",
       "resource": {
         "resourceType": "Condition",
         "id": "syn-patient-003-cond",
@@ -112,15 +112,15 @@
           "text": "Acute upper respiratory infection, unspecified"
         },
         "subject": {
-          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+          "reference": "urn:uuid:3f4521b0-dfea-45bf-9ab4-b27487dcc181"
         },
         "encounter": {
-          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+          "reference": "urn:uuid:caeb6179-53f1-4089-bcb6-ddb84c07736d"
         }
       }
     },
     {
-      "fullUrl": "urn:uuid:a2efe324-d517-452c-97b0-1b577664d399",
+      "fullUrl": "urn:uuid:6b0db0dd-6eae-4cb3-8e08-dedebbf63735",
       "resource": {
         "resourceType": "Observation",
         "id": "syn-patient-003-obs",
@@ -142,10 +142,10 @@
           ]
         },
         "subject": {
-          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+          "reference": "urn:uuid:3f4521b0-dfea-45bf-9ab4-b27487dcc181"
         },
         "encounter": {
-          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+          "reference": "urn:uuid:caeb6179-53f1-4089-bcb6-ddb84c07736d"
         },
         "valueQuantity": {
           "value": 38.4,
@@ -156,7 +156,7 @@
       }
     },
     {
-      "fullUrl": "urn:uuid:35c39d75-da03-4722-8124-fcbad9edd094",
+      "fullUrl": "urn:uuid:023c5f06-261a-4815-baad-76001a90ccd7",
       "resource": {
         "resourceType": "MedicationRequest",
         "id": "syn-patient-003-med",
@@ -173,10 +173,10 @@
           "text": "Paracetamol 500mg oral tablet"
         },
         "subject": {
-          "reference": "urn:uuid:721d2cad-cae6-463e-924b-3cd3585fadab"
+          "reference": "urn:uuid:3f4521b0-dfea-45bf-9ab4-b27487dcc181"
         },
         "encounter": {
-          "reference": "urn:uuid:72d2905b-7e66-4043-b3db-06efd77a8f74"
+          "reference": "urn:uuid:caeb6179-53f1-4089-bcb6-ddb84c07736d"
         }
       }
     }

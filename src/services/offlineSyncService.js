@@ -9,7 +9,9 @@
  * 5. Full compliance with ABDM M3 offline clinic workflow specifications.
  */
 
-import { supabase } from './supabaseClient';
+import { supabase } from './supabaseClient.js';
+import { encryptRecord, decryptRecord } from './secureOfflineStorage.js';
+import { assertOfflineDataConsent, isBackgroundSyncApproved } from './offlineDataConsent.js';
 
 const DB_NAME = 'ayuswar_clinical_offline_db';
 const DB_VERSION = 2;
@@ -19,6 +21,8 @@ let dbInstance = null;
 
 // Cross-tab broadcast channel for instant multi-window sync status
 const syncChannel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('ayuswar_sync_channel') : null;
+// Node/test runtimes: do not let the channel keep the event loop alive.
+if (syncChannel && typeof syncChannel.unref === 'function') syncChannel.unref();
 
 /**
  * Open or initialize IndexedDB with structured clinical object stores
@@ -94,15 +98,34 @@ export const getPendingOfflineQueue = async () => {
         const tx = db.transaction('pending_sync_queue', 'readonly');
         const store = tx.objectStore('pending_sync_queue');
         const request = store.getAll();
-        request.onsuccess = () => resolve(request.result || []);
-        request.onerror = () => resolve(getLocalStorageQueue());
+        request.onsuccess = async () => resolve(await decryptQueue(request.result || []));
+        request.onerror = async () => resolve(await decryptQueue(getLocalStorageQueue()));
       } catch {
-        resolve(getLocalStorageQueue());
+        resolve(decryptQueue(getLocalStorageQueue()));
       }
     });
   }
-  return getLocalStorageQueue();
+  return decryptQueue(getLocalStorageQueue());
 };
+
+// Decrypt encrypted payloads on read. Legacy plaintext rows pass through.
+// A row whose key is locked/unavailable or whose GCM tag fails (tamper) is
+// returned with payload null + decryptError and is NEVER uploaded.
+async function decryptQueue(items) {
+  return Promise.all((items || []).map(decryptQueueItem));
+}
+
+async function decryptQueueItem(item) {
+  if (item?.payload?.__encrypted === true) {
+    try {
+      const plain = await decryptRecord(item.payload);
+      return { ...item, payload: plain.payload };
+    } catch {
+      return { ...item, payload: null, decryptError: true };
+    }
+  }
+  return item;
+}
 
 function getLocalStorageQueue() {
   try {
@@ -117,10 +140,18 @@ function getLocalStorageQueue() {
  * Save record offline with high durability
  */
 export const saveOfflineRecord = async (type, payload) => {
+  // Fail-closed: persisting clinical data on-device requires explicit,
+  // revocable offline-data consent. Throws OfflineDataConsentRequiredError.
+  assertOfflineDataConsent();
+
+  // Payload is encrypted at rest (AES-256-GCM envelope); only queue-management
+  // metadata (id/type/createdAt/status) stays cleartext.
+  const encryptedPayload = await encryptRecord({ type, payload });
   const newRecord = {
     id: `off_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
     type, // 'vital' | 'encounter' | 'prescription' | 'appointment' | 'triage'
-    payload,
+    payload: encryptedPayload,
+    payloadEncrypted: true,
     createdAt: new Date().toISOString(),
     status: 'pending_sync'
   };
@@ -174,6 +205,10 @@ export const syncAllPendingRecords = async () => {
 
   for (const item of queue) {
     try {
+      if (item.decryptError) {
+        console.warn('[OfflineSync] Skipping undecryptable record (locked key or tamper):', item.id);
+        continue;
+      }
       if (supabase) {
         if (item.type === 'vital' && item.payload) {
           await supabase.from('patient_vitals_log').insert({
@@ -227,13 +262,17 @@ export const syncAllPendingRecords = async () => {
  * Direct record caching in specific clinical store (cached_encounters, cached_vitals, cached_prescriptions)
  */
 export const cacheClinicalRecord = async (storeName, record) => {
+  // Fail-closed: on-device clinical caching requires explicit consent.
+  assertOfflineDataConsent();
   const db = await openOfflineDatabase();
   if (db && db.objectStoreNames.contains(storeName)) {
+    // id stays cleartext (it is the keyPath); the full record is encrypted.
+    const stored = { id: record.id, __encryptedEnvelope: await encryptRecord(record) };
     return new Promise((resolve) => {
       try {
         const tx = db.transaction(storeName, 'readwrite');
         const store = tx.objectStore(storeName);
-        store.put(record);
+        store.put(stored);
         tx.oncomplete = () => resolve(true);
         tx.onerror = () => resolve(false);
       } catch {
@@ -255,7 +294,18 @@ export const getCachedClinicalRecord = async (storeName, id) => {
         const tx = db.transaction(storeName, 'readonly');
         const store = tx.objectStore(storeName);
         const req = store.get(id);
-        req.onsuccess = () => resolve(req.result || null);
+        req.onsuccess = async () => {
+          const row = req.result || null;
+          if (row?.__encryptedEnvelope) {
+            try {
+              resolve(await decryptRecord(row.__encryptedEnvelope));
+            } catch {
+              resolve(null); // locked key or tamper: fail closed, no plaintext
+            }
+          } else {
+            resolve(row); // legacy plaintext row
+          }
+        };
         req.onerror = () => resolve(null);
       } catch {
         resolve(null);
@@ -275,9 +325,22 @@ export const enqueueOfflineAction = async (action) => {
 export const getPendingSyncQueue = getPendingOfflineQueue;
 export const flushOfflineSyncQueue = syncAllPendingRecords;
 
-// Automatic listener for network recovery
+// Network-recovery listener. NEVER auto-uploads: flushing queued records to
+// the backend requires an explicit, revocable background-sync approval (login
+// never grants it). Without approval the listener only announces that pending
+// records exist so the UI can ask the user.
 if (typeof window !== 'undefined') {
   window.addEventListener('online', () => {
-    syncAllPendingRecords();
+    if (isBackgroundSyncApproved()) {
+      syncAllPendingRecords();
+    } else {
+      getPendingOfflineQueue().then((queue) => {
+        if (queue && queue.length > 0 && typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('ayuswar:offline_sync_approval_required', {
+            detail: { pendingCount: queue.length }
+          }));
+        }
+      });
+    }
   });
 }

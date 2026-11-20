@@ -22,6 +22,14 @@ import {
   Layers
 } from 'lucide-react';
 import { getPendingOfflineQueue, saveOfflineRecord, syncAllPendingRecords } from '../services/offlineSyncService';
+import {
+  getOfflineDataConsent,
+  grantOfflineDataConsent,
+  revokeOfflineDataConsent,
+  isBackgroundSyncApproved,
+  approveBackgroundSync,
+  OfflineDataConsentRequiredError
+} from '../services/offlineDataConsent';
 import { getAuditLedger, recordAuditBlock, verifyLedgerIntegrity } from '../services/auditLedgerService';
 import { getNetworkQualityProfile } from '../services/bandwidthAdaptiveService';
 import { requestPushPermission, triggerDosagePushNotification } from '../services/webPushService';
@@ -44,6 +52,8 @@ export default function MobileInnovationHubModal({
   const [ledgerStatus, setLedgerStatus] = useState(verifyLedgerIntegrity());
   const [networkProfile, setNetworkProfile] = useState(getNetworkQualityProfile());
   const [toastMsg, setToastMsg] = useState(null);
+  const [offlineConsent, setOfflineConsent] = useState(() => Boolean(getOfflineDataConsent()));
+  const [bgSyncApproved, setBgSyncApproved] = useState(() => isBackgroundSyncApproved());
 
   useEffect(() => {
     const handleQueueUpdate = () => {
@@ -58,23 +68,49 @@ export default function MobileInnovationHubModal({
     setTimeout(() => setToastMsg(null), 3500);
   };
 
-  // Phase 4 trigger: Add offline test record
-  const handleAddOfflineRecord = () => {
-    saveOfflineRecord('vital_observation', {
-      patient: 'Narayana Rao',
-      bp: '130/84 mmHg',
-      heartRate: '76 bpm',
-      ruralPhc: 'Warangal Sub-Center #04'
-    });
-    setOfflineQueue(getPendingOfflineQueue());
-    showToast('Offline clinical vital queued in IndexedDB.');
+  // Phase 4 trigger: Add offline test record (requires explicit offline-data consent)
+  const handleAddOfflineRecord = async () => {
+    try {
+      await saveOfflineRecord('vital_observation', {
+        patient: 'Narayana Rao',
+        bp: '130/84 mmHg',
+        heartRate: '76 bpm',
+        ruralPhc: 'Warangal Sub-Center #04'
+      });
+      setOfflineQueue(getPendingOfflineQueue());
+      showToast('Offline clinical vital queued (encrypted) in IndexedDB.');
+    } catch (err) {
+      if (err instanceof OfflineDataConsentRequiredError || err.name === 'OfflineDataConsentRequiredError') {
+        showToast('On-device storage consent required first. Grant it below.');
+      } else {
+        showToast('Offline queue write failed.');
+      }
+    }
   };
 
-  // Phase 4 trigger: Sync queue
+  const handleGrantOfflineConsent = () => {
+    grantOfflineDataConsent();
+    setOfflineConsent(true);
+    showToast('On-device encrypted storage consent granted. Revocable any time.');
+  };
+
+  const handleRevokeOfflineConsent = () => {
+    revokeOfflineDataConsent();
+    setOfflineConsent(false);
+    showToast('On-device storage consent revoked. New offline saves are blocked.');
+  };
+
+  const handleApproveBackgroundSync = () => {
+    approveBackgroundSync();
+    setBgSyncApproved(true);
+    showToast('Background sync approved. Queue uploads when connectivity returns.');
+  };
+
+  // Phase 4 trigger: Sync queue (explicit per-flush user action = approval)
   const handleSyncOfflineQueue = async () => {
     const res = await syncAllPendingRecords();
     setOfflineQueue(getPendingOfflineQueue());
-    showToast(`Synced ${res.syncedCount} records to ABDM server.`);
+    showToast(`Synced ${res.syncedCount} queued records (demo backend).`);
   };
 
   // Phase 11 trigger: Test Push Notification
@@ -153,7 +189,7 @@ export default function MobileInnovationHubModal({
       desc: `Offline IndexedDB queue for zero-network rural zones (${offlineQueue.length} pending).`,
       icon: WifiOff,
       color: '#0F4C5C',
-      customContent: (
+      customContent: (<>
         <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
           <button 
             onClick={handleAddOfflineRecord}
@@ -169,7 +205,26 @@ export default function MobileInnovationHubModal({
             Sync ({offlineQueue.length})
           </button>
         </div>
-      )
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '8px', padding: '6px', borderRadius: '6px', background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
+          <span style={{ fontSize: '10px', color: '#475569', lineHeight: 1.4 }}>
+            On-device records are stored AES-256-GCM encrypted. Saving and background upload each need your explicit consent.
+          </span>
+          {offlineConsent ? (
+            <button onClick={handleRevokeOfflineConsent} style={{ padding: '3px 8px', borderRadius: '6px', background: '#FEF2F2', color: '#B91C1C', border: '1px solid #FECACA', fontSize: '10.5px', fontWeight: 700, cursor: 'pointer' }}>
+              Revoke on-device storage consent
+            </button>
+          ) : (
+            <button onClick={handleGrantOfflineConsent} style={{ padding: '3px 8px', borderRadius: '6px', background: '#ECFDF5', color: '#047857', border: '1px solid #A7F3D0', fontSize: '10.5px', fontWeight: 700, cursor: 'pointer' }}>
+              Allow encrypted on-device storage
+            </button>
+          )}
+          {offlineConsent && !bgSyncApproved && (
+            <button onClick={handleApproveBackgroundSync} style={{ padding: '3px 8px', borderRadius: '6px', background: '#EFF6FF', color: '#1D4ED8', border: '1px solid #BFDBFE', fontSize: '10.5px', fontWeight: 700, cursor: 'pointer' }}>
+              Approve background upload on reconnect
+            </button>
+          )}
+        </div>
+      </>)
     },
     {
       num: '5',

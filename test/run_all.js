@@ -37,7 +37,8 @@ const suites = [
   { name: 'Phase 15: Data Provenance & STT Metric Engine', file: 'test/data_provenance.test.js', count: 4 },
   { name: 'Phase 16: Synthetic FHIR R4 Bundles', file: 'test/fhir_synthetic.test.js', count: 2 },
   { name: 'Phase 17: Provider-Proxy Caller Authorization', file: 'test/api_caller_auth.test.js', count: 5 },
-  { name: 'Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity', file: 'test/status_cors_devproxy.test.js', count: 9 }
+  { name: 'Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity', file: 'test/status_cors_devproxy.test.js', count: 9 },
+  { name: 'Phase 19: Offline Consent & Encrypted Storage', file: 'test/offline_consent_storage.test.js', count: 8 }
 ];
 
 console.clear();
