@@ -27,6 +27,10 @@
   - Scope note: Android WebView enforcement of pins for in-page fetch/XHR
     varies by WebView version; this config is enforced for app-level
     connections and is not a substitute for server-side caller auth.
+  - HOST SCOPE: this pin-set covers ONLY ayuswar-ai.vercel.app. If the app
+    moves to a new backend host, that host is UNPINNED (system trust only)
+    until it gets its own domain-config here. The ISRG backup pin does NOT
+    protect any other host - it only covers an issuer switch on this one.
 -->
 <network-security-config>
     <base-config cleartextTrafficPermitted="false" />

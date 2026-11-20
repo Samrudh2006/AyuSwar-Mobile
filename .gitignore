@@ -62,3 +62,6 @@ __pycache__/
 # APK build outputs (attach via GitHub Releases, never commit binaries)
 android/app/build/outputs/apk/
 *.apk
+
+# Machine-local Android SDK path - never commit
+android/local.properties
