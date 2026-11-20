@@ -578,7 +578,7 @@ export default function ClinicalBenchmarkView() {
           <span>Home</span>
         </Link>
         <span style={{ color: '#94A3B8' }}>/</span>
-        <span style={{ color: '#698892', fontSize: '13px' }}>Clinical Impact</span>
+        <span style={{ color: '#122028', fontSize: '13px' }}>Clinical Impact</span>
         <span style={{ color: '#94A3B8' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>
           {activeTab === 'clinical' ? 'Real-World Efficacy & Field Studies' : `${TEST_CASES.length}-Point Software QA Assertions`}
@@ -594,7 +594,7 @@ export default function ClinicalBenchmarkView() {
         <h1 className="page-main-heading" style={{ fontSize: '32px', fontWeight: 850, color: '#081C24', marginBottom: '10px' }}>
           Clinical Workflow Design & Verification Center
         </h1>
-        <p className="page-main-subtext" style={{ fontSize: '15px', color: '#5A7184', maxWidth: '920px', lineHeight: 1.6 }}>
+        <p className="page-main-subtext" style={{ fontSize: '15px', color: '#37525C', maxWidth: '920px', lineHeight: 1.6 }}>
           Interactive integration test suite evaluating documentation workflow ergonomics, clinical vocabulary crosswalks, acoustic signal processing boundaries, and vernacular patient audio guidance in real time.
         </p>
 

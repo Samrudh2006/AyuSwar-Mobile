@@ -55,7 +55,7 @@ AyuSwar AI is a Telugu-first, synthetic-data healthcare voice prototype built by
   <img src="docs/screenshots/s09_emergency.png" width="23%" alt="Emergency triage" />
 </p>
 
-<sub>Local-preview captures at 390×844 from an earlier 18 Nov 2026 revision; they predate that day's scanner/report honesty fixes and do not depict them. Native-device captures are on the roadmap below.</sub>
+<sub>Local-preview captures at 390×844 from the current build (20 Nov 2026), rendered in desktop Chromium at a mobile viewport, not on a native phone. Native-device captures are on the roadmap below.</sub>
 
 ---
 
