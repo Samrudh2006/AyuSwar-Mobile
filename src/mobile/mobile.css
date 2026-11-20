@@ -61,13 +61,12 @@
 
 /* Page-level headings/text sit on the illustrated backdrop: soft light halo keeps
    them readable over leaves/sky without boxing them. Card interiors unchanged. */
+/* Readable header surface only for uncontained page headings/intros (never
+   inside cards or colored heroes like .m-hero / .m-sanj-hero). Heading + intro
+   join into one coherent surface when adjacent. */
 .m-page > .m-section-title,
 .m-page > .m-display,
-.m-page > h1, .m-page > h2, .m-page > h3,
-.m-page section:not(.m-card) > .m-section-title,
-.m-page section:not(.m-card) > h1,
-.m-page section:not(.m-card) > h2,
-.m-page section:not(.m-card) > h3 {
+.m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-section-title {
   display: inline-block;
   background: rgba(255, 253, 246, 0.82);
   -webkit-backdrop-filter: blur(8px) saturate(1.15);
@@ -78,16 +77,27 @@
 }
 .m-page > .m-sub,
 .m-page > .m-eyebrow,
-.m-page > p,
-.m-page section:not(.m-card) > .m-sub,
-.m-page section:not(.m-card) > .m-eyebrow {
+.m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-sub {
   display: inline-block;
-  background: rgba(255, 253, 246, 0.68);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border-radius: 10px;
-  padding: 2px 10px 3px;
-  margin-left: -10px;
+  background: rgba(255, 253, 246, 0.82);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  backdrop-filter: blur(8px) saturate(1.15);
+  border-radius: 12px;
+  padding: 3px 12px 5px;
+  margin-left: -12px;
+}
+.m-page .m-section-title:has(+ .m-sub),
+.m-page .m-display:has(+ .m-sub) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-bottom: 2px;
+}
+.m-page .m-section-title + .m-sub,
+.m-page .m-display + .m-sub {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -12px;
+  padding-top: 0;
 }
 
 /* ---------- Top app bar ---------- */
