@@ -306,7 +306,7 @@ export default function Navbar({
                     <Stethoscope size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.opdScribe') : 'OPD Ambient Scribe'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>{t ? t('nav.opdScribeDesc') : 'Vernacular consultation drafting'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>{t ? t('nav.opdScribeDesc') : 'Vernacular consultation drafting'}</div>
                     </div>
                   </Link>
 
@@ -321,7 +321,7 @@ export default function Navbar({
                     <Scan size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.scanner') : 'Blister Strip Scanner'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>{t ? t('nav.scannerDesc') : 'OCR & PMBJP generic pricing'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>{t ? t('nav.scannerDesc') : 'OCR & PMBJP generic pricing'}</div>
                     </div>
                   </Link>
 
@@ -336,7 +336,7 @@ export default function Navbar({
                     <Volume2 size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.audioRx') : 'Vernacular Audio-Rx Studio'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>{t ? t('nav.audioRxDesc') : 'Spoken dosage instructions'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>{t ? t('nav.audioRxDesc') : 'Spoken dosage instructions'}</div>
                     </div>
                   </Link>
 
@@ -351,7 +351,7 @@ export default function Navbar({
                     <Activity size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.acousticLab') : 'Acoustic Biomarker Lab'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>{t ? t('nav.acousticLabDesc') : 'Non-diagnostic audio DSP features'}</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>{t ? t('nav.acousticLabDesc') : 'Non-diagnostic audio DSP features'}</div>
                     </div>
                   </Link>
 
@@ -418,7 +418,7 @@ export default function Navbar({
                     <Languages size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.languageMatrix') : 'Indic Language Matrix'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>ASR & TTS provider status</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>ASR & TTS provider status</div>
                     </div>
                   </Link>
 
@@ -433,7 +433,7 @@ export default function Navbar({
                     <BookOpen size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>{t ? t('nav.clinicalKnowledge') : 'Clinical Knowledge & Lexicon'}</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>ICD-10 taxonomy & colloquial phrases</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>ICD-10 taxonomy & colloquial phrases</div>
                     </div>
                   </Link>
 
@@ -448,7 +448,7 @@ export default function Navbar({
                     <User size={17} color="#0e7490" style={{ flexShrink: 0, marginTop: 2 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26', whiteSpace: 'nowrap' }}>About & Team</div>
-                      <div style={{ fontSize: '0.75rem', color: '#698892', marginTop: 1 }}>Creator, Aditya University & governance</div>
+                      <div style={{ fontSize: '0.75rem', color: '#52707C', marginTop: 1 }}>Creator, Aditya University & governance</div>
                     </div>
                   </Link>
                 </div>
@@ -601,7 +601,7 @@ export default function Navbar({
                     <Stethoscope size={16} color="#0F4C5C" style={{ flexShrink: 0 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26' }}>{t ? t('nav.doctorLogin') : 'Doctor Login'}</div>
-                      <div style={{ fontSize: '0.72rem', color: '#698892' }}>Clinical OPD workspace</div>
+                      <div style={{ fontSize: '0.72rem', color: '#52707C' }}>Clinical OPD workspace</div>
                     </div>
                   </button>
 
@@ -623,7 +623,7 @@ export default function Navbar({
                     <Users size={16} color="#0F4C5C" style={{ flexShrink: 0 }} />
                     <div>
                       <div style={{ fontWeight: 650, color: '#091E26' }}>{t ? t('nav.patientLogin') : 'Patient Login'}</div>
-                      <div style={{ fontSize: '0.72rem', color: '#698892' }}>ABHA Citizen Portal</div>
+                      <div style={{ fontSize: '0.72rem', color: '#52707C' }}>ABHA Citizen Portal</div>
                     </div>
                   </button>
                 </div>
@@ -746,7 +746,7 @@ export default function Navbar({
                     <div style={{ fontWeight: 850, fontSize: '1rem', color: '#0F4C5C', letterSpacing: '-0.2px' }}>
                       AyuSwar AI
                     </div>
-                    <div style={{ fontSize: '0.675rem', color: '#698892', fontWeight: 600 }}>
+                    <div style={{ fontSize: '0.675rem', color: '#52707C', fontWeight: 600 }}>
                       Clinical Navigation Menu
                     </div>
                   </div>
@@ -909,7 +909,7 @@ export default function Navbar({
                   <Stethoscope size={18} color="#0F4C5C" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>OPD Ambient Scribe</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>Vernacular consultation drafting</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>Vernacular consultation drafting</div>
                   </div>
                 </Link>
                 
@@ -917,7 +917,7 @@ export default function Navbar({
                   <Scan size={18} color="#0E7490" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>Blister Strip Scanner</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>OCR & PMBJP generic pricing</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>OCR & PMBJP generic pricing</div>
                   </div>
                 </Link>
                 
@@ -925,7 +925,7 @@ export default function Navbar({
                   <Volume2 size={18} color="#0F4C5C" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>Vernacular Audio-Rx Studio</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>Spoken dosage instructions</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>Spoken dosage instructions</div>
                   </div>
                 </Link>
                 
@@ -933,7 +933,7 @@ export default function Navbar({
                   <Activity size={18} color="#0E7490" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>Acoustic Biomarker Lab</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>Non-diagnostic audio DSP features</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>Non-diagnostic audio DSP features</div>
                   </div>
                 </Link>
 
@@ -947,15 +947,15 @@ export default function Navbar({
                   <Layers size={18} color="#0F4C5C" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>{t ? t('nav.technology') : 'Technology & Architecture'}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>Deep-Tech pipeline HLD & terminal</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>Deep-Tech pipeline HLD & terminal</div>
                   </div>
                 </Link>
 
                 <Link to="/benchmarks" onClick={() => setMobileMenuOpen(false)} style={dropdownItemStyle(isImpactActive)}>
-                  <BarChart3 size={18} color="#10B981" style={{ flexShrink: 0, marginTop: 2 }} />
+                  <BarChart3 size={18} color="#047857" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>{t ? t('nav.clinicalImpact') : 'Clinical Impact & Validation'}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>24 QA test suite & workflow model</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>24 QA test suite & workflow model</div>
                   </div>
                 </Link>
 
@@ -968,15 +968,15 @@ export default function Navbar({
                   <Languages size={18} color="#0E7490" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>Indic Language Matrix</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>22 Scheduled languages & dialects</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>22 Scheduled languages & dialects</div>
                   </div>
                 </Link>
 
                 <Link to="/datasets" onClick={() => setMobileMenuOpen(false)} style={dropdownItemStyle(currentPath === '/datasets')}>
-                  <BookOpen size={18} color="#D97706" style={{ flexShrink: 0, marginTop: 2 }} />
+                  <BookOpen size={18} color="#B45309" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>Clinical Knowledge & Lexicon</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>ICD-10 taxonomy & colloquial phrases</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>ICD-10 taxonomy & colloquial phrases</div>
                   </div>
                 </Link>
 
@@ -984,7 +984,7 @@ export default function Navbar({
                   <User size={18} color="#0F4C5C" style={{ flexShrink: 0, marginTop: 2 }} />
                   <div>
                     <div style={{ fontWeight: 700, color: '#091E26', fontSize: '0.825rem' }}>About Creator & Consortium</div>
-                    <div style={{ fontSize: '0.7rem', color: '#698892' }}>Satya Samrudh, Aditya University</div>
+                    <div style={{ fontSize: '0.7rem', color: '#52707C' }}>Satya Samrudh, Aditya University</div>
                   </div>
                 </Link>
               </div>
@@ -998,7 +998,7 @@ export default function Navbar({
                 alignItems: 'center',
                 justifyContent: 'space-between'
               }}>
-                <span style={{ fontSize: '0.75rem', color: '#698892', fontWeight: 600 }}>Simulation Data:</span>
+                <span style={{ fontSize: '0.75rem', color: '#52707C', fontWeight: 600 }}>Simulation Data:</span>
                 <button
                   type="button"
                   onClick={() => toggleDemoMode()}

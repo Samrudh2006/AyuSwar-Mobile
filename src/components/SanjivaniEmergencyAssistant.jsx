@@ -839,11 +839,11 @@ export default function SanjivaniEmergencyAssistant({
               height: '40px',
               borderRadius: '12px',
               background: 'rgba(239, 68, 68, 0.15)',
-              border: '1.5px solid #EF4444',
+              border: '1.5px solid #B91C1C',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              color: '#EF4444',
+              color: '#B91C1C',
               boxShadow: '0 0 16px rgba(239, 68, 68, 0.35)'
             }}>
               <Activity size={20} />
@@ -855,7 +855,7 @@ export default function SanjivaniEmergencyAssistant({
                 </span>
                 <span style={{
                   fontSize: '9.5px',
-                  background: '#EF4444',
+                  background: '#B91C1C',
                   color: '#FFFFFF',
                   padding: '2px 8px',
                   borderRadius: '10px',
@@ -881,7 +881,7 @@ export default function SanjivaniEmergencyAssistant({
               <button
                 onClick={handleStartCall}
                 style={{
-                  background: '#059669',
+                  background: '#047857',
                   color: '#FFFFFF',
                   border: 'none',
                   borderRadius: '24px',
@@ -905,7 +905,7 @@ export default function SanjivaniEmergencyAssistant({
                 {/* 108 Call Live Indicator */}
                 <div style={{
                   background: 'rgba(239, 68, 68, 0.2)',
-                  border: '1.5px solid #EF4444',
+                  border: '1.5px solid #B91C1C',
                   padding: '5px 11px',
                   borderRadius: '20px',
                   color: '#FCA5A5',
@@ -915,7 +915,7 @@ export default function SanjivaniEmergencyAssistant({
                   alignItems: 'center',
                   gap: '6px'
                 }}>
-                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#EF4444', display: 'inline-block', boxShadow: '0 0 8px #EF4444' }} />
+                  <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#B91C1C', display: 'inline-block', boxShadow: '0 0 8px #B91C1C' }} />
                   <span>108 CALL LIVE</span>
                 </div>
 
@@ -936,7 +936,7 @@ export default function SanjivaniEmergencyAssistant({
                 {/* Live Voice Status Pill */}
                 <div style={{
                   background: voiceState === 'SPEAKING' ? 'rgba(212, 175, 55, 0.25)' : voiceState === 'THINKING' ? 'rgba(217, 119, 6, 0.2)' : 'rgba(16, 185, 129, 0.2)',
-                  border: voiceState === 'SPEAKING' ? '1px solid #D4AF37' : voiceState === 'THINKING' ? '1px solid #D97706' : '1px solid #10B981',
+                  border: voiceState === 'SPEAKING' ? '1px solid #D4AF37' : voiceState === 'THINKING' ? '1px solid #B45309' : '1px solid #047857',
                   color: voiceState === 'SPEAKING' ? '#FEF08A' : voiceState === 'THINKING' ? '#FDE68A' : '#A7F3D0',
                   padding: '5px 12px',
                   borderRadius: '20px',
@@ -968,7 +968,7 @@ export default function SanjivaniEmergencyAssistant({
                 <button
                   onClick={handleToggleMute}
                   style={{
-                    background: isAudioMuted ? '#EF4444' : '#1E293B',
+                    background: isAudioMuted ? '#B91C1C' : '#1E293B',
                     color: '#FFFFFF',
                     border: isAudioMuted ? 'none' : '1px solid #486770',
                     borderRadius: '50%',
@@ -1030,7 +1030,7 @@ export default function SanjivaniEmergencyAssistant({
                 width: '7px',
                 height: '7px',
                 borderRadius: '50%',
-                background: voiceState === 'SPEAKING' ? '#D4AF37' : voiceState === 'THINKING' ? '#F59E0B' : '#10B981'
+                background: voiceState === 'SPEAKING' ? '#D4AF37' : voiceState === 'THINKING' ? '#F59E0B' : '#047857'
               }}></span>
               <span style={{ color: '#D0DFE2', fontWeight: 700 }}>
                 {voiceState === 'SPEAKING' 
@@ -1046,16 +1046,16 @@ export default function SanjivaniEmergencyAssistant({
               <span style={{ color: '#38BDF8', fontSize: '9.5px', fontFamily: 'monospace', background: 'rgba(56, 189, 248, 0.12)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(56, 189, 248, 0.25)' }}>
                 LOCAL: {sipQoS.rttMs}ms
               </span>
-              <span style={{ color: '#10B981', fontSize: '9.5px', fontFamily: 'monospace', background: 'rgba(16, 185, 129, 0.12)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+              <span style={{ color: '#047857', fontSize: '9.5px', fontFamily: 'monospace', background: 'rgba(16, 185, 129, 0.12)', padding: '2px 6px', borderRadius: '4px', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
                 VAD: {vadConfidence}%
               </span>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <span style={{ color: '#698892', fontSize: '9.5px', fontFamily: 'monospace' }}>MIC LEVEL</span>
+                <span style={{ color: '#52707C', fontSize: '9.5px', fontFamily: 'monospace' }}>MIC LEVEL</span>
                 <div style={{ width: '48px', height: '6px', background: '#1E293B', borderRadius: '3px', overflow: 'hidden' }}>
                   <div style={{
                     width: `${Math.min(100, Math.round(voiceRms * 400))}%`,
                     height: '100%',
-                    background: voiceRms > 0.04 ? '#EF4444' : '#10B981',
+                    background: voiceRms > 0.04 ? '#B91C1C' : '#047857',
                     transition: 'width 0.05s linear'
                   }}></div>
                 </div>
@@ -1079,7 +1079,7 @@ export default function SanjivaniEmergencyAssistant({
           <span style={{ fontSize: '9.5px', background: '#2C4A52', color: '#94A3B8', padding: '2px 5px', borderRadius: '4px', fontWeight: 800, textTransform: 'uppercase' }}>
             Sample transcript
           </span>
-          <span style={{ fontStyle: 'italic', color: liveTranscript ? '#38BDF8' : '#698892' }}>
+          <span style={{ fontStyle: 'italic', color: liveTranscript ? '#38BDF8' : '#52707C' }}>
             {liveTranscript || 'Listening for sample scenario audio...'}
           </span>
         </div>
@@ -1098,7 +1098,7 @@ export default function SanjivaniEmergencyAssistant({
         <div style={{ fontSize: '9px', fontWeight: 800, color: '#94A3B8', textTransform: 'uppercase', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span>Simulation actions & safety boundary</span>
           {isMetronomeActive && (
-            <span style={{ color: '#EF4444', fontWeight: 800 }}>
+            <span style={{ color: '#B91C1C', fontWeight: 800 }}>
  Beat {metronomeBeat} ({compressionCount}/30)
             </span>
           )}
@@ -1112,7 +1112,7 @@ export default function SanjivaniEmergencyAssistant({
             title="Start sample 110 BPM pacing beat"
             style={{
               background: isMetronomeActive ? '#DC2626' : '#0B172E',
-              border: isMetronomeActive ? '1px solid #EF4444' : '1px solid #1E2D48',
+              border: isMetronomeActive ? '1px solid #B91C1C' : '1px solid #1E2D48',
               color: '#FFF',
               borderRadius: '7px',
               padding: '6px 4px',
@@ -1126,7 +1126,7 @@ export default function SanjivaniEmergencyAssistant({
               boxShadow: isMetronomeActive ? '0 0 12px rgba(220, 38, 38, 0.6)' : 'none'
             }}
           >
-            <Heart size={13} color="#EF4444" className={isMetronomeActive ? 'animate-ping' : ''} />
+            <Heart size={13} color="#B91C1C" className={isMetronomeActive ? 'animate-ping' : ''} />
             <span>{isMetronomeActive ? `Beat (${metronomeBeat})` : '110 BPM beat'}</span>
           </button>
 
@@ -1182,7 +1182,7 @@ export default function SanjivaniEmergencyAssistant({
             title="Open local handoff preview"
             style={{
               background: '#0B172E',
-              border: '1px solid #10B981',
+              border: '1px solid #047857',
               color: '#34D399',
               borderRadius: '7px',
               padding: '6px 4px',
@@ -1228,7 +1228,7 @@ export default function SanjivaniEmergencyAssistant({
         <button
           onClick={handleCallDriver}
           style={{
-            background: '#059669',
+            background: '#047857',
             border: 'none',
             color: '#FFFFFF',
             borderRadius: '6px',
@@ -1275,7 +1275,7 @@ export default function SanjivaniEmergencyAssistant({
               border: ev.type === 'cpr' 
                 ? '1px solid #DC2626' 
                 : ev.type === 'corridor' 
-                ? '1px solid #D97706' 
+                ? '1px solid #B45309' 
                 : ev.type === 'cathlab' 
                 ? '1px solid #0284C7' 
                 : '1px solid #1E3456',

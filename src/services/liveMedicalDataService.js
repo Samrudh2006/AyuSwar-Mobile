@@ -182,12 +182,12 @@ export async function fetchLivePhcEnvironmentalData(locationKey = 'kurnool') {
 
     // Display category only; no clinical interpretation.
     let riskLabel = 'Lower AQI display band';
-    let riskColor = '#10B981';
+    let riskColor = '#047857';
     let alertMsg = 'Public air-quality reference data only.';
 
     if (pm25 > 50 || aqi > 60) {
       riskLabel = 'Higher AQI display band';
-      riskColor = '#EF4444';
+      riskColor = '#B91C1C';
       alertMsg = 'Higher particulate reading; environmental reference only.';
     } else if (pm25 > 25 || aqi > 35) {
       riskLabel = 'Middle AQI display band';

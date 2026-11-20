@@ -213,7 +213,7 @@ export default function MobileAppBottomNav({
           );
         }
 
-        const activeColor = item.id === 'patient' ? '#D97706' : '#0F4C5C';
+        const activeColor = item.id === 'patient' ? '#B45309' : '#0F4C5C';
 
         return (
           <button
@@ -232,7 +232,7 @@ export default function MobileAppBottomNav({
               cursor: 'pointer',
               padding: '6px 4px',
               position: 'relative',
-              color: item.isActive ? activeColor : '#698892',
+              color: item.isActive ? activeColor : '#52707C',
               transition: 'all 0.15s ease'
             }}
           >

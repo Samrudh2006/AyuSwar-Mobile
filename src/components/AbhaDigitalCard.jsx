@@ -470,7 +470,7 @@ export default function AbhaDigitalCard({
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '13px', fontWeight: 800, color: '#0F766E' }}>
-                    <Activity size={16} color="#0D9488" />
+                    <Activity size={16} color="#0F766E" />
                     <span>Medical Summary</span>
                   </div>
                   <span style={{ fontSize: '10px', fontWeight: 800, background: '#CCFBF1', color: '#0F766E', padding: '2px 6px', borderRadius: '6px' }}>
@@ -517,7 +517,7 @@ export default function AbhaDigitalCard({
 
                 {/* Recent Lab Reports */}
                 <div style={{ background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '12px', padding: '10px 8px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10.5px', fontWeight: 800, color: '#059669', marginBottom: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '10.5px', fontWeight: 800, color: '#047857', marginBottom: '6px' }}>
                     <FileText size={12} />
                     <span>Lab Reports</span>
                   </div>
@@ -526,7 +526,7 @@ export default function AbhaDigitalCard({
                     <div>Chol: <strong>182</strong></div>
                     <div>Vit D: <strong>18</strong></div>
                   </div>
-                  <div style={{ fontSize: '9px', color: '#059669', fontWeight: 800, marginTop: '4px' }}>
+                  <div style={{ fontSize: '9px', color: '#047857', fontWeight: 800, marginTop: '4px' }}>
                     View All →
                   </div>
                 </div>
@@ -585,7 +585,7 @@ export default function AbhaDigitalCard({
                   { label: 'Prescriptions', icon: Pill, color: '#0F4C5C', bg: '#F0FDFA' },
                   { label: 'Lab Reports', icon: FileText, color: '#0284C7', bg: '#F0F9FF' },
                   { label: 'Documents', icon: ShieldCheck, color: '#0F4C5C', bg: '#F0FDFA' },
-                  { label: 'Timeline', icon: Clock, color: '#D97706', bg: '#FFFBEB' }
+                  { label: 'Timeline', icon: Clock, color: '#B45309', bg: '#FFFBEB' }
                 ].map((act, i) => {
                   const Icon = act.icon;
                   return (

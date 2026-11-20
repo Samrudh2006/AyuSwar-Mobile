@@ -131,7 +131,7 @@ export default function KurnoolClimateSentinel({ onAddOrsToRx }) {
           alignItems: 'center',
           gap: '6px'
         }}>
-          <CheckCircle2 size={14} color="#10B981" />
+          <CheckCircle2 size={14} color="#047857" />
           <span>{t('doctor.sentinel.orsToast')}</span>
         </div>
       )}

@@ -134,7 +134,7 @@ export default function PatientHealthGoalsTab({
       {(bpLogNotification || sugarLogNotification) && (
         <div style={{ 
           background: '#ECFDF5', 
-          border: '1px solid #10B981', 
+          border: '1px solid #047857', 
           borderRadius: '12px', 
           padding: '12px 18px', 
           marginBottom: '20px', 
@@ -145,7 +145,7 @@ export default function PatientHealthGoalsTab({
           fontSize: '13px',
           fontWeight: 650
         }}>
-          <CheckCircle2 size={18} color="#10B981" />
+          <CheckCircle2 size={18} color="#047857" />
           <span>{bpLogNotification || sugarLogNotification}</span>
         </div>
       )}
@@ -165,7 +165,7 @@ export default function PatientHealthGoalsTab({
             <div style={{ fontSize: '32px', fontWeight: 850, color: '#0F4C5C', margin: '4px 0 2px 0' }}>
               {dailySteps.toLocaleString()}
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.target')} {stepsGoal.toLocaleString()} {t('patient.goals.steps')} • {(dailySteps * 0.00075).toFixed(1)} km • {Math.round(dailySteps * 0.038)} kcal
             </div>
 
@@ -203,14 +203,14 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.hydration')}</span>
-              <span style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#2563EB', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+              <span style={{ background: 'rgba(59, 130, 246, 0.1)', color: '#1D4ED8', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
                 {(waterGlasses * 0.25).toFixed(2)} / 2.0 Liters
               </span>
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 850, color: '#2563EB', margin: '4px 0 2px 0' }}>
-              {waterGlasses} <span style={{ fontSize: '18px', fontWeight: 600, color: '#698892' }}>/ {waterGoal} {t('patient.goals.glasses')}</span>
+            <div style={{ fontSize: '32px', fontWeight: 850, color: '#1D4ED8', margin: '4px 0 2px 0' }}>
+              {waterGlasses} <span style={{ fontSize: '18px', fontWeight: 600, color: '#52707C' }}>/ {waterGoal} {t('patient.goals.glasses')}</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.hydrationReco')}
             </div>
 
@@ -247,7 +247,7 @@ export default function PatientHealthGoalsTab({
             </button>
             <button
               onClick={() => setWaterGlasses(w => Math.max(0, w - 1))}
-              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 700, color: '#698892', cursor: 'pointer' }}
+              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 700, color: '#52707C', cursor: 'pointer' }}
             >
               {t('patient.goals.minusGlass')}
             </button>
@@ -259,14 +259,14 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.chronoStreak')}</span>
-              <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+              <span style={{ background: '#ECFDF5', color: '#047857', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
                 {t('patient.goals.onTime')}
               </span>
             </div>
-            <div style={{ fontSize: '32px', fontWeight: 850, color: '#10B981', margin: '4px 0 2px 0' }}>
+            <div style={{ fontSize: '32px', fontWeight: 850, color: '#047857', margin: '4px 0 2px 0' }}>
               {adherenceStreak} {t('patient.goals.days')} <Flame size={18} style={{ display: 'inline', verticalAlign: 'middle', color: '#F59E0B' }} />
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.pillboxNote')}
             </div>
 
@@ -274,10 +274,10 @@ export default function PatientHealthGoalsTab({
             <div style={{ display: 'flex', justifyContent: 'space-between', gap: '4px', marginBottom: '14px' }}>
               {['M', 'T', 'W', 'T', 'F', 'S', 'S'].map((day, idx) => (
                 <div key={idx} style={{ textAlign: 'center' }}>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#10B981', color: '#ffffff', fontSize: '12px', fontWeight: 850, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 4px auto' }}>
+                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: '#047857', color: '#ffffff', fontSize: '12px', fontWeight: 850, display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 4px auto' }}>
  ✓
                   </div>
-                  <div style={{ fontSize: '10px', color: '#698892', fontWeight: 700 }}>{day}</div>
+                  <div style={{ fontSize: '10px', color: '#52707C', fontWeight: 700 }}>{day}</div>
                 </div>
               ))}
             </div>
@@ -301,7 +301,7 @@ export default function PatientHealthGoalsTab({
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.bpTitle')}</span>
               <span style={{ 
                 background: bpSystolic < 120 && bpDiastolic < 80 ? '#ECFDF5' : '#FEF3C7', 
-                color: bpSystolic < 120 && bpDiastolic < 80 ? '#059669' : '#D97706', 
+                color: bpSystolic < 120 && bpDiastolic < 80 ? '#047857' : '#B45309', 
                 fontSize: '11px', 
                 fontWeight: 800, 
                 padding: '3px 8px', 
@@ -311,15 +311,15 @@ export default function PatientHealthGoalsTab({
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#081C24', margin: '4px 0 2px 0' }}>
-              {bpSystolic} / {bpDiastolic} <span style={{ fontSize: '14px', color: '#698892', fontWeight: 600 }}>mmHg</span>
+              {bpSystolic} / {bpDiastolic} <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>mmHg</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.restingHr')}: <strong>{restingPulse} bpm</strong> {t('patient.goals.sampleValue')}
             </div>
 
             <div className="patient-bp-subgrid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px', marginBottom: '12px', width: '100%' }}>
               <div>
-                <label style={{ fontSize: '10px', color: '#698892', fontWeight: 700 }}>{t('patient.goals.systolic')}</label>
+                <label style={{ fontSize: '10px', color: '#52707C', fontWeight: 700 }}>{t('patient.goals.systolic')}</label>
                 <input
                   type="number"
                   value={bpSystolic}
@@ -328,7 +328,7 @@ export default function PatientHealthGoalsTab({
                 />
               </div>
               <div>
-                <label style={{ fontSize: '10px', color: '#698892', fontWeight: 700 }}>{t('patient.goals.diastolic')}</label>
+                <label style={{ fontSize: '10px', color: '#52707C', fontWeight: 700 }}>{t('patient.goals.diastolic')}</label>
                 <input
                   type="number"
                   value={bpDiastolic}
@@ -337,7 +337,7 @@ export default function PatientHealthGoalsTab({
                 />
               </div>
               <div>
-                <label style={{ fontSize: '10px', color: '#698892', fontWeight: 700 }}>{t('patient.goals.pulse')}</label>
+                <label style={{ fontSize: '10px', color: '#52707C', fontWeight: 700 }}>{t('patient.goals.pulse')}</label>
                 <input
                   type="number"
                   value={restingPulse}
@@ -364,14 +364,14 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.glucose')}</span>
-              <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+              <span style={{ background: '#ECFDF5', color: '#047857', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
                 {t('patient.goals.bpOptimal')}
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#081C24', margin: '4px 0 2px 0' }}>
-              {fastingSugar} <span style={{ fontSize: '13px', color: '#698892', fontWeight: 600 }}>FBS</span> • {postMealSugar} <span style={{ fontSize: '13px', color: '#698892', fontWeight: 600 }}>PPBS</span>
+              {fastingSugar} <span style={{ fontSize: '13px', color: '#52707C', fontWeight: 600 }}>FBS</span> • {postMealSugar} <span style={{ fontSize: '13px', color: '#52707C', fontWeight: 600 }}>PPBS</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.target')} FBS &lt; 100 mg/dL • {t('patient.goals.estHbA1c')} <strong>5.6%</strong> {t('patient.goals.controlled')}
             </div>
 
@@ -414,9 +414,9 @@ export default function PatientHealthGoalsTab({
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#0F4C5C', margin: '4px 0 2px 0' }}>
-              {sleepHours} hrs <span style={{ fontSize: '14px', color: '#698892', fontWeight: 600 }}>(Score: {sleepScore}/100)</span>
+              {sleepHours} hrs <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>(Score: {sleepScore}/100)</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.deepSleep')} <strong>{deepSleepPercent}% (1h 48m)</strong> • {t('patient.goals.rem')} <strong>22%</strong> • {t('patient.goals.sleepDebt')} 0m
             </div>
 
@@ -434,7 +434,7 @@ export default function PatientHealthGoalsTab({
             </button>
             <button
               onClick={() => setSleepHours(h => Math.max(4, +(h - 0.5).toFixed(1)))}
-              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 700, color: '#698892', cursor: 'pointer' }}
+              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '6px', fontSize: '11.5px', fontWeight: 700, color: '#52707C', cursor: 'pointer' }}
             >
               {t('patient.goals.sleepMinus30')}
             </button>
@@ -448,7 +448,7 @@ export default function PatientHealthGoalsTab({
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.pefr')}</span>
               <span style={{ 
                 background: peakFlowRate >= 0.8 * peakFlowPersonalBest ? '#ECFDF5' : peakFlowRate >= 0.5 * peakFlowPersonalBest ? '#FEF3C7' : '#FEE2E2', 
-                color: peakFlowRate >= 0.8 * peakFlowPersonalBest ? '#059669' : peakFlowRate >= 0.5 * peakFlowPersonalBest ? '#D97706' : '#DC2626', 
+                color: peakFlowRate >= 0.8 * peakFlowPersonalBest ? '#047857' : peakFlowRate >= 0.5 * peakFlowPersonalBest ? '#B45309' : '#DC2626', 
                 fontSize: '11px', 
                 fontWeight: 800, 
                 padding: '3px 8px', 
@@ -458,14 +458,14 @@ export default function PatientHealthGoalsTab({
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#0F4C5C', margin: '4px 0 2px 0' }}>
-              {peakFlowRate} <span style={{ fontSize: '14px', color: '#698892', fontWeight: 600 }}>L/min</span>
+              {peakFlowRate} <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>L/min</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {Math.round((peakFlowRate / peakFlowPersonalBest) * 100)}% {t('patient.goals.pefrNote', { best: peakFlowPersonalBest })}
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <span style={{ fontSize: '11px', color: '#698892' }}>{t('patient.goals.adjust')}</span>
+              <span style={{ fontSize: '11px', color: '#52707C' }}>{t('patient.goals.adjust')}</span>
               <input 
                 type="range" 
                 min="250" 
@@ -493,14 +493,14 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.sodium')}</span>
-              <span style={{ background: '#ECFDF5', color: '#059669', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+              <span style={{ background: '#ECFDF5', color: '#047857', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
                 {t('patient.goals.safeRange')}
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#081C24', margin: '4px 0 2px 0' }}>
-              {sodiumMg.toLocaleString()} <span style={{ fontSize: '14px', color: '#698892', fontWeight: 600 }}>/ 2,000 mg max</span>
+              {sodiumMg.toLocaleString()} <span style={{ fontSize: '14px', color: '#52707C', fontWeight: 600 }}>/ 2,000 mg max</span>
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '12px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '12px' }}>
               {t('patient.goals.sodiumEquiv')}
             </div>
 
@@ -527,7 +527,7 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 800, color: '#0F4C5C' }}>{t('patient.goals.pranayama')}</span>
-              <span style={{ background: isBreathingActive ? '#ECFDF5' : '#F1F5F9', color: isBreathingActive ? '#059669' : '#698892', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
+              <span style={{ background: isBreathingActive ? '#ECFDF5' : '#F1F5F9', color: isBreathingActive ? '#047857' : '#52707C', fontSize: '11px', fontWeight: 800, padding: '3px 8px', borderRadius: '12px' }}>
                 {isBreathingActive ? t('patient.goals.activeLive') : t('patient.goals.ready')}
               </span>
             </div>
@@ -541,8 +541,8 @@ export default function PatientHealthGoalsTab({
                 background: breathingPhase === 'Inhale' 
                   ? 'radial-gradient(circle, #2DD4BF 0%, #0F4C5C 100%)' 
                   : breathingPhase === 'Hold' 
-                  ? 'radial-gradient(circle, #FBBF24 0%, #D97706 100%)' 
-                  : 'radial-gradient(circle, #60A5FA 0%, #2563EB 100%)',
+                  ? 'radial-gradient(circle, #FBBF24 0%, #B45309 100%)' 
+                  : 'radial-gradient(circle, #60A5FA 0%, #1D4ED8 100%)',
                 color: '#ffffff',
                 margin: '0 auto 10px auto',
                 display: 'flex',
@@ -560,7 +560,7 @@ export default function PatientHealthGoalsTab({
               <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>
                 {breathingPhase === 'Inhale' ? t('patient.goals.inhaleDeeply') : breathingPhase === 'Hold' ? t('patient.goals.holdBreath') : t('patient.goals.exhaleSlowly')}
               </div>
-              <div style={{ fontSize: '11px', color: '#698892', marginTop: '2px' }}>
+              <div style={{ fontSize: '11px', color: '#52707C', marginTop: '2px' }}>
                 {t('patient.goals.cyclesInfo', { cycles: breathingCyclesCompleted })}
               </div>
             </div>
@@ -589,7 +589,7 @@ export default function PatientHealthGoalsTab({
                 setBreathingPhase('Inhale');
                 setBreathingTimer(4);
               }}
-              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '7px', fontSize: '11.5px', fontWeight: 700, color: '#698892', cursor: 'pointer' }}
+              style={{ flex: 1, background: '#FAF8F5', border: '1px solid #D0DFE2', borderRadius: '8px', padding: '7px', fontSize: '11.5px', fontWeight: 700, color: '#52707C', cursor: 'pointer' }}
             >
               {t('patient.goals.reset')}
             </button>

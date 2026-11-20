@@ -509,7 +509,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
             
             {/* Patient & Dispatch Selector */}
             <div style={{ background: '#ffffff', padding: '16px', borderRadius: '14px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '10px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '10px' }}>
                 Demo Recipient & Phone Label
               </div>
               <div className="whatsapp-recipient-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '12px' }}>
@@ -520,7 +520,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                   <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#081C24' }}>
                     {patient.name} <span style={{ color: '#0F4C5C', fontWeight: 700 }}>({patient.vernacularName || 'నారాయణ'})</span>
                   </div>
-                  <div style={{ fontSize: '11px', color: '#698892' }}>
+                  <div style={{ fontSize: '11px', color: '#52707C' }}>
                     Demo ID: {patient.abhaId} • {patient.age}y {patient.gender}
                   </div>
                   <AbdmRegistryBadgeRow
@@ -567,7 +567,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
 
               {/* Fast Phone Presets */}
               <div style={{ display: 'flex', gap: '6px', marginTop: '10px', flexWrap: 'wrap' }}>
-                <span style={{ fontSize: '10.5px', color: '#698892', alignSelf: 'center', marginRight: '4px' }}>Quick Select:</span>
+                <span style={{ fontSize: '10.5px', color: '#52707C', alignSelf: 'center', marginRight: '4px' }}>Quick Select:</span>
                 {[
                   { label: 'Narayana (demo)', num: '+91 00000 00001', lang: 'te' },
                   { label: 'Aarav Kumar (demo)', num: '+91 00000 00002', lang: 'hi' },
@@ -596,7 +596,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
             {/* Language & Voice Synthesis Engine */}
             <div style={{ background: '#ffffff', padding: '16px', borderRadius: '14px', border: '1px solid #D0DFE2' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Spoken Dialect & Synthesis Speed
                 </div>
                 <span style={{ fontSize: '11px', color: '#0F4C5C', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -663,7 +663,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                 </button>
               </div>
 
-              <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', margin: '4px 0 10px', fontSize: '11.5px', color: '#698892', fontWeight: 700 }}>
+              <label style={{ display: 'flex', flexDirection: 'column', gap: '6px', margin: '4px 0 10px', fontSize: '11.5px', color: '#52707C', fontWeight: 700 }}>
                 Sample note text (not clinician-reviewed)
                 <textarea
                   aria-label="Sample note text (not clinician-reviewed)"
@@ -676,7 +676,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
               </label>
               {generationError && <p role="status" style={{ margin: '0 0 8px', color: '#B45309', fontSize: '12px', fontWeight: 700 }}>{generationError}</p>}
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11.5px', color: '#698892' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11.5px', color: '#52707C' }}>
                 <span>Speech Tempo:</span>
                 <div style={{ display: 'flex', gap: '6px' }}>
                   {[0.8, 1.0, 1.25].map(rate => (
@@ -723,7 +723,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                     fontSize: '10.5px',
                     fontWeight: 800,
                     color: '#ffffff',
-                    background: '#D97706',
+                    background: '#B45309',
                     padding: '2px 8px',
                     borderRadius: '12px',
                     animation: 'pulse 1s infinite'
@@ -757,7 +757,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                         fontWeight: isActive ? 850 : 600,
                         color: isActive ? '#061626' : (isPill ? '#FDE68A' : '#D0DFE2'),
                         background: isActive 
-                          ? (token.pill === 'night' ? '#F472B6' : (token.pill === 'morning' ? '#FBBF24' : '#10B981'))
+                          ? (token.pill === 'night' ? '#F472B6' : (token.pill === 'morning' ? '#FBBF24' : '#047857'))
                           : (isPill ? 'rgba(251, 191, 36, 0.15)' : 'rgba(255, 255, 255, 0.05)'),
                         border: isActive ? '1px solid #ffffff' : '1px solid rgba(255, 255, 255, 0.1)',
                         boxShadow: 'none',
@@ -783,7 +783,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                     gap: '8px',
                     padding: '12px 20px',
                     borderRadius: '12px',
-                    background: isPlayingAudio ? '#EF4444' : '#0E7A3D',
+                    background: isPlayingAudio ? '#B91C1C' : '#0E7A3D',
                     color: '#ffffff',
                     border: 'none',
                     fontSize: '13.5px',
@@ -801,7 +801,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
             {/* Visual Color-Coded Pill Schedule (Doctor-Configurable Timings) */}
             <div style={{ background: '#ffffff', padding: '16px', borderRadius: '14px', border: '1px solid #D0DFE2' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
-                <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   Sample Schedule Preview & Meal Timings
                 </div>
                 <span style={{ fontSize: '10px', background: '#FAF8F5', color: '#0F4C5C', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
@@ -857,8 +857,8 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                           style={{
                             padding: '2px 7px',
                             borderRadius: '6px',
-                            border: morningTime === t ? '1.5px solid #D97706' : '1px solid #FCD34D',
-                            background: morningTime === t ? '#D97706' : '#ffffff',
+                            border: morningTime === t ? '1.5px solid #B45309' : '1px solid #FCD34D',
+                            background: morningTime === t ? '#B45309' : '#ffffff',
                             color: morningTime === t ? '#ffffff' : '#78350F',
                             fontSize: '10px',
                             fontWeight: 700,
@@ -878,8 +878,8 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                           flex: 1,
                           padding: '3px',
                           borderRadius: '6px',
-                          border: morningMeal === 'before' ? '1.5px solid #D97706' : '1px solid #FCD34D',
-                          background: morningMeal === 'before' ? '#D97706' : '#ffffff',
+                          border: morningMeal === 'before' ? '1.5px solid #B45309' : '1px solid #FCD34D',
+                          background: morningMeal === 'before' ? '#B45309' : '#ffffff',
                           color: morningMeal === 'before' ? '#ffffff' : '#78350F',
                           fontSize: '10px',
                           fontWeight: 700,
@@ -894,8 +894,8 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                           flex: 1,
                           padding: '3px',
                           borderRadius: '6px',
-                          border: morningMeal === 'after' ? '1.5px solid #D97706' : '1px solid #FCD34D',
-                          background: morningMeal === 'after' ? '#D97706' : '#ffffff',
+                          border: morningMeal === 'after' ? '1.5px solid #B45309' : '1px solid #FCD34D',
+                          background: morningMeal === 'after' ? '#B45309' : '#ffffff',
                           color: morningMeal === 'after' ? '#ffffff' : '#78350F',
                           fontSize: '10px',
                           fontWeight: 700,
@@ -1202,7 +1202,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
             {sendSuccessToast && (
               <div style={{
                 background: '#ECFDF5',
-                border: '1.5px solid #10B981',
+                border: '1.5px solid #047857',
                 padding: '10px 16px',
                 borderRadius: '10px',
                 color: '#065F46',
@@ -1212,7 +1212,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                 alignItems: 'center',
                 gap: '8px'
               }}>
-                <CheckCircle2 size={16} color="#10B981" />
+                <CheckCircle2 size={16} color="#047857" />
                 <span>Preview simulation finished. This does not prove WhatsApp delivery or read receipts.</span>
               </div>
             )}
@@ -1422,7 +1422,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                       <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#081C24' }}>
                         Tap to Replay Spoken Audio-Rx
                       </div>
-                      <div style={{ fontSize: '10px', color: '#698892' }}>
+                      <div style={{ fontSize: '10px', color: '#52707C' }}>
                         ayuswar-demo/rx/DEMO-RX-001
                       </div>
                     </div>
@@ -1444,7 +1444,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
                   borderRadius: '20px',
                   padding: '8px 14px',
                   fontSize: '11.5px',
-                  color: '#698892'
+                  color: '#52707C'
                 }}>
                   Local preview input only...
                 </div>
@@ -1474,10 +1474,10 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
           alignItems: 'center',
           justifyContent: 'space-between',
           fontSize: '12px',
-          color: '#698892'
+          color: '#52707C'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <ShieldCheck size={16} color="#059669" />
+            <ShieldCheck size={16} color="#047857" />
             <span>Synthetic prototype • Groq/TTS use external services when available • no active ABDM/FHIR exchange verified</span>
           </div>
 

@@ -201,7 +201,7 @@ export default function Sidebar({
             {!isCollapsed && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <span>Clinical Studio</span>
-                <span style={{ fontSize: '9px', background: '#10B981', color: '#ffffff', padding: '1px 5px', borderRadius: '8px', fontWeight: 800 }}>
+                <span style={{ fontSize: '9px', background: '#047857', color: '#ffffff', padding: '1px 5px', borderRadius: '8px', fontWeight: 800 }}>
                   LIVE
                 </span>
               </div>
@@ -234,7 +234,7 @@ export default function Sidebar({
             {!isCollapsed && (
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
                 <span>Patient Portal</span>
-                <span style={{ fontSize: '10px', background: '#D97706', color: '#ffffff', padding: '1px 6px', borderRadius: '8px' }}>
+                <span style={{ fontSize: '10px', background: '#B45309', color: '#ffffff', padding: '1px 6px', borderRadius: '8px' }}>
                   Audio-Rx
                 </span>
               </div>
@@ -306,7 +306,7 @@ export default function Sidebar({
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: '#EF4444'
+                  background: '#B91C1C'
                 }} />
               )}
             </div>
@@ -314,7 +314,7 @@ export default function Sidebar({
           </div>
           {!isCollapsed && unreadNotificationsCount > 0 && (
             <span style={{
-              background: '#EF4444',
+              background: '#B91C1C',
               color: '#ffffff',
               fontSize: '10px',
               fontWeight: 800,

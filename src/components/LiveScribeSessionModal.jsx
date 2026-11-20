@@ -489,7 +489,7 @@ export default function LiveScribeSessionModal({
               width: '46px',
               height: '46px',
               borderRadius: '14px',
-              background: isRecording ? '#EF4444' : '#0F4C5C',
+              background: isRecording ? '#B91C1C' : '#0F4C5C',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -507,7 +507,7 @@ export default function LiveScribeSessionModal({
                 <span style={{
                   fontSize: '10px',
                   fontWeight: 800,
-                  background: isRecording ? '#EF4444' : '#10B981',
+                  background: isRecording ? '#B91C1C' : '#047857',
                   color: '#ffffff',
                   padding: '3px 10px',
                   borderRadius: '12px',
@@ -547,7 +547,7 @@ export default function LiveScribeSessionModal({
                   padding: '5px 12px',
                   borderRadius: '7px',
                   border: 'none',
-                  background: micMode === 'physical_mic' ? '#EF4444' : 'transparent',
+                  background: micMode === 'physical_mic' ? '#B91C1C' : 'transparent',
                   color: '#ffffff',
                   fontSize: '11.5px',
                   fontWeight: 750,
@@ -574,7 +574,7 @@ export default function LiveScribeSessionModal({
                   padding: '7px 14px',
                   borderRadius: '10px',
                   background: '#0F172A',
-                  border: '1px solid #10B981',
+                  border: '1px solid #047857',
                   color: '#34D399',
                   fontSize: '11.5px',
                   fontWeight: 800,
@@ -598,7 +598,7 @@ export default function LiveScribeSessionModal({
                 padding: '8px 14px',
                 borderRadius: '10px',
                 background: isRecording ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)',
-                border: isRecording ? '1px solid #EF4444' : '1px solid #10B981',
+                border: isRecording ? '1px solid #B91C1C' : '1px solid #047857',
                 color: '#ffffff',
                 fontSize: '12px',
                 fontWeight: 750,
@@ -695,7 +695,7 @@ export default function LiveScribeSessionModal({
                 ● Auto-Detect Dialect Active
               </span>
             </div>
-            <ArrowRight size={14} color="#698892" />
+            <ArrowRight size={14} color="#52707C" />
             <div style={{
               display: 'flex',
               alignItems: 'center',
@@ -737,13 +737,13 @@ export default function LiveScribeSessionModal({
           {/* COLUMN 1: Ambient Multi-Speaker Dialogue Stream */}
           <div style={{ padding: isMobileScreen ? '14px' : '20px', borderRight: isMobileScreen ? 'none' : '1px solid #D0DFE2', borderBottom: isMobileScreen ? '1px solid #D0DFE2' : 'none', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
-              <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 Dual-Speaker Diarization (16 kHz PCM)
               </div>
               <span style={{
                 fontSize: '11px',
                 fontWeight: 750,
-                color: hasGnaniSttTranscribed ? '#059669' : gnaniSpeechStatus?.available ? '#0F4C5C' : '#698892',
+                color: hasGnaniSttTranscribed ? '#047857' : gnaniSpeechStatus?.available ? '#0F4C5C' : '#52707C',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '5px'
@@ -817,7 +817,7 @@ export default function LiveScribeSessionModal({
                     onClick={handleTranscribeCurrentChunk}
                     disabled={isTranscribingChunk}
                     style={{
-                      background: '#16A34A',
+                      background: '#15803D',
                       color: '#ffffff',
                       border: 'none',
                       padding: '4px 8px',
@@ -872,7 +872,7 @@ export default function LiveScribeSessionModal({
                   <h3 style={{ fontSize: '14.5px', fontWeight: 800, color: '#091E26', margin: 0 }}>
                     Consultation Room on Standby
                   </h3>
-                  <p style={{ fontSize: '12px', color: '#698892', maxWidth: '320px', margin: 0, lineHeight: 1.5 }}>
+                  <p style={{ fontSize: '12px', color: '#52707C', maxWidth: '320px', margin: 0, lineHeight: 1.5 }}>
                     {micMode === 'physical_mic'
                       ? (isRecording
  ? 'Listening to your microphone... Speak clearly and live doctor-patient turns will appear here in real-time!'
@@ -945,14 +945,14 @@ export default function LiveScribeSessionModal({
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px', gap: '8px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                        <span style={{ fontSize: '10.5px', fontWeight: 800, color: isDoc ? '#2DD4BF' : '#D97706' }}>
+                        <span style={{ fontSize: '10.5px', fontWeight: 800, color: isDoc ? '#2DD4BF' : '#B45309' }}>
                           {item.speaker} {item.lang ? `(${item.lang})` : ''}
                         </span>
                         {item.isGnaniLive && (
                           <span style={{
                             fontSize: '9px',
                             background: 'rgba(16, 185, 129, 0.2)',
-                            color: '#10B981',
+                            color: '#047857',
                             border: '1px solid rgba(16, 185, 129, 0.4)',
                             padding: '1px 5px',
                             borderRadius: '4px',
@@ -986,7 +986,7 @@ export default function LiveScribeSessionModal({
                   alignItems: 'center',
                   gap: '8px'
                 }}>
-                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444', animation: 'pulse 1s infinite' }} />
+                  <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#B91C1C', animation: 'pulse 1s infinite' }} />
                   <span>{liveTranscriptInterim}...</span>
                 </div>
               )}
@@ -995,18 +995,18 @@ export default function LiveScribeSessionModal({
 
           {/* COLUMN 2: Clinical Telemetry, Biomarkers & Ontology */}
           <div style={{ padding: isMobileScreen ? '14px' : '20px', borderRight: isMobileScreen ? 'none' : '1px solid #D0DFE2', borderBottom: isMobileScreen ? '1px solid #D0DFE2' : 'none', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Extracted Vitals & Biomarkers
             </div>
 
             {/* Vitals Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               <div style={{ background: '#ffffff', padding: '10px 12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                <div style={{ fontSize: '10px', color: '#698892' }}>Blood Pressure</div>
+                <div style={{ fontSize: '10px', color: '#52707C' }}>Blood Pressure</div>
                 <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>{encounterData.vitals.bp}</div>
               </div>
               <div style={{ background: '#ffffff', padding: '10px 12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                <div style={{ fontSize: '10px', color: '#698892' }}>Heart Rate / SpO2</div>
+                <div style={{ fontSize: '10px', color: '#52707C' }}>Heart Rate / SpO2</div>
                 <div style={{ fontSize: '14px', fontWeight: 800, color: '#0F4C5C' }}>{encounterData.vitals.hr} • {encounterData.vitals.spo2}</div>
               </div>
             </div>
@@ -1027,14 +1027,14 @@ export default function LiveScribeSessionModal({
             {/* Vernacular term to draft coding candidate */}
             <div style={{ background: '#ffffff', padding: '14px', borderRadius: '12px', border: '1px solid #D0DFE2', flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
-                <Sparkles size={14} color="#D97706" />
+                <Sparkles size={14} color="#B45309" />
                 <span style={{ fontSize: '11.5px', fontWeight: 800, color: '#081C24' }}>Colloquial → Draft Coding Candidates</span>
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {dialogueList.length === 0 ? (
-                  <div style={{ padding: '18px 12px', textAlign: 'center', background: '#FAF8F5', borderRadius: '8px', border: '1px dashed #D0DFE2', color: '#698892', fontSize: '11px', lineHeight: 1.5 }}>
-                    <Sparkles size={16} color="#D97706" style={{ margin: '0 auto 6px auto', display: 'block' }} />
+                  <div style={{ padding: '18px 12px', textAlign: 'center', background: '#FAF8F5', borderRadius: '8px', border: '1px dashed #D0DFE2', color: '#52707C', fontSize: '11px', lineHeight: 1.5 }}>
+                    <Sparkles size={16} color="#B45309" style={{ margin: '0 auto 6px auto', display: 'block' }} />
                     Awaiting speech input... Regional sample phrases will appear as draft coding candidates for clinician review.
                   </div>
                 ) : (
@@ -1049,7 +1049,7 @@ export default function LiveScribeSessionModal({
                         )}
                       </div>
                       <div style={{ fontSize: '11px', color: '#1E293B', fontWeight: 600 }}>{icd.clinical}</div>
-                      <div style={{ fontSize: '10px', color: '#698892', fontFamily: 'monospace', marginTop: '2px' }}>
+                      <div style={{ fontSize: '10px', color: '#52707C', fontFamily: 'monospace', marginTop: '2px' }}>
                         <code>{icd.icd10}</code> • <code>Draft terminology: {icd.snomed}</code>
                       </div>
                     </div>
@@ -1062,10 +1062,10 @@ export default function LiveScribeSessionModal({
           {/* COLUMN 3: Documentation Draft & Local Share Preview */}
           <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px', background: '#ffffff' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 AI-Drafted Documentation
               </div>
-              <span style={{ fontSize: '10.5px', color: '#059669', background: 'rgba(16, 185, 129, 0.1)', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
+              <span style={{ fontSize: '10.5px', color: '#047857', background: 'rgba(16, 185, 129, 0.1)', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
                 NO PRESCRIPTION GENERATED
               </span>
             </div>
@@ -1073,7 +1073,7 @@ export default function LiveScribeSessionModal({
             {/* Prescribed Items Cards */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {dialogueList.length === 0 ? (
-                <div style={{ padding: '24px 14px', textAlign: 'center', background: '#FAF8F5', borderRadius: '10px', border: '1px dashed #D0DFE2', color: '#698892', fontSize: '11.5px', lineHeight: 1.5 }}>
+                <div style={{ padding: '24px 14px', textAlign: 'center', background: '#FAF8F5', borderRadius: '10px', border: '1px dashed #D0DFE2', color: '#52707C', fontSize: '11.5px', lineHeight: 1.5 }}>
                   <Pill size={18} color="#0F4C5C" style={{ margin: '0 auto 6px auto', display: 'block' }} />
                   Awaiting consultation recording... This prototype does not formulate prescriptions. Clinician review is required for any treatment decision.
                 </div>
@@ -1095,7 +1095,7 @@ export default function LiveScribeSessionModal({
                     <div style={{ fontSize: '11.5px', color: '#0F4C5C', fontWeight: 700 }}>
                       ⏰ {p.timing} • {p.days}
                     </div>
-                    <div style={{ fontSize: '11px', color: '#698892', marginTop: '2px' }}>
+                    <div style={{ fontSize: '11px', color: '#52707C', marginTop: '2px' }}>
                       Instructions: {p.meal}
                     </div>
                   </div>
@@ -1113,7 +1113,7 @@ export default function LiveScribeSessionModal({
               alignItems: 'center',
               gap: '8px'
             }}>
-              <ShieldCheck size={18} color="#10B981" />
+              <ShieldCheck size={18} color="#047857" />
               <div style={{ fontSize: '11px', color: '#065F46', fontWeight: 700 }}>
                 No drug-interaction clearance is generated. Verify all medicines with a pharmacist or qualified clinician.
               </div>
@@ -1121,7 +1121,7 @@ export default function LiveScribeSessionModal({
 
             {/* Human Review & Local Share Preview */}
             <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div style={{ fontSize: '11px', color: '#698892', lineHeight: 1.4 }}>
+              <div style={{ fontSize: '11px', color: '#52707C', lineHeight: 1.4 }}>
  <strong>Clinician review required:</strong> Local acknowledgement prepares a sample spoken note in {safePatient.language || 'Telugu'}. No prescription, external voice service, or WhatsApp message is sent by this step.
               </div>
 
@@ -1136,7 +1136,7 @@ export default function LiveScribeSessionModal({
                   gap: '10px',
                   padding: '12px',
                   borderRadius: '12px',
-                  background: dialogueList.length === 0 ? '#94A3B8' : (isRxSigned ? '#10B981' : '#0F4C5C'),
+                  background: dialogueList.length === 0 ? '#94A3B8' : (isRxSigned ? '#047857' : '#0F4C5C'),
                   color: '#ffffff',
                   border: 'none',
                   fontSize: '13.5px',
@@ -1267,7 +1267,7 @@ export default function LiveScribeSessionModal({
                   width: '32px',
                   height: '32px',
                   borderRadius: '8px',
-                  background: '#059669',
+                  background: '#047857',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -1281,7 +1281,7 @@ export default function LiveScribeSessionModal({
                     <span style={{
                       fontSize: '9.5px',
                       background: evonReasoning.isEvonLive ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
-                      color: evonReasoning.isEvonLive ? '#10B981' : '#FCD34D',
+                      color: evonReasoning.isEvonLive ? '#047857' : '#FCD34D',
                       padding: '2px 8px',
                       borderRadius: '6px',
                       border: `1px solid ${evonReasoning.isEvonLive ? 'rgba(16, 185, 129, 0.4)' : 'rgba(245, 158, 11, 0.4)'}`,
@@ -1370,7 +1370,7 @@ export default function LiveScribeSessionModal({
               justifyContent: 'space-between',
               alignItems: 'center'
             }}>
-              <span style={{ fontSize: '11px', color: '#698892' }}>
+              <span style={{ fontSize: '11px', color: '#52707C' }}>
                 Synthetic documentation draft · clinician review required · no registry compliance or signature claimed
               </span>
               <button

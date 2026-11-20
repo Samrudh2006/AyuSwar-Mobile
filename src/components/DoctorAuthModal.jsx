@@ -185,7 +185,7 @@ export default function DoctorAuthModal({ isOpen, onClose, onLoginSuccess }) {
               border: 'none',
               borderRadius: '10px',
               background: authMode === 'login' ? '#ffffff' : 'transparent',
-              color: authMode === 'login' ? '#0F4C5C' : '#698892',
+              color: authMode === 'login' ? '#0F4C5C' : '#52707C',
               fontWeight: 800,
               fontSize: '13px',
               cursor: 'pointer',
@@ -209,7 +209,7 @@ export default function DoctorAuthModal({ isOpen, onClose, onLoginSuccess }) {
               border: 'none',
               borderRadius: '10px',
               background: authMode === 'register' ? '#ffffff' : 'transparent',
-              color: authMode === 'register' ? '#0F4C5C' : '#698892',
+              color: authMode === 'register' ? '#0F4C5C' : '#52707C',
               fontWeight: 800,
               fontSize: '13px',
               cursor: 'pointer',
@@ -326,7 +326,7 @@ export default function DoctorAuthModal({ isOpen, onClose, onLoginSuccess }) {
                       letterSpacing: '2px'
                     }}
                   />
-                  <KeyRound size={16} color="#698892" style={{ position: 'absolute', left: '12px', top: '13px' }} />
+                  <KeyRound size={16} color="#52707C" style={{ position: 'absolute', left: '12px', top: '13px' }} />
                 </div>
               </div>
             </div>
@@ -347,7 +347,7 @@ export default function DoctorAuthModal({ isOpen, onClose, onLoginSuccess }) {
                 gap: '8px',
                 marginBottom: '16px'
               }}>
-                <CheckCircle2 size={18} color="#0D9488" />
+                <CheckCircle2 size={18} color="#0F766E" />
                 <span>Register a new physician. Patients will be routed to your queue based on your medical specialty.</span>
               </div>
 

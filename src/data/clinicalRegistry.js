@@ -273,7 +273,7 @@ export function generateClinicalProfile(patientName, condition, language = 'Telu
           mealContext: 'After Breakfast (టిఫిన్ తర్వాత / नाश्ते के बाद)',
           medicine: 'Metformin 500mg SR + Glimepiride 1mg',
           purpose: 'Post-prandial glucose control',
-          color: '#D97706',
+          color: '#B45309',
           bg: 'rgba(217, 119, 6, 0.1)',
           teluguAudioText: 'టిఫిన్ చేసిన వెంటనే మెట్‌ఫార్మిన్ షుగర్ మాత్ర వేసుకోండి. కడుపు మంట లేకుండా చక్కెర అదుపులో ఉంటుంది.',
           hindiAudioText: 'नाश्ता करने के तुरंत बाद मेटफॉर्मिन शुगर की गोली लें। पेट में गैस नहीं बनेगी।'
@@ -341,7 +341,7 @@ export function generateClinicalProfile(patientName, condition, language = 'Telu
         mealContext: 'After Lunch (భోజనం తర్వాత / दोपहर खाने के बाद)',
         medicine: 'Zinc 50mg + Vitamin C 500mg',
         purpose: 'Immune cell restoration & tissue recovery',
-        color: '#16A34A',
+        color: '#15803D',
         bg: 'rgba(22, 163, 74, 0.1)',
         teluguAudioText: 'మధ్యాహ్న భోజనం తర్వాత విటమిన్ సి మరియు జింక్ మాత్ర వేసుకోండి. రోగనిరోధక శక్తి పెరుగుతుంది.',
         hindiAudioText: 'दोपहर खाने के बाद विटामिन सी और जिंक की गोली लें ताकि कमजोरी दूर हो।'
@@ -353,7 +353,7 @@ export function generateClinicalProfile(patientName, condition, language = 'Telu
         mealContext: 'After Dinner (రాత్రి భోజనం తర్వాత / रात खाने के बाद)',
         medicine: 'Cetirizine 10mg / Levocetirizine',
         purpose: 'Symptom relief for allergic rhinitis and sore throat',
-        color: '#D97706',
+        color: '#B45309',
         bg: 'rgba(217, 119, 6, 0.1)',
         teluguAudioText: 'రాత్రి భోజనం తర్వాత సెటిరిజిన్ వేసుకోండి. జలుబు, తుమ్ములు తగ్గి హాయిగా నిద్రపడుతుంది.',
         hindiAudioText: 'रात खाने के बाद सेटिरिज़िन लें ताकि छींकें और जुकाम कम हो और अच्छी नींद आए।'

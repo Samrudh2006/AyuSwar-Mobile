@@ -70,7 +70,7 @@ export default function ConsultationVisitSummaryModal({
 
     const approvalBlockHtml = isDemoApproved
       ? `
-        <div style="color: #059669; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 6px;">
+        <div style="color: #047857; font-weight: 800; font-size: 13px; display: flex; align-items: center; gap: 6px;">
           <span style="font-size: 16px;">&#8226;</span> Demo review completed - not clinical sign-off
         </div>
         <div style="font-size: 11px; color: #475569; margin-top: 4px; line-height: 1.45;">
@@ -575,7 +575,7 @@ export default function ConsultationVisitSummaryModal({
           {/* Doctor Sign-off Box */}
           <div style={{
             background: isDemoApproved ? '#F0FDF4' : '#FAF8F5',
-            border: isDemoApproved ? '1.5px dashed #10B981' : '1.5px dashed #D4AF37',
+            border: isDemoApproved ? '1.5px dashed #047857' : '1.5px dashed #D4AF37',
             borderRadius: '12px',
             padding: '14px',
             display: 'flex',
@@ -611,8 +611,8 @@ export default function ConsultationVisitSummaryModal({
 
             {isDemoApproved ? (
               <div>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#059669', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <CheckCircle2 size={15} color="#059669" />
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#047857', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                  <CheckCircle2 size={15} color="#047857" />
                   <span>Demo review completed - not clinical sign-off</span>
                 </div>
                 <div style={{ fontSize: '11px', color: '#475569', lineHeight: 1.45, marginTop: '4px' }}>
@@ -622,7 +622,7 @@ export default function ConsultationVisitSummaryModal({
             ) : (
               <div>
                 <div style={{ fontSize: '13px', fontWeight: 800, color: '#B45309', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <span style={{ color: '#D97706', fontSize: '16px' }}>&#8226;</span>
+                  <span style={{ color: '#B45309', fontSize: '16px' }}>&#8226;</span>
                   <span>Pending doctor review</span>
                 </div>
                 <div style={{ fontSize: '11px', color: '#64748B', lineHeight: 1.45, marginTop: '4px' }}>

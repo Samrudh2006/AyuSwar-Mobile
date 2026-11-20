@@ -223,7 +223,7 @@ export default function VitalsRppgModal({ isOpen, onClose, onSaveVitals }) {
             width: '160px',
             height: '200px',
             borderRadius: '50%',
-            border: isScanning ? '2.5px solid #D4AF37' : '2px dashed #698892',
+            border: isScanning ? '2.5px solid #D4AF37' : '2px dashed #52707C',
             boxShadow: isScanning ? '0 0 24px rgba(0, 0, 0, 0.14)' : 'none',
             display: 'flex',
             alignItems: 'center',
@@ -312,7 +312,7 @@ export default function VitalsRppgModal({ isOpen, onClose, onSaveVitals }) {
 
               <div style={{ background: '#0A1E34', padding: '12px', borderRadius: '12px', border: '1px solid #16365C', textAlign: 'center' }}>
                 <div style={{ fontSize: '10px', color: '#94A3B8', textTransform: 'uppercase' }}>Est. SpO2</div>
-                <div style={{ fontSize: '22px', fontWeight: 900, color: '#10B981', marginTop: '2px' }}>{bloodOxygen}%</div>
+                <div style={{ fontSize: '22px', fontWeight: 900, color: '#047857', marginTop: '2px' }}>{bloodOxygen}%</div>
                 <div style={{ fontSize: '10px', color: '#D0DFE2' }}>Pulse Ox</div>
               </div>
             </div>

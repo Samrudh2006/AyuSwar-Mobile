@@ -45,7 +45,7 @@ export const INITIAL_REAL_OPD_QUEUE = [
     mode: 'In-Person OPD',
     isTeleconsult: false,
     status: 'Completed',
-    statusColor: '#10B981',
+    statusColor: '#047857',
     statusBg: 'rgba(16, 185, 129, 0.1)',
     chiefComplaint: 'Follow-up for fasting glucose & asthma inhaler check',
     vitals: 'BP: 132/84, HR: 76 bpm, SpO2: 98%',
@@ -97,7 +97,7 @@ export const INITIAL_REAL_OPD_QUEUE = [
     mode: 'In-Person OPD',
     isTeleconsult: false,
     status: 'Waiting',
-    statusColor: '#D97706',
+    statusColor: '#B45309',
     statusBg: 'rgba(217, 119, 6, 0.1)',
     chiefComplaint: 'Chronic morning cough with sputum, seasonal allergy',
     vitals: 'BP: 128/80, HR: 80 bpm, SpO2: 96%',
@@ -292,7 +292,7 @@ class OpdQueueService {
       mode,
       isTeleconsult: mode.includes('Video') || mode.includes('Telehealth'),
       status: 'Upcoming',
-      statusColor: '#D97706',
+      statusColor: '#B45309',
       statusBg: 'rgba(217, 119, 6, 0.1)',
       chiefComplaint: reason,
       vitals: 'BP: 124/82, HR: 76 bpm, SpO2: 98%',
@@ -313,10 +313,10 @@ class OpdQueueService {
   updateStatus(appointmentId, newStatus) {
     const queue = this.getQueue();
     const statusMeta = {
-      'Waiting': { color: '#D97706', bg: 'rgba(217, 119, 6, 0.1)' },
+      'Waiting': { color: '#B45309', bg: 'rgba(217, 119, 6, 0.1)' },
       'In Progress': { color: '#3B82F6', bg: 'rgba(59, 130, 246, 0.12)' },
-      'Completed': { color: '#10B981', bg: 'rgba(16, 185, 129, 0.1)' },
-      'Cancelled': { color: '#EF4444', bg: 'rgba(239, 68, 68, 0.1)' },
+      'Completed': { color: '#047857', bg: 'rgba(16, 185, 129, 0.1)' },
+      'Cancelled': { color: '#B91C1C', bg: 'rgba(239, 68, 68, 0.1)' },
       'Upcoming': { color: '#6B7280', bg: 'rgba(107, 114, 128, 0.1)' }
     };
 

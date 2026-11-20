@@ -628,7 +628,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
             >
               <span style={{ color: '#38BDF8', fontWeight: 800, letterSpacing: '0.3px' }}>INCIDENT #108-AP-8902</span>
               <span style={{ color: '#486770' }}>•</span>
-              <span style={{ color: '#10B981', fontWeight: 700 }}>SAMPLE SESSION</span>
+              <span style={{ color: '#047857', fontWeight: 700 }}>SAMPLE SESSION</span>
             </div>
           </div>
 
@@ -860,7 +860,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
             <span style={{
               background: locationSource === 'gps' ? '#065F46' : '#0B2144',
               color: locationSource === 'gps' ? '#6EE7B7' : '#38BDF8',
-              border: `1px solid ${locationSource === 'gps' ? '#10B981' : '#1E3B68'}`,
+              border: `1px solid ${locationSource === 'gps' ? '#047857' : '#1E3B68'}`,
               padding: '3px 8px',
               borderRadius: '6px',
               fontSize: '10px',
@@ -944,7 +944,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
               <button
                 onClick={() => applyLocation(17.2790, 82.4042, 'Annavaram, Sankhavaram Mandal, Kakinada District', 'preset')}
                 style={{
-                  background: '#D97706',
+                  background: '#B45309',
                   color: '#FFF',
                   border: 'none',
                   borderRadius: '4px',
@@ -1020,7 +1020,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
               boxShadow: '0 4px 16px rgba(0,0,0,0.4)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                <span style={{ fontSize: '11px', fontWeight: 800, color: dispatchState >= 2 ? '#10B981' : '#EF4444', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <span style={{ fontSize: '11px', fontWeight: 800, color: dispatchState >= 2 ? '#047857' : '#B91C1C', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
  {dispatchState >= 2 ? 'SIMULATION ACTIVE — PREVIEW ONLY': 'SIMULATION READY — NO DISPATCH'}
                 </span>
                 <span style={{ fontSize: '9.5px', background: 'rgba(16, 185, 129, 0.2)', color: '#34D399', padding: '2px 8px', borderRadius: '10px', fontWeight: 800 }}>
@@ -1061,7 +1061,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
                   <div style={{ fontSize: '15px', fontWeight: 900, color: '#FFFFFF', lineHeight: 1.25, marginTop: '4px' }}>
                     {selectedHospital.name}
                   </div>
-                  <div style={{ fontSize: '10.5px', color: '#698892', marginTop: '2px' }}>
+                  <div style={{ fontSize: '10.5px', color: '#52707C', marginTop: '2px' }}>
                     {selectedHospital.address}
                   </div>
 
@@ -1080,21 +1080,21 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
                       <div style={{ fontSize: '17px', fontWeight: 900, color: '#38BDF8' }}>
                         {selectedHospital.etaMinutes} min
                       </div>
-                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Estimated travel</div>
+                      <div style={{ fontSize: '8.5px', color: '#52707C' }}>Estimated travel</div>
                     </div>
                     <div style={{ width: '1px', height: '22px', background: '#1E3658' }} />
                     <div>
                       <div style={{ fontSize: '17px', fontWeight: 900, color: '#FFFFFF' }}>
                         {selectedHospital.distanceKm} km
                       </div>
-                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Distance</div>
+                      <div style={{ fontSize: '8.5px', color: '#52707C' }}>Distance</div>
                     </div>
                     <div style={{ width: '1px', height: '22px', background: '#1E3658' }} />
                     <div>
-                      <div style={{ fontSize: '17px', fontWeight: 900, color: '#10B981' }}>
+                      <div style={{ fontSize: '17px', fontWeight: 900, color: '#047857' }}>
                         Not verified
                       </div>
-                      <div style={{ fontSize: '8.5px', color: '#698892' }}>Beds unknown</div>
+                      <div style={{ fontSize: '8.5px', color: '#52707C' }}>Beds unknown</div>
                     </div>
                   </div>
 
@@ -1178,12 +1178,12 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
                         {panToken || 'SIM-PREVIEW-0000'}
                       </span>
                     </div>
-                    <div style={{ color: '#10B981', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> NOT SENT</span>
-                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> UNKNOWN</span>
-                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#10B981", display: "inline-block", flexShrink: 0 }} /> NO BAY RESERVED</span>
+                    <div style={{ color: '#047857', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#047857", display: "inline-block", flexShrink: 0 }} /> NOT SENT</span>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#047857", display: "inline-block", flexShrink: 0 }} /> UNKNOWN</span>
+                      <span style={{display:"inline-flex",alignItems:"center",gap:4}}><span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "#047857", display: "inline-block", flexShrink: 0 }} /> NO BAY RESERVED</span>
                     </div>
-                    <div style={{ fontSize: '9px', color: '#698892', marginTop: '3px' }}>
+                    <div style={{ fontSize: '9px', color: '#52707C', marginTop: '3px' }}>
                       Preview generated locally; no CMO or hospital confirmation
                     </div>
                   </div>
@@ -1253,7 +1253,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
                       <span style={{ color: '#F59E0B', fontWeight: 700 }}>Not verified</span>
                     </div>
                     <div style={{ height: '4px', background: '#132442', borderRadius: '2px', overflow: 'hidden' }}>
-                      <div style={{ width: '0%', height: '100%', background: '#10B981', borderRadius: '2px' }} />
+                      <div style={{ width: '0%', height: '100%', background: '#047857', borderRadius: '2px' }} />
                     </div>
                   </div>
                 </div>
@@ -1312,7 +1312,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
                       }}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '6px', minWidth: 0 }}>
-                        <span style={{ fontSize: '9.5px', color: '#698892', fontWeight: 800 }}>{idx + 1}.</span>
+                        <span style={{ fontSize: '9.5px', color: '#52707C', fontWeight: 800 }}>{idx + 1}.</span>
                         <div style={{ minWidth: 0 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                             <div style={{ fontSize: '11px', fontWeight: 700, color: '#F1F5F9', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -1550,7 +1550,7 @@ export default function SanjivaniEmergencyModal({ isOpen, onClose }) {
 
               {/* Operational status */}
               <div style={{ background: '#061020', border: '1px solid #142845', borderRadius: '8px', padding: '10px', marginBottom: '12px' }}>
-                <div style={{ fontSize: '10px', fontWeight: 800, color: '#10B981', textTransform: 'uppercase', marginBottom: '6px' }}>
+                <div style={{ fontSize: '10px', fontWeight: 800, color: '#047857', textTransform: 'uppercase', marginBottom: '6px' }}>
                   Operational status (no live telemetry)
                 </div>
                 <div style={{ fontSize: '10px', color: '#D0DFE2', lineHeight: 1.5 }}>

@@ -335,7 +335,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
               border: 'none',
               borderRadius: '10px',
               background: authMode === 'register' ? '#ffffff' : 'transparent',
-              color: authMode === 'register' ? '#D97706' : '#698892',
+              color: authMode === 'register' ? '#B45309' : '#52707C',
               fontWeight: 800,
               fontSize: '13px',
               cursor: 'pointer',
@@ -359,7 +359,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
               border: 'none',
               borderRadius: '10px',
               background: authMode === 'login' ? '#ffffff' : 'transparent',
-              color: authMode === 'login' ? '#0A2540' : '#698892',
+              color: authMode === 'login' ? '#0A2540' : '#52707C',
               fontWeight: 800,
               fontSize: '13px',
               cursor: 'pointer',
@@ -394,7 +394,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                 gap: '8px',
                 marginBottom: '16px'
               }}>
-                <ShieldCheck size={18} color="#D97706" />
+                <ShieldCheck size={18} color="#B45309" />
                 <span>Select a preloaded demo citizen profile to login immediately.</span>
               </div>
 
@@ -422,7 +422,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                   width: '100%',
                   padding: '12px 14px',
                   borderRadius: '12px',
-                  background: '#D97706',
+                  background: '#B45309',
                   color: '#ffffff',
                   fontWeight: 800,
                   fontSize: '13px',
@@ -487,7 +487,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                       color: '#091E26'
                     }}
                   />
-                  <Smartphone size={16} color="#698892" style={{ position: 'absolute', left: '12px', top: '12px' }} />
+                  <Smartphone size={16} color="#52707C" style={{ position: 'absolute', left: '12px', top: '12px' }} />
                 </div>
               </div>
 
@@ -513,7 +513,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                       letterSpacing: '2px'
                     }}
                   />
-                  <KeyRound size={16} color="#698892" style={{ position: 'absolute', left: '12px', top: '12px' }} />
+                  <KeyRound size={16} color="#52707C" style={{ position: 'absolute', left: '12px', top: '12px' }} />
                 </div>
               </div>
             </div>
@@ -534,7 +534,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                 gap: '8px',
                 marginBottom: '16px'
               }}>
-                <CheckCircle2 size={18} color="#16A34A" />
+                <CheckCircle2 size={18} color="#15803D" />
                 <span>
                   <strong>AyuSwar Clinical Triage:</strong> Doctors are assigned automatically based on clinical conditions!
                 </span>
@@ -655,13 +655,13 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                       type="checkbox"
                       checked={includeFamily}
                       onChange={e => setIncludeFamily(e.target.checked)}
-                      style={{ width: '16px', height: '16px', accentColor: '#D97706' }}
+                      style={{ width: '16px', height: '16px', accentColor: '#B45309' }}
                     />
                     <span>Add Family Members to Shared Health Locker (కుటుంబ ఖాతా)</span>
                   </label>
                 </div>
 
-                <p style={{ fontSize: '11px', color: '#698892', margin: '0 0 10px 0' }}>
+                <p style={{ fontSize: '11px', color: '#52707C', margin: '0 0 10px 0' }}>
                   {includeFamily 
                     ? 'Register your parents, spouse, or children. Each will get an assigned doctor according to their disease and can be switched in your portal!'
                     : 'Unchecked: You will have a single citizen profile with no profile switching.'}
@@ -689,7 +689,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                             <button
                               type="button"
                               onClick={() => handleRemoveFamilyMember(member.id)}
-                              style={{ background: 'none', border: 'none', color: '#EF4444', cursor: 'pointer', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                              style={{ background: 'none', border: 'none', color: '#B91C1C', cursor: 'pointer', fontSize: '11px', display: 'flex', alignItems: 'center', gap: '4px' }}
                             >
                               <Trash2 size={13} />
                               <span>Remove</span>
@@ -762,8 +762,8 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
                       onClick={handleAddFamilyMember}
                       style={{
                         background: '#ffffff',
-                        border: '1.5px solid #D97706',
-                        color: '#D97706',
+                        border: '1.5px solid #B45309',
+                        color: '#B45309',
                         borderRadius: '8px',
                         padding: '8px',
                         fontSize: '12px',
@@ -794,7 +794,7 @@ export default function PatientAuthModal({ isOpen, onClose, onLoginSuccess }) {
               justifyContent: 'center',
               padding: '13px',
               fontSize: '14px',
-              background: '#D97706',
+              background: '#B45309',
               borderRadius: '12px',
               cursor: 'pointer'
             }}

@@ -1067,7 +1067,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             color: gnaniStatus?.available ? '#166534' : '#0F4C5C',
             fontWeight: 750
           }}>
-            <Volume2 size={14} color={gnaniStatus?.available ? '#16a34a' : '#0F4C5C'} />
+            <Volume2 size={14} color={gnaniStatus?.available ? '#15803D' : '#0F4C5C'} />
             <span>
               {speechService.activeProvider === 'browser_fallback'
  ? 'Browser Web Speech Fallback (Zero Network Dependency)'
@@ -1079,7 +1079,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             </span>
           </div>
 
-          <span style={{ fontSize: '12px', color: '#698892', fontWeight: 600 }}>
+          <span style={{ fontSize: '12px', color: '#52707C', fontWeight: 600 }}>
             Session #{currentEncounter.patient.abhaId.slice(-4)}
           </span>
         </div>
@@ -1127,7 +1127,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 </span>
                 <LiveTelemetryBadge location={currentEncounter.patient.location || 'kurnool'} compact={true} />
               </div>
-              <p style={{ fontSize: '12px', color: '#698892', margin: '3px 0 4px 0' }}>
+              <p style={{ fontSize: '12px', color: '#52707C', margin: '3px 0 4px 0' }}>
                 Facility: {currentEncounter.patient.location} • Attending: <strong>{doctorProfile?.doctorName || currentEncounter.patient.doctorName || 'Dr. Demo Clinician (synthetic)'}</strong>
               </p>
               <AbdmRegistryBadgeRow
@@ -1173,7 +1173,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 fontWeight: 750,
                 color: '#0F4C5C'
               }}>
-                <Sparkles size={13} color="#D97706" />
+                <Sparkles size={13} color="#B45309" />
                 <span>Doctor & Patient Input:</span>
                 <span style={{
                   background: 'rgba(16, 185, 129, 0.15)',
@@ -1188,7 +1188,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               </div>
             </div>
 
-            <ArrowRight className="cc-bridge-arrow" size={14} color="#698892" style={{ flexShrink: 0 }} />
+            <ArrowRight className="cc-bridge-arrow" size={14} color="#52707C" style={{ flexShrink: 0 }} />
 
             {/* Output: Patient Vernacular Mother Tongue */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
@@ -1232,31 +1232,31 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
           borderTop: '1px solid #F1F5F9'
         }}>
           <div style={{ background: '#FAF8F5', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-            <div style={{ fontSize: '10px', color: '#698892', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Heart size={11} color="#EF4444" /> Blood Pressure
+            <div style={{ fontSize: '10px', color: '#52707C', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Heart size={11} color="#B91C1C" /> Blood Pressure
             </div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.vitals.bp}</div>
           </div>
           <div style={{ background: '#FAF8F5', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-            <div style={{ fontSize: '10px', color: '#698892', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ fontSize: '10px', color: '#52707C', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <Activity size={11} color="#0F4C5C" /> Pulse / HR
             </div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.vitals.heartRate}</div>
           </div>
           <div style={{ background: '#FAF8F5', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-            <div style={{ fontSize: '10px', color: '#698892', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ fontSize: '10px', color: '#52707C', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <Droplets size={11} color="#0284C7" /> SpO2 Oxygen
             </div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.vitals.spo2}</div>
           </div>
           <div style={{ background: '#FAF8F5', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-            <div style={{ fontSize: '10px', color: '#698892', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Thermometer size={11} color="#D97706" /> Temperature
+            <div style={{ fontSize: '10px', color: '#52707C', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <Thermometer size={11} color="#B45309" /> Temperature
             </div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.vitals.temp}</div>
           </div>
           <div style={{ background: '#FAF8F5', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-            <div style={{ fontSize: '10px', color: '#698892', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ fontSize: '10px', color: '#52707C', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <Droplets size={11} color="#B45309" /> Random Blood Sugar
             </div>
             <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.vitals.bloodSugar}</div>
@@ -1292,7 +1292,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '12px', color: '#94A3B8' }}>Sequential Flow:</span>
+            <span style={{ fontSize: '12px', color: '#CBD5E1' }}>Sequential Flow:</span>
             <span style={{ fontSize: '12px', fontWeight: 800, color: '#FCD34D' }}>
               Record → AI Process → Gnani Voice → Dispatch
             </span>
@@ -1332,7 +1332,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   border: isCurrent 
                     ? '2px solid #D4AF37' 
                     : isDone 
-                      ? '1.5px solid #10B981' 
+                      ? '1.5px solid #047857' 
                       : '1px solid rgba(255,255,255,0.15)',
                   background: isCurrent 
                     ? 'rgba(45, 212, 191, 0.18)' 
@@ -1350,7 +1350,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   width: '32px',
                   height: '32px',
                   borderRadius: '50%',
-                  background: isCurrent ? '#D4AF37' : isDone ? '#10B981' : 'rgba(255,255,255,0.15)',
+                  background: isCurrent ? '#D4AF37' : isDone ? '#047857' : 'rgba(255,255,255,0.15)',
                   color: isCurrent ? '#061626' : '#ffffff',
                   display: 'flex',
                   alignItems: 'center',
@@ -1363,7 +1363,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   <div style={{ fontSize: '12px', fontWeight: 800, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
                     {item.title}
                   </div>
-                  <div style={{ fontSize: '10.5px', color: isCurrent ? '#D4AF37' : '#D0DFE2', whiteSpace: 'nowrap' }}>
+                  <div style={{ fontSize: '10.5px', color: isCurrent ? '#F0D078' : '#D0DFE2', whiteSpace: 'nowrap' }}>
                     {item.desc}
                   </div>
                 </div>
@@ -1434,7 +1434,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     fontSize: '10.5px',
                     fontWeight: 750,
                     background: 'rgba(16, 185, 129, 0.12)',
-                    color: '#059669',
+                    color: '#047857',
                     border: '1px solid rgba(16, 185, 129, 0.25)',
                     padding: '2px 8px',
                     borderRadius: '6px'
@@ -1442,7 +1442,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
  HW Noise Filter: Active
                   </span>
                 </h2>
-                <p style={{ fontSize: '11.5px', color: '#698892', margin: '2px 0 0 0' }}>
+                <p style={{ fontSize: '11.5px', color: '#52707C', margin: '2px 0 0 0' }}>
                   Single-Mic Diarization: WebAudio Pitch DSP + Linguistic NLP + Instant Spacebar Toggle
                 </p>
               </div>
@@ -1456,7 +1456,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     borderRadius: '7px',
                     border: 'none',
                     background: recordingMode === 'ambient_sim' ? '#0F4C5C' : 'transparent',
-                    color: recordingMode === 'ambient_sim' ? '#ffffff' : '#698892',
+                    color: recordingMode === 'ambient_sim' ? '#ffffff' : '#52707C',
                     fontSize: '11px',
                     fontWeight: 750,
                     cursor: 'pointer'
@@ -1470,8 +1470,8 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     padding: '5px 12px',
                     borderRadius: '7px',
                     border: 'none',
-                    background: recordingMode === 'live_mic' ? '#EF4444' : 'transparent',
-                    color: recordingMode === 'live_mic' ? '#ffffff' : '#698892',
+                    background: recordingMode === 'live_mic' ? '#B91C1C' : 'transparent',
+                    color: recordingMode === 'live_mic' ? '#ffffff' : '#52707C',
                     fontSize: '11px',
                     fontWeight: 750,
                     cursor: 'pointer',
@@ -1508,7 +1508,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     gap: '8px',
                     padding: '9px 18px',
                     borderRadius: '10px',
-                    background: isRecording ? '#EF4444' : '#10B981',
+                    background: isRecording ? '#B91C1C' : '#047857',
                     color: '#ffffff',
                     border: 'none',
                     fontSize: '13px',
@@ -1540,15 +1540,15 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     padding: '6px 11px',
                     fontSize: '11.5px',
                     fontWeight: 750,
-                    color: activeLiveSpeaker.includes('Doctor') ? '#10B981' : '#FDE047',
+                    color: activeLiveSpeaker.includes('Doctor') ? '#2FBF8F' : '#FDE047',
                     cursor: 'pointer',
                     whiteSpace: 'nowrap',
                     flexShrink: 0
                   }}
                 >
-                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: activeLiveSpeaker.includes('Doctor') ? '#10B981' : '#FDE047', animation: isRecording ? 'pulse 1s infinite' : 'none' }} />
+                  <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: activeLiveSpeaker.includes('Doctor') ? '#2FBF8F' : '#FDE047', animation: isRecording ? 'pulse 1s infinite' : 'none' }} />
  <span>{activeLiveSpeaker.includes('Doctor') ? 'Doctor': 'Patient'}</span>
-                  <span style={{ fontSize: '9.5px', opacity: 0.65, borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '5px' }}>Auto</span>
+                  <span style={{ fontSize: '9.5px', color: '#D0DFE2', borderLeft: '1px solid rgba(255,255,255,0.2)', paddingLeft: '5px' }}>Auto</span>
                 </div>
 
                 {/* Live Whisper Transcribing Indicator (Only shown during active background transcription) */}
@@ -1580,7 +1580,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     <div style={{ fontSize: '9px', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Elapsed
                     </div>
-                    <div style={{ fontSize: '15px', fontWeight: 800, color: isRecording ? '#EF4444' : '#10B981', fontFamily: 'monospace' }}>
+                    <div style={{ fontSize: '15px', fontWeight: 800, color: isRecording ? '#F87171' : '#2FBF8F', fontFamily: 'monospace' }}>
                       {formatTimer(recordedSeconds)}
                     </div>
                   </div>
@@ -1588,7 +1588,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    background: isRecording ? '#EF4444' : '#698892',
+                    background: isRecording ? '#B91C1C' : '#52707C',
                     animation: isRecording ? 'pulse 1s infinite' : 'none'
                   }} />
                 </div>
@@ -1699,7 +1699,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     padding: '2px 8px',
                     borderRadius: '6px',
                     fontWeight: 800,
-                    border: `1px solid ${pitchCluster?.includes('Doctor') ? '#10B981' : '#FDE68A'}`
+                    border: `1px solid ${pitchCluster?.includes('Doctor') ? '#047857' : '#FDE68A'}`
                   }}>
  Pitch F0: {detectedPitch} Hz ({pitchCluster})
                   </span>
@@ -1810,7 +1810,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#091E26' }}>
                     No Spoken Dialogue Recorded Yet
                   </div>
-                  <div style={{ fontSize: '12px', color: '#698892', maxWidth: '380px', lineHeight: 1.5 }}>
+                  <div style={{ fontSize: '12px', color: '#52707C', maxWidth: '380px', lineHeight: 1.5 }}>
                     {recordingMode === 'live_mic'
                       ? (isRecording 
  ? 'Listening with hardware noise suppression... Press SPACEBAR anytime to toggle Doctor ⇄ Patient!'
@@ -1862,7 +1862,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                       borderRadius: '12px',
                       background: isDoc ? '#F0FDFA' : '#FFFDF5',
                       border: isDoc ? '1.5px solid #CCFBF1' : '1.5px solid #FEF08A',
-                      borderLeft: isDoc ? '4px solid #0F4C5C' : '4px solid #D97706'
+                      borderLeft: isDoc ? '4px solid #0F4C5C' : '4px solid #B45309'
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px', flexWrap: 'wrap', gap: '6px' }}>
@@ -1937,7 +1937,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   padding: '10px 14px',
                   borderRadius: '10px',
                   background: activeLiveSpeaker.includes('Doctor') ? '#F0FDFA' : '#FFFDF5',
-                  border: `1.5px dashed ${activeLiveSpeaker.includes('Doctor') ? '#0F4C5C' : '#D97706'}`,
+                  border: `1.5px dashed ${activeLiveSpeaker.includes('Doctor') ? '#0F4C5C' : '#B45309'}`,
                   fontSize: '13px',
                   color: activeLiveSpeaker.includes('Doctor') ? '#0F4C5C' : '#B45309',
                   fontWeight: 650
@@ -1991,7 +1991,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   Vernacular Semantic Metaphor Resolver
                 </h3>
               </div>
-              <p style={{ fontSize: '11.5px', color: '#698892', margin: '0 0 12px 0' }}>
+              <p style={{ fontSize: '11.5px', color: '#52707C', margin: '0 0 12px 0' }}>
                 Maps colloquial sample phrases to draft coding candidates for clinician review:
               </p>
 
@@ -2008,8 +2008,8 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     fontSize: '12px'
                   }}>
                     <div>
-                      <div style={{ fontWeight: 800, color: '#D97706' }}>{map.dialect}</div>
-                      <div style={{ fontSize: '11px', color: '#698892' }}>{map.clinicalTerm}</div>
+                      <div style={{ fontWeight: 800, color: '#B45309' }}>{map.dialect}</div>
+                      <div style={{ fontSize: '11px', color: '#52707C' }}>{map.clinicalTerm}</div>
                     </div>
                     <span style={{ fontSize: '10.5px', fontWeight: 800, background: 'rgba(0, 0, 0, 0.07)', color: '#0F4C5C', padding: '2px 8px', borderRadius: '6px' }}>
                       ICD-10: {map.icd10}
@@ -2028,7 +2028,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               boxShadow: '0 4px 18px rgba(0,0,0,0.04)'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-                <Activity size={18} color="#D97706" />
+                <Activity size={18} color="#B45309" />
                 <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#091E26', margin: 0 }}>
                   Acoustic Respiratory Biomarkers (DSP)
                 </h3>
@@ -2036,20 +2036,20 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                 <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-                  <div style={{ fontSize: '10px', color: '#698892' }}>Respiratory Effort</div>
-                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#D97706' }}>{currentEncounter.acousticBiomarkers.respiratoryEffort}</div>
+                  <div style={{ fontSize: '10px', color: '#52707C' }}>Respiratory Effort</div>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#B45309' }}>{currentEncounter.acousticBiomarkers.respiratoryEffort}</div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-                  <div style={{ fontSize: '10px', color: '#698892' }}>Cough Signature</div>
+                  <div style={{ fontSize: '10px', color: '#52707C' }}>Cough Signature</div>
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#091E26' }}>{currentEncounter.acousticBiomarkers.coughType}</div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-                  <div style={{ fontSize: '10px', color: '#698892' }}>Vocal Tremor</div>
+                  <div style={{ fontSize: '10px', color: '#52707C' }}>Vocal Tremor</div>
                   <div style={{ fontSize: '13px', fontWeight: 800, color: '#0F4C5C' }}>{currentEncounter.acousticBiomarkers.vocalTremor}</div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-                  <div style={{ fontSize: '10px', color: '#698892' }}>Risk Category</div>
-                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#10B981' }}>{currentEncounter.acousticBiomarkers.riskCategory}</div>
+                  <div style={{ fontSize: '10px', color: '#52707C' }}>Risk Category</div>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#047857' }}>{currentEncounter.acousticBiomarkers.riskCategory}</div>
                 </div>
               </div>
             </div>
@@ -2104,7 +2104,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 gap: '12px'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <CheckCircle2 size={24} color="#16a34a" />
+                  <CheckCircle2 size={24} color="#15803D" />
                   <div>
                     <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#166534', margin: 0 }}>
                       AI Documentation Draft Complete
@@ -2278,7 +2278,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     </span>
                   </div>
 
-                  <p style={{ fontSize: '12px', color: '#698892', margin: 0 }}>
+                  <p style={{ fontSize: '12px', color: '#52707C', margin: 0 }}>
                     This text is a documentation draft for review. It is not medical advice; edit it only after a qualified clinician reviews the encounter.
                   </p>
 
@@ -2307,7 +2307,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#0F4C5C', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
                       <span>Sample Medication Badges (review required):</span>
                       <span style={{ fontSize: '10.5px', color: '#047857', background: 'rgba(16, 185, 129, 0.1)', padding: '2px 7px', borderRadius: '6px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }}></span>
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#047857', display: 'inline-block' }}></span>
                         No external drug-label clearance claimed
                       </span>
                     </div>
@@ -2403,7 +2403,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   <h2 style={{ fontSize: '17px', fontWeight: 850, color: '#0F4C5C', margin: 0 }}>
                     Spoken Draft Voice Note
                   </h2>
-                  <p style={{ fontSize: '12px', color: '#698892', margin: '2px 0 0 0' }}>
+                  <p style={{ fontSize: '12px', color: '#52707C', margin: '2px 0 0 0' }}>
                     {speechService.getPlaybackProvenance().label} {gnaniStatus?.available ? '• Configured gateway (availability checked separately)' : '• Local audio pipeline'}
                   </p>
                 </div>
@@ -2470,14 +2470,14 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 <div style={{ fontSize: '14px', fontWeight: 800, color: '#0F4C5C' }}>
                   {doctorProfile?.doctorName || 'Dr. Demo Clinician (synthetic)'}
                 </div>
-                <div style={{ fontSize: '11.5px', color: '#698892' }}>
+                <div style={{ fontSize: '11.5px', color: '#52707C' }}>
                   Speaking in <strong>{currentEncounter.language}</strong> with personalized dosage schedule
                 </div>
               </div>
 
               {/* Speed Controls */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <span style={{ fontSize: '11px', color: '#698892', fontWeight: 700 }}>Speed:</span>
+                <span style={{ fontSize: '11px', color: '#52707C', fontWeight: 700 }}>Speed:</span>
                 {[0.8, 1.0, 1.25].map((speed) => (
                   <button
                     key={speed}
@@ -2489,7 +2489,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                       fontWeight: 800,
                       border: playbackSpeed === speed ? '1.5px solid #0F4C5C' : '1px solid #D0DFE2',
                       background: playbackSpeed === speed ? 'rgba(0, 0, 0, 0.08)' : '#ffffff',
-                      color: playbackSpeed === speed ? '#0F4C5C' : '#698892',
+                      color: playbackSpeed === speed ? '#0F4C5C' : '#52707C',
                       cursor: 'pointer'
                     }}
                   >
@@ -2547,7 +2547,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   gap: '8px',
                   padding: '13px',
                   borderRadius: '12px',
-                  background: isPlayingAudioRx ? '#EF4444' : (isSynthesizingAudioRx ? '#083344' : '#0F4C5C'),
+                  background: isPlayingAudioRx ? '#B91C1C' : (isSynthesizingAudioRx ? '#083344' : '#0F4C5C'),
                   color: '#ffffff',
                   border: 'none',
                   fontSize: '14px',
@@ -2651,20 +2651,20 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               background: '#ffffff',
               borderRadius: '24px',
               padding: '24px',
-              border: isRxSigned ? '2px solid #10B981' : '1.5px solid #D0DFE2',
+              border: isRxSigned ? '2px solid #047857' : '1.5px solid #D0DFE2',
               boxShadow: '0 4px 18px rgba(0,0,0,0.04)',
               display: 'flex',
               flexDirection: 'column',
               gap: '14px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <ShieldCheck size={20} color={isRxSigned ? '#10B981' : '#0F4C5C'} />
+                <ShieldCheck size={20} color={isRxSigned ? '#047857' : '#0F4C5C'} />
                 <h3 style={{ fontSize: '15px', fontWeight: 850, color: '#091E26', margin: 0 }}>
                   Doctor Review & Demo Acknowledgement
                 </h3>
               </div>
 
-              <p style={{ fontSize: '12px', color: '#698892', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: '12px', color: '#52707C', lineHeight: 1.5, margin: 0 }}>
                 In this synthetic workflow, the reviewer checks the generated voice-note text and records a local acknowledgement. No NMC workflow, Class-3 DSC, or legal prescription signature is connected.
               </p>
 
@@ -2678,7 +2678,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   alignItems: 'center',
                   gap: '12px'
                 }}>
-                  <CheckCircle2 size={24} color="#16a34a" />
+                  <CheckCircle2 size={24} color="#15803D" />
                   <div>
                     <div style={{ fontSize: '13px', fontWeight: 800, color: '#166534' }}>
  DEMO REVIEW ACKNOWLEDGED 
@@ -2715,7 +2715,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   width: '100%',
                   padding: '14px',
                   borderRadius: '12px',
-                  background: '#059669',
+                  background: '#047857',
                   color: '#ffffff',
                   border: 'none',
                   fontSize: '14px',
@@ -2761,7 +2761,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 <h3 style={{ fontSize: '16px', fontWeight: 850, color: '#091E26', margin: 0 }}>
                   Local Audio-Rx Share Preview
                 </h3>
-                <p style={{ fontSize: '11.5px', color: '#698892', margin: '2px 0 0 0' }}>
+                <p style={{ fontSize: '11.5px', color: '#52707C', margin: '2px 0 0 0' }}>
                   Demo target: {customPatientName || currentEncounter.patient.name} ({customRecipientPhone || '+91 00000 00001'})
                 </p>
               </div>
@@ -2823,7 +2823,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               background: dailyReminderActive ? '#F0FDF4' : '#F8FAFC',
               borderRadius: '14px',
               padding: '12px 14px',
-              border: dailyReminderActive ? '1.5px solid #10B981' : '1px solid #CBD5E1',
+              border: dailyReminderActive ? '1.5px solid #047857' : '1px solid #CBD5E1',
               display: 'flex',
               flexDirection: 'column',
               gap: '8px'
@@ -2834,7 +2834,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     width: '26px',
                     height: '26px',
                     borderRadius: '50%',
-                    background: dailyReminderActive ? '#10B981' : '#94A3B8',
+                    background: dailyReminderActive ? '#047857' : '#94A3B8',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -2865,7 +2865,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     padding: '5px 12px',
                     borderRadius: '16px',
                     border: 'none',
-                    background: dailyReminderActive ? '#10B981' : '#E2E8F0',
+                    background: dailyReminderActive ? '#047857' : '#E2E8F0',
                     color: dailyReminderActive ? '#ffffff' : '#64748B',
                     fontSize: '11px',
                     fontWeight: 800,
@@ -2900,7 +2900,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                       padding: '4px 9px',
                       borderRadius: '8px',
                       background: '#ffffff',
-                      border: '1px solid #10B981',
+                      border: '1px solid #047857',
                       color: '#065F46',
                       fontSize: '11px',
                       fontWeight: 750,
@@ -3132,7 +3132,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 <div style={{ fontSize: '12.5px', fontWeight: 800, color: '#091E26' }}>
                   Sample Audio-Preview QR
                 </div>
-                <div style={{ fontSize: '11px', color: '#698892', marginTop: '2px' }}>
+                <div style={{ fontSize: '11px', color: '#52707C', marginTop: '2px' }}>
                   Demo-only marker for local playback; no prescription, pharmacist workflow, or registry verification.
                 </div>
               </div>
@@ -3370,7 +3370,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #D0DFE2', paddingBottom: '8px', marginBottom: '8px' }}>
                 <div>
                   <div style={{ fontWeight: 800, fontSize: '14px', color: '#091E26' }}>AYUSWAR AMBIENT CLINIC</div>
-                  <div style={{ fontSize: '10.5px', color: '#698892' }}>Synthetic Demo Facility • local prototype</div>
+                  <div style={{ fontSize: '10.5px', color: '#52707C' }}>Synthetic Demo Facility • local prototype</div>
                 </div>
                 <AuthenticQrCode value={`AYUSWAR-DEMO:${currentEncounter.patient.abhaId}`} size={56} />
               </div>
@@ -3387,7 +3387,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               </div>
 
               <div style={{ borderTop: '1px solid #D0DFE2', paddingTop: '8px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ fontSize: '10px', color: '#698892' }}>Local demo acknowledgement only; no cryptographic signature</div>
+                <div style={{ fontSize: '10px', color: '#52707C' }}>Local demo acknowledgement only; no cryptographic signature</div>
                 <div style={{ fontSize: '11px', fontWeight: 800, color: '#0F4C5C' }}>{doctorProfile?.doctorName || 'Dr. Demo Clinician (synthetic)'}</div>
               </div>
             </div>

@@ -494,7 +494,7 @@ export default function OpdAppointmentTicketModal({
                   Status
                 </div>
                 <div style={{ fontSize: '13px', fontWeight: 800, color: '#B45309', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                  <span style={{ color: '#D97706', fontSize: '16px' }}>&#8226;</span>
+                  <span style={{ color: '#B45309', fontSize: '16px' }}>&#8226;</span>
                   <span>{statusStr}</span>
                 </div>
               </div>

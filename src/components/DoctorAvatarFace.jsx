@@ -90,7 +90,7 @@ export default function DoctorAvatarFace({
     };
   }, [isSpeaking]);
 
-  const themeAccent = isEmergency ? '#EF4444' : '#10B981';
+  const themeAccent = isEmergency ? '#B91C1C' : '#047857';
 
   // Determine active frame for the 4-frame system
   const activeFrame = blinkState
@@ -231,7 +231,7 @@ export default function DoctorAvatarFace({
         gap: '4px',
         pointerEvents: 'none'
       }}>
-        <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#10B981', animation: 'greenRadarBlink 1.2s infinite' }} />
+        <span style={{ width: '5px', height: '5px', borderRadius: '50%', background: '#047857', animation: 'greenRadarBlink 1.2s infinite' }} />
         <span>1080p 60fps</span>
       </div>
 

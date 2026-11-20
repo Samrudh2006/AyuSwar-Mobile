@@ -62,8 +62,8 @@ export default function LiveTelemetryBadge({ location = 'kurnool', compact = fal
           ...style
         }}
       >
-        <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: telemetry?.isLive ? '#10B981' : '#D97706', display: 'inline-block' }}></span>
-        <Wind size={11} color="#059669" />
+        <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: telemetry?.isLive ? '#047857' : '#B45309', display: 'inline-block' }}></span>
+        <Wind size={11} color="#047857" />
         <span>{t('telemetry.pubAqi')}</span>
         <strong style={{ color: '#047857' }}>{telemetry ? telemetry.aqi : '...'}</strong>
         <span style={{ fontSize: '10px', opacity: 0.85 }}>{telemetry?.isLive ? t('telemetry.live') : t('telemetry.offline')}</span>

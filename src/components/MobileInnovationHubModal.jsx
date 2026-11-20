@@ -179,7 +179,7 @@ export default function MobileInnovationHubModal({
       title: 'ABHA-KYC',
       desc: 'One-tap Aadhaar OTP / QR-scan mobile ABHA ID creation and family locker.',
       icon: QrCode,
-      color: '#D97706',
+      color: '#B45309',
       action: onOpenAbha,
       btnLabel: 'View ABHA Locker'
     },
@@ -231,7 +231,7 @@ export default function MobileInnovationHubModal({
       title: 'PWA-Install',
       desc: 'Progressive Web App manifest + sw.js for instant mobile home screen install.',
       icon: Download,
-      color: '#10B981',
+      color: '#047857',
       action: () => showToast('PWA Manifest & Service Worker Active in /site.webmanifest'),
       btnLabel: 'PWA Status: Active'
     },
@@ -240,7 +240,7 @@ export default function MobileInnovationHubModal({
       title: 'EHR-Scanner',
       desc: 'Mobile camera OCR scanning handwritten prescriptions and printed lab reports.',
       icon: Scan,
-      color: '#0D9488',
+      color: '#0F766E',
       action: onOpenScanner,
       btnLabel: 'Launch Camera OCR'
     },
@@ -315,7 +315,7 @@ export default function MobileInnovationHubModal({
       title: 'Audit-Ledger',
       desc: `SHA-256 tamper-evident clinical block ledger (${ledgerStatus.count} blocks verified).`,
       icon: ShieldCheck,
-      color: '#059669',
+      color: '#047857',
       customContent: (
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
           <span style={{ fontSize: '11px', color: '#065F46', fontWeight: 700 }}>
@@ -323,7 +323,7 @@ export default function MobileInnovationHubModal({
           </span>
           <button 
             onClick={handleAddAuditBlock}
-            style={{ padding: '3px 8px', borderRadius: '6px', background: '#059669', color: '#ffffff', border: 'none', fontSize: '10.5px', fontWeight: 700, cursor: 'pointer' }}
+            style={{ padding: '3px 8px', borderRadius: '6px', background: '#047857', color: '#ffffff', border: 'none', fontSize: '10.5px', fontWeight: 700, cursor: 'pointer' }}
           >
             + Add Block
           </button>

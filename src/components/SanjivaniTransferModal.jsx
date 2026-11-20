@@ -227,7 +227,7 @@ export default function SanjivaniTransferModal({
             </div>
 
             <div style={{ textAlign: 'right' }}>
-              <div style={{ fontSize: '13px', fontWeight: 900, color: '#10B981' }}>
+              <div style={{ fontSize: '13px', fontWeight: 900, color: '#047857' }}>
                 {formData.assignedBay}
               </div>
               <div style={{ fontSize: '9.5px', color: '#D0DFE2' }}>
@@ -288,7 +288,7 @@ export default function SanjivaniTransferModal({
 
             {/* Field 3: Triage Classification */}
             <div>
-              <label style={{ fontSize: '10px', fontWeight: 800, color: '#EF4444', textTransform: 'uppercase' }}>
+              <label style={{ fontSize: '10px', fontWeight: 800, color: '#B91C1C', textTransform: 'uppercase' }}>
                 Clinical Triage Category
               </label>
               <input
@@ -358,7 +358,7 @@ export default function SanjivaniTransferModal({
 
             {/* Field 6: EMT Driver Contact */}
             <div>
-              <label style={{ fontSize: '10px', fontWeight: 800, color: '#10B981', textTransform: 'uppercase' }}>
+              <label style={{ fontSize: '10px', fontWeight: 800, color: '#047857', textTransform: 'uppercase' }}>
                 EMT Specialist & Driver Direct Mobile
               </label>
               <input
@@ -368,10 +368,10 @@ export default function SanjivaniTransferModal({
                 style={{
                   width: '100%',
                   background: '#050B16',
-                  border: '1px solid #10B981',
+                  border: '1px solid #047857',
                   borderRadius: '6px',
                   padding: '7px 10px',
-                  color: '#10B981',
+                  color: '#047857',
                   fontSize: '11.5px',
                   fontWeight: 800,
                   marginTop: '4px'
@@ -437,7 +437,7 @@ export default function SanjivaniTransferModal({
               <div style={{ width: '100%', height: '4px', background: '#102A50', borderRadius: '2px', overflow: 'hidden' }}>
                 <div style={{
                   height: '100%',
-                  background: transmissionStep === 3 ? '#10B981' : '#38BDF8',
+                  background: transmissionStep === 3 ? '#047857' : '#38BDF8',
                   width: transmissionStep === 1 ? '35%' : transmissionStep === 2 ? '75%' : '100%',
                   transition: 'width 0.6s ease'
                 }} />
@@ -498,7 +498,7 @@ export default function SanjivaniTransferModal({
             onClick={handleTransmitHandshake}
             disabled={isTransmitting}
             style={{
-              background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+              background: 'linear-gradient(135deg, #B91C1C 0%, #DC2626 100%)',
               border: 'none',
               color: '#FFFFFF',
               padding: '10px 20px',

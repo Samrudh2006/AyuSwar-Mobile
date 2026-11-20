@@ -74,7 +74,7 @@ export function evaluatePharmacovigilanceSafety({
       return {
         severity: 'MODERATE_RISK',
         badge: 'Renal Dose Modification',
-        color: '#D97706',
+        color: '#B45309',
         bgColor: '#FFFBEB',
         borderColor: '#FCD34D',
         title: 'eGFR 30–44 mL/min Renal Adjustment',
@@ -103,7 +103,7 @@ export function evaluatePharmacovigilanceSafety({
     return {
       severity: 'MONITORING',
       badge: 'Myopathy & Interaction Guard',
-      color: '#0D9488',
+      color: '#0F766E',
       bgColor: '#F0FDFA',
       borderColor: '#99F6E4',
       title: 'Statin Myopathy & Hepatic Sentinel',
@@ -116,7 +116,7 @@ export function evaluatePharmacovigilanceSafety({
   return {
     severity: 'CLEARED',
     badge: 'Formulary Cleared',
-    color: '#16A34A',
+    color: '#15803D',
     bgColor: '#F0FDF4',
     borderColor: '#BBF7D0',
     title: 'Cleared by Beers Criteria & KDIGO Renal Matrix',

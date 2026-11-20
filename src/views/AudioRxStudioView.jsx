@@ -380,9 +380,9 @@ export default function AudioRxStudioView() {
 
       // Dynamic 60 FPS Dual Gradient Waveform (Green to Fiery Amber)
       const gradient = ctx.createLinearGradient(0, 0, width, 0);
-      gradient.addColorStop(0, '#10B981');   // Vibrant Emerald Green
+      gradient.addColorStop(0, '#047857');   // Vibrant Emerald Green
       gradient.addColorStop(0.5, '#F59E0B'); // Warm Amber Orange
-      gradient.addColorStop(1, '#EF4444');   // High Energy Coral Red
+      gradient.addColorStop(1, '#B91C1C');   // High Energy Coral Red
 
       ctx.lineWidth = 2.5;
       ctx.strokeStyle = gradient;
@@ -646,14 +646,14 @@ Text only. No audio attachment. Not automatically sent.`;
           <span>Home</span>
         </Link>
         <span style={{ color: '#94A3B8' }}>/</span>
-        <span style={{ color: '#698892', fontSize: '13px' }}>Solutions</span>
+        <span style={{ color: '#52707C', fontSize: '13px' }}>Solutions</span>
         <span style={{ color: '#94A3B8' }}>/</span>
         <span style={{ color: '#081C24', fontSize: '13px', fontWeight: 700 }}>Vernacular Audio-Rx Studio</span>
       </div>
 
       {/* Header */}
       <div style={{ marginBottom: '32px' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#059669', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800, marginBottom: '12px' }}>
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'rgba(16, 185, 129, 0.1)', color: '#047857', padding: '6px 12px', borderRadius: '20px', fontSize: '12px', fontWeight: 800, marginBottom: '12px' }}>
           <Volume2 size={14} />
           <span>PATIENT ADHERENCE & LIVE AUDIO-RX</span>
         </div>
@@ -713,7 +713,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 color: '#94A3B8',
                 pointerEvents: 'none'
               }}>
-                <span style={{ color: '#10B981', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ color: '#047857', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Activity size={12} /> Live microphone amplitude
                 </span>
                 <span>
@@ -737,7 +737,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   flexDirection: 'column',
                   gap: '6px'
                 }}>
-                  <Mic size={24} color="#10B981" />
+                  <Mic size={24} color="#047857" />
                   <span>Click 'Record Doctor Voice' to capture live waveform</span>
                 </div>
               )}
@@ -835,7 +835,7 @@ Text only. No audio attachment. Not automatically sent.`;
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                    <Activity size={16} color={acousticResult.wheezeIndex > 40 ? '#D97706' : '#16A34A'} />
+                    <Activity size={16} color={acousticResult.wheezeIndex > 40 ? '#B45309' : '#15803D'} />
                     <span style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>
                       {acousticResult.title}
                     </span>
@@ -872,7 +872,7 @@ Text only. No audio attachment. Not automatically sent.`;
             {/* Recorded Audio Audio Element */}
             {liveRecordedAudioUrl && (
               <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                <div style={{ fontSize: '11px', fontWeight: 700, color: '#059669', marginBottom: '6px' }}>
+                <div style={{ fontSize: '11px', fontWeight: 700, color: '#047857', marginBottom: '6px' }}>
  ✓ Live Voice Note Recorded Ready for WhatsApp Dispatch:
                 </div>
                 <audio src={liveRecordedAudioUrl} controls style={{ width: '100%', height: '36px' }} />
@@ -903,13 +903,13 @@ Text only. No audio attachment. Not automatically sent.`;
                     cursor: isGeneratingGroqScript ? 'wait' : 'pointer'
                   }}
                 >
-                  <Volume2 size={12} color="#D97706" />
+                  <Volume2 size={12} color="#B45309" />
  <span>{isGeneratingGroqScript ? 'Generating...': 'Groq Voicemaker AI'}</span>
                 </button>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
- <span style={{ fontSize: '11px', fontWeight: 800, color: '#698892'}}> Gnani Voice:</span>
+ <span style={{ fontSize: '11px', fontWeight: 800, color: '#52707C'}}> Gnani Voice:</span>
                   <select
                     id="gnani-voice-select"
                     aria-label="Select Gnani Timbre Neural Voice Profile"
@@ -992,7 +992,7 @@ Text only. No audio attachment. Not automatically sent.`;
                       style={{
                         display: 'inline-block',
                         marginRight: '6px',
-                        color: isCurrent ? '#34D399' : idx < karaokeActiveIndex ? '#FFFFFF' : '#698892',
+                        color: isCurrent ? '#34D399' : idx < karaokeActiveIndex ? '#FFFFFF' : '#52707C',
                         fontWeight: isCurrent ? 850 : 600,
                         transform: isCurrent ? 'scale(1.08)' : 'scale(1)',
                         transition: 'all 140ms ease',
@@ -1075,7 +1075,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 padding: '8px 12px',
                 borderRadius: '8px',
                 background: '#ECFDF5',
-                border: '1px solid #10B981',
+                border: '1px solid #047857',
                 color: '#065F46',
                 fontSize: '12px',
                 fontWeight: 700,
@@ -1120,7 +1120,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>
                     Pantoprazole 40mg (పసుపు గోళీ / Yellow Pill)
                   </div>
-                  <div style={{ fontSize: '12px', color: '#698892' }}>
+                  <div style={{ fontSize: '12px', color: '#52707C' }}>
                     Morning: 08:30 AM (Before Breakfast • 30 mins empty stomach)
                   </div>
                 </div>
@@ -1147,7 +1147,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>
                     Metformin 500mg SR (గులాబీ గోళీ / Pink Pill)
                   </div>
-                  <div style={{ fontSize: '12px', color: '#698892' }}>
+                  <div style={{ fontSize: '12px', color: '#52707C' }}>
                     Night: 08:30 PM (After Dinner • Regular with water)
                   </div>
                 </div>
@@ -1158,20 +1158,20 @@ Text only. No audio attachment. Not automatically sent.`;
           {/* Feature 1: Teach-Back Patient Adherence Quiz Card */}
           <div style={{
             background: teachBackVerified ? '#ECFDF5' : '#FFFBEB',
-            border: `1.5px solid ${teachBackVerified ? '#10B981' : '#F59E0B'}`,
+            border: `1.5px solid ${teachBackVerified ? '#047857' : '#F59E0B'}`,
             borderRadius: '16px',
             padding: '20px',
             transition: 'all 200ms ease'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Award size={18} color={teachBackVerified ? '#059669' : '#D97706'} />
+                <Award size={18} color={teachBackVerified ? '#047857' : '#B45309'} />
                 <span style={{ fontSize: '13.5px', fontWeight: 800, color: teachBackVerified ? '#065F46' : '#92400E' }}>
                   Teach-Back Patient Adherence Quiz
                 </span>
               </div>
               <span style={{
-                background: teachBackVerified ? '#059669' : '#D97706',
+                background: teachBackVerified ? '#047857' : '#B45309',
                 color: '#FFFFFF',
                 fontSize: '11px',
                 fontWeight: 800,
@@ -1199,7 +1199,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   padding: '10px',
                   borderRadius: '10px',
                   border: 'none',
-                  background: '#D97706',
+                  background: '#B45309',
                   color: '#FFFFFF',
                   fontSize: '12.5px',
                   fontWeight: 800,
@@ -1238,7 +1238,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         flex: 1,
                         padding: '8px',
                         borderRadius: '8px',
-                        border: teachBackAnswers.q1 === 0 ? '2px solid #10B981' : '1px solid #D0DFE2',
+                        border: teachBackAnswers.q1 === 0 ? '2px solid #047857' : '1px solid #D0DFE2',
                         background: teachBackAnswers.q1 === 0 ? '#DCFCE7' : '#F8FAFC',
                         color: teachBackAnswers.q1 === 0 ? '#166534' : '#2C4A52',
                         fontSize: '11px',
@@ -1254,7 +1254,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         flex: 1,
                         padding: '8px',
                         borderRadius: '8px',
-                        border: teachBackAnswers.q1 === 1 ? '2px solid #EF4444' : '1px solid #D0DFE2',
+                        border: teachBackAnswers.q1 === 1 ? '2px solid #B91C1C' : '1px solid #D0DFE2',
                         background: teachBackAnswers.q1 === 1 ? '#FEE2E2' : '#F8FAFC',
                         color: teachBackAnswers.q1 === 1 ? '#991B1B' : '#2C4A52',
                         fontSize: '11px',
@@ -1279,7 +1279,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         flex: 1,
                         padding: '8px',
                         borderRadius: '8px',
-                        border: teachBackAnswers.q2 === 0 ? '2px solid #10B981' : '1px solid #D0DFE2',
+                        border: teachBackAnswers.q2 === 0 ? '2px solid #047857' : '1px solid #D0DFE2',
                         background: teachBackAnswers.q2 === 0 ? '#DCFCE7' : '#F8FAFC',
                         color: teachBackAnswers.q2 === 0 ? '#166534' : '#2C4A52',
                         fontSize: '11px',
@@ -1295,7 +1295,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         flex: 1,
                         padding: '8px',
                         borderRadius: '8px',
-                        border: teachBackAnswers.q2 === 1 ? '2px solid #EF4444' : '1px solid #D0DFE2',
+                        border: teachBackAnswers.q2 === 1 ? '2px solid #B91C1C' : '1px solid #D0DFE2',
                         background: teachBackAnswers.q2 === 1 ? '#FEE2E2' : '#F8FAFC',
                         color: teachBackAnswers.q2 === 1 ? '#991B1B' : '#2C4A52',
                         fontSize: '11px',
@@ -1321,7 +1321,7 @@ Text only. No audio attachment. Not automatically sent.`;
                     alignItems: 'center',
                     gap: '6px'
                   }}>
-                    <CheckCircle2 size={16} color="#16A34A" />
+                    <CheckCircle2 size={16} color="#15803D" />
                     <span>Both sample timing answers matched. This does not verify real patient understanding or adherence.</span>
                   </div>
                 )}
@@ -1333,7 +1333,7 @@ Text only. No audio attachment. Not automatically sent.`;
           <div style={{ background: '#F0FDF4', border: '1.5px solid #86EFAC', borderRadius: '16px', padding: '20px 18px', boxSizing: 'border-box', overflow: 'hidden', width: '100%', maxWidth: '100%' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px', flexWrap: 'wrap', gap: '8px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534', fontWeight: 800, fontSize: '15px' }}>
-                <MessageSquare size={18} color="#16A34A" />
+                <MessageSquare size={18} color="#15803D" />
                 <span>Share practice text</span>
               </div>
               <span style={{ background: '#DCFCE7', color: '#15803D', fontSize: '10.5px', fontWeight: 700, padding: '3px 8px', borderRadius: '12px' }}>
@@ -1356,7 +1356,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   padding: '11px 16px',
                   borderRadius: '10px',
                   border: 'none',
-                  background: '#16A34A',
+                  background: '#15803D',
                   color: '#FFFFFF',
                   fontSize: '13.5px',
                   fontWeight: 800,
@@ -1401,7 +1401,7 @@ Text only. No audio attachment. Not automatically sent.`;
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  {copiedToast ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
+                  {copiedToast ? <Check size={14} color="#15803D" /> : <Copy size={14} />}
                   <span>{copiedToast ? 'Copied to Clipboard!' : 'Copy Formatted Text'}</span>
                 </button>
 
@@ -1462,7 +1462,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 Source text only
               </span>
             </div>
-            <p style={{ fontSize: '12.5px', color: '#698892', margin: '4px 0 0 0' }}>
+            <p style={{ fontSize: '12.5px', color: '#52707C', margin: '4px 0 0 0' }}>
               Export the exact reviewed practice text. For consultation-derived SOAP, record and review an encounter in OPD Scribe.
             </p>
           </div>
@@ -1484,7 +1484,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 gap: '6px'
               }}
             >
-              {soapCopiedToast ? <Check size={14} color="#16A34A" /> : <Copy size={14} />}
+              {soapCopiedToast ? <Check size={14} color="#15803D" /> : <Copy size={14} />}
               <span>{soapCopiedToast ? 'Copied SOAP Note!' : 'Copy practice note'}</span>
             </button>
 

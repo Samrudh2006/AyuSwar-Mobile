@@ -134,7 +134,7 @@ export default function AyuSwarLogoReveal({
           <div className="ayuswar-subtitle" style={{
             fontSize: '0.68rem',
             fontWeight: 700,
-            color: '#698892',
+            color: '#52707C',
             textTransform: 'uppercase',
             letterSpacing: '0.8px',
             marginTop: '2px',

@@ -47,9 +47,9 @@ export default function EvonStatusChip({ compact = false, showDetails = false })
   const isUnconfigured = statusData.status === 'UNCONFIGURED' || (!statusData.available && !isUnavailable && !isLive);
 
   const badge = isLive
-    ? { label: 'LIVE (200 OK)', bg: '#10B981', color: '#FFFFFF', dot: '#10B981', text: '● EVON 30B: LIVE' }
+    ? { label: 'LIVE (200 OK)', bg: '#047857', color: '#FFFFFF', dot: '#047857', text: '● EVON 30B: LIVE' }
     : isUnavailable
-      ? { label: 'UNAVAILABLE (UPSTREAM ERROR)', bg: '#EF4444', color: '#FFFFFF', dot: '#EF4444', text: '▲ EVON 30B: UNAVAILABLE' }
+      ? { label: 'UNAVAILABLE (UPSTREAM ERROR)', bg: '#B91C1C', color: '#FFFFFF', dot: '#B91C1C', text: '▲ EVON 30B: UNAVAILABLE' }
       : { label: 'UNCONFIGURED (FALLBACK ACTIVE)', bg: '#486770', color: '#F1F5F9', dot: '#94A3B8', text: '○ EVON 30B: UNCONFIGURED (SAFE FALLBACK)' };
 
   const formatLastSuccess = (isoStr) => {
@@ -82,7 +82,7 @@ export default function EvonStatusChip({ compact = false, showDetails = false })
           cursor: 'pointer',
           fontSize: '11px',
           fontWeight: 700,
-          color: isLive ? '#10B981' : isUnavailable ? '#EF4444' : '#698892'
+          color: isLive ? '#047857' : isUnavailable ? '#B91C1C' : '#52707C'
         }}
       >
         <span style={{
@@ -103,7 +103,7 @@ export default function EvonStatusChip({ compact = false, showDetails = false })
     <div style={{
       background: isLive ? 'rgba(6, 78, 59, 0.35)' : isUnavailable ? 'rgba(69, 10, 10, 0.4)' : 'rgba(15, 23, 42, 0.65)',
       borderRadius: '10px',
-      border: `1px solid ${isLive ? '#059669' : isUnavailable ? '#991B1B' : '#2C4A52'}`,
+      border: `1px solid ${isLive ? '#047857' : isUnavailable ? '#991B1B' : '#2C4A52'}`,
       padding: '10px 14px',
       display: 'flex',
       flexDirection: 'column',
@@ -116,7 +116,7 @@ export default function EvonStatusChip({ compact = false, showDetails = false })
             width: '24px',
             height: '24px',
             borderRadius: '6px',
-            background: isLive ? '#059669' : isUnavailable ? '#991B1B' : '#2C4A52',
+            background: isLive ? '#047857' : isUnavailable ? '#991B1B' : '#2C4A52',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -182,7 +182,7 @@ export default function EvonStatusChip({ compact = false, showDetails = false })
         }}>
           {isLive ? (
             <>
- <div> Latency: <strong style={{ color: '#10B981'}}>{statusData.latencyMs} ms</strong></div>
+ <div> Latency: <strong style={{ color: '#047857'}}>{statusData.latencyMs} ms</strong></div>
  <div> Last Success: <strong>{formatLastSuccess(statusData.lastSuccessTime)}</strong></div>
  <div> Route: <code>/api/evon/chat</code></div>
             </>

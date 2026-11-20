@@ -14,7 +14,7 @@ export default function PipelineTerminal() {
 
   const PIPELINE_LOGS = [
     { type: 'init', tag: '[INIT]', text: 'W3C AudioContext initialized (sampleRate: 16000Hz, channels: 1 PCM)', color: '#38BDF8' },
-    { type: 'audio', tag: '[AUDIO-DSP]', text: 'Local FFT buffer active • Acoustic F0 & formants extraction started', color: '#10B981' },
+    { type: 'audio', tag: '[AUDIO-DSP]', text: 'Local FFT buffer active • Acoustic F0 & formants extraction started', color: '#047857' },
     { type: 'speech', tag: '[WEB-SPEECH]', text: 'Voice event captured • Locale: te-IN (Rayalaseema colloquial stream)', color: '#F59E0B' },
     { type: 'nlp', tag: '[INDIC-TOKENIZER]', text: 'Raw utterance: "రెండు రోజుల నుంచి పీకల్లో పిల్లికూతలు వస్తున్నాయి"', color: '#D0DFE2' },
  { type: 'nlp', tag: '[ONTOLOGY-MAP]', text: 'Idiom resolved: "పీకల్లో పిల్లికూతలు" ➔ Wheezing / Bronchospasm (ICD-10 R06.2)', color: '#38BDF8'},
@@ -22,7 +22,7 @@ export default function PipelineTerminal() {
  { type: 'ocr', tag: '[OPTICAL-SCAN]', text: 'Camera frame buffered ➔ Tesseract.js WASM matching active salt: Pantoprazole 40mg', color: '#A78BFA'},
     { type: 'fhir', tag: '[FHIR-DRAFT]', text: 'Generating local HL7 FHIR-shaped research draft (Encounter, Observation, MedicationRequest)', color: '#34D399' },
     { type: 'voice', tag: '[DISPATCH]', text: 'Synthesizing vernacular Telugu Audio-Rx dosage instructions (Web Speech TTS)', color: '#38BDF8' },
-    { type: 'done', tag: '[COMPLETED]', text: 'Encounter draft assembled • Awaiting clinician review and local demo acknowledgement', color: '#10B981' }
+    { type: 'done', tag: '[COMPLETED]', text: 'Encounter draft assembled • Awaiting clinician review and local demo acknowledgement', color: '#047857' }
   ];
 
   useEffect(() => {
@@ -76,9 +76,9 @@ export default function PipelineTerminal() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           {/* Mac-style Window Controls */}
           <div style={{ display: 'flex', gap: '6px' }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#EF4444', display: 'inline-block' }} />
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#B91C1C', display: 'inline-block' }} />
             <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#F59E0B', display: 'inline-block' }} />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10B981', display: 'inline-block' }} />
+            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#047857', display: 'inline-block' }} />
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginLeft: '10px' }}>
             <Terminal size={14} color="#D4AF37" />
@@ -166,7 +166,7 @@ export default function PipelineTerminal() {
 
         {/* Blinking Terminal Cursor */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '6px' }}>
- <span style={{ color: '#10B981', fontWeight: 800 }}>❯</span>
+ <span style={{ color: '#047857', fontWeight: 800 }}>❯</span>
           <span style={{
             display: 'inline-block',
             width: '8px',
@@ -186,10 +186,10 @@ export default function PipelineTerminal() {
         alignItems: 'center',
         justifyContent: 'space-between',
         fontSize: '11.5px',
-        color: '#698892'
+        color: '#52707C'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Shield size={13} color="#10B981" />
+          <Shield size={13} color="#047857" />
           <span>Execution Context: In-Browser Client Sandbox (Zero Server Secrets)</span>
         </div>
         <span>Target: W3C AudioContext & HL7 FHIR R4</span>

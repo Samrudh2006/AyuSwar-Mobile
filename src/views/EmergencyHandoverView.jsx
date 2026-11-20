@@ -56,7 +56,7 @@ export default function EmergencyHandoverView() {
 
       {/* Simulation Watermark Banner */}
       <div style={{ background: '#FFFBEB', border: '1.5px solid #FCD34D', borderRadius: '12px', padding: '14px 18px', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <ShieldAlert size={18} color="#D97706" />
+        <ShieldAlert size={18} color="#B45309" />
         <span style={{ fontSize: '12.5px', color: '#92400E', fontWeight: 750 }}>
           PROTOTYPE SPECIMEN: This document is a software simulation artifact. Not an official legal hospital record.
         </span>
@@ -90,7 +90,7 @@ export default function EmergencyHandoverView() {
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#DC2626', background: '#FEE2E2', padding: '3px 8px', borderRadius: '6px', display: 'inline-block' }}>
               TRIAGE RED: CATEGORY 1
             </div>
-            <div style={{ fontSize: '11px', color: '#698892', marginTop: '4px' }}>
+            <div style={{ fontSize: '11px', color: '#52707C', marginTop: '4px' }}>
               Handover ID: SIM-HO-849201
             </div>
           </div>
@@ -99,19 +99,19 @@ export default function EmergencyHandoverView() {
         {/* Section 1: Demographics & Transit */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 220px), 1fr))', gap: '16px', marginBottom: '24px', fontSize: '13px' }}>
           <div>
-            <span style={{ color: '#698892' }}>Patient Name: </span>
+            <span style={{ color: '#52707C' }}>Patient Name: </span>
             <strong style={{ color: '#081C24' }}>Narayana Rao (Sample Patient)</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Age / Gender: </span>
+            <span style={{ color: '#52707C' }}>Age / Gender: </span>
             <strong style={{ color: '#081C24' }}>58 Years / Male</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Transit Unit: </span>
+            <span style={{ color: '#52707C' }}>Transit Unit: </span>
             <strong style={{ color: '#081C24' }}>ALS-108-AP-9942 (Senior EMT Unit)</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Incident Location: </span>
+            <span style={{ color: '#52707C' }}>Incident Location: </span>
             <strong style={{ color: '#081C24' }}>Kurnool Old City, Andhra Pradesh</strong>
           </div>
         </div>
@@ -123,19 +123,19 @@ export default function EmergencyHandoverView() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 130px), 1fr))', gap: '10px', textAlign: 'center' }}>
             <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Blood Pressure</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Blood Pressure</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#DC2626' }}>90/60 mmHg</div>
             </div>
             <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Heart Rate</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Heart Rate</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#081C24' }}>118 bpm</div>
             </div>
             <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Oxygen (SpO2)</div>
-              <div style={{ fontSize: '15px', fontWeight: 850, color: '#D97706' }}>91% on room air</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Oxygen (SpO2)</div>
+              <div style={{ fontSize: '15px', fontWeight: 850, color: '#B45309' }}>91% on room air</div>
             </div>
             <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892' }}>GCS Scale</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>GCS Scale</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#081C24' }}>14/15</div>
             </div>
           </div>
@@ -162,9 +162,9 @@ export default function EmergencyHandoverView() {
         {/* Section 4: Receiving Hospital & Signatures */}
         <div style={{ borderTop: '1px solid #D0DFE2', paddingTop: '18px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
           <div>
-            <div style={{ fontSize: '12px', color: '#698892' }}>Receiving Facility:</div>
+            <div style={{ fontSize: '12px', color: '#52707C' }}>Receiving Facility:</div>
             <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>Demo General Hospital - Trauma Center (Simulation)</div>
-            <div style={{ fontSize: '12px', color: '#698892' }}>Destination Bay: Red Bay #02</div>
+            <div style={{ fontSize: '12px', color: '#52707C' }}>Destination Bay: Red Bay #02</div>
           </div>
           <div style={{ textAlign: 'left' }}>
             <div style={{ borderBottom: '1px solid #0A2540', width: '180px', marginBottom: '4px' }} />

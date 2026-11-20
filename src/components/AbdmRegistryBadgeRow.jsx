@@ -88,15 +88,15 @@ export default function AbdmRegistryBadgeRow({
           boxShadow: '0 1px 2px rgba(16, 185, 129, 0.05)'
         }}
       >
-        <ShieldCheck size={compact ? 11 : 12} color="#10B981" />
+        <ShieldCheck size={compact ? 11 : 12} color="#047857" />
         <span>{t('abdm.badge.sampleId')}</span>
         <strong style={{ color: '#047857' }}>{cleanAbha}</strong>
         {!compact && cleanAddress && (
-          <span style={{ color: '#059669', opacity: 0.85, fontSize: '10px' }}>
+          <span style={{ color: '#047857', opacity: 0.85, fontSize: '10px' }}>
             ({cleanAddress})
           </span>
         )}
-        {copiedKey === 'abha' ? <Check size={11} color="#059669" /> : <Copy size={9} opacity={0.5} />}
+        {copiedKey === 'abha' ? <Check size={11} color="#047857" /> : <Copy size={9} opacity={0.5} />}
       </div>
 
       {/* 2. Demo clinician ID */}
@@ -129,7 +129,7 @@ export default function AbdmRegistryBadgeRow({
           boxShadow: '0 1px 2px rgba(217, 119, 6, 0.05)'
         }}
       >
-        <Building2 size={compact ? 11 : 12} color="#D97706" />
+        <Building2 size={compact ? 11 : 12} color="#B45309" />
         <span>{t('abdm.badge.demoFacility')}</span>
         <strong style={{ color: '#78350F' }}>{hfrId}</strong>
         {copiedKey === 'hfr' ? <Check size={11} color="#92400E" /> : <Copy size={9} opacity={0.5} />}
@@ -148,7 +148,7 @@ export default function AbdmRegistryBadgeRow({
             boxShadow: '0 1px 2px rgba(30, 64, 175, 0.05)'
           }}
         >
-          <Tag size={compact ? 11 : 12} color="#2563EB" />
+          <Tag size={compact ? 11 : 12} color="#1D4ED8" />
           <span>{t('abdm.badge.draftCode')}</span>
           <strong style={{ color: '#1D4ED8' }}>{icd10}</strong>
           {copiedKey === 'icd10' ? <Check size={11} color="#1D4ED8" /> : <Copy size={9} opacity={0.5} />}

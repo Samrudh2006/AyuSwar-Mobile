@@ -150,7 +150,7 @@ export default function PatientAnalyticsCard() {
             >
               Patient Analytics
             </h3>
-            <p style={{ fontSize: '12.5px', color: '#698892', margin: '3px 0 0 0' }}>
+            <p style={{ fontSize: '12.5px', color: '#52707C', margin: '3px 0 0 0' }}>
               Track patient inflow and follow-ups trends over time
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function PatientAnalyticsCard() {
                   borderRadius: '9999px',
                   border: 'none',
                   background: isActive ? '#CCFBF1' : 'transparent',
-                  color: isActive ? '#0F766E' : '#698892',
+                  color: isActive ? '#0F766E' : '#52707C',
                   fontSize: '12px',
                   fontWeight: isActive ? 800 : 600,
                   cursor: 'pointer',
@@ -210,7 +210,7 @@ export default function PatientAnalyticsCard() {
           <span>New Patients</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#2563EB' }}></span>
+          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#1D4ED8' }}></span>
           <span>Follow-ups</span>
         </div>
       </div>
@@ -231,8 +231,8 @@ export default function PatientAnalyticsCard() {
 
             {/* Follow-ups Blue Area Gradient */}
             <linearGradient id="followUpsAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#2563EB" stopOpacity="0.16" />
-              <stop offset="100%" stopColor="#2563EB" stopOpacity="0.01" />
+              <stop offset="0%" stopColor="#1D4ED8" stopOpacity="0.16" />
+              <stop offset="100%" stopColor="#1D4ED8" stopOpacity="0.01" />
             </linearGradient>
           </defs>
 
@@ -268,7 +268,7 @@ export default function PatientAnalyticsCard() {
 
           {/* Smooth Curves */}
           <path d={pathNew} fill="none" stroke="#0F766E" strokeWidth="2.8" strokeLinecap="round" />
-          <path d={pathFollow} fill="none" stroke="#2563EB" strokeWidth="2.8" strokeLinecap="round" />
+          <path d={pathFollow} fill="none" stroke="#1D4ED8" strokeWidth="2.8" strokeLinecap="round" />
 
           {/* Regular Data Points (New Patients) */}
           {ptsNew.map((pt, i) => (
@@ -290,8 +290,8 @@ export default function PatientAnalyticsCard() {
               cx={pt.x}
               cy={pt.y}
               r={i === hlIdx ? 6 : 4}
-              fill={i === hlIdx ? '#FFFFFF' : '#2563EB'}
-              stroke="#2563EB"
+              fill={i === hlIdx ? '#FFFFFF' : '#1D4ED8'}
+              stroke="#1D4ED8"
               strokeWidth={i === hlIdx ? 3 : 1.5}
             />
           ))}
@@ -305,7 +305,7 @@ export default function PatientAnalyticsCard() {
                 width="90"
                 height="24"
                 rx="12"
-                fill="#2563EB"
+                fill="#1D4ED8"
               />
               <text
                 x={hlFollow.x}
@@ -351,7 +351,7 @@ export default function PatientAnalyticsCard() {
               x={getX(i, current.dates.length)}
               y="230"
               fontSize="11.5"
-              fill="#698892"
+              fill="#52707C"
               fontWeight="650"
               textAnchor="middle"
             >
@@ -383,7 +383,7 @@ export default function PatientAnalyticsCard() {
               height: '38px',
               borderRadius: '10px',
               background: '#DCFCE7',
-              color: '#059669',
+              color: '#047857',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -405,7 +405,7 @@ export default function PatientAnalyticsCard() {
         {/* Aggregate Stats */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '28px', flexWrap: 'wrap' }}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#698892', fontWeight: 700 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#52707C', fontWeight: 700 }}>
               <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#0F766E' }}></span>
               <span>New Patients</span>
             </div>
@@ -413,22 +413,22 @@ export default function PatientAnalyticsCard() {
               <span style={{ fontSize: '20px', fontWeight: 900, color: '#081C24' }}>
                 {current.totalNew}
               </span>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#059669', display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#047857', display: 'flex', alignItems: 'center' }}>
                 <ArrowUpRight size={12} /> {current.newGrowth} <span style={{ color: '#94A3B8', fontWeight: 500, marginLeft: 2 }}>vs. last week</span>
               </span>
             </div>
           </div>
 
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#698892', fontWeight: 700 }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#2563EB' }}></span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11px', color: '#52707C', fontWeight: 700 }}>
+              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#1D4ED8' }}></span>
               <span>Follow-ups</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', marginTop: '2px' }}>
               <span style={{ fontSize: '20px', fontWeight: 900, color: '#081C24' }}>
                 {current.totalFollowUps}
               </span>
-              <span style={{ fontSize: '11px', fontWeight: 800, color: '#059669', display: 'flex', alignItems: 'center' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, color: '#047857', display: 'flex', alignItems: 'center' }}>
                 <ArrowUpRight size={12} /> {current.followUpGrowth} <span style={{ color: '#94A3B8', fontWeight: 500, marginLeft: 2 }}>vs. last week</span>
               </span>
             </div>

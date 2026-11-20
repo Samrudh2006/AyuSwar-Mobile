@@ -46,7 +46,7 @@ export default function NotFoundView() {
           Clinical Route Not Found
         </h1>
 
-        <p style={{ fontSize: '14.5px', color: '#698892', lineHeight: 1.6, maxWidth: '480px', margin: '0 auto 30px auto' }}>
+        <p style={{ fontSize: '14.5px', color: '#52707C', lineHeight: 1.6, maxWidth: '480px', margin: '0 auto 30px auto' }}>
           The clinical page, diagnostic specimen, or endpoint you requested does not exist or has been relocated to another FHIR registry block.
         </p>
 
@@ -75,7 +75,7 @@ export default function NotFoundView() {
             <Activity size={20} color="#0F4C5C" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>Acoustic Lab</div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Real-time voice DSP</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Real-time voice DSP</div>
             </div>
           </Link>
 
@@ -93,10 +93,10 @@ export default function NotFoundView() {
               transition: 'all 0.15s ease'
             }}
           >
-            <FileText size={20} color="#059669" />
+            <FileText size={20} color="#047857" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>Jan Aushadhi Rx</div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>data.gov.in formulary</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>data.gov.in formulary</div>
             </div>
           </Link>
 
@@ -114,10 +114,10 @@ export default function NotFoundView() {
               transition: 'all 0.15s ease'
             }}
           >
-            <Cpu size={20} color="#2563EB" />
+            <Cpu size={20} color="#1D4ED8" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>Deep-Tech Specs</div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Architecture & models</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Architecture & models</div>
             </div>
           </Link>
 
@@ -135,10 +135,10 @@ export default function NotFoundView() {
               transition: 'all 0.15s ease'
             }}
           >
-            <Search size={20} color="#D97706" />
+            <Search size={20} color="#B45309" />
             <div>
               <div style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>Blister OCR</div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>Scan strip medications</div>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>Scan strip medications</div>
             </div>
           </Link>
         </div>

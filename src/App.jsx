@@ -554,7 +554,7 @@ export default function App() {
               width: 44,
               height: 44,
               border: '3px solid rgba(239, 68, 68, 0.25)',
-              borderTopColor: '#EF4444',
+              borderTopColor: '#B91C1C',
               borderRadius: '50%',
               animation: 'ayuswar-spin 0.7s linear infinite'
             }} />

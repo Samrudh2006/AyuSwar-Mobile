@@ -295,7 +295,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               Sample formulary reference
             </span>
           </div>
-          <p style={{ fontSize: '13.5px', color: '#698892', margin: 0 }}>
+          <p style={{ fontSize: '13.5px', color: '#52707C', margin: 0 }}>
             Demo generic substitution using bundled sample prices. No live formulary, government verification, or guaranteed patient saving is claimed.
           </p>
         </div>
@@ -307,7 +307,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               padding: '10px 16px',
               borderRadius: '10px',
               border: '1px solid #38BDF8',
-              background: isSpeaking ? '#EF4444' : '#F0F9FF',
+              background: isSpeaking ? '#B91C1C' : '#F0F9FF',
               color: isSpeaking ? '#FFFFFF' : '#0369A1',
               fontSize: '13px',
               fontWeight: 750,
@@ -392,7 +392,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
           style={{
             padding: '12px 18px',
             borderRadius: '12px',
-            border: '1px solid #059669',
+            border: '1px solid #047857',
             background: '#FFFFFF',
             color: '#065F46',
             fontSize: '13px',
@@ -451,7 +451,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                 transform: 'translateY(-50%)',
                 background: 'none',
                 border: 'none',
-                color: '#698892',
+                color: '#52707C',
                 cursor: 'pointer',
                 fontWeight: 700
               }}
@@ -491,14 +491,14 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                   <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#081C24' }}>
                     {drug.genericName}
                   </div>
-                  <div style={{ fontSize: '11.5px', color: '#698892', marginTop: '2px' }}>
+                  <div style={{ fontSize: '11.5px', color: '#52707C', marginTop: '2px' }}>
                     Popular Brand: <strong>{drug.popularBrand}</strong> • Category: {drug.category} • Code: {drug.kendraCode}
                   </div>
                 </div>
 
                 <div style={{ textAlign: 'right', display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <div>
-                    <div style={{ fontSize: '10.5px', color: '#698892' }}>Bundled sample reference; not live-checked</div>
+                    <div style={{ fontSize: '10.5px', color: '#52707C' }}>Bundled sample reference; not live-checked</div>
                   </div>
 
                   <button
@@ -606,13 +606,13 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
             <div style={{ fontSize: '13px', color: '#0F4C5C', fontWeight: 750 }}>
               {patient.doctorSpecialty}
             </div>
-            <div style={{ fontSize: '11.5px', color: '#698892', marginTop: '2px' }}>
+            <div style={{ fontSize: '11.5px', color: '#52707C', marginTop: '2px' }}>
               Demo clinician ID: {patient.regNumber} • {patient.facilityName}
             </div>
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontSize: '12px', fontWeight: 800, color: '#081C24' }}>Date: {patient.date}</div>
-            <div style={{ fontSize: '11px', color: '#698892', marginTop: '4px' }}>Local sample JSON #RX-2026-PMBJP-0941</div>
+            <div style={{ fontSize: '11px', color: '#52707C', marginTop: '4px' }}>Local sample JSON #RX-2026-PMBJP-0941</div>
             <div style={{ fontSize: '10.5px', color: '#15803D', fontWeight: 750, marginTop: '2px' }}>
               Demo • no live formulary verification
             </div>
@@ -631,26 +631,26 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
           fontSize: '13px' 
         }}>
           <div>
-            <span style={{ color: '#698892' }}>Patient Name: </span>
+            <span style={{ color: '#52707C' }}>Patient Name: </span>
             <strong style={{ color: '#081C24' }}>{patient.name} ({patient.vernacularName})</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Age / Gender: </span>
+            <span style={{ color: '#52707C' }}>Age / Gender: </span>
             <strong style={{ color: '#081C24' }}>{patient.age}y / {patient.gender}</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Demo ABHA-style ID: </span>
+            <span style={{ color: '#52707C' }}>Demo ABHA-style ID: </span>
             <strong style={{ color: '#081C24', fontFamily: 'monospace' }}>{patient.abhaId}</strong>
           </div>
           <div>
-            <span style={{ color: '#698892' }}>Recorded Vitals: </span>
+            <span style={{ color: '#52707C' }}>Recorded Vitals: </span>
             <span style={{ color: '#081C24' }}>{patient.vitals}</span>
           </div>
         </div>
 
         {/* Sample clinical assessment */}
         <div style={{ marginBottom: '24px' }}>
-          <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', marginBottom: '4px' }}>
+          <div style={{ fontSize: '11.5px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', marginBottom: '4px' }}>
             Sample Clinical Assessment:
           </div>
           <div style={{ fontSize: '14px', fontWeight: 800, color: '#081C24' }}>
@@ -667,7 +667,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                 Medication Order & Sample Generic Mapping
               </span>
             </div>
-            <span style={{ fontSize: '11.5px', color: '#698892' }}>
+            <span style={{ fontSize: '11.5px', color: '#52707C' }}>
               {medications.length} Prescribed Medications
             </span>
           </div>
@@ -684,7 +684,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                   key={med.id} 
                   style={{ 
                     border: rxPadStyle === 'sketch' 
-                      ? (med.isJanAushadhi ? '2px solid #059669' : '2px dashed #78716C')
+                      ? (med.isJanAushadhi ? '2px solid #047857' : '2px dashed #78716C')
                       : (med.isJanAushadhi ? '1.5px solid #BBF7D0' : '1px solid #D0DFE2'), 
                     borderRadius: rxPadStyle === 'sketch' ? '14px' : '12px', 
                     padding: '16px 18px', 
@@ -722,7 +722,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       {/* Price & Savings Badge */}
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontSize: '10.5px', color: '#698892' }}>
+                        <div style={{ fontSize: '10.5px', color: '#52707C' }}>
                           {drug ? 'Bundled sample reference; not live-checked' : 'No bundled sample price reference'}
                         </div>
                       </div>
@@ -733,7 +733,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                         style={{
                           padding: '6px 12px',
                           borderRadius: '8px',
-                          border: med.isJanAushadhi ? '1px solid #059669' : '1px solid #D0DFE2',
+                          border: med.isJanAushadhi ? '1px solid #047857' : '1px solid #D0DFE2',
                           background: med.isJanAushadhi ? '#ECFDF5' : '#F8FAFC',
                           color: med.isJanAushadhi ? '#065F46' : '#486770',
                           fontSize: '11.5px',
@@ -765,7 +765,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                     <strong>Dosage & Frequency:</strong> {med.dosage} • <strong>Timing:</strong> {med.timing} • <strong>Duration:</strong> {med.duration}
                   </div>
 
-                  <div style={{ fontSize: '11px', color: '#059669', marginTop: '4px' }}>
+                  <div style={{ fontSize: '11px', color: '#047857', marginTop: '4px' }}>
                     Sample ceiling price: <strong>{drug.nlemCeiling}</strong> • Unit Pack: {drug.unit}
                   </div>
                 </div>
@@ -792,10 +792,10 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               showCenterBadge={true}
             />
             <div>
-              <div style={{ fontSize: '11.5px', color: '#059669', fontWeight: 750, marginBottom: '2px' }}>
+              <div style={{ fontSize: '11.5px', color: '#047857', fontWeight: 750, marginBottom: '2px' }}>
                 Sample generic price-comparison slip (demo)
               </div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>
                 Opens a sample slip page for demo purposes.
               </div>
             </div>

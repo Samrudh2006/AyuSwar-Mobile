@@ -267,7 +267,7 @@ textarea:not(.sanjivani-dark-textarea) {
 
 /* Sanjivani Realistic Emergency Vehicle Animations */
 @keyframes ambulance-strobe-red {
-  0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #EF4444) drop-shadow(0 0 3px #F87171); }
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 8px #B91C1C) drop-shadow(0 0 3px #F87171); }
   50% { opacity: 0.15; filter: none; }
 }
 
@@ -1145,7 +1145,7 @@ h6 {
 }
 
 .text-amber-600 {
-  color: #d97706;
+  color: #B45309;
 }
 
 .text-emerald-100 {

@@ -204,7 +204,7 @@ export function calculateMewsScore({ bpSystolic = 120, hr = 76, spo2 = 98, respR
   else if (respRate <= 14 && respRate >= 9) score += 0;
 
   let riskLevel = 'Sample low-score display';
-  let riskColor = '#10B981';
+  let riskColor = '#047857';
   let riskBg = '#DCFCE7';
 
   if (score >= 5) {
@@ -213,7 +213,7 @@ export function calculateMewsScore({ bpSystolic = 120, hr = 76, spo2 = 98, respR
     riskBg = '#FEE2E2';
   } else if (score >= 3) {
     riskLevel = 'Sample middle-score display';
-    riskColor = '#D97706';
+    riskColor = '#B45309';
     riskBg = '#FEF3C7';
   }
 

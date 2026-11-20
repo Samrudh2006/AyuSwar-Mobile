@@ -71,7 +71,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
       speaker: 'patient',
       name: 'Lakshmi Devi',
       role: 'Sample Patient Voice',
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
  avatar: 'Pt',
       teluguText: 'నమస్కారం డాక్టర్ అమ్మ. మూడు రోజుల నుంచి గుండెలో మంటగా ఉంది, ఆయాసంగా ఉంటే రాత్రి నిద్ర పట్టట్లేదు. వేలు లో ఆత్రంగా ఉంది.',
       englishText: 'Namaskaram doctor. For 3 days severe burning in chest and breathlessness so I cannot sleep at night. Restless inside.',
@@ -95,7 +95,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
       speaker: 'patient',
       name: 'Lakshmi Devi',
       role: 'Sample Patient Voice',
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
  avatar: 'Pt',
       teluguText: 'ఈ మందులు ఎప్పుడు వేసుకోవాలి డాక్టర్ అమ్మ? మాకు చదవడం రాదు.',
       englishText: 'When should I take these medicines, doctor? We do not know how to read.',
@@ -170,7 +170,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                   borderRadius: '10px',
                   background: isPlaying ? 'rgba(16, 185, 129, 0.2)' : 'rgba(148, 163, 184, 0.2)',
                   color: isPlaying ? '#34D399' : '#94A3B8',
-                  border: isPlaying ? '1px solid #059669' : '1px solid #486770'
+                  border: isPlaying ? '1px solid #047857' : '1px solid #486770'
                 }}>
                   {isPlaying ? '● PLAYING SAMPLE' : 'PAUSED'}
                 </span>
@@ -232,7 +232,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                 borderRadius: '8px',
                 fontSize: '12px',
                 fontWeight: 700,
-                border: filterMode === 'raw' ? '1.5px solid #EF4444' : '1px solid #486770',
+                border: filterMode === 'raw' ? '1.5px solid #B91C1C' : '1px solid #486770',
                 background: filterMode === 'raw' ? 'rgba(239, 68, 68, 0.2)' : 'transparent',
                 color: filterMode === 'raw' ? '#FCA5A5' : '#94A3B8',
                 cursor: 'pointer',
@@ -312,7 +312,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  background: isPlaying ? '#EF4444' : '#0F4C5C',
+                  background: isPlaying ? '#B91C1C' : '#0F4C5C',
                   color: '#ffffff',
                   border: 'none',
                   padding: '8px 16px',
@@ -348,7 +348,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '11px', color: '#698892', fontWeight: 600 }}>Speed:</span>
+              <span style={{ fontSize: '11px', color: '#52707C', fontWeight: 600 }}>Speed:</span>
               {[1, 1.5].map((speed) => (
                 <button
                   key={speed}
@@ -360,7 +360,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                     fontWeight: 700,
                     border: playbackSpeed === speed ? '1.5px solid #0F4C5C' : '1px solid #D0DFE2',
                     background: playbackSpeed === speed ? 'rgba(0, 0, 0, 0.07)' : '#ffffff',
-                    color: playbackSpeed === speed ? '#0F4C5C' : '#698892',
+                    color: playbackSpeed === speed ? '#0F4C5C' : '#52707C',
                     cursor: 'pointer'
                   }}
                 >
@@ -388,7 +388,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                       ? (isDoctor ? '#F0FDFA' : '#ECFDF5') 
                       : (idx < activeStep ? '#F8FAFC' : '#ffffff'),
                     border: isCurrent
-                      ? (isDoctor ? '2px solid #0F4C5C' : '2px solid #10B981')
+                      ? (isDoctor ? '2px solid #0F4C5C' : '2px solid #047857')
                       : '1.5px solid #D0DFE2',
                     boxShadow: isCurrent 
                       ? (isDoctor ? '0 6px 18px rgba(0, 0, 0, 0.13)' : '0 6px 18px rgba(16,185,129,0.18)')
@@ -403,21 +403,21 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                       <span style={{
                         fontSize: '12px',
                         fontWeight: 800,
-                        color: isDoctor ? '#0F4C5C' : '#059669',
+                        color: isDoctor ? '#0F4C5C' : '#047857',
                         padding: '2px 8px',
                         borderRadius: '6px',
                         background: isDoctor ? 'rgba(0, 0, 0, 0.07)' : 'rgba(16,185,129,0.1)'
                       }}>
                         {item.name}
                       </span>
-                      <span style={{ fontSize: '11px', color: '#698892' }}>{item.role}</span>
+                      <span style={{ fontSize: '11px', color: '#52707C' }}>{item.role}</span>
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {isCurrent && isPlaying && (
                         <div style={{ display: 'flex', gap: '2px', alignItems: 'flex-end', height: '12px' }}>
-                          <span style={{ width: '2px', height: '100%', background: isDoctor ? '#0F4C5C' : '#10B981', borderRadius: '1px' }} className="animate-pulse" />
-                          <span style={{ width: '2px', height: '60%', background: isDoctor ? '#0F4C5C' : '#10B981', borderRadius: '1px' }} className="animate-pulse" />
-                          <span style={{ width: '2px', height: '80%', background: isDoctor ? '#0F4C5C' : '#10B981', borderRadius: '1px' }} className="animate-pulse" />
+                          <span style={{ width: '2px', height: '100%', background: isDoctor ? '#0F4C5C' : '#047857', borderRadius: '1px' }} className="animate-pulse" />
+                          <span style={{ width: '2px', height: '60%', background: isDoctor ? '#0F4C5C' : '#047857', borderRadius: '1px' }} className="animate-pulse" />
+                          <span style={{ width: '2px', height: '80%', background: isDoctor ? '#0F4C5C' : '#047857', borderRadius: '1px' }} className="animate-pulse" />
                         </div>
                       )}
                       <span style={{ fontSize: '10px', color: '#94A3B8', fontWeight: 600 }}>{item.timestamp}</span>
@@ -501,7 +501,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
               border: activeStep >= 1 ? '1.5px solid #0F4C5C' : '1px dashed #D0DFE2',
               transition: 'all 0.3s ease'
             }}>
-              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 1 ? '#0F4C5C' : '#698892', marginBottom: '4px' }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 1 ? '#0F4C5C' : '#52707C', marginBottom: '4px' }}>
                 SUBJECTIVE (S) — Vernacular Symptom Resolution
               </div>
               {activeStep >= 1 ? (
@@ -523,7 +523,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
               border: activeStep >= 2 ? '1.5px solid #0F4C5C' : '1px dashed #D0DFE2',
               transition: 'all 0.3s ease'
             }}>
-              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 2 ? '#0F4C5C' : '#698892', marginBottom: '4px' }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 2 ? '#0F4C5C' : '#52707C', marginBottom: '4px' }}>
                 OBJECTIVE (O) — Sample Vitals From Dialogue
               </div>
               {activeStep >= 2 ? (
@@ -546,7 +546,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
               border: activeStep >= 2 ? '1.5px solid #3B82F6' : '1px dashed #D0DFE2',
               transition: 'all 0.3s ease'
             }}>
-              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 2 ? '#2563EB' : '#698892', marginBottom: '4px' }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 2 ? '#1D4ED8' : '#52707C', marginBottom: '4px' }}>
                 ASSESSMENT (A) — Sample ICD-10 Reference Codes
               </div>
               {activeStep >= 2 ? (
@@ -576,17 +576,17 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
               padding: '12px 14px',
               borderRadius: '12px',
               background: activeStep >= 4 ? '#ECFDF5' : '#F1F5F9',
-              border: activeStep >= 4 ? '1.5px solid #10B981' : '1px dashed #D0DFE2',
+              border: activeStep >= 4 ? '1.5px solid #047857' : '1px dashed #D0DFE2',
               transition: 'all 0.3s ease'
             }}>
-              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 4 ? '#059669' : '#698892', marginBottom: '4px' }}>
+              <div style={{ fontSize: '11.5px', fontWeight: 800, color: activeStep >= 4 ? '#047857' : '#52707C', marginBottom: '4px' }}>
                 PLAN (P) — Attending e-Rx & Spoken Audio-Rx
               </div>
               {activeStep >= 4 ? (
                 <div style={{ fontSize: '12.5px', color: '#1E293B', lineHeight: 1.45 }}>
                   <div>1. <strong>Tab Pantoprazole 40mg</strong> — 1 tab OD (Morning AC) x 14 days</div>
                   <div>2. <strong>Salbutamol Inhaler 100mcg</strong> — 2 puffs PRN / SOS</div>
-                  <div style={{ marginTop: '4px', color: '#059669', fontWeight: 700 }}>
+                  <div style={{ marginTop: '4px', color: '#047857', fontWeight: 700 }}>
  Spoken Telugu Audio-Rx prepared as a local share preview; delivery is not verified.
                   </div>
                 </div>
@@ -601,7 +601,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
           {/* Bottom Safeguard Notice */}
           <div style={{
             fontSize: '11.5px',
-            color: '#698892',
+            color: '#52707C',
             background: '#FAF8F5',
             padding: '10px 12px',
             borderRadius: '10px',
@@ -783,7 +783,7 @@ export default function DetailedModuleView({
       id: 'vernacular_audio_rx',
       category: 'Solutions',
       badge: 'Breakthrough Innovation',
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
       title: 'Vernacular Audio-Rx & Karaoke Visual Guide',
       tagline: 'Spoken instructions with synchronized word highlighting for low-literacy contexts',
       icon: Volume2,
@@ -901,7 +901,7 @@ export default function DetailedModuleView({
       id: 'opencv_strip_scanner',
       category: 'Solutions',
       badge: 'Vision AI & Safety',
-      badgeColor: '#D97706',
+      badgeColor: '#B45309',
       title: 'Tesseract Medicine Blister OCR & Safety Review',
       tagline: 'On-device OCR prototype with bundled formulary and safety reference',
       icon: Eye,
@@ -1198,7 +1198,7 @@ export default function DetailedModuleView({
       id: 'clinical_impact',
       category: 'Impact',
       badge: 'Prototype Goals',
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
       title: 'Workflow Impact & Health Economics Model',
       tagline: 'Prototype metrics for workflow burden, review controls, and health-literacy support',
       icon: BarChart2,
@@ -1438,7 +1438,7 @@ export default function DetailedModuleView({
       id: 'clinical_benchmark_suite',
       category: 'Resources',
       badge: 'Workflow Evaluation',
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
       title: '24-Point Synthetic Workflow Test Suite & Radar Matrix',
       tagline: 'Automated 24-scenario synthetic workflow test runner; not diagnostic validation',
       icon: Award,
@@ -1715,7 +1715,7 @@ export default function DetailedModuleView({
           flexWrap: 'wrap',
           gap: '12px'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#698892' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#52707C' }}>
             <button 
               onClick={() => onBackToHome ? onBackToHome() : navigate('/')}
               style={{
@@ -1735,7 +1735,7 @@ export default function DetailedModuleView({
               <span>Back to Home</span>
             </button>
             <span style={{ color: '#D0DFE2' }}>/</span>
-            <span style={{ color: '#698892', fontWeight: 600 }}>{currentModule.category}</span>
+            <span style={{ color: '#52707C', fontWeight: 600 }}>{currentModule.category}</span>
             <span style={{ color: '#D0DFE2' }}>/</span>
             <span style={{ color: '#0F4C5C', fontWeight: 800 }}>{currentModule.title}</span>
           </div>
@@ -1828,7 +1828,7 @@ export default function DetailedModuleView({
                 >
                   {currentModule.badge}
                 </span>
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#698892', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#52707C', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                   Deep Technical Specification
                 </span>
               </div>
@@ -1843,7 +1843,7 @@ export default function DetailedModuleView({
 
           {/* Section Step Progress Bar */}
           <div style={{ paddingTop: '20px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase' }}>
+            <span style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase' }}>
               Section {currentPage} of {currentModule.totalPages}:
             </span>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', width: '220px' }}>
@@ -1879,7 +1879,7 @@ export default function DetailedModuleView({
             <h2 style={{ fontSize: '22px', fontWeight: 900, color: '#091E26', margin: 0, letterSpacing: '-0.01em' }}>
               {currentPageData.pageTitle}
             </h2>
-            <p style={{ fontSize: '14px', color: '#698892', margin: '6px 0 0 0' }}>
+            <p style={{ fontSize: '14px', color: '#52707C', margin: '6px 0 0 0' }}>
               {currentPageData.subtitle}
             </p>
           </div>
@@ -1920,7 +1920,7 @@ export default function DetailedModuleView({
               <span>Previous Section</span>
             </button>
 
-            <div style={{ fontSize: '12px', fontWeight: 800, color: '#698892' }}>
+            <div style={{ fontSize: '12px', fontWeight: 800, color: '#52707C' }}>
               Section {currentPage} of {currentModule.totalPages}
             </div>
 

@@ -84,13 +84,13 @@ export default function AboutView() {
           </div>
 
           <div style={{ flex: '1 1 300px' }}>
-            <div style={{ fontSize: '12px', fontWeight: 800, color: '#059669', textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: '4px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 800, color: '#047857', textTransform: 'uppercase', letterSpacing: '0.6px', marginBottom: '4px' }}>
               Lead Systems Architect & Creator
             </div>
             <h2 style={{ fontSize: '24px', fontWeight: 850, color: '#081C24', margin: '0 0 8px 0' }}>
               Satya Samrudh Dwivedula
             </h2>
-            <div style={{ fontSize: '14px', color: '#698892', fontWeight: 600, marginBottom: '16px' }}>
+            <div style={{ fontSize: '14px', color: '#52707C', fontWeight: 600, marginBottom: '16px' }}>
               B.Tech Computer Science & Engineering Undergraduate · <strong>Aditya University</strong>, Andhra Pradesh
             </div>
             <p style={{ fontSize: '14.5px', color: '#334155', lineHeight: 1.6, margin: '0 0 18px 0' }}>
@@ -203,7 +203,7 @@ export default function AboutView() {
         marginBottom: '32px'
       }}>
         <div style={{ background: '#FFFFFF', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#D97706', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#B45309', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
             <Award size={18} />
             <span>Gnani.ai Challenge Context</span>
           </div>
@@ -213,7 +213,7 @@ export default function AboutView() {
         </div>
 
         <div style={{ background: '#FFFFFF', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#059669', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#047857', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
             <ShieldCheck size={18} />
             <span>Ethical Prototype Safeguards</span>
           </div>

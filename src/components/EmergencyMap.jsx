@@ -80,17 +80,17 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
 
             <!-- Handlebars & Mirrors -->
             <path d="M 12 26 Q 25 24 38 26" stroke="#475569" stroke-width="3" stroke-linecap="round" fill="none" />
-            <circle cx="12" cy="26" r="2.5" fill="#10B981" />
-            <circle cx="38" cy="26" r="2.5" fill="#10B981" />
+            <circle cx="12" cy="26" r="2.5" fill="#047857" />
+            <circle cx="38" cy="26" r="2.5" fill="#047857" />
 
             <!-- Central Projector Headlight -->
             <ellipse cx="25" cy="24" rx="3.5" ry="2" fill="#FEF08A" stroke="#CA8A04" stroke-width="0.8" />
 
             <!-- Gas Tank & Frame -->
-            <path d="M 22 28 L 28 28 L 27 42 L 23 42 Z" fill="#059669" stroke="#047857" stroke-width="1" />
+            <path d="M 22 28 L 28 28 L 27 42 L 23 42 Z" fill="#047857" stroke="#047857" stroke-width="1" />
 
             <!-- Paramedic First-Responder (Helmet & Hi-Vis Fluorescent Vest) -->
-            <path d="M 17 40 Q 25 38 33 40 L 31 52 Q 25 50 19 52 Z" fill="#10B981" stroke="#064E3B" stroke-width="1.2" />
+            <path d="M 17 40 Q 25 38 33 40 L 31 52 Q 25 50 19 52 Z" fill="#047857" stroke="#064E3B" stroke-width="1.2" />
             <line x1="20" y1="46" x2="30" y2="46" stroke="#FEF08A" stroke-width="1.5" />
             <ellipse cx="25" cy="38" rx="5.5" ry="6" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.2" />
             <path d="M 21 35 Q 25 33 29 35" stroke="#0284C7" stroke-width="2.2" stroke-linecap="round" fill="none" />
@@ -113,7 +113,7 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
         </div>
 
         <!-- TACTICAL CALLSIGN BADGE -->
-        <div style="position: absolute; bottom: -6px; background: rgba(6, 78, 59, 0.95); border: 1.5px solid #10B981; border-radius: 999px; padding: 2px 7px; font-size: 8px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.5px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.8); pointer-events: auto;">
+        <div style="position: absolute; bottom: -6px; background: rgba(6, 78, 59, 0.95); border: 1.5px solid #047857; border-radius: 999px; padding: 2px 7px; font-size: 8px; font-weight: 800; color: #FFFFFF; letter-spacing: 0.5px; white-space: nowrap; box-shadow: 0 4px 10px rgba(0,0,0,0.8); pointer-events: auto;">
  108 M-01
         </div>
       </div>
@@ -165,7 +165,7 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
 
           <!-- Lightbar Housing & Dual Alternating Strobes -->
           <rect x="19" y="27.5" width="22" height="4.5" rx="2" fill="#0F172A" stroke="#334155" stroke-width="0.8" />
-          <circle cx="23" cy="29.7" r="2.2" fill="#EF4444" class="strobe-led-red" />
+          <circle cx="23" cy="29.7" r="2.2" fill="#B91C1C" class="strobe-led-red" />
           <circle cx="37" cy="29.7" r="2.2" fill="#0284C7" class="strobe-led-blue" />
 
           <!-- Side Windows -->
@@ -173,13 +173,13 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
           <rect x="42.5" y="44" width="2" height="13" rx="1" fill="#1E293B" />
 
           <!-- Battenburg High-Vis Chevrons -->
-          <rect x="14" y="58" width="3" height="5" fill="#16A34A" />
+          <rect x="14" y="58" width="3" height="5" fill="#15803D" />
           <rect x="14" y="63" width="3" height="5" fill="#FACC15" />
-          <rect x="43" y="58" width="3" height="5" fill="#16A34A" />
+          <rect x="43" y="58" width="3" height="5" fill="#15803D" />
           <rect x="43" y="63" width="3" height="5" fill="#FACC15" />
 
           <!-- Roof Medical Cross -->
-          <circle cx="30" cy="50" r="5.5" fill="#EF4444" />
+          <circle cx="30" cy="50" r="5.5" fill="#B91C1C" />
           <rect x="28.5" y="46.5" width="3" height="7" rx="0.5" fill="#FFFFFF" />
           <rect x="26.5" y="48.5" width="7" height="3" rx="0.5" fill="#FFFFFF" />
 
@@ -187,8 +187,8 @@ const getVehicleSvg = (type = 'ambulance', heading = 52, id = 'ALS-12') => {
           <text x="30" y="68" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="10" fill="#DC2626" letter-spacing="0.5">108</text>
 
           <!-- Rear Tail Lights -->
-          <rect x="16" y="80" width="3" height="2" rx="0.5" fill="#EF4444" />
-          <rect x="41" y="80" width="3" height="2" rx="0.5" fill="#EF4444" />
+          <rect x="16" y="80" width="3" height="2" rx="0.5" fill="#B91C1C" />
+          <rect x="41" y="80" width="3" height="2" rx="0.5" fill="#B91C1C" />
         </svg>
       </div>
 
@@ -385,11 +385,11 @@ export default function EmergencyMap({
           <div style="position: relative; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;">
             <div style="position: absolute; inset: 0; border-radius: 50%; background: rgba(239, 68, 68, 0.4); animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
             <div style="position: absolute; width: 28px; height: 28px; border-radius: 50%; background: rgba(220, 38, 38, 0.65);"></div>
-            <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; background: #EF4444; border: 2.5px solid #FFF; box-shadow: 0 0 16px #EF4444;"></div>
+            <div style="position: absolute; width: 15px; height: 15px; border-radius: 50%; background: #B91C1C; border: 2.5px solid #FFF; box-shadow: 0 0 16px #B91C1C;"></div>
           </div>
           <div style="
             background: rgba(10, 19, 36, 0.96);
-            border: 1.5px solid #EF4444;
+            border: 1.5px solid #B91C1C;
             color: #FFFFFF;
             padding: 3px 9px;
             border-radius: 12px;
@@ -480,7 +480,7 @@ export default function EmergencyMap({
         : isTop 
         ? '1.5px solid #F59E0B' 
         : hosp.ownership?.toLowerCase().includes('government')
-        ? '1px solid #10B981'
+        ? '1px solid #047857'
         : '1px solid #1E3A5F';
 
       el.innerHTML = `
@@ -717,7 +717,7 @@ export default function EmergencyMap({
           </h3>
           <div style={{
             background: 'rgba(239, 68, 68, 0.25)',
-            border: '1px solid #EF4444',
+            border: '1px solid #B91C1C',
             borderRadius: '10px',
             padding: '10px 16px',
             color: '#FEE2E2',
@@ -757,7 +757,7 @@ export default function EmergencyMap({
                 </div>
               </div>
               <div style={{ textAlign: 'right' }}>
-                <div style={{ fontSize: '14px', fontWeight: 850, color: '#10B981' }}>{hosp.distanceKm || '2.8'} km</div>
+                <div style={{ fontSize: '14px', fontWeight: 850, color: '#047857' }}>{hosp.distanceKm || '2.8'} km</div>
                 <div style={{ fontSize: '11px', color: '#94A3B8' }}>{hosp.etaMinutes || '7'} mins ETA</div>
               </div>
             </div>
@@ -814,7 +814,7 @@ export default function EmergencyMap({
               </span>
             </div>
             <div style={{ fontSize: '10px', color: '#94A3B8', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '3px', flexWrap: 'wrap' }}>
-              <span>ETA: <strong style={{ color: '#10B981', fontSize: '11px' }}>{routeEtaMinutes || selectedHospital.etaMinutes || 6} mins</strong></span>
+              <span>ETA: <strong style={{ color: '#047857', fontSize: '11px' }}>{routeEtaMinutes || selectedHospital.etaMinutes || 6} mins</strong></span>
               <span>•</span>
               <span>Dist: <strong style={{ color: '#38BDF8', fontSize: '11px' }}>{routeDistanceKm || selectedHospital.distanceKm || 3.8} km</strong></span>
               <span>•</span>
@@ -893,7 +893,7 @@ export default function EmergencyMap({
         <button
           onClick={handleLocateCaller}
           title="Locate Patient Caller"
-          style={{ background: '#0F1E38', border: '1px solid #1C335A', color: '#EF4444', borderRadius: '6px', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          style={{ background: '#0F1E38', border: '1px solid #1C335A', color: '#B91C1C', borderRadius: '6px', width: '32px', height: '32px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           <Crosshair size={15} />
         </button>
@@ -904,7 +904,7 @@ export default function EmergencyMap({
           title={isSirenPlaying ? "Mute Emergency Siren" : "Sound Emergency Siren (WebAudio)"}
           style={{
             background: isSirenPlaying ? '#DC2626' : '#0F1E38',
-            border: isSirenPlaying ? '1.5px solid #EF4444' : '1px solid #1C335A',
+            border: isSirenPlaying ? '1.5px solid #B91C1C' : '1px solid #1C335A',
             color: '#FFF',
             borderRadius: '6px',
             width: '32px',
@@ -947,7 +947,7 @@ export default function EmergencyMap({
               </span>
             </div>
             <div style={{
-              background: isSirenPlaying ? '#EF4444' : '#1E293B',
+              background: isSirenPlaying ? '#B91C1C' : '#1E293B',
               color: '#FFFFFF',
               fontSize: '9px',
               fontWeight: 800,
@@ -972,25 +972,25 @@ export default function EmergencyMap({
               <div style={{ fontSize: '15px', fontWeight: 900, color: '#38BDF8' }}>
                 {telemetrySpeed}
               </div>
-              <div style={{ fontSize: '7.5px', color: '#698892' }}>km/h</div>
+              <div style={{ fontSize: '7.5px', color: '#52707C' }}>km/h</div>
             </div>
 
             {/* ETA Countdown */}
             <div style={{ background: '#0A1830', padding: '6px 8px', borderRadius: '8px', border: '1px solid #1C335A', textAlign: 'center' }}>
               <div style={{ fontSize: '8px', color: '#94A3B8', fontWeight: 700 }}>LIVE ETA</div>
-              <div style={{ fontSize: '15px', fontWeight: 900, color: '#10B981' }}>
+              <div style={{ fontSize: '15px', fontWeight: 900, color: '#047857' }}>
                 {formatEta(etaRemainingSec)}
               </div>
-              <div style={{ fontSize: '7.5px', color: '#698892' }}>mm:ss</div>
+              <div style={{ fontSize: '7.5px', color: '#52707C' }}>mm:ss</div>
             </div>
 
             {/* Heart Rate */}
             <div style={{ background: '#0A1830', padding: '6px 8px', borderRadius: '8px', border: '1px solid #1C335A', textAlign: 'center' }}>
               <div style={{ fontSize: '8px', color: '#94A3B8', fontWeight: 700 }}>PULSE</div>
-              <div style={{ fontSize: '15px', fontWeight: 900, color: '#EF4444' }}>
+              <div style={{ fontSize: '15px', fontWeight: 900, color: '#B91C1C' }}>
                 {heartRate}
               </div>
-              <div style={{ fontSize: '7.5px', color: '#698892' }}>BPM</div>
+              <div style={{ fontSize: '7.5px', color: '#52707C' }}>BPM</div>
             </div>
 
             {/* SpO2 */}
@@ -999,16 +999,16 @@ export default function EmergencyMap({
               <div style={{ fontSize: '15px', fontWeight: 900, color: '#A78BFA' }}>
                 {spO2}%
               </div>
-              <div style={{ fontSize: '7.5px', color: '#698892' }}>O2 Sat</div>
+              <div style={{ fontSize: '7.5px', color: '#52707C' }}>O2 Sat</div>
             </div>
           </div>
 
           {/* Continuous Lead-II ECG Rhythm Strip & SpO2 Plethysmograph */}
           <div style={{ background: '#020617', borderRadius: '6px', border: '1px solid #0F2342', padding: '5px 7px', position: 'relative' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px', fontSize: '8px' }}>
-              <span style={{ color: '#10B981', fontWeight: 800 }}>● ECG LEAD-II (25 mm/s • 10 mm/mV)</span>
+              <span style={{ color: '#047857', fontWeight: 800 }}>● ECG LEAD-II (25 mm/s • 10 mm/mV)</span>
               <span style={{ color: '#38BDF8', fontWeight: 700 }}>PLETH SpO2: {spO2}%</span>
-              <span style={{ color: '#698892', fontFamily: 'monospace' }}>IoT CAN-BUS: ACTIVE</span>
+              <span style={{ color: '#52707C', fontFamily: 'monospace' }}>IoT CAN-BUS: ACTIVE</span>
             </div>
             <svg viewBox="0 0 280 34" style={{ width: '100%', height: '34px', overflow: 'hidden' }}>
               <defs>
@@ -1020,7 +1020,7 @@ export default function EmergencyMap({
               <path
                 d="M 0,17 L 18,17 Q 23,13 28,17 L 36,17 L 40,21 L 44,3 L 48,31 L 52,17 L 60,17 Q 67,11 75,17 L 95,17 L 110,17 Q 115,13 120,17 L 128,17 L 132,21 L 136,3 L 140,31 L 144,17 L 152,17 Q 159,11 167,17 L 187,17 L 202,17 Q 207,13 212,17 L 220,17 L 224,21 L 228,3 L 232,31 L 236,17 L 244,17 Q 251,11 259,17 L 280,17"
                 fill="none"
-                stroke="#10B981"
+                stroke="#047857"
                 strokeWidth="1.8"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -1044,7 +1044,7 @@ export default function EmergencyMap({
             border: '1px solid #12213A'
           }}>
             <span>Blood Pressure: <strong style={{ color: '#F1F5F9' }}>136/88 mmHg</strong></span>
-            <span>Rhythm: <strong style={{ color: '#10B981' }}>Normal Sinus (Lead II)</strong></span>
+            <span>Rhythm: <strong style={{ color: '#047857' }}>Normal Sinus (Lead II)</strong></span>
             <span>O2: <strong style={{ color: '#38BDF8' }}>Ventilator Active</strong></span>
           </div>
         </div>

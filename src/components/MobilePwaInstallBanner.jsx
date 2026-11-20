@@ -245,8 +245,8 @@ export default function MobilePwaInstallBanner() {
 
               {installState === 'installed' && (
                 <>
-                  <CheckCircle2 size={14} color="#059669" />
-                  <span style={{ color: '#059669', fontWeight: 850 }}>Installed!</span>
+                  <CheckCircle2 size={14} color="#047857" />
+                  <span style={{ color: '#047857', fontWeight: 850 }}>Installed!</span>
                 </>
               )}
             </button>
@@ -343,7 +343,7 @@ export default function MobilePwaInstallBanner() {
                   border: 'none',
                   borderRadius: '10px',
                   background: deviceTab === 'desktop' ? '#ffffff' : 'transparent',
-                  color: deviceTab === 'desktop' ? '#0F4C5C' : '#698892',
+                  color: deviceTab === 'desktop' ? '#0F4C5C' : '#52707C',
                   fontWeight: deviceTab === 'desktop' ? 750 : 600,
                   fontSize: '12px',
                   cursor: 'pointer',
@@ -366,7 +366,7 @@ export default function MobilePwaInstallBanner() {
                   border: 'none',
                   borderRadius: '10px',
                   background: deviceTab === 'android' ? '#ffffff' : 'transparent',
-                  color: deviceTab === 'android' ? '#0F4C5C' : '#698892',
+                  color: deviceTab === 'android' ? '#0F4C5C' : '#52707C',
                   fontWeight: deviceTab === 'android' ? 750 : 600,
                   fontSize: '12px',
                   cursor: 'pointer',
@@ -389,7 +389,7 @@ export default function MobilePwaInstallBanner() {
                   border: 'none',
                   borderRadius: '10px',
                   background: deviceTab === 'ios' ? '#ffffff' : 'transparent',
-                  color: deviceTab === 'ios' ? '#0F4C5C' : '#698892',
+                  color: deviceTab === 'ios' ? '#0F4C5C' : '#52707C',
                   fontWeight: deviceTab === 'ios' ? 750 : 600,
                   fontSize: '12px',
                   cursor: 'pointer',
@@ -500,7 +500,7 @@ export default function MobilePwaInstallBanner() {
                 alignItems: 'center',
                 gap: '10px'
               }}>
-                <CheckCircle2 size={18} color="#059669" style={{ flexShrink: 0 }} />
+                <CheckCircle2 size={18} color="#047857" style={{ flexShrink: 0 }} />
                 <div style={{ fontSize: '11.5px', color: '#065F46', lineHeight: 1.4 }}>
                   <strong>Service Worker & Cache Active:</strong> AyuSwar AI is fully offline-capable for rural PHC clinics and emergency 108 field operations.
                 </div>
@@ -642,7 +642,7 @@ export default function MobilePwaInstallBanner() {
         .ayuswar-pwa-btn-installed {
           background: #ECFDF5;
           color: #065F46;
-          border: 1px solid #10B981;
+          border: 1px solid #047857;
           cursor: default;
         }
 

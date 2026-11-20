@@ -682,16 +682,16 @@ export default function ClinicalBenchmarkView() {
             </div>
 
             <div style={{ background: '#FFFFFF', border: '1.5px solid #D0DFE2', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
-              <div style={{ fontSize: '11px', color: '#16A34A', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vocabulary Alignment</div>
-              <div style={{ fontSize: '32px', fontWeight: 900, color: '#16A34A', margin: '6px 0 2px 0' }}>WHO ICD-10</div>
+              <div style={{ fontSize: '11px', color: '#15803D', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vocabulary Alignment</div>
+              <div style={{ fontSize: '32px', fontWeight: 900, color: '#15803D', margin: '6px 0 2px 0' }}>WHO ICD-10</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
                 Direct normalization of vernacular Indic complaints to standard clinical diagnostic codes.
               </div>
             </div>
 
             <div style={{ background: '#FFFFFF', border: '1.5px solid #FDE68A', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(217,119,6,0.06)' }}>
-              <div style={{ fontSize: '11px', color: '#D97706', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Patient Guidance</div>
-              <div style={{ fontSize: '32px', fontWeight: 900, color: '#D97706', margin: '6px 0 2px 0' }}>Vernacular</div>
+              <div style={{ fontSize: '11px', color: '#B45309', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Patient Guidance</div>
+              <div style={{ fontSize: '32px', fontWeight: 900, color: '#B45309', margin: '6px 0 2px 0' }}>Vernacular</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
                 Multi-lingual spoken audio prescriptions with synchronized visual karaoke highlighting.
               </div>
@@ -705,7 +705,7 @@ export default function ClinicalBenchmarkView() {
                 <h3 style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', margin: 0 }}>
                   Primary Health Center (PHC) Time-Motion Workflow Model (Simulation)
                 </h3>
-                <p style={{ fontSize: '13.5px', color: '#698892', margin: '4px 0 0 0' }}>
+                <p style={{ fontSize: '13.5px', color: '#52707C', margin: '4px 0 0 0' }}>
                   Simulated workflow comparison modeling conventional documentation vs ambient voice assistance.
                 </p>
               </div>
@@ -755,7 +755,7 @@ export default function ClinicalBenchmarkView() {
                 <div style={{ width: '100%', height: '18px', background: '#D0DFE2', borderRadius: '9px', overflow: 'hidden' }}>
                   <div style={{ width: '100%', height: '100%', background: 'linear-gradient(90deg, #F87171, #DC2626)', borderRadius: '9px' }} />
                 </div>
-                <div style={{ fontSize: '11px', color: '#698892', marginTop: '4px' }}>
+                <div style={{ fontSize: '11px', color: '#52707C', marginTop: '4px' }}>
                   Doctor spends majority of encounter typing into keyboard with back turned to the patient.
                 </div>
               </div>
@@ -768,7 +768,7 @@ export default function ClinicalBenchmarkView() {
                 <div style={{ width: '100%', height: '18px', background: '#D0DFE2', borderRadius: '9px', overflow: 'hidden' }}>
                   <div style={{ width: '19.1%', height: '100%', background: 'linear-gradient(90deg, #14B8A6, #0F4C5C)', borderRadius: '9px' }} />
                 </div>
-                <div style={{ fontSize: '11px', color: '#698892', marginTop: '4px' }}>
+                <div style={{ fontSize: '11px', color: '#52707C', marginTop: '4px' }}>
                   Passive listening creates structured FHIR-format draft notes. The doctor reviews the content and records a local demo acknowledgement; no Class-3 DSC is connected.
                 </div>
               </div>
@@ -780,7 +780,7 @@ export default function ClinicalBenchmarkView() {
             <h3 style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', marginBottom: '6px' }}>
               Acoustic Biomarker Signal Analysis Parameters (Prototype)
             </h3>
-            <p style={{ fontSize: '13.5px', color: '#698892', marginBottom: '20px' }}>
+            <p style={{ fontSize: '13.5px', color: '#52707C', marginBottom: '20px' }}>
               Target frequency ranges and digital signal processing modalities for non-diagnostic exploratory screening.
             </p>
 
@@ -801,35 +801,35 @@ export default function ClinicalBenchmarkView() {
                     <td style={{ padding: '12px 16px', color: '#486770' }}>Continuous musical wheeze</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>400-800 Hz</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Bandpass FFT Filter</td>
-                    <td style={{ padding: '12px 16px', color: '#698892' }}>Flags spirometry PFT confirmation draft</td>
+                    <td style={{ padding: '12px 16px', color: '#52707C' }}>Flags spirometry PFT confirmation draft</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #D0DFE2' }}>
                     <td style={{ padding: '12px 16px', fontWeight: 750, color: '#081C24' }}>Infectious / COPD & Pneumonia</td>
                     <td style={{ padding: '12px 16px', color: '#486770' }}>Low-frequency rhonchi & moist rales</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>100-350 Hz</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Short-Time Spectral Flux</td>
-                    <td style={{ padding: '12px 16px', color: '#698892' }}>Prompts Chest X-Ray & sputum requisition</td>
+                    <td style={{ padding: '12px 16px', color: '#52707C' }}>Prompts Chest X-Ray & sputum requisition</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #D0DFE2' }}>
                     <td style={{ padding: '12px 16px', fontWeight: 750, color: '#081C24' }}>Pediatrics / Stridor & Croup</td>
                     <td style={{ padding: '12px 16px', color: '#486770' }}>High spectral centroid</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>&gt;2500 Hz</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Centroid Peak Tracking</td>
-                    <td style={{ padding: '12px 16px', color: '#698892' }}>Immediate upper airway obstruction advisory</td>
+                    <td style={{ padding: '12px 16px', color: '#52707C' }}>Immediate upper airway obstruction advisory</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #D0DFE2' }}>
                     <td style={{ padding: '12px 16px', fontWeight: 750, color: '#081C24' }}>Neurology / Parkinson's Tremor</td>
                     <td style={{ padding: '12px 16px', color: '#486770' }}>Sustained vowel phonatory tremor</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>4-8 Hz</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Pitch Jitter Analysis</td>
-                    <td style={{ padding: '12px 16px', color: '#698892' }}>Advises specialist motor examination</td>
+                    <td style={{ padding: '12px 16px', color: '#52707C' }}>Advises specialist motor examination</td>
                   </tr>
                   <tr>
                     <td style={{ padding: '12px 16px', fontWeight: 750, color: '#081C24' }}>Cardiology / Vocal Edema</td>
                     <td style={{ padding: '12px 16px', color: '#486770' }}>Fluid damping & fundamental pitch jitter</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Fundamental F0</td>
                     <td style={{ padding: '12px 16px', fontWeight: 800, color: '#0F766E' }}>Harmonics-to-Noise Ratio</td>
-                    <td style={{ padding: '12px 16px', color: '#698892' }}>Recommends BNP / Echo evaluation</td>
+                    <td style={{ padding: '12px 16px', color: '#52707C' }}>Recommends BNP / Echo evaluation</td>
                   </tr>
                 </tbody>
               </table>
@@ -847,7 +847,7 @@ export default function ClinicalBenchmarkView() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', background: '#FFFFFF', border: '1px solid #D0DFE2', padding: '16px 20px', borderRadius: '14px' }}>
             <div>
               <div style={{ fontSize: '15px', fontWeight: 800, color: '#081C24' }}>In-Browser Contract Verification Runner</div>
-              <div style={{ fontSize: '12.5px', color: '#698892' }}>Executes actual JavaScript methods against local services, speech API, and DSP math boundaries.</div>
+              <div style={{ fontSize: '12.5px', color: '#52707C' }}>Executes actual JavaScript methods against local services, speech API, and DSP math boundaries.</div>
             </div>
 
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
@@ -900,13 +900,13 @@ export default function ClinicalBenchmarkView() {
           <div className="benchmark-metrics-summary-bar" style={{ background: '#FFFFFF', border: '1px solid #D0DFE2', borderRadius: '16px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <div className="benchmark-metrics-counts-row" style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', minWidth: 0 }}>
               <div style={{ minWidth: '70px' }}>
-                <div style={{ fontSize: '11px', color: '#698892', fontWeight: 800, textTransform: 'uppercase' }}>Executed Tests</div>
+                <div style={{ fontSize: '11px', color: '#52707C', fontWeight: 800, textTransform: 'uppercase' }}>Executed Tests</div>
                 <div style={{ fontSize: '24px', fontWeight: 900, color: '#081C24' }}>{executedResults.length} / {TEST_CASES.length}</div>
               </div>
               <div className="benchmark-metric-divider" style={{ width: '1px', height: '36px', background: '#D0DFE2' }} />
               <div style={{ minWidth: '55px' }}>
-                <div style={{ fontSize: '11px', color: '#16A34A', fontWeight: 800, textTransform: 'uppercase' }}>Passed</div>
-                <div style={{ fontSize: '24px', fontWeight: 900, color: '#16A34A' }}>{passedCount}</div>
+                <div style={{ fontSize: '11px', color: '#15803D', fontWeight: 800, textTransform: 'uppercase' }}>Passed</div>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#15803D' }}>{passedCount}</div>
               </div>
               <div className="benchmark-metric-divider" style={{ width: '1px', height: '36px', background: '#D0DFE2' }} />
               <div style={{ minWidth: '55px' }}>
@@ -915,8 +915,8 @@ export default function ClinicalBenchmarkView() {
               </div>
               <div className="benchmark-metric-divider" style={{ width: '1px', height: '36px', background: '#D0DFE2' }} />
               <div style={{ minWidth: '70px' }}>
-                <div style={{ fontSize: '11px', color: '#D97706', fontWeight: 800, textTransform: 'uppercase' }}>Skipped (Env)</div>
-                <div style={{ fontSize: '24px', fontWeight: 900, color: '#D97706' }}>{skippedCount}</div>
+                <div style={{ fontSize: '11px', color: '#B45309', fontWeight: 800, textTransform: 'uppercase' }}>Skipped (Env)</div>
+                <div style={{ fontSize: '24px', fontWeight: 900, color: '#B45309' }}>{skippedCount}</div>
               </div>
             </div>
 
@@ -931,7 +931,7 @@ export default function ClinicalBenchmarkView() {
                     borderRadius: '8px',
                     border: 'none',
                     background: activeFilter === f ? '#0A2540' : '#F1F5F9',
-                    color: activeFilter === f ? '#FFFFFF' : '#698892',
+                    color: activeFilter === f ? '#FFFFFF' : '#52707C',
                     fontSize: '11.5px',
                     fontWeight: 750,
                     cursor: 'pointer',
@@ -972,14 +972,14 @@ export default function ClinicalBenchmarkView() {
                       <span style={{ fontSize: '11px', fontFamily: 'monospace', fontWeight: 800, color: '#0F4C5C', background: '#F0FDFA', padding: '2px 6px', borderRadius: '4px', flexShrink: 0 }}>
                         {test.id}
                       </span>
-                      <span style={{ fontSize: '11px', color: '#698892', fontWeight: 700 }}>
+                      <span style={{ fontSize: '11px', color: '#52707C', fontWeight: 700 }}>
                         {test.domain}
                       </span>
                     </div>
                     <h4 style={{ fontSize: '15px', fontWeight: 800, color: '#081C24', marginBottom: '4px', overflowWrap: 'break-word' }}>
                       {test.title}
                     </h4>
-                    <p style={{ fontSize: '12.5px', color: '#698892', margin: 0, lineHeight: 1.4, overflowWrap: 'break-word' }}>
+                    <p style={{ fontSize: '12.5px', color: '#52707C', margin: 0, lineHeight: 1.4, overflowWrap: 'break-word' }}>
                       {test.desc}
                     </p>
 
@@ -1002,7 +1002,7 @@ export default function ClinicalBenchmarkView() {
                     {isRunning ? (
                       <RefreshCw size={18} style={{ animation: 'spin 1s linear infinite', color: '#0F4C5C' }} />
                     ) : res?.status === 'passed' ? (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#16A34A', fontSize: '12px', fontWeight: 800, background: '#DCFCE7', padding: '4px 10px', borderRadius: '8px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#15803D', fontSize: '12px', fontWeight: 800, background: '#DCFCE7', padding: '4px 10px', borderRadius: '8px' }}>
                         <CheckCircle2 size={14} /> Passed
                       </span>
                     ) : res?.status === 'failed' ? (
@@ -1010,7 +1010,7 @@ export default function ClinicalBenchmarkView() {
                         <XCircle size={14} /> Failed
                       </span>
                     ) : res?.status === 'skipped' ? (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#D97706', fontSize: '12px', fontWeight: 800, background: '#FEF3C7', padding: '4px 10px', borderRadius: '8px' }}>
+                      <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#B45309', fontSize: '12px', fontWeight: 800, background: '#FEF3C7', padding: '4px 10px', borderRadius: '8px' }}>
                         <AlertCircle size={14} /> Skipped
                       </span>
                     ) : (

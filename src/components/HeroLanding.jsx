@@ -503,7 +503,7 @@ export default function HeroLanding({
       speaker: 'Sample Voice C (Tamil Indic)',
       tokens: [
         { word: 'இந்த', hint: 'This', trigger: 0 },
-        { word: 'நீல', hint: 'Blue (Foil)', trigger: 15, isPill: true, pillColor: '#2563EB' },
+        { word: 'நீல', hint: 'Blue (Foil)', trigger: 15, isPill: true, pillColor: '#1D4ED8' },
         { word: 'மாத்திரை', hint: 'Tablet', trigger: 30 },
         { word: 'காலை', hint: 'Morning', trigger: 45, isTime: true, icon: '' },
         { word: 'உணவுக்குப் பின்', hint: 'After food', trigger: 60 },
@@ -2579,7 +2579,7 @@ export default function HeroLanding({
                     { id: 'te', name: 'Telugu', native: 'తెలుగు (Telangana)', col: '#0F4C5C' },
                     { id: 'hi', name: 'Hindi', native: 'हिन्दी (North India)', col: '#b45309' },
                     { id: 'ta', name: 'Tamil', native: 'தமிழ் (Tamil Nadu)', col: '#047857' },
-                    { id: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ (Karnataka)', col: '#2563EB' },
+                    { id: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ (Karnataka)', col: '#1D4ED8' },
                     { id: 'mr', name: 'Marathi', native: 'मराठी (Maharashtra)', col: '#C2410C' },
                     { id: 'bn', name: 'Bengali', native: 'বাংলা (West Bengal)', col: '#991B1B' }
                   ].map((chip) => {
@@ -3069,7 +3069,7 @@ export default function HeroLanding({
                 {[
                   { id: 'human_agency', label: '1. Human Review (Demo Acknowledgement)', icon: Stethoscope, color: '#0F4C5C', tag: 'REVIEW CONTROL' },
                   { id: 'dpdp_ephemeral', label: '2. Local Privacy Boundary (Ephemeral Demo)', icon: Lock, color: '#047857', tag: 'DATA PRIVACY' },
-                  { id: 'zero_hallucination', label: '3. Draft Grounding (Audio Anchors)', icon: ShieldCheck, color: '#2563EB', tag: 'EVIDENCE ANCHOR' },
+                  { id: 'zero_hallucination', label: '3. Draft Grounding (Audio Anchors)', icon: ShieldCheck, color: '#1D4ED8', tag: 'EVIDENCE ANCHOR' },
                   { id: 'uncertainty_sentinel', label: '4. Uncertainty Fallback (Noise Check)', icon: AlertTriangle, color: '#b45309', tag: 'FAIL-SAFE' }
                 ].map((tab) => {
                   const isActive = governanceTab === tab.id;
@@ -3155,7 +3155,7 @@ export default function HeroLanding({
 
                   {governanceTab === 'zero_hallucination' && (
                     <div>
-                      <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(37,99,235,0.1)', color: '#2563EB', padding: '4px 10px', borderRadius: '6px' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(37,99,235,0.1)', color: '#1D4ED8', padding: '4px 10px', borderRadius: '6px' }}>
                         PHONETIC GROUNDING PROTOCOL
                       </span>
                       <h3 style={{ fontSize: '22px', fontWeight: 900, color: '#081C24', margin: '10px 0 8px 0' }}>
@@ -3371,7 +3371,7 @@ export default function HeroLanding({
                         style={{
                           width: '100%',
                           padding: '10px 14px',
-                          background: govSimAction.hallucinationTested ? 'rgba(37, 99, 235, 0.3)' : '#2563EB',
+                          background: govSimAction.hallucinationTested ? 'rgba(37, 99, 235, 0.3)' : '#1D4ED8',
                           border: 'none',
                           color: '#ffffff',
                           borderRadius: '8px',
@@ -3452,7 +3452,7 @@ export default function HeroLanding({
               }}>
                 {[
                   { id: 'acoustic', label: '1. Acoustic DSP (Prototype)', badge: 'ACOUSTICS', color: '#0F4C5C' },
-                  { id: 'abdm', label: '2. Local FHIR-shaped draft', badge: 'DRAFT', color: '#2563EB' },
+                  { id: 'abdm', label: '2. Local FHIR-shaped draft', badge: 'DRAFT', color: '#1D4ED8' },
                   { id: 'who', label: '3. Sample terminology', badge: 'REFERENCE', color: '#047857' },
                   { id: 'nfi', label: '4. NFI Pharmacopoeia', badge: 'DRUG SAFETY', color: '#b45309' },
                   { id: 'gnani_stt', label: '5. Gnani Prisma v3 ASR', badge: 'INDIC SPEECH ASR', color: '#0F4C5C' },
@@ -3514,7 +3514,7 @@ export default function HeroLanding({
 
                   {academicStandardTab === 'abdm' && (
                     <div>
-                      <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(37,99,235,0.1)', color: '#2563EB', padding: '4px 10px', borderRadius: '6px' }}>
+                      <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(37,99,235,0.1)', color: '#1D4ED8', padding: '4px 10px', borderRadius: '6px' }}>
                         LOCAL FHIR-SHAPED REFERENCE (PROTOTYPE)
                       </span>
                       <h3 style={{ fontSize: '22px', fontWeight: 900, color: '#081C24', margin: '10px 0 6px 0' }}>

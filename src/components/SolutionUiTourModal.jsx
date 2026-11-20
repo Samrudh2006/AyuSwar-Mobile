@@ -24,7 +24,7 @@ export default function SolutionUiTourModal({ isOpen, onClose }) {
       tag: 'STAGE 1 • AUDIO INTAKE',
       desc: 'Doctor and patient speak naturally in rural OPD. Web Speech API captures dual-speaker dialogue with zero hands-on-keyboard typing.',
       targetZone: { top: '24%', left: '28%' },
-      badgeColor: '#10B981',
+      badgeColor: '#047857',
       badgeBg: '#ECFDF5',
       preview: {
         speaker: 'Demo Clinician (synthetic)',
@@ -52,7 +52,7 @@ export default function SolutionUiTourModal({ isOpen, onClose }) {
       tag: 'STAGE 3 • ACOUSTIC SENTINEL',
       desc: 'AudioContext FFT calculates spectral centroid and harmonic formants, tagging sub-acute respiratory strain for attending physician review.',
       targetZone: { top: '64%', left: '32%' },
-      badgeColor: '#D97706',
+      badgeColor: '#B45309',
       badgeBg: '#FFFBEB',
       preview: {
         speaker: 'Acoustic DSP Engine',
@@ -370,7 +370,7 @@ export default function SolutionUiTourModal({ isOpen, onClose }) {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <span style={{ fontSize: '12px', color: '#698892' }}>
+          <span style={{ fontSize: '12px', color: '#52707C' }}>
             Click anywhere on progress dots or next button to navigate.
           </span>
           <button

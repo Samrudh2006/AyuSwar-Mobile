@@ -1222,7 +1222,7 @@
 .m-auth2-role-ic { width: 38px; height: 38px; border-radius: 50%; background: #EAF6F1; color: #0F4C5C; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .m-auth2-role.active .m-auth2-role-ic { background: #0F4C5C; color: #ffffff; }
 .m-auth2-role-tx b { display: block; font-size: 14.5px; font-weight: 800; color: #081C24; }
-.m-auth2-role-tx small { font-size: 10.5px; color: #698892; font-weight: 600; }
+.m-auth2-role-tx small { font-size: 10.5px; color: #52707C; font-weight: 600; }
 .m-auth2-form { background: #ffffff; border: 1px solid rgba(15,76,92,0.08); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 28px rgba(8,28,36,0.09), 0 2px 8px rgba(8,28,36,0.05); }
 .m-auth2-field { display: flex; flex-direction: column; gap: 6px; }
 .m-auth2-field > span { font-size: 12px; font-weight: 700; color: #1F4550; }

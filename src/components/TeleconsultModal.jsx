@@ -108,7 +108,7 @@ export default function TeleconsultModal({
             width: '10px',
             height: '10px',
             borderRadius: '50%',
-            background: '#10B981',
+            background: '#047857',
             boxShadow: 'none'
           }} />
           <div>
@@ -168,7 +168,7 @@ export default function TeleconsultModal({
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
           ) : (
-            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#698892', fontSize: '10px' }}>
+            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#52707C', fontSize: '10px' }}>
               Cam Off
             </div>
           )}

@@ -37,7 +37,7 @@ export default function TermsOfServiceView() {
         alignItems: 'flex-start',
         gap: '14px'
       }}>
-        <AlertTriangle size={24} color="#D97706" style={{ flexShrink: 0, marginTop: '2px' }} />
+        <AlertTriangle size={24} color="#B45309" style={{ flexShrink: 0, marginTop: '2px' }} />
         <div>
           <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#92400E', margin: '0 0 4px 0' }}>
             CRITICAL MEDICAL DISCLAIMER — NOT A DIAGNOSTIC DEVICE

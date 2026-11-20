@@ -35,7 +35,7 @@ export default function ArchitectureView() {
       tag: 'W3C AudioContext & Web Speech',
       desc: 'Local browser 16kHz PCM audio intake and spectral formant extraction without mandatory server compute.',
       icon: Mic,
-      color: '#10B981'
+      color: '#047857'
     },
     {
       title: 'Clinical Lexicon & NLP',
@@ -56,7 +56,7 @@ export default function ArchitectureView() {
       tag: 'Synthetic reference sample',
       desc: 'Bundled Indic speech examples and sample generic-drug schemas; no repository endorsement is claimed.',
       icon: ShieldCheck,
-      color: '#D97706'
+      color: '#B45309'
     }
   ];
 
@@ -220,7 +220,7 @@ export default function ArchitectureView() {
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(15, 76, 92, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F4C5C' }}>
                 <Server size={20} />
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#059669', padding: '3px 8px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#047857', padding: '3px 8px', borderRadius: '10px' }}>
                 Config present
               </span>
             </div>
@@ -241,7 +241,7 @@ export default function ArchitectureView() {
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(234, 88, 12, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA580C' }}>
                 <BarChart3 size={20} />
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#059669', padding: '3px 8px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#047857', padding: '3px 8px', borderRadius: '10px' }}>
                 Config present
               </span>
             </div>
@@ -262,7 +262,7 @@ export default function ArchitectureView() {
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0284C7' }}>
                 <GitBranch size={20} />
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#059669', padding: '3px 8px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#047857', padding: '3px 8px', borderRadius: '10px' }}>
                 Config present
               </span>
             </div>
@@ -280,17 +280,17 @@ export default function ArchitectureView() {
           {/* 4. Traefik & Sovereign Mesh */}
           <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
-              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10B981' }}>
+              <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#047857' }}>
                 <Radio size={20} />
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#059669', padding: '3px 8px', borderRadius: '10px' }}>
+              <span style={{ fontSize: '11px', fontWeight: 800, background: 'rgba(52, 211, 153, 0.15)', color: '#047857', padding: '3px 8px', borderRadius: '10px' }}>
                 Config present
               </span>
             </div>
             <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#081C24', margin: '0 0 4px 0' }}>
               Traefik Cloud-Native Ingress
             </h3>
-            <div style={{ fontSize: '12px', fontWeight: 700, color: '#10B981', marginBottom: '8px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 700, color: '#047857', marginBottom: '8px' }}>
               deploy/docker-compose.enterprise.yml
             </div>
             <p style={{ fontSize: '13px', color: '#486770', lineHeight: 1.5, margin: 0 }}>

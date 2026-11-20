@@ -49,7 +49,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
       title: 'Acoustic Respiratory Biomarkers & Digital Stethoscope',
       badge: 'LAYER 3 • DSP SIGNAL PROCESSING',
       icon: Activity,
-      color: '#D97706',
+      color: '#B45309',
       problem: 'Early signs of respiratory distress (pediatric stridor, asthmatic wheezing, COPD exacerbations) often go unquantified in rural clinics lacking spirometers or pulse oximeters.',
       solution: 'Executes real-time digital signal processing (DSP) simulation. Calculates Short-Time Fourier Transform (STFT) spectral rolloff, spectral centroid, and frequency features from microphone audio for non-diagnostic educational demonstration.',
       scientificMetric: 'Experimental spectral centroid calculation for acoustic signal visualization.',
@@ -69,7 +69,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
       title: 'Vernacular Audio-Rx with Synchronized Karaoke',
       badge: 'LAYER 6 • VERNACULAR SPOKEN AUDIO-RX',
       icon: Volume2,
-      color: '#10B981',
+      color: '#047857',
       problem: 'Over 600 million Indian citizens cannot read handwritten prescription slips or English dosage instructions, causing 45% of patients to discontinue life-saving therapies.',
       solution: 'Gnani Timbre Neural Voice (TTS). Synthesizes spoken prescriptions in the patient’s regional language. The companion audio player illuminates color-coded pill schedule cards (morning, afternoon, night) with synchronized glowing text.',
       scientificMetric: 'Human-cadence voice interface designed to enhance medication schedule comprehension.',
@@ -79,7 +79,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
       title: 'Sample Medication Safety Rule Checks',
       badge: 'PROTOTYPE RULE CHECKS',
       icon: ShieldCheck,
-      color: '#EF4444',
+      color: '#B91C1C',
       problem: 'Rushed OPD shifts lead to inadvertent drug-drug interactions (e.g., prescribing NSAIDs to patients with active peptic ulcers or combining conflicting diabetic medications).',
       solution: 'A bundled sample rule list flags a small fixed set of demo drug-pair conflicts for illustration. It does not inspect real patient history, enzyme interactions, renal clearance, or dosing, and it never clears a prescription; a qualified clinician must review every medication decision.',
       scientificMetric: 'Sample-only demonstration; not a validated contraindication or interaction service.',
@@ -195,7 +195,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
 
           {/* Solution Block */}
           <div style={{ background: '#F0FDFA', border: '1px solid #CCFBF1', padding: '16px', borderRadius: '12px' }}>
-            <div style={{ fontSize: '12px', fontWeight: 800, color: '#0D9488', textTransform: 'uppercase', marginBottom: '6px' }}>
+            <div style={{ fontSize: '12px', fontWeight: 800, color: '#0F766E', textTransform: 'uppercase', marginBottom: '6px' }}>
               How AyuSwar AI Solves It
             </div>
             <p style={{ fontSize: '13.5px', color: '#134E4A', lineHeight: 1.6 }}>
@@ -206,14 +206,14 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
           {/* Metrics & Architecture Row */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             <div style={{ background: '#FAF8F5', padding: '14px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892', fontWeight: 700, textTransform: 'uppercase' }}>Clinical Benchmark</div>
+              <div style={{ fontSize: '11px', color: '#52707C', fontWeight: 700, textTransform: 'uppercase' }}>Clinical Benchmark</div>
               <div style={{ fontSize: '13px', fontWeight: 750, color: '#081C24', marginTop: '4px' }}>
                 {current.scientificMetric}
               </div>
             </div>
 
             <div style={{ background: '#FAF8F5', padding: '14px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-              <div style={{ fontSize: '11px', color: '#698892', fontWeight: 700, textTransform: 'uppercase' }}>Technical Pipeline</div>
+              <div style={{ fontSize: '11px', color: '#52707C', fontWeight: 700, textTransform: 'uppercase' }}>Technical Pipeline</div>
               <div style={{ fontSize: '12.5px', fontWeight: 750, color: '#0F4C5C', marginTop: '4px' }}>
                 {current.techSpec}
               </div>
@@ -223,7 +223,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
 
         {/* Footer Actions */}
         <div style={{ padding: '16px 28px', borderTop: '1px solid #D0DFE2', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: '#FAF8F5', flexWrap: 'wrap', gap: '10px' }}>
-          <span style={{ fontSize: '12px', color: '#698892' }}>
+          <span style={{ fontSize: '12px', color: '#52707C' }}>
             Secure access required to run live consultation sessions.
           </span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -260,7 +260,7 @@ export default function FeatureDetailModal({ featureKey, onClose, onLaunchLogin 
                   navigate('/audio-rx');
                 }}
                 className="btn-primary"
-                style={{ fontSize: '13px', padding: '9px 18px', background: '#10B981', display: 'flex', alignItems: 'center', gap: '6px' }}
+                style={{ fontSize: '13px', padding: '9px 18px', background: '#047857', display: 'flex', alignItems: 'center', gap: '6px' }}
               >
  <span> Open Audio-Rx Studio</span>
                 <ArrowRight size={14} />

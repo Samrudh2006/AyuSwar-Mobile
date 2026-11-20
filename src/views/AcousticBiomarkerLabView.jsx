@@ -41,11 +41,11 @@ function AyuSwarClinicalLogo({ size = 42 }) {
           <stop offset="100%" stopColor="#006666" />
         </linearGradient>
       </defs>
-      <circle cx="32" cy="32" r="30" fill="url(#asEmblemGrad)" stroke="#10B981" strokeWidth="2.5" />
+      <circle cx="32" cy="32" r="30" fill="url(#asEmblemGrad)" stroke="#047857" strokeWidth="2.5" />
       <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(16, 185, 129, 0.4)" strokeDasharray="3 2" />
       <path d="M12 32 L20 32 L24 20 L28 44 L32 16 L36 48 L40 24 L44 32 L52 32" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="32" cy="13" r="2.5" fill="#10B981" />
-      <circle cx="32" cy="51" r="2.5" fill="#10B981" />
+      <circle cx="32" cy="13" r="2.5" fill="#047857" />
+      <circle cx="32" cy="51" r="2.5" fill="#047857" />
     </svg>
   );
 }
@@ -62,7 +62,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
         borderRadius: '10px',
         padding: '24px',
         textAlign: 'center',
-        color: '#698892',
+        color: '#52707C',
         fontSize: '12px'
       }}>
         Aperiodic or unvoiced signal. Pitch trajectory contour is unavailable for non-harmonic waveforms.
@@ -106,15 +106,15 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
     <div style={{ background: '#061626', borderRadius: '12px', padding: '14px 16px', border: '1px solid #1E293B', color: '#F8FAFC' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: 6 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ fontSize: '12px', fontWeight: 800, color: '#10B981', letterSpacing: '0.04em' }}>
+          <span style={{ fontSize: '12px', fontWeight: 800, color: '#047857', letterSpacing: '0.04em' }}>
             VOICE PITCH MOVEMENT TRAJECTORY (F0 CONTOUR)
           </span>
-          <span style={{ fontSize: '10px', background: 'rgba(16, 185, 129, 0.15)', color: '#10B981', padding: '1px 6px', borderRadius: 4, fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+          <span style={{ fontSize: '10px', background: 'rgba(16, 185, 129, 0.15)', color: '#047857', padding: '1px 6px', borderRadius: 4, fontWeight: 700, border: '1px solid rgba(16, 185, 129, 0.3)' }}>
             48 kHz YIN
           </span>
         </div>
         <div style={{ fontSize: '11px', color: '#94A3B8', fontFamily: 'monospace' }}>
-          Min: <strong style={{ color: '#F8FAFC' }}>{minF0} Hz</strong> • Max: <strong style={{ color: '#F8FAFC' }}>{maxF0} Hz</strong> • Mean: <strong style={{ color: '#10B981' }}>{meanF0} Hz</strong>
+          Min: <strong style={{ color: '#F8FAFC' }}>{minF0} Hz</strong> • Max: <strong style={{ color: '#F8FAFC' }}>{maxF0} Hz</strong> • Mean: <strong style={{ color: '#047857' }}>{meanF0} Hz</strong>
         </div>
       </div>
 
@@ -122,7 +122,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
         <svg viewBox={`0 0 ${svgW} ${svgH}`} style={{ width: '100%', height: 'auto', display: 'block' }}>
           <defs>
             <linearGradient id="pitchAreaGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+              <stop offset="0%" stopColor="#047857" stopOpacity="0.4" />
               <stop offset="100%" stopColor="#0F4C5C" stopOpacity="0.02" />
             </linearGradient>
           </defs>
@@ -151,7 +151,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
           <path d={areaD} fill="url(#pitchAreaGrad)" />
 
           {/* Trajectory Polyline */}
-          <polyline fill="none" stroke="#10B981" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" points={points} />
+          <polyline fill="none" stroke="#047857" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" points={points} />
 
           {/* Time axis ticks */}
           {[0, tMax * 0.25, tMax * 0.5, tMax * 0.75, tMax].map((t) => (
@@ -757,7 +757,7 @@ export default function AcousticBiomarkerLabView() {
           <line x1="${padL}" y1="${getY(fMax)}" x2="${padL + plotW}" y2="${getY(fMax)}" stroke="#E2E8F0" stroke-width="1" />
           <text x="${padL - 6}" y="${getY(fMin) + 3}" fill="#64748B" font-size="8.5" text-anchor="end" font-family="monospace">${fMin}Hz</text>
           <text x="${padL - 6}" y="${getY(fMax) + 3}" fill="#64748B" font-size="8.5" text-anchor="end" font-family="monospace">${fMax}Hz</text>
-          ${meanY ? `<line x1="${padL}" y1="${meanY}" x2="${padL + plotW}" y2="${meanY}" stroke="#D97706" stroke-width="1.2" stroke-dasharray="4,3" /><text x="${padL + plotW - 6}" y="${meanY - 3}" fill="#D97706" font-size="8.5" font-weight="700" text-anchor="end">Mean F0: ${dspMetrics.pitchF0} Hz</text>` : ''}
+          ${meanY ? `<line x1="${padL}" y1="${meanY}" x2="${padL + plotW}" y2="${meanY}" stroke="#B45309" stroke-width="1.2" stroke-dasharray="4,3" /><text x="${padL + plotW - 6}" y="${meanY - 3}" fill="#B45309" font-size="8.5" font-weight="700" text-anchor="end">Mean F0: ${dspMetrics.pitchF0} Hz</text>` : ''}
           <path d="${areaD}" fill="rgba(15, 76, 92, 0.08)" />
           <polyline fill="none" stroke="#0F4C5C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" points="${points}" />
           <text x="${padL}" y="${padT + plotH + 16}" fill="#64748B" font-size="8.5" font-family="monospace">0.0s</text>
@@ -789,7 +789,7 @@ export default function AcousticBiomarkerLabView() {
     .metric-table td { padding: 8px 10px; border: 1px solid #D0DFE2; }
     .section-title { font-size: 12.5px; font-weight: 800; color: #0F4C5C; text-transform: uppercase; letter-spacing: 0.5px; margin: 20px 0 6px 0; border-left: 3px solid #0F4C5C; padding-left: 8px; }
     .clinical-box { background: #FAF8F5; border: 1px solid #D0DFE2; border-radius: 8px; padding: 12px; font-size: 11.5px; line-height: 1.6; }
-    .footer { margin-top: 30px; padding-top: 12px; border-top: 1px solid #D0DFE2; display: flex; justify-content: space-between; font-size: 10.5px; color: #698892; }
+    .footer { margin-top: 30px; padding-top: 12px; border-top: 1px solid #D0DFE2; display: flex; justify-content: space-between; font-size: 10.5px; color: #52707C; }
     @media print {
       .no-print { display: none !important; }
       body { padding: 0; }
@@ -804,19 +804,19 @@ export default function AcousticBiomarkerLabView() {
   <div class="header">
     <div class="brand-wrap">
       <svg width="44" height="44" viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="30" fill="#0F4C5C" stroke="#10B981" stroke-width="2.5" />
+        <circle cx="32" cy="32" r="30" fill="#0F4C5C" stroke="#047857" stroke-width="2.5" />
         <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(16, 185, 129, 0.4)" stroke-dasharray="3 2" />
         <path d="M12 32 L20 32 L24 20 L28 44 L32 16 L36 48 L40 24 L44 32 L52 32" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
-        <circle cx="32" cy="13" r="2.5" fill="#10B981" />
-        <circle cx="32" cy="51" r="2.5" fill="#10B981" />
+        <circle cx="32" cy="13" r="2.5" fill="#047857" />
+        <circle cx="32" cy="51" r="2.5" fill="#047857" />
       </svg>
       <div>
         <div class="brand">AYUSWAR AUDIO RESEARCH</div>
         <div class="subbrand">Browser-based audio engineering prototype</div>
-        <div style="font-size: 10px; color: #698892; margin-top: 1px;">Not a clinical record. No certification, diagnosis or medical sign-off.</div>
+        <div style="font-size: 10px; color: #52707C; margin-top: 1px;">Not a clinical record. No certification, diagnosis or medical sign-off.</div>
       </div>
     </div>
-    <div style="text-align: right; font-size: 11px; color: #698892;">
+    <div style="text-align: right; font-size: 11px; color: #52707C;">
       <div><strong>Accession No:</strong> ${reportId}</div>
       <div><strong>Generated:</strong> ${generatedDate}</div>
       <div style="margin-top: 4px;"><span class="badge badge-teal">RESEARCH OUTPUT</span></div>
@@ -824,10 +824,10 @@ export default function AcousticBiomarkerLabView() {
   </div>
 
   <div class="meta-grid">
-    <div><span style="color:#698892; display:block;">Specimen Source:</span><strong>${escapeHtml(sampleSummary?.fileName || 'Microphone research audio')}</strong></div>
-    <div><span style="color:#698892; display:block;">Duration:</span><strong>${escapeHtml(sampleSummary?.durationSec || dspMetrics.durationSec)} s</strong></div>
-    <div><span style="color:#698892; display:block;">Sampling Rate:</span><strong>${escapeHtml(dspMetrics.sampleRate || 'Unavailable')} Hz</strong></div>
-    <div><span style="color:#698892; display:block;">Signal Type:</span><strong>${escapeHtml(dspMetrics.isVoiced ? 'Candidate periodic signal' : 'No periodic signal detected')}</strong></div>
+    <div><span style="color:#52707C; display:block;">Specimen Source:</span><strong>${escapeHtml(sampleSummary?.fileName || 'Microphone research audio')}</strong></div>
+    <div><span style="color:#52707C; display:block;">Duration:</span><strong>${escapeHtml(sampleSummary?.durationSec || dspMetrics.durationSec)} s</strong></div>
+    <div><span style="color:#52707C; display:block;">Sampling Rate:</span><strong>${escapeHtml(dspMetrics.sampleRate || 'Unavailable')} Hz</strong></div>
+    <div><span style="color:#52707C; display:block;">Signal Type:</span><strong>${escapeHtml(dspMetrics.isVoiced ? 'Candidate periodic signal' : 'No periodic signal detected')}</strong></div>
   </div>
 
   <div class="section-title">Research measurements only</div>
@@ -1098,8 +1098,8 @@ export default function AcousticBiomarkerLabView() {
 
         // High-Precision Cyan Phosphor Trace
         ctx.lineWidth = 2.2;
-        ctx.strokeStyle = '#10B981';
-        ctx.shadowColor = '#10B981';
+        ctx.strokeStyle = '#047857';
+        ctx.shadowColor = '#047857';
         ctx.shadowBlur = 8;
         ctx.beginPath();
 
@@ -1123,7 +1123,7 @@ export default function AcousticBiomarkerLabView() {
         ctx.shadowBlur = 0;
 
         // Calibrated HUD Telemetry
-        ctx.fillStyle = '#10B981';
+        ctx.fillStyle = '#047857';
         ctx.font = '9.5px monospace';
         ctx.fillText(`OSCILLOGRAM (48kHz) • PEAK: ±${peakAmp.toFixed(2)} FS`, 12, 18);
       } else {
@@ -1172,12 +1172,12 @@ export default function AcousticBiomarkerLabView() {
           const grad = ctx.createLinearGradient(0, canvas.height, 0, y);
           if (x >= wheezeXStart && x <= wheezeXEnd && rawVal > 110) {
             grad.addColorStop(0, '#7F1D1D');
-            grad.addColorStop(0.5, '#EF4444');
+            grad.addColorStop(0.5, '#B91C1C');
             grad.addColorStop(1, '#FCA5A5');
           } else {
             grad.addColorStop(0, '#042F2E');
             grad.addColorStop(0.4, '#0F4C5C');
-            grad.addColorStop(0.8, '#10B981');
+            grad.addColorStop(0.8, '#047857');
             grad.addColorStop(1, '#D4AF37');
           }
 
@@ -1294,7 +1294,7 @@ export default function AcousticBiomarkerLabView() {
               fontWeight: 800
             }}
           >
-            <span style={{ width: 7, height: 7, borderRadius: '50%', background: gnaniSpeechStatus?.available ? '#10B981' : '#94A3B8' }} />
+            <span style={{ width: 7, height: 7, borderRadius: '50%', background: gnaniSpeechStatus?.available ? '#047857' : '#94A3B8' }} />
             <span>{gnaniSpeechStatus?.available ? 'Gnani Speech: LIVE' : 'Speech: Browser Fallback'}</span>
           </div>
         </div>
@@ -1322,7 +1322,7 @@ export default function AcousticBiomarkerLabView() {
 
       {/* Non-Diagnostic Disclaimer Banner */}
       <div style={{ background: '#FFFBEB', border: '1.5px solid #FCD34D', borderRadius: '14px', padding: '14px 18px', marginBottom: '24px', display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-        <AlertCircle size={20} color="#D97706" style={{ marginTop: '2px', flexShrink: 0 }} />
+        <AlertCircle size={20} color="#B45309" style={{ marginTop: '2px', flexShrink: 0 }} />
         <div>
           <div style={{ fontSize: '13px', fontWeight: 800, color: '#92400E', marginBottom: '2px' }}>
             PHYSICAL SIGNAL OBSERVATIONS NOTICE (RESEARCH & BENCHMARK PROTOTYPE)
@@ -1379,7 +1379,7 @@ export default function AcousticBiomarkerLabView() {
                     padding: '6px 12px',
                     borderRadius: 8,
                     border: 'none',
-                    background: '#EF4444',
+                    background: '#B91C1C',
                     color: '#FFFFFF',
                     fontSize: '11.5px',
                     fontWeight: 800,
@@ -1425,7 +1425,7 @@ export default function AcousticBiomarkerLabView() {
               alignItems: 'center',
               gap: '6px'
             }}>
-              <span style={{ fontSize: '10px', color: '#10B981', fontFamily: 'monospace', fontWeight: 700 }}>
+              <span style={{ fontSize: '10px', color: '#047857', fontFamily: 'monospace', fontWeight: 700 }}>
                 {visualizerMode === 'oscilloscope'
  ? '⏱ 46.4ms Frame Oscillogram • Zero-Crossing Calibrated (48 kHz)'
                   : '2048-point FFT frequency spectrum - no formants or disease inference'}
@@ -1437,10 +1437,10 @@ export default function AcousticBiomarkerLabView() {
           <div style={{ background: '#091E26', padding: '12px 14px', borderRadius: '10px', display: 'flex', flexDirection: 'column', gap: '8px', border: '1px solid #1E293B' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: '#94A3B8' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ width: 8, height: 8, borderRadius: '50%', background: vuLevel > 10 ? '#10B981' : '#486770' }} />
+                <span style={{ width: 8, height: 8, borderRadius: '50%', background: vuLevel > 10 ? '#047857' : '#486770' }} />
                 <span style={{ fontWeight: 700, color: '#D0DFE2' }}>Signal Input Level (VU / RMS):</span>
               </span>
-              <span style={{ fontFamily: 'monospace', color: vuLevel > 60 ? '#F59E0B' : '#10B981', fontWeight: 800 }}>
+              <span style={{ fontFamily: 'monospace', color: vuLevel > 60 ? '#F59E0B' : '#047857', fontWeight: 800 }}>
                 {vuLevel > 0 ? `${vuLevel}% (${-(60 - Math.round(vuLevel * 0.55))} dBFS)` : 'Idle (-60 dBFS Gate)'}
               </span>
             </div>
@@ -1448,14 +1448,14 @@ export default function AcousticBiomarkerLabView() {
               <div style={{
                 width: `${vuLevel}%`,
                 height: '100%',
-                background: vuLevel > 75 ? 'linear-gradient(90deg, #F59E0B, #EF4444)' : 'linear-gradient(90deg, #0F4C5C, #10B981)',
+                background: vuLevel > 75 ? 'linear-gradient(90deg, #F59E0B, #B91C1C)' : 'linear-gradient(90deg, #0F4C5C, #047857)',
                 borderRadius: 3,
                 transition: 'width 0.08s ease'
               }} />
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '10px', color: '#64748B', fontFamily: 'monospace' }}>
               <span>-60 dBFS (Floor)</span>
-              <span style={{ color: vuLevel > 15 ? '#10B981' : '#64748B', fontWeight: vuLevel > 15 ? 750 : 500 }}>
+              <span style={{ color: vuLevel > 15 ? '#047857' : '#64748B', fontWeight: vuLevel > 15 ? 750 : 500 }}>
                 {vuLevel > 15 ? 'Optimal Phonation SNR' : 'Ambient Baseline'}
               </span>
               <span>0 dBFS (Peak)</span>
@@ -1515,7 +1515,7 @@ export default function AcousticBiomarkerLabView() {
                 padding: '12px 14px',
                 borderRadius: '10px',
                 border: 'none',
-                background: '#059669',
+                background: '#047857',
                 color: '#FFFFFF',
                 fontSize: '12.5px',
                 fontWeight: 800,
@@ -1601,7 +1601,7 @@ export default function AcousticBiomarkerLabView() {
                   padding: '4px 10px',
                   borderRadius: 6,
                   border: 'none',
-                  background: isToneActive ? '#EF4444' : '#0F4C5C',
+                  background: isToneActive ? '#B91C1C' : '#0F4C5C',
                   color: '#FFFFFF',
                   fontSize: '11px',
                   fontWeight: 800,
@@ -1649,25 +1649,25 @@ export default function AcousticBiomarkerLabView() {
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
                 <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                  <span style={{ fontSize: '11px', color: '#698892' }}>Candidate pitch F0 (experimental)</span>
+                  <span style={{ fontSize: '11px', color: '#52707C' }}>Candidate pitch F0 (experimental)</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.pitchF0 !== null ? `${dspMetrics.pitchF0} Hz` : 'Unavailable'}
                   </div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                  <span style={{ fontSize: '11px', color: '#698892' }}>Pitch reliability</span>
+                  <span style={{ fontSize: '11px', color: '#52707C' }}>Pitch reliability</span>
                   <div style={{ fontSize: '15px', fontWeight: 850, color: '#0F4C5C' }}>
                     {dspMetrics.pitchRegister}
                   </div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                  <span style={{ fontSize: '11px', color: '#698892' }}>HNR estimate (YIN residual)</span>
+                  <span style={{ fontSize: '11px', color: '#52707C' }}>HNR estimate (YIN residual)</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.hnrDb !== null ? `${dspMetrics.hnrDb} dB` : 'Unavailable'}
                   </div>
                 </div>
                 <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
-                  <span style={{ fontSize: '11px', color: '#698892' }}>Spectral Centroid</span>
+                  <span style={{ fontSize: '11px', color: '#52707C' }}>Spectral Centroid</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.spectralCentroid !== null ? `${dspMetrics.spectralCentroid} Hz` : 'Unavailable'}
                   </div>
@@ -1709,7 +1709,7 @@ export default function AcousticBiomarkerLabView() {
                     {item.icon ? <span>{item.icon}</span> : null}
                     <span>{item.label}</span>
                   </div>
-                  <div style={{ fontSize: '10px', color: '#698892', marginTop: 2 }}>
+                  <div style={{ fontSize: '10px', color: '#52707C', marginTop: 2 }}>
                     {item.sub}
                   </div>
                 </button>
@@ -1758,7 +1758,7 @@ export default function AcousticBiomarkerLabView() {
               <h3 style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', margin: '0 0 8px 0' }}>
                 {isDraggingFile ? 'Drop audio file to begin DSP analysis' : 'Awaiting audio input'}
               </h3>
-              <p style={{ fontSize: '13.5px', color: '#698892', maxWidth: '440px', lineHeight: 1.6, margin: '0 0 24px 0' }}>
+              <p style={{ fontSize: '13.5px', color: '#52707C', maxWidth: '440px', lineHeight: 1.6, margin: '0 0 24px 0' }}>
                 Drag & drop a patient audio recording (.wav, .mp3, .ogg up to 20MB) or use the upload button to measure physical acoustic parameters (F0, HNR, jitter, and shimmer).
               </p>
               <div style={{
@@ -1783,7 +1783,7 @@ export default function AcousticBiomarkerLabView() {
             <div style={{
               background: '#FFFFFF',
               borderRadius: '16px',
-              border: '2px solid #EF4444',
+              border: '2px solid #B91C1C',
               padding: '40px 24px',
               textAlign: 'center',
               display: 'flex',
@@ -1810,7 +1810,7 @@ export default function AcousticBiomarkerLabView() {
               <h3 style={{ fontSize: '18px', fontWeight: 850, color: '#991B1B', margin: '0 0 8px 0' }}>
                 Recording Audio Phonation ({samplingDuration}s)
               </h3>
-              <p style={{ fontSize: '13px', color: '#698892', maxWidth: '420px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
+              <p style={{ fontSize: '13px', color: '#52707C', maxWidth: '420px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
                 Live audio waveform and VU meter are active. Sustain phonation or record sample, then click "Stop & Analyze".
               </p>
               <button
@@ -1861,7 +1861,7 @@ export default function AcousticBiomarkerLabView() {
                   position: 'absolute',
                   inset: 0,
                   borderRadius: '50%',
-                  border: '3px solid #10B981',
+                  border: '3px solid #047857',
                   opacity: 0.35,
                   animation: 'ayuswar-spin 1.4s linear infinite'
                 }} />
@@ -1873,7 +1873,7 @@ export default function AcousticBiomarkerLabView() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: '#10B981'
+                  color: '#047857'
                 }}>
                   <Activity size={28} />
                 </div>
@@ -1881,7 +1881,7 @@ export default function AcousticBiomarkerLabView() {
 
               {/* Progress Bar & Stage Indicator */}
               <div style={{ width: '100%', maxWidth: '420px', marginBottom: '16px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#698892', marginBottom: '6px', fontWeight: 700 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', color: '#52707C', marginBottom: '6px', fontWeight: 700 }}>
                   <span>STAGE {analyzingStage} OF 3</span>
                   <span style={{ color: '#0F4C5C', fontWeight: 800 }}>{analyzingProgress}%</span>
                 </div>
@@ -1899,7 +1899,7 @@ export default function AcousticBiomarkerLabView() {
               <h3 style={{ fontSize: '18px', fontWeight: 850, color: '#081C24', margin: '0 0 6px 0' }}>
                 {analyzingStageText}
               </h3>
-              <p style={{ fontSize: '12.5px', color: '#698892', maxWidth: '440px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
+              <p style={{ fontSize: '12.5px', color: '#52707C', maxWidth: '440px', lineHeight: 1.6, margin: '0 0 20px 0' }}>
                 {analyzingSubtext}
               </p>
 
@@ -1919,7 +1919,7 @@ export default function AcousticBiomarkerLabView() {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 8,
-                      color: isDone ? '#059669' : isCurrent ? '#0F4C5C' : '#94A3B8',
+                      color: isDone ? '#047857' : isCurrent ? '#0F4C5C' : '#94A3B8',
                       fontWeight: isCurrent ? 800 : 600
                     }}>
  <span>{isDone ? '✓': isCurrent ? '…': '○'}</span>
@@ -2006,7 +2006,7 @@ export default function AcousticBiomarkerLabView() {
                         <span style={{
                           fontSize: '10px',
                           fontWeight: 800,
-                          background: '#10B981',
+                          background: '#047857',
                           color: '#081C24',
                           padding: '2px 8px',
                           borderRadius: 4,
@@ -2033,8 +2033,8 @@ export default function AcousticBiomarkerLabView() {
                       style={{
                         padding: '8px 16px',
                         borderRadius: 8,
-                        border: '1.5px solid #10B981',
-                        background: '#10B981',
+                        border: '1.5px solid #047857',
+                        background: '#047857',
                         color: '#081C24',
                         fontSize: '12px',
                         fontWeight: 850,
@@ -2073,20 +2073,20 @@ export default function AcousticBiomarkerLabView() {
                   {/* Accession & Telemetry Metadata Grid */}
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', background: '#F8FAFC', padding: '12px 16px', borderRadius: '10px', border: '1px solid #D0DFE2', marginBottom: '20px', fontSize: '11.5px' }}>
                     <div>
-                      <span style={{ color: '#698892', display: 'block', fontSize: '10.5px' }}>Specimen Source:</span>
+                      <span style={{ color: '#52707C', display: 'block', fontSize: '10.5px' }}>Specimen Source:</span>
                       <strong style={{ color: '#081C24' }}>{sampleSummary?.fileName || 'Microphone research audio'}</strong>
                     </div>
                     <div>
-                      <span style={{ color: '#698892', display: 'block', fontSize: '10.5px' }}>Sampling Rate:</span>
+                      <span style={{ color: '#52707C', display: 'block', fontSize: '10.5px' }}>Sampling Rate:</span>
                       <strong style={{ color: '#081C24' }}>{dspMetrics.sampleRate || 'Unavailable'} Hz</strong>
                     </div>
                     <div>
-                      <span style={{ color: '#698892', display: 'block', fontSize: '10.5px' }}>Duration:</span>
+                      <span style={{ color: '#52707C', display: 'block', fontSize: '10.5px' }}>Duration:</span>
                       <strong style={{ color: '#081C24' }}>{sampleSummary?.durationSec || dspMetrics.durationSec}s</strong>
                     </div>
                     <div>
-                      <span style={{ color: '#698892', display: 'block', fontSize: '10.5px' }}>Signal Integrity:</span>
-                      <strong style={{ color: dspMetrics.isVoiced ? '#059669' : '#D97706' }}>
+                      <span style={{ color: '#52707C', display: 'block', fontSize: '10.5px' }}>Signal Integrity:</span>
+                      <strong style={{ color: dspMetrics.isVoiced ? '#047857' : '#B45309' }}>
                         {dspMetrics.isVoiced ? 'Candidate periodic signal' : 'No periodic signal detected'}
                       </strong>
                     </div>
@@ -2162,7 +2162,7 @@ export default function AcousticBiomarkerLabView() {
                           padding: '6px 14px',
                           borderRadius: 6,
                           border: 'none',
-                          background: isSpeakingReadout ? '#EF4444' : '#0F4C5C',
+                          background: isSpeakingReadout ? '#B91C1C' : '#0F4C5C',
                           color: '#FFFFFF',
                           fontSize: '11.5px',
                           fontWeight: 800,
@@ -2188,7 +2188,7 @@ export default function AcousticBiomarkerLabView() {
                   <div style={{ fontSize: '12px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
                     Acoustic Reference Pattern Distance
                   </div>
-                  <div style={{ fontSize: '11.5px', color: '#698892', marginBottom: '16px' }}>
+                  <div style={{ fontSize: '11.5px', color: '#52707C', marginBottom: '16px' }}>
                     Mathematical Gaussian similarity distance against standard voice literature profiles. Physical signal matching only — not a clinical disease diagnosis.
                   </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -2196,7 +2196,7 @@ export default function AcousticBiomarkerLabView() {
                       <div key={match.key}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', marginBottom: '4px' }}>
                           <span style={{ fontWeight: 750, color: '#081C24' }}>{match.label}</span>
-                          <span style={{ color: '#698892', fontFamily: 'monospace' }}>Reference similarity: {match.similarityScore}/100</span>
+                          <span style={{ color: '#52707C', fontFamily: 'monospace' }}>Reference similarity: {match.similarityScore}/100</span>
                         </div>
                         <div style={{ height: '8px', background: '#FAF8F5', borderRadius: '4px', overflow: 'hidden' }}>
                           <div style={{

@@ -305,7 +305,7 @@ export default function ClinicalNotificationsDrawer({
               height: '36px',
               borderRadius: '10px',
               background: isDoctor ? 'rgba(0, 0, 0, 0.08)' : 'rgba(16, 185, 129, 0.12)',
-              color: isDoctor ? '#0F4C5C' : '#10B981',
+              color: isDoctor ? '#0F4C5C' : '#047857',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center'
@@ -316,7 +316,7 @@ export default function ClinicalNotificationsDrawer({
               <div style={{ fontSize: '16px', fontWeight: 800, color: '#081C24', fontFamily: 'var(--font-main)' }}>
                 {isDoctor ? 'Clinical Alert Sentinel' : 'Citizen Health Alerts'}
               </div>
-              <div style={{ fontSize: '11px', color: '#698892' }}>
+              <div style={{ fontSize: '11px', color: '#52707C' }}>
                 {unreadCount > 0 ? `${unreadCount} unread update${unreadCount > 1 ? 's' : ''}` : 'No unread alerts'}
               </div>
             </div>
@@ -334,7 +334,7 @@ export default function ClinicalNotificationsDrawer({
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: '#698892'
+              color: '#52707C'
             }}
             title="Close Notifications"
           >
@@ -370,7 +370,7 @@ export default function ClinicalNotificationsDrawer({
                   border: 'none',
                   cursor: 'pointer',
                   background: filter === f.id ? '#0A2540' : '#F1F5F9',
-                  color: filter === f.id ? '#ffffff' : '#698892',
+                  color: filter === f.id ? '#ffffff' : '#52707C',
                   transition: 'all 120ms ease'
                 }}
               >
@@ -521,7 +521,7 @@ export default function ClinicalNotificationsDrawer({
                           width: '7px',
                           height: '7px',
                           borderRadius: '50%',
-                          background: isUrgent ? '#EF4444' : '#10B981',
+                          background: isUrgent ? '#B91C1C' : '#047857',
                           display: 'inline-block',
                           flexShrink: 0
                         }} />
@@ -576,7 +576,7 @@ export default function ClinicalNotificationsDrawer({
                           onClose();
                         }}
                         style={{
-                          background: isUrgent ? '#DC2626' : (isDoctor ? '#0F4C5C' : '#059669'),
+                          background: isUrgent ? '#DC2626' : (isDoctor ? '#0F4C5C' : '#047857'),
                           color: '#ffffff',
                           border: 'none',
                           borderRadius: '6px',
@@ -601,7 +601,7 @@ export default function ClinicalNotificationsDrawer({
                           background: 'transparent',
                           border: 'none',
                           fontSize: '11px',
-                          color: '#698892',
+                          color: '#52707C',
                           cursor: 'pointer',
                           display: 'flex',
                           alignItems: 'center',
@@ -643,7 +643,7 @@ export default function ClinicalNotificationsDrawer({
           alignItems: 'center',
           justifyContent: 'space-between',
           fontSize: '11px',
-          color: '#698892'
+          color: '#52707C'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <ShieldCheck size={14} color="#0F4C5C" />

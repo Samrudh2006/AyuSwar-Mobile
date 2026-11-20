@@ -483,7 +483,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
               borderRadius: '8px',
               border: 'none',
               background: activeMode === 'camera' ? '#ffffff' : 'transparent',
-              color: activeMode === 'camera' ? '#D97706' : '#698892',
+              color: activeMode === 'camera' ? '#B45309' : '#52707C',
               fontWeight: 700,
               fontSize: '12px',
               display: 'flex',
@@ -504,7 +504,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
               borderRadius: '8px',
               border: 'none',
               background: activeMode === 'upload' ? '#ffffff' : 'transparent',
-              color: activeMode === 'upload' ? '#D97706' : '#698892',
+              color: activeMode === 'upload' ? '#B45309' : '#52707C',
               fontWeight: 700,
               fontSize: '12px',
               display: 'flex',
@@ -525,7 +525,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
               borderRadius: '8px',
               border: 'none',
               background: activeMode === 'preset' ? '#ffffff' : 'transparent',
-              color: activeMode === 'preset' ? '#D97706' : '#698892',
+              color: activeMode === 'preset' ? '#B45309' : '#52707C',
               fontWeight: 700,
               fontSize: '12px',
               display: 'flex',
@@ -555,7 +555,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
             fontSize: '11.5px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#92400E', fontWeight: 600 }}>
-              <Sparkles size={14} color="#D97706" />
+              <Sparkles size={14} color="#B45309" />
               <span>OpenCV.js Otsu Binarization & Foil Glare Filter</span>
             </div>
             <label style={{ display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer', fontWeight: 700, color: '#B45309' }}>
@@ -563,7 +563,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
                 type="checkbox" 
                 checked={useCvEnhancement} 
                 onChange={(e) => setUseCvEnhancement(e.target.checked)}
-                style={{ accentColor: '#D97706' }}
+                style={{ accentColor: '#B45309' }}
               />
               Active
             </label>
@@ -582,7 +582,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
               
               {!isWebcamActive && (
                 <div style={{ padding: '36px 20px', color: '#94A3B8' }}>
-                  <Camera size={36} color="#698892" style={{ margin: '0 auto 10px auto' }} />
+                  <Camera size={36} color="#52707C" style={{ margin: '0 auto 10px auto' }} />
                   <div style={{ fontSize: '13px', fontWeight: 600 }}>Webcam feed ready for scanning</div>
                   <button
                     onClick={startWebcam}
@@ -590,7 +590,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
                       marginTop: '12px',
                       padding: '8px 16px',
                       borderRadius: '8px',
-                      background: '#D97706',
+                      background: '#B45309',
                       color: '#ffffff',
                       border: 'none',
                       fontWeight: 700,
@@ -611,7 +611,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
                     style={{
                       padding: '8px 20px',
                       borderRadius: '20px',
-                      background: '#D97706',
+                      background: '#B45309',
                       color: '#ffffff',
                       border: 'none',
                       fontWeight: 800,
@@ -650,16 +650,16 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
                 onChange={handleFileUpload} 
                 style={{ display: 'none' }} 
               />
-              <Upload size={32} color="#D97706" style={{ margin: '0 auto 8px auto' }} />
+              <Upload size={32} color="#B45309" style={{ margin: '0 auto 8px auto' }} />
               <div style={{ fontSize: '13px', fontWeight: 700, color: '#081C24' }}>Click to Upload Medicine Strip Photo</div>
-              <div style={{ fontSize: '11px', color: '#698892', marginTop: '4px' }}>Supports Paracetamol, Pantocid, Glycomet, Augmentin packaging</div>
+              <div style={{ fontSize: '11px', color: '#52707C', marginTop: '4px' }}>Supports Paracetamol, Pantocid, Glycomet, Augmentin packaging</div>
             </div>
           )}
 
           {/* Mode 3: Demo Presets */}
           {activeMode === 'preset' && (
             <div>
-              <div style={{ fontSize: '11px', fontWeight: 800, color: '#698892', textTransform: 'uppercase', marginBottom: '8px' }}>
+              <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase', marginBottom: '8px' }}>
                 Select Common Strip Sample:
               </div>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -671,7 +671,7 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
                       flex: '1 1 calc(50% - 4px)',
                       padding: '8px 10px',
                       borderRadius: '10px',
-                      border: selectedPreset === p.id && !detectedResult ? '2px solid #D97706' : '1px solid #D0DFE2',
+                      border: selectedPreset === p.id && !detectedResult ? '2px solid #B45309' : '1px solid #D0DFE2',
                       background: selectedPreset === p.id && !detectedResult ? '#FEF3C7' : '#ffffff',
                       color: selectedPreset === p.id && !detectedResult ? '#92400e' : '#2C4A52',
                       fontSize: '11px',
@@ -698,12 +698,12 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
           {/* Scanning Progress Bar */}
           {isScanning && (
             <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '12px', border: '1px solid #D0DFE2' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 700, color: '#D97706', marginBottom: '6px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: 700, color: '#B45309', marginBottom: '6px' }}>
                 <span>{scanStatusText}</span>
                 <span>{scanProgress}%</span>
               </div>
               <div style={{ width: '100%', height: '6px', background: '#D0DFE2', borderRadius: '3px', overflow: 'hidden' }}>
-                <div style={{ width: `${scanProgress}%`, height: '100%', background: '#D97706', transition: 'width 0.2s ease' }} />
+                <div style={{ width: `${scanProgress}%`, height: '100%', background: '#B45309', transition: 'width 0.2s ease' }} />
               </div>
             </div>
           )}
@@ -712,15 +712,15 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
           {capturedImageUrl && (
             <div style={{ display: 'flex', gap: '8px', background: '#FAF8F5', padding: '10px', borderRadius: '12px', border: '1px solid #D0DFE2' }}>
               <div style={{ flex: 1, textAlign: 'center' }}>
-                <div style={{ fontSize: '10px', fontWeight: 700, color: '#698892', marginBottom: '4px' }}>Original Photo</div>
+                <div style={{ fontSize: '10px', fontWeight: 700, color: '#52707C', marginBottom: '4px' }}>Original Photo</div>
                 <img src={capturedImageUrl} alt="Original Strip" style={{ width: '100%', maxHeight: '110px', objectFit: 'contain', borderRadius: '6px', background: '#000' }} />
               </div>
               {processedImageUrl && useCvEnhancement && (
                 <div style={{ flex: 1, textAlign: 'center' }}>
-                  <div style={{ fontSize: '10px', fontWeight: 700, color: '#059669', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '10px', fontWeight: 700, color: '#047857', marginBottom: '4px' }}>
                     OpenCV Otsu ({cvStats ? `Thresh: ${cvStats.otsuThreshold}` : 'Binarized'})
                   </div>
-                  <img src={processedImageUrl} alt="Processed Strip" style={{ width: '100%', maxHeight: '110px', objectFit: 'contain', borderRadius: '6px', background: '#fff', border: '1px solid #10B981' }} />
+                  <img src={processedImageUrl} alt="Processed Strip" style={{ width: '100%', maxHeight: '110px', objectFit: 'contain', borderRadius: '6px', background: '#fff', border: '1px solid #047857' }} />
                 </div>
               )}
             </div>
@@ -780,11 +780,11 @@ export default function PillVisionScannerModal({ isOpen, onClose }) {
             background: '#ECFDF5',
             padding: '16px',
             borderRadius: '16px',
-            border: '1.5px solid #10B981'
+            border: '1.5px solid #047857'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <TrendingDown size={18} color="#059669" />
+                <TrendingDown size={18} color="#047857" />
                 <span style={{ fontSize: '11.5px', fontWeight: 800, color: '#065F46', textTransform: 'uppercase' }}>
                   Sample Generic Comparison
                 </span>

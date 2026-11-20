@@ -43,7 +43,7 @@ export default function DoctorAiAssistantTab({
               borderRadius: '10px',
               border: aiCategory === cat.id ? '1.5px solid #0F4C5C' : '1px solid #D0DFE2',
               background: aiCategory === cat.id ? 'rgba(0, 0, 0, 0.06)' : '#ffffff',
-              color: aiCategory === cat.id ? '#0F4C5C' : '#698892',
+              color: aiCategory === cat.id ? '#0F4C5C' : '#52707C',
               fontSize: '12.5px',
               fontWeight: 750,
               cursor: 'pointer'

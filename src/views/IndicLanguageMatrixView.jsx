@@ -182,12 +182,12 @@ export default function IndicLanguageMatrixView() {
                   <span style={{ color: '#091E26', fontWeight: 700 }}>{item.asrEngine}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#698892' }}>Text-to-Speech (TTS):</span>
+                  <span style={{ color: '#52707C' }}>Text-to-Speech (TTS):</span>
                   <span style={{ color: '#081C24', fontWeight: 700 }}>{item.ttsEngine}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#698892' }}>Integration Status:</span>
-                  <span style={{ color: '#0D9488', fontWeight: 750 }}>{item.status}</span>
+                  <span style={{ color: '#52707C' }}>Integration Status:</span>
+                  <span style={{ color: '#0F766E', fontWeight: 750 }}>{item.status}</span>
                 </div>
               </div>
 
@@ -206,7 +206,7 @@ export default function IndicLanguageMatrixView() {
                 </div>
               </div>
 
-              <div style={{ fontSize: '11.5px', color: '#698892', borderTop: '1px solid #F1F5F9', paddingTop: '10px', marginTop: 'auto' }}>
+              <div style={{ fontSize: '11.5px', color: '#52707C', borderTop: '1px solid #F1F5F9', paddingTop: '10px', marginTop: 'auto' }}>
                 <strong>Methodology:</strong> {item.methodology}
               </div>
             </div>

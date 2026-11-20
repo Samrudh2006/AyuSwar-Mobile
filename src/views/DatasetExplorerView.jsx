@@ -219,7 +219,7 @@ export default function DatasetExplorerView() {
                 <span><strong>22</strong> condition reference records (ICD-10/SNOMED)</span>
               </div>
               <div style={{ background: '#fff', border: '1px solid #D0DFE2', borderRadius: 8, padding: '6px 12px', fontSize: '0.8rem', color: '#2C4A52', display: 'flex', alignItems: 'center', gap: 6 }}>
-                <CheckCircle2 size={14} color="#10B981" />
+                <CheckCircle2 size={14} color="#047857" />
                 <span>Rule-based sample matching (not a diagnosis)</span>
               </div>
               <div style={{ background: '#fff', border: '1px solid #D0DFE2', borderRadius: 8, padding: '6px 12px', fontSize: '0.8rem', color: '#2C4A52', display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -526,7 +526,7 @@ export default function DatasetExplorerView() {
                   </span>
                 </div>
 
-                <div style={{ fontSize: '0.8rem', color: '#698892', marginBottom: 8 }}>
+                <div style={{ fontSize: '0.8rem', color: '#52707C', marginBottom: 8 }}>
                   Category: {d.category}
                 </div>
 
@@ -733,7 +733,7 @@ export default function DatasetExplorerView() {
                   )}
                 </div>
               ) : (
-                <div style={{ color: '#698892', fontSize: '0.875rem' }}>
+                <div style={{ color: '#52707C', fontSize: '0.875rem' }}>
                   No colloquial dictionary terms matched the provided input.
                 </div>
               )}
@@ -787,7 +787,7 @@ export default function DatasetExplorerView() {
                           </span>
                         )}
                       </div>
-                      <div style={{ color: '#698892', fontSize: '0.775rem', marginBottom: 8, overflowWrap: 'break-word' }}>
+                      <div style={{ color: '#52707C', fontSize: '0.775rem', marginBottom: 8, overflowWrap: 'break-word' }}>
                         {p.authors} • <em>{p.journal}</em> {p.doi && `• DOI: ${p.doi}`}
                       </div>
                       {p.coreInsight && (

@@ -67,7 +67,7 @@ export const CLINICAL_DISEASE_DATASET = [
     firstLineMedication: {
       brand: 'Tiotropium Bromide (Tiova 18mcg Rotacap)',
       salt: 'Tiotropium 18mcg',
-      pillColor: '#10B981',
+      pillColor: '#047857',
       colorName: 'Emerald Green Capsule',
       timingTelugu: 'ప్రతిరోజూ ఉదయం పరగడుపున ఒక క్యాప్సూల్ ఇన్హేల్ చేయండి.',
       timingHindi: 'रोजाना सुबह खाली पेट एक कैप्सूल इन्हेल करें।'
@@ -109,7 +109,7 @@ export const CLINICAL_DISEASE_DATASET = [
     firstLineMedication: {
       brand: '4-FDC (Rifampicin + Isoniazid + Pyrazinamide + Ethambutol)',
       salt: '4-Drug Fixed Dose Combination (DOTS Regimen)',
-      pillColor: '#EF4444',
+      pillColor: '#B91C1C',
       colorName: 'Bright Red Fixed Dose Tablet',
       timingTelugu: 'ప్రతిరోజూ ఉదయం పరగడుపున 3 మాత్రలు ప్రభుత్వ సూచన ప్రకారం వేసుకోవాలి.',
       timingHindi: 'रोज सुबह खाली पेट 3 गोलियां नियमित रूप से लें।'
@@ -195,7 +195,7 @@ export const CLINICAL_DISEASE_DATASET = [
     firstLineMedication: {
       brand: 'Atorvastatin 20mg + Ecosprin 75mg',
       salt: 'Atorvastatin 20mg + Enteric-Coated Aspirin 75mg',
-      pillColor: '#D97706',
+      pillColor: '#B45309',
       colorName: 'Amber Enteric Tablet',
       timingTelugu: 'రాత్రి భోజనం తర్వాత ఒక మాత్ర వేసుకోవాలి. గుండె రక్తనాళాల్లో కొవ్వు చేరకుండా కాపాడుతుంది.',
       timingHindi: 'रात के खाने के बाद एक गोली लें। यह नसों को साफ रखती है।'
@@ -455,7 +455,7 @@ export const CLINICAL_DISEASE_DATASET = [
     firstLineMedication: {
       brand: 'Itraconazole 200mg + Luliconazole 1% Cream (Itral-200)',
       salt: 'Itraconazole 200mg + Luliconazole 1% w/w Topical',
-      pillColor: '#0D9488',
+      pillColor: '#0F766E',
       colorName: 'Teal Blue Capsule',
       timingTelugu: 'మధ్యాహ్నం భోజనం తర్వాత ఒక క్యాప్సూల్ వేసుకోవాలి. క్రీమ్‌ను రాత్రి పూట తామరపై రాయాలి.',
       timingHindi: 'दोपहर के खाने के बाद 1 कैप्सूल लें और रात को मलहम लगाएं।'
@@ -499,7 +499,7 @@ export const CLINICAL_DISEASE_DATASET = [
     firstLineMedication: {
       brand: 'Tamsulosin 0.4mg + Drotaverine 80mg (Urimax-D)',
       salt: 'Tamsulosin Hydrochloride 0.4mg + Drotaverine 80mg',
-      pillColor: '#D97706',
+      pillColor: '#B45309',
       colorName: 'Ochre Amber Capsule',
       timingTelugu: 'రాత్రి భోజనం తర్వాత ఒక మాత్ర వేసుకోండి. మూత్రనాళాన్ని వదులు చేసి రాయి జారేలా చేస్తుంది.',
       timingHindi: 'रात को खाने के बाद एक कैप्सूल लें ताकि पथरी आसानी से निकल सके।'

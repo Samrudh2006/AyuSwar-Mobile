@@ -25,7 +25,7 @@ export default function SanjivaniAnimatedFlowchart({ activeStage = 0 }) {
       subtitle: 'Vernacular Audio Stream',
       icon: PhoneCall,
       detail: 'Telugu / Hindi caller distress call captured. AudioContext extracts emergency keywords.',
-      color: '#EF4444',
+      color: '#B91C1C',
       bg: '#FEF2F2',
       border: '#FECACA'
     },
@@ -45,7 +45,7 @@ export default function SanjivaniAnimatedFlowchart({ activeStage = 0 }) {
       subtitle: 'Emergency ER Pre-Alert',
       icon: Hospital,
       detail: 'Transmits digital handover payload and pre-alerts trauma team before ambulance arrival.',
-      color: '#10B981',
+      color: '#047857',
       bg: '#ECFDF5',
       border: '#A7F3D0'
     }
@@ -64,7 +64,7 @@ export default function SanjivaniAnimatedFlowchart({ activeStage = 0 }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{
-            background: '#EF4444',
+            background: '#B91C1C',
             color: '#FFFFFF',
             fontSize: '10.5px',
             fontWeight: 900,
@@ -78,7 +78,7 @@ export default function SanjivaniAnimatedFlowchart({ activeStage = 0 }) {
             Sanjivani-108 Automated Handover Pipeline
           </h4>
         </div>
-        <span style={{ fontSize: '11.5px', color: '#698892', fontWeight: 600 }}>
+        <span style={{ fontSize: '11.5px', color: '#52707C', fontWeight: 600 }}>
           Live Multi-Stage Dispatch Flow
         </span>
       </div>

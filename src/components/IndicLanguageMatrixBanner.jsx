@@ -70,7 +70,7 @@ export default function IndicLanguageMatrixBanner() {
       sampleMetaphor: 'గుండెల్లో మంట, పుల్లటి తేన్పులు ఎగదన్నుతున్నాయి',
       translation: 'Acid Regurgitation & Retrosternal Pyrosis',
       clinicalCode: 'ICD-10 K21.9 (Gastro-esophageal Reflux)',
-      color: '#D97706'
+      color: '#B45309'
     }
   ];
 
@@ -132,7 +132,7 @@ export default function IndicLanguageMatrixBanner() {
           <span>VARIABLE FONT MORPH & VERNACULAR DIALECT REGIONAL MAP</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#94A3B8' }}>
-          <Radio size={14} color="#10B981" style={{ flexShrink: 0 }} />
+          <Radio size={14} color="#047857" style={{ flexShrink: 0 }} />
           <span>Active Dialect Pipeline • Rayalaseema & Telangana</span>
         </div>
       </div>
@@ -183,7 +183,7 @@ export default function IndicLanguageMatrixBanner() {
             {/* Subtitle Details */}
             <div style={{ fontSize: '12.5px', color: '#94A3B8', lineHeight: 1.5 }}>
               <div style={{ color: '#D0DFE2', marginBottom: '2px' }}>{currentCycle.subEn}</div>
-              <div style={{ color: '#698892', fontStyle: 'italic' }}>{currentCycle.subTe}</div>
+              <div style={{ color: '#52707C', fontStyle: 'italic' }}>{currentCycle.subTe}</div>
             </div>
           </div>
 
@@ -220,7 +220,7 @@ export default function IndicLanguageMatrixBanner() {
             <span style={{ fontSize: '12px', fontWeight: 800, color: '#D0DFE2' }}>
  Regional Dialect Clusters (Interactive Map)
             </span>
-            <span style={{ fontSize: '11px', color: '#698892' }}>
+            <span style={{ fontSize: '11px', color: '#52707C' }}>
               Zero unverified coverage numbers
             </span>
           </div>
@@ -259,7 +259,7 @@ export default function IndicLanguageMatrixBanner() {
                   );
                 })}
               </svg>
-              <div style={{ position: 'absolute', bottom: '6px', left: '6px', fontSize: '9.5px', color: '#698892', fontWeight: 600 }}>
+              <div style={{ position: 'absolute', bottom: '6px', left: '6px', fontSize: '9.5px', color: '#52707C', fontWeight: 600 }}>
                 AP & Telangana
               </div>
             </div>

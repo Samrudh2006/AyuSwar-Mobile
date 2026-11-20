@@ -361,14 +361,14 @@ export default function LiveOpdDemoSimulator({ isOpen, onClose, onApplyToPrescri
               <span>Reset</span>
             </button>
 
-            <div style={{ fontSize: '12px', color: '#698892', fontWeight: 650, display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <div style={{ fontSize: '12px', color: '#52707C', fontWeight: 650, display: 'flex', alignItems: 'center', gap: '4px' }}>
               <Clock size={13} />
               <span>{elapsedSeconds}s / 42s</span>
             </div>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '11px', background: isPlaying ? '#DCFCE7' : '#F1F5F9', color: isPlaying ? '#15803D' : '#698892', padding: '3px 9px', borderRadius: '8px', fontWeight: 750 }}>
+            <span style={{ fontSize: '11px', background: isPlaying ? '#DCFCE7' : '#F1F5F9', color: isPlaying ? '#15803D' : '#52707C', padding: '3px 9px', borderRadius: '8px', fontWeight: 750 }}>
  {isPlaying ? 'LIVE ASR STREAMING': (isCompleted ? '✓ CONSULTATION COMPLETED': 'READY')}
             </span>
 
@@ -406,7 +406,7 @@ export default function LiveOpdDemoSimulator({ isOpen, onClose, onApplyToPrescri
           background: '#ffffff'
         }}>
           {currentLineIndex === -1 && (
-            <div style={{ textAlign: 'center', padding: '40px 20px', color: '#698892' }}>
+            <div style={{ textAlign: 'center', padding: '40px 20px', color: '#52707C' }}>
               <Volume2 size={40} color="#0F4C5C" style={{ opacity: 0.5, marginBottom: '10px' }} />
               <h4 style={{ fontSize: '16px', fontWeight: 750, color: '#081C24', margin: '0 0 6px 0' }}>
                 One-Click Rayalaseema Telugu OPD Simulation
@@ -452,7 +452,7 @@ export default function LiveOpdDemoSimulator({ isOpen, onClose, onApplyToPrescri
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span>{line.speaker}</span>
                       {isLatest && isPlaying && (
-                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#EF4444', animation: 'pulse 1s infinite' }} />
+                        <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#B91C1C', animation: 'pulse 1s infinite' }} />
                       )}
                     </div>
 
@@ -512,7 +512,7 @@ export default function LiveOpdDemoSimulator({ isOpen, onClose, onApplyToPrescri
  {line.extractedConcept.vernacular} ➔ {line.extractedConcept.concept}
                       </div>
                       {line.extractedConcept.priceSavings && (
-                        <div style={{ color: '#059669', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
+                        <div style={{ color: '#047857', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px', marginTop: '2px' }}>
                           <TrendingDown size={14} />
                           <span>Jan Aushadhi: {line.extractedConcept.priceSavings}</span>
                         </div>
@@ -531,13 +531,13 @@ export default function LiveOpdDemoSimulator({ isOpen, onClose, onApplyToPrescri
               padding: '16px',
               borderRadius: '14px',
               background: '#F0FDF4',
-              border: '1.5px solid #10B981',
+              border: '1.5px solid #047857',
               display: 'flex',
               flexDirection: 'column',
               gap: '10px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#065F46', fontWeight: 800, fontSize: '14px' }}>
-                <CheckCircle2 size={18} color="#10B981" />
+                <CheckCircle2 size={18} color="#047857" />
                 <span>Simulated encounter complete: local FHIR-shaped SOAP note draft (demo)</span>
               </div>
               <div style={{ fontSize: '12px', color: '#2C4A52', lineHeight: 1.5 }}>
