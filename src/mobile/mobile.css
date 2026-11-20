@@ -35,15 +35,20 @@
 }
 
 @media (max-width: 768px) {
-  body {
-    background: #F6EFDD url("/assets/ayuswar-app-bg.webp") center top / cover no-repeat fixed;
-  }
+  body { background: #F6EFDD; }
 }
 
 /* Rich app-wide backdrop: illustrated scene-derived background (sky + leaves top,
    warm light middle, deep green waves bottom) fixed behind every screen.
    Content sits on readable cards/surfaces above it. */
-.m-appbg { display: none; }
+.m-appbg {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: #F6EFDD url("/assets/ayuswar-app-bg.webp") center top / cover no-repeat;
+  pointer-events: none;
+}
 
 .m-app {
   min-height: 100vh;
@@ -58,11 +63,31 @@
    them readable over leaves/sky without boxing them. Card interiors unchanged. */
 .m-page > .m-section-title,
 .m-page > .m-display,
+.m-page > h1, .m-page > h2, .m-page > h3,
+.m-page section:not(.m-card) > .m-section-title,
+.m-page section:not(.m-card) > h1,
+.m-page section:not(.m-card) > h2,
+.m-page section:not(.m-card) > h3 {
+  display: inline-block;
+  background: rgba(255, 253, 246, 0.82);
+  -webkit-backdrop-filter: blur(8px) saturate(1.15);
+  backdrop-filter: blur(8px) saturate(1.15);
+  border-radius: 12px;
+  padding: 3px 12px 5px;
+  margin-left: -12px;
+}
 .m-page > .m-sub,
 .m-page > .m-eyebrow,
-.m-page > h1, .m-page > h2, .m-page > h3,
-.m-page > p {
-  text-shadow: 0 0 7px rgba(255, 253, 246, 0.9), 0 0 14px rgba(255, 253, 246, 0.65), 0 1px 2px rgba(255, 253, 246, 0.6);
+.m-page > p,
+.m-page section:not(.m-card) > .m-sub,
+.m-page section:not(.m-card) > .m-eyebrow {
+  display: inline-block;
+  background: rgba(255, 253, 246, 0.68);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 2px 10px 3px;
+  margin-left: -10px;
 }
 
 /* ---------- Top app bar ---------- */
