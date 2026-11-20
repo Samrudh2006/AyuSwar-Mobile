@@ -17,8 +17,11 @@ export default async function handler(req, res) {
   const startTime = Date.now();
   const route = '/api/gnani/status';
 
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET');
+  // GET  = free config-only status (NEVER probes, never spends upstream quota).
+  // POST = explicit live probe, only when the server operator enabled it via
+  //        GNANI_STATUS_PROBE_ENABLED=true and the caller is authorized.
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    res.setHeader('Allow', 'GET, POST');
     logSafeApiAccess({ route, method: req.method, status: 405, durationMs: Date.now() - startTime });
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -66,30 +69,44 @@ export default async function handler(req, res) {
     });
   }
 
-  if (!callerAuth.authorized) {
-    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (caller not authenticated)' });
+  // FREE default: GET never probes. Credentials exist, but nothing has been
+  // verified live and no upstream quota is spent. UI health checks, startup
+  // banners and polls use this path.
+  if (req.method === 'GET') {
+    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (GET never probes, no spend)' });
     return res.status(200).json({
       available: false,
-      status: 'AUTH_REQUIRED',
-      provider: 'browser_fallback',
+      status: 'CONFIGURED_NOT_PROBED',
+      provider: 'gnani',
       tts: {
         configured: Boolean(ttsKey),
-        status: 'AUTH_REQUIRED',
-        model: 'Browser Web SpeechSynthesis (Client Fallback)'
+        status: 'CONFIGURED_NOT_PROBED',
+        model: 'Gnani Timbre v2.5 / v3.0'
       },
       stt: {
         configured: Boolean(sttKey),
-        status: 'AUTH_REQUIRED',
-        model: 'Browser Web SpeechRecognition (Client Fallback)'
+        status: 'CONFIGURED_NOT_PROBED',
+        model: 'Gnani Prisma v3 STT'
       },
       models: {
-        stt: 'Browser Web SpeechRecognition (Client Fallback)',
-        tts: 'Browser Web SpeechSynthesis (Client Fallback)'
+        stt: 'Gnani Prisma v3 STT (not probed)',
+        tts: 'Gnani Timbre v2.5 / v3.0 (not probed)'
       },
       latencyMs: null,
-      lastSuccessTime: null,
-      reason: 'Sign in required to check live speech provider status. Using safe browser speech fallback.'
+      lastSuccessTime,
+      lastSttSuccessTime,
+      reason: 'Credentials configured; live status intentionally not probed (a probe spends upstream quota). An explicit operator-enabled POST probe is required.'
     });
+  }
+
+  // Explicit live probe path (POST): operator-enabled and authorized only.
+  if (process.env.GNANI_STATUS_PROBE_ENABLED !== 'true') {
+    logSafeApiAccess({ route, method: req.method, status: 403, durationMs: Date.now() - startTime, clientNote: 'Probe disabled by server configuration; no spend' });
+    return res.status(403).json({ error: 'Live status probes are disabled by server configuration. Config-only status is available via GET.', probeDisabled: true });
+  }
+  if (!callerAuth.authorized) {
+    logSafeApiAccess({ route, method: req.method, status: callerAuth.status, durationMs: Date.now() - startTime, clientNote: 'Probe rejected (caller not authenticated); no spend' });
+    return res.status(callerAuth.status).json({ error: callerAuth.error });
   }
 
   // Validate upstream host

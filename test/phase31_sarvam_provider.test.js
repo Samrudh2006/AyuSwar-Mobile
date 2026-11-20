@@ -17,17 +17,18 @@ let executed = 0;
   assert.ok(statusSrc.includes('verifyCallerAuthorization'), 'status must gate live probes behind caller auth');
   assert.ok(statusSrc.includes('INSUFFICIENT_QUOTA'), 'status must surface 402 quota distinctly');
   assert.ok(statusSrc.includes('api-subscription-key'), 'status probe must use the Sarvam auth header');
-  // COST POSTURE: normal status checks must NEVER spend credits. The free
-  // config-only answer is the default; the paid probe requires BOTH caller
-  // auth AND an explicit ?probe=live. The probe branch must come after the
-  // free branch so no code path reaches fetch() without the explicit flag.
+  // COST POSTURE: normal status checks must NEVER spend credits. GET always
+  // returns the free config-only answer; the paid probe requires a deliberate
+  // POST + operator env gate + caller auth. The free branch must come before
+  // any code path that can reach fetch().
   assert.ok(statusSrc.includes('CONFIGURED_NOT_PROBED'), 'default answer must be free CONFIGURED_NOT_PROBED');
-  assert.ok(statusSrc.includes("searchParams.get('probe') === 'live'"), 'probe requires explicit probe=live');
-  const iFree = statusSrc.indexOf("clientNote: 'Config-only status (no probe, no spend)'");
-  const iProbe = statusSrc.indexOf("api-subscription-key");
-  assert.ok(iFree > -1 && iProbe > iFree, 'free config-only branch must precede any upstream fetch');
-  const fetchIdx = statusSrc.indexOf('await fetch(ttsEndpoint)');
-  assert.ok(statusSrc.slice(0, fetchIdx).includes("probe') === 'live'"), 'no fetch before the explicit probe gate');
+  assert.ok(statusSrc.includes("SARVAM_STATUS_PROBE_ENABLED !== 'true'"), 'probe requires the operator env gate');
+  assert.ok(statusSrc.includes("req.method === 'GET'"), 'GET must be the free branch');
+  assert.ok(statusSrc.includes('probeDisabled'), 'disabled probe must be refused explicitly');
+  const iFree = statusSrc.indexOf("req.method === 'GET'");
+  const fetchIdx = statusSrc.indexOf('fetch(ttsEndpoint');
+  assert.ok(iFree > -1 && fetchIdx > iFree, 'free GET branch must precede any upstream fetch');
+  assert.ok(statusSrc.slice(0, fetchIdx).includes('SARVAM_STATUS_PROBE_ENABLED'), 'no fetch before the operator env gate');
 
   const ttsSrc = readFileSync(resolve('api/sarvam/tts.js'), 'utf8');
   assert.ok(ttsSrc.includes('process.env.SARVAM_API_KEY'), 'key must come from server env only');

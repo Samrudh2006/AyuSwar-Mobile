@@ -50,7 +50,8 @@ const suites = [
   { name: 'Phase 28: Certificate Pinning Config', file: 'test/phase28_certificate_pinning.test.js', count: 4 },
   { name: 'Phase 29: Local OSS Voice Fallback', file: 'test/phase29_local_voice_fallback.test.js', count: 12 },
   { name: 'Phase 30: Local Voice Integration & Production Packaging', file: 'test/phase30_local_voice_integration.test.js', count: 6 },
-  { name: 'Phase 31: Sarvam Provider Integration', file: 'test/phase31_sarvam_provider.test.js', count: 5 }
+  { name: 'Phase 31: Sarvam Provider Integration', file: 'test/phase31_sarvam_provider.test.js', count: 5 },
+  { name: 'Phase 32: Speech Provider Routing & Billing Safety', file: 'test/phase32_speech_provider_routing.test.js', count: 6 }
 ];
 
 console.clear();

@@ -1112,7 +1112,7 @@ export class IndicSpeechService {
     //    content gate as Gnani; 503/402 are cached so subsequent turns
     //    degrade instantly instead of retrying a billable path. Never
     //    replaces the Gnani tier or the on-device/browser fallbacks below.
-    if (!this._sarvamTtsDisabled && !options.skipSarvam) {
+    if (!this._sarvamTtsDisabled && !options.skipSarvam && !options.strictGnani && this.isSarvamProcessingAllowed()) {
       const sarvamStartTime = Date.now();
       try {
         const sarvamRes = await fetch(apiUrl('/api/sarvam/tts'), {
@@ -1162,7 +1162,7 @@ export class IndicSpeechService {
     } else {
       recordDiagnosticStage({
         stage: 'sarvam_tts',
-        outcomeCode: 'FAST_FALLBACK_UNCONFIGURED',
+        outcomeCode: options.strictGnani ? 'SKIPPED_STRICT_GNANI' : (this.isSarvamProcessingAllowed() ? 'FAST_FALLBACK_UNCONFIGURED' : 'NOT_OPTED_IN'),
         elapsedMs: 0,
         component: 'indicSpeechService'
       });
@@ -1675,6 +1675,16 @@ export class IndicSpeechService {
   // unavailable instead of silently using the network.
   isNetworkSpeechAllowed() {
     try { return globalThis.localStorage?.getItem('ayuswar_network_speech_allowed') === 'true'; } catch { return false; }
+  }
+  // Sarvam is a separate third-party processor. Spoken text (which can be
+  // clinical) must never be sent to it silently as a fallback: the user
+  // explicitly opts in in Settings first. Default OFF.
+  isSarvamProcessingAllowed() {
+    try { return globalThis.localStorage?.getItem('ayuswar_sarvam_processing_allowed') === 'true'; } catch { return false; }
+  }
+  setSarvamProcessingAllowed(allowed) {
+    try { globalThis.localStorage?.setItem('ayuswar_sarvam_processing_allowed', allowed === true ? 'true' : 'false'); } catch {}
+    if (allowed !== true) this._sarvamTtsDisabled = false; // re-probe config on next opt-in
   }
   setNetworkSpeechAllowed(allowed) {
     try { globalThis.localStorage?.setItem('ayuswar_network_speech_allowed', allowed === true ? 'true' : 'false'); } catch {}

@@ -154,7 +154,7 @@ export default async function handler(req, res) {
       }
       res.setHeader('Content-Type', 'audio/wav');
       res.setHeader('Content-Length', String(outBuf.length));
-      res.setHeader('Cache-Control', 'public, max-age=3600');
+      res.setHeader('Cache-Control', 'private, no-store'); // spoken text can be clinical: never shared/browser-cached
       logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime });
       return res.status(200).send(outBuf);
     } else {

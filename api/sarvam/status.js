@@ -7,11 +7,12 @@
  * server-side and NEVER exposed to clients.
  *
  * COST POSTURE (deliberate): a LIVE probe spends real credits (billed per
- * character by Sarvam). Normal status checks must therefore NEVER probe —
- * UI health checks, startup banners and polls get the free config-only
- * answer (CONFIGURED / UNCONFIGURED, no upstream fetch, no key-validity
- * detail). A probe runs ONLY when the caller is authorized AND explicitly
- * passes ?probe=live, i.e. a bounded test action, never automatic.
+ * character by Sarvam). Normal status checks must therefore NEVER probe:
+ * GET always returns the free config-only answer (CONFIGURED_NOT_PROBED /
+ * UNCONFIGURED, no upstream fetch, no key-validity detail). A probe runs
+ * ONLY on a deliberate POST while the server operator has set
+ * SARVAM_STATUS_PROBE_ENABLED=true AND the caller is authorized — a bounded
+ * test action, never automatic, never from a polled health check.
  */
 
 import { validateUpstreamUrl, checkRateLimit, logSafeApiAccess, verifyCallerAuthorization, applyCorsHeaders, handleCorsPreflight } from '../_lib/security.js';
@@ -35,8 +36,11 @@ export default async function handler(req, res) {
   const startTime = Date.now();
   const route = '/api/sarvam/status';
 
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET');
+  // GET  = free config-only status (NEVER probes, never spends credits).
+  // POST = explicit live probe, only when the server operator enabled it via
+  //        SARVAM_STATUS_PROBE_ENABLED=true and the caller is authorized.
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    res.setHeader('Allow', 'GET, POST');
     logSafeApiAccess({ route, method: req.method, status: 405, durationMs: Date.now() - startTime });
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -55,10 +59,10 @@ export default async function handler(req, res) {
     return res.status(200).json(UNCONFIGURED_BODY);
   }
 
-  // FREE default: credentials exist, but nothing has been verified live and
-  // no credit is spent. This is the answer normal UI health checks get.
-  const wantsLiveProbe = (() => { try { return new URL(req.url, 'http://localhost').searchParams.get('probe') === 'live'; } catch { return false; } })();
-  if (!wantsLiveProbe) {
+  // FREE default: GET never probes. Credentials exist, but nothing has been
+  // verified live and no credit is spent. This is the answer normal UI
+  // health checks, startup banners and polls get.
+  if (req.method === 'GET') {
     logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Config-only status (no probe, no spend)' });
     return res.status(200).json({
       available: false,
@@ -68,24 +72,21 @@ export default async function handler(req, res) {
       stt: { configured: true, status: 'CONFIGURED_NOT_PROBED', model: 'Sarvam Saaras v4' },
       latencyMs: null,
       lastSuccessTime,
-      reason: 'Credentials configured; live status intentionally not probed (a probe spends credits). Explicit authorized probe=live required.'
+      reason: 'Credentials configured; live status intentionally not probed (a probe spends credits). An explicit operator-enabled POST probe is required.'
     });
   }
 
-  // Explicit live probe path: authorized caller + probe=live only.
+  // Explicit live probe path (POST): operator-enabled and authorized only.
+  // A query flag on a polled GET was judged too easy to trigger by accident:
+  // probing requires a deliberate POST AND the server-side env gate.
+  if (process.env.SARVAM_STATUS_PROBE_ENABLED !== 'true') {
+    logSafeApiAccess({ route, method: req.method, status: 403, durationMs: Date.now() - startTime, clientNote: 'Probe disabled by server configuration; no spend' });
+    return res.status(403).json({ error: 'Live status probes are disabled by server configuration. Config-only status is available via GET.', probeDisabled: true });
+  }
   const callerAuth = await verifyCallerAuthorization(req);
   if (!callerAuth.authorized) {
-    logSafeApiAccess({ route, method: req.method, status: 200, durationMs: Date.now() - startTime, clientNote: 'Probe rejected (caller not authenticated); no spend' });
-    return res.status(200).json({
-      available: false,
-      status: 'AUTH_REQUIRED',
-      provider: 'sarvam',
-      tts: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Bulbul v3' },
-      stt: { configured: true, status: 'AUTH_REQUIRED', model: 'Sarvam Saaras v4' },
-      latencyMs: null,
-      lastSuccessTime: null,
-      reason: 'Sign in required for a live Sarvam probe. Config status is free; probing is not.'
-    });
+    logSafeApiAccess({ route, method: req.method, status: callerAuth.status, durationMs: Date.now() - startTime, clientNote: 'Probe rejected (caller not authenticated); no spend' });
+    return res.status(callerAuth.status).json({ error: callerAuth.error });
   }
 
   const ttsEndpoint = 'https://api.sarvam.ai/text-to-speech';

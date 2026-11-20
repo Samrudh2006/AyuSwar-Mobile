@@ -66,9 +66,9 @@ const clearEnv = () => ENV_KEYS.forEach((k) => delete process.env[k]);
     const { default: handler } = await import('../api/gnani/status.js');
     const res = mockRes();
     await handler({ method: 'GET', headers: {}, url: '/api/gnani/status' }, res);
-    record('gnani/status unauthenticated: 200 config-only AUTH_REQUIRED, zero upstream fetches', () => {
+    record('gnani/status GET: 200 free config-only CONFIGURED_NOT_PROBED, zero upstream fetches (never bills, any caller)', () => {
       assert(res.statusCode === 200, `expected 200, got ${res.statusCode}`);
-      assert(res.body?.status === 'AUTH_REQUIRED', `expected AUTH_REQUIRED, got ${res.body?.status}`);
+      assert(res.body?.status === 'CONFIGURED_NOT_PROBED', `expected CONFIGURED_NOT_PROBED, got ${res.body?.status}`);
       assert(res.body?.available === false, 'available must be false');
       assert(upstreamFetchCount === 0, `${upstreamFetchCount} upstream fetches happened`);
       assert(!/invalid|unauthorized/i.test(res.body?.reason || ''), 'no key-validity wording leaked');
