@@ -23,6 +23,8 @@ export default function PatientHealthGoalsTab({
   const [bpDiastolic, setBpDiastolic] = useState(78);
   const [restingPulse, setRestingPulse] = useState(72);
   const [bpLogNotification, setBpLogNotification] = useState('');
+  const [bpEdited, setBpEdited] = useState(false);
+  const [bpLogError, setBpLogError] = useState(false);
 
   // Blood Sugar & Glycemic Control
   const [fastingSugar, setFastingSugar] = useState(96);
@@ -132,20 +134,20 @@ export default function PatientHealthGoalsTab({
 
       {/* Toast feedback if logged */}
       {(bpLogNotification || sugarLogNotification) && (
-        <div style={{ 
-          background: '#ECFDF5', 
-          border: '1px solid #047857', 
+        <div style={{
+          background: bpLogError ? '#FEF2F2' : '#ECFDF5',
+          border: bpLogError ? '1px solid #B91C1C' : '1px solid #047857', 
           borderRadius: '12px', 
           padding: '12px 18px', 
           marginBottom: '20px', 
           display: 'flex', 
           alignItems: 'center', 
           gap: '10px',
-          color: '#065F46',
+          color: bpLogError ? '#7F1D1D' : '#065F46',
           fontSize: '13px',
           fontWeight: 650
         }}>
-          <CheckCircle2 size={18} color="#047857" />
+          <CheckCircle2 size={18} color={bpLogError ? '#B91C1C' : '#047857'} />
           <span>{bpLogNotification || sugarLogNotification}</span>
         </div>
       )}
@@ -299,15 +301,15 @@ export default function PatientHealthGoalsTab({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
               <span style={{ fontSize: '13px', fontWeight: 750, color: '#081C24' }}>{t('patient.goals.bpTitle')}</span>
-              <span style={{ 
-                background: bpSystolic < 120 && bpDiastolic < 80 ? '#ECFDF5' : '#FEF3C7', 
-                color: bpSystolic < 120 && bpDiastolic < 80 ? '#047857' : '#B45309', 
-                fontSize: '11px', 
-                fontWeight: 800, 
-                padding: '3px 8px', 
-                borderRadius: '12px' 
+              <span style={{
+                background: bpEdited ? '#F1F5F9' : (bpSystolic < 120 && bpDiastolic < 80 ? '#ECFDF5' : '#FEF3C7'),
+                color: bpEdited ? '#475569' : (bpSystolic < 120 && bpDiastolic < 80 ? '#047857' : '#B45309'),
+                fontSize: '11px',
+                fontWeight: 800,
+                padding: '3px 8px',
+                borderRadius: '12px'
               }}>
-                {bpSystolic < 120 && bpDiastolic < 80 ? t('patient.goals.bpOptimal') : t('patient.goals.bpPre')}
+                {bpEdited ? t('patient.goals.bpNotEvaluated') : (bpSystolic < 120 && bpDiastolic < 80 ? t('patient.goals.bpOptimal') : t('patient.goals.bpPre'))}
               </span>
             </div>
             <div style={{ fontSize: '28px', fontWeight: 850, color: '#081C24', margin: '4px 0 2px 0' }}>
@@ -323,7 +325,7 @@ export default function PatientHealthGoalsTab({
                 <input
                   type="number"
                   value={bpSystolic}
-                  onChange={e => setBpSystolic(Number(e.target.value))}
+                  onChange={e => { setBpEdited(true); setBpSystolic(Number(e.target.value)); }}
                   style={{ width: '100%', padding: '4px 6px', borderRadius: '6px', border: '1px solid #D0DFE2', fontSize: '12px', fontWeight: 700 }}
                 />
               </div>
@@ -332,7 +334,7 @@ export default function PatientHealthGoalsTab({
                 <input
                   type="number"
                   value={bpDiastolic}
-                  onChange={e => setBpDiastolic(Number(e.target.value))}
+                  onChange={e => { setBpEdited(true); setBpDiastolic(Number(e.target.value)); }}
                   style={{ width: '100%', padding: '4px 6px', borderRadius: '6px', border: '1px solid #D0DFE2', fontSize: '12px', fontWeight: 700 }}
                 />
               </div>
@@ -341,7 +343,7 @@ export default function PatientHealthGoalsTab({
                 <input
                   type="number"
                   value={restingPulse}
-                  onChange={e => setRestingPulse(Number(e.target.value))}
+                  onChange={e => { setBpEdited(true); setRestingPulse(Number(e.target.value)); }}
                   style={{ width: '100%', padding: '4px 6px', borderRadius: '6px', border: '1px solid #D0DFE2', fontSize: '12px', fontWeight: 700 }}
                 />
               </div>
@@ -350,7 +352,15 @@ export default function PatientHealthGoalsTab({
 
           <button
             onClick={() => {
-              setBpLogNotification(`Vitals Logged: ${bpSystolic}/${bpDiastolic} mmHg at ${restingPulse} bpm recorded to ABHA.`);
+              const valid = [bpSystolic, bpDiastolic, restingPulse].every(v => Number.isFinite(v) && v > 0)
+                && bpSystolic >= bpDiastolic;
+              if (!valid) {
+                setBpLogError(true);
+                setBpLogNotification(t('patient.goals.bpToastInvalid'));
+              } else {
+                setBpLogError(false);
+                setBpLogNotification(t('patient.goals.bpToastOk', { s: bpSystolic, d: bpDiastolic, p: restingPulse }));
+              }
               setTimeout(() => setBpLogNotification(''), 4000);
             }}
             style={{ background: '#0A2540', color: '#ffffff', border: 'none', borderRadius: '8px', padding: '7px', fontSize: '11.5px', fontWeight: 750, cursor: 'pointer' }}
