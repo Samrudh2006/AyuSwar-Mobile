@@ -134,7 +134,7 @@ npm test    # 237 specs + 3 conditional skips (see metrics below)
 
 ## 📦 Offline voice packs (optional, on-device)
 
-Two optional packs run inference entirely on-device after download (WASM, no network). Both are opt-in: nothing downloads without an explicit consent screen that shows the exact byte size; Wi-Fi only unless you tick "allow mobile data"; every file is sha256-verified against the pinned manifest on download and again on every load; a mismatch deletes the file and keeps nothing. Install from the app menu (Menu → Offline voice pack / Offline transcription pack).
+Two optional packs run inference entirely on-device after download (WASM, no network). Both are opt-in: nothing downloads without an explicit consent screen that shows the exact byte size; Wi-Fi only unless you tick "allow mobile data"; every file is sha256-verified against the pinned manifest on download and again on every load; a mismatch deletes the file and keeps nothing. Install from the app menu (Menu → Offline voice pack / Offline transcription pack). A pack whose files are not yet published shows as unavailable inside the app instead of starting a download that would fail.
 
 | Pack | Size | What it does | Hard limits |
 |---|---|---|---|
