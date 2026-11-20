@@ -68,3 +68,6 @@ android/local.properties
 
 # local capture/verification harnesses (dev-only)
 _*.mjs
+
+# Local evaluation data (FLEURS etc.) - fetched by scripts/fetch-fleurs.sh, never committed
+eval-data/

@@ -19,6 +19,11 @@ Third-party components and data with their own licenses:
   not medical, dosage or substitution guidance.
 - Synthetic benchmark corpora and FHIR-shaped fixtures under benchmarks/:
   synthetic demo content created for this project, no real patient data.
+- Google FLEURS speech corpus (te_in, hi_in), used only for local ASR
+  evaluation, fetched by scripts/fetch-fleurs.sh and never committed:
+  CC-BY-4.0 (https://huggingface.co/datasets/google/fleurs).
+  Conneau et al., "FLEURS: Few-shot Learning Evaluation of Universal
+  Representations of Speech", arXiv:2205.12446 (2022).
 
 Clinical safety: AyuSwar AI is a synthetic demo prototype. It is not a
 certified medical device and provides no diagnosis, dosage, or substitution
