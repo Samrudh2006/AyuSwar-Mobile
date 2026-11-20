@@ -149,6 +149,14 @@ export default function ClinicalNotificationsDrawer({
   const [pushStatus, setPushStatus] = useState('default');
   const [localNoticeResult, setLocalNoticeResult] = useState('');
 
+  // Keyboard accessibility: Escape closes the drawer while it is open.
+  useEffect(() => {
+    if (!isOpen || typeof onClose !== 'function') return undefined;
+    const onEsc = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [isOpen, onClose]);
+
   // Persist notifications on change
   useEffect(() => {
     try {

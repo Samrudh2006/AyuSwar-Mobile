@@ -7,7 +7,7 @@ import { useApp } from '../context/AppContext';
 import { triggerHaptic } from '../utils/haptics';
 import {
   IconMic, IconScan, IconSpeaker, IconLab, IconStethoscope, IconUser,
-  IconSiren, IconChevronR, IconDiya, IconGlobe, IconHeart, IconPhone
+  IconSiren, IconChevronR, IconDiya, IconGlobe, IconHeart, IconPhone, IconCalendar
 } from './MIcons';
 
 export default function MHome() {
@@ -72,6 +72,11 @@ export default function MHome() {
             <span className="m-quick-ic"><IconLab /></span>
             <b>{t('acousticLab')}</b>
             <span>{t('serviceAcousticDesc')}</span>
+          </button>
+          <button className="m-quick" onClick={() => go('/appointment-ticket')}>
+            <span className="m-quick-ic"><IconCalendar /></span>
+            <b>{t('OPD appointment ticket')}</b>
+            <span>{t('View your booking ticket with QR')}</span>
           </button>
         </div>
       </section>

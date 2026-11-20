@@ -1055,7 +1055,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
         </div>
 
         {/* Voice service status badge */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', flexWrap: 'wrap' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -1113,7 +1113,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               {(effectivePatientName.split('(')[0] || effectivePatientName).trim().charAt(0)}
             </div>
 
-            <div>
+            <div style={{ minWidth: 0 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                 <h1 style={{ fontSize: '18px', color: '#091E26', fontWeight: 850, margin: 0 }}>
                   {effectivePatientName}
@@ -1636,6 +1636,24 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 </div>
               </div>
             </div>
+
+            {/* Recording/transcription status line: makes micStatusMsg visible and
+                announced (timeout notes, recording state, transcription progress). */}
+            {micStatusMsg && (
+              <div role="status" aria-live="polite" style={{
+                marginTop: '8px',
+                padding: '7px 12px',
+                borderRadius: '8px',
+                background: 'rgba(15, 76, 92, 0.08)',
+                border: '1px solid #D0DFE2',
+                color: '#0F4C5C',
+                fontSize: '11.5px',
+                fontWeight: 600,
+                lineHeight: 1.45
+              }}>
+                {micStatusMsg}
+              </div>
+            )}
 
             {/* Live Audio STFT Spectrum Bars & DSP Hardware Filters Telemetry */}
             <div style={{

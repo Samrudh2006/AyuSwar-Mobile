@@ -102,6 +102,14 @@ export default function FloatingAssistant({
     window.addEventListener('ayuswar:open-assistant', onSummon);
     return () => window.removeEventListener('ayuswar:open-assistant', onSummon);
   }, []);
+  // Keyboard accessibility: Escape collapses an open (idle/ended) panel. Active
+  // listening/speaking sessions are left untouched so Escape never kills audio mid-flow.
+  useEffect(() => {
+    if (assistantState !== 'expanded' && assistantState !== 'ended') return undefined;
+    const onEsc = (e) => { if (e.key === 'Escape') setAssistantState('collapsed'); };
+    window.addEventListener('keydown', onEsc);
+    return () => window.removeEventListener('keydown', onEsc);
+  }, [assistantState]);
   const [isMuted, setIsMuted] = useState(false);
   const [showTextInput, setShowTextInput] = useState(false);
   const [textInputValue, setTextInputValue] = useState('');

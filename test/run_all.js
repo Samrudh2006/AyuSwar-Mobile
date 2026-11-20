@@ -56,7 +56,8 @@ const suites = [
   { name: 'Phase 34: Offline ASR Pack', file: 'test/phase34_local_asr_pack.test.js', count: 11 },
   { name: 'Phase 35: Local ASR Fallback Wiring', file: 'test/phase35_local_asr_fallback_wiring.test.js', count: 3 },
   { name: 'Phase 36: Structured Assistant Answers', file: 'test/structured_answers.test.js', count: 5 },
-  { name: 'Phase 37: Offline Sync Queue Integrity', file: 'test/phase37_offline_sync_integrity.test.js', count: 6 }
+  { name: 'Phase 37: Offline Sync Queue Integrity', file: 'test/phase37_offline_sync_integrity.test.js', count: 6 },
+  { name: 'Phase 38: API Reliability Chain', file: 'test/phase38_api_reliability_chain.test.js', count: 5 }
 ];
 
 console.clear();

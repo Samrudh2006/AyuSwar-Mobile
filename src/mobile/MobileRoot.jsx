@@ -10,6 +10,8 @@ const UnifiedAuthView = lazyWithRetry(() => import('../views/UnifiedAuthView'));
 const MSanjivani = lazyWithRetry(() => import('./MSanjivani'));
 const MClinical = lazyWithRetry(() => import('./MClinical'));
 const MScribeFlow = lazyWithRetry(() => import('./MScribeFlow'));
+const MOpdNote = lazyWithRetry(() => import('./MOpdNote'));
+const MAppointmentTicket = lazyWithRetry(() => import('./MAppointmentTicket'));
 import FloatingAssistant from '../components/FloatingAssistant';
 import { AppLockScreen } from './MAppLock';
 import { isAppLockEnabled } from './appLock';
@@ -279,6 +281,8 @@ export default function MobileRoot() {
           <Route path="/clinical-console" element={<Embedded title="OPD Scribe" subtitle="Voice consultation demo" showBack hideTabs><MClinical /></Embedded>} />
           <Route path="/clinical-console/full" element={<Embedded title="OPD Scribe Studio" subtitle="Voice consultation demo" showBack hideTabs><ClinicalConsole /></Embedded>} />
           <Route path="/clinical-console/review" element={<Embedded title="Visit summary" subtitle="Steps 2-4 demo" showBack hideTabs><MScribeFlow /></Embedded>} />
+          <Route path="/opd-note" element={<Embedded title="OPD Note" subtitle="Structured draft" showBack hideTabs><MOpdNote /></Embedded>} />
+          <Route path="/appointment-ticket" element={<Embedded title="OPD Ticket" subtitle="Appointment pass" showBack hideTabs><MAppointmentTicket /></Embedded>} />
           <Route path="/doctor-portal" element={<Embedded title="Doctor Portal" showBack hideTabs><DoctorPortal greetingKey="doctor.home.greetingNeutral" doctorProfile={doctorProfile} onLogoutDoctor={() => { setDoctorProfile(null); navigate('/'); }} /></Embedded>} />
           <Route path="/patient-portal" element={<Embedded title="Patient Portal" showBack hideTabs><PatientPortal patientProfile={patientProfile} onLogoutPatient={() => { setPatientProfile(null); navigate('/'); }} onSwitchPatient={setPatientProfile} /></Embedded>} />
 

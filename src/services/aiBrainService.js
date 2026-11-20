@@ -422,7 +422,10 @@ export async function transcribeAudioWithGroqWhisper(audioBlob, language = 'te')
     body: JSON.stringify({
       audioBase64,
       language
-    })
+    }),
+    // Audio uploads can be large; cap the wait so a stalled connection surfaces
+    // a timeout note instead of an indefinite transcribing spinner.
+    signal: AbortSignal.timeout(45000)
   });
 
   if (!res.ok) {

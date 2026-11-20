@@ -301,6 +301,9 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
                     onChange={(e) => editField('bestMatterVernacular', e.target.value)}
                   />
                 </label>
+                <button className="m-btn m-btn-ghost" style={{ marginTop: 6 }} onClick={() => { triggerHaptic('light'); navigate('/opd-note', { state: { soap, encounter, turns, sourceMode: state.sourceMode } }); }}>
+                  {t('Open structured OPD note')}
+                </button>
                 <button className="m-btn m-btn-primary" disabled={!soap?.bestMatterVernacular?.trim()} style={{ marginTop: 6 }} onClick={() => { triggerHaptic('light'); setStep(1); }}>
                   {edited ? t('Continue with my edits') : t('Approve & continue to voice note')}
                 </button>
