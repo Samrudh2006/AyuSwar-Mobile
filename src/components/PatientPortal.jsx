@@ -1824,7 +1824,7 @@ export default function PatientPortal({
                       </div>
 
                       <button 
-                        onClick={() => alert(`Launching video session with ${assignedDoctor.doctorName}...`)}
+                        onClick={() => alert(t('patient.home.videoConsultNote'))}
                         style={{
                           background: '#0F4C5C',
                           color: '#ffffff',
@@ -3391,7 +3391,7 @@ export default function PatientPortal({
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                                   {isTeleconsult ? (
                                     <button
-                                      onClick={() => alert('Teleconsultation session initialized with secure WebRTC media bridge.')}
+                                      onClick={() => alert(t('patient.appts.teleconsultNote'))}
                                       style={{
                                         background: '#0F4C5C',
                                         color: '#ffffff',
