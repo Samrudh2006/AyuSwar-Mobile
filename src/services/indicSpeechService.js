@@ -586,6 +586,37 @@ export class IndicSpeechService {
   }
 
   /**
+   * Local on-device ASR fallback tier (Phase 34). Runs ONLY when the user has
+   * explicitly installed + consented to the offline transcription pack; fully
+   * on-device, no network. Output is a DRAFT requiring human review
+   * (draft/requiresReview flags), never auto-applied to clinical records -
+   * callers must label it as a draft. Any local failure returns null and the
+   * caller's existing fallback contract is unchanged.
+   */
+  async tryLocalAsrFallback(audioBlob, langCode = 'te-IN', signal) {
+    try {
+      const { transcribeInstalledClip } = await import('./localVoice/localAsrService.js');
+      const language = String(langCode || 'te-IN').split('-')[0] || 'te';
+      const r = await transcribeInstalledClip(audioBlob, { signal, language });
+      this.activeProvider = 'local_oss_onnx_asr';
+      return {
+        transcript: r.transcript,
+        provider: r.provider,
+        model: 'IndicConformer INT8 (on-device, draft)',
+        draft: true,
+        requiresReview: true,
+        clinicalValidated: false,
+        localOnDevice: true
+      };
+    } catch (e) {
+      if (e && e.code !== 'MODELS_NOT_INSTALLED' && e.code !== 'UNSUPPORTED_LANGUAGE') {
+        console.warn('Local on-device ASR fallback failed:', (e && e.code) || '', (e && e.message) || e);
+      }
+      return null;
+    }
+  }
+
+  /**
    * Transcribe Audio Chunk using Serverless Gnani STT (/api/gnani/stt)
    * If Gnani server route is unconfigured or fails, returns { transcript: null, fallbackRequired: true }
    */
@@ -594,6 +625,8 @@ export class IndicSpeechService {
       return { transcript: null, fallbackRequired: true, aborted: true };
     }
     if (this.gnaniAvailable === false) {
+      const local = await this.tryLocalAsrFallback(audioBlob, langCode, options.signal);
+      if (local) return local;
       return { transcript: null, fallbackRequired: true };
     }
 
@@ -661,6 +694,10 @@ export class IndicSpeechService {
       // REMOVED: automatic Cloudflare Workers AI Whisper fallback. Patient audio
       // must never be auto-forwarded to a third-party processor without explicit
       // disclosure and consent. Fall back to the labeled local/browser path.
+      {
+        const local = await this.tryLocalAsrFallback(audioBlob, langCode, combinedSignal);
+        if (local) return local;
+      }
       return { transcript: null, fallbackRequired: true };
     } catch (err) {
       if (err.name === 'AbortError' || combinedSignal.aborted) {
@@ -670,6 +707,10 @@ export class IndicSpeechService {
 
       // REMOVED: automatic Cloudflare Workers AI Whisper fallback on network
       // error (same undisclosed third-party audio forwarding concern).
+      {
+        const local = await this.tryLocalAsrFallback(audioBlob, langCode, options.signal);
+        if (local) return local;
+      }
       return { transcript: null, fallbackRequired: true, error: err.message };
     } finally {
       if (this.inFlightSttController === sttController) {

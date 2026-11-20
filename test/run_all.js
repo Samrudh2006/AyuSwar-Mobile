@@ -52,7 +52,9 @@ const suites = [
   { name: 'Phase 30: Local Voice Integration & Production Packaging', file: 'test/phase30_local_voice_integration.test.js', count: 6 },
   { name: 'Phase 31: Sarvam Provider Integration', file: 'test/phase31_sarvam_provider.test.js', count: 5 },
   { name: 'Phase 32: Speech Provider Routing & Billing Safety', file: 'test/phase32_speech_provider_routing.test.js', count: 6 },
-  { name: 'Phase 33: 16kHz ASR Resampler', file: 'test/phase33_asr_resampler.test.js', count: 6 }
+  { name: 'Phase 33: 16kHz ASR Resampler', file: 'test/phase33_asr_resampler.test.js', count: 6 },
+  { name: 'Phase 34: Offline ASR Pack', file: 'test/phase34_local_asr_pack.test.js', count: 11 },
+  { name: 'Phase 35: Local ASR Fallback Wiring', file: 'test/phase35_local_asr_fallback_wiring.test.js', count: 3 }
 ];
 
 console.clear();

@@ -226,12 +226,14 @@ export default function LiveScribeSessionModal({
     try {
       const res = await speechService.transcribeAudioWithGnani(blob, targetLang);
       if (res && res.transcript && res.transcript.trim()) {
-        setHasGnaniSttTranscribed(true);
+        const isDraft = Boolean(res.draft);
+        if (!isDraft) setHasGnaniSttTranscribed(true);
         setDialogueList(prev => [...prev, {
-          speaker: 'Doctor (Gnani STT - Live)',
+          speaker: isDraft ? 'Doctor (Local on-device DRAFT - review required)' : 'Doctor (Gnani STT - Live)',
           lang: safePatient.language || 'Telugu',
           text: res.transcript.trim(),
-          isGnaniLive: true
+          isGnaniLive: !isDraft,
+          isLocalDraft: isDraft
         }]);
       } else if (res?.fallbackRequired) {
         // Gnani unavailable or key unset, keep fallback active

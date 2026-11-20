@@ -36,7 +36,7 @@ const env = {
 };
 export function _setEnvForTests(overrides) { Object.assign(env, overrides); }
 
-async function sha256Hex(buf) {
+export async function sha256Hex(buf) {
   const subtle = env.cryptoFn();
   if (!subtle) throw new LocalVoiceError('NO_CRYPTO', 'WebCrypto unavailable; cannot verify model integrity.');
   const digest = await subtle.digest('SHA-256', buf);
@@ -88,7 +88,7 @@ function assertUsableConsent(language) {
   return c;
 }
 
-async function putInCache(key, buf) {
+export async function putInCache(key, buf) {
   const store = await env.cachesFn().open(CACHE_NAME);
   await store.put(`/__local_voice__/${key}`, new Response(buf, { headers: { 'content-type': 'application/octet-stream' } }));
 }
