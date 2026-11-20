@@ -16,7 +16,7 @@ import {
   ShieldCheck,
   Clock
 } from 'lucide-react';
-import { checkNotificationPermission, requestNotificationPermission, sendLocalDemoNotification } from '../services/deviceNotificationService';
+import { checkNotificationPermission, requestNotificationPermission, sendLocalDemoNotification, listenForLocalNotificationActions } from '../services/deviceNotificationService';
 
 /**
  * ClinicalNotificationsDrawer
@@ -165,6 +165,27 @@ export default function ClinicalNotificationsDrawer({
       if (mounted && result.supported) setPushStatus(result.status);
     });
     return () => { mounted = false; };
+  }, []);
+
+  // Native tap feedback: this reports an action event received by the app,
+  // never delivery, sound, vibration, or DND success.
+  useEffect(() => {
+    let mounted = true;
+    let listener = null;
+    listenForLocalNotificationActions((event) => {
+      if (!mounted) return;
+      const title = event?.notification?.title || 'synthetic local notification';
+      setLocalNoticeResult(`Opened from local notification: ${title}. Android delivery was observed by the app; server push is not connected.`);
+    }).then((handle) => {
+      if (!mounted) handle?.remove?.();
+      else listener = handle;
+    }).catch(() => {
+      // Native listener registration is unavailable in browser/unsupported shells.
+    });
+    return () => {
+      mounted = false;
+      listener?.remove?.();
+    };
   }, []);
 
   // Web Audio chime sound

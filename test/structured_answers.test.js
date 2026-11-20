@@ -33,10 +33,9 @@ const medCard = med.blocks.find(b => b.type === 'card');
 assert.ok(/telmisartan/i.test(medCard.title), 'medicine card should name matched generic');
 assert.ok(med.blocks.some(b => b.type === 'note' && /not medical advice/i.test(b.body)), 'medicine must carry nonclinical note');
 
-// Vernacular symptom -> concept card + consult-doctor note
+// Vernacular symptom -> no canned concept or urgency classification
 const vern = mapQueryToStructuredAnswer('నాకు ఆయాసం గా ఉంది');
-assertBlocksValid(vern, 'vernacular');
-assert.ok(vern.blocks.some(b => b.type === 'note' && /not a diagnosis/i.test(b.body)), 'vernacular must carry not-a-diagnosis note');
+assert.strictEqual(vern, null, 'vernacular symptoms must use the safe plain-text path');
 
 // Portal intent -> tabs + portal action
 const portal = mapQueryToStructuredAnswer('where is my appointment');
@@ -46,4 +45,4 @@ assertBlocksValid(portal, 'portal');
 assert.strictEqual(mapQueryToStructuredAnswer('what is the weather today'), null, 'unmatched query must fall back to text');
 assert.strictEqual(mapQueryToStructuredAnswer(''), null, 'empty query must return null');
 
-console.log('structured_answers: 5 contract groups OK');
+console.log('structured_answers: 5/5 passed');

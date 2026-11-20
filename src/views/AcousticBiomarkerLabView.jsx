@@ -2196,7 +2196,7 @@ export default function AcousticBiomarkerLabView() {
                       <div key={match.key}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12.5px', marginBottom: '4px' }}>
                           <span style={{ fontWeight: 750, color: '#081C24' }}>{match.label}</span>
-                          <span style={{ color: '#698892', fontFamily: 'monospace' }}>Distance Score: {match.similarityScore}/100</span>
+                          <span style={{ color: '#698892', fontFamily: 'monospace' }}>Reference similarity: {match.similarityScore}/100</span>
                         </div>
                         <div style={{ height: '8px', background: '#FAF8F5', borderRadius: '4px', overflow: 'hidden' }}>
                           <div style={{

@@ -10,7 +10,7 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fraunces&weight=600&size=22&duration=2600&pause=900&color=0F4C5C&center=true&vCenter=true&width=640&height=45&lines=Ambient+clinical+voice+scribe+for+Indian+healthcare;%E0%B0%86%E0%B0%AF%E0%B1%81%E0%B0%B8%E0%B1%8D%E0%B0%B5%E0%B0%B0%3A+%E0%B0%AE%E0%B1%80+%E0%B0%B5%E0%B0%BE%E0%B0%A3%E0%B0%BF%2C+%E0%B0%AE%E0%B1%80+%E0%B0%AD%E0%B0%BE%E0%B0%B7%E0%B0%B2%E0%B1%8B;Spoken+Audio-Rx+%C2%B7+Blister+OCR+%C2%B7+Patient+portal;Synthetic+data+only+-+honest+by+design" alt="Typing banner" />
 </a>
 
-![Test suite](https://img.shields.io/badge/tests-237%20passed%20%C2%B7%203%20conditional%20skips%20(20%20Nov%202026)-0F4C5C)
+![Test suite](https://img.shields.io/badge/tests-243%20passed%20%C2%B7%204%20conditional%20skips%20(20%20Nov%202026)-0F4C5C)
 ![Build](https://img.shields.io/badge/build-passing-0D9488)
 ![Platform](https://img.shields.io/badge/platform-Android%20(Capacitor)%20%2B%20web-D97706)
 ![Data](https://img.shields.io/badge/demo%20data-synthetic%20samples-486770)
@@ -127,7 +127,7 @@ cd android && ./gradlew assembleDebug   # verified with JDK 21
 Tests:
 
 ```bash
-npm test    # 237 specs + 3 conditional skips (see metrics below)
+npm test    # 243 specs + 4 conditional skips (see metrics below)
 ```
 
 ---
@@ -148,21 +148,21 @@ Measured on desktop (single runs, exploratory - NOT phone numbers): built-app br
 ## 🏗️ Architecture
 
 - **Front end:** React + Vite, custom mobile lens (390px-first), Fraunces + Albert Sans, cream/teal/saffron design system
-- **Mobile shell:** Capacitor 6, native splash, local asset bundle, live API calls pointed at the deployed backend
+- **Mobile shell:** Capacitor 8, native splash, local asset bundle, live API calls pointed at the deployed backend
 - **Voice:** Gnani proxy (`/api/gnani/tts`, `/api/gnani/stt`), then clearly-labeled fallbacks: an explicit opt-in Sarvam TTS tier (third-party processor, per-character cost, off by default), on-device offline packs (below), then the browser Web Speech fallback, then an honest unavailable state. No silent failures: playback that does not start says so on screen. Browser speech recognition behavior depends on the browser and OS
 - **OCR:** Tesseract.js running fully on-device; results labeled as unverified candidates until checked against the original label
 - **Data:** patient-portal entries persist in the browser/app `localStorage` on the device. Voice features call the listed remote endpoints (`/api/gnani/tts`, `/api/gnani/stt`) on the deployed origin, and browser speech recognition uses the browser/OS recognizer, which may send audio to the OS vendor. A full network-traffic inventory has not been independently audited.
 
 ---
 
-## 📊 Measured metrics (18 Nov 2026, this repository's build)
+## 📊 Measured metrics (20 Nov 2026, this repository's build)
 
 | Metric | Result | Scope |
 |---|---|---|
-| Test suite | **237 passed, 3 conditional skips, 0 failed** | `npm test` on this repo, 20 Nov 2026 |
+| Test suite | **243 passed, 4 conditional skips, 0 failed** | `npm test` on this repo, 20 Nov 2026; includes structured-answer contracts |
 | Production build | Green | `npm run build`, 20 Nov 2026 |
-| Debug APK (working tree) | 69,594,976 bytes after packaging dedupe (was 78,886,799 before; published candidate is 57,009,839 with a different feature set) | `gradlew assembleDebug`, 20 Nov 2026 |
-| TTS endpoint | HTTP 200, valid 38 KB WAV returned | Live `POST /api/gnani/tts`, 18 Nov |
+| Debug APK (working tree) | **77,135,436 bytes**, SHA-256 `7170DFF0EACF7D646F6249F6226CDF1D0E8AACA4D3F1A1A58FF707A469164B4B` | `gradlew assembleDebug`, 20 Nov 2026; debug APK, not a signed release |
+| TTS endpoint | **Not release-verified**; latest recorded provider check returned 502/404 responses | Live provider availability and audible APK playback remain unverified |
 | Runtime failure honesty | Blank-scan and no-voice cases show explicit notices, no fake progress | Headless Chromium checks, 18 Nov |
 
 Earlier Lighthouse and performance figures were measured on the **old live web build** (10:53-10:55 IST, 18 Nov) and do not describe this mobile build, so they are not repeated here. Rate limiting is implemented in source but has not been verified under live trigger.
@@ -174,7 +174,7 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 - **Transcript preservation is not accuracy validation:** `normalizeCodeMixedClinicalText` does not rewrite supplied text into medicine names, strengths or diagnostic codes. Recognition errors still require clinician review. Browser/Android speech processing depends on the provider and device settings and is not guaranteed to stay on-device.
 - **Benchmark fixtures are not clinical evidence:** bundled CSVs and historical example annotations do not establish live recognizer accuracy, preservation of medical intent or absence of harm. See [benchmark verification limits](benchmarks/RESULTS.md).
 
-- **Native Android runtime untested:** the APK is built and its bundled assets verified, but installation, audio playback, microphone and camera permissions have not been exercised on a physical device. All native verification is pending. Offline-pack inference is verified in desktop browser WASM and Node only - not on Android WebView, not on low-RAM hardware, and no device WER/latency numbers exist.
+- **Native Android runtime untested:** the APK is built and its bundled assets verified, but installation, audio playback, microphone and camera permissions have not been exercised on a physical device. Native notification channel delivery, tap actions, vibration, DND behavior, hardware back, share sheets and file downloads are also pending. Offline-pack inference is verified in desktop browser WASM and Node only - not on Android WebView, not on low-RAM hardware, and no device WER/latency numbers exist.
 - **Offline ASR is draft-quality:** the on-device transcription pack produces drafts with observed omissions and substitutions; identical model bytes give slightly different transcripts across machines/runtimes (observed, cause unconfirmed). Output is labeled draft and requires human review everywhere it appears.
 - **Uploaded reports are not read:** the report organizer stores what you type; it never interprets an uploaded file and says so on screen.
 - **Scanner OCR is English-model only** and its dictionary matches are unverified candidates, not medicine identification.
@@ -183,7 +183,7 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 
 ## 🗺️ Roadmap (proposed, not committed)
 
-- Real Android runtime verification (audio, mic, camera, offline behavior) on physical devices
+- Real Android runtime verification (audio, mic, camera, notifications, sharing, hardware back and offline behavior) on physical devices
 - Consent-based medicine reminders
 - Sandbox-verified external integrations before any "live" label
 - Clinician-led validation before anything resembling real use

@@ -41,63 +41,63 @@ export const ACOUSTIC_CLUSTER_PROFILES = {
   },
   asthma_wheeze: {
     label: 'High-Frequency Polyphonic Airway Signal',
-    category: 'Pulmonology (Experimental Signal)',
+    category: 'Respiratory-signal research pattern',
     f0Mean: 220, f0Std: 45,
     jitterMean: 2.85, jitterStd: 0.75,
     shimmerMean: 4.90, shimmerStd: 1.20,
     hnrMean: 13.8, hnrStd: 2.2,
     spectralCentroidMean: 1850, spectralCentroidStd: 320,
-    description: 'Elevated spectral centroid and periodic turbulence characteristic of narrowed airways.'
+    description: 'Synthetic high-frequency whistle and periodic modulation; not a disease or airway finding.'
   },
   copd_rhonchi: {
     label: 'Low-Frequency Bronchial Airway Perturbation',
-    category: 'Pulmonology (Experimental Signal)',
+    category: 'Low-frequency research pattern',
     f0Mean: 130, f0Std: 25,
     jitterMean: 3.40, jitterStd: 0.85,
     shimmerMean: 6.20, shimmerStd: 1.50,
     hnrMean: 11.2, hnrStd: 2.0,
     spectralCentroidMean: 950, spectralCentroidStd: 180,
-    description: 'Sub-audible low-frequency harmonic dampening with increased jitter.'
+    description: 'Synthetic low-frequency harmonic dampening pattern; not a disease or airway finding.'
   },
   pneumonia_rales: {
     label: 'Explosive Discontinuous Adventitious Signal',
-    category: 'Pulmonology (Experimental Signal)',
+    category: 'Discontinuous-signal research pattern',
     f0Mean: 195, f0Std: 40,
     jitterMean: 3.65, jitterStd: 0.90,
     shimmerMean: 7.80, shimmerStd: 1.80,
     hnrMean: 11.5, hnrStd: 2.1,
     spectralCentroidMean: 1450, spectralCentroidStd: 280,
-    description: 'Discontinuous acoustic crackles across middle frequencies.'
+    description: 'Synthetic discontinuous burst pattern across middle frequencies; not a lung finding.'
   },
   vocal_edema_fluid: {
     label: 'Dampened Fundamental Frequency & Spectral Dispersion',
-    category: 'Cardiovascular Literature Research Pattern',
+    category: 'Low-pitch research pattern',
     f0Mean: 112, f0Std: 20,
     jitterMean: 4.15, jitterStd: 1.10,
     shimmerMean: 8.40, shimmerStd: 1.90,
     hnrMean: 9.4, hnrStd: 2.5,
     spectralCentroidMean: 820, spectralCentroidStd: 160,
-    description: 'Vocal fold mass-loading causing pitch depression and reduced harmonic purity.'
+    description: 'Synthetic pitch depression and reduced harmonic purity; no tissue or cardiac inference.'
   },
   neurological_tremor: {
     label: 'Low-Frequency Phonatory Modulation (4–8 Hz Flutter)',
-    category: 'Neurological Literature Research Pattern',
+    category: 'Low-frequency modulation research pattern',
     f0Mean: 136, f0Std: 22,
     jitterMean: 3.90, jitterStd: 0.95,
     shimmerMean: 6.70, shimmerStd: 1.40,
     hnrMean: 12.1, hnrStd: 2.0,
     spectralCentroidMean: 1100, spectralCentroidStd: 210,
-    description: 'Periodic amplitude and frequency modulation during sustained phonation.'
+    description: 'Synthetic periodic amplitude and frequency modulation; not a neurological finding.'
   },
   pediatric_stridor: {
     label: 'High-Pitch Inspiratory Airway Signal',
-    category: 'Pediatric Respiratory Research Pattern',
+    category: 'High-pitch research pattern',
     f0Mean: 380, f0Std: 65,
     jitterMean: 4.20, jitterStd: 1.20,
     shimmerMean: 7.90, shimmerStd: 1.70,
     hnrMean: 8.5, hnrStd: 1.9,
     spectralCentroidMean: 2800, spectralCentroidStd: 450,
-    description: 'Marked upper airway obstruction harmonic signature with high spectral centroid.'
+    description: 'Synthetic high-pitch harmonic pattern with elevated spectral centroid; not an obstruction finding.'
   }
 };
 

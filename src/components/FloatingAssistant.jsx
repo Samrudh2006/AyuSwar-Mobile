@@ -1043,7 +1043,7 @@ export default function FloatingAssistant({
                 </div>
 
                 {/* Dynamic Dialogue / Transcript Card */}
-                <div className="fa-answercard" style={{
+                <div className={mobileFull ? 'fa-transcript-card' : 'fa-answercard'} style={{
                   background: '#FFFFFF',
                   border: '1.5px solid #D0DFE2',
                   borderRadius: '14px',

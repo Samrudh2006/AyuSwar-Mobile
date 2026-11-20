@@ -16,6 +16,17 @@ export const getNotificationSupport = () => ({
   browser: typeof window !== 'undefined' && 'Notification' in window
 });
 
+/**
+ * Subscribe to native local-notification taps. Registration is intentionally
+ * native-only: the browser Notification constructor has no equivalent action
+ * callback that this demo controls. The callback proves the app received an
+ * action event, not that Android displayed or played the notification.
+ */
+export const listenForLocalNotificationActions = async (onAction) => {
+  if (!isNative() || typeof onAction !== 'function') return null;
+  return LocalNotifications.addListener('localNotificationActionPerformed', onAction);
+};
+
 export const checkNotificationPermission = async () => {
   const support = getNotificationSupport();
   if (support.native) {
