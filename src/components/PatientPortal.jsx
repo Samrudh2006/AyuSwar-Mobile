@@ -691,7 +691,7 @@ export default function PatientPortal({
       mealContext: 'After Lunch (భోజనం తర్వాత / दोपहर खाने के बाद)',
       medicine: 'Multivitamin & Zinc Capsule',
       purpose: 'Immune & energy booster',
-      color: '#3B82F6',
+      color: '#1D4ED8',
       bg: 'rgba(59, 130, 246, 0.1)',
       teluguAudioText: 'మధ్యాహ్నం భోజనం చేసిన తర్వాత ఈ ఎరుపు రంగు క్యాప్సూల్ ఒకసారి వేసుకోండి.',
       hindiAudioText: 'दोपहर खाने के बाद यह लाल कैप्सूल एक बार लें।',
@@ -2447,7 +2447,7 @@ export default function PatientPortal({
                                 padding: '1px 6px',
                                 borderRadius: '4px',
                                 background: v.status.includes('Normal') || v.status.includes('Optimal') ? 'rgba(16, 185, 129, 0.1)' : 'rgba(234, 88, 12, 0.1)',
-                                color: v.status.includes('Normal') || v.status.includes('Optimal') ? '#065F46' : '#C2410C'
+                                color: v.status.includes('Normal') || v.status.includes('Optimal') ? '#065F46' : '#9A3412'
                               }}>
                                 {v.status}
                               </span>
@@ -5376,7 +5376,7 @@ export default function PatientPortal({
                         setCacheSizeMb('0.0 MB');
                         alert(t('patient.settings.alertCache'))
                       }}
-                      style={{ background: '#0284C7', color: '#ffffff', border: 'none', borderRadius: '6px', padding: '4px 10px', fontSize: '11px', fontWeight: 750, cursor: 'pointer' }}
+                      style={{ background: '#0369A1', color: '#ffffff', border: 'none', borderRadius: '6px', padding: '4px 10px', fontSize: '11px', fontWeight: 750, cursor: 'pointer' }}
                     >
                       {t('patient.settings.clearCache')}
                     </button>
