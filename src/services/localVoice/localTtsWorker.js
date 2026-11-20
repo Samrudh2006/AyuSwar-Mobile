@@ -13,6 +13,12 @@
 import * as ort from 'onnxruntime-web';
 import FFT from 'fft.js';
 
+// WASM must be served from the app's own origin, never a CDN. Builds (or test
+// harnesses) set the base path before this module loads.
+if (typeof self !== 'undefined' && self.ORT_WASM_PATH) {
+  ort.env.wasm.wasmPaths = self.ORT_WASM_PATH;
+}
+
 const PROMPTS = new Set([
   'నమస్కారం. మీ ఆరోగ్య వివరాలను నమోదు చేయండి.',
   'మళ్లీ ప్రయత్నించండి.',
