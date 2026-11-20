@@ -89,7 +89,7 @@ import { downloadAbdmWhitepaper, printAbdmDossier } from '../utils/abdmWhitepape
 import { clinicalOfflineStorage } from '../services/clinicalOfflineStorage';
 import { queueSampleRuralEncounters } from '../services/offlineSimulationQueue';
 import { grantOfflineDataConsent } from '../services/offlineDataConsent';
-import { purgeAllPendingRecords } from '../services/offlineSyncService';
+import { purgeAllOfflineClinicalData } from '../services/offlineSyncService';
 import { opdQueueService, STANDARD_OPD_TIME_SLOTS } from '../services/opdQueueService';
 import { loadLocalPreferences, saveLocalPreferences } from '../services/localPreferences';
 
@@ -344,13 +344,17 @@ export default function DoctorPortal({
 
   const handlePurgeOfflineRecords = async () => {
     triggerHaptic('heavy');
-    const receipts = await purgeAllPendingRecords();
-    const purged = receipts.filter((r) => r.purged).length;
-    setPendingOfflineCount(0);
-    setFhirToast(purged > 0
-      ? `Purged ${purged} local offline record(s) from this device at ${receipts[0]?.deletedAt}. Local-only: does not undo past syncs.`
-      : 'No local offline records found to purge on this device.');
-    setTimeout(() => setFhirToast(null), 4500);
+    const result = await purgeAllOfflineClinicalData();
+    // Honest aftermath: reflect the recomputed remaining count, never assume 0.
+    setPendingOfflineCount(result.remainingQueueCount);
+    if (result.attempted === 0) {
+      setFhirToast('No local offline records found to purge on this device.');
+    } else if (result.failed > 0) {
+      setFhirToast(`Purged ${result.purged} of ${result.attempted} local record(s); ${result.failed} deletion(s) FAILED and ${result.remainingQueueCount} remain queued. Retry or contact support.`);
+    } else {
+      setFhirToast(`Purged ${result.purged} local offline record(s) across queue + caches. Data deleted on this device; encryption key retained; past syncs unaffected.`);
+    }
+    setTimeout(() => setFhirToast(null), 5000);
   };
 
   const handleTriggerAbdmSync = async () => {

@@ -70,15 +70,49 @@ await record('DoctorPortal: consent prompt UI, grant-and-retry, toggle revert ar
   assert(!/for \(const enc of sampleRuralEncounters\)[\s\S]{0,80}await clinicalOfflineStorage\.saveEncounter/.test(src), 'old unguarded save loop still present');
 });
 
-// 3. purge wired to explicit UI
-await record('DoctorPortal: Purge Local Records button backed by purgeAllPendingRecords', async () => {
+// 3. purge wired to explicit UI (full-scope, honest receipts)
+await record('DoctorPortal: Purge Local Records button backed by full-scope purge with honest aftermath', async () => {
   const src = readFileSync('src/components/DoctorPortal.jsx', 'utf8');
   assert(src.includes('Purge Local Records'), 'purge button label missing');
   assert(src.includes('handlePurgeOfflineRecords'), 'purge handler missing');
-  assert(src.includes('purgeAllPendingRecords'), 'purge service not imported/used');
+  assert(src.includes('purgeAllOfflineClinicalData'), 'full-scope purge service not imported/used');
+  assert(src.includes('result.remainingQueueCount'), 'handler must reflect recomputed remaining count');
   const svc = readFileSync('src/services/offlineSyncService.js', 'utf8');
-  assert(svc.includes('export const purgeAllPendingRecords'), 'purgeAllPendingRecords not exported');
+  assert(svc.includes('export const purgeAllOfflineClinicalData'), 'purgeAllOfflineClinicalData not exported');
   assert(svc.includes('purgeWithConfirmation'), 'purge receipts not used');
+  assert(svc.includes('cached_encounters') && svc.includes('cached_vitals') && svc.includes('cached_prescriptions'), 'cache stores not covered by purge');
+  assert(svc.includes('deviceKeyRetained'), 'key-retention honesty flag missing');
+});
+
+// 3b. behavioral: purge clears fallback queue and recomputes remaining
+await record('purgeAllOfflineClinicalData: clears records and recomputes honest remaining count', async () => {
+  const sync = await import('../src/services/offlineSyncService.js');
+  const before = await sync.getPendingOfflineQueue();
+  assert(before.length === 3, `expected 3 queued from earlier check, got ${before.length}`);
+  const result = await sync.purgeAllOfflineClinicalData();
+  assert(result.purged === 3 && result.failed === 0, `expected 3 purged 0 failed, got ${result.purged}/${result.failed}`);
+  assert(result.remainingQueueCount === 0, `remaining recomputed to ${result.remainingQueueCount}`);
+  const after = await sync.getPendingOfflineQueue();
+  assert(after.length === 0, 'queue not actually empty after purge');
+  assert(result.deviceKeyRetained === true, 'key retention must be stated');
+});
+
+// 3c. behavioral failure path: deletion error is reported, not silently zeroed
+await record('purge failure path: failed deletions are reported with honest remaining count', async () => {
+  const sync = await import('../src/services/offlineSyncService.js');
+  await sync.saveOfflineRecord('vital', { bp: '120/80' });
+  const realRemove = globalThis.localStorage.removeItem;
+  globalThis.localStorage.removeItem = () => { throw new Error('simulated storage failure'); };
+  try {
+    const result = await sync.purgeAllOfflineClinicalData();
+    assert(result.failed > 0, 'failure not reported');
+    assert(result.fallbackError === true, 'fallback error flag missing');
+    assert(result.remainingQueueCount === 1, `remaining should be 1, got ${result.remainingQueueCount}`);
+  } finally {
+    globalThis.localStorage.removeItem = realRemove;
+  }
+  // cleanup so the suite leaves no residue
+  await sync.purgeAllOfflineClinicalData();
 });
 
 // report

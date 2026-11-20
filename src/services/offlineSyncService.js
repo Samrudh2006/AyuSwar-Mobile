@@ -323,25 +323,79 @@ export const enqueueOfflineAction = async (action) => {
 };
 
 /**
- * Purge every pending local offline record from IndexedDB and the LocalStorage
- * fallback, returning a purge receipt per record (explicit user action only).
- * Local-only: cannot undo records already synced elsewhere.
+ * Purge ALL local offline clinical data on this device (explicit user action
+ * only): the pending sync queue, the cached encounter/vitals/prescription
+ * stores, and the LocalStorage fallback. Returns per-record receipts plus an
+ * honest summary: actual remaining count is recomputed after the attempt and
+ * failed deletions are reported, never silently zeroed.
+ *
+ * Scope honesty: the AES-GCM device key is RETAINED (documented in
+ * secureOfflineStorage.js); this is data deletion, not a full cryptographic
+ * wipe, and it cannot undo records already synced elsewhere.
  */
-export const purgeAllPendingRecords = async () => {
-  const queue = await getPendingOfflineQueue();
+export const purgeAllOfflineClinicalData = async () => {
   const receipts = [];
-  for (const item of queue) {
-    try {
-      receipts.push(await purgeWithConfirmation(DB_NAME, 'pending_sync_queue', item.id));
-    } catch {
-      receipts.push({ purged: false, id: item.id, store: 'pending_sync_queue', deletedAt: new Date().toISOString(), scope: 'this-device-local-storage', note: 'Purge failed for this record.' });
+  const db = await openOfflineDatabase();
+  const storeNames = db
+    ? ['pending_sync_queue', 'cached_encounters', 'cached_vitals', 'cached_prescriptions']
+        .filter((name) => db.objectStoreNames.contains(name))
+    : [];
+
+  for (const storeName of storeNames) {
+    const keys = await new Promise((resolve) => {
+      try {
+        const tx = db.transaction(storeName, 'readonly');
+        const req = tx.objectStore(storeName).getAllKeys();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => resolve([]);
+      } catch {
+        resolve([]);
+      }
+    });
+    for (const key of keys) {
+      try {
+        receipts.push(await purgeWithConfirmation(DB_NAME, storeName, key));
+      } catch {
+        receipts.push({
+          purged: false,
+          id: key,
+          store: storeName,
+          deletedAt: new Date().toISOString(),
+          scope: 'this-device-local-storage',
+          note: 'Purge failed for this record.'
+        });
+      }
     }
   }
-  try {
-    localStorage.removeItem(STORAGE_FALLBACK_KEY);
-  } catch {}
-  notifyQueueUpdate(0);
-  return receipts;
+
+  // LocalStorage fallback queue
+  const fallback = getLocalStorageQueue();
+  let fallbackPurged = 0;
+  let fallbackError = false;
+  if (fallback.length > 0) {
+    try {
+      localStorage.removeItem(STORAGE_FALLBACK_KEY);
+      fallbackPurged = fallback.length;
+    } catch {
+      fallbackError = true;
+    }
+  }
+
+  // Honest aftermath: recompute what actually remains.
+  const remainingQueue = await getPendingOfflineQueue();
+  const summary = {
+    receipts,
+    attempted: receipts.length + fallback.length,
+    purged: receipts.filter((r) => r.purged).length + fallbackPurged,
+    failed: receipts.filter((r) => !r.purged).length + (fallbackError ? fallback.length : 0),
+    fallbackError,
+    remainingQueueCount: remainingQueue.length,
+    deviceKeyRetained: true,
+    scope: 'this-device-local-storage',
+    note: 'Local data deleted where reported; device encryption key retained (not a full wipe); already-synced records are unaffected.'
+  };
+  if (summary.failed === 0) notifyQueueUpdate(0);
+  return summary;
 };
 
 export const getPendingSyncQueue = getPendingOfflineQueue;
