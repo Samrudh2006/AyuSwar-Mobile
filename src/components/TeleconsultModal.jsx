@@ -105,12 +105,13 @@ export default function TeleconsultModal({
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '10px',
-            height: '10px',
-            borderRadius: '50%',
-            background: '#047857',
-            boxShadow: 'none'
-          }} />
+            background: '#F59E0B',
+            color: '#1F2937',
+            fontSize: '9px',
+            fontWeight: 850,
+            padding: '2px 7px',
+            borderRadius: '6px'
+          }}>DEMO</div>
           <div>
             <div style={{ fontSize: '14px', fontWeight: 800 }}>{doctorName}</div>
             <div style={{ fontSize: '11px', color: '#94A3B8' }}>{specialty} • PHC Room #4</div>
@@ -132,6 +133,19 @@ export default function TeleconsultModal({
         }}>
           {formatTime(callDuration)}
         </div>
+      </div>
+
+      {/* Demo honesty banner: local preview only, nothing connected or transmitted */}
+      <div style={{
+        background: '#F59E0B',
+        color: '#1F2937',
+        fontSize: '11px',
+        fontWeight: 700,
+        padding: '7px 16px',
+        textAlign: 'center',
+        lineHeight: 1.4
+      }}>
+        DEMO ROOM, local preview only: no call is connected and no audio or video leaves this device. The doctor is a synthetic avatar with scripted captions; your camera is used only for this on-device preview. The mic toggle does not capture audio.
       </div>
 
       {/* Main Video Call Canvas */}

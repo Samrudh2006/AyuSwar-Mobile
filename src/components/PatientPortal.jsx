@@ -3408,7 +3408,7 @@ export default function PatientPortal({
                                       }}
                                     >
                                       <span>{t('patient.appts.joinCall')}</span>
-                                      <span style={{ fontSize: '9px', background: 'rgba(52,211,153,0.3)', color: '#A7F3D0', padding: '1px 5px', borderRadius: '6px', fontWeight: 800 }}>ACTIVE</span>
+                                      <span style={{ fontSize: '9px', background: 'rgba(148,163,184,0.25)', color: '#CBD5E1', padding: '1px 5px', borderRadius: '6px', fontWeight: 800 }}>{t('patient.goals.sampleTag')}</span>
                                     </button>
                                   ) : (
                                     <a

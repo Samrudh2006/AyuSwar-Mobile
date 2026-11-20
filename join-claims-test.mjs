@@ -47,5 +47,13 @@ assert(dialogs.length === 2 && dialogs[1].startsWith('Demo preview only') && dia
   'appointments Join Call dialog honest: ' + dialogs[1]);
 ok('appointments Join Call: no false WebRTC/session claim');
 
-console.log(`\nJOIN CLAIMS PROBE: ${passed}/2 scenarios passed`);
+// 3. visible control state: neutral sample chip, no ACTIVE liveness badge
+const joinCallText = await joinCall.innerText();
+assert(!joinCallText.includes('ACTIVE'), 'no ACTIVE liveness badge: ' + joinCallText);
+assert(joinCallText.includes('(sample)'), 'sample chip present: ' + joinCallText);
+await joinCall.scrollIntoViewIfNeeded();
+await joinCall.screenshot({ path: '/tmp/joincall-control.png' });
+ok('Join Call control shows sample chip, no ACTIVE badge');
+
+console.log(`\nJOIN CLAIMS PROBE: ${passed}/3 scenarios passed`);
 await b.close();
