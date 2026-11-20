@@ -208,7 +208,8 @@ export default function MobileRoot() {
   }, [location.pathname, placeAssistant]);
   React.useEffect(() => {
     if (freezeSplash) return;
-    const t = setTimeout(() => setSplash(false), 2450);
+    // Short branding beat only - never a gate. Tap the splash to skip it.
+    const t = setTimeout(() => setSplash(false), 1200);
     return () => clearTimeout(t);
   }, [freezeSplash]);
 
@@ -230,7 +231,7 @@ export default function MobileRoot() {
 
   return (
     <>
-      <MSplash done={!splash} />
+      <MSplash done={!splash} onSkip={() => setSplash(false)} />
       <React.Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'var(--m-muted)' }}>{loadingLabel}</div>}>
         <Routes>
           <Route path="/" element={<MShell><MHome /></MShell>} />
