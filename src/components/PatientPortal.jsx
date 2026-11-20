@@ -570,9 +570,11 @@ export default function PatientPortal({
   const [newReportTitle, setNewReportTitle] = useState('HbA1c & Fasting Blood Glucose');
   const [newReportDoctor, setNewReportDoctor] = useState('Dr. Demo Clinician (synthetic)');
   const [newReportDate, setNewReportDate] = useState(formatDemoDate(0));
-  const [newReportSummary, setNewReportSummary] = useState('HbA1c: 6.4% (Good Control). Fasting Blood Sugar: 104 mg/dL. Renal function intact.');
-  const [newReportTelugu, setNewReportTelugu] = useState('మీ రక్తంలో చక్కెర స్థాయిలు అదుపులో ఉన్నాయి. హెచ్‌బీఏ1సి 6.4 శాతం ఉంది.');
-  const [newReportHindi, setNewReportHindi] = useState('आपके खून में शुगर का स्तर नियंत्रण में है। दवाएं ठीक से काम कर रही हैं।');
+  // Initial demo values: sample numbers only, explicitly labeled; no clinical
+  // interpretation anywhere in the pre-fill (same honesty rule as the autofill fix).
+  const [newReportSummary, setNewReportSummary] = useState('Bundled sample values only: HbA1c 6.4%, Fasting Blood Sugar 104 mg/dL. Sample data, not read from any real report; no interpretation provided.');
+  const [newReportTelugu, setNewReportTelugu] = useState('నమూనా విలువలు మాత్రమే: HbA1c 6.4%, ఫాస్టింగ్ బ్లడ్ షుగర్ 104 mg/dL. నమూనా డేటా మాత్రమే; ఏ నిజ నివేదిక నుండి చదవలేదు; విశ్లేషణ ఇవ్వలేదు.');
+  const [newReportHindi, setNewReportHindi] = useState('केवल नमूना मान: HbA1c 6.4%, फास्टिंग ब्लड शुगर 104 mg/dL. केवल नमूना डेटा; किसी वास्तविक रिपोर्ट से नहीं पढ़ा गया; कोई व्याख्या नहीं.');
 
   const handleReportFileChosen = (file) => {
     if (!file) return;
