@@ -515,6 +515,7 @@ export default function PrescriptionScannerView() {
         fileName: res.fileName,
         pageCount: res.pageCount,
         truncated: res.truncated,
+        ackPartial: false,
         text: res.pages.map(pg => `[Page ${pg.page}] ${pg.text}`).join('\n\n')
       });
     } catch (err) {
@@ -529,7 +530,7 @@ export default function PrescriptionScannerView() {
     setUserScanAttempted(true);
     setLiveOcrResult({
       isLiveExtraction: true,
-      brand: `PDF import: ${pdfImport.fileName || 'document'}`,
+      brand: `PDF import${pdfImport.truncated ? ` (partial - first 20 of ${pdfImport.pageCount} pages)` : ''}: ${pdfImport.fileName || 'document'}`,
       genericSalt: matchedDrug ? `${matchedDrug.brand} (unverified dictionary candidate)` : 'Unverified document text - no medicine match',
       nfiCode: 'UNVERIFIED PDF TEXT LAYER',
       dosageForm: 'Document text, not OCR',
@@ -748,6 +749,25 @@ export default function PrescriptionScannerView() {
                 <div style={{ fontSize: '11px', color: '#698892', marginBottom: 8 }}>
                   Extracted from the PDF text layer on this device. This is not OCR output and not verified medicine information - review and correct before use.
                 </div>
+                {pdfImport.truncated && (
+                  <div style={{ padding: '10px 12px', borderRadius: '8px', background: '#FFFBEB', border: '1.5px solid #F59E0B', marginBottom: 8 }}>
+                    <div style={{ fontSize: '12px', fontWeight: 800, color: '#92400E', marginBottom: 4 }}>
+                      Partial import - this document is incomplete here
+                    </div>
+                    <div style={{ fontSize: '11.5px', color: '#78350F', lineHeight: 1.5 }}>
+                      This document has {pdfImport.pageCount} pages. Only the first 20 were imported; {pdfImport.pageCount - 20} page(s) were not read. Missing pages can change what this document means. To read the rest, split the PDF and import the remaining pages separately.
+                    </div>
+                    <label style={{ display: 'flex', alignItems: 'flex-start', gap: 8, marginTop: 8, fontSize: '11.5px', fontWeight: 750, color: '#92400E', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={!!pdfImport.ackPartial}
+                        onChange={e => setPdfImport(p => ({ ...p, ackPartial: e.target.checked }))}
+                        style={{ marginTop: 2 }}
+                      />
+                      I understand this import is incomplete (first 20 of {pdfImport.pageCount} pages)
+                    </label>
+                  </div>
+                )}
                 <textarea
                   value={pdfImport.text}
                   onChange={e => setPdfImport(p => ({ ...p, text: e.target.value }))}
@@ -755,8 +775,12 @@ export default function PrescriptionScannerView() {
                   style={{ width: '100%', fontSize: '12px', padding: '8px', borderRadius: '8px', border: '1px solid #D0DFE2', fontFamily: 'monospace', boxSizing: 'border-box' }}
                 />
                 <div style={{ display: 'flex', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
-                  <button onClick={usePdfDraft} style={{ padding: '8px 14px', borderRadius: '8px', background: '#0A2540', color: '#fff', border: 'none', fontSize: '12px', fontWeight: 800, cursor: 'pointer' }}>
-                    Use as unverified draft
+                  <button
+                    onClick={usePdfDraft}
+                    disabled={!!pdfImport.truncated && !pdfImport.ackPartial}
+                    style={{ padding: '8px 14px', borderRadius: '8px', background: (!pdfImport.truncated || pdfImport.ackPartial) ? '#0A2540' : '#94A3B8', color: '#fff', border: 'none', fontSize: '12px', fontWeight: 800, cursor: (!pdfImport.truncated || pdfImport.ackPartial) ? 'pointer' : 'not-allowed' }}
+                  >
+                    Use as unverified draft{pdfImport.truncated ? ' (partial - first 20 pages)' : ''}
                   </button>
                   <button onClick={() => setPdfImport({ status: 'idle' })} style={{ padding: '8px 14px', borderRadius: '8px', background: 'none', color: '#486770', border: '1px solid #D0DFE2', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}>
                     Clear

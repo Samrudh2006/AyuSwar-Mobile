@@ -6,10 +6,8 @@
 //    medicine identity. Provenance is carried with every page.
 //  - Cancel destroys the loading task and worker; nothing persists.
 
-const MAX_BYTES = 15 * 1024 * 1024; // 15 MB
-const MAX_PAGES = 20;
-
 import workerUrl from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { guardPdfFile, planExtraction } from './pdfImportGuards';
 
 let pdfjsPromise = null;
 const loadPdfjs = () => {
@@ -26,8 +24,8 @@ const loadPdfjs = () => {
 // or { ok: false, kind: 'oversize'|'not-pdf'|'password'|'corrupt'|'no-text' }.
 // Cancellation is caller-side: the caller destroys the loading task and drops state.
 export async function importPdfText(file, { onProgress } = {}) {
-  if (!file || file.type !== 'application/pdf') return { ok: false, kind: 'not-pdf' };
-  if (file.size > MAX_BYTES) return { ok: false, kind: 'oversize' };
+  const gate = guardPdfFile(file);
+  if (gate) return { ok: false, kind: gate };
 
   const pdfjs = await loadPdfjs();
   const data = await file.arrayBuffer();
@@ -42,7 +40,7 @@ export async function importPdfText(file, { onProgress } = {}) {
   }
 
   const pageCount = doc.numPages;
-  const pagesToRead = Math.min(pageCount, MAX_PAGES);
+  const { pagesToRead } = planExtraction(pageCount);
   const pages = [];
   let totalChars = 0;
   try {
