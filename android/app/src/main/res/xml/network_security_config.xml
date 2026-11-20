@@ -13,6 +13,9 @@
     backend connectivity. As a safety valve the pin-set expires 2026-08-20;
     after that Android falls back to normal system trust instead of
     hard-failing. Re-verify the chain and refresh pins before that date.
+    Trust scope: Android accepts the connection when ANY pin matches
+    anywhere in the chain, so this pins trust to the named root/intermediate
+    CAs as a whole, not to one specific server certificate.
   - Scope note: Android WebView enforcement of pins for in-page fetch/XHR
     varies by WebView version; this config is enforced for app-level
     connections and is not a substitute for server-side caller auth.
@@ -21,7 +24,7 @@
     <base-config cleartextTrafficPermitted="false" />
     <domain-config>
         <domain includeSubdomains="true">ayuswar-ai.vercel.app</domain>
-        <pin-set expiration="2026-08-20">
+        <pin-set expiration="2027-05-20">
             <pin digest="SHA-256">hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=</pin>
             <pin digest="SHA-256">yDu9og255NN5GEf+Bwa9rTrqFQ0EydZ0r1FCh9TdAW4=</pin>
         </pin-set>
