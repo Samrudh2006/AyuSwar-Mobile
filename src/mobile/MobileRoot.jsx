@@ -48,7 +48,7 @@ function Embedded({ children, title, subtitle, showBack, hideTabs }) {
   return (
     <MShell title={title ? mt(title, selectedLanguage) : title} subtitle={subtitle ? mt(subtitle, selectedLanguage) : subtitle} showBack={showBack} hideTabs={hideTabs}>
       <React.Suspense fallback={<div style={{ padding: 40, textAlign: 'center', color: 'var(--m-muted)' }}>{loadingLabel}</div>}>
-        {children}
+        <div className="m-embed-responsive">{children}</div>
       </React.Suspense>
     </MShell>
   );

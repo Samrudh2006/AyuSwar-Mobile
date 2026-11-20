@@ -1158,11 +1158,12 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             border: '1.5px solid rgba(0, 0, 0, 0.10)'
           }}>
             {/* Input: Auto-Detect Dialect */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: '6px',
+                flexWrap: 'wrap',
                 background: '#ffffff',
                 padding: '6px 12px',
                 borderRadius: '8px',
@@ -1189,7 +1190,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             <ArrowRight size={14} color="#698892" />
 
             {/* Output: Patient Vernacular Mother Tongue */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <span style={{ fontSize: '11.5px', fontWeight: 750, color: '#486770' }}>
  Patient Audio-Rx Language:
               </span>
@@ -1197,6 +1198,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                 value={selectedEncounterIndex}
                 onChange={(e) => setSelectedEncounterIndex(Number(e.target.value))}
                 style={{
+                  maxWidth: '100%',
                   padding: '6px 12px',
                   borderRadius: '8px',
                   border: '1.5px solid #0F4C5C',

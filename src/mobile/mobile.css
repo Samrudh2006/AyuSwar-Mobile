@@ -1519,3 +1519,18 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 .m-noisegate-toggle { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; font-size: 13px; line-height: 1.45; color: #33523f; }
 .m-noisegate-toggle input { margin-top: 2px; flex: none; }
 
+
+/* Embedded desktop consoles (clinical console etc.) on narrow screens:
+   collapse fixed multi-column grids and unwrap frozen flex rows so content
+   never clips off-viewport at 390px. */
+@media (max-width: 640px) {
+  .m-embed-responsive [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+  .m-embed-responsive [style*="flex-wrap: nowrap"] {
+    flex-wrap: wrap !important;
+  }
+  .m-embed-responsive [style*="white-space: nowrap"] {
+    white-space: normal !important;
+  }
+}
