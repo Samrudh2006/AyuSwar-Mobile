@@ -566,6 +566,10 @@ export default function PatientPortal({
   // Upload Report Form State & File Handling
   const reportFileInputRef = useRef(null);
   const [uploadedReportFile, setUploadedReportFile] = useState(null);
+  // Provenance of the report being composed: 'sample' for the bundled
+  // prefill/quick-select samples, 'user' once a real file is chosen. Saved
+  // onto the report so the card subtitle labels sample vs self-entered data.
+  const [reportOrigin, setReportOrigin] = useState('sample');
   const [isReportDraggingOver, setIsReportDraggingOver] = useState(false);
   const [newReportTitle, setNewReportTitle] = useState('HbA1c & Fasting Blood Glucose');
   const [newReportDoctor, setNewReportDoctor] = useState('Dr. Demo Clinician (synthetic)');
@@ -586,7 +590,7 @@ export default function PatientPortal({
       } catch {}
     }
     const cleanName = file.name ? file.name.replace(/\.[^/.]+$/, "").replace(/[-_]/g, ' ') : 'Diagnostic Lab Report';
-    
+    setReportOrigin('user');
     setUploadedReportFile({
       name: file.name,
       size: (file.size / (1024 * 1024)).toFixed(2) + ' MB',
@@ -606,6 +610,7 @@ export default function PatientPortal({
   };
 
   const handleSelectSampleReport = (sampleKey) => {
+    setReportOrigin('sample');
     if (sampleKey === 'hba1c') {
       setUploadedReportFile({
         name: 'Demo_Diagnostics_HbA1c_Blood_Panel.pdf',
@@ -3693,7 +3698,7 @@ export default function PatientPortal({
                           <span style={{ fontSize: '15px', fontWeight: 800, color: '#081C24' }}>{rep.title}</span>
 
                         </div>
-                        <div style={{ fontSize: '12px', color: '#52707C' }}>Sample report data from {rep.date} • not clinician-reviewed</div>
+                        <div style={{ fontSize: '12px', color: '#52707C' }}>{rep.origin === 'user' ? `Self-entered report text from ${rep.date} • not clinician-reviewed` : `Sample report data from ${rep.date} • not clinician-reviewed`}</div>
                         <div style={{ fontSize: '12.5px', color: '#1E293B', marginTop: '4px', maxWidth: '540px' }}>{rep.summary}</div>
                       </div>
                     </div>
@@ -3722,7 +3727,7 @@ export default function PatientPortal({
                         <span>
                           {isPlayingAudio && activeAudioSlotId === `report-${rep.id || rep.title}`
                             ? t('patient.reports.stopAudio')
-                            : t('patient.reports.hearSample')}
+                            : (rep.origin === 'user' ? t('patient.reports.hearText') : t('patient.reports.hearSample'))}
                         </span>
                       </button>
 
@@ -4190,9 +4195,11 @@ export default function PatientPortal({
                               summary: newReportSummary,
                               spokenTelugu: newReportTelugu,
                               spokenHindi: newReportHindi,
+                              origin: reportOrigin,
                               isNew: true
                             };
                             setReportsList([newRep, ...reportsList]);
+                            setReportOrigin('sample');
 
                             // Saving a report adds only the report record. No vitals are
                             // invented from it: measurements enter the tracker only through

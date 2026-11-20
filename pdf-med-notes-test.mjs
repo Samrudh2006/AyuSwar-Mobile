@@ -52,6 +52,37 @@ const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome'
   await page.close();
 }
 
+// Scenario 3: origin-aware report subtitle. A user-uploaded file saved from
+// the upload modal must render the self-entered subtitle, while a bundled
+// quick-select sample keeps the sample subtitle.
+{
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  page.on('dialog', async d => { await d.accept(); });
+  await page.goto(`${BASE}?tab=reports`, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(3200);
+  await page.locator('button', { hasText: 'Upload New Diagnostic Report' }).first().click();
+  await page.waitForTimeout(500);
+  const fileInput = page.locator('input[type="file"][accept*=".pdf"]').first();
+  await fileInput.setInputFiles({ name: 'my-lab-jan.pdf', mimeType: 'application/pdf', buffer: Buffer.from('%PDF-1.4 demo') });
+  await page.waitForTimeout(400);
+  await page.locator('button', { hasText: 'Verify & Add to My Reports' }).first().click();
+  await page.waitForTimeout(500);
+  const selfCard = page.locator('text=Self-entered report text').first();
+  ok(await selfCard.count() === 1, 'S3: user-uploaded save renders the self-entered subtitle');
+  ok(await page.locator('button', { hasText: 'Hear summary (demo voice)' }).count() === 1,
+     'S3: user-entered card hear button drops the sample label');
+  // Sample quick-select keeps the sample subtitle
+  await page.locator('button', { hasText: 'Upload New Diagnostic Report' }).first().click();
+  await page.waitForTimeout(500);
+  await page.locator('button', { hasText: 'HbA1c Lab PDF' }).first().click();
+  await page.waitForTimeout(400);
+  await page.locator('button', { hasText: 'Verify & Add to My Reports' }).first().click();
+  await page.waitForTimeout(500);
+  const sampleCards = page.locator('text=Sample report data');
+  ok(await sampleCards.count() >= 2, 'S3: sample quick-select save keeps the sample subtitle');
+  await page.close();
+}
+
 await browser.close();
-console.log(failures === 0 ? 'ALL 2 SCENARIOS PASS' : `${failures} CHECK(S) FAILED`);
+console.log(failures === 0 ? 'ALL 3 SCENARIOS PASS' : `${failures} CHECK(S) FAILED`);
 process.exit(failures === 0 ? 0 : 1);
