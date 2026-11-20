@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  AyuSwar network security config (rural-PHC brief: certificate pinning).
+
+  - Cleartext HTTP is disabled app-wide.
+  - The API backend host is pinned to the public keys observed on its live
+    certificate chain on 2026-11-20:
+      pin 1: GTS Root R1 (root CA of the served chain)
+      pin 2: WR1 (Google Trust Services intermediate that issued the leaf)
+    The leaf certificate itself is NOT pinned - Vercel rotates it often.
+  - MAINTENANCE: if the backend moves hosts or Vercel changes issuing CA
+    (e.g. to Let's Encrypt), these pins MUST be updated or the app loses
+    backend connectivity. As a safety valve the pin-set expires 2026-08-20;
+    after that Android falls back to normal system trust instead of
+    hard-failing. Re-verify the chain and refresh pins before that date.
+  - Scope note: Android WebView enforcement of pins for in-page fetch/XHR
+    varies by WebView version; this config is enforced for app-level
+    connections and is not a substitute for server-side caller auth.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false" />
+    <domain-config>
+        <domain includeSubdomains="true">ayuswar-ai.vercel.app</domain>
+        <pin-set expiration="2026-08-20">
+            <pin digest="SHA-256">hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=</pin>
+            <pin digest="SHA-256">yDu9og255NN5GEf+Bwa9rTrqFQ0EydZ0r1FCh9TdAW4=</pin>
+        </pin-set>
+        <certificates src="system" />
+    </domain-config>
+</network-security-config>

@@ -18,7 +18,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            // Minify + shrink for release (audit finding). Signing config is
+            // intentionally absent until the user's keystore decision; an
+            // unsigned release APK is expected until then.
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
