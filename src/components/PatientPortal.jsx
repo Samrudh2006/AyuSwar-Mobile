@@ -404,7 +404,7 @@ export default function PatientPortal({
         weight: '63 kg',
         source: 'Community Health Worker Visit',
         sourceType: 'manual',
-        status: 'Normal'
+        status: 'Self-reported'
       },
       {
         id: 'vit_002',
@@ -419,7 +419,7 @@ export default function PatientPortal({
         weight: '63.5 kg',
         source: 'Community Health Worker Visit',
         sourceType: 'manual',
-        status: 'Mild Elevation'
+        status: 'Self-reported'
       },
       {
         id: 'vit_003',
@@ -434,7 +434,7 @@ export default function PatientPortal({
         weight: '64 kg',
         source: 'District OPD Screening',
         sourceType: 'manual',
-        status: 'Stage 1 HTN'
+        status: 'Self-reported'
       }
     ];
   });
@@ -2600,7 +2600,7 @@ export default function PatientPortal({
                               type="number"
                               value={vitalsForm.systolic}
                               onChange={e => setVitalsForm({ ...vitalsForm, systolic: e.target.value })}
-                              placeholder="120"
+                              placeholder="e.g. 120"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
                             />
@@ -2611,7 +2611,7 @@ export default function PatientPortal({
                               type="number"
                               value={vitalsForm.diastolic}
                               onChange={e => setVitalsForm({ ...vitalsForm, diastolic: e.target.value })}
-                              placeholder="80"
+                              placeholder="e.g. 80"
                               style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #D0DFE2', fontSize: '14px', fontWeight: 700 }}
                               required
                             />
@@ -2629,7 +2629,7 @@ export default function PatientPortal({
                             type="number"
                             value={vitalsForm.pulse}
                             onChange={e => setVitalsForm({ ...vitalsForm, pulse: e.target.value })}
-                            placeholder="74"
+                            placeholder="e.g. 74"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
@@ -2642,7 +2642,7 @@ export default function PatientPortal({
                             type="number"
                             value={vitalsForm.spo2}
                             onChange={e => setVitalsForm({ ...vitalsForm, spo2: e.target.value })}
-                            placeholder="98"
+                            placeholder="e.g. 98"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
@@ -2656,7 +2656,7 @@ export default function PatientPortal({
                             step="0.5"
                             value={vitalsForm.weight}
                             onChange={e => setVitalsForm({ ...vitalsForm, weight: e.target.value })}
-                            placeholder="63"
+                            placeholder="e.g. 63"
                             style={{ width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />

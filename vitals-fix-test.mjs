@@ -27,8 +27,8 @@ out.push(['empty-save blocked with alert', alert1 === 1]);
 await p.screenshot({ path: '/tmp/vf-2-errors.png' });
 
 // 2. Enter zeros and impossible values
-const sys = p.locator('input[placeholder="120"]');
-const dia = p.locator('input[placeholder="80"]');
+const sys = p.locator('input[placeholder="e.g. 120"]');
+const dia = p.locator('input[placeholder="e.g. 80"]');
 await sys.fill('0');
 await dia.fill('98');
 await p.locator('button:has-text("Save Vitals Entry")').click();
@@ -40,11 +40,11 @@ out.push(['values kept for correction', (await sys.inputValue()) === '0']);
 // 3. Definitional guards: spo2 > 100 and sys < dia
 await sys.fill('70');
 await dia.fill('98');
-const spo2Input = p.locator('input[placeholder="98"]').last();
+const spo2Input = p.locator('input[placeholder="e.g. 98"]').last();
 // find spo2 input by label proximity instead
-const spo2 = p.locator('div:has(> label:text-is("SpO2")) input, input[placeholder="98"]').first();
+const spo2 = p.locator('div:has(> label:text-is("SpO2")) input, input[placeholder="e.g. 98"]').first();
 await spo2.fill('105');
-await p.locator('input[placeholder="74"]').fill('72');
+await p.locator('input[placeholder="e.g. 74"]').fill('72');
 await p.locator('button:has-text("Save Vitals Entry")').click();
 await p.waitForTimeout(400);
 const alertText2 = await p.locator('[role="alert"]').innerText();
@@ -74,9 +74,9 @@ await p.screenshot({ path: '/tmp/vf-5-reload.png' });
 const addBtn2 = p.locator('button:has-text("Add Vitals Manually")').first();
 await addBtn2.scrollIntoViewIfNeeded(); await p.waitForTimeout(300); await addBtn2.click();
 await p.waitForTimeout(600);
-await p.locator('input[placeholder="120"]').fill('118');
-await p.locator('input[placeholder="80"]').fill('76');
-await p.locator('input[placeholder="74"]').fill('70');
+await p.locator('input[placeholder="e.g. 120"]').fill('118');
+await p.locator('input[placeholder="e.g. 80"]').fill('76');
+await p.locator('input[placeholder="e.g. 74"]').fill('70');
 await spo2.fill('97');
 const saveBtn = p.locator('button:has-text("Save Vitals Entry")');
 await saveBtn.scrollIntoViewIfNeeded(); await p.waitForTimeout(200); await saveBtn.dblclick();
@@ -90,11 +90,11 @@ await p.reload({ waitUntil: 'networkidle' });
 await p.waitForTimeout(1500);
 await addBtn2.scrollIntoViewIfNeeded(); await p.waitForTimeout(300); await addBtn2.click();
 await p.waitForTimeout(500);
-await p.locator('input[placeholder="120"]').fill('130');
+await p.locator('input[placeholder="e.g. 120"]').fill('130');
 await p.locator('button:has-text("Clear")').click();
 await p.waitForTimeout(400);
 out.push(['clear asked for confirm', confirmSeen >= 1]);
-out.push(['clear blanked the field', (await p.locator('input[placeholder="120"]').inputValue()) === '']);
+out.push(['clear blanked the field', (await p.locator('input[placeholder="e.g. 120"]').inputValue()) === '']);
 
 await ctx.close();
 await b.close();
