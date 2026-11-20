@@ -3727,7 +3727,7 @@ export default function PatientPortal({
                       </button>
 
                       <button
-                        onClick={() => alert(`Preparing demo PDF copy of ${rep.title}...`)}
+                        onClick={() => alert(t('patient.reports.pdfNote'))}
                         style={{
                           background: '#0A2540',
                           color: '#ffffff',
@@ -4521,7 +4521,7 @@ export default function PatientPortal({
                             };
                             setChronotherapySchedule([...chronotherapySchedule, newSlotItem]);
                             setIsAddMedicationModalOpen(false);
-                            alert(`${manualMedName} added to your chronotherapy schedule!`);
+                            alert(t('patient.meds.addedNote', { name: manualMedName }));
                           }}
                           style={{
                             flex: 2,
