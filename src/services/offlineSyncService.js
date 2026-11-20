@@ -10,7 +10,7 @@
  */
 
 import { supabase } from './supabaseClient.js';
-import { encryptRecord, decryptRecord, purgeWithConfirmation } from './secureOfflineStorage.js';
+import { encryptRecord, decryptRecord, purgeWithConfirmation, purgeDeviceKeys } from './secureOfflineStorage.js';
 import { assertOfflineDataConsent, isBackgroundSyncApproved } from './offlineDataConsent.js';
 
 const DB_NAME = 'ayuswar_clinical_offline_db';
@@ -329,9 +329,11 @@ export const enqueueOfflineAction = async (action) => {
  * honest summary: actual remaining count is recomputed after the attempt and
  * failed deletions are reported, never silently zeroed.
  *
- * Scope honesty: the AES-GCM device key is RETAINED (documented in
- * secureOfflineStorage.js); this is data deletion, not a full cryptographic
- * wipe, and it cannot undo records already synced elsewhere.
+ * Scope honesty: this purge also deletes BOTH device encryption keys (the
+ * WebCrypto IndexedDB device key and the native Android Keystore alias), so
+ * any record that failed to delete is permanently unreadable
+ * (cryptographic erasure). The per-key outcome is reported explicitly in
+ * summary.deviceKeys; it cannot undo records already synced elsewhere.
  */
 export const purgeAllOfflineClinicalData = async () => {
   const receipts = [];
@@ -383,6 +385,9 @@ export const purgeAllOfflineClinicalData = async () => {
 
   // Honest aftermath: recompute what actually remains.
   const remainingQueue = await getPendingOfflineQueue();
+  // Cryptographic erasure of anything missed: delete both device keys and
+  // report each outcome explicitly (never claim a wipe that did not happen).
+  const deviceKeys = await purgeDeviceKeys();
   const summary = {
     receipts,
     attempted: receipts.length + fallback.length,
@@ -390,9 +395,9 @@ export const purgeAllOfflineClinicalData = async () => {
     failed: receipts.filter((r) => !r.purged).length + (fallbackError ? fallback.length : 0),
     fallbackError,
     remainingQueueCount: remainingQueue.length,
-    deviceKeyRetained: true,
+    deviceKeys,
     scope: 'this-device-local-storage',
-    note: 'Local data deleted where reported; device encryption key retained (not a full wipe); already-synced records are unaffected.'
+    note: 'Local data deleted where reported; both device encryption keys purged per deviceKeys, so any record that failed to delete is permanently unreadable; already-synced records are unaffected.'
   };
   if (summary.failed === 0) notifyQueueUpdate(0);
   return summary;

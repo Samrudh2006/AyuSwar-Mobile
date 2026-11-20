@@ -76,8 +76,15 @@ const toB64 = (buf) => btoa(String.fromCharCode(...new Uint8Array(buf)));
 const fromB64 = (b64) => Uint8Array.from(atob(b64), (ch) => ch.charCodeAt(0));
 
 // Native Keystore path (lazy import keeps web bundles free of Capacitor deps).
+// Test hook: unit tests may inject a rejecting/accepting fake bridge.
 let keystoreBridge = null;
+let injectedBridge = null;
+export function __setKeystoreBridgeForTests(bridge) {
+  injectedBridge = bridge;
+  keystoreBridge = null;
+}
 async function keystore() {
+  if (injectedBridge) return injectedBridge;
   if (keystoreBridge) return keystoreBridge;
   try {
     keystoreBridge = await import('../mobile/keystoreNative.js');
@@ -91,11 +98,18 @@ export async function encryptRecord(plainObject) {
   const encoded = new TextEncoder().encode(JSON.stringify(plainObject));
   const bridge = await keystore();
   if (bridge.nativeAvailable()) {
-    const packed = await bridge.keystoreEncrypt(encoded);
+    let packed = null;
+    try {
+      packed = await bridge.keystoreEncrypt(encoded);
+    } catch {
+      packed = null; // transient native failure must degrade, never break the save
+    }
     if (packed) {
       return { __encrypted: true, algorithm: 'AES-256-GCM-KEYSTORE', ciphertext: packed };
     }
-    // Native encrypt failed: fall through to WebCrypto rather than store plaintext.
+    // Native encrypt failed or rejected: fall through to WebCrypto rather
+    // than store plaintext. The envelope label says which path protected it,
+    // so a WebCrypto fallback is never claimed to be Keystore protection.
   }
   const key = await getOrCreateDeviceKey();
   const iv = globalThis.crypto.getRandomValues(new Uint8Array(GCM_IV_BYTES));
@@ -112,8 +126,19 @@ export async function decryptRecord(record) {
   if (!record || record.__encrypted !== true) return record; // legacy plaintext row
   if (record.algorithm === 'AES-256-GCM-KEYSTORE') {
     const bridge = await keystore();
-    const plain = await bridge.keystoreDecrypt(record.ciphertext);
-    if (!plain) throw new Error('Native Keystore decryption unavailable for this record.');
+    let plain = null;
+    try {
+      plain = await bridge.keystoreDecrypt(record.ciphertext);
+    } catch {
+      plain = null; // native rejection handled below as an honest unrecoverable
+    }
+    if (!plain) {
+      // Clean, honest failure: no plaintext fallback exists for Keystore
+      // records, and nothing here may silently downgrade or guess.
+      throw new Error(
+        'This record was encrypted with the Android Keystore device key and cannot be decrypted on this device (key missing or decryption failed). It is unrecoverable; no plaintext copy exists.'
+      );
+    }
     return JSON.parse(new TextDecoder().decode(plain));
   }
   const key = await getOrCreateDeviceKey();
@@ -126,7 +151,49 @@ export async function decryptRecord(record) {
 }
 
 export function isEncryptedRecord(record) {
-  return Boolean(record && record.__encrypted === true && record.iv && record.ciphertext);
+  if (!record || record.__encrypted !== true) return false;
+  if (record.algorithm === 'AES-256-GCM-KEYSTORE') return Boolean(record.ciphertext);
+  return Boolean(record.iv && record.ciphertext);
+}
+
+/**
+ * Purge BOTH device keys (full cryptographic wipe support):
+ * - the WebCrypto device key record in the dedicated IndexedDB store, and
+ * - the native Android Keystore alias (keystoreNative.deleteKey).
+ * Returns an explicit per-key receipt so the caller can never claim a wipe
+ * that did not happen. After this, any record missed by a data purge is
+ * permanently unreadable, which the purge summary must state honestly.
+ */
+export async function purgeDeviceKeys() {
+  const result = { indexedDbDeviceKey: 'absent', nativeKeystoreKey: 'unavailable' };
+  try {
+    const db = await openKeyDb();
+    const existed = await new Promise((resolve, reject) => {
+      const tx = db.transaction(KEY_STORE, 'readonly');
+      const req = tx.objectStore(KEY_STORE).get(KEY_ID);
+      req.onsuccess = () => resolve(Boolean(req.result));
+      req.onerror = () => reject(req.error);
+    });
+    await new Promise((resolve, reject) => {
+      const tx = db.transaction(KEY_STORE, 'readwrite');
+      tx.objectStore(KEY_STORE).delete(KEY_ID);
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+    });
+    result.indexedDbDeviceKey = existed ? 'deleted' : 'absent';
+  } catch {
+    result.indexedDbDeviceKey = 'failed';
+  }
+  try {
+    const bridge = await keystore();
+    if (bridge.nativeAvailable()) {
+      const ok = await bridge.keystoreDeleteKey();
+      result.nativeKeystoreKey = ok ? 'deleted' : 'failed';
+    }
+  } catch {
+    result.nativeKeystoreKey = 'failed';
+  }
+  return result;
 }
 
 /**

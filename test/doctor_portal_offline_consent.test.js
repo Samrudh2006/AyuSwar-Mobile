@@ -81,7 +81,8 @@ await record('DoctorPortal: Purge Local Records button backed by full-scope purg
   assert(svc.includes('export const purgeAllOfflineClinicalData'), 'purgeAllOfflineClinicalData not exported');
   assert(svc.includes('purgeWithConfirmation'), 'purge receipts not used');
   assert(svc.includes('cached_encounters') && svc.includes('cached_vitals') && svc.includes('cached_prescriptions'), 'cache stores not covered by purge');
-  assert(svc.includes('deviceKeyRetained'), 'key-retention honesty flag missing');
+  assert(svc.includes('deviceKeys'), 'per-key purge receipt (both device keys) missing');
+  assert(svc.includes('purgeDeviceKeys'), 'full purge must also purge device keys');
 });
 
 // 3b. behavioral: purge clears fallback queue and recomputes remaining
@@ -94,7 +95,9 @@ await record('purgeAllOfflineClinicalData: clears records and recomputes honest 
   assert(result.remainingQueueCount === 0, `remaining recomputed to ${result.remainingQueueCount}`);
   const after = await sync.getPendingOfflineQueue();
   assert(after.length === 0, 'queue not actually empty after purge');
-  assert(result.deviceKeyRetained === true, 'key retention must be stated');
+  assert(result.deviceKeys && typeof result.deviceKeys === 'object', 'per-key purge receipt missing');
+  assert(result.deviceKeys.nativeKeystoreKey === 'unavailable', `web run must report native key unavailable, got ${result.deviceKeys.nativeKeystoreKey}`);
+  assert(['deleted', 'absent', 'failed'].includes(result.deviceKeys.indexedDbDeviceKey), 'IndexedDB device key outcome must be explicit');
 });
 
 // 3c. behavioral failure path: deletion error is reported, not silently zeroed

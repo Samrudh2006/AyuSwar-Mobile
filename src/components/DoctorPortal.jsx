@@ -352,7 +352,7 @@ export default function DoctorPortal({
     } else if (result.failed > 0) {
       setFhirToast(`Purged ${result.purged} of ${result.attempted} local record(s); ${result.failed} deletion(s) FAILED and ${result.remainingQueueCount} remain queued. Retry or contact support.`);
     } else {
-      setFhirToast(`Purged ${result.purged} local offline record(s) across queue + caches. Data deleted on this device; encryption key retained; past syncs unaffected.`);
+      setFhirToast(`Purged ${result.purged} local offline record(s) across queue + caches. Data deleted on this device; both device encryption keys purged (IndexedDB: ${result.deviceKeys?.indexedDbDeviceKey}, native Keystore: ${result.deviceKeys?.nativeKeystoreKey}); anything missed is unreadable; past syncs unaffected.`);
     }
     setTimeout(() => setFhirToast(null), 5000);
   };

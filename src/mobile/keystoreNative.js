@@ -32,7 +32,11 @@ export async function keystoreStatus() {
 
 export async function keystoreEnsureKey() {
   if (!nativeAvailable()) return null;
-  return Keystore.ensureKey(); // { hasKey, hardwareBacked }
+  try {
+    return await Keystore.ensureKey(); // { hasKey, hardwareBacked }
+  } catch {
+    return null;
+  }
 }
 
 const bytesToBase64 = (bytes) => {
@@ -43,18 +47,30 @@ const bytesToBase64 = (bytes) => {
 };
 const base64ToBytes = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
 
-// plaintext: Uint8Array -> base64 ciphertext (iv || ciphertext), or null when native is unavailable.
+// plaintext: Uint8Array -> base64 ciphertext (iv || ciphertext), or null when
+// native is unavailable OR the plugin rejects (transient Android keystore
+// errors must degrade to the WebCrypto path, never break the save).
 export async function keystoreEncrypt(plainBytes) {
   if (!nativeAvailable()) return null;
-  const result = await Keystore.encrypt({ data: bytesToBase64(plainBytes) });
-  return result?.data ?? null;
+  try {
+    const result = await Keystore.encrypt({ data: bytesToBase64(plainBytes) });
+    return result?.data ?? null;
+  } catch {
+    return null;
+  }
 }
 
-// base64 ciphertext -> Uint8Array plaintext, or null when native is unavailable.
+// base64 ciphertext -> Uint8Array plaintext, or null when native is
+// unavailable OR decryption rejects. Callers surface an honest
+// "unrecoverable" message; there is no plaintext fallback for these records.
 export async function keystoreDecrypt(packedB64) {
   if (!nativeAvailable()) return null;
-  const result = await Keystore.decrypt({ data: packedB64 });
-  return result?.data ? base64ToBytes(result.data) : null;
+  try {
+    const result = await Keystore.decrypt({ data: packedB64 });
+    return result?.data ? base64ToBytes(result.data) : null;
+  } catch {
+    return null;
+  }
 }
 
 // Full-purge support: deleting the device key makes every Keystore-encrypted
