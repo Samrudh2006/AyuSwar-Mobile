@@ -1419,12 +1419,12 @@ export default function PatientPortal({
               padding: 0
             }} 
             title="Citizen Health Alerts & Reminders"
-            aria-label="Open Health Notifications"
+            aria-label={unreadNotifCount > 0 ? `Open Health Notifications, ${unreadNotifCount} unread` : 'Open Health Notifications'}
           >
             <Bell size={18} className="hdr-icon-lucide" color={isNotificationsDrawerOpen ? '#0F4C5C' : '#52707C'} />
             <img src="/assets/icons/sheet/notifications.png" alt="" aria-hidden="true" className="hdr-icon-art" />
             {unreadNotifCount > 0 && (
-            <span style={{
+            <span aria-hidden="true" style={{
               position: 'absolute',
               top: '7px',
               right: '7px',
@@ -4333,6 +4333,7 @@ export default function PatientPortal({
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <Languages size={16} color="#0F4C5C" />
                     <select
+                      aria-label={t('patient.meds.audioPreview')}
                       value={selectedLanguage}
                       onChange={e => setSelectedLanguage(e.target.value)}
                       style={{
@@ -4441,6 +4442,7 @@ export default function PatientPortal({
                             Timing Slot
                           </label>
                           <select
+                            aria-label="Timing Slot"
                             value={manualSlot}
                             onChange={e => {
                               setManualSlot(e.target.value);
@@ -4628,6 +4630,8 @@ export default function PatientPortal({
                       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                         <button
                           onClick={() => setDailyPillChecked(prev => ({ ...prev, [slot.id]: !prev[slot.id] }))}
+                          aria-label={`Mark ${slot.medicine} (${slot.label} ${slot.time}) as taken`}
+                          aria-pressed={!!isChecked}
                           style={{
                             width: '28px',
                             height: '28px',
@@ -5002,6 +5006,7 @@ export default function PatientPortal({
                       {t('patient.settings.dialectLabel')}
                     </label>
                     <select
+                      aria-label={t('patient.settings.dialectLabel')}
                       value={selectedLanguage}
                       onChange={e => setSelectedLanguage(e.target.value)}
                       style={{
@@ -5034,6 +5039,7 @@ export default function PatientPortal({
                         {t('patient.settings.personaLabel')}
                       </label>
                       <select
+                        aria-label={t('patient.settings.personaLabel')}
                         value={voicePersona}
                         onChange={e => setVoicePersona(e.target.value)}
                         style={{ width: '100%', padding: '8px 10px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '12px', fontWeight: 650 }}
@@ -5050,6 +5056,7 @@ export default function PatientPortal({
                         {t('patient.settings.tempoLabel')}
                       </label>
                       <select
+                        aria-label={t('patient.settings.tempoLabel')}
                         value={speechTempo}
                         onChange={e => setSpeechTempo(e.target.value)}
                         style={{ width: '100%', padding: '8px 10px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '12px', fontWeight: 650 }}
@@ -5070,6 +5077,7 @@ export default function PatientPortal({
                       type="checkbox" 
                       checked={autoPlayAudio} 
                       onChange={e => setAutoPlayAudio(e.target.checked)}
+                      aria-label={t('patient.settings.autoPlay')}
                       style={{ width: '18px', height: '18px', accentColor: '#0F4C5C', cursor: 'pointer' }}
                     />
                   </div>
@@ -5131,6 +5139,7 @@ export default function PatientPortal({
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                     <span style={{ fontSize: '12px', color: '#52707C', fontWeight: 650 }}>{t('patient.settings.slotLabel')}</span>
                     <select
+                      aria-label={t('patient.settings.slotLabel')}
                       value={preferredReminderTime}
                       onChange={e => setPreferredReminderTime(e.target.value)}
                       style={{ padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '12px', fontWeight: 700 }}
@@ -5163,6 +5172,7 @@ export default function PatientPortal({
                       type="text"
                       value={emergencyContactName}
                       onChange={e => setEmergencyContactName(e.target.value)}
+                      aria-label={t('patient.settings.caregiverNameLabel')}
                       style={{ width: '100%', padding: '9px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '13px', fontWeight: 650 }}
                     />
                   </div>
@@ -5175,6 +5185,7 @@ export default function PatientPortal({
                       type="text"
                       value={emergencyPhone}
                       onChange={e => setEmergencyPhone(e.target.value)}
+                      aria-label={t('patient.settings.emergencyPhoneLabel')}
                       style={{ width: '100%', padding: '9px 12px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '13px', fontWeight: 650 }}
                     />
                   </div>
@@ -5225,6 +5236,7 @@ export default function PatientPortal({
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
                     <span style={{ fontSize: '12px', fontWeight: 700, color: '#081C24' }}>{t('patient.settings.durationLabel')}</span>
                     <select
+                      aria-label={t('patient.settings.durationLabel')}
                       value={consentDurationDays}
                       onChange={e => setConsentDurationDays(Number(e.target.value))}
                       style={{ padding: '6px 10px', borderRadius: '8px', border: '1px solid rgba(0, 0, 0, 0.08)', fontSize: '12px', fontWeight: 650 }}
