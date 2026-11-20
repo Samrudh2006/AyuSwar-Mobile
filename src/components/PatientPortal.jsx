@@ -2319,7 +2319,7 @@ export default function PatientPortal({
                       }}
                     >
                       <Plus size={15} />
-                      <span>+ Add Vitals Manually</span>
+                      <span>+ {t('vitals.title')}</span>
                     </button>
                   </div>
                 </div>
@@ -2522,10 +2522,10 @@ export default function PatientPortal({
                         <Activity size={22} color="#2DD4BF" />
                         <div>
                           <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, fontFamily: 'var(--font-main)' }}>
-                            Add Vitals Manually
+                            {t('vitals.title')}
                           </h3>
                           <div style={{ fontSize: '12px', color: '#D0DFE2', marginTop: '2px' }}>
-                            Self-enter home readings or health worker visit measurements
+                            {t('vitals.subtitle')}
                           </div>
                         </div>
                       </div>
@@ -2558,7 +2558,7 @@ export default function PatientPortal({
                           </div>
                           <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12px', color: '#7F1D1D' }}>
                             {Object.entries(vitalsErrors).map(([field, err]) => (
-                              <li key={field}><strong>{field}</strong>: {String(err?.message ?? '')}</li>
+                              <li key={field}><strong>{t('vitals.field.' + field) !== 'vitals.field.' + field ? t('vitals.field.' + field) : field}</strong>: {String(err?.message ?? '')}</li>
                             ))}
                           </ul>
                         </div>
@@ -2566,8 +2566,7 @@ export default function PatientPortal({
                       {/* Date & Recording Context */}
                       <div className="patient-vitals-modal-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', width: '100%' }}>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Measurement Date
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>{t('vitals.date')}
                           </label>
                           <input
                             type="text"
@@ -2585,17 +2584,16 @@ export default function PatientPortal({
                           )}
                         </div>
                         <div>
-                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Recording Source / Location
+                          <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>{t('vitals.source')}
                           </label>
                           <select
                             {...registerVital('sourceNote')}
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                           >
-                            <option value="Self-measured at home">Home Self-Check (Digital Meter)</option>
-                            <option value="Community Health Worker Visit">Community Health Worker (ASHA / ANM Visit)</option>
-                            <option value="Village PHC OPD Health Camp">Village PHC OPD Health Camp</option>
-                            <option value="Local Jan Aushadhi Pharmacy Check">Local Jan Aushadhi Pharmacy</option>
+                            <option value="Self-measured at home">{t('vitals.src.home')}</option>
+                            <option value="Community Health Worker Visit">{t('vitals.src.chw')}</option>
+                            <option value="Village PHC OPD Health Camp">{t('vitals.src.phc')}</option>
+                            <option value="Local Jan Aushadhi Pharmacy Check">{t('vitals.src.jan')}</option>
                           </select>
                         </div>
                       </div>
@@ -2603,14 +2601,14 @@ export default function PatientPortal({
                       {/* Blood Pressure Fields */}
                       <div style={{ background: '#FAF8F5', padding: '14px', borderRadius: '12px', border: '1px solid rgba(0, 0, 0, 0.06)' }}>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-                          <span style={{ fontSize: '12px', fontWeight: 750, color: '#081C24' }}>Blood Pressure (BP)</span>
+                          <span style={{ fontSize: '12px', fontWeight: 750, color: '#081C24' }}>{t('vitals.bpGroup')}</span>
                           <span style={{ fontSize: '11px', fontWeight: 700, padding: '2px 8px', borderRadius: '6px', background: '#F1F5F9', color: '#52707C' }}>
-                            Self-reported; not clinically reviewed
+                            {t('vitals.selfReportedNote')}
                           </span>
                         </div>
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
                           <div>
-                            <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>Systolic (mmHg)</label>
+                            <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>{t('vitals.systolic')}</label>
                             <input
                               type="number"
                               {...registerVital('systolic')}
@@ -2627,7 +2625,7 @@ export default function PatientPortal({
                           )}
                           </div>
                           <div>
-                            <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>Diastolic (mmHg)</label>
+                            <label style={{ display: 'block', fontSize: '11px', color: '#52707C', marginBottom: '4px' }}>{t('vitals.diastolic')}</label>
                             <input
                               type="number"
                               {...registerVital('diastolic')}
@@ -2650,7 +2648,7 @@ export default function PatientPortal({
                       <div className="patient-vitals-modal-grid-3" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', width: '100%' }}>
                         <div>
                           <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
-                            Pulse / HR (bpm)
+                            {t('vitals.pulse')}
                           </label>
                           <input
                             type="number"
@@ -2669,7 +2667,7 @@ export default function PatientPortal({
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
-                            SpO2 (%)
+                            {t('vitals.spo2')}
                           </label>
                           <input
                             type="number"
@@ -2688,7 +2686,7 @@ export default function PatientPortal({
                         </div>
                         <div>
                           <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
-                            Weight (kg)
+                            {t('vitals.weight')}
                           </label>
                           <input
                             type="number"
@@ -2711,7 +2709,7 @@ export default function PatientPortal({
                       {/* Blood Sugar (optional) */}
                       <div>
                         <label style={{ display: 'block', fontSize: '11.5px', fontWeight: 750, color: '#081C24', marginBottom: '4px' }}>
-                          Fasting / Random Blood Sugar (mg/dL) - Optional
+                          {t('vitals.sugarOptional')}
                         </label>
                         <input
                           type="number"
@@ -2745,14 +2743,14 @@ export default function PatientPortal({
                             cursor: 'pointer'
                           }}
                         >
-                          Cancel
+                          {t('vitals.cancel')}
                         </button>
                         <button
                           type="button"
                           onClick={handleClearVitalsForm}
                           style={{ flex: 1, padding: '10px', borderRadius: '10px', border: '1px solid #B91C1C', background: '#FFFFFF', color: '#B91C1C', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}
                         >
-                          Clear
+                          {t('vitals.clear')}
                         </button>
                         <button
                           type="submit"
@@ -2774,7 +2772,7 @@ export default function PatientPortal({
                           }}
                         >
                           <CheckCircle2 size={16} />
-                          <span>Save Vitals Entry</span>
+                          <span>{t('vitals.save')}</span>
                         </button>
                       </div>
                     </form>
