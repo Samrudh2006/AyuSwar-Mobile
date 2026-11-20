@@ -165,7 +165,7 @@ export function isEncryptedRecord(record) {
  * permanently unreadable, which the purge summary must state honestly.
  */
 export async function purgeDeviceKeys() {
-  const result = { indexedDbDeviceKey: 'absent', nativeKeystoreKey: 'unavailable' };
+  const result = { indexedDbDeviceKey: 'absent', nativeKeystoreKey: 'not-applicable' };
   try {
     const db = await openKeyDb();
     const existed = await new Promise((resolve, reject) => {
@@ -186,14 +186,28 @@ export async function purgeDeviceKeys() {
   }
   try {
     const bridge = await keystore();
+    const nativePlatform = typeof bridge.isNativePlatform === 'function' ? bridge.isNativePlatform() : false;
     if (bridge.nativeAvailable()) {
       const ok = await bridge.keystoreDeleteKey();
       result.nativeKeystoreKey = ok ? 'deleted' : 'failed';
+    } else if (nativePlatform) {
+      // On a native platform the plugin SHOULD exist; unavailable is a
+      // failure, never a success. Only web counts as not-applicable.
+      result.nativeKeystoreKey = 'failed';
     }
   } catch {
     result.nativeKeystoreKey = 'failed';
   }
   return result;
+}
+
+// True only when BOTH keys are proven gone (or genuinely not applicable on
+// web). Anything else means erasure is INCOMPLETE and must be said so.
+export function erasureComplete(deviceKeys) {
+  if (!deviceKeys) return false;
+  const idbGone = ['deleted', 'absent'].includes(deviceKeys.indexedDbDeviceKey);
+  const nativeGone = ['deleted', 'not-applicable'].includes(deviceKeys.nativeKeystoreKey);
+  return idbGone && nativeGone;
 }
 
 /**

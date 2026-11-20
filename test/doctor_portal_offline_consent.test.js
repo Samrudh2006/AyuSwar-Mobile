@@ -96,7 +96,7 @@ await record('purgeAllOfflineClinicalData: clears records and recomputes honest 
   const after = await sync.getPendingOfflineQueue();
   assert(after.length === 0, 'queue not actually empty after purge');
   assert(result.deviceKeys && typeof result.deviceKeys === 'object', 'per-key purge receipt missing');
-  assert(result.deviceKeys.nativeKeystoreKey === 'unavailable', `web run must report native key unavailable, got ${result.deviceKeys.nativeKeystoreKey}`);
+  assert(result.deviceKeys.nativeKeystoreKey === 'not-applicable', `web run must report native key not-applicable, got ${result.deviceKeys.nativeKeystoreKey}`);
   assert(['deleted', 'absent', 'failed'].includes(result.deviceKeys.indexedDbDeviceKey), 'IndexedDB device key outcome must be explicit');
 });
 

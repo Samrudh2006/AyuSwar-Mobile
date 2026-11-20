@@ -17,6 +17,10 @@ import { Capacitor, registerPlugin } from '@capacitor/core';
 
 const Keystore = registerPlugin('AyuSwarKeystore');
 
+export function isNativePlatform() {
+  return Capacitor.isNativePlatform();
+}
+
 export function nativeAvailable() {
   return Capacitor.isNativePlatform() && Capacitor.isPluginAvailable('AyuSwarKeystore');
 }

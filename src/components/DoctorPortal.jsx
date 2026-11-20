@@ -352,7 +352,13 @@ export default function DoctorPortal({
     } else if (result.failed > 0) {
       setFhirToast(`Purged ${result.purged} of ${result.attempted} local record(s); ${result.failed} deletion(s) FAILED and ${result.remainingQueueCount} remain queued. Retry or contact support.`);
     } else {
-      setFhirToast(`Purged ${result.purged} local offline record(s) across queue + caches. Data deleted on this device; both device encryption keys purged (IndexedDB: ${result.deviceKeys?.indexedDbDeviceKey}, native Keystore: ${result.deviceKeys?.nativeKeystoreKey}); anything missed is unreadable; past syncs unaffected.`);
+      const keys = result.deviceKeys || {};
+      const bothGone = ['deleted', 'absent'].includes(keys.indexedDbDeviceKey) && ['deleted', 'not-applicable'].includes(keys.nativeKeystoreKey);
+      const keyLine = `Device keys - IndexedDB: ${keys.indexedDbDeviceKey}, native Keystore: ${keys.nativeKeystoreKey}.`;
+      const erasureLine = bothGone
+        ? 'Any record missed is permanently unreadable.'
+        : 'Key purge incomplete; missed records may remain readable - retry the purge.';
+      setFhirToast(`Purged ${result.purged} local offline record(s) across queue + caches. ${keyLine} ${erasureLine} Past syncs unaffected.`);
     }
     setTimeout(() => setFhirToast(null), 5000);
   };

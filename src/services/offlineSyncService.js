@@ -10,7 +10,7 @@
  */
 
 import { supabase } from './supabaseClient.js';
-import { encryptRecord, decryptRecord, purgeWithConfirmation, purgeDeviceKeys } from './secureOfflineStorage.js';
+import { encryptRecord, decryptRecord, purgeWithConfirmation, purgeDeviceKeys, erasureComplete } from './secureOfflineStorage.js';
 import { assertOfflineDataConsent, isBackgroundSyncApproved } from './offlineDataConsent.js';
 
 const DB_NAME = 'ayuswar_clinical_offline_db';
@@ -388,6 +388,7 @@ export const purgeAllOfflineClinicalData = async () => {
   // Cryptographic erasure of anything missed: delete both device keys and
   // report each outcome explicitly (never claim a wipe that did not happen).
   const deviceKeys = await purgeDeviceKeys();
+  const erased = erasureComplete(deviceKeys);
   const summary = {
     receipts,
     attempted: receipts.length + fallback.length,
@@ -396,8 +397,11 @@ export const purgeAllOfflineClinicalData = async () => {
     fallbackError,
     remainingQueueCount: remainingQueue.length,
     deviceKeys,
+    erasureComplete: erased,
     scope: 'this-device-local-storage',
-    note: 'Local data deleted where reported; both device encryption keys purged per deviceKeys, so any record that failed to delete is permanently unreadable; already-synced records are unaffected.'
+    note: erased
+      ? 'Local data deleted where reported; both device encryption keys are gone (per deviceKeys), so any record that failed to delete is permanently unreadable; already-synced records are unaffected.'
+      : 'Local data deleted where reported, but key erasure is INCOMPLETE (per deviceKeys); surviving records may remain readable on this device - retry the purge. Already-synced records are unaffected.'
   };
   if (summary.failed === 0) notifyQueueUpdate(0);
   return summary;

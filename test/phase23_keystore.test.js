@@ -137,6 +137,27 @@ await record('purgeDeviceKeys reports both keys explicitly', async () => {
   mod.__setKeystoreBridgeForTests(null);
 });
 
+// 9. Native platform with the plugin missing is a FAILURE, never success;
+//    only web counts as not-applicable. erasureComplete reflects that.
+await record('native platform without plugin reports failed, erasure incomplete', async () => {
+  const mod = await import('../src/services/secureOfflineStorage.js');
+  mod.__setKeystoreBridgeForTests({ nativeAvailable: () => false, isNativePlatform: () => true });
+  const result = await mod.purgeDeviceKeys();
+  assert(result.nativeKeystoreKey === 'failed', `native-without-plugin must be failed, got ${result.nativeKeystoreKey}`);
+  assert(mod.erasureComplete(result) === false, 'erasure must not be claimed complete');
+  mod.__setKeystoreBridgeForTests(null);
+});
+
+// 10. erasureComplete is true only when both keys are proven gone / n-a.
+await record('erasureComplete true only when both keys gone', async () => {
+  const mod = await import('../src/services/secureOfflineStorage.js');
+  assert(mod.erasureComplete({ indexedDbDeviceKey: 'deleted', nativeKeystoreKey: 'deleted' }) === true, 'both deleted');
+  assert(mod.erasureComplete({ indexedDbDeviceKey: 'absent', nativeKeystoreKey: 'not-applicable' }) === true, 'web absent+n/a');
+  assert(mod.erasureComplete({ indexedDbDeviceKey: 'deleted', nativeKeystoreKey: 'failed' }) === false, 'native failed');
+  assert(mod.erasureComplete({ indexedDbDeviceKey: 'failed', nativeKeystoreKey: 'deleted' }) === false, 'idb failed');
+  assert(mod.erasureComplete(null) === false, 'missing receipt');
+});
+
 let failed = 0;
 for (const r of results) {
   if (!r.ok) {
