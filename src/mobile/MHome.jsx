@@ -26,10 +26,7 @@ export default function MHome() {
         <h1>{greeting()}.<br />{t('heroTitle')}</h1>
         <p>{t('heroBody')}</p>
         <div className="m-hero-actions">
-          <button className="m-btn m-btn-saffron" onClick={() => go('/clinical-console')}>
-            <IconMic size={17} /> {t('startVoiceScribe')}
-          </button>
-          <button className="m-btn m-btn-outline" style={{ background: 'rgba(255,255,255,0.08)', borderColor: 'rgba(255,253,246,0.5)', color: '#FFFDF6' }} onClick={() => go('/solutions')}>
+          <button className="m-btn m-btn-saffron" onClick={() => go('/solutions')}>
             {t('explore')}
           </button>
         </div>
@@ -61,11 +58,6 @@ export default function MHome() {
       <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <h2 className="m-section-title">{t('services')} <small>{t('tapOpen')}</small></h2>
         <div className="m-quickgrid">
-          <button className="m-quick" onClick={() => go('/clinical-console')}>
-            <span className="m-quick-ic"><IconMic /></span>
-            <b>{t('opdVoiceScribe')}</b>
-            <span>{t('serviceOpdDesc')}</span>
-          </button>
           <button className="m-quick saffron" onClick={() => go('/audio-rx')}>
             <span className="m-quick-ic"><IconSpeaker /></span>
             <b>{t('audioRxStudio')}</b>

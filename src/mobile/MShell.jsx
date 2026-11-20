@@ -108,9 +108,11 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-tab-sos" aria-label={t('emergency')} onClick={openSanjivani}>
             <span className="m-tab-sos-btn"><IconSiren size={20} />108</span>
           </button>
-          <button className={`m-tab ${activeTab === TAB_VOICE ? 'active' : ''}`} onClick={() => go('/clinical-console')}>
-            <IconMic /><span>{t('scribe')}</span>
-          </button>
+          {location.pathname !== '/' && (
+            <button className={`m-tab ${activeTab === TAB_VOICE ? 'active' : ''}`} onClick={() => go('/clinical-console')}>
+              <IconMic /><span>{t('scribe')}</span>
+            </button>
+          )}
           <button className="m-tab" aria-label={t('assistant')} onClick={() => { triggerHaptic('light'); window.dispatchEvent(new CustomEvent('ayuswar:open-assistant')); }}>
             <IconCpu /><span>{t('assistant')}</span>
           </button>
@@ -150,9 +152,11 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-drawer-item" onClick={() => go('/emergency')}>
             <IconHeart /> {t('emergencyTriage')}
           </button>
-          <button className="m-drawer-item" onClick={() => go('/clinical-console')}>
-            <SheetIcon name="opd-scribe" /> {t('opdVoiceScribe')}
-          </button>
+          {location.pathname !== '/' && (
+            <button className="m-drawer-item" onClick={() => go('/clinical-console')}>
+              <SheetIcon name="opd-scribe" /> {t('opdVoiceScribe')}
+            </button>
+          )}
 
           <div className="m-drawer-section">{t('services')}</div>
           <button className={`m-drawer-item ${location.pathname.startsWith('/solutions') ? 'active' : ''}`} onClick={() => go('/solutions')}>
