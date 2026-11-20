@@ -75,7 +75,9 @@ await record('Network speech settings UI discloses and toggles the opt-in', asyn
   const ui = readFileSync(new URL('../src/mobile/MSpeechSettings.jsx', import.meta.url), 'utf8');
   assert(ui.includes('setNetworkSpeechAllowed'), 'toggle must write the flag');
   assert(ui.includes('may send audio off this device'), 'network disclosure missing');
-  assert(ui.includes('Recorded consultations stay on this device either way'), 'on-device reassurance missing');
+  assert(ui.includes('leave it only if you explicitly tap Transcribe or choose to sync'), 'recordings-leave-only-on-explicit-choice wording missing');
+  assert(ui.includes('covers live voice only'), 'setting must be scoped to live voice, not recordings');
+  assert(ui.includes('device and Android version support it'), 'on-device availability must need platform support, not pack alone');
   const shell = readFileSync(new URL('../src/mobile/MShell.jsx', import.meta.url), 'utf8');
   assert(shell.includes('NetworkSpeechSettings'), 'modal not wired');
   assert(shell.includes('setSpeechSettingsOpen(true)'), 'drawer entry missing');
