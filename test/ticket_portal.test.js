@@ -1,0 +1,43 @@
+import assert from 'node:assert';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+
+console.log('--- RUNNING PHASE: OPD TICKET MODAL & PORTAL PLACEMENT CONTRACTS ---');
+
+const modal = readFileSync(resolve('src/components/OpdAppointmentTicketModal.jsx'), 'utf8');
+const portal = readFileSync(resolve('src/components/PatientPortal.jsx'), 'utf8');
+
+// 1. QR is purposeful, privacy-safe and locally generated
+{
+  assert.ok(modal.includes('AYUSWAR-TICKET:'), 'ticket QR must carry the booking reference');
+  assert.ok(!modal.includes('api.qrserver.com'), 'ticket QR must never be rendered by an external service');
+  assert.ok(modal.includes('QRCode.toDataURL'), 'ticket QR must be generated locally');
+  assert.ok(modal.includes('No health details in this code'), 'QR caption must state its privacy boundary');
+  console.log('✓ Test 1 Passed: ticket QR carries only the booking reference and is generated on-device.');
+}
+
+// 2. No invented ticket fields
+{
+  for (const invented of ["'Ananya Rao'", "'AS-DEMO-1105'", "'Dr. Demo Sharma'", "'Fri, 6 Nov 2026'", "'GM-042'"]) {
+    assert.ok(!modal.includes(invented), `modal must not invent fallback ${invented}`);
+  }
+  assert.ok(modal.includes("'Not recorded'"), 'missing fields must render as Not recorded');
+  assert.ok(modal.includes("'Not assigned'"), 'a missing token must render as Not assigned');
+  console.log('✓ Test 2 Passed: the ticket never invents patient demographics, refs, dates or tokens.');
+}
+
+// 3. Demo framing survives on screen and in print
+{
+  assert.ok(modal.includes('NOT A REAL HOSPITAL APPOINTMENT'), 'demo band must be present');
+  assert.ok(modal.includes('A real ticket is issued only after the hospital confirms the slot'), 'footer must state confirmation reality');
+  console.log('✓ Test 3 Passed: ticket keeps honest prototype framing on screen and in print.');
+}
+
+// 4. Portal appointment cards open the ticket for their own entry
+{
+  assert.ok(portal.includes('setShowTicketModal(true)'), 'portal must open the ticket modal');
+  assert.ok(portal.includes('ref: appt.bookingRef || appt.id'), 'card action must preserve the selected entry identity');
+  assert.ok(portal.includes('date: formatDemoDate(appt.offsetDays || 0)'), 'card action must resolve an exact date, never a floating label');
+  assert.ok(portal.includes('no hospital confirmation exists'), 'card action must carry an honest status');
+  console.log('✓ Test 4 Passed: every queue appointment card opens the reference ticket with its own data.');
+}

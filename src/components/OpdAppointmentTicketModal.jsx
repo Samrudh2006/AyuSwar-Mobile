@@ -1,5 +1,6 @@
 import React from 'react';
 import { Download, X } from 'lucide-react';
+import QRCode from 'qrcode';
 import AuthenticQrCode from './AuthenticQrCode';
 import { escapeHtml } from '../utils/escapeHtml';
 
@@ -15,20 +16,37 @@ export default function OpdAppointmentTicketModal({
 }) {
   if (!ticket || (!isOpen && isModal)) return null;
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://ayuswar-ai.vercel.app';
-  const qrPayload = `${origin}/`;
   const isNarrowTicket = typeof window !== 'undefined' && window.innerWidth <= 520;
 
-  const patientDisplay = `${ticket.patientName || 'Ananya Rao'} · ${ticket.patientAge || 28} ${ticket.patientGender || 'F'}`;
-  const bookingRef = ticket.ref || 'AS-DEMO-1105';
-  const doctorDept = `${ticket.doctorName || 'Dr. Demo Sharma'} · ${ticket.department || ticket.specialty || 'General Medicine'}`;
-  const dateStr = ticket.date || 'Fri, 6 Nov 2026';
-  const timeStr = ticket.time || '10:30 AM';
-  const modeStr = ticket.mode || 'In-person';
-  const opdToken = ticket.token || 'GM-042';
+  // Honest fallbacks: never invent patient demographics, dates or tokens.
+  const ageGender = [ticket.patientAge, ticket.patientGender].filter(v => v !== undefined && v !== null && v !== '').join(' ');
+  const patientDisplay = `${ticket.patientName || 'Demo patient'}${ageGender ? ` · ${ageGender}` : ''}`;
+  const bookingRef = ticket.ref || ticket.id || 'Not recorded';
+  const doctorDept = [ticket.doctorName, ticket.department || ticket.specialty].filter(Boolean).join(' · ') || 'Not recorded';
+  const dateStr = ticket.date || 'Not recorded';
+  const timeStr = ticket.time || 'Not recorded';
+  const modeStr = ticket.mode || 'Not recorded';
+  const opdToken = ticket.token || 'Not assigned';
   const statusStr = ticket.status || 'Demo request - nothing is sent; hospital confirmation is simulated';
 
-  const handlePrintPdf = () => {
+  // The QR carries ONLY the booking reference: purposeful (ticket lookup) and
+  // privacy-safe (no health details). Generated locally; nothing leaves the device.
+  const qrPayload = `AYUSWAR-TICKET:${bookingRef}`;
+  const [qrDataUrl, setQrDataUrl] = React.useState('');
+  React.useEffect(() => {
+    let live = true;
+    QRCode.toDataURL(qrPayload, { margin: 1, width: 130 })
+      .then(url => { if (live) setQrDataUrl(url); })
+      .catch(() => {});
+    return () => { live = false; };
+  }, [qrPayload]);
+
+  const handlePrintPdf = async () => {
+    // Ensure the local QR exists before the print document references it.
+    let qrForPrint = qrDataUrl;
+    if (!qrForPrint) {
+      try { qrForPrint = await QRCode.toDataURL(qrPayload, { margin: 1, width: 130 }); } catch { qrForPrint = ''; }
+    }
     const printWindow = window.open('', '_blank', 'width=760,height=820');
     if (!printWindow) {
       window.print();
@@ -270,10 +288,10 @@ export default function OpdAppointmentTicketModal({
 
                 <div class="qr-col">
                   <div class="qr-frame">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent(qrPayload)}" width="130" height="130" alt="Demo preview QR" />
+                    <img src="${qrForPrint}" width="130" height="130" alt="Ticket QR - booking reference only" />
                   </div>
-                  <div class="qr-caption">Demo preview QR</div>
-                  <div class="qr-subtext">Opens the AyuSwar demo page. No health details stored in this code.</div>
+                  <div class="qr-caption">Ticket QR</div>
+                  <div class="qr-subtext">Carries the booking reference only (${escapeHtml(bookingRef)}). No health details in this code.</div>
                 </div>
               </div>
 
@@ -507,10 +525,10 @@ export default function OpdAppointmentTicketModal({
               />
             </div>
             <div style={{ fontSize: '11px', fontWeight: 800, color: '#081C24', marginTop: '8px' }}>
-              Demo preview QR
+              Ticket QR
             </div>
             <div style={{ fontSize: '9.5px', color: '#64748B', lineHeight: 1.35, marginTop: '2px', maxWidth: '170px' }}>
-              Opens the AyuSwar demo page. No health details stored in this code.
+              Carries the booking reference only. No health details in this code.
             </div>
           </div>
         </div>

@@ -3413,6 +3413,43 @@ export default function PatientPortal({
                                   >
                                     <span>{t('patient.appts.reschedule')}</span>
                                   </button>
+
+                                  {/* Reference-style ticket for THIS queue entry: the selected card's
+                                      own data opens in the ticket modal, never a different fixture. */}
+                                  <button
+                                    onClick={() => {
+                                      setBookedTicket({
+                                        ...appt,
+                                        ref: appt.bookingRef || appt.id,
+                                        patientName: appt.patientName || patientName,
+                                        patientAge: appt.age,
+                                        patientGender: appt.gender,
+                                        department: appt.specialty,
+                                        date: formatDemoDate(appt.offsetDays || 0),
+                                        time: appt.time,
+                                        mode: isTeleconsult ? 'Teleconsult' : 'In-person OPD',
+                                        status: `${appt.status || 'Waiting'} - local demo queue entry; no hospital confirmation exists`
+                                      });
+                                      setShowTicketModal(true);
+                                    }}
+                                    style={{
+                                      background: '#0F4C5C',
+                                      color: '#ffffff',
+                                      border: 'none',
+                                      borderRadius: '8px',
+                                      padding: '8px 14px',
+                                      fontSize: '12px',
+                                      fontWeight: 750,
+                                      cursor: 'pointer',
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '6px',
+                                      minHeight: '44px'
+                                    }}
+                                  >
+                                    <FileText size={12} />
+                                    <span>{t('patient.appts.viewTicket')}</span>
+                                  </button>
                                 </div>
                               </div>
                             );
