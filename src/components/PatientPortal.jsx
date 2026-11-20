@@ -573,7 +573,6 @@ export default function PatientPortal({
   const [newReportSummary, setNewReportSummary] = useState('HbA1c: 6.4% (Good Control). Fasting Blood Sugar: 104 mg/dL. Renal function intact.');
   const [newReportTelugu, setNewReportTelugu] = useState('మీ రక్తంలో చక్కెర స్థాయిలు అదుపులో ఉన్నాయి. హెచ్‌బీఏ1సి 6.4 శాతం ఉంది.');
   const [newReportHindi, setNewReportHindi] = useState('आपके खून में शुगर का स्तर नियंत्रण में है। दवाएं ठीक से काम कर रही हैं।');
-  const [isAiScanningReport, setIsAiScanningReport] = useState(false);
 
   const handleReportFileChosen = (file) => {
     if (!file) return;
@@ -595,16 +594,13 @@ export default function PatientPortal({
 
     setNewReportTitle(cleanName);
 
-    // Load the bundled sample preview automatically
-    setIsAiScanningReport(true);
-    setTimeout(() => {
-      setIsAiScanningReport(false);
-      // Uploaded reports are never read or interpreted: every language gets the
-      // same honest sample-preview notice, with no canned findings or vitals.
-      setNewReportSummary('Bundled sample preview only: this text is NOT read from your uploaded file. Review and edit it against your original report before saving. No result interpretation is provided.');
-      setNewReportTelugu('నమూనా ప్రివ్యూ మాత్రమే: ఈ పాఠ్యం మీ అప్‌లోడ్ ఫైల్ నుండి చదవలేదు. సేవ్ చేయడానికి ముందు మీ అసలు నివేదికతో సరిచూసి సవరించండి. ఎలాంటి ఫలిత విశ్లేషణా ఇవ్వబడలేదు.');
-      setNewReportHindi('केवल नमूना पूर्वावलोकन: यह पाठ आपकी अपलोड की गई फ़ाइल से नहीं पढ़ा गया है। सहेजने से पहले अपनी मूल रिपोर्ट से मिलाकर संपादित करें। कोई परिणाम व्याख्या नहीं दी जाती।');
-    }, 600);
+    // Load the bundled sample preview automatically. Nothing is scanned or
+    // pending, so the preview appears immediately (no artificial scan delay).
+    // Uploaded reports are never read or interpreted: every language gets the
+    // same honest sample-preview notice, with no canned findings or vitals.
+    setNewReportSummary('Bundled sample preview only: this text is NOT read from your uploaded file. Review and edit it against your original report before saving. No result interpretation is provided.');
+    setNewReportTelugu('నమూనా ప్రివ్యూ మాత్రమే: ఈ పాఠ్యం మీ అప్‌లోడ్ ఫైల్ నుండి చదవలేదు. సేవ్ చేయడానికి ముందు మీ అసలు నివేదికతో సరిచూసి సవరించండి. ఎలాంటి ఫలిత విశ్లేషణా ఇవ్వబడలేదు.');
+    setNewReportHindi('केवल नमूना पूर्वावलोकन: यह पाठ आपकी अपलोड की गई फ़ाइल से नहीं पढ़ा गया है। सहेजने से पहले अपनी मूल रिपोर्ट से मिलाकर संपादित करें। कोई परिणाम व्याख्या नहीं दी जाती।');
   };
 
   const handleSelectSampleReport = (sampleKey) => {
@@ -4048,32 +4044,6 @@ export default function PatientPortal({
                         </div>
                       )}
 
-                      {isAiScanningReport && (
-                        <div style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '10px',
-                          padding: '10px 12px',
-                          borderRadius: '10px',
-                          background: 'rgba(15, 76, 92, 0.05)',
-                          border: '1px dashed rgba(15, 76, 92, 0.25)',
-                          marginBottom: '12px'
-                        }}>
-                          <span className="ayu-loadring" style={{ width: '46px', height: '46px' }}>
-                            <svg viewBox="0 0 46 46" aria-hidden="true"><circle className="ayu-ring-bg" cx="23" cy="23" r="20"/><circle className="ayu-ring-fg" cx="23" cy="23" r="20" style={{ strokeDasharray: '35 91' }}/></svg>
-                            <img
-                              src="/assets/icons/sheet/load-report.png"
-                              alt=""
-                              className="ayu-loadart-loop"
-                              style={{ width: '30px', height: '30px', objectFit: 'contain' }}
-                            />
-                          </span>
-                          <div style={{ fontSize: '12px', fontWeight: 700, color: '#0F4C5C' }}>
-                            {t('patient.reports.scanning')}
-                          </div>
-                        </div>
-                      )}
-
                       {/* Title & Date */}
                       <div className="patient-report-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '12px', width: '100%' }}>
                         <div>
@@ -4138,13 +4108,12 @@ export default function PatientPortal({
                         <button
                           type="button"
                           onClick={() => {
-                            setIsAiScanningReport(true);
-                            setTimeout(() => {
-                              setIsAiScanningReport(false);
-                              setNewReportSummary('HbA1c: 6.4% (Good Control). Fasting Blood Sugar: 104 mg/dL. Renal function intact.');
-                              setNewReportTelugu('మీ రక్తంలో చక్కెర స్థాయిలు అదుపులో ఉన్నాయి. హెచ్‌బీఏ1సి 6.4 శాతం ఉంది.');
-                              setNewReportHindi('आपके खून में शुगर का स्तर नियंत्रण में है। दवाएं ठीक से काम कर रही हैं।');
-                            }, 700);
+                            // Bundled sample values, shown immediately (no fake
+                            // scan delay) and labeled as sample data with no
+                            // clinical interpretation.
+                            setNewReportSummary('Bundled sample values only: HbA1c 6.4%, Fasting Blood Sugar 104 mg/dL. Sample data, not read from any real report; no interpretation provided.');
+                            setNewReportTelugu('నమూనా విలువలు మాత్రమే: HbA1c 6.4%, ఫాస్టింగ్ బ్లడ్ షుగర్ 104 mg/dL. నమూనా డేటా మాత్రమే; ఏ నిజ నివేదిక నుండి చదవలేదు; విశ్లేషణ ఇవ్వలేదు.');
+                            setNewReportHindi('केवल नमूना मान: HbA1c 6.4%, फास्टिंग ब्लड शुगर 104 mg/dL. केवल नमूना डेटा; किसी वास्तविक रिपोर्ट से नहीं पढ़ा गया; कोई व्याख्या नहीं.');
                           }}
                           style={{
                             background: '#0F4C5C',
@@ -4157,7 +4126,7 @@ export default function PatientPortal({
                             cursor: 'pointer'
                           }}
                         >
-                          {isAiScanningReport ? t('patient.reports.scanning') : t('patient.reports.ocr')}
+                          {t('patient.reports.ocr')}
                         </button>
                       </div>
 
