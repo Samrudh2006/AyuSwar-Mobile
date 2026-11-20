@@ -12,7 +12,7 @@ import { IconMic, IconChevronR, IconHeart } from './MIcons';
 const CONSENT_COPY = {
   'en-IN': {
     title: 'Recording consent',
-    body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. You can withdraw this consent whenever you are not recording; withdrawing discards any unshared recording.',
+    body: 'This app records your microphone only while you practice a consultation on this device. Audio stays in memory on this device, is never uploaded automatically, and is discarded unless you choose to transcribe it. If you tap Transcribe, that recording is sent over the internet to the speech transcription service, and Transcribe asks for your confirmation separately at that moment. You can withdraw this consent whenever you are not recording; withdrawing discards any unshared recording.',
     agree: 'I agree, start recording',
     later: 'Not now',
     withdraw: 'Withdraw consent & discard recording',
@@ -20,7 +20,7 @@ const CONSENT_COPY = {
   },
   'te-IN': {
     title: 'రికార్డింగ్ సమ్మతి',
-    body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు రికార్డింగ్ చేయని సమయంలో ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు; ఉపసంహరించుకుంటే షేర్ చేయని రికార్డింగ్ తొలగించబడుతుంది.',
+    body: 'ఈ యాప్ మీరు ఈ పరికరంలో కన్సల్టేషన్ అభ్యసిస్తున్న సమయంలో మాత్రమే మీ మైక్రోఫోన్ రికార్డ్ చేస్తుంది. ఆడియో ఈ పరికరంలోనే మెమరీలో ఉంటుంది, ఆటోమేటిగ్గా ఎప్పుడూ అప్లోడ్ అవదు, మీరు ట్రాన్స్క్రైబ్ చేయాలని ఎంచుకోకపోతే తొలగించబడుతుంది. మీరు Transcribe నొక్కితే, ఆ రికార్డింగ్ ఇంటర్నెట్ ద్వారా స్పీచ్ ట్రాన్స్క్రిప్షన్ సర్వీస్‌కు పంపబడుతుంది, మరియు ఆ సమయంలో Transcribe మీ నిర్ధారణను విడిగా అడుగుతుంది. మీరు రికార్డింగ్ చేయని సమయంలో ఈ సమ్మతిని ఉపసంహరించుకోవచ్చు; ఉపసంహరించుకుంటే షేర్ చేయని రికార్డింగ్ తొలగించబడుతుంది.',
     agree: 'నేను అంగీకరిస్తున్నాను, రికార్డింగ్ ప్రారంభించండి',
     later: 'ఇప్పుడు వద్దు',
     withdraw: 'సమ్మతి ఉపసంహరించి రికార్డింగ్ తొలగించండి',
@@ -28,7 +28,7 @@ const CONSENT_COPY = {
   },
   'hi-IN': {
     title: 'रिकॉर्डिंग सहमति',
-    body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। जब आप रिकॉर्ड नहीं कर रहे हों, तब आप यह सहमति वापस ले सकते हैं; वापस लेने पर साझा न की गई रिकॉर्डिंग हटा दी जाती है।',
+    body: 'यह ऐप केवल तभी आपका माइक्रोफ़ोन रिकॉर्ड करता है जब आप इस डिवाइस पर परामर्श का अभ्यास कर रहे हों। ऑडियो इसी डिवाइस की मेमोरी में रहता है, अपने आप कभी अपलोड नहीं होता, और जब तक आप ट्रांसक्राइब करना न चुनें तब तक हटा दिया जाता है। यदि आप Transcribe दबाते हैं, तो वह रिकॉर्डिंग इंटरनेट पर स्पीच ट्रांसक्रिप्शन सेवा को भेजी जाती है, और उस समय Transcribe आपसे अलग से पुष्टि मांगता है। जब आप रिकॉर्ड नहीं कर रहे हों, तब आप यह सहमति वापस ले सकते हैं; वापस लेने पर साझा न की गई रिकॉर्डिंग हटा दी जाती है।',
     agree: 'मैं सहमत हूँ, रिकॉर्डिंग शुरू करें',
     later: 'अभी नहीं',
     withdraw: 'सहमति वापस लें और रिकॉर्डिंग हटाएँ',
@@ -36,6 +36,30 @@ const CONSENT_COPY = {
   }
 };
 const consentCopy = lang => CONSENT_COPY[lang] || CONSENT_COPY['en-IN'];
+
+// Transcribe-time upload consent: recording consent is not upload consent.
+// The recording leaves the device ONLY after an explicit confirmation here.
+const TRANSCRIBE_COPY = {
+  'en-IN': {
+    title: 'Send recording for transcription?',
+    body: 'Transcribing sends this recording over the internet to the speech transcription service, which returns the text. Nothing is uploaded until you confirm here. Recording consent does not cover this upload.',
+    confirm: 'Send & transcribe',
+    cancel: 'Keep on device'
+  },
+  'te-IN': {
+    title: 'రికార్డింగ్‌ను ట్రాన్స్క్రిప్షన్ కోసం పంపాలా?',
+    body: 'ట్రాన్స్క్రైబ్ చేస్తే ఈ రికార్డింగ్ ఇంటర్నెట్ ద్వారా స్పీచ్ ట్రాన్స్క్రిప్షన్ సర్వీస్‌కు పంపబడుతుంది, అది టెక్స్ట్ తిరిగి ఇస్తుంది. మీరు ఇక్కడ నిర్ధారించే వరకు ఏమీ అప్లోడ్ అవదు. రికార్డింగ్ సమ్మతి ఈ అప్లోడ్‌ను కవర్ చేయదు.',
+    confirm: 'పంపి ట్రాన్స్క్రైబ్ చేయండి',
+    cancel: 'పరికరంలోనే ఉంచండి'
+  },
+  'hi-IN': {
+    title: 'ट्रांसक्रिप्शन के लिए रिकॉर्डिंग भेजें?',
+    body: 'ट्रांसक्राइब करने पर यह रिकॉर्डिंग इंटरनेट पर स्पीच ट्रांसक्रिप्शन सेवा को भेजी जाती है, जो टेक्स्ट लौटाती है। जब तक आप यहां पुष्टि न करें, कुछ भी अपलोड नहीं होता। रिकॉर्डिंग सहमति इस अपलोड को कवर नहीं करती।',
+    confirm: 'भेजें और ट्रांसक्राइब करें',
+    cancel: 'डिवाइस पर ही रखें'
+  }
+};
+const transcribeCopy = lang => TRANSCRIBE_COPY[lang] || TRANSCRIBE_COPY['en-IN'];
 
 // Noise gate copy: honest, off by default, warns about quiet speech.
 const GATE_COPY = {
@@ -156,6 +180,9 @@ export default function MClinical() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [phase]);
+  const [transcribeConsentOpen, setTranscribeConsentOpen] = React.useState(false);
+  const requestTranscribe = () => setTranscribeConsentOpen(true);
+  const confirmTranscribe = () => { setTranscribeConsentOpen(false); transcribe(); };
   const transcribe = async () => {
     if (!audio?.blob || !audio.signalSeen) return;
     if (!navigator.onLine) { setStatus(t('offlineTranscribe')); return; }
@@ -208,6 +235,18 @@ export default function MClinical() {
           </section>
         </div>
       )}
+      {transcribeConsentOpen && (
+        <div className="m-consent-backdrop" onClick={() => setTranscribeConsentOpen(false)}>
+          <section className="m-consent-modal" role="dialog" aria-modal="true" aria-label={transcribeCopy(selectedLanguage).title} onClick={e => e.stopPropagation()}>
+            <h2 className="m-steps-title">{transcribeCopy(selectedLanguage).title}</h2>
+            <p className="m-record-intro">{transcribeCopy(selectedLanguage).body}</p>
+            <div className="m-record-modes">
+              <button className="m-btn m-btn-primary" onClick={confirmTranscribe}>{transcribeCopy(selectedLanguage).confirm}</button>
+              <button className="m-btn m-btn-soft" onClick={() => setTranscribeConsentOpen(false)}>{transcribeCopy(selectedLanguage).cancel}</button>
+            </div>
+          </section>
+        </div>
+      )}
       <section className="m-card m-card-pad m-tint-peach">
         <label className="m-record-language">{t('consultationLanguage')}
           <select disabled={busy} value={encounter.id} onChange={e => { setEncId(e.target.value); setTurns([]); setAudio(null); setPhase('idle'); setStatus(''); }}>
@@ -241,7 +280,7 @@ export default function MClinical() {
                 setAudio({ ...audio, ...next, url: URL.createObjectURL(next.blob) });
               }}>{audio.noiseGate ? gateCopy(selectedLanguage).remove : gateCopy(selectedLanguage).apply}</button>
             )}
-            <button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={transcribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
+            <button className="m-btn m-btn-primary" disabled={phase === 'transcribing' || !audio.signalSeen} onClick={requestTranscribe}>{phase === 'transcribing' ? t('transcribing') : t('transcribeRecording')}</button></div>}
         </> : <>
           <h2 className="m-steps-title">{t('trySample')}</h2>
           <p className="m-record-intro">{encounter.patient.name} · {encounter.patient.age}y · {t('noMicSample')}</p>

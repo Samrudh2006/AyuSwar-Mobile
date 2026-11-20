@@ -45,7 +45,8 @@ const suites = [
   { name: 'Phase 23: Native Keystore At-Rest Protection', file: 'test/phase23_keystore.test.js', count: 10 },
   { name: 'Phase 24: On-Device-First Speech Recognition', file: 'test/phase24_ondevice_asr.test.js', count: 6 },
   { name: 'Phase 25: Background Recording Foreground Service', file: 'test/phase25_background_recording.test.js', count: 7 },
-  { name: 'Phase 26: Network Speech Privacy Gate', file: 'test/phase26_network_speech_gate.test.js', count: 6 }
+  { name: 'Phase 26: Network Speech Privacy Gate', file: 'test/phase26_network_speech_gate.test.js', count: 6 },
+  { name: 'Phase 27: Transcribe Upload Consent', file: 'test/phase27_transcribe_upload_consent.test.js', count: 4 }
 ];
 
 console.clear();

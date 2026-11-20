@@ -1593,7 +1593,7 @@ export class IndicSpeechService {
     if (!this.isNetworkSpeechAllowed()) {
       // Fail closed, visibly: browser Web Speech may send audio off this
       // device, so it needs the explicit Settings opt-in first.
-      onError('Live voice uses the browser speech service, which may send audio off this device. It stays off until you enable network speech in Settings. Recorded consultations stay on-device.');
+      onError('Live voice uses the browser speech service, which may send audio off this device. It stays off until you enable network speech in Settings. Recorded consultations stay on this device unless you explicitly transcribe or sync them.');
       return null;
     }
 
