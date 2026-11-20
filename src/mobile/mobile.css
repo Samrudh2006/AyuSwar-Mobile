@@ -61,6 +61,12 @@
 
 /* Page-level headings/text sit on the illustrated backdrop: soft light halo keeps
    them readable over leaves/sky without boxing them. Card interiors unchanged. */
+/* Soft halo under every page heading: invisible on light hero text, lifts dark
+   view headings (inline-styled, no classes) off the leaves/sky. */
+.m-page h1, .m-page h2 {
+  text-shadow: 0 0 6px rgba(255, 253, 246, 0.85), 0 0 14px rgba(255, 253, 246, 0.55);
+}
+
 /* Readable header surface only for uncontained page headings/intros (never
    inside cards or colored heroes like .m-hero / .m-sanj-hero). Heading + intro
    join into one coherent surface when adjacent. */
