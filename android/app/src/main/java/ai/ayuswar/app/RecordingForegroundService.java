@@ -12,17 +12,19 @@ import android.os.IBinder;
 import androidx.core.app.NotificationCompat;
 
 /**
- * RecordingForegroundService — keeps consultation recording alive when the
- * app is backgrounded (rural-PHC must-have: background recording during long
- * OPD conversations).
+ * RecordingForegroundService — microphone-type foreground service for
+ * consultation recording while the app is backgrounded (rural-PHC must-have:
+ * background recording during long OPD conversations).
  *
  * Honest scope: this service holds NO audio pipeline of its own. The actual
- * capture stays in the WebView (memory-only, consent-gated); this
- * microphone-type foreground service keeps the process and the mic grant
- * alive while the app is in the background, with the OS-required persistent
- * notification visible the whole time. Recording still stops on consent
- * withdraw, on leaving the recorder, or at the 3-minute cap - backgrounding
- * extends capture, it does not bypass any consent or lifecycle rule.
+ * capture stays in the WebView (memory-only, consent-gated). The service
+ * satisfies Android's while-in-use microphone requirement for backgrounded
+ * apps and shows the OS-required persistent notification the whole time.
+ * That alone does NOT prove the WebView's own audio capture continues on
+ * any specific device - continued background capture is unverified until
+ * tested on a physical phone. Recording still stops on consent withdraw, on leaving
+ * the recorder, or at the 3-minute cap - backgrounding does not bypass any
+ * consent or lifecycle rule.
  */
 public class RecordingForegroundService extends Service {
     static final String CHANNEL_ID = "ayuswar_recording";

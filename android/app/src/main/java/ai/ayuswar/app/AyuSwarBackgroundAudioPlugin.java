@@ -12,10 +12,11 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 /**
  * AyuSwarBackgroundAudioPlugin — start/stop the microphone-type foreground
- * service that keeps WebView consultation recording alive in the background.
- * The service holds no audio data; capture stays in the WebView under the
- * existing recording-consent rules. Every start is paired with the
- * OS-mandated persistent notification (visible disclosure).
+ * service used during backgrounded consultation recording. The service holds
+ * no audio data; capture stays in the WebView under the existing
+ * recording-consent rules. Every start is paired with the OS-mandated
+ * persistent notification (visible disclosure). Whether capture actually
+ * continues on a given device is unproven without physical-device testing.
  */
 @CapacitorPlugin(name = "AyuSwarBackgroundAudio")
 public class AyuSwarBackgroundAudioPlugin extends Plugin {

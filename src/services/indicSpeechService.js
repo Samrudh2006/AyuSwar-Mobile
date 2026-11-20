@@ -399,6 +399,10 @@ export class IndicSpeechService {
     this.vadInterval = null;
     this.conversationState = 'IDLE'; // 'IDLE' | 'LISTENING' | 'THINKING' | 'SPEAKING'
     this.activeSessionCallbacks = null;
+    // True while a live recognition session is running on a NETWORK-backed
+    // engine (browser Web Speech, community plugin, or AyuSwarSpeech with
+    // allowNetwork and no on-device model). Drives immediate stop on opt-out.
+    this.activeLiveRecognitionUsesNetwork = false;
     this.bargeInThreshold = 0.042;
     this.lastVoiceRms = 0;
     this.activePanicIndex = 0;
@@ -1553,6 +1557,14 @@ export class IndicSpeechService {
   }
   setNetworkSpeechAllowed(allowed) {
     try { globalThis.localStorage?.setItem('ayuswar_network_speech_allowed', allowed === true ? 'true' : 'false'); } catch {}
+    if (allowed === true || !this.activeLiveRecognitionUsesNetwork) return;
+    // Revocation is immediate: an in-flight NETWORK session stops now, not
+    // at the next start. On-device sessions are unaffected. The reason is
+    // surfaced through the session's own error channel, never silent.
+    const config = this.activeLiveRecognitionConfig;
+    this.stopLiveRecognition();
+    this.activeLiveRecognitionConfig = null;
+    config?.onError?.('Network speech was turned off in Settings, so the in-progress network speech session stopped. On-device recognition is unaffected.');
   }
 
   startLiveRecognition({
@@ -1688,6 +1700,7 @@ export class IndicSpeechService {
 
       recognition.start();
       this.currentRecognition = recognition;
+      this.activeLiveRecognitionUsesNetwork = true; // browser Web Speech is network-backed
       return recognition;
     } catch (err) {
       this.isRecognitionRunning = false;
@@ -1764,6 +1777,7 @@ export class IndicSpeechService {
       // Honest provider label: on-device only when the plugin says an
       // on-device recognizer was actually created for this session.
       const provider = useOnDeviceEngine && started?.onDevice === true ? 'capacitor_native_ondevice' : 'capacitor_native';
+      this.activeLiveRecognitionUsesNetwork = provider !== 'capacitor_native_ondevice';
       recordDiagnosticStage({
         stage: 'stt_mic',
         micState: 'granted',
@@ -1782,6 +1796,7 @@ export class IndicSpeechService {
 
   stopLiveRecognition() {
     this.isRecognitionRunning = false;
+    this.activeLiveRecognitionUsesNetwork = false;
     if (this.nativePartialListener) { try { this.nativePartialListener.remove(); } catch {} this.nativePartialListener = null; }
     if (this.nativeStateListener) { try { this.nativeStateListener.remove(); } catch {} this.nativeStateListener = null; }
     if (this.currentRecognition) {

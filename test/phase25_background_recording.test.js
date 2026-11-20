@@ -81,6 +81,12 @@ await record('MClinical pairs background service lifecycle with recording and co
   assert(withdraw.includes('stopBackgroundAudio()'), 'withdraw must stop the background service');
 });
 
+// 7. Unmount cleanup pairs the foreground service stop with the recorder stop
+await record('unmount stops the foreground service, not just the recorder', async () => {
+  const src = readFileSync(new URL('../src/mobile/MClinical.jsx', import.meta.url), 'utf8');
+  assert(src.includes('mounted.current = false; stopBackgroundAudio(); recorder.current?.stop();'), 'unmount cleanup must call stopBackgroundAudio before stopping the recorder');
+});
+
 let failed = 0;
 for (const r of results) {
   if (!r.ok) {

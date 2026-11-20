@@ -85,7 +85,10 @@ export default function MClinical() {
   const languages = mode === 'mic' ? [...CLINICAL_ENCOUNTERS, english] : CLINICAL_ENCOUNTERS;
   const encounter = languages.find(e => e.id === encId) || CLINICAL_ENCOUNTERS[0];
   const busy = ['requesting', 'recording', 'transcribing'].includes(phase);
-  React.useEffect(() => { mounted.current = true; return () => { mounted.current = false; recorder.current?.stop(); }; }, []);
+  // Unmount/navigation cleanup must stop BOTH the WebView recorder and the
+  // native foreground service; otherwise the mic-type FGS and its "recording"
+  // notification leak until process death after the user navigates away.
+  React.useEffect(() => { mounted.current = true; return () => { mounted.current = false; stopBackgroundAudio(); recorder.current?.stop(); }; }, []);
   React.useEffect(() => () => { if (audio?.url) URL.revokeObjectURL(audio.url); }, [audio]);
 
   const stop = () => {
@@ -114,8 +117,10 @@ export default function MClinical() {
       recorder.current = capture; setPhase('recording');
       // Background recording (rural-PHC must-have): on native builds a
       // microphone-type foreground service with the OS persistent
-      // notification keeps capture alive if the app is backgrounded. It
-      // holds no audio; all consent/lifecycle rules still apply. A
+      // notification runs while the app is backgrounded, satisfying
+      // Android's while-in-use mic rule. It holds no audio; all
+      // consent/lifecycle rules still apply. Continued WebView capture on a
+      // specific device is unverified until physical-device testing. A
       // foreground-service rejection never blocks a foreground recording.
       startBackgroundAudio();
       setStatus(t('recordingActual'));

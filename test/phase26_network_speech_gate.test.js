@@ -81,6 +81,16 @@ await record('Network speech settings UI discloses and toggles the opt-in', asyn
   assert(shell.includes('setSpeechSettingsOpen(true)'), 'drawer entry missing');
 });
 
+// 6. Revocation stops an in-flight network session immediately
+await record('turning network speech off stops an in-flight network session', async () => {
+  const src = readFileSync(new URL('../src/services/indicSpeechService.js', import.meta.url), 'utf8');
+  assert(src.includes('activeLiveRecognitionUsesNetwork'), 'network-usage tracking missing');
+  assert(src.includes("if (allowed === true || !this.activeLiveRecognitionUsesNetwork) return;"), 'revocation guard missing');
+  assert(src.includes('Network speech was turned off in Settings, so the in-progress network speech session stopped'), 'visible revocation reason missing');
+  const setter = src.split('setNetworkSpeechAllowed(allowed)')[1] || '';
+  assert(setter.includes('this.stopLiveRecognition()'), 'revocation must stop the active session, not just the next start');
+});
+
 let failed = 0;
 for (const r of results) {
   if (!r.ok) {

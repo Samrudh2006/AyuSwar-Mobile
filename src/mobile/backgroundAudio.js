@@ -1,11 +1,14 @@
 /**
- * backgroundAudio.js — bridge to the microphone-type foreground service that
- * keeps WebView consultation recording alive when the app is backgrounded.
+ * backgroundAudio.js — bridge to the microphone-type foreground service
+ * used when a consultation is recorded while the app is backgrounded.
  *
  * Honest scope: the service holds no audio; capture stays in the WebView
  * under the existing consent rules (stop on withdraw, on leaving the
- * recorder, at the 3-minute cap). Starting shows the OS-mandated persistent
- * notification. On web/preview this is a no-op.
+ * recorder, at the 3-minute cap). The service satisfies Android's
+ * while-in-use microphone rule for backgrounded apps and shows the
+ * OS-mandated persistent notification. Whether WebView capture actually
+ * continues on a specific device is NOT proven by this and needs
+ * physical-device verification. On web/preview this is a no-op.
  */
 import { Capacitor, registerPlugin } from '@capacitor/core';
 
