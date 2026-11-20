@@ -67,9 +67,11 @@ let conditionalSkips = 0;
 }
 
 // 4. Fallback chain order (static contract on indicSpeechService source):
-//    gnani → sample (demo only) → strict-Gnani early-return → local OSS tier
+//    gnani → sample (demo only) → local OSS tier → strict-Gnani early-return
 //    → browser fallback. TEXT_NOT_QUALIFIED / MODELS_NOT_INSTALLED must be
-//    silent fall-throughs; strict mode must error BEFORE the local tier.
+//    silent fall-throughs; the local tier must stay reachable when Gnani
+//    fails in EVERY mode (strictGnani suppresses only the uncontrolled
+//    browser voice, never the user's own installed on-device fallback).
 {
   const src = readFileSync(resolve('src/services/indicSpeechService.js'), 'utf8');
   const iGnani = src.indexOf("stage: 'gnani_tts'");
@@ -79,7 +81,7 @@ let conditionalSkips = 0;
   const iBrowser = src.indexOf("this.activeProvider = 'browser_fallback';", iLocal);
   assert.ok(iGnani > -1 && iSample > iGnani, 'sample tier after gnani');
   assert.ok(iStrict > iSample, 'strict-Gnani early-return after sample tier');
-  assert.ok(iLocal > iStrict, 'local OSS tier AFTER strict-Gnani early-return (strict semantics preserved)');
+  assert.ok(iLocal < iStrict && iLocal > iSample, 'local OSS tier BEFORE strict-Gnani early-return, after sample tier (fallback reachable on primary failure in every mode)');
   assert.ok(iBrowser > iLocal, 'browser fallback last');
   assert.ok(src.includes("synthesizeQualifiedPrompt"), 'local tier must call synthesizeQualifiedPrompt');
   assert.ok(src.includes("localErr.code === 'TEXT_NOT_QUALIFIED' || localErr.code === 'MODELS_NOT_INSTALLED'"), 'expected gates must be silent fall-throughs');

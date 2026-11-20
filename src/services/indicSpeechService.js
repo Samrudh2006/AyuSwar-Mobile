@@ -1150,25 +1150,17 @@ export class IndicSpeechService {
       return;
     }
 
-    // 3. Browser Speech Synthesis of ACTUAL text (Deterministic & Honest)
-    if (options.strictGnani && options.suppressBrowserFallback) {
-      console.warn('Strict Gnani mode active: suppressing browser voice fallback.');
-      this.isSpeaking = false;
-      this.lastSpeechEndTime = Date.now();
-      if (this.conversationState === 'SPEAKING') {
-        this.setConversationState('LISTENING');
-      }
-      onError('Gnani TTS did not complete; browser voice suppressed per strict Gnani setting.');
-      return;
-    }
-
-    // 4. On-device local OSS tier (opt-in). Speaks ONLY the fixed qualified
+    // 3. On-device local OSS tier (opt-in). Speaks ONLY the fixed qualified
     //    interface prompts and ONLY when the user has explicitly installed the
     //    integrity-verified on-device model. TEXT_NOT_QUALIFIED (any clinical,
     //    patient-specific, or edited text) and MODELS_NOT_INSTALLED are
-    //    expected, silent fall-throughs to the browser voice below — this tier
-    //    must never surface an error for ordinary speech. Placed AFTER the
-    //    strict-Gnani early-return so strict mode keeps its exact semantics.
+    //    expected, silent fall-throughs — this tier must never surface an
+    //    error for ordinary speech. Placed BEFORE the strict-Gnani
+    //    early-return deliberately: strictGnani exists to suppress the
+    //    UNCONTROLLED browser voice; this tier is the user's own explicitly
+    //    installed, pinned, qualified on-device fallback, so it stays
+    //    reachable when the primary (Gnani) path fails in every mode. The
+    //    browser voice below remains suppressed in strict mode.
     try {
       const { synthesizeQualifiedPrompt } = await import('./localVoice/localTtsService.js');
       const localLanguage = (langObj && langObj.gnaniLang) || String(langCode || '').split('-')[0] || 'te';
@@ -1209,6 +1201,18 @@ export class IndicSpeechService {
     }
 
     if (this.sessionGeneration !== currentTurnGeneration || combinedSignal.aborted) {
+      return;
+    }
+
+    // 4. Browser Speech Synthesis of ACTUAL text (Deterministic & Honest)
+    if (options.strictGnani && options.suppressBrowserFallback) {
+      console.warn('Strict Gnani mode active: suppressing browser voice fallback.');
+      this.isSpeaking = false;
+      this.lastSpeechEndTime = Date.now();
+      if (this.conversationState === 'SPEAKING') {
+        this.setConversationState('LISTENING');
+      }
+      onError('Gnani TTS did not complete; browser voice suppressed per strict Gnani setting.');
       return;
     }
 
