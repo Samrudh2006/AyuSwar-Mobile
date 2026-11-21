@@ -2182,11 +2182,11 @@ export default function PatientPortal({
                   <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '18px' }}>
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '16px', fontWeight: 850, letterSpacing: '-0.2px' }}>Health ID (demo)</span>
+                        <span style={{ fontSize: '16px', fontWeight: 850, letterSpacing: '-0.2px' }}>{t('patient.vitals.healthIdDemo')}</span>
                         <SampleDataChip text={t('patient.common.sampleData')} style={{ background: 'rgba(255,255,255,0.15)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.3)' }} />
                       </div>
                       <div style={{ fontSize: '11px', color: '#A5F3FC', marginTop: '2px' }}>
-                        AyuSwar AI Fictional Health Demonstration Record
+                        {t('patient.vitals.fictionalRecord')}
                       </div>
                     </div>
                     <div style={{
@@ -2222,7 +2222,7 @@ export default function PatientPortal({
                         {activeDemoPatient?.name || patientName}
                       </div>
                       <div style={{ fontSize: '12.5px', color: '#93C5FD', marginTop: '2px' }}>
-                        Age: {activeDemoPatient?.age || 58} y • Gender: {activeDemoPatient?.genderLabel || 'Female'} • Blood: {activeDemoPatient?.bloodGroup || 'B+'}
+                        {t('patient.vitals.ageLabel')} {activeDemoPatient?.age || 58} y • {t('patient.vitals.genderLabel')} {activeDemoPatient?.genderLabel || 'Female'} • {t('patient.vitals.bloodLabel')} {activeDemoPatient?.bloodGroup || 'B+'}
                       </div>
                       <div style={{ fontSize: '15px', fontWeight: 800, fontFamily: 'monospace', color: '#5EEAD4', marginTop: '4px' }}>
                         {activeDemoPatient?.abhaId || abhaId}
@@ -2244,8 +2244,8 @@ export default function PatientPortal({
                     flexWrap: 'wrap',
                     gap: '6px'
                   }}>
-                    <span>External registry integration: <strong>NOT CONNECTED</strong></span>
-                    <span style={{ fontSize: '10px', color: '#94A3B8' }}>Non-production demonstration</span>
+                    <span>{t('patient.vitals.registryLabel')} <strong>{t('patient.vitals.notConnected')}</strong></span>
+                    <span style={{ fontSize: '10px', color: '#94A3B8' }}>{t('patient.vitals.nonProdDemo')}</span>
                   </div>
                 </div>
               </div>
@@ -2256,7 +2256,7 @@ export default function PatientPortal({
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
                       <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#081C24', margin: 0 }}>
-                        Longitudinal Vitals Tracker
+                        {t('patient.vitals.trackerTitle')}
                       </h3>
                       <div style={{
                         display: 'inline-flex',
@@ -2270,11 +2270,11 @@ export default function PatientPortal({
                         fontWeight: 700,
                         border: '1px solid rgba(148, 163, 184, 0.3)'
                       }}>
-                        Bundled sample import (manual)
+                        {t('patient.vitals.bundledChip')}
                       </div>
                     </div>
                     <p style={{ fontSize: '12px', color: '#52707C', margin: '4px 0 0 0' }}>
-                      Self-entered demo values & bundled report previews. Computed from logged record entries.
+                      {t('patient.vitals.trackerSub')}
                     </p>
                   </div>
 
@@ -2296,10 +2296,10 @@ export default function PatientPortal({
                         gap: '6px',
                         transition: 'all 120ms ease'
                       }}
-                      title="Preview sample report parsing; verify every value"
+                      title={t('patient.vitals.importSample')}
                     >
                       <Zap size={14} color="#0F4C5C" />
-                      <span>Import bundled sample vitals</span>
+                      <span>{t('patient.vitals.importSample')}</span>
                     </button>
 
                     <button
@@ -2406,7 +2406,7 @@ export default function PatientPortal({
                                   fontWeight: 800,
                                   border: '1px solid #A7F3D0'
                                 }}>
-                                  MANUAL
+                                  {t('patient.vitals.manualBadge')}
                                 </span>
                               )}
 
@@ -2447,20 +2447,20 @@ export default function PatientPortal({
                                 background: v.status.includes('Normal') || v.status.includes('Optimal') ? 'rgba(16, 185, 129, 0.1)' : 'rgba(234, 88, 12, 0.1)',
                                 color: v.status.includes('Normal') || v.status.includes('Optimal') ? '#065F46' : '#9A3412'
                               }}>
-                                {v.status}
+                                {v.status === 'Self-reported' ? t('patient.vitals.selfReported') : v.status}
                               </span>
                             )}
                           </div>
 
                           {/* Pulse & SpO2 */}
                           <div style={{ fontSize: '12.5px', color: '#2C4A52', marginBottom: '4px' }}>
-                            Pulse: <strong>{v.pulse}</strong> • SpO2: <strong>{v.spo2}</strong>
+                            {t('patient.vitals.pulseLabel')} <strong>{v.pulse}</strong> • {t('patient.vitals.spo2Label')} <strong>{v.spo2}</strong>
                           </div>
 
                           {/* Weight & Blood Sugar */}
                           <div style={{ fontSize: '12px', color: '#486770', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                            <span>Weight: <strong>{v.weight}</strong></span>
-                            {v.bloodSugar && <span>• Glucose: <strong>{v.bloodSugar}</strong></span>}
+                            <span>{t('patient.vitals.weightLabel')} <strong>{v.weight}</strong></span>
+                            {v.bloodSugar && <span>• {t('patient.vitals.glucoseLabel')} <strong>{v.bloodSugar}</strong></span>}
                           </div>
                         </div>
 
@@ -2474,7 +2474,7 @@ export default function PatientPortal({
                           alignItems: 'center',
                           gap: '4px'
                         }}>
-                          <span>{v.source || 'Community Health Worker Visit'}</span>
+                          <span>{v.source || t('patient.vitals.chwVisit')}</span>
                         </div>
                       </div>
                     );
@@ -2482,8 +2482,8 @@ export default function PatientPortal({
                 </div>
 
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', fontSize: '11px', color: '#52707C' }}>
-                  <span>Note: Health parameters reflect demo simulation data. Always seek professional physician evaluation for clinical readings.</span>
-                  <span style={{ fontWeight: 700, color: '#0F4C5C' }}>{vitalsHistory.length} recordings logged</span>
+                  <span>{t('patient.vitals.demoNote')}</span>
+                  <span style={{ fontWeight: 700, color: '#0F4C5C' }}>{vitalsHistory.length} {t('patient.vitals.recordingsLogged')}</span>
                 </div>
               </div>
 

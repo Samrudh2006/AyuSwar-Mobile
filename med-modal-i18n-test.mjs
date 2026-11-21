@@ -60,6 +60,26 @@ const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome'
   await ctx.close();
 }
 
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const p = await ctx.newPage();
+  p.on('dialog', d => d.accept());
+  await p.addInitScript(() => localStorage.setItem('ayuswar_selected_language', 'te-IN'));
+  await p.goto(`${BASE}?tab=my_health`, { waitUntil: 'domcontentloaded' });
+  await p.waitForTimeout(3200);
+  const body = await p.evaluate(() => document.body.innerText);
+  check('S3 vitals panel Health ID in Telugu', /హెల్త్ ID \(డెమో\)/.test(body));
+  check('S3 no English "Import bundled sample vitals"', !/Import bundled sample vitals/.test(body));
+  check('S3 no English "recordings logged"', !/recordings logged/.test(body));
+  check('S3 no English "NOT CONNECTED"', !/NOT CONNECTED/.test(body));
+  check('S3 demo note in Telugu', /గమనిక: ఆరోగ్య పరామితులు/.test(body));
+  check('S3 weight label in Telugu', /బరువు:/.test(body));
+  await p.evaluate(() => { const el = [...document.querySelectorAll('*')].find(e => e.children.length === 0 && /హెల్త్ ID/.test(e.textContent)); if (el) el.scrollIntoView({ block: 'start' }); });
+  await p.waitForTimeout(400);
+  await p.screenshot({ path: '/tmp/vitals-panel-telugu.png' });
+  await ctx.close();
+}
+
 console.log(results.join('\n'));
 const fails = results.filter(r => r.startsWith('FAIL')).length;
 console.log(`${results.length} scenarios, ${fails} failed`);
