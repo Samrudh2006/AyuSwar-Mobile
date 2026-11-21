@@ -37,6 +37,8 @@ export default function MAppointmentTicket() {
   const [qrUrl, setQrUrl] = React.useState('');
   // Chosen queue entry: last by default, switchable via the chooser below.
   const [selectedIdx, setSelectedIdx] = React.useState(() => (Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 ? appointmentsQueue.length - 1 : -1));
+  const [lookupRef, setLookupRef] = React.useState('');
+  const [lookupMsg, setLookupMsg] = React.useState('');
 
   // Real local booking wins; otherwise a clearly labelled sample.
   const fromState = location.state?.ticket;
@@ -65,6 +67,24 @@ export default function MAppointmentTicket() {
     setAppointmentsQueue(next);
     setSelectedIdx(next.length - 1);
   };
+  // Local lookup: resolve a booking reference (typed or scanned elsewhere)
+  // against the queue stored on this device. Nothing leaves the device.
+  const findTicket = () => {
+    const ref = lookupRef.trim().replace(/^AYUSWAR-TICKET:/i, '');
+    if (!ref || !Array.isArray(appointmentsQueue)) {
+      setLookupMsg(t('No ticket with that reference is stored on this device.'));
+      return;
+    }
+    const idx = appointmentsQueue.findIndex(a =>
+      [a.bookingRef, a.id, a.token].filter(Boolean).some(v => String(v).toLowerCase() === ref.toLowerCase()));
+    if (idx >= 0) {
+      setSelectedIdx(idx);
+      setLookupMsg(t('Ticket found on this device.'));
+    } else {
+      setLookupMsg(t('No ticket with that reference is stored on this device.'));
+    }
+  };
+
   // Exact date, never a floating "Today"/"Tomorrow" on a saved or printed ticket.
   const exactDate = d => (d === 'Today' || d === 'Tomorrow')
     ? new Date(Date.now() + (d === 'Tomorrow' ? 86400000 : 0)).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
@@ -186,7 +206,21 @@ export default function MAppointmentTicket() {
             <div className="m-tkt-qr">
               {qrUrl ? <img src={qrUrl} alt={`QR code carrying booking reference ${ticket.bookingRef}`} /> : <p>{t('QR unavailable on this device.')}</p>}
               <h5>{ticket.sample || ticket.synthetic ? t('Demo preview QR') : t('Ticket QR')}</h5>
-              <p>{t('Carries only the booking reference for ticket lookup. No health details stored in this code.')}</p>
+              <p>{t('Carries only the booking reference. Scan or enter it below to find the matching ticket on this device. No health details stored in this code.')}</p>
+              <div style={{ display: 'flex', gap: 6, marginTop: 8 }}>
+                <input
+                  type="text"
+                  value={lookupRef}
+                  onChange={e => setLookupRef(e.target.value)}
+                  placeholder={t('Booking reference')}
+                  aria-label={t('Booking reference')}
+                  style={{ flex: 1, minWidth: 0, fontSize: 13, padding: '7px 10px', borderRadius: 8, border: '1px solid #C6D2DB' }}
+                />
+                <button className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto' }} onClick={findTicket}>
+                  {t('Find ticket')}
+                </button>
+              </div>
+              {lookupMsg && <p role="status" style={{ margin: '6px 0 0', fontSize: 11.5, fontWeight: 700, color: '#12324F' }}>{lookupMsg}</p>}
             </div>
             <div className="m-tkt-foot">
               {ticket.sample
