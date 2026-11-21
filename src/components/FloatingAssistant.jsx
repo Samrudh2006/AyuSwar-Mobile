@@ -98,6 +98,7 @@ export default function FloatingAssistant({
 }) {
   // Assistant states: 'collapsed' | 'expanded' | 'listening' | 'speaking' | 'ended'
   const [assistantState, setAssistantState] = useState('collapsed');
+  const isAwaitingReply = () => isProcessingQuery && !currentAiReply;
   useEffect(() => {
     const onSummon = () => setAssistantState('expanded');
     window.addEventListener('ayuswar:open-assistant', onSummon);
@@ -316,6 +317,7 @@ export default function FloatingAssistant({
 
       setCurrentReplySource('generated');
       setCurrentAiReply(replyText);
+      setAssistantState('expanded');
       if (isAiVoiceEnabled && !isMuted) {
         speakOutLoud(replyText, currentGen);
       }
@@ -328,6 +330,7 @@ export default function FloatingAssistant({
       setCurrentAiReply(fallback);
       setCurrentAnswerBlocks(null);
       setCurrentAnswerLang(null);
+      setAssistantState('expanded');
       if (isAiVoiceEnabled && !isMuted) {
         speakOutLoud(fallback, currentGen);
       }
@@ -350,7 +353,7 @@ export default function FloatingAssistant({
     setCurrentAnswerBlocks(null);
     setCurrentAnswerLang(null);
     setOfficialRenderFailed(false);
-    setAssistantState('speaking');
+    setAssistantState('expanded');
     if (isAiVoiceEnabled && !isMuted) {
       speakOutLoud(content.answer, currentGen);
     }
@@ -577,7 +580,7 @@ export default function FloatingAssistant({
     setCurrentAnswerBlocks(null);
     setCurrentAnswerLang(null);
     setOfficialRenderFailed(false);
-    setAssistantState('speaking');
+    setAssistantState('expanded');
     if (isAiVoiceEnabled && !isMuted) {
       speakOutLoud(text, currentGen);
     }
@@ -1015,11 +1018,11 @@ export default function FloatingAssistant({
                         key={i}
                         style={{
                           width: '3.5px',
-                          height: (assistantState === 'speaking' || isMeSpeaking) ? `${h}px` : '6px',
+                          height: ((assistantState === 'speaking' && !isAwaitingReply()) || isMeSpeaking) ? `${h}px` : '6px',
                           borderRadius: '3px',
                           background: isMeSpeaking ? '#B91C1C' : (assistantState === 'speaking' ? '#0F4C5C' : '#2C4A52'),
                           transition: 'height 180ms ease',
-                          animation: (assistantState === 'speaking' || isMeSpeaking)
+                          animation: ((assistantState === 'speaking' && !isAwaitingReply()) || isMeSpeaking)
                             ? `pulseBar 0.${4 + (i % 5)}s infinite alternate ease-in-out`
                             : 'none'
                         }}
@@ -1046,7 +1049,7 @@ export default function FloatingAssistant({
                     <span>
                       {isMeSpeaking
                         ? tt('assistant.recording', { time: `${String(Math.floor(elapsedVoiceSec / 60)).padStart(2, '0')}:${String(elapsedVoiceSec % 60).padStart(2, '0')}` })
-                        : (assistantState === 'speaking' ? tt('assistant.speaking') : tt('assistant.ready', { time: '00:00' }))}
+                        : (assistantState === 'speaking' ? (isAwaitingReply() ? tt('assistant.thinkingTitle') : tt('assistant.speaking')) : tt('assistant.ready', { time: '00:00' }))}
                     </span>
                   </div>
                 </div>
@@ -1125,7 +1128,7 @@ export default function FloatingAssistant({
                               />
                             </>
                           )}
-                          {currentAiReply || "Analyzing clinical query..."}
+                          {currentAiReply || tt('assistant.analyzingClinicalQuery')}
                         </div>
                       ) : null}
                       {currentAnswerLang && !officialRenderFailed ? (
