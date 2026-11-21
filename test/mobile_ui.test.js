@@ -65,3 +65,11 @@ console.log('--- RUNNING PHASE 5: MOBILE UI/UX DECLUTTER & ACCESSIBILITY TESTS -
 console.log('======================================================================');
 console.log('ALL 5 PHASE 5 MOBILE UI/UX & NAVIGATION TESTS PASSED! 🎉');
 console.log('======================================================================');
+
+// 6. OPD note sheet shows the whole note on screen (paper-reference parity)
+{
+  const opd = readFileSync(resolve('src/mobile/MOpdNote.jsx'), 'utf8');
+  assert.ok(opd.includes('el.scrollHeight'), 'section textareas must auto-grow to content height');
+  assert.ok(opd.includes('resize: none; overflow: hidden;'), 'auto-grown textareas must not keep an inner scrollbar');
+  console.log('✓ Test 6 Passed: OPD note textareas auto-grow so the sheet shows the full note like the paper reference.');
+}

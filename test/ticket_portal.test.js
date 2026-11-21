@@ -41,3 +41,15 @@ const portal = readFileSync(resolve('src/components/PatientPortal.jsx'), 'utf8')
   assert.ok(portal.includes('no hospital confirmation exists'), 'card action must carry an honest status');
   console.log('✓ Test 4 Passed: every queue appointment card opens the reference ticket with its own data.');
 }
+
+// 5. Mobile ticket: demo booking is reachable from an empty queue and never shows a floating "Tomorrow"
+{
+  const mticket = readFileSync(resolve('src/mobile/MAppointmentTicket.jsx'), 'utf8');
+  assert.ok(mticket.includes("date: sampleDate(),"), 'demo booking must resolve an exact date at render, not a floating Tomorrow');
+  assert.ok(!mticket.includes("date: 'Tomorrow'"), 'no floating Tomorrow may remain in the demo booking entry');
+  const emptyIdx = mticket.indexOf("appointmentsQueue.length === 0");
+  assert.ok(emptyIdx > -1, 'empty-queue state must offer the demo booking action');
+  const bookIdx = mticket.indexOf('onClick={bookDemoSlot}');
+  assert.ok(emptyIdx < bookIdx, 'the empty-queue booking button must render before the queue chooser');
+  console.log('✓ Test 5 Passed: demo booking is reachable from an empty queue with an exact render-time date.');
+}

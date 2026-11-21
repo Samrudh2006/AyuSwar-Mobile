@@ -56,7 +56,7 @@ export default function MAppointmentTicket() {
       gender: '',
       doctorName: 'Dr. Demo Clinician (synthetic)',
       specialty: 'General Medicine (demo)',
-      date: 'Tomorrow',
+      date: sampleDate(),
       time: '11:00 AM',
       status: 'Waiting',
       isSyntheticFixture: true
@@ -128,6 +128,13 @@ export default function MAppointmentTicket() {
       `}</style>
 
       <section className="m-tkt-wrap">
+        {isDemoMode && !fromState && (!Array.isArray(appointmentsQueue) || appointmentsQueue.length === 0) && (
+          <div style={{ marginBottom: 10 }}>
+            <button className="m-btn m-btn-ghost" style={{ padding: '6px 10px', fontSize: 12, borderStyle: 'dashed' }} onClick={bookDemoSlot}>
+              {t('+ Book demo slot (synthetic, stays on this device)')}
+            </button>
+          </div>
+        )}
         {!fromState && Array.isArray(appointmentsQueue) && appointmentsQueue.length > 0 && (
           <div style={{ marginBottom: 10 }}>
             <p style={{ fontSize: 11.5, fontWeight: 700, color: '#5B7183', margin: '0 0 6px' }}>

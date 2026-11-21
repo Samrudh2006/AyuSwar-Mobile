@@ -78,6 +78,16 @@ export default function MOpdNote() {
   const [saveState, setSaveState] = React.useState('idle'); // idle | saving | saved | failed
   const [exportState, setExportState] = React.useState('');
 
+  // Auto-grow every section textarea to its content height, so the on-screen
+  // sheet shows the whole note like the paper reference instead of clipping
+  // inside fixed rows. Runs on mount and after every edit.
+  React.useEffect(() => {
+    document.querySelectorAll('.m-opd-sec textarea').forEach(el => {
+      el.style.height = 'auto';
+      el.style.height = `${el.scrollHeight}px`;
+    });
+  }, [note]);
+
   const isDemoSource = !state?.encounter || state?.sourceMode === 'sample';
 
   const setField = (key, value) => {
@@ -133,7 +143,7 @@ export default function MOpdNote() {
         .m-opd-toprow input { flex: 1 1 auto; min-width: 0; font-size: 14.5px; color: #233043; background: transparent; border: none; border-bottom: 1px dashed #B9C8CE; padding: 1px 2px; }
         .m-opd-sec { margin-top: 12px; }
         .m-opd-sec > span { display: inline-block; background: #C7E5E0; color: #12324F; font-size: 12px; font-weight: 800; padding: 2px 10px; border-radius: 20px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .m-opd-sec textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 4px; font-size: 14.5px; color: #233043; background: transparent; border: none; padding: 1px 2px 4px 14px; resize: vertical; }
+        .m-opd-sec textarea { display: block; width: 100%; box-sizing: border-box; margin-top: 4px; font-size: 14.5px; color: #233043; background: transparent; border: none; padding: 1px 2px 4px 14px; resize: none; overflow: hidden; }
         .m-opd-sheet input:focus, .m-opd-sheet textarea:focus { outline: 1.5px solid #2A7F8E; border-radius: 4px; }
         .m-opd-foot { border-top: 2px solid #2A7F8E; margin-top: 14px; padding-top: 7px; text-align: center; color: #12324F; font-size: 10.5px; font-weight: 800; letter-spacing: 0.4px; }
         .m-opd-printonly { display: none; }
