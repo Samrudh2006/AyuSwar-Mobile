@@ -733,7 +733,6 @@ export default function PatientPortal({
   const [manualMealContext, setManualMealContext] = useState('After Meals (భోజనం తర్వాత)');
   const [manualPurpose, setManualPurpose] = useState('Fever & Bodyache relief');
   const [manualTeluguAudio, setManualTeluguAudio] = useState('జ్వరం లేదా ఒళ్ళు నొప్పులు ఉన్నప్పుడు భోజనం తర్వాత ఈ టాబ్లెట్ వేసుకోండి.');
-  const [manualHindiAudio, setManualHindiAudio] = useState('बुखार या बदन दर्द होने पर खाना खाने के बाद यह गोली लें।');
 
   const currentPill = chronotherapySchedule.find(p => p.id === activePillSlot) || chronotherapySchedule[1];
 
@@ -3727,7 +3726,11 @@ export default function PatientPortal({
                         <span>
                           {isPlayingAudio && activeAudioSlotId === `report-${rep.id || rep.title}`
                             ? t('patient.reports.stopAudio')
-                            : (rep.origin === 'user' ? t('patient.reports.hearText') : t('patient.reports.hearSample'))}
+                            : (rep.origin === 'user'
+                                ? (['Hindi', 'Tamil', 'Kannada', 'Marathi'].includes(selectedLanguage)
+                                  ? t('patient.reports.hearTextUntranslated')
+                                  : t('patient.reports.hearText'))
+                                : t('patient.reports.hearSample'))}
                         </span>
                       </button>
 
@@ -4397,10 +4400,10 @@ export default function PatientPortal({
                         <Pill size={22} color="#2DD4BF" />
                         <div>
                           <h3 style={{ fontSize: '18px', fontWeight: 800, margin: 0, fontFamily: 'var(--font-main)', color: '#ffffff' }}>
-                            Add Medication Manually
+                            {t('patient.meds.addBtn')}
                           </h3>
                           <div style={{ fontSize: '12px', color: '#D0DFE2', marginTop: '2px' }}>
-                            Set meal timing, dosage & auto-generate voice instructions
+                            {t('patient.meds.modalSub')}
                           </div>
                         </div>
                       </div>
@@ -4427,7 +4430,7 @@ export default function PatientPortal({
                     <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                       <div>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                          Medicine Name & Strength
+                          {t('patient.meds.medNameLabel')}
                         </label>
                         <input
                           type="text"
@@ -4442,10 +4445,10 @@ export default function PatientPortal({
                       <div className="patient-med-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', width: '100%' }}>
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Timing Slot
+                            {t('patient.meds.slotLabel')}
                           </label>
                           <select
-                            aria-label="Timing Slot"
+                            aria-label={t('patient.meds.slotLabel')}
                             value={manualSlot}
                             onChange={e => {
                               setManualSlot(e.target.value);
@@ -4463,17 +4466,17 @@ export default function PatientPortal({
                             }}
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                           >
-                            <option value="early_morning">Early Morning (Empty Stomach)</option>
- <option value="morning">Morning (After Breakfast)</option>
-                            <option value="afternoon">Afternoon (After Lunch)</option>
-                            <option value="evening">Evening (Tea Time)</option>
-                            <option value="night">Night (After Dinner)</option>
+                            <option value="early_morning">{t('patient.meds.slotEarly')}</option>
+ <option value="morning">{t('patient.meds.slotMorning')}</option>
+                            <option value="afternoon">{t('patient.meds.slotAfternoon')}</option>
+                            <option value="evening">{t('patient.meds.slotEvening')}</option>
+                            <option value="night">{t('patient.meds.slotNight')}</option>
                           </select>
                         </div>
 
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Indication / Purpose
+                            {t('patient.meds.purposeLabel')}
                           </label>
                           <input
                             type="text"
@@ -4487,13 +4490,13 @@ export default function PatientPortal({
 
                       <div>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                          Telugu Voice Instruction (తెలుగు సూచన)
+                          {t('patient.meds.voiceLabel')}
                         </label>
                         <input
                           type="text"
                           value={manualTeluguAudio}
                           onChange={e => setManualTeluguAudio(e.target.value)}
-                          aria-label="Telugu Voice Instruction"
+                          aria-label={t('patient.meds.voiceLabel')}
                           style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
@@ -4530,7 +4533,11 @@ export default function PatientPortal({
                               color: '#0F4C5C',
                               bg: 'rgba(0, 0, 0, 0.07)',
                               teluguAudioText: manualTeluguAudio,
-                              hindiAudioText: manualHindiAudio
+                              // No canned Hindi/English script: only the Telugu
+                              // instruction is editable, so other locales read the
+                              // user's own entries (untranslated, disclosed in the audit).
+                              hindiAudioText: `${manualMedName}, ${manualPurpose}`,
+                              englishAudioText: `${manualMedName}, ${manualPurpose}`,
                             };
                             setChronotherapySchedule([...chronotherapySchedule, newSlotItem]);
                             setIsAddMedicationModalOpen(false);
@@ -4554,7 +4561,7 @@ export default function PatientPortal({
                           }}
                         >
                           <CheckCircle2 size={16} />
-                          <span>Add to Chronotherapy Pillbox</span>
+                          <span>{t('patient.meds.pillboxBtn')}</span>
                         </button>
                       </div>
                     </div>
