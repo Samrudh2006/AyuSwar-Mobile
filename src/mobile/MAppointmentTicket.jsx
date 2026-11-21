@@ -69,8 +69,8 @@ export default function MAppointmentTicket() {
   };
   // Local lookup: resolve a booking reference (typed or scanned elsewhere)
   // against the queue stored on this device. Nothing leaves the device.
-  const findTicket = () => {
-    const ref = lookupRef.trim().replace(/^AYUSWAR-TICKET:/i, '');
+  const findTicket = (override) => {
+    const ref = String(override ?? lookupRef).trim().replace(/^AYUSWAR-TICKET:/i, '');
     if (!ref || !Array.isArray(appointmentsQueue)) {
       setLookupMsg(t('No ticket with that reference is stored on this device.'));
       return;
@@ -82,6 +82,41 @@ export default function MAppointmentTicket() {
       setLookupMsg(t('Ticket found on this device.'));
     } else {
       setLookupMsg(t('No ticket with that reference is stored on this device.'));
+    }
+  };
+
+  // Scan route: decode a ticket QR from an image entirely on-device. Uses the
+  // native BarcodeDetector where present, otherwise the bundled jsQR decoder
+  // (pure JS, no network, no camera permission; the file picker opens the
+  // camera on phones). A QR-less image says so instead of pretending to scan.
+  const scanTicketImage = async (file) => {
+    if (!file) return;
+    try {
+      let payload = '';
+      if ('BarcodeDetector' in window) {
+        const bmp = await createImageBitmap(file);
+        const codes = await new window.BarcodeDetector({ formats: ['qr_code'] }).detect(bmp);
+        payload = codes && codes[0] && codes[0].rawValue ? codes[0].rawValue : '';
+      } else {
+        const { default: jsQR } = await import('jsqr');
+        const bmp = await createImageBitmap(file);
+        const canvas = document.createElement('canvas');
+        canvas.width = bmp.width;
+        canvas.height = bmp.height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bmp, 0, 0);
+        const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(img.data, img.width, img.height);
+        payload = code && code.data ? code.data : '';
+      }
+      if (!payload) {
+        setLookupMsg(t('No QR code found in that image.'));
+        return;
+      }
+      setLookupRef(payload);
+      findTicket(payload);
+    } catch {
+      setLookupMsg(t('Could not read that image.'));
     }
   };
 
@@ -216,9 +251,19 @@ export default function MAppointmentTicket() {
                   aria-label={t('Booking reference')}
                   style={{ flex: 1, minWidth: 0, fontSize: 13, padding: '7px 10px', borderRadius: 8, border: '1px solid #C6D2DB' }}
                 />
-                <button className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto' }} onClick={findTicket}>
+                <button className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto' }} onClick={() => findTicket()}>
                   {t('Find ticket')}
                 </button>
+                <label className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto', cursor: 'pointer' }}>
+                  {t('Scan ticket image')}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    style={{ display: 'none' }}
+                    onChange={e => { scanTicketImage(e.target.files?.[0]); e.target.value = ''; }}
+                  />
+                </label>
               </div>
               {lookupMsg && <p role="status" style={{ margin: '6px 0 0', fontSize: 11.5, fontWeight: 700, color: '#12324F' }}>{lookupMsg}</p>}
             </div>

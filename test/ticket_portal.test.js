@@ -69,3 +69,15 @@ const portal = readFileSync(resolve('src/components/PatientPortal.jsx'), 'utf8')
   }
   console.log('✓ Test 6 Passed: QR reference lookup resolves locally with an honest miss state and 6-locale strings.');
 }
+
+// 7. Scan route: on-device BarcodeDetector only, honest unsupported and no-QR states
+{
+  const mticket = readFileSync(resolve('src/mobile/MAppointmentTicket.jsx'), 'utf8');
+  assert.ok(mticket.includes("window.BarcodeDetector"), 'scan must use the native on-device BarcodeDetector');
+  assert.ok(mticket.includes("('BarcodeDetector' in window)"), 'scan must feature-detect the native API first');
+  assert.ok(mticket.includes("await import('jsqr')"), 'the bundled pure-JS jsQR decoder must be the on-device fallback');
+  assert.ok(mticket.includes('createImageBitmap'), 'decode must run on the local image bitmap');
+  assert.ok(mticket.includes('No QR code found in that image.'), 'a QR-less image must say so honestly');
+  assert.ok(!mticket.includes('api.qrserver.com') && !mticket.includes('zxing'), 'no external or network QR service may be introduced');
+  console.log('✓ Test 7 Passed: scan route is on-device BarcodeDetector with honest fallback states.');
+}

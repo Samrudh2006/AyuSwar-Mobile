@@ -40,7 +40,7 @@ const suites = [
   { name: 'Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity', file: 'test/status_cors_devproxy.test.js', count: 9 },
   { name: 'Phase 19: PDF Text-Layer Import & 390px Embed Contracts', file: 'test/pdf_import.test.js', count: 9 },
   { name: 'Phase 19b: OCR Legibility Gate', file: 'test/prescription_ocr_legibility.test.js', count: 7 },
-  { name: 'Phase 20: OPD Ticket Modal & Portal Placement', file: 'test/ticket_portal.test.js', count: 6 },
+  { name: 'Phase 20: OPD Ticket Modal & Portal Placement', file: 'test/ticket_portal.test.js', count: 7 },
   { name: 'Phase 39: axe-core Route Accessibility (dev-only)', file: 'test/accessibility_routes.test.js', count: 4 },
   { name: 'Phase 19: Offline Consent & Encrypted Storage', file: 'test/offline_consent_storage.test.js', count: 8 },
   { name: 'Phase 20: DoctorPortal Offline Consent Regression & Purge', file: 'test/doctor_portal_offline_consent.test.js', count: 6 },
