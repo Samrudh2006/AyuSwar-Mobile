@@ -1538,6 +1538,14 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
   .m-embed-responsive [style*="white-space: nowrap"] {
     white-space: normal !important;
   }
+  /* Horizontal-scroll rows (category filter pills etc.) never clip off-viewport
+     because the row itself scrolls: their items must stay single-line.
+     Without this exemption the blanket rule above wraps and squeezes pill
+     labels at phone width. */
+  .m-embed-responsive [style*="overflow-x: auto"] [style*="white-space: nowrap"],
+  .m-embed-responsive [style*="overflow-x:auto"] [style*="white-space: nowrap"] {
+    white-space: nowrap !important;
+  }
 }
 
 /* Language bridge in embedded consoles: stack vertically on narrow screens
