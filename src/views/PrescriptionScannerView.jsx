@@ -330,6 +330,7 @@ export default function PrescriptionScannerView() {
       // On error/empty result: stop animation and offer clearer-image retry, NO success check!
       if (!rawText || rawText.length < 3) {
         setOcrPhase('empty-error');
+        setIsScanning(false);
         setMeasuredProgress(null);
         setOcrProgress(0);
         setOcrStatusText('No legible text found. Please hold medicine strip flat under bright light.');
@@ -344,6 +345,7 @@ export default function PrescriptionScannerView() {
         // Confidence stays internal: it is a rejection heuristic, not a
         // probability that a reading is correct, so it is never shown to users.
         setOcrPhase('empty-error');
+        setIsScanning(false);
         setMeasuredProgress(null);
         setOcrProgress(0);
         setOcrStatusText('Could not read this image reliably. No medicine details were inferred. Retake: hold the strip flat, fill the frame, and use bright even light.');
@@ -461,6 +463,7 @@ export default function PrescriptionScannerView() {
     } catch (ocrErr) {
       console.error("Tesseract OCR execution error:", ocrErr);
       setOcrPhase('failed');
+      setIsScanning(false);
       setMeasuredProgress(null);
       setCameraError("OCR recognition encountered an error. Please try uploading a clearer image.");
     }
@@ -1016,7 +1019,7 @@ export default function PrescriptionScannerView() {
               )}
 
               {/* Teal Liquid Wave in Rounded Medicine-Foil Container */}
-              {isScanning && (
+              {(isScanning || ocrPhase === 'empty-error' || ocrPhase === 'failed') && (
                 <div
                   role="progressbar"
                   aria-valuemin="0"
@@ -1094,7 +1097,10 @@ export default function PrescriptionScannerView() {
                   {/* Accessible Status Copy & Action */}
                   <div className="ayuswar-liquid-status-block">
                     <div className="ayuswar-liquid-primary-label">
-                      Reading image on your device
+                      {ocrPhase === 'empty-error' && 'No readable result'}
+                      {ocrPhase === 'failed' && 'Reading failed'}
+                      {ocrPhase === 'success' && 'Reading complete'}
+                      {(ocrPhase === 'preprocessing' || ocrPhase === 'loading-wasm' || ocrPhase === 'recognizing' || ocrPhase === 'idle') && 'Reading image on your device'}
                     </div>
                     <div className="ayuswar-liquid-subtext">
                       {ocrPhase === 'preprocessing' && 'Enhancing foil contrast with OpenCV.js...'}

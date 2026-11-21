@@ -54,3 +54,35 @@ const CLEAN_LABEL = 'PANTOPRAZOLE 40 mg Gastro-resistant Tablets';
   assert.ok(view.includes('never substitute an unrelated medicine photo'), 'fallback must carry the explicit no-substitution note');
   console.log('✓ Test 4 Passed: unmatched scans no longer display an unrelated medicine photo.');
 }
+
+// 5. Every terminal error path clears the scanning flag and shows a terminal heading
+{
+  const emptyIdx = view.indexOf("setOcrPhase('empty-error');\n        setIsScanning(false);");
+  assert.ok(emptyIdx > -1, 'empty-text path must clear isScanning before returning');
+  const gateIdx = view.indexOf("No medicine details were inferred");
+  const gateBlock = view.slice(Math.max(0, gateIdx - 400), gateIdx);
+  assert.ok(gateBlock.includes("setIsScanning(false)"), 'legibility-gate path must clear isScanning before returning');
+  const failedIdx = view.indexOf("setOcrPhase('failed');");
+  const failedBlock = view.slice(failedIdx, failedIdx + 120);
+  assert.ok(failedBlock.includes("setIsScanning(false)"), 'recognition-failure path must clear isScanning');
+  console.log('✓ Test 5 Passed: every terminal error path clears the scanning flag.');
+}
+
+// 6. Panel heading is phase-aware, never a static in-progress label on terminal states
+{
+  assert.ok(view.includes("{ocrPhase === 'empty-error' && 'No readable result'}"), 'empty-error must show a terminal heading');
+  assert.ok(view.includes("{ocrPhase === 'failed' && 'Reading failed'}"), 'failed must show a terminal heading');
+  const labelIdx = view.indexOf('ayuswar-liquid-primary-label');
+  const labelBlock = view.slice(labelIdx, labelIdx + 700);
+  const staticOnly = labelBlock.includes('>Reading image on your device<') || />\s*Reading image on your device\s*</.test(labelBlock.replace(/\{[^}]*\}/g, ''));
+  assert.ok(labelBlock.includes('ocrPhase'), 'heading must be driven by ocrPhase');
+  console.log('✓ Test 6 Passed: panel heading is phase-aware on terminal states.');
+}
+
+// 7. Status panel stays mounted on terminal phases so the retry control remains reachable
+{
+  assert.ok(view.includes("isScanning || ocrPhase === 'empty-error' || ocrPhase === 'failed'"), 'terminal phases must keep the status panel mounted');
+  const retryIdx = view.indexOf('Retry with Clearer Image');
+  assert.ok(retryIdx > -1, 'retry control must exist on terminal paths');
+  console.log('✓ Test 7 Passed: terminal phases keep the status panel and retry control mounted.');
+}
