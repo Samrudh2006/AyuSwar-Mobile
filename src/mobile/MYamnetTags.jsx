@@ -1,4 +1,5 @@
 import React from 'react';
+import { MStateStyles, StateAnalyzing } from './MStateAnimations.jsx';
 
 export default function MYamnetTags({ audio }) {
   const [task, setTask] = React.useState('unspecified');
@@ -27,11 +28,13 @@ export default function MYamnetTags({ audio }) {
     worker.current.postMessage({ samples }, [samples.buffer]);
   };
   return <section className="m-yamnet-panel">
+    <MStateStyles />
     <span className="m-clin-label">Local model · YAMNet v1</span>
     <h2 className="m-steps-title">Explore sound-event hints</h2>
     <p>Google YAMNet predicts audio-event tags, not diseases. Scores are raw model outputs, not probabilities. Vowels and breathing can receive unrelated tags. Your selected task is kept separate.</p>
     <label className="m-record-language">What did you record?<select value={task} disabled={busy} onChange={e=>{setTask(e.target.value);setResult(null);}}><option value="unspecified">Select the recorded task</option><option value="sustained-vowel">Sustained vowel</option><option value="speech">Speech / counting</option><option value="cough">Cough</option><option value="breathing">Breathing</option><option value="other">Other sound</option></select></label>
     <button className="m-btn m-btn-primary" onClick={run} disabled={busy || !audio || task === 'unspecified'}>{busy ? 'Running local model...' : 'Analyze sound-event hints'}</button>
+    {busy && <StateAnalyzing />}
     <p className="m-yamnet-note">Runs on this device in a separate worker. First 5 seconds only; bundled model, no audio upload. Initial load and slower phones may take longer.</p>
     {result && <div role="status" className="m-yamnet-result">{result.ok ? <><b>Uncertain event hints</b><p>Recorded task: {result.task}. Do not treat these tags as a confirmed classification.</p>{result.top.map((tag,i)=><div className="m-yamnet-tag" key={i}><span>{typeof tag.label === 'string' ? tag.label : tag.label?.display_name || 'Unknown'}</span><code>{tag.score.toFixed(3)}</code></div>)}<small>Raw scores · {result.elapsedMs}ms including model load if needed · {result.backend} · {result.samples / 16000}s input. No diagnostic inference.</small></> : <p>{result.message}</p>}</div>}
     <a href="/models/yamnet-v1/LICENSE" target="_blank" rel="noreferrer">Apache 2.0 model license</a>

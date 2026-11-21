@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { MStateStyles, StateEmpty } from '../mobile/MStateAnimations.jsx';
 import { 
   Bell, 
   X, 
@@ -474,19 +475,11 @@ export default function ClinicalNotificationsDrawer({
               padding: '48px 16px',
               color: '#475569'
             }}>
-              <img
-                src="/assets/icons/sheet/load-empty.png"
-                alt=""
-                aria-hidden="true"
-                className="ayu-loadart-fade"
-                style={{ width: '64px', height: '64px', objectFit: 'contain', margin: '0 auto 12px', display: 'block' }}
+              <MStateStyles />
+              <StateEmpty
+                title="No notifications to display"
+                hint={filter === 'unread' ? 'All notifications have been marked as read.' : 'No stored demo alerts on this device; server push is not connected.'}
               />
-              <div style={{ fontSize: '14px', fontWeight: 700, color: '#486770', marginBottom: '4px' }}>
-                No notifications to display
-              </div>
-              <div style={{ fontSize: '12px', color: '#475569' }}>
-                {filter === 'unread' ? 'All notifications have been marked as read.' : 'No stored demo alerts on this device; server push is not connected.'}
-              </div>
             </div>
           ) : (
             filteredNotifications.map(item => {
