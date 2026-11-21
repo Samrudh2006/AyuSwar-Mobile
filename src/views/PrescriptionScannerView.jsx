@@ -20,7 +20,7 @@ import {
 import { useApp } from '../context/AppContext';
 import { openCvPreprocessor } from '../services/openCvOcrPreprocessor';
 import { evaluatePharmacovigilanceSafety } from '../services/pharmacovigilanceSentinel';
-import { extractBatchAndExpiry, matchDrugFromOcrText } from '../services/prescriptionOcrParsing';
+import { extractBatchAndExpiry, matchDrugFromOcrText, assessOcrLegibility } from '../services/prescriptionOcrParsing';
 
 export default function PrescriptionScannerView() {
   const { isDemoMode } = useApp();
@@ -336,6 +336,20 @@ export default function PrescriptionScannerView() {
         return;
       }
 
+      // Legibility gate: unreliable OCR (low engine confidence or symbol-soup)
+      // must not reach the formulary matcher or the result card as a candidate.
+      const ocrConfidence = typeof result?.data?.confidence === 'number' ? result.data.confidence : null;
+      const legibility = assessOcrLegibility(rawText, ocrConfidence);
+      if (!legibility.legible) {
+        // Confidence stays internal: it is a rejection heuristic, not a
+        // probability that a reading is correct, so it is never shown to users.
+        setOcrPhase('empty-error');
+        setMeasuredProgress(null);
+        setOcrProgress(0);
+        setOcrStatusText('Could not read this image reliably. No medicine details were inferred. Retake: hold the strip flat, fill the frame, and use bright even light.');
+        return;
+      }
+
       // Show 100% + check only after successful processing with non-empty text
       setOcrPhase('success');
       setMeasuredProgress(100);
@@ -428,7 +442,7 @@ export default function PrescriptionScannerView() {
           genericSalt: 'No exact dictionary candidate - inspect extracted text',
           nfiCode: 'BUNDLED SAMPLE',
           dosageForm: 'Solid Dosage Form',
-          realImageUrl: resultPreviewUrl || '/images/medicines/silver_amoxicillin_blister.jpg',
+          realImageUrl: resultPreviewUrl || null, // never substitute an unrelated medicine photo for an unmatched scan
           janAushadhiGeneric: 'Bundled sample formulary reference',
           brandedPrice: 'Check local MRP',
           janAushadhiPrice: 'Not checked (no live stock or price)',

@@ -150,6 +150,25 @@ export const CLINICAL_FORMULARY_DATABASE = [
 ];
 
 
+
+// Legibility gate for raw OCR output. Engine mean confidence alone misses
+// symbol-soup that scores mid-range, and alphabetic density alone misses
+// short noisy strings, so a scan must clear both bars before any text is
+// shown as a candidate. Anything else is reported as an unreadable scan
+// instead of fabricated medicine details.
+export function assessOcrLegibility(rawText, confidence) {
+  const text = String(rawText || '').trim();
+  const nonSpace = text.replace(/\s/g, '');
+  const letters = nonSpace.match(/[a-zA-Z]/g) || [];
+  const alphaRatio = nonSpace.length > 0 ? letters.length / nonSpace.length : 0;
+  const conf = typeof confidence === 'number' && Number.isFinite(confidence) ? confidence : null;
+  const reasons = [];
+  if (nonSpace.length < 3) reasons.push('too-short');
+  if (conf !== null && conf < 45) reasons.push('low-confidence');
+  if (alphaRatio < 0.5) reasons.push('low-alpha-density');
+  return { legible: reasons.length === 0, alphaRatio, confidence: conf, reasons };
+}
+
 export function extractBatchAndExpiry(rawText) {
   let batch = null;
   let expiry = null;
