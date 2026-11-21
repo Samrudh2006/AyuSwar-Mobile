@@ -472,7 +472,7 @@ export default function ClinicalNotificationsDrawer({
             <div style={{
               textAlign: 'center',
               padding: '48px 16px',
-              color: '#94A3B8'
+              color: '#475569'
             }}>
               <img
                 src="/assets/icons/sheet/load-empty.png"
@@ -484,7 +484,7 @@ export default function ClinicalNotificationsDrawer({
               <div style={{ fontSize: '14px', fontWeight: 700, color: '#486770', marginBottom: '4px' }}>
                 No notifications to display
               </div>
-              <div style={{ fontSize: '12px', color: '#94A3B8' }}>
+              <div style={{ fontSize: '12px', color: '#475569' }}>
                 {filter === 'unread' ? 'All notifications have been marked as read.' : 'No stored demo alerts on this device; server push is not connected.'}
               </div>
             </div>
@@ -538,7 +538,7 @@ export default function ClinicalNotificationsDrawer({
 
                     <div style={{
                       fontSize: '10.5px',
-                      color: '#94A3B8',
+                      color: '#475569',
                       whiteSpace: 'nowrap',
                       display: 'flex',
                       alignItems: 'center',
@@ -618,7 +618,7 @@ export default function ClinicalNotificationsDrawer({
                         style={{
                           background: 'transparent',
                           border: 'none',
-                          color: '#94A3B8',
+                          color: '#475569',
                           cursor: 'pointer',
                           padding: '2px'
                         }}

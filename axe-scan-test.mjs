@@ -43,11 +43,16 @@ const MODALS = [
   { name: 'modal-upload-report', tab: 'reports', opener: 'Upload New Diagnostic Report' },
   { name: 'modal-add-medication', tab: 'medications', opener: 'Add Medication Manually' },
   { name: 'modal-add-vitals', tab: 'my_health', opener: 'Add Vitals Manually' },
+  { name: 'drawer-notifications', tab: 'home', openerAria: 'Open Health Notifications' },
 ];
 for (const m of MODALS) {
   await page.goto(`${BASE}?tab=${m.tab}`, { waitUntil: 'domcontentloaded' });
   await page.waitForTimeout(3200);
-  await page.locator('button', { hasText: m.opener }).first().click();
+  if (m.openerAria) {
+    await page.locator(`button[aria-label^="${m.openerAria}"]`).first().click();
+  } else {
+    await page.locator('button', { hasText: m.opener }).first().click();
+  }
   await page.waitForTimeout(700);
   await page.evaluate(AXE);
   const res = await page.evaluate(async () => {

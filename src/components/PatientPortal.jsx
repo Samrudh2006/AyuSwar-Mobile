@@ -3869,10 +3869,10 @@ export default function PatientPortal({
                         >
                           <UploadCloud size={34} color="#0F4C5C" style={{ margin: '0 auto 8px auto', display: 'block' }} />
                           <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#081C24' }}>
-                            Drag & drop diagnostic PDF, DICOM, or scan image
+                            {t('patient.reports.dropzone')}
                           </div>
                           <div style={{ fontSize: '11px', color: '#52707C', marginTop: '3px', marginBottom: '14px' }}>
-                            Supports PDF, JPEG, PNG, DICOM, WebP up to 25 MB
+                            {t('patient.reports.dropzoneSub')}
                           </div>
 
                           {/* Explicit Manual Upload Button */}
@@ -3906,7 +3906,7 @@ export default function PatientPortal({
                           {/* Quick One-Click Sample Reports */}
                           <div style={{ marginTop: '16px', borderTop: '1px solid rgba(0, 0, 0, 0.08)', paddingTop: '12px' }}>
                             <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#52707C', marginBottom: '8px' }}>
-                              Or quickly test with a sample clinical report:
+                              {t('patient.reports.quickTest')}
                             </div>
                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }}>
                               <button
@@ -4009,7 +4009,7 @@ export default function PatientPortal({
                               <div style={{ fontSize: '11px', color: '#065F46', display: 'flex', alignItems: 'center', gap: '6px', marginTop: '2px' }}>
                                 <span>{uploadedReportFile.size}</span>
                                 <span>•</span>
- <span style={{ fontWeight: 700 }}>✓ Attached • bundled sample preview</span>
+ <span style={{ fontWeight: 700 }}>{t('patient.reports.attachedChip')}</span>
                               </div>
                             </div>
                           </div>
@@ -4041,7 +4041,7 @@ export default function PatientPortal({
                                 cursor: 'pointer',
                                 padding: '6px'
                               }}
-                              title="Remove attached file"
+                              title={t('patient.reports.removeTitle')}
                             >
                               <Trash2 size={16} />
                             </button>
@@ -4053,7 +4053,7 @@ export default function PatientPortal({
                       <div className="patient-report-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '12px', width: '100%' }}>
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Report Name / Test Type
+                            {t('patient.reports.nameLabel')}
                           </label>
                           <input
                             type="text"
@@ -4066,13 +4066,13 @@ export default function PatientPortal({
 
                         <div>
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                            Test Date
+                            {t('patient.reports.dateLabel')}
                           </label>
                           <input
                             type="text"
                             value={newReportDate}
                             onChange={e => setNewReportDate(e.target.value)}
-                            aria-label="Test Date"
+                            aria-label={t('patient.reports.dateLabel')}
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12.5px' }}
                           />
                         </div>
@@ -4081,7 +4081,7 @@ export default function PatientPortal({
                       {/* Doctor / Verifier */}
                       <div>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                          Ordering Physician / Lab Name
+                          {t('patient.reports.doctorLabel')}
                         </label>
                         <input
                           type="text"
@@ -4107,7 +4107,7 @@ export default function PatientPortal({
                             AyuSwar Indic Bio-Scribe AI
                           </div>
                           <div style={{ fontSize: '11px', color: '#52707C' }}>
-                            Autofills a bundled sample preview & translates to Telugu / Hindi speech
+                            {t('patient.reports.scribeSub')}
                           </div>
                         </div>
 
@@ -4139,13 +4139,13 @@ export default function PatientPortal({
                       {/* Summary */}
                       <div>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                          Clinical Findings & Summary
+                          {t('patient.reports.summaryLabel')}
                         </label>
                         <textarea
                           rows={2}
                           value={newReportSummary}
                           onChange={e => setNewReportSummary(e.target.value)}
-                          aria-label="Clinical Findings & Summary"
+                          aria-label={t('patient.reports.summaryLabel')}
                           style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
@@ -4153,13 +4153,13 @@ export default function PatientPortal({
                       {/* Spoken Dialect Audio Scripts */}
                       <div>
                         <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>
-                          Telugu Audio Script (తెలుగు వాయిస్ సారాంశం)
+                          {t('patient.reports.teluguScriptLabel')}
                         </label>
                         <input
                           type="text"
                           value={newReportTelugu}
                           onChange={e => setNewReportTelugu(e.target.value)}
-                          aria-label="Telugu Audio Script"
+                          aria-label={t('patient.reports.teluguScriptLabel')}
                           style={{ width: '100%', padding: '8px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '12px' }}
                         />
                       </div>
@@ -4184,7 +4184,7 @@ export default function PatientPortal({
                             cursor: 'pointer'
                           }}
                         >
-                          Cancel
+                          {t('patient.reports.cancelBtn')}
                         </button>
                         <button
                           type="button"
@@ -4197,7 +4197,7 @@ export default function PatientPortal({
                               doctor: newReportDoctor,
                               summary: newReportSummary,
                               spokenTelugu: newReportTelugu,
-                              spokenHindi: newReportHindi,
+                              spokenHindi: reportOrigin === 'user' ? newReportSummary : newReportHindi,
                               origin: reportOrigin,
                               isNew: true
                             };
@@ -4515,7 +4515,7 @@ export default function PatientPortal({
                             cursor: 'pointer'
                           }}
                         >
-                          Cancel
+                          {t('patient.reports.cancelBtn')}
                         </button>
                         <button
                           type="button"

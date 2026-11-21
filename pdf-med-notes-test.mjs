@@ -83,6 +83,28 @@ const browser = await chromium.launch({ executablePath: '/usr/bin/google-chrome'
   await page.close();
 }
 
+// Scenario 4: Upload Report modal renders translated in Telugu locale
+// (language persisted via localStorage, same mechanism as the UI selector).
+{
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  page.on('dialog', async d => { await d.accept(); });
+  await page.addInitScript(() => localStorage.setItem('ayuswar_selected_language', 'te-IN'));
+  await page.goto(`${BASE}?tab=reports`, { waitUntil: 'domcontentloaded' });
+  await page.waitForTimeout(3200);
+  await page.locator('button', { hasText: 'కొత్త' }).first().click().catch(() => {});
+  // fallback: click by the upload button's SVG sibling text in Telugu
+  if (await page.locator('text=డయగ్నోస్టిక్ PDF').count() === 0) {
+    await page.locator('button', { hasText: 'రిపోర్ట్' }).first().click();
+  }
+  await page.waitForTimeout(600);
+  ok(await page.locator('text=డయగ్నోస్టిక్ PDF').count() >= 1, 'S4: dropzone title renders in Telugu');
+  ok(await page.locator('text=టెస్ట్ తేదీ').count() >= 1, 'S4: Test Date label renders in Telugu');
+  ok(await page.locator('text=క్లినికల్ ఫలితాలు & సారాంశం').count() >= 1, 'S4: summary label renders in Telugu');
+  ok(await page.locator('text=రద్దు చేయండి').count() >= 1, 'S4: Cancel renders in Telugu');
+  ok(await page.locator('text=ముందుగా రాసిన తెలుగు').count() >= 1, 'S4: scribe subtitle renders in Telugu');
+  await page.close();
+}
+
 await browser.close();
-console.log(failures === 0 ? 'ALL 3 SCENARIOS PASS' : `${failures} CHECK(S) FAILED`);
+console.log(failures === 0 ? 'ALL 4 SCENARIOS PASS' : `${failures} CHECK(S) FAILED`);
 process.exit(failures === 0 ? 0 : 1);
