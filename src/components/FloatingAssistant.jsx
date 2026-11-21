@@ -33,6 +33,7 @@ import { CLINICAL_RAG_AUDIO_MATRIX, matrixContent } from '../services/clinicalRa
 import StructuredAnswer from './assistant/StructuredAnswer';
 import { mapQueryToStructuredAnswer, blocksToOpenUILang } from '../services/structuredAnswerService';
 import { translate } from '../i18n';
+import { MStateStyles, StateThinking } from '../mobile/MStateAnimations.jsx';
 import { useApp } from '../context/AppContext';
 import { Renderer, createParser } from '@openuidev/react-lang';
 import { ayuswarUiLibrary, ayuswarUiSystemPrompt } from '../services/ayuswarUiLibrary.jsx';
@@ -1116,10 +1117,12 @@ export default function FloatingAssistant({
                         <div style={{ fontWeight: 600 }}>
                           {isProcessingQuery && !currentAiReply && (
                             <>
-                              <img src="/assets/icons/sheet/load-assistant-wait.png" alt="" aria-hidden="true"
-                                className="ayu-loadart-breathe"
-                                style={{ width: '86px', height: 'auto', display: 'block', margin: '2px auto 4px' }} />
-                              <div className="ayu-loadbars" aria-hidden="true" style={{ margin: '0 auto 8px' }}><span></span><span></span><span></span><span></span><span></span></div>
+                              <MStateStyles />
+                              <StateThinking
+                                eyebrow={tt('assistant.thinkingEyebrow')}
+                                title={tt('assistant.thinkingTitle')}
+                                hint={tt('assistant.thinkingHint')}
+                              />
                             </>
                           )}
                           {currentAiReply || "Analyzing clinical query..."}

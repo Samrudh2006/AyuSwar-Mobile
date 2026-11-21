@@ -59,9 +59,9 @@ export function StateUpload({ percent }) {
 }
 
 // Assistant waiting: shown only while a reply is genuinely pending.
-export function StateThinking() {
+export function StateThinking({ eyebrow = 'Assistant waiting', title = 'AyuSwar is thinking...', hint = 'Shown only while a reply is pending' }) {
   return (
-    <MStateFrame eyebrow="Assistant waiting" title="AyuSwar is thinking..." hint="Shown only while a reply is pending">
+    <MStateFrame eyebrow={eyebrow} title={title} hint={hint}>
       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
         <path d="M14 22a10 10 0 0 1 10-10h24a10 10 0 0 1 10 10v16a10 10 0 0 1-10 10H30l-12 10v-10a10 10 0 0 1-4-8V22z" stroke={NAVY} strokeWidth="2.5" fill="none" strokeLinejoin="round" />
         {[26, 33, 40, 47].map((x, i) => (
@@ -88,9 +88,9 @@ export function StateProcessing({ title = 'Scanning report...', hint = 'Runs onl
 }
 
 // Acoustic analysis: shown only while DSP stages actually run.
-export function StateAnalyzing() {
+export function StateAnalyzing({ eyebrow = 'Acoustic analysis', title = 'Analysing audio...', hint = 'On-device model run; raw event scores, no diagnostic inference' }) {
   return (
-    <MStateFrame eyebrow="Acoustic analysis" title="Analysing audio..." hint="Real DSP stages, no inference">
+    <MStateFrame eyebrow={eyebrow} title={title} hint={hint}>
       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
         {[16, 25, 34, 43, 52].map((x, i) => (
           <rect key={x} className="m-state-bar" x={x} y={36 - [10, 18, 24, 18, 10][i]} width="5" height={[10, 18, 24, 18, 10][i] * 2} rx="2.5" fill={i === 2 ? GOLD : NAVY} />
@@ -127,9 +127,9 @@ export function StateError({ title = 'Could not analyse', hint = 'Actual failure
 }
 
 // Empty: callers render this ONLY when the list is genuinely empty.
-export function StateEmpty({ title = 'No stored demo alerts', hint = 'Shown only when the list is genuinely empty' }) {
+export function StateEmpty({ eyebrow = 'Empty state', title = 'No stored demo alerts', hint = 'Shown only when the list is genuinely empty' }) {
   return (
-    <MStateFrame eyebrow="Empty state" title={title} hint={hint}>
+    <MStateFrame eyebrow={eyebrow} title={title} hint={hint}>
       <svg width="72" height="72" viewBox="0 0 72 72" fill="none" aria-hidden="true">
         <path d="M16 28h40l-4 22a4 4 0 0 1-4 3.4H24A4 4 0 0 1 20 50l-4-22z" stroke={NAVY} strokeWidth="2.5" fill="none" strokeLinejoin="round" />
         <path d="M16 28l6-10h28l6 10" stroke={NAVY} strokeWidth="2.5" fill="none" strokeLinejoin="round" />

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MStateStyles, StateEmpty } from '../mobile/MStateAnimations.jsx';
+import { useApp } from '../context/AppContext';
+import { translate } from '../i18n';
 import { 
   Bell, 
   X, 
@@ -38,6 +40,8 @@ export default function ClinicalNotificationsDrawer({
   onActionClick = null
 }) {
   const isDoctor = mode === 'doctor';
+  const { selectedLanguage } = useApp();
+  const tt = key => translate(key, selectedLanguage || 'en-IN');
 
   // Seed notification data tailored to mode
   const initialDoctorNotifications = [
@@ -477,8 +481,9 @@ export default function ClinicalNotificationsDrawer({
             }}>
               <MStateStyles />
               <StateEmpty
-                title="No notifications to display"
-                hint={filter === 'unread' ? 'All notifications have been marked as read.' : 'No stored demo alerts on this device; server push is not connected.'}
+                eyebrow={tt('notifications.emptyEyebrow')}
+                title={tt('notifications.emptyTitle')}
+                hint={filter === 'unread' ? tt('notifications.emptyHintUnread') : tt('notifications.emptyHintAll')}
               />
             </div>
           ) : (
