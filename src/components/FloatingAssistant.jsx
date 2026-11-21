@@ -132,7 +132,7 @@ export default function FloatingAssistant({
   const [showSampleLibrary, setShowSampleLibrary] = useState(false);
   // Assistant chrome follows the app UI locale; the voice-language selector only
   // chooses the speech recognition/synthesis language and must not change UI text.
-  const { selectedLanguage: uiLocale } = useApp();
+  const { selectedLanguage: uiLocale, t } = useApp();
   const tt = (key, params) => translate(key, uiLocale || 'en-IN', params);
   const [currentAnswerBlocks, setCurrentAnswerBlocks] = useState(null);
   const [currentAnswerLang, setCurrentAnswerLang] = useState(null);
@@ -697,7 +697,7 @@ export default function FloatingAssistant({
           className="floating-assistant-pill"
           role="button"
           tabIndex={0}
-          aria-label="Open AyuSwar AI Help voice assistant"
+          aria-label={t('common.aiHelpAria')}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setAssistantState('expanded'); } }}
           onClick={() => setAssistantState('expanded')}
           style={{
@@ -752,7 +752,7 @@ export default function FloatingAssistant({
           </div>
 
           {/* Mobile-only compact label (portal floating button) */}
-          <span className="floating-assistant-mobile-label">AI Help</span>
+          <span className="floating-assistant-mobile-label">{t('common.aiHelp')}</span>
 
           {/* Mic Button Circle */}
           <button

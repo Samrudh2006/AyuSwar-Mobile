@@ -3278,7 +3278,7 @@ export default function PatientPortal({
                                   fontSize: '12px',
                                   flexShrink: 0
                                 }}>
-                                  <div style={{ fontSize: '9px', textTransform: 'uppercase', color: '#D4AF37', letterSpacing: '0.5px' }}>OPD Token</div>
+                                  <div style={{ fontSize: '9px', textTransform: 'uppercase', color: '#D4AF37', letterSpacing: '0.5px' }}>{t('patient.appts.opdToken')}</div>
                                   <div style={{ fontSize: '15px', fontWeight: 900 }}>{booking.token || 'GM-042'}</div>
                                 </div>
 
@@ -3573,7 +3573,7 @@ export default function PatientPortal({
                                     )}
                                   </div>
                                   <div style={{ fontSize: '11.5px', color: '#52707C', marginTop: '2px' }}>
-                                    {past.type ? past.type + ' • ' : ''}Reason: {past.reason || 'Clinical consultation'}
+                                    {past.type ? past.type + ' • ' : ''}{t('patient.appts.reasonLabel')} {(past.reason === 'Clinical consultation' || !past.reason) ? t('patient.appts.clinicalConsult') : past.reason}
                                   </div>
                                 </div>
                               </div>
@@ -4954,9 +4954,9 @@ export default function PatientPortal({
                       textTransform: 'uppercase',
                       border: '1px solid rgba(255,255,255,0.2)' 
                     }}>
-                      Synthetic patient record • demo
+                      {t('patient.settings.recordBadge')}
                     </span>
-                    <span style={{ fontSize: '12px', color: '#CFE3E8' }}>• Synthetic {t('patient.home.demoId')} <code>{abhaId}</code></span>
+                    <span style={{ fontSize: '12px', color: '#CFE3E8' }}>• {t('patient.settings.syntheticWord')} {t('patient.home.demoId')} <code>{abhaId}</code></span>
                   </div>
                   <h2 style={{ fontSize: '24px', fontWeight: 800, fontFamily: 'var(--font-main)', margin: '0 0 6px 0', color: '#FFFFFF' }}>
                     {t('patient.settings.title')}
