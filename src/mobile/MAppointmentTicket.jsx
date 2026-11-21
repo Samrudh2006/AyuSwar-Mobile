@@ -254,17 +254,17 @@ export default function MAppointmentTicket() {
                 <button className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto' }} onClick={() => findTicket()}>
                   {t('Find ticket')}
                 </button>
-                <label className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, flex: 'none', width: 'auto', cursor: 'pointer' }}>
-                  {t('Scan ticket image')}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    capture="environment"
-                    style={{ display: 'none' }}
-                    onChange={e => { scanTicketImage(e.target.files?.[0]); e.target.value = ''; }}
-                  />
-                </label>
               </div>
+              <label className="m-btn m-btn-ghost" style={{ padding: '7px 12px', fontSize: 12.5, width: '100%', marginTop: 6, cursor: 'pointer', textAlign: 'center' }}>
+                {t('Scan ticket image')}
+                <input
+                  type="file"
+                  accept="image/*"
+                  capture="environment"
+                  style={{ display: 'none' }}
+                  onChange={e => { scanTicketImage(e.target.files?.[0]); e.target.value = ''; }}
+                />
+              </label>
               {lookupMsg && <p role="status" style={{ margin: '6px 0 0', fontSize: 11.5, fontWeight: 700, color: '#12324F' }}>{lookupMsg}</p>}
             </div>
             <div className="m-tkt-foot">

@@ -206,8 +206,8 @@ export default function PrescriptionScannerView() {
   // Current display data: live OCR result, an honest empty state after a user
   // scan that produced nothing, or the explicitly selected bundled sample.
   const EMPTY_SCAN_RESULT = { id: 'empty-scan', brand: 'No result from this scan', keywords: [], boundingBoxes: [], extractedText: '', genericSalt: 'No text recognized - try a clearer, well-lit photo', dosageForm: '-', nfiCode: 'NO RESULT', matchType: 'No candidate', imagePlaceholderColor: '#F1F5F9', realImageUrl: null, batchNumber: 'Not identified', expiryDate: 'Not identified', vernacularTe: null, ddiConflict: null, pillColor: '#94A3B8' };
-  const baseSample = liveOcrResult || (userScanAttempted ? EMPTY_SCAN_RESULT : OCR_SAMPLES[selectedSampleIdx]);
-  const currentSample = { ...baseSample, nfiCode: liveOcrResult ? (liveOcrResult.sourceKind === 'pdf-text-layer' ? 'UNVERIFIED PDF TEXT IMPORT' : 'UNVERIFIED OCR CANDIDATE') : (userScanAttempted ? 'NO RESULT' : 'BUNDLED SAMPLE'), vectorConfidence: 'Verify exact ingredient, strength and release form', brandedPrice: 'Not checked', janAushadhiPrice: 'Not checked', savingsPct: 'Not measured', janAushadhiGeneric: 'No live stock, price or equivalence check', vernacularTe: null };
+  const baseSample = liveOcrResult || (userScanAttempted && !isScanning ? EMPTY_SCAN_RESULT : OCR_SAMPLES[selectedSampleIdx]);
+  const currentSample = { ...baseSample, nfiCode: liveOcrResult ? (liveOcrResult.sourceKind === 'pdf-text-layer' ? 'UNVERIFIED PDF TEXT IMPORT' : 'UNVERIFIED OCR CANDIDATE') : (userScanAttempted && !isScanning ? 'NO RESULT' : 'BUNDLED SAMPLE'), vectorConfidence: 'Verify exact ingredient, strength and release form', brandedPrice: 'Not checked', janAushadhiPrice: 'Not checked', savingsPct: 'Not measured', janAushadhiGeneric: 'No live stock, price or equivalence check', vernacularTe: null };
 
   // Evaluate Beers Criteria & KDIGO Renal Safety
   const activeKeywords = currentSample.keywords || [currentSample.id || '', currentSample.brand || ''];
