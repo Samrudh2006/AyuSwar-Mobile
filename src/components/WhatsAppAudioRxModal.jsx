@@ -22,7 +22,7 @@ import {
   Info
 } from 'lucide-react';
 import { speechService } from '../services/indicSpeechService';
-import { getBoundSampleAudioUrl } from '../services/bundledSpeechSamples';
+import { getBoundSampleAudioUrl } from '../services/bundledSpeechSamples.js';
 import { queryGroqApi, getGroqApiKey } from '../services/aiBrainService';
 import { cleanTextForSpeech } from '../utils/speechSanitizer';
 import AbdmRegistryBadgeRow from './AbdmRegistryBadgeRow';

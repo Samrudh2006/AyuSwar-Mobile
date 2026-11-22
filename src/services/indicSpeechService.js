@@ -1,4 +1,4 @@
-import { getBoundSampleAudioUrl } from './bundledSpeechSamples';
+import { getBoundSampleAudioUrl } from './bundledSpeechSamples.js';
 /**
  * AyuSwar AI — Unified Indic Speech & Voice Service (indicSpeechService.js)
  * 
