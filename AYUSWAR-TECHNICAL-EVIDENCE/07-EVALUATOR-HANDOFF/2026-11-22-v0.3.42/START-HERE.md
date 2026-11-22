@@ -26,7 +26,7 @@ The final 42-check policy test was also run against an isolated copy of the four
 
 ## Historical evidence is still historical
 
-The ZIP includes the existing technical-evidence tree, selected documentation and benchmark reports at the released source snapshot. Original files and their dates/revisions remain intact. In particular:
+The ZIP includes the existing technical-evidence tree, selected documentation and benchmark reports at the released source snapshot. Historical evaluation files and their recorded dates/revisions remain intact. Current notes have a narrow privacy correction: private conversation locators, precise message times and operational references are omitted, while product-relevant provenance remains. This correction does not erase earlier Git history or previously downloaded archives. The manifest identifies the changed note copies. In particular:
 
 - The corrected ASR PDF reports measured FLEURS and a bounded controlled-noise experiment. It does not establish clinical, Tenglish, dialect or native-device accuracy. Telugu local quantizer settings were not recorded; Hindi pilot model origin remains unverified. Neither is repaired by this handoff.
 - The safety PDF remains the recorded 82-check text-level baseline with its later 407/3 appendix, not a new 550-check PDF or an audio-level clinical study.
@@ -38,7 +38,7 @@ The [proposal completion matrix](https://github.com/Samrudh2006/AyuSwar-Mobile/b
 
 ## Replay without confusing the scope
 
-For the full application and whole suite, clone the Mobile repository, check out v0.3.42-debug, and follow its documented npm/build instructions. A new run produces new evidence; preserve these recorded files. This evidence ZIP is not a complete application checkout, APK installer or model pack.
+For the full application and whole suite, clone the Mobile repository, check out v0.3.42-debug, and follow its documented npm/build instructions. A new run produces new evidence; preserve these recorded files. This evidence ZIP is not a complete application checkout, APK installer or model pack. Marketing pitch materials and video binaries are excluded; the separately delivered technical deck is not bundled.
 
 A small byte-matched copy of the four evidence services and the 42-check test is included in `replay-span-guards/` inside the ZIP. With Node 22, run:
 

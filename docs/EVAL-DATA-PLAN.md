@@ -1,7 +1,7 @@
 # Evaluation data plan (ASR)
 
 Scope: evaluation data for the speech pipeline requested in the user's
-research brief (WhatsApp, 2026-11-20): WER/CER measurement per dialect,
+research brief dated 2026-11-20: WER/CER measurement per dialect,
 Telugu + Hindi + code-mixed speech. This document fixes provenance,
 licenses, split discipline and contamination rules BEFORE any integration.
 No dataset is committed to this repository; audio is fetched locally by

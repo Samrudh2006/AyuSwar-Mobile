@@ -76,7 +76,6 @@ APK = {
     'note': 'Debug APK, compile-verified, contains every browser-verified fix in this report. Build provenance: this APK was produced from the exact source tree shipped as AyuSwar-mobile-source-18Nov0755.tar.gz (SHA-256 reported with the archive) via npm build + cap sync + gradle assembleDebug at 07:55 IST; the archive and this APK are one provenance pair. Native on-device runtime NOT tested (no physical device available).',
 }
 LINKS = {
-    'Live checklist File': 'https://files.instinct.com/4jiaz39yxm5w-ayuswar-mobile-build-live-checklist',
     'Source repository': 'https://github.com/Samrudh2006/Ayuswar-Ai',
     'Deployed website (reference)': 'https://ayuswar-ai.vercel.app',
     '112 India - Emergency Response Support System (MHA)': 'https://www.112.gov.in/about',

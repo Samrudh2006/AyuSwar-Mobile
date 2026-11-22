@@ -3,7 +3,7 @@
   "snapshot": "2026-11-22-v0.3.42",
   "applicationReleaseRevision": "843ea7bf2b26a6d983f665e1488cb17f86d2010c",
   "acceptedFullSuiteRevision": "651cf79e3b822afe7334fe3b939a120e96b0266c",
-  "scope": "Evidence/documentation package, not an APK, full app checkout, new experiment or clinical validation. Historical inputs keep their own recorded dates/revisions. Marketing video binaries, model weights and original corpora are not included.",
+  "scope": "Evidence/documentation package, not an APK, full app checkout, new experiment or clinical validation. Historical inputs keep their own recorded dates/revisions. Marketing video/pitch materials, model weights and original corpora are not included.",
   "fullSuite": {
     "passed": 550,
     "actualConditionalSkips": 3,
@@ -499,8 +499,8 @@
     },
     {
       "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
-      "bytes": 6673,
-      "sha256": "75f277b4f381862b77a409635e07f44d5871d70f57b733234680efc7e035b9b1",
+      "bytes": 7129,
+      "sha256": "1a2c53342278a1a6a76ec0d6632b2fe8c6f5df0bc008c01ebdde5f9469a5174e",
       "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
       "transform": null
     },
@@ -583,15 +583,15 @@
     },
     {
       "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/build_package.py",
-      "bytes": 5139,
-      "sha256": "7b80872f37d8dd0f05d80e726b1d7f9cb67ea594673ee13dd480b20eda1db1b5",
+      "bytes": 5405,
+      "sha256": "a25ad3f3f277f24fe1d2ee8348ae4276fd0842e232ce351667b22ec7b0e92cd2",
       "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/build_package.py",
       "transform": null
     },
     {
       "path": "AYUSWAR-TECHNICAL-EVIDENCE/README.md",
-      "bytes": 4835,
-      "sha256": "3bd0de198017579796a3c4410c8614b6de296f795031fb189ca63e37b98ef13d",
+      "bytes": 5051,
+      "sha256": "363245b52c94b7d428d218118ccacbc63364835459cf08b6d437e1113a8358c2",
       "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/README.md",
       "transform": "New packaging index, with self-ZIP link replaced for archive use"
     },
@@ -618,8 +618,8 @@
     },
     {
       "path": "START-HERE.md",
-      "bytes": 6673,
-      "sha256": "75f277b4f381862b77a409635e07f44d5871d70f57b733234680efc7e035b9b1",
+      "bytes": 7129,
+      "sha256": "1a2c53342278a1a6a76ec0d6632b2fe8c6f5df0bc008c01ebdde5f9469a5174e",
       "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
       "transform": null
     },
@@ -1143,10 +1143,10 @@
     },
     {
       "path": "docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md",
-      "bytes": 5326,
-      "sha256": "30fc4eb752828bd4c5355e16514c9d2e8fcf5fb5216fe38d6ed7d368077ceb6c",
-      "sourcePath": "docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
+      "bytes": 5343,
+      "sha256": "d52bbf9babfa3d99ff1508fda930701b57061bd59b8a191537feefd7c86d39e9",
+      "sourcePath": "docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md",
+      "transform": "Privacy-only note cleanup; product evaluation results unchanged"
     },
     {
       "path": "docs/CLINICAL_EVIDENCE_DATA_MODEL.md",
@@ -1185,10 +1185,10 @@
     },
     {
       "path": "docs/EVAL-DATA-PLAN.md",
-      "bytes": 6759,
-      "sha256": "13ed8c3c754ac12f6e6dd77d414ac95b65af535d186df75be7618afaab5918f5",
-      "sourcePath": "docs/EVAL-DATA-PLAN.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
+      "bytes": 6753,
+      "sha256": "6a98308fbc5c74bdb609bb37ccf95a3455e78d96bec42be4c5260bfa3d2d4cad",
+      "sourcePath": "docs/EVAL-DATA-PLAN.md",
+      "transform": "Privacy-only note cleanup; product evaluation results unchanged"
     },
     {
       "path": "docs/EVIDENCE-SPAN-GUARDS-2026-11-22.md",
@@ -1220,38 +1220,10 @@
     },
     {
       "path": "docs/audit-2026-11-21.md",
-      "bytes": 43606,
-      "sha256": "52c9c795aa7aca9d3093bab048bf7a4fd93c5beff435bbc7665070c485a6bfad",
-      "sourcePath": "docs/audit-2026-11-21.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
-    },
-    {
-      "path": "docs/pitch/AyuSwar_AI_Solution_Pitch.pdf",
-      "bytes": 618545,
-      "sha256": "b41fc8d0a619aa502b5ceaf64b384d75e8d6266074f10801a1a1dbd2043ceb55",
-      "sourcePath": "docs/pitch/AyuSwar_AI_Solution_Pitch.pdf@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
-    },
-    {
-      "path": "docs/pitch/SOLUTION_PITCH.md",
-      "bytes": 5766,
-      "sha256": "1ddc806e0ad603b5f6725b2ecc3270a8bc9e753362ec9d5f8703c50d506509ac",
-      "sourcePath": "docs/pitch/SOLUTION_PITCH.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
-    },
-    {
-      "path": "docs/pitch/pitch.html",
-      "bytes": 222562,
-      "sha256": "178faa8630fc4414c6f52bc175fcc76d4bbd32cfac76bd39079bf6725ddde157",
-      "sourcePath": "docs/pitch/pitch.html@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
-    },
-    {
-      "path": "docs/pitch/pitch_plan_a.html",
-      "bytes": 222562,
-      "sha256": "178faa8630fc4414c6f52bc175fcc76d4bbd32cfac76bd39079bf6725ddde157",
-      "sourcePath": "docs/pitch/pitch_plan_a.html@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
-      "transform": null
+      "bytes": 43179,
+      "sha256": "83ecb18a8c696192e92c4c784c67f1f3f870ad4b612b690b909331ec6efa6c15",
+      "sourcePath": "docs/audit-2026-11-21.md",
+      "transform": "Privacy-only note cleanup; product evaluation results unchanged"
     },
     {
       "path": "docs/screenshots/s01_home.png",

@@ -30,10 +30,10 @@ The 42 new guard checks are synthetic local-stub/fallback extraction, verificati
 | Performance and build | [Recorded performance](06-PERFORMANCE/PERFORMANCE_REPORT.md), [deployment guide](../docs/DEPLOYMENT_GUIDE.md) | Build/bundle/suite measurements, not app startup, ASR/device performance or production signing |
 | Unfinished original requirements | [Completion matrix](../docs/PROPOSAL-COMPLETION-MATRIX-2026-11-22.md) | Partial/deferred rows remain open; this index is not a dedicated in-app evaluator portal |
 
-## Historical records remain unchanged
+## Historical evaluation records remain unchanged
 
 The undated engineering-quality files remain their recorded 383-assertion baseline. `TEST_RESULTS_2026-11-22_current.*` and its output log remain the 407-assertion run at `2164f36`; current in that historical filename is not a latest-result guarantee. Earlier APK provenance, both PDFs, old adversarial results and all failed runs keep their original dates/revisions.
 
-Previously review-only 651cf79 run artifacts and pre-fix span-guard failures are now published in the new dated handoff directory. Earlier documents describing those artifacts as local/attached describe their state at that time; their original text is preserved.
+Previously review-only 651cf79 run artifacts and pre-fix span-guard failures are now published in the new dated handoff directory. Earlier documents describing those artifacts as local/attached describe their state at that time. Evaluation records are preserved. A privacy-only correction removes private conversation locators, precise message times and operational references from current notes; it does not erase earlier Git history or previously downloaded copies.
 
 For a fresh whole-app run, use the repository's documented commands and send report output to a new path, not over historical evidence. Local automated testing is not CI; this branch has no `.github/workflows` pipeline. No real patient data, clinician feedback, native-device result or externally validated clinical performance is included.

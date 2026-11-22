@@ -1,7 +1,7 @@
 # Clinical Evidence Engine — Implementation Plan (AyuSwar-Mobile)
 
 Branch: `feat/clinical-evidence-engine` · Base: main @ 4cbbf26 · Date: 2026-11-22
-Scope: user brief of 2026-11-22 12:24 IST adapted to this Mobile repo (web repo untouched).
+Scope: Clinical Evidence Engine enhancement for the Mobile repository only; the web repository is unchanged.
 
 ## 1. What the audit actually found (not assumed from filenames)
 

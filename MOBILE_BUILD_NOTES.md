@@ -1,5 +1,7 @@
 # AyuSwar Mobile Build — working notes (updated each cycle)
 
+Privacy-corrected historical notes: product findings, build measurements and evaluation results are retained; private conversation locators, delivery records and operational instructions are omitted. Earlier Git history and previously downloaded copies are not erased.
+
 ## Environment
 - Source: workspace box /tmp/ayuswar (from Samrudh2006/Ayuswar-Ai, 308 files, binaries re-fetched from live site)
 - Build: `cd /tmp/ayuswar && npm run build` (vite + prerender). APK: `cd /tmp/ayuswar/android && JAVA_HOME=/downloads/builddeps/jdk-21.0.13+9 ANDROID_HOME=/downloads/builddeps/android-sdk ./gradlew assembleDebug` → app/build/outputs/apk/debug/app-debug.apk
@@ -33,7 +35,7 @@ Fresh mobile screens for EVERY page; fix haphazard arrangement; cream/deep-green
 11. Android app icon + splash from ayuswar_emblem_mark.png; app name "AyuSwar AI".
 12. Hide cookie banner/PWA install banner inside native app; FloatingAssistant overlaps — in phone mode either integrate as m-voice-fab or reposition.
 13. Security/speed pass: no secrets in APK (grep dist for keys), image sizes, duplicate API calls, error/retry handling review of services.
-14. Audit suite + PDF/DOCX report (real results only): repo npm test (79 tests), render checks per route (console errors, overflow, tap targets), load timing, API status checks. Report style per his preferences (white bg, classic font, A4, clickable links, first-page preview); delivery via main.
+14. Audit suite + PDF/DOCX report (real results only): repo npm test (79 tests), render checks per route (console errors, overflow, tap targets), load timing, API status checks. Report style per his preferences (white bg, classic font, A4, clickable links, first-page preview).
 
 ## Milestones reported
 - Baseline screenshot (old UI) sent 21:09
@@ -43,15 +45,14 @@ Fresh mobile screens for EVERY page; fix haphazard arrangement; cream/deep-green
 
 ## Update 21:23 IST (run 2)
 - Deadline moved to Nov 18 08:00-09:00 IST (user). Hourly work-image cadence requested by user; include IST timestamp strip on every image (ImageMagick: convert X.png -gravity south -background '#0C3B27' -splice 0x44 ...).
-- Hero v3 (m8): full-bleed mobile_hero_doctor_bg.jpg, gradient overlay, object-position 86% 18%, h1 max-width 54%, opaque tab bar, active pill. Verified via render. DELIVERED to user 21:17.
+- Hero v3 (m8): full-bleed mobile_hero_doctor_bg.jpg, gradient overlay, object-position 86% 18%, h1 max-width 54%, opaque tab bar, active pill. Verified via render. Capture recorded.
 - Font fix: old index.css forces h1-h6 font-family var(--font-display) !important (Albert Sans). Scoped override added in mobile.css (.m-app h1..h4 !important Fraunces). fonts loaded via <link> in index.html (NOT @import - vite doesn't guarantee top position).
 - Nav: removed top-bar hamburger + siren. Bottom tabs only (Home, Services, 108 center, Scribe, Menu). Drawer opens from Menu tab only.
 - Splash: MSplash.jsx inline SVG stroke-draw reveal of Deepam Heartbeat (rings/bowl/lotus/flame/ECG/dot, ~1.9s, cream, no glow - matches his short-film logo rule). Freeze for capture with /?splash=1. Native Android splash.png files replaced (cream+emblem) in all drawable* dirs. NOT YET visually verified.
 - Floating assistant: now rendered inside MobileRoot (hidden on sanjivani/auth/login), repositioned above tab bar via .m-assistant CSS. TAP-THROUGH NOT YET TESTED.
 - BUG FIXED: nested double MShell on embedded routes (removed outer shell in MobileRoot; home gets own <MShell>).
-- Editor capture: REAL VS Code at /usr/bin/code works under Xvfb: (Xvfb :99 -screen 0 1600x1000x24 &) && code --no-first-run --skip-release-notes --disable-workspace-trust --user-data-dir /tmp/vscode-profile /tmp/ayuswar --goto FILE, sleep 20, close chat panel via xdotool click at ~(1489,104), scrot. Background procs die when bash call ends - do it ALL IN ONE bash call. Sent editor_full_ts.png 21:23.
 - shot.cjs: clinical-console route timed out earlier; sanjivani failed (check). Survey shots /tmp/shots/surv__solutions.png + surv__auth_doctor.png exist - REVIEW next run.
-- User steering: don't clone web layouts - fresh mobile-first flows, feature parity via master checklist. Master checklist File (user-readable, files skill) REQUIRED: inventory from src/views + src/components + App.jsx routes, per-item: where it lives, interaction, verification status. Build it next run.
+- Product design requirements: fresh mobile-first flows with explicit feature-parity, interaction and verification-status tracking.
 - APK: rebuild pending (splash assets + all UI changes since first APK).
 - Kaggle: only if materially useful; no account creation/spend without authority.
 
@@ -62,7 +63,7 @@ Fresh mobile screens for EVERY page; fix haphazard arrangement; cream/deep-green
 - APK rebuilt 21:26 with all changes (25.9MB debug).
 - Master checklist working copy: MOBILE_MASTER_CHECKLIST.md (source-backed, from App.jsx routes + views + components). User-readable File version TODO (files skill page).
 - dbg.cjs renders any route w/ console errors: clinical-console + sanjivani DO render (earlier failures were networkidle timeouts). Both are desktop layouts with overflow — need dedicated mobile screens. maplibre worker fails in preview (note: retest in WebView).
-- User steering: standout senior-level design, no shrunk web screens; cover FeedbackPopup; dev package installs permitted; whole-product background scope (data provenance, reports, cards).
+- Product design requirements: phone-first screens, including feedback flows, rather than scaled-down desktop layouts; document data provenance and report limitations.
 - NEXT: MSanjivani mobile screen (cream+red, big voice action, CPR pacing, handover entry, SIMULATION labels; keep /sanjivani-console modal as secondary), then clinical console mobile, then portals.
 
 ## Update 21:31 IST (run 4)
@@ -70,7 +71,7 @@ Fresh mobile screens for EVERY page; fix haphazard arrangement; cream/deep-green
 - /emergency (EmergencyTriageView) renders acceptably on phone already.
 - Portal shell-fit CSS surgery: hide doctor-search-box + language select via :has() on phone; portal container heights auto. Doctor + patient portals render verified. Patient portal ABHA chip wrap + Telugu tofu glyph TODO.
 - APK REBUILD PROCEDURE (do not skip): npm run build && npx cap sync android && cd android && gradlew assembleDebug. Gradle alone ships STALE web assets (caught: size identical 25926721 → after sync 26405334).
-- AUDIT RUBRIC (user-supplied screenshot, /downloads/image-e0c62979.jpg): 100pt reviewer rubric to adopt: Public workflows & usefulness /25; Usability, access & localization /20; Loading & public web delivery /15; Visible privacy & security hygiene /15; Claim accuracy & evaluation evidence /15; Failure handling & state clarity /10. Reference total shown 73/100 from another project - NOT AyuSwar results. User pasted Lighthouse-format metrics (median of 3, mobile/desktop, axe scans, viewport coverage, smoke≠accuracy) as reporting format reference. Report must keep automated scores, reviewer rubric and Android APK checks separate, with exceptions listed.
+- AUDIT RUBRIC (user-supplied screenshot, [private attachment reference omitted]): 100pt reviewer rubric to adopt: Public workflows & usefulness /25; Usability, access & localization /20; Loading & public web delivery /15; Visible privacy & security hygiene /15; Claim accuracy & evaluation evidence /15; Failure handling & state clarity /10. Reference total shown 73/100 from another project - NOT AyuSwar results. User pasted Lighthouse-format metrics (median of 3, mobile/desktop, axe scans, viewport coverage, smoke≠accuracy) as reporting format reference. Report must keep automated scores, reviewer rubric and Android APK checks separate, with exceptions listed.
 - cap sync output assets: android/app/src/main/assets/public/.
 - NEXT: clinical console mobile layout (biggest chunk), audio-rx/scanner/acoustic shell-fit checks, drawer open state shot, splash visual verify (shot.cjs /?splash=1 - filename has ? char, check /tmp/shots for actual name), assistant tap-through test, then audit runs (npm test, lighthouse, axe) + APK on-device checks.
 
@@ -80,10 +81,10 @@ Fresh mobile screens for EVERY page; fix haphazard arrangement; cream/deep-green
 - DATA: PillVisionScannerModal unified onto shared PMBJP_FORMULARY_DATABASE (6 rich + 33 mapped entries, verified:false badge "Formulary match (unverified detail)", imageUrl null -> pill emoji fallback OK).
 - MClinical.jsx NEW mobile OPD scribe (encounter chips, record live via speechService, scripted demo playback, transcript, encounter brief, link to /clinical-console/full). Route rewired; full desktop console at /clinical-console/full. Render-verified x2.
 - Sanjivani polish: How-it-works steps card fills void; .m-solrow radius bug fixed (undefined --m-radius var -> --m-radius-m); colored glow shadow softened (unslop).
-- RESOURCES VERIFIED + APPLIED: Modern Web Guidance (official Chrome/Edge/Firefox/MDN, developer.chrome.com/docs/modern-web-guidance) legacy-scan run: scrollbar standard props added to FeedbackPopup.css; toSorted finding REVERTED for old-WebView safety (parent call). Unslop signs.md (CC BY 4.0, github.com/heydamir/unslop) applied as audit lens: mobile module clean (no emoji icons, no gradients, no pulse); 1 glow fixed. Attribution owed if text reused in report.
-- PENDING: floating assistant reel concept (DehLY2gSMfT) - DO NOT build until verified handoff from main. audio-rx/scanner/acoustic-lab/info pages still Embedded shell-fit. OCR synthetic eval set not started. ClinicalConsole UI-string claim sweep deferred to /full screen mobile-ification. Hourly editor capture next window. Audit runs + report pending.
+- RESOURCES VERIFIED + APPLIED: Modern Web Guidance (official Chrome/Edge/Firefox/MDN, developer.chrome.com/docs/modern-web-guidance) legacy-scan run: scrollbar standard props added to FeedbackPopup.css; toSorted finding REVERTED for old-WebView safety . Unslop signs.md (CC BY 4.0, github.com/heydamir/unslop) applied as audit lens: mobile module clean (no emoji icons, no gradients, no pulse); 1 glow fixed. Attribution owed if text reused in report.
+- PENDING at this checkpoint: the floating-assistant reel concept was not yet verified. Audio-Rx, scanner, acoustic lab and info pages still used an embedded shell; OCR synthetic evaluation had not started, and the ClinicalConsole claim sweep and audit remained pending.
 
-## OpenUI-style structured answers plan (verified reel concept, approved by main 21:47)
+## OpenUI-style structured answers plan (historical)
 Concept: floating assistant answers render as interactive typed components (cards/tabs/steps/diagram), not text walls. Source: OpenUI.com (Thesys) - DO NOT integrate hosted lib (provider/account/privacy surface); implement in-house renderer.
 Pipeline: FloatingAssistant.handleProcessQuestion -> tier1 matrix / askAyuSwarBrain (skipGroq) -> setCurrentAiReply(text).
 Implementation:
@@ -100,7 +101,7 @@ Implementation:
 - Medicine cards now say "ref. price"/"ref. MRP" + note "bundled formulary, not a live price check, not medical advice".
 - test/structured_answers.test.js (5 contract groups, PASS, standalone; not yet in run_all.js). NOTE: vernacular matching is Telugu-script keys only; romanized ("aayasam") NOT matched - known limitation.
 - APK 21:52 rebuilt with all of it. Device mic + interactive assistant screenshot STILL pending.
-- NEXT: model-generated OpenUI path (Groq prompt), audio-rx/scanner/acoustic mobile treatment, OCR synthetic eval, hourly editor capture, master checklist File, audit.
+- NEXT: model-generated OpenUI path (Groq prompt), audio-rx/scanner/acoustic mobile treatment, OCR synthetic eval, audit.
 
 ## 21:54-21:58 IST
 - Model-generated OpenUI path wired in FloatingAssistant brain path: explainer queries (EN regex + Telugu/Indic script regex) with no deterministic mapper match and Groq key present -> queryGroqApi with ayuswarUiSystemPrompt + grounding from brain answer -> createParser(ayuswarUiLibrary.toJSONSchema(), 'Answer') -> strict success sets currentAnswerLang + uses root.props.text as reply/speech; ANY failure keeps plain text + deterministic fallbacks.
@@ -108,7 +109,7 @@ Implementation:
 - BUG FOUND + FIXED via in-app playwright interaction test: handleProcessQuestion crashed with ReferenceError selectedLanguage is not defined (pre-existing; line ~209 tier1 matrix lookup). Fixed to speechLanguage. This crash made assistant answers never render in app.
 - Interaction test (interact.cjs): assistant opens via .floating-assistant-pill, Type Message toggles input, query 'paracetamol price in Jan Aushadhi' processed, no page errors. TTS 404 on /api/gnani/tts in vite preview (expected, serverless fn absent in preview) -> 'synthesis-failed' voice warning, graceful. Input hides after submit (showTextInput toggles off on send?) - second-query script step skipped; verify manually next run.
 - APK rebuilt 21:54 IST with model path BEFORE selectedLanguage fix -> APK 21:54 CONTAINS THE CRASH. MUST REBUILD APK with fix before delivery.
-- New user requirements added: (1) offline behavior - local flows usable offline, clear network-required states, no blank/endless loading, airplane-mode per-feature tests, honest offline vs online report; (2) everything connected real-time - actions reflect across dashboards/cards/reports, no fake live labels on simulated data, offline pending-sync + reconnect dedup; (3) work through to Nov 18 09:00 IST, hourly improvement + full-editor captures; mobile-native screen standard from competitor promos - no desktop embeds under /full counted as complete.
+- Product requirements: local flows should remain usable offline with clear network-required states and no blank/endless loading; actions should reflect across connected dashboards without fake live labels, and queued work should expose reconnect/dedup status. Phone-first screens should not be counted complete while desktop embeds remain. These are requirements, not demonstrated results.
 
 ## 22:01 IST - interaction proof captured
 - FIXED real UX bug: structured/plain answers only rendered while assistantState==='speaking'; TTS end/error instantly reverted panel to welcome, hiding the answer. Now reply block renders whenever a reply exists (listening view still takes precedence).
@@ -117,53 +118,48 @@ Implementation:
 - APK rebuilt 22:01 IST with all fixes (crash fix + persistence + honest voice + no sparkles). Prior APKs (21:54 and earlier) contained the query crash - do not deliver.
 
 ## 22:05-22:08 IST
-- Claim sweep complete (parent-flagged release-blockers): tier1 matrix + rag_jan_01 EN/TE/HI rewritten (no WHO-GMP/NABL blanket claims, no bioavailability equivalence, no 70-88%/Save-86% figures, no '1 second' scanner); cards: Savings row removed, 'Same-salt brand examples', unit shown on both price rows, bundled-formulary note moved ABOVE cards. Verified via interact.cjs DOM text + screenshot /downloads/assistant_claims_fixed_2205.png. Build+tests pass.
+- Claim sweep complete : tier1 matrix + rag_jan_01 EN/TE/HI rewritten (no WHO-GMP/NABL blanket claims, no bioavailability equivalence, no 70-88%/Save-86% figures, no '1 second' scanner); cards: Savings row removed, 'Same-salt brand examples', unit shown on both price rows, bundled-formulary note moved ABOVE cards. Verified via interact.cjs DOM text + screenshot /downloads/assistant_claims_fixed_2205.png. Build+tests pass.
 - INCIDENT: first KB edit corrupted clinicalRagKnowledgeBase.js (bad python slice math inserted text at top + clobbered rag_hosp_01 answerTe/answerHi). Restored originals verbatim from pre-edit bundle android/.../index-BaJ7AoQX.js, re-applied edits per-line. Lesson: never slice by index() of non-unique markers; operate per-line or on unique IDs.
 - Voice labels fully honest: mute toggle shows 'Text only', bottom button 'AI Voice: unavailable' when synthesis fails.
-- SIGNUP: does not exist anywhere (0 routes, no control in MAuth). Demo accounts only. Reported to parent; no cosmetic signup unless user asks.
+- SIGNUP: does not exist anywhere (0 routes, no control in MAuth). Demo accounts only. no cosmetic signup unless user asks.
 - Auth design direction settled: single-column mobile, NO desktop side panel on phone; user wants REAL licensed photography (no AI people), no implication people shown are actual AyuSwar clinicians. TODO: audit all photo assets for licensing/provenance (MHome hero woman-doctor photo provenance unknown); fix auth screen bottom whitespace + add purposeful imagery.
-- Master checklist File LIVE (PRIVATE): https://files.instinct.com/4jiaz39yxm5w-ayuswar-mobile-build-live-checklist (file-01M7N5N198CPFDN915DWH4ZKBH, project /downloads/ayuswar-checklist). Revise as items move.
 - Competitor promo principles noted (consistent hierarchy, state colors, compact controls); LinkedIn remains off-limits.
 
-## Update 22:22 IST: MScribeFlow done + keys analysis + vault requests
+## Update 22:22 IST: MScribeFlow and backend configuration
 - MScribeFlow (OPD steps 2-4: /clinical-console/review) verified end-to-end in preview; 2 bugs fixed: (1) empty-SOAP silent failure -> key validation + labeled demo fallback; (2) Telugu tofu in bold patient names = preview webfont race only (Android system has Noto Telugu; APK unaffected). shot.cjs/flowshot.cjs/interact.cjs now await document.fonts.ready before captures.
 - APK rebuilt 22:21 (27,090,481 bytes). NOT device-tested.
 - Live backend 22:20: Groq CONFIGURED; Gnani TTS+STT now BOTH LIVE (flipped since 22:10); Evon UNCONFIGURED (EVON_API_KEY/EVON_BASE_URL = Vercel env, user must set in his dashboard - I have no deploy access).
-- APK bundles NO VITE_ keys -> auth = demo mode (OTP 123456), Sanjivani = OSM/regional fallback. Vault requests created (reported to main 22:21): Supabase URL+anon key (request_3TWDPJXCBXD4RAN3SQEW6VM2AFZ6IACB), Mapbox token (request_KYXSNS5RZNEZW6YJCV4ULBO3ODC4DPHD). When user saves: vault write-file/copy -> .env -> rebuild -> real auth + maps.
-- Steering 22:15-22:21: speed + full coverage (built/tested/pending separation); proactive public design-guidance .md resources; TODO: author AYUSWAR_MOBILE_DESIGN.md (design-system rules).
-- NEXT QUEUE: audio-rx/scanner/acoustic-lab mobile treatment; portal internals; WhatsApp modal sheet; offline audit; secrets grep in APK; perf measurements; 23:05 editor capture for 23:10 delivery.
-- REMINDER: gradle must run in FOREGROUND of a bash call (detached procs die when call ends).
+- At this checkpoint, APK configuration contained no VITE_ values. Auth used demo mode, and Sanjivani used OSM/regional fallbacks. Live-service setup was not demonstrated in that APK.
+- NEXT QUEUE: audio-rx/scanner/acoustic-lab mobile treatment; portal internals; WhatsApp modal sheet; offline audit; secrets grep in APK; perf measurements.
 
 ## Update 22:30 IST (run closeout)
 - APK 22:26 (27,090,708 bytes): SOAP validation + demo-script note on voice card + font warmup (retry version) + demo-note CSS. NOT device-tested.
-- Editor capture delivered 22:29 (/downloads/editor_live_2229.png, shows MSanjivani.jsx - editor restored session file; recipe works, --goto ignored when profile restores).
-- TELUGU TOFU: preview-only race; probe5 proved element renders fine after forced fonts.load; faces list shows 700 loaded. Warmup in MobileRoot has ready.then + 4s retry. STILL tofu in flow screenshots despite script-side fonts.load before capture - UNRESOLVED, low priority (preview-only; Android system Noto covers it, but APK runtime unverified - parent flagged). Next idea: check whether flowshot preview server serves stale dist (byte-identical screenshots twice) - add cache-bust or verify hash in served HTML vs dist.
-- URGENT NEXT RUN: (1) Acoustic DSP verification in src/services/acousticDspEngine.js: centroid uses sample positions*amplitude NOT FFT bins (reproduced: 100/400Hz tones -> ~11994Hz), jitter computed after pitch SORT (loses adjacency), shimmer = overlapping frame RMS, CPP/formants/voice-health labels formulaic. 4/6 Coswara vowels F0 octave-off vs Praat comparator. Fix centroid properly (FFT magnitude spectrum), gate/relabel unsupported outputs, no trained-model claims. Researcher agent: agent-01M7N6WCN50VZJ8AHXSGYY8EED (has clip kit). (2) OPD steps 2-4 DESIGN REWORK: user rejected sparse card + empty lower space + no background design; wants polished full composition. Also live-Groq generated SOAP never verified - preview has no serverless; test live path via apiBase production diagnostic before claiming. (3) User says "one step missing" in OPD - compare FULL desktop OPD journey (ClinicalConsole.jsx ~line 1330: record -> processing -> voice note -> dispatch/WhatsApp+FHIR) vs mobile; find missing stage (likely step 1 recording is separate screen, or WhatsApp step). (4) Waveform: bind to real mic amplitude, no canned animation, no fake listening states (user requirement 22:26). (5) Map must be genuinely interactive w/ permission states + manual fallback + search/route tests (22:26). (6) Buttons real: loading/success/error states everywhere (22:26).
-- Steering: user supplies keys in MORNING (no more key prompts tonight); vault links delivered (Supabase request_3TWDPJXCBXD4RAN3SQEW6VM2AFZ6IACB, Mapbox request_KYXSNS5RZNEZW6YJCV4ULBO3ODC4DPHD). Background data research split to agent-01M7N6WCN50VZJ8AHXSGYY8EED. Open-source/HF/Kaggle options for location: research OSS alternatives (OSM/Photon/Valhalla etc) next run.
-- User frustrated by update gaps: send MATERIAL screenshots with reports, meaningful flow visuals when ready + hourly editor captures. Next hourly editor capture due 23:05 prep / 23:10 delivery.
-- Evon: used by aiBrainService brain path + FloatingAssistant + ClinicalConsole + Sanjivani + triage. UNCONFIGURED server-side; rule-based fallback works. Config route: user's Vercel env (his GitHub login in vault could reach Vercel via OAuth - research morning WITH approval; no production mutation without it).
+- TELUGU TOFU: preview-only race; probe5 proved element renders fine after forced fonts.load; faces list shows 700 loaded. Warmup in MobileRoot has ready.then + 4s retry. STILL tofu in flow screenshots despite script-side fonts.load before capture - UNRESOLVED, low priority . Next idea: check whether flowshot preview server serves stale dist (byte-identical screenshots twice) - add cache-bust or verify hash in served HTML vs dist.
+- Historical product follow-ups: the acousticDspEngine.js audit found centroid using sample positions and amplitude rather than FFT bins (100/400 Hz tones yielded about 11994 Hz), jitter calculated after pitch sorting, shimmer from overlapping-frame RMS, formulaic CPP/formant/voice-health labels, and octave errors on 4/6 Coswara vowels compared with Praat. These are recorded findings, not new measurements or a claim that later versions retain them. See later dated evaluations for current status.
+- Other recorded product follow-ups: OPD steps 2-4 composition and completeness relative to desktop, an unverified live SOAP route, genuine microphone waveform, interactive map permissions and fallback, truthful action/loading/result states, and comparison of open map-data options. These were follow-up requirements, not demonstrated results. Private operational references and conversation times are omitted.
+- Evon was used by the aiBrainService path, FloatingAssistant, ClinicalConsole, Sanjivani and triage. At this recorded checkpoint its server-side configuration was unavailable and the rule-based fallback worked; this is not a current live-deployment check.
 
-## 22:30 - MISSING STEP RESOLVED (user 22:30): doctor review/edit of AI draft
+## 22:30 - MISSING STEP RESOLVED : doctor review/edit of AI draft
 - User: "AI generate chesindi doctor review chestadi and also he can edit if he want". This is the missing OPD step.
 - SPEC for MScribeFlow rework: after AI processing (step 2), SOAP fields (subjective/objective/assessment/plan + voice-note text) must be EDITABLE by the doctor BEFORE voice note + sign/share. Edited values authoritative downstream: voice note text, share text, FHIR JSON. If voice note already generated and doctor edits summary -> voice note stale: require regeneration (disable Play or auto-mark regenerate). No silent overwrite of edits on re-render. Preserve all fields.
 - Desktop reference: ClinicalConsole step 2 output area - check if desktop has edit (grep edit/textarea around line 2066) to match behavior.
 - Flow header should show all 4 stages (Record done -> Processing -> Voice note -> Dispatch) so user sees the complete journey. Karaoke synced playback = desktop step 3 feature, add to voice note.
 
-## 22:32 IST - Acoustic DSP fixes (researcher audit verified + fixed, build passes)
-- src/services/acousticDspEngine.js: (1) spectral centroid now REAL (Hann-windowed radix-2 FFT magnitude centroid; was sample-position*amplitude - reproduced researcher's defect, tones gave ~11994Hz). Verified: 100Hz tone -> 101Hz, 400Hz -> 400Hz, F0 exact, jitter 0% on pure tones. (2) jitter now uses chronologicalPitchTrack order (was sorted array). (3) F1/F2 formula placeholders REMOVED -> null (honest unavailability). (4) voiceHealthScore relabeled prototype signal-quality heuristic; pathological glottal labels ("Pathological Dysphonia" etc.) replaced with engineering descriptions.
+## 22:32 IST - Acoustic DSP fixes (audit verified + fixed, build passes)
+- src/services/acousticDspEngine.js: (1) spectral centroid now REAL (Hann-windowed radix-2 FFT magnitude centroid; was sample-position*amplitude - reproduced recorded defect, tones gave ~11994Hz). Verified: 100Hz tone -> 101Hz, 400Hz -> 400Hz, F0 exact, jitter 0% on pure tones. (2) jitter now uses chronologicalPitchTrack order (was sorted array). (3) F1/F2 formula placeholders REMOVED -> null (honest unavailability). (4) voiceHealthScore relabeled prototype signal-quality heuristic; pathological glottal labels ("Pathological Dysphonia" etc.) replaced with engineering descriptions.
 - src/views/AcousticBiomarkerLabView.jsx: removed fabricated fallbacks (|| '18', || 92, || '408', || '1344', || '11.8 dB'), CPP row relabeled heuristic, F1/F2 row shows "Not measured", "Clinical Interpretation" -> "Prototype Analysis Summary", stage labels de-clinicalized, glottal/airflow physiology wording removed.
 - STILL TODO next run: ACOUSTIC_CLUSTER_PROFILES disease-named matches (clinicalMlInferenceEngine.js: asthma_wheeze/pneumonia_rales/pediatric_stridor/neurological_tremor) - "Distance Score x/100" vs disease-named profiles = disease-likelihood implication; rename displayed labels to neutral acoustic descriptions, keep disclaimer, remove emoji icons (lines 1824-1828, 2043-2047 stage labels, 2488 area). Then cap sync + gradle rebuild + preview-verify acoustic lab screen.
 - Build passes (vite). APK NOT yet rebuilt with these changes.
-- User visual direction (22:31-32, reference /downloads/image-ee7f3582.jpg): layered pastel backgrounds (mint/peach/yellow/blue) + subtle green-gold curves, pastel action cards, doctor imagery quality "mind blowing" - palette-integrated licensed real photos, no random stock. Apply in OPD rework + design pass.
+- Recorded visual design requirements: layered pastel backgrounds (mint/peach/yellow/blue), subtle green-gold curves, pastel action cards and palette-integrated licensed photography. Apply consistently in the OPD and mobile design.
 - OPD missing step RESOLVED: doctor review/edit of AI draft (editable SOAP + voice text before sign/share; edits authoritative; stale voice note must regenerate). Desktop ref: editableSoapNote/editableBestMatter in ClinicalConsole.jsx.
 
 ## 22:45 IST OPD integrated correctness correction
 - Rebuilt MClinical: PCM WAV capture memory only, playback, actual RMS meter, explicit user-initiated cloud transcription, then transcript review. Mic/sample modes separate. Missing-input route guard and disabled draft. Source mic path has no synthetic patient identity/diagnosis substitution. Mock browser microphone fixture (flite synthetic English speech) -> actual browser PCM capture15s -> live Gnani STT200 -> live Groq200 -> editable complete SOAP verified. NOT human/native mic tested.
 - Removed all bundled SOAP fallbacks on AI error/missing input. Error+retry retains source, no silent sample. SOAP edits clear voice text requiring rewrite; signing invalidates after edits. Export all5reviewed fields via FHIR-format research collection, NOT ABDM-validated prescription (old helper injected asthma/IDs due mismatched parameter names). Signature is demo only. No real sends.
 - Regression: /downloads/opd_2242_regression.txt; script opd-regression.cjs; live STT transcript captured exact synthetic sentence headache/no fever/no meds. Browser fake microphone explicitly not Android proof. Passed503/no-source/no-horizontal-overflow320/430/all5export/sign-invalidation;0pageerrors. Human mic/keyboard/audibleTTS/share/runtime still unverified.
-- Screens sent parent22:45: record_idle/review_live_ai/recording_synthetic_input filenames2242prefix but actual captures22:44-45. Parent inspected/delivered. Current APK22:44:02,27087192bytes includes DSP gating+OPD.
+- Capture evidence: record_idle/review_live_ai/recording_synthetic_input filenames2242prefix but actual captures22:44-45. Current APK22:44:02,27087192bytes includes DSP gating+OPD.
 - Floating assistant hidden on focusedOPD routes, no phantom tabbar bottom padding; full-height subtle pastel background. Still need voice/dispatch composition tighter and real licensed doctor imagery. Header Process vs Review&edit label unify.
-- CRITICAL22:46 duplicate Acoustic results/export template found still containing fabricated formants/clinical norm badges/dysphonia&ICD/impostorregistry signoff. Prior claim sweep incomplete. Parent notified release blocker. Replace both rendered/export templates with measured-only research values, gate unsupported heuristics; researcher confirms4/6vowels octave disagreement persists. DSP two-tone correction != validated accuracy.
+- CRITICAL22:46 duplicate Acoustic results/export template found still containing fabricated formants/clinical norm badges/dysphonia&ICD/impostorregistry signoff. Prior claim sweep incomplete. Replace both rendered/export templates with measured-only research values, gate unsupported heuristics; the recorded comparison confirms4/6vowels octave disagreement persists. DSP two-tone correction != validated accuracy.
 
 ##22:48 acoustic patch in progress
 - Both secondary on-screen report and actual print popup now share acousticResearchRows (new services/acousticResearchPresentation.js). No clinical norms/ICD/registry signoff/formant defaults. Removed synthetic timed1.8s stage simulation -> real working indicator. Export actual popup regression passes blocked-claims list,0pageerrors. Visual inspection caught remaining Norm baseline label inside trajectorySVG, removing next. No readiness yet.
@@ -171,20 +167,19 @@ Implementation:
 - CPP/voiceHealth/glottal output derivations disabled null in engine. Existing YINpitch experimental, frameperiod/RMSvariation not jitter/shimmer. SampleRate missing in engine return -> fix. Unsupported default prescription if speech sanitization empty removed from speechService.speak -> onError now.
 
 ##23:09 IST checkpoint - latest source and APK
-- LatestAPK23:09:05IST41777268bytes. Built+capsync+gradle after AudioRx/scanner safety corrections, stronger backgrounds/borders, generatedIndianimage, partial mobilelanding restoration. Hash print this run, record below. Prior22:56APK static-verified by nativeworker but STALE for these changes. Native worker Android11 softwarebootfailed;NO app install/launch/nativepass. No repeat without new environment. Runtime/device blocker remains.
+- LatestAPK23:09:05IST41777268bytes. Built+capsync+gradle after AudioRx/scanner safety corrections, stronger backgrounds/borders, generatedIndianimage, partial mobilelanding restoration. Hash print this run, record below. Prior22:56APK static-verified by static inspection but STALE for these changes. Android11 softwarebootfailed;NO app install/launch/nativepass. No repeat without new environment. Runtime/device blocker remains.
 - User clarified6UIlocales must change ALL menus/buttons/forms/instructions/errors/dialogs/exports and persist matchingvoice. Existing src/i18n translations249keys each en/te/hi/ta/kn/mr,0missingEnglishkeys. BUT mobile components contain Englishliterals and no global language selector yet. Need wire existinguseApp selectedLanguage/setSelectedLanguage/t, create mobilekeys, actuallytranslate6locales, fallback explicit not silent;screenbyScreenvalidation. Do not claim done from dictionary249counts.
 - New user REALANDROIDNOTIFICATIONS requirement: actual OSnotificationsafterinstall, bell+sound,toast/actionfeedback. Not implemented yet. Distinguish localnotifications vs serverpush;no fabricatedcounts,no installaloneproof,respectOSsoundDNDpermissionchannels. Native testblocked. Can implement localtestbutton/actualdraftready event notifications,serverpushneeds backend/config/approval. No paid/newaccount/prod changes.
 - Source landing audit confirms major gaps. New MLandingDetails.jsx written/wiredinHome:8featuredialogs(modal0falsybugfixed),4stagepipeline/story,qualitativebeforeaftertoggle,3voicesamples(liveTTScurrentlyfails),4governanceinformationaltabs,6standardsinformationaltabs,11FAQ,resourcesincludingprescriptionpreview. Tests landing-check.cjs:8dialogsopen/content/Escape/focusreturn,storynext,11FAQ,nohorizontaloverflow320x640/430x932,0pageerrors. THIS IS PARTIAL restoration NOT fullparity. Pending:beforeafterslider,6workbenchactualinputs/actions/bodydepth,6dialectkaraoke/perwordtracks,10languageatlasregionfilter/samples,governancesandboxactualbuttons+copyterminal,storyoriginal4scenecontent/actions/authCTA. Independentinventory /downloads/ayuswar-landing-interaction-inventory-a7b7d3b5.md,sourceHeroLanding+FeatureDetailModal+FAQ. SourcefalseclaimsDSC/ABDM/DPDP/zerohallucination mustcorrectnotcopy.
-- Home removedunknownlicenseoldhero;nowgeneratedIndianconsultation assetpublic/assets/consultation-indian-generated-20261117.jpg. UserexplicitlyrequestedgeneratedIndianpeople23:04exceptionpreviousrealphotopref. Gemini-generatedfictionalIndianwomandoctor+elderlywoman,sourceprovidedbydesignagentviamain. Preservefullframeandvisibleprovenancemark/sparkle atlowerright,no watermarkfree claim. CaptionAIgeneratedillustrationnotrealpatient. Westernlicensedstockkeptinassetfolderwithprovenancebutnotcurrentimage. CSSfullframe,nofacecrop. NeedOPDnewimagepixelretestafterreplacement.
+- Home removedunknownlicenseoldhero;nowgeneratedIndianconsultation assetpublic/assets/consultation-indian-generated-20261117.jpg. Generated illustration exception recorded. Gemini-generatedfictionalIndianwomandoctor+elderlywoman,generated illustration provenance recorded. Preservefullframeandvisibleprovenancemark/sparkle atlowerright,no watermarkfree claim. CaptionAIgeneratedillustrationnotrealpatient. Westernlicensedstockkeptinassetfolderwithprovenancebutnotcurrentimage. CSSfullframe,nofacecrop. NeedOPDnewimagepixelretestafterreplacement.
 - AudioRx ORIGINALsourcepreservedbutcorrected: no-recordedexport nowerrorinsteadoffabricatedtone; coughanalysis nowexplicitlyunavailable/no syntheticbuffers;revieweditablecurrentScript authoritativeforvoice/share/practiceJSON;staticclinicalSOAP/vitals/diagnoses/AMIEremoved→sourcepracticepreview;sharingusesgenericshare/clipboard,noprefilledrecipient/noattachedaudio/sentsuccessclaims. UIstates prototypeonly. safety-check.cjscontrolledmicdenialpass/noaudioexporterrorpass/coughunavailablepass. Deeperactualrecording/editedspeech/export/share regressionPENDING. OriginalquizandmedicinevisualschedulearebundledSAMPLEandneedconsistencywhenediting;don'tclaimsrealadherence. Originalkaraokefixedtimingneedsrealtimecheck.
 - Scanner: realTesseractOCRofsyntheticPARACETAMOL650mgTABLETS fixture succeeded rawtext. RawtextFIRST, nofuzzydrugsubstitution;conflatedparacetamol+ibuprofenentrydisabled;candidateonlyifname+mgstrength+tablet/capsule,releaseformneedsstrictercheck; generativeidentityreconstructiondisabled. Noequivalence/liveprice/stock/savingclaims. Automaticunknown-safetyclearancefoundbytestthenremoved→alwaysunverified/no dispensing/doseapproval. Hypotheticalage/eGFRcontrolsretained. Testscanner-check.cjs; /downloads/scanner_2302_body.txt currentrerunandresult. Needautomatedassertionsbroadercasesexactform/strength/combinationandactualexportpaths. Sourcepricesstilldictionarybutoverriddendisplay;notcurrentfacts.
 - Doctor/patientportals nohorizontaloverflowinitial390;notfullparitytested. ABHAVerifiedlabel→Syntheticsamplehealthrecord;badge tooltipnotregistryverified;badgeCSSnowrapids,nohidingdetails. Allnestedtabs/actions/modals/reports stillqueue. FloatingassistanthiddenfocusedOPD/audioRx/scanner/acoustic/portals toavoidcontentoverlap.
-- TTS LIVEBLOCKER: directactualEnglish+Telugu /api/gnani/tts outer502/upstream404. Defaultapi.vachana.ai/api/v1/tts/inference maybe stale/envunknown. Mainaskedresearcherverifyofficialcontract. NOproductionchangesauthorized. No keyabsenceclaim.STT/GroqpassdoesNOTproveTTS. Actualaudibleplaybackstillunverified;donotsubstitutetones orsampleprescription. APIspeakemptytextfallbackremoved→error.
-- Hourlyeditorfresh23:05:30ISTRGBJPEG /downloads/editor_2305_actual.jpg deliveredmain23:05anduser23:06. Next00:05prep/00:10delivery,don'tduplicate23:10. CapturesactualeditorworkingMLandingDetails. Userasleepbutrequestedhourlycontinue09:00. No nonurgentapprovalpingsovernight;StitchToSremainsUNANSWERED,don'tacceptfromcontinue/goodnight.
+- TTS LIVEBLOCKER: directactualEnglish+Telugu /api/gnani/tts outer502/upstream404. Defaultapi.vachana.ai/api/v1/tts/inference maybe stale/envunknown. NOproductionchangesauthorized. No keyabsenceclaim.STT/GroqpassdoesNOTproveTTS. Actualaudibleplaybackstillunverified;donotsubstitutetones orsampleprescription. APIspeakemptytextfallbackremoved→error.
 fedf0005b4b07fbe9bfe8eb244635ff76e9c6606d59821208bfdfcea00761dda  android/app/build/outputs/apk/debug/app-debug.apk
 
 ## 2026-11-17 23:24-23:32 IST
-- Corrected AudioRx modal claims after parent pixel review: synthetic demo wording in summaries, phone preview, notes export, header and footer; removed official verified badge styling and current-generation/ABDM/FHIR/24kHz implications.
+- Corrected AudioRx modal claims after visual review: synthetic demo wording in summaries, phone preview, notes export, header and footer; removed official verified badge styling and current-generation/ABDM/FHIR/24kHz implications.
 - Added controlled TTS-outage test to audiorx-parity-check.cjs: 502 TTS response + edited text must not request bundled `/audio/gnani_lang_*` recording. Passed. Headless browser speech audibility remains untested.
 - Added compact 390px AudioRx modal layout: single-column scroll, compact header/footer, preserved website controls. Screenshot `/downloads/audiorx_2320_edit.png` inspected.
 - Added full-label title/ARIA text to top language selector; fixed hidden sr-only span so compact selector shows only current short language and full labels remain in options/drawer.
@@ -249,22 +244,22 @@ Added slogan/logo/icon audit at /downloads/slogan_logo_claim_audit_0050.md. Rewr
 - Current dist is rebuilt for offline support, but the Android APK has not yet been rebuilt after this change.
 
 ## 2026-11-18 00:52 IST - Offline cache bounds, test suite repair, mobile home localization
-- Reconciled timestamps after parent review: earlier report treated filename suffixes such as `0051` as wall-clock times. Actual filesystem mtimes are authoritative. Latest app APK is now 00:52:20 IST, SHA256 `2074b74cf072449cd6a3062684502ee7717fdbb7f74512cdf586fa2b59e33d3c`, 42,090,967 bytes.
+- Reconciled timestamps after review: earlier report treated filename suffixes such as `0051` as wall-clock times. Actual filesystem mtimes are authoritative. Latest app APK is now 00:52:20 IST, SHA256 `2074b74cf072449cd6a3062684502ee7717fdbb7f74512cdf586fa2b59e33d3c`, 42,090,967 bytes.
 - Upgraded service worker to v7 with explicit cache bounds: no private clinical API responses, route documents, `/audio/` responses, media destinations, third-party origins, or secrets are cached. Old cache versions are deleted on activation. Warm offline shell works after an online install; first-ever offline launch honestly fails. Audit: `/downloads/offline_cache_audit_0053.md`; tests `/downloads/offline_privacy_0125.txt`, `/downloads/offline_0126.txt`; inspected screenshot `/downloads/offline_privacy_0047_home.png`.
 - Repaired test-suite execution without changing product claims: added explicit `.js` import resolution for Node, regenerated corrupted synthetic WAV fixtures as valid 44.1kHz PCM, aligned the auth/database test with local-demo mode and optional Supabase migrations, updated the AudioRx test for the current honest share labels, and made `test/run_all.js` report 98 passed + 2 conditional skips instead of a false 101/101 and stale provider/platform claims.
 - Full suite now exits 0: `/downloads/npm_test_0129.txt`.
 - Expanded mobile home localization beyond nav: localized greeting, four service descriptions, feature chips, generated-image alt text, loading label, and prototype footer across six locales. Browser evidence `/downloads/i18n_0121.txt`; screenshot `/downloads/i18n_2315_te-IN.png` inspected. Localization remains PARTIAL for long-form content and portal bodies.
 - Performance lab audit at 390x844 with cache/service workers disabled: `/downloads/performance_audit_0054.md` and `.json`. Main local timings are lab-only, not Android device timings.
 
-## 2026-11-18 03:01 IST - Reconciliation round (parent 02:58)
+## 2026-11-18 03:01 IST - Reconciliation round
 - Print slip ABHA reconciled to canonical DEMO-ABHA-0000-1049 (4 DoctorPortal sites); Ananya Rao given distinct DEMO-ABHA-0000-1047 (was duplicate).
 - Facility renamed unambiguously fictional across 12+ sites: "AyuSwar Demo District Hospital (synthetic)" / "Demo ... (synthetic)" (DoctorAuthModal, PatientPortal x2, MobileInnovationHubModal, KurnoolClimateSentinel, LiveOpdDemoSimulator x2, PatientAuthModal x3, HeroLanding, ClinicalBenchmarkView, clinicalRegistry, AppContext, diagnosticReportsDataset x4). Maps link now queries the fictional name. Regional "Kurnool" SETTING refs (village/catchment/climate) intentionally kept - synthetic setting, not affiliation.
 - Reports header count now dynamic {recentReports.length}; verified 20 == All Reports tab 20.
 - Verified: slipABHA DEMO-ABHA-0000-1049, facility fictional, no "Kurnool District Hospital" anywhere (reconcile_verify.cjs).
-- APK 0301: /downloads/AyuSwar-debug-safety-0301.apk 45,401,408B SHA256 3bbe8a1b02d333855d39aec9ae58a32b9a40b0589e097734dd799964ff83c8e8 (03:00 IST). Tests 98/0. APK 0300 was transferred to main in 3 parts (verified receipt) then deleted locally; main owns user delivery via WhatsApp doc (100MB ok). Transfer newer build only when materially superseding.
+- APK 0301: /downloads/AyuSwar-debug-safety-0301.apk 45,401,408B SHA256 3bbe8a1b02d333855d39aec9ae58a32b9a40b0589e097734dd799964ff83c8e8 (03:00 IST). Tests 98/0.
 - PENDING: (a) verify GENERATED PDF output of Print/Save PDF (preview verified only); (b) RAG matrix safe routing - distinguish educational sample vs generated, honest provider failure, no canned personalized treatment (partial sentence neutralization done 02:56; full reword pending); (c) portal/modal internal translations; (d) final audit PDF/DOCX; (e) hourly editor JPEG :05 + report :10.
 
-## 03:17 IST - Safe-routing rework (parent 03:09 directive)
+## 03:17 IST - Safe-routing rework
 - Removed tier-1 canned matrix interception from ALL live queries (FloatingAssistant + DoctorPortal AI box). Live symptom queries now get truthful inability-to-assess text, no urgency label, no canned diagnosis.
 - Removed vernacular symptom->concept/urgency card from live structured mapper.
 - Bundled samples moved behind explicit user-selected "Sample Q&A (educational)" library view, labeled educational, voice plays only on selection.
@@ -273,7 +268,7 @@ Added slogan/logo/icon audit at /downloads/slogan_logo_claim_audit_0050.md. Rewr
 - Reply header renamed "AyuSwar AI Response" -> "AyuSwar Assistant" (deterministic fallbacks no longer AI-labeled).
 - Verified: LIVE_SYMPTOM all-true, LIVE_DENGUE all-true, FORMULARY card intact, NAV synthetic framing intact, SAMPLE_VIEW labeled; npm test 98/0; APK 0317.
 
-## 03:21 IST - Sample library content neutralization (parent 03:16 directive)
+## 03:21 IST - Sample library content neutralization
 - All 8 matrix samples reviewed. GERD/palpitations diagnosis-like assertion neutralized in en/te/hi (many possible causes; clinician determines; emergency red-flag kept). Dengue English treatment directive removed (no self-medication; doctor decides). Metformin + hypertension answers qualified as general info deferring to prescriber. Asthma GINA claim narrowed to verified population/regimen (GINA 2025, adults+adolescents, low-dose ICS-formoterol preferred reliever; source ginasthma.org Summary Guide 2025 PDF).
 - Reply header is now "AyuSwar Assistant" (final-build verified); response panel scroll verified - emergency line reachable after scroll at 390px width.
 - Evidence: final_live_scrolled_0319.png, final_library_0319.png, final_sample_0319.png. npm test 98/0. APK 0321 (local only, batched per main instruction).
@@ -301,8 +296,8 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
 - Tests: npm test 98 passed, 2 conditional skips, 0 failed at 03:53 IST (log /tmp/npm_test_0353.log). NOTE: `npx vitest run` directly reports script-style test files as "0 test" failures - not a regression; use npm test.
 - Screenshots: /tmp/shots/qa_doctor_soap_0345.png, qa_doctor_drug_0345.png, qa_patient_meds_0345.png, fab_doctorportal_0348.png, fab_console_lifted_0351.png
 
-## 04:04-04:11 IST - Voice-state binding fix (parent review finding)
-- Parent flagged conflicting audio state in the Telugu chrome shot: status line said untested while toggles said ON.
+## 04:04-04:11 IST - Voice-state binding fix
+- Review found conflicting audio state in the Telugu chrome shot: status line said untested while toggles said ON.
 - ROOT CAUSE 1: voiceOk=null (untested) fell through to "Audio on"/"AI Voice: ON" on the mute and AI-voice toggles; only voiceOk=false showed honest labels.
 - ROOT CAUSE 2 (deeper): assistant chrome translated from its own voice-language setting (localStorage ayuswar_language) instead of the app UI locale (ayuswar_selected_language); app-locale changes did not translate the assistant. The 03:22 chrome check had seeded the wrong key, masking it.
 - FIX: all three voice surfaces bind to the same availability state (untested/null, unavailable/false, on/true only after real playback); new assistant.aiVoiceUntested key in all 6 locales (288 keys each). Assistant chrome now uses useApp() selectedLanguage; voice-language selector is speech-only.
@@ -320,7 +315,7 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
 1. PatientPortal home tab translated: 24 patient.home.* keys added in all 6 locales
    (greeting w/ {name} param, subtitle, sampleRecord, demoId, 4 quick cards title+sub,
    upcoming/viewAll/join/onlineConsult, healthOverview/viewDetails, 4 vitals labels,
-   normalChip, recentReports). en/te/hi/ta/kn/mr; ta/kn/mr authored by agent, not
+   normalChip, recentReports). en/te/hi/ta/kn/mr; ta/kn/mr machine-authored, not
    human-reviewed (same limitation as sample translations). No clinician-entered
    medicine names/doses/instructions touched. Build OK 04:25.
    Verified te at 390px: greeting/subtitle/cards/overview/sample-record/recent all
@@ -328,13 +323,13 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
    Screenshot: /tmp/shots/patient_home_te_0421.png.
 2. Tofu fix: PatientPortal badge 🌿 -> Lucide Leaf icon; 🛡️ -> Lucide Shield icon
    (Shield was already imported; Leaf added). Build OK.
-3. Cross-locale sample evidence (parent 04:17 ask): hypertension sample clicked and
+3. Cross-locale sample evidence : hypertension sample clicked and
    answer tail verified at runtime in ALL 5 non-EN locales via sample_check_one.cjs:
    te/hi/ta/kn/mr answerTailFound=true ("doctor decides" tail present in each).
    questionFound=false post-click is expected (view swaps to answer-only).
    Scroll evidence: /tmp/shots/sample_te_top_0426.png, sample_te_bottom_0426.png,
    sample_ta_top_0426.png, sample_ta_bottom_0426.png (answer scrolled to bottom,
-   defer-to-doctor tail visible; te bottom shot pixel-verified by agent).
+   defer-to-doctor tail visible; te bottom shot pixel-verified).
 4. Inert metadata noted: CLINICAL_RAG_AUDIO_MATRIX entries carry genericDrug/icd10/
    snomed fields; sample UI renders only question+answer via matrixContent();
    findMatrixAnswer/queryTieredClinicalVoiceRag have no callers outside the service
@@ -400,7 +395,7 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
 - Verified te 390px: tab 7/7, modal 9/9 (appts_check.cjs). Screenshots /tmp/shots/patient_appts_te_0514.png, patient_appts_modal_te_0514.png (post-fix). npm test 98/0. Remaining English on tab: Past Completed Visits card, portal chrome, data values (names/specialties/dates/'Routine follow-up' fallback, '(Today)' from formatDemoDate).
 - Audit generator: Evon row reworded to inspected-evidence only (backend status 22:20 reported unconfigured; live deployment not re-verified; settings separate from source config; no hosting access granted); appointments VERIFIED row added. Regen at 06:03 with editor batch.
 
-## 2026-11-18 05:16-05:24 IST - appointments flow hardening (parent findings)
+## 2026-11-18 05:16-05:24 IST - appointments flow hardening
 - Date chips: hardcoded May 14/15 replaced with clock-derived offsets (0=today,1=tomorrow,+2,+3 via toLocaleDateString en-IN); bookingDate state is now an offset int; label derived once for chip/store/display so ticket and list always match. Verified chips: ఈరోజు/రేపు/Fri, 20 Nov/Sat, 21 Nov.
 - Banner: green "Real-Time OPD Slot Allocation Active" -> amber "Sample slot grid - local demo booking only; no real hospital slot is held" (6 locales).
 - Reschedule: false "Clinic coordinator notified" alert -> honest demo note (6 locales); handler verified via DOM click; dialog text verified te.
@@ -422,7 +417,7 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
 - Checklist File: gen-10 revision published (now generation 11), revision filerevision-01M7P00XF7JQ1HMYSE0QEA9AS1, 5 new tested rows + Portal-internals pending row updated; preview verified via cloud browser (lease L-alpx4mevgbbpyk7e3zlycfvjchjv6nkp, reported/released). URL unchanged.
 - Settings tab round 1: 23 patient.settings.* keys x6 (title/subtitle/save/savedNote/voice/autoPlay/reminders/waPreview/ivrPref/smsAlerts/emergency/sos/sharing/specialistView + subs). Wired in PatientPortal.jsx (Save button appears twice - both replaced). Verified te 390px 10/10 (settings_check.cjs; shot patient_settings_te_0549.png). Remaining settings: family locker/masking/privacy note(🔒->Lock icon)/offline/print-preview/Rx-table headers + doctor internals.
 
-## 06:06-06:11 IST — Goals claim-neutralization round 4 (parent 06:04:28 correction) + bottom-nav overlap fix
+## 06:06-06:11 IST — Goals claim-neutralization round 4  + bottom-nav overlap fix
 - Rewrote 17 existing goal key values x6 locales (bpOptimal/bpPre/controlled/safeRange/hydrationReco/pefrNote/ginaNote/cyclesInfo/sleepNoteTitle/sleepNoteBody/dietNoteTitle/pillboxNote/greenZone/yellowZone/redZone/onTime/sodiumEquiv): all fixed record values, computed classifications and scripted trends now sample-labelled; removed inference/treatment-response claims (sinus rhythm, bronchodilation, GINA guideline response, sleep-benefit claim, sodium WHO "assessment").
 - Added 8 new keys x6: restingHr, sampleValue, sleepQuality, fastingNote, logFasting, logPostMeal, toastFasting, toastPostMeal.
 - JSX wiring in PatientHealthGoalsTab.jsx (8 sites): Normal Sinus Rhythm -> restingHr+sampleValue; Normoglycemic -> bpOptimal; fasting note (dropped no-symptom claim) -> fastingNote; Log Fasting/Post-Meal buttons -> keys w/ {v}; 2 toasts -> keys; Restorative -> sleepQuality.
@@ -494,21 +489,21 @@ APK checkpoint 0330: /downloads/AyuSwar-debug-safety-0330.apk mtime 2026-11-18 0
 - Verify: chips_check.cjs 8/8 at 390px te (home/my_health/appts). NOTE: patient default tab is 'home', NOT my_health - nav click needed. Audit PDF grew to 9 pages; page 1 re-pixel-inspected 06:45.
 - APK checkpoint-0647: /downloads/AyuSwar-debug-checkpoint-0647.apk, 45,399,641 B, SHA256 b5ffb9ed5ecf21bd66bf31d8e9ab5d5c04f0f8757a07dd8d4e72ffb73b259fa7. Checklist gen 20 published filerevision-01M7P3JSQQYSWF3P9A9N6C1YJK.
 
-## 07:04-07:11 IST — Parent 07:03:56 directives + functional handover regression
+## 07:04-07:11 IST — Review corrections + functional handover regression
 - Identifiers: 6 hfrId values across demoData.jsx (12 occurrences) DEMO-prefixed (HFR-GJ-MSH-0018 etc → DEMO-HFR-…). Grep sweep: no remaining non-DEMO HFR/HPR/ABHA identifiers; clinician-entered content untouched. Runtime verified te (idem_check 4/4, pixel shot doctor_directory_idem_te_0706.png: DEMO-HFR-GJ-MSH-0018 + DEMO-ABHA + DEMO-HPR on card).
 - Triage chips: doctor.opd.card.triageCritical/Urgent/Moderate/Stable values now carry sample wording in all 6 locales (e.g. en "Critical (sample)", te "క్రిటికల్ (నమూనా)"). Logic comparisons untouched (raw triageLevel values).
 - Claims: neutralized canned patient-assistant reply in aiBrainService.generateSafeDemonstrationResponse that asserted unverified facility hours ("OPD consultations Mon-Sat 9:00 AM - 2:00 PM") — now honest demo guidance (no medical advice, no live schedules, confirm with PHC, 112/108 for urgent). Added 6th SampleDataChip on patient AI Assistant tab header (seeded demo chat now visibly labelled).
 - Functional handover regression (handover_regression.cjs + regression3, vite preview 390px): rx preview renders; FHIR JSON download = valid Bundle (7 entries); print button triggers window.print; PMBJP drug search input filters (met→Metformin); New Appointment form submit adds new token (OPD-106) using selected registry patient; AI assistant input sends and receives honest demo-guidance reply with SAMPLE DATA chip. 7/7 PASS after fixes.
 - 98 specs passed, 2 conditional skips. vite build clean.
 
-## 07:13-07:21 IST — Parent 07:13:05 review corrections (handover rev 2)
+## 07:13-07:21 IST — Review corrections (handover rev 2)
 - Seeded assistant chat replaced: hardcoded EN medical-advice reply (honey/gargles + fictional Dr Priya referral) removed; seed Q + seed A now keyed patient.assistant.seedQ/seedA across all 6 locales; seedA is honest nonclinical demo guidance (cannot assess symptoms, consult qualified clinician, 112/108 if severe). TDZ crash caught (t used before useApp destructure) - state moved after hook; error-boundary verified gone.
 - Emergency box source-grounded: "104 Health Advice available 24x7" claim removed; now "In a medical emergency, call 112 (national emergency) or 108 (ambulance)" x6 locales; Call 108 button changed from fake alert('Dialing...') to real tel:108 link.
 - Chat controls translated: input placeholder, Voice/Listening, Send x6 locales.
 - Reachability verified concretely (not full-page assertion): input and Send are the actual elementFromPoint hit targets at their centers at 390px; actual click+type+submit roundtrip returns the honest te fallback ("క్లౌడ్ రీజనింగ్ ప్రస్తుతం అందుబాటులో లేదు", aiBrainService.js:159); at true bottom scroll the full control row clears the fixed nav (pixel proof patient_assistant_ctrls_bottom_te_0721.png).
 - assistfix_check.cjs 8/8 (seed honest, no Priya, no honey advice, emergency source-grounded, input/send hit targets, roundtrip). 98 specs green.
 
-## 07:44-07:48 IST — Rev 3: persona neutralization + honest assistant capability copy (parent 07:45:11 approved)
+## 07:44-07:48 IST — Rev 3: persona neutralization + honest assistant capability copy
 - Regression finding: Rx print-bytes re-check exposed surviving named fictional doctor persona contradicting bounded identity-cleanup claim. Full inventory ~30 sites in 25+ files: 5-doctor auth roster, booking/referral/reviewer/radiologist fallbacks, signup prefill + authService default, sample-dialogue speaker, 6 voice-persona labels (now Sample Voice A-F), health-goals fallback, imaging-centre fixture, real-looking NMC number -> DEMO-NMC-0000. All neutralized to Dr. Demo Clinician A-F (synthetic) / Demo Reviewer / Demo Radiologist; AyuSwar Demo District Hospital OPD (synthetic) at every unmarked site. No clinician-entered values touched.
 - personaPriya/personaRajesh settings labels -> Demo voice (female/male) x6; queueRosterSub + appts.subtitle demo-care-team wording x6; booking select specialty logic re-keyed to new values.
 - Assistant header translated x6; subtitle rewritten honest (general questions only, cannot assess symptoms or give medical advice) x6. Dictionary 667 keys/locale, parity clean.

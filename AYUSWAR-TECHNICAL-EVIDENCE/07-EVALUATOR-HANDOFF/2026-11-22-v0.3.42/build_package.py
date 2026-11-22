@@ -34,7 +34,7 @@ def add(name, data, source, transform=None):
 # is read from the approved packaging worktree rather than its stale base copy.
 paths = git('ls-tree', '-r', '--name-only', APP_REV, '--', 'AYUSWAR-TECHNICAL-EVIDENCE', 'docs', 'benchmarks', 'LICENSE', 'NOTICE').decode().splitlines()
 for name in sorted(paths):
-    if name.startswith('docs/videos/'):
+    if name.startswith(('docs/videos/', 'docs/pitch/')):
         continue
     data = git('show', APP_REV + ':' + name)
     transform = None
@@ -43,6 +43,9 @@ for name in sorted(paths):
         text = '\n'.join('The outer ZIP is this archive and is not nested inside itself.' if '[Download the evaluator evidence ZIP]' in line else line for line in text.split('\n'))
         data = text.encode()
         transform = 'New packaging index, with self-ZIP link replaced for archive use'
+    elif name in {'docs/audit-2026-11-21.md', 'docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md', 'docs/EVAL-DATA-PLAN.md'}:
+        data = (ROOT / name).read_bytes()
+        transform = 'Privacy-only note cleanup; product evaluation results unchanged'
     add(name, data, name + '@' + APP_REV if transform is None else name, transform)
 
 # New accepted evidence and reader files, both at their repository paths and at
@@ -70,7 +73,7 @@ manifest = {
     'snapshot': '2026-11-22-v0.3.42',
     'applicationReleaseRevision': APP_REV,
     'acceptedFullSuiteRevision': TEST_REV,
-    'scope': 'Evidence/documentation package, not an APK, full app checkout, new experiment or clinical validation. Historical inputs keep their own recorded dates/revisions. Marketing video binaries, model weights and original corpora are not included.',
+    'scope': 'Evidence/documentation package, not an APK, full app checkout, new experiment or clinical validation. Historical inputs keep their own recorded dates/revisions. Marketing video/pitch materials, model weights and original corpora are not included.',
     'fullSuite': {'passed': 550, 'actualConditionalSkips': 3, 'failedSuiteProcesses': 0},
     'manifestPathsExcludedFromOwnChecksum': ['MANIFEST.json', PREFIX + '/MANIFEST.json'],
     'files': [dict(path=name, bytes=len(payload[name]), sha256=hashlib.sha256(payload[name]).hexdigest(), **origins[name]) for name in sorted(payload)]
