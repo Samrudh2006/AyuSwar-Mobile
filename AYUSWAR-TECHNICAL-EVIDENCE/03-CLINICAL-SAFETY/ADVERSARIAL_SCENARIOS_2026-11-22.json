@@ -1,12 +1,12 @@
 {
   "scope": "TEXT-LEVEL synthetic adversarial scenarios, purpose-authored per case (expected written before observing engine output), run through the real extract/verify/review/export code. Not audio, not a real model (model-path cases use a simulated adversarial reply), not clinical validation. FAIL rows are retained and reflect real gaps.",
-  "generatedAt": "2026-11-22T12:48:31.666Z",
-  "revision": "498b28f644a132e0eff80259ae97bce992decb1b",
-  "trackedWorkingTreeDirty": true,
+  "generatedAt": "2026-11-22T13:07:21.390Z",
+  "revision": "d440775a10a657b088656743a92e5cf347d0776d",
+  "trackedWorkingTreeDirty": false,
   "totals": {
-    "scenarios": 36,
-    "pass": 33,
-    "fail": 3
+    "scenarios": 39,
+    "pass": 35,
+    "fail": 4
   },
   "scenarios": [
     {
@@ -1087,6 +1087,86 @@
         ]
       },
       "result": "PASS"
+    },
+    {
+      "id": "ADV-37",
+      "proposalCategory": "Telugu polite negation (లేదండి)",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [Telugu]: నాకు జ్వరం లేదండి."
+      ],
+      "expectedBehaviour": "Polite Telugu denial \"లేదండి\" (I do not have fever) must flag the fever candidate as negated and hold it from export.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "జ్వరం",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-38",
+      "proposalCategory": "Telugu polite negation (కాదండి)",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [Telugu]: నాకు జ్వరం కాదండి."
+      ],
+      "expectedBehaviour": "Polite Telugu negation \"కాదండి\" must flag the fever candidate as negated and hold it from export.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "జ్వరం",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-39",
+      "proposalCategory": "Affirmed clause ending in a question",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I have a fever, do you know why?"
+      ],
+      "expectedBehaviour": "The patient affirms fever and then asks a question. The affirmed fever should stay exportable after review; holding it only because the sentence ends in \"?\" would drop a true symptom.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "fever",
+            "status": "AMBIGUOUS",
+            "negatedContext": false,
+            "clinicianStatus": "PENDING_REVIEW",
+            "notes": [
+              "span is inside a question, not a finding"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "FAIL"
     }
   ]
 }
