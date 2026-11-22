@@ -11,7 +11,7 @@ certification, onboarding readiness, or any clinical claim.
 
 **What this adds.** Per-resource profile-format validation against the
 five named ABDM profiles (Patient, Practitioner, Encounter, Condition,
-Observation, MedicationRequest), run offline with the official validator,
+Observation, MedicationRequest), run with the official validator against a locally vendored IG package,
 answering what the profiles enforce structurally.
 
 ## Run record
@@ -20,7 +20,8 @@ answering what the profiles enforce structurally.
 |---|---|
 | Validator | official HL7 FHIR Validator `validator_cli.jar` 7.0.6 (https://github.com/hapifhir/org.hl7.fhir.core/releases/download/7.0.6/validator_cli.jar) |
 | JVM | OpenJDK 21 (`/home/sandbox/jdk21`; system default `java` is 11 and cannot load the validator — class-file 61 vs 55) |
-| IG | `ndhm.in#6.5.0` package.tgz, sha256 `41fa99955adbd1983a235d7c7136b30f…` (public, https://www.nrces.in/ndhm/fhir/r4/package.tgz, no account) |
+| IG | `ndhm.in#6.5.0` package.tgz, sha256 `41fa99955adbd1983a235d7c7136b30f…` (public, https://www.nrces.in/ndhm/fhir/r4/package.tgz, no account), vendored locally |
+| Network | NOT fully offline: the IG package is local, but core terminology validation used the validator's default public terminology server (tx.fhir.org) - visible in VALIDATOR_RUN.log |
 | Fixture generator | `scripts/export_fhir_profile_format_fixtures.mjs` (deterministic, fixed UUIDs, no randomness) |
 | Command | `java -jar validator_cli.jar synthetic-profile-format-bundle.json -version 4.0.1 -ig package.tgz` |
 | Verbatim log | `VALIDATOR_RUN.log` (this folder) |
@@ -53,8 +54,9 @@ Read of the warnings (facts, not legal or onboarding conclusions):
 - No ABDM document profile (e.g. PrescriptionRecord Composition) is
   asserted or validated here; document-level packaging, signatures and
   real registry identifiers are out of scope.
-- Terminology-service validation used the validator's default public tx
-  server for core terminologies; no ABDM-specific terminology service was
-  exercised.
+- Terminology validation used the validator's default public tx server
+  (tx.fhir.org) for core terminologies, so the complete run is NOT an
+  offline run; only the IG package was local. No ABDM-specific
+  terminology service was exercised.
 - Real-emission scope is unchanged: the app still emits only
   Bundle+QuestionnaireResponse (see matrix rows 45/47).
