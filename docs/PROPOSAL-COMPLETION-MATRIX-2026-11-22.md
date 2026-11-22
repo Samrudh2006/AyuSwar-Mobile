@@ -7,6 +7,10 @@ Reconciled after the published v0.3.39-debug checkpoint (source `6718515`),
 including the accepted declared-person vital-export delta. The local export
 integrity gate at `5371787` is independently reviewed and included in the
 v0.3.40-debug build checkpoint; it is NOT in v0.3.39. Earlier dated baselines remain unchanged.
+Audio-Rx software consistency at `c14bf44` is independently accepted for the
+v0.3.41-debug checkpoint: unknown-default WAV download is blocked, not replaced
+by newly verified audio, and quiz completion follows current existing choices.
+This does not close the DEFERRED patient-comprehension deliverable.
 
 Scope note: the proposal was written against the web project and website
 (`Ayuswar-Ai`). The mobile repository is the active engineering surface; web
