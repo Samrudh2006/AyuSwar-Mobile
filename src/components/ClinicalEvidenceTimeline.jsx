@@ -57,7 +57,7 @@ export default function ClinicalEvidenceTimeline({ utterances, evidence }) {
               )}
               {u.provider && <span style={{ fontSize: '10px', color: '#5B706E' }}>via {u.provider}</span>}
               {u.timestampStartMs !== undefined
-                ? <span style={{ fontSize: '10px', color: '#5B706E' }}>{new Date(u.timestampStartMs).toLocaleTimeString()}</span>
+                ? <span style={{ fontSize: '10px', color: '#5B706E' }} title="Device receipt clock when this turn was registered. Not an audio-capture timestamp.">{new Date(u.timestampStartMs).toLocaleTimeString()} · receipt clock</span>
                 : <span style={{ fontSize: '10px', color: '#94A3B8' }}>no recorded timestamps</span>}
             </div>
             <div style={{ fontSize: '14px', color: '#16403F', lineHeight: 1.55 }}>

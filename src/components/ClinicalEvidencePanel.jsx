@@ -12,13 +12,15 @@
  * deterministic fallback only.
  */
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ShieldCheck, AlertTriangle, FlaskConical } from 'lucide-react';
 import {
-  createEvidenceSession, registerUtterance, extractEvidence
+  createEvidenceSession, clearEvidenceSession, registerUtterance, extractEvidence
 } from '../services/clinicalEvidenceEngine.js';
 import { verifyEvidence } from '../services/clinicalEvidenceVerifier.js';
-import { applyReviewAction, selectApprovedForExport } from '../services/clinicalEvidencePersistence.js';
+import {
+  applyReviewAction, selectApprovedForExport, persistEvidenceSession, loadEvidenceSession
+} from '../services/clinicalEvidencePersistence.js';
 import { SPEAKER, SOURCE_TYPE } from '../services/clinicalEvidenceTypes.js';
 import ClinicalEvidenceTimeline from './ClinicalEvidenceTimeline.jsx';
 import ClinicalEvidenceCard from './ClinicalEvidenceCard.jsx';
@@ -34,7 +36,15 @@ const mapSpeaker = (s) => (typeof s === 'string' && s.startsWith('Doctor')) ? SP
  * - provider from the actual capture label, else absent
  * - no timestamps are invented; live turns may carry real capturedAtMs
  */
+function hashTurns(turns) {
+  const s = (turns || []).map(t => `${t.speaker}|${t.text}`).join('\n');
+  let h = 5381;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+
 function buildSessionFromTurns(turns, { sessionId, isScriptedDemo }) {
+  clearEvidenceSession(sessionId); // deterministic id may exist from an earlier run in this page session
   const session = createEvidenceSession(sessionId);
   turns.forEach((t) => {
     const isScriptedTurn = Boolean(t.isScripted) || isScriptedDemo;
@@ -68,29 +78,62 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
   const [records, setRecords] = useState([]);
   const [counts, setCounts] = useState({});
   const [methodNote, setMethodNote] = useState(null);
+  const [persistOptIn, setPersistOptIn] = useState(false);
+  const [persistNote, setPersistNote] = useState(null);
+
+  // Deterministic per-consultation id so a prior opt-in demo review of the
+  // SAME turns restores on revisit (device-local, synthetic sessions only).
+  const sessionIdRef = useRef(null);
+  sessionIdRef.current = `console_${hashTurns(dialogueTurns || [])}`;
 
   const approvedCount = useMemo(() =>
     records.filter(r => r.clinicianStatus === 'APPROVED' || r.clinicianStatus === 'EDITED').length, [records]);
 
-  const runExtraction = async (allowFallback) => {
-    setPhase('running'); setError(null);
+  const allSynthetic = useMemo(() =>
+    (dialogueTurns || []).length > 0 && (dialogueTurns || []).every(t => t.isScripted || isScriptedDemo),
+  [dialogueTurns, isScriptedDemo]);
+
+  // Restore a previous opt-in review of this exact consultation, if any.
+  useEffect(() => {
+    const saved = loadEvidenceSession(sessionIdRef.current);
+    if (saved && Array.isArray(saved.evidence) && saved.evidence.length > 0) {
+      setSession({ sessionId: saved.sessionId, utterances: saved.utterances || [], evidence: saved.evidence });
+      setRecords(saved.evidence);
+      const c = {};
+      for (const r of saved.evidence) c[r.verificationStatus] = (c[r.verificationStatus] || 0) + 1;
+      setCounts(c);
+      setPersistNote('Restored your earlier on-device demo review of this consultation (local storage, synthetic data only).');
+      setPhase('done');
+    }
+  }, [sessionIdRef.current]);
+
+  const maybePersist = (sess, recs) => {
+    if (!persistOptIn || !sess) return;
+    const res = persistEvidenceSession(sess, recs, { allowPersist: true });
+    setPersistNote(res.saved
+      ? 'Review saved on this device (synthetic demo data only; no live-captured content is stored).'
+      : `Not saved: ${res.reason}`);
+  };
+
+  const runExtraction = async (mode) => { // 'auto' (model w/ labelled fallback) | 'offline' (never calls a model)
+    setPhase('running'); setError(null); setPersistNote(null);
     try {
       const sess = buildSessionFromTurns(dialogueTurns || [], {
-        sessionId: `console_${Date.now().toString(36)}`,
+        sessionId: sessionIdRef.current,
         isScriptedDemo
       });
-      const out = await extractEvidence(sess, {
-        callModel: allowFallback ? callModel : (callModel || undefined),
-        modelVersion,
-        allowFallback
-      });
+      const out = mode === 'offline'
+        ? await extractEvidence(sess, { allowFallback: true }) // no caller: deterministic lexicon only
+        : await extractEvidence(sess, { callModel: callModel || undefined, modelVersion, allowFallback: true });
       if (out.status === 'EXTRACTION_UNAVAILABLE') {
         setPhase('unavailable');
         setError(`Extraction unavailable: ${out.reason}. No fallback was run because you chose model-only.`);
         setSession(sess);
         return;
       }
-      if (out.status === 'FALLBACK_USED') {
+      if (mode === 'offline') {
+        setMethodNote('Offline deterministic lexicon extraction: no model was called. Coverage is limited to exact lexicon matches (some Telugu/Hindi inflected forms are not matched; unmatched content fails closed). NOT live model output.');
+      } else if (out.status === 'FALLBACK_USED') {
         setMethodNote(`Live model unavailable (${out.fallbackReason}). Showing explicitly labelled deterministic fallback results: NOT live model output.`);
       } else {
         setMethodNote(null);
@@ -100,6 +143,7 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
       setSession(sess);
       setRecords(verified);
       setCounts(counts);
+      maybePersist(sess, verified);
       setPhase('done');
     } catch (err) {
       setPhase('unavailable');
@@ -112,7 +156,11 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
       const updated = applyReviewAction(record, action,
         { identity: reviewerIdentity || 'demo-reviewer', isDemo: true },
         action.type === 'EDIT' ? 'demo reviewer edit' : `demo reviewer ${action.type.toLowerCase()}`);
-      setRecords(prev => prev.map(r => r.evidenceId === record.evidenceId ? updated : r));
+      setRecords(prev => {
+        const next = prev.map(r => r.evidenceId === record.evidenceId ? updated : r);
+        maybePersist(session, next);
+        return next;
+      });
     } catch (err) {
       setError(err.message);
     }
@@ -142,10 +190,24 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
       </p>
 
       {phase === 'idle' && (
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-          <button onClick={() => runExtraction(true)} style={primaryBtn}>
-            <FlaskConical size={13} /> Run evidence extraction
-          </button>
+        <div>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <button onClick={() => runExtraction('auto')} style={primaryBtn}>
+              <FlaskConical size={13} /> Run evidence extraction (model, labelled fallback if unavailable)
+            </button>
+            <button onClick={() => runExtraction('offline')} style={{ ...primaryBtn, background: '#FFFFFF', color: '#0F766E', border: '1.5px solid #0F766E' }}>
+              Run offline extraction (no model)
+            </button>
+          </div>
+          <label style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '10px', fontSize: '11.5px', color: allSynthetic ? '#0F3B3A' : '#94A3B8' }}>
+            <input
+              type="checkbox"
+              checked={persistOptIn}
+              disabled={!allSynthetic}
+              onChange={e => setPersistOptIn(e.target.checked)}
+            />
+            Remember this demo review on this device (synthetic sessions only; live-captured consultations are never stored)
+          </label>
         </div>
       )}
       {phase === 'running' && <div style={{ fontSize: '12px', color: '#5B706E' }}>Extracting and verifying against source...</div>}
@@ -160,6 +222,11 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
           {methodNote && (
             <div style={{ fontSize: '11px', color: '#B45309', background: '#FFFBEB', borderRadius: '8px', padding: '8px 10px', marginBottom: '10px' }}>
               {methodNote}
+            </div>
+          )}
+          {persistNote && (
+            <div style={{ fontSize: '11px', color: '#0F766E', background: '#F0FDFA', borderRadius: '8px', padding: '8px 10px', marginBottom: '10px' }}>
+              {persistNote}
             </div>
           )}
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '10px' }}>

@@ -26,6 +26,47 @@ test number is the final reported figure for that model. FLEURS is read-speech
 news/web text, not code-mixed clinical speech; these numbers do not transfer to
 consultation audio.
 
+### Runner scope: benchmark numbers are NOT shipping app-path quality
+
+`benchmarks/fleurs_local_asr.mjs` is an UNCAPPED benchmark runner: it feeds
+each full clip to the model regardless of duration. The shipping in-app offline
+worker caps input at 15 seconds (pilot `LocalAsrPilot` duration guard), so
+shipping-path accuracy on real captures is a separate, unmeasured question.
+These numbers describe the model under benchmark conditions only.
+
+### Model provenance and replay
+
+| File | sha256 | Source |
+| :--- | :--- | :--- |
+| te model `model.matmul-int8.onnx` | `a67b8aa4840fd78934f6246e626c183f9a07773fa910e3012349a6081fbeb1aa` | EXACT match of the pin in `src/services/localVoice/localAsrManifest.js` (AI4Bharat Telugu IndicConformer, OpenVoiceOS conversion, repo int8 derivative) |
+| te preprocessor `preprocessor.onnx` | `1566e840c72d032dfb31166b924d96fe2a6c8a6c29393da8e83c19d99de0eb76` | manifest pin (onnx-asr 0.12.0 nemo80_conv) |
+| te vocab `vocab.txt` | `dc0b7bbb9eca8d3c8aebf1eb86e3144c90d692b4008cf5a32d46437b942b23ac` | manifest pin (OpenVoiceOS) |
+| hi model `asr-hi.onnx` | `03e527a067eb467cf9cee7bc8c8f57862198c9eef0068ffd7e23770ec85fc9e7` | local pilot file, copied from the pilot's OpenVoiceOS AI4Bharat IndicConformer Hindi download (nemo-conformer-ctc, matmul-int8); upstream repo pin NOT yet recorded in-repo - treat as pilot-grade provenance |
+| hi preprocessor | `1566e840c72d032dfb31166b924d96fe2a6c8a6c29393da8e83c19d99de0eb76` | same onnx-asr preprocessor as te |
+
+Hypothesis TSVs are committed next to the scorer JSON so every figure is
+independently recomputable:
+
+| Hypotheses | sha256 |
+| :--- | :--- |
+| `benchmarks/results/2026-11-22-fleurs-te_in-dev.hyps.tsv` | `120731a962858ba4d1627bad4da52abe3d550599e705652fa513746566bea96e` |
+| `benchmarks/results/2026-11-22-fleurs-te_in-test.hyps.tsv` | `ce1aeecf36c425352b92d3e30d0f35abc07303f8387920fd9feadb11bcbc9ca1` |
+| `benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv` | `92da6530a7301be9013a81602b415c6bb33c70a64f7db822226dc6065a3243fd` |
+
+Replay (no model run needed):
+
+```
+python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/te_in/dev.tsv \
+  --hyps benchmarks/results/2026-11-22-fleurs-te_in-dev.hyps.tsv \
+  --model local-onnx-conformer-ctc-int8-te --split dev --ref-column normalized
+python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/te_in/test.tsv \
+  --hyps benchmarks/results/2026-11-22-fleurs-te_in-test.hyps.tsv \
+  --model local-onnx-conformer-ctc-int8-te --split test --ref-column normalized
+python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/hi_in/dev.tsv \
+  --hyps benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv \
+  --model local-onnx-conformer-ctc-int8-hi --split dev --ref-column normalized
+```
+
 ## Current verification status
 
 The former results narrative in this file conflicts with [NOTICE.md](NOTICE.md), which identifies the CSVs as unverified template/reference fixtures. The earlier execution labels and aggregate metrics are withdrawn as evidence of current application or recognizer performance. No replacement accuracy, latency, dosage-clarity or safety metric is asserted here.

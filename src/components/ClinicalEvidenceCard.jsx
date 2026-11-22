@@ -27,6 +27,7 @@ const CLINICIAN_LABEL = {
 export default function ClinicalEvidenceCard({ record, onReview }) {
   const st = STATUS_STYLE[record.verificationStatus] || STATUS_STYLE.UNSUPPORTED;
   const canAct = record.verificationStatus === 'SUPPORTED' || record.verificationStatus === 'AMBIGUOUS';
+  const isEdited = record.clinicianStatus === 'EDITED' && record.displayText && record.displayText !== record.sourceQuote;
   return (
     <div style={{
       background: '#FFFDF7', border: `1.5px solid ${st.border}`, borderRadius: '14px',
@@ -49,14 +50,30 @@ export default function ClinicalEvidenceCard({ record, onReview }) {
         margin: '10px 0 6px', padding: '8px 12px', borderLeft: '3px solid #0F766E',
         background: '#F8FAF9', borderRadius: '0 8px 8px 0', fontSize: '14px', color: '#16403F'
       }}>
-        "{record.displayText || record.sourceQuote}"
+        "{record.sourceQuote}"
       </blockquote>
+      {isEdited && (
+        <div style={{
+          margin: '0 0 6px', padding: '8px 12px', border: '1.5px dashed #B45309',
+          background: '#FFFBEB', borderRadius: '8px', fontSize: '13px', color: '#92400E'
+        }}>
+          <strong>Clinician correction (reviewer text, NOT source):</strong> "{record.displayText}"
+        </div>
+      )}
+      {record.isNegatedContext && (
+        <div style={{
+          margin: '0 0 6px', padding: '8px 12px', border: '1.5px solid #B91C1C',
+          background: '#FEF2F2', borderRadius: '8px', fontSize: '12.5px', fontWeight: 700, color: '#991B1B'
+        }}>
+          NEGATED FINDING: the source marks this as absent / ruled out. It is excluded from positive export even if approved.
+        </div>
+      )}
       <div style={{ fontSize: '11px', color: '#5B706E' }}>
         Source: {record.utteranceId} · chars {record.startOffset}–{record.endOffset}
         {record.modelVersion ? ` · model ${record.modelVersion}` : ''}
         {record.extractionMethod === 'DETERMINISTIC_FALLBACK' ? ' · deterministic fallback (not live model)' : ''}
         {record.isSynthetic ? ' · synthetic demo' : ''}
-        {record.isNegatedContext ? ' · negation context flagged' : ''}
+        {record.isNegatedContext ? '' : ''}
       </div>
       {(record.verificationNotes || []).map((n, i) => (
         <div key={i} style={{ fontSize: '11px', color: '#B45309', marginTop: '4px' }}>Note: {n}</div>

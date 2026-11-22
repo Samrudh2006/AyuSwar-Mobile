@@ -141,6 +141,39 @@ await record('contradictory statements conflict', async () => {
   assert(v2.verificationStatus === VERIFICATION_STATUS.CONFLICTING, `expected CONFLICTING, got ${v2.verificationStatus}`);
 });
 
+// 8b. Same-batch conflicts can never both pass (production call order:
+// verifyEvidence over the whole candidate set BEFORE session.evidence exists)
+await record('same-batch conflicting claims caught by verifyEvidence', async () => {
+  const s = mkSession();
+  addUtts(s, CONTRADICTION_PAIR);
+  const out = await extractEvidence(s, {
+    callModel: async () => JSON.stringify([
+      { utteranceId: s.utterances[0].utteranceId, entityType: 'DURATION', sourceQuote: 'three days ago', normalizedConcept: 'fever onset' },
+      { utteranceId: s.utterances[1].utteranceId, entityType: 'DURATION', sourceQuote: 'one week ago', normalizedConcept: 'fever onset' }
+    ])
+  });
+  assert(!s.evidence || s.evidence.length === 0, 'session.evidence must be empty before batch verification (production order)');
+  const { verified, counts } = verifyEvidence(s, out.candidates);
+  assert(verified.length === 2, 'both candidates verified');
+  assert(verified[0].verificationStatus === VERIFICATION_STATUS.SUPPORTED, `first stays SUPPORTED, got ${verified[0].verificationStatus}`);
+  assert(verified[1].verificationStatus === VERIFICATION_STATUS.CONFLICTING, `second must be CONFLICTING, got ${verified[1].verificationStatus}`);
+  assert(counts.CONFLICTING === 1, 'exactly one conflict counted');
+});
+
+// 20b. Negated findings never enter positive export, even when approved
+await record('export gate excludes negated findings', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = await extractEvidence(s, {
+    callModel: async () => JSON.stringify([{ utteranceId: s.utterances[4].utteranceId, entityType: 'ALLERGY', sourceQuote: 'పెన్సిలిన్ అలర్జీ', normalizedConcept: 'penicillin allergy' }])
+  });
+  const { verified } = verifyEvidence(s, out.candidates);
+  assert(verified[0].isNegatedContext === true, 'negation flagged');
+  const approved = applyReviewAction(verified[0], { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  const exported = selectApprovedForExport([approved]);
+  assert(exported.length === 0, 'negated allergy must never become a positive exported claim');
+});
+
 // 9. Invalid offsets rejected
 await record('invalid offsets rejected', async () => {
   const s = mkSession();

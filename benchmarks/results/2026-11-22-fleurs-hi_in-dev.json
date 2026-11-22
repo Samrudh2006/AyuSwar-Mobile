@@ -5,7 +5,7 @@
   "split": "dev",
   "ref_column": "normalized",
   "refs_path": "eval-data/fleurs/hi_in/dev.tsv",
-  "hyps_path": "/tmp/hyps-hi-dev.tsv",
+  "hyps_path": "benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv",
   "references_total": 239,
   "hypotheses_total": 239,
   "matched": 239,

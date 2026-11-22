@@ -44,5 +44,16 @@ check(
   /No vitals or examination findings were captured in this session/.test(src)
 );
 
+check(
+  'model-returned objective is sanitized against the transcript (fail closed on invented values)',
+  /sanitizeObjective/.test(src) && /Discarded model-written objective containing values not present in the transcript/.test(src)
+);
+
+check(
+  'JSON parse-error path never embeds raw model output in the assessment',
+  !/aiResponse\.slice\(0, ?180\)/.test(src) &&
+  /The model response could not be parsed into a structured draft/.test(src)
+);
+
 console.log(`\nphase42_soap_draft_safeguards: ${passed}/${passed + failed} passed`);
 process.exit(failed === 0 ? 0 : 1);

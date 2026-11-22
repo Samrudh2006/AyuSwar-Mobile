@@ -62,9 +62,9 @@ const suites = [
   { name: 'Phase 36: Structured Assistant Answers', file: 'test/structured_answers.test.js', count: 5 },
   { name: 'Phase 37: Offline Sync Queue Integrity', file: 'test/phase37_offline_sync_integrity.test.js', count: 6 },
   { name: 'Phase 38: API Reliability Chain', file: 'test/phase38_api_reliability_chain.test.js', count: 5 },
-  { name: 'Phase 40: Clinical Evidence Engine', file: 'test/clinical_evidence_engine.test.js', count: 20 },
+  { name: 'Phase 40: Clinical Evidence Engine', file: 'test/clinical_evidence_engine.test.js', count: 22 },
   { name: 'Phase 41: Clinical Evidence Review UI', file: 'test/clinical_evidence_ui.test.js', count: 6 },
-  { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 5 }
+  { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 7 }
 ];
 
 console.clear();

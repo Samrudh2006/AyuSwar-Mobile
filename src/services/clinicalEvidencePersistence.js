@@ -136,7 +136,11 @@ export function applyReviewAction(record, action, reviewer, reason) {
 export function selectApprovedForExport(verifiedRecords) {
   return verifiedRecords.filter(r =>
     r.verificationStatus === 'SUPPORTED' &&
-    (r.clinicianStatus === CLINICIAN_STATUS.APPROVED || r.clinicianStatus === CLINICIAN_STATUS.EDITED)
+    (r.clinicianStatus === CLINICIAN_STATUS.APPROVED || r.clinicianStatus === CLINICIAN_STATUS.EDITED) &&
+    // A negated finding (e.g. "no penicillin allergy") is never exported as a
+    // positive claim, even if a reviewer approved the extraction. Negated
+    // context belongs in the review record, not in downstream positive fields.
+    !r.isNegatedContext
   ).map(r => Object.freeze({
     ...r,
     exportNote: r.entityType === ENTITY_TYPE.MEDICATION_INSTRUCTION

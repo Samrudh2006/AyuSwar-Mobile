@@ -107,6 +107,13 @@ export async function extractWithModel(session, callModel, { modelVersion } = {}
  * Deterministic fallback extractor: exact lexicon matching over the original
  * strings. Explicitly labelled; never presented as model output. Small and
  * conservative by design - it only emits verbatim matches.
+ *
+ * KNOWN COVERAGE LIMIT (documented, fail-closed): the lexicon lists citation
+ * forms only. Telugu/Hindi inflected forms (e.g. జ్వరంగా, జ్వరమ్ తో, दिनों,
+ * हफ्तों) are NOT matched, so content expressed only in those forms yields no
+ * candidate at all rather than a guessed one. Fail-closed silence here is
+ * acceptable for the beta; widening coverage needs real morphology, not more
+ * hand-listed strings.
  */
 // Indic scripts are not covered by ASCII \b, so boundaries use Unicode
 // letter/number lookarounds instead.

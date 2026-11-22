@@ -723,10 +723,22 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
           const objectiveFallback = allTurnsScripted
             ? `Recorded demo vitals only (scripted sample data, not measured): BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`
             : 'No vitals or examination findings were captured in this session. A clinician must record objective findings before use.';
+          // Deterministic safeguard: the prompt never supplies vitals, so any
+          // numeric clinical value in the model's objective that does not
+          // appear verbatim in the transcript is model-invented. Fail closed:
+          // discard the whole objective and use the labelled fallback.
+          const sanitizeObjective = (objectiveText) => {
+            if (!objectiveText) return objectiveFallback;
+            const numbers = String(objectiveText).match(/\d+(?:[./]\d+)?%?/g) || [];
+            const invented = numbers.some(n => !fullDialogueText.includes(n));
+            return invented
+              ? `${objectiveFallback} (Discarded model-written objective containing values not present in the transcript.)`
+              : objectiveText;
+          };
           if (parsed.subjective) {
             setEditableSoapNote({
               subjective: parsed.subjective,
-              objective: parsed.objective || objectiveFallback,
+              objective: sanitizeObjective(parsed.objective),
               assessment: parsed.assessment || 'Clinical Assessment pending review.',
               plan: parsed.plan || 'No medication or treatment plan is generated.'
             });
@@ -745,7 +757,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
         } catch {
           setEditableSoapNote(prev => ({
             ...prev,
-            assessment: `Clinical dialogue parsed: ${aiResponse.slice(0, 180)}...`
+            assessment: 'The model response could not be parsed into a structured draft. No assessment is generated; a clinician must review the recording and write the assessment.'
           }));
         }
       }

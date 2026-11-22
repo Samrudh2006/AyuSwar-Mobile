@@ -94,10 +94,21 @@ export function verifyCandidate(session, candidate) {
 
 /**
  * Verify a whole candidate set. Mutates nothing; returns { verified, counts }.
+ * Candidates are verified SEQUENTIALLY and each already-verified candidate in
+ * the same batch joins the comparison set for the next one, so two conflicting
+ * claims inside one batch can never both come out SUPPORTED. The first
+ * candidate in batch order wins deterministically; later conflicting ones are
+ * CONFLICTING. (The pre-fix batch implementation compared only against
+ * session.evidence, which the caller populates after verification, letting
+ * same-batch conflicts through.)
  */
 export function verifyEvidence(session, candidates) {
-  const verified = candidates.map(c => verifyCandidate(session, c));
+  const verified = [];
   const counts = {};
-  for (const v of verified) counts[v.verificationStatus] = (counts[v.verificationStatus] || 0) + 1;
+  for (const c of candidates) {
+    const v = verifyCandidate({ ...session, evidence: [...(session.evidence || []), ...verified] }, c);
+    verified.push(v);
+    counts[v.verificationStatus] = (counts[v.verificationStatus] || 0) + 1;
+  }
   return { verified, counts };
 }
