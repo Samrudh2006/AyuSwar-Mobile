@@ -6,7 +6,10 @@
  * Designed for clean, high-contrast terminal screenshots for LinkedIn & reports.
  */
 
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
 
 const C = {
   reset: '\x1b[0m',
@@ -81,6 +84,40 @@ console.log(`${C.gold}${C.bold}╚═══════════════�
 const startTime = Date.now();
 let totalTests = 0;
 let totalSkipped = 0;
+const reportRows = [];
+const reportDirectory = process.env.AYUSWAR_REPORT_DIR;
+function writeReports() {
+  if (!reportDirectory) return;
+  mkdirSync(reportDirectory, { recursive: true });
+  let revision = null;
+  let dirty = null;
+  try {
+    revision = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+    dirty = !!execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { encoding: 'utf8' }).trim();
+  } catch { /* standalone archive: revision remains unknown */ }
+  const summary = {
+    schemaVersion: 1, generatedAt: new Date().toISOString(), revision, trackedWorkingTreeDirty: dirty,
+    reportGranularity: 'One execution record per suite process, not one JUnit testcase per assertion',
+    environment: { node: process.version, platform: os.platform(), architecture: os.arch() },
+    scope: 'Synthetic engineering checks. Not clinical validation, live provider availability or native Android runtime.',
+    suitesExecuted: reportRows.length,
+    assertionsPassed: totalTests, conditionalAssertionsSkipped: totalSkipped,
+    suiteProcessesFailed: reportRows.filter(r => r.exitCode !== 0).length,
+    suites: reportRows
+  };
+  const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+  const ansiFree = value => String(value).replace(/\x1b\[[0-9;]*[A-Za-z]/g, '');
+  const failed = summary.suiteProcessesFailed;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<testsuites name="AyuSwar suite-process executions" tests="${reportRows.length}" failures="${failed}">\n` +
+    reportRows.map(r => `  <testsuite name="${esc(r.name)}" tests="1" failures="${r.exitCode ? 1 : 0}" time="${r.durationSeconds}">\n` +
+      `    <properties><property name="assertionsPassed" value="${r.executed}"/><property name="conditionalAssertionsSkipped" value="${r.skipped}"/></properties>\n` +
+      `    <testcase classname="suite-process" name="${esc(r.file)}" time="${r.durationSeconds}">${r.exitCode ? '<failure message="Suite process exited nonzero"/>' : ''}</testcase>\n` +
+      `    <system-out>${esc(ansiFree(r.output))}</system-out>\n  </testsuite>\n`).join('') + '</testsuites>\n';
+  writeFileSync(path.join(reportDirectory, 'TEST_RESULTS.json'), JSON.stringify(summary, null, 2) + '\n');
+  writeFileSync(path.join(reportDirectory, 'TEST_RESULTS.xml'), xml);
+  writeFileSync(path.join(reportDirectory, 'TEST_OUTPUT.log'), reportRows.map(r => `=== ${r.name} (${r.file}) ===\n${ansiFree(r.output)}`).join('\n'));
+}
+
 
 // Factual accounting: counts are parsed from each suite's actual output, never
 // from static reservations. A skip is reported only when the suite itself
@@ -104,6 +141,7 @@ function parseSuiteResult(output, expectedCount) {
 }
 
 for (const suite of suites) {
+  const suiteStarted = Date.now();
   process.stdout.write(`${C.cyan}▸ Running ${suite.name}...${C.reset} `);
   try {
     const output = execSync(`node ${suite.file}`, { stdio: 'pipe', env: { ...process.env, AYUSWAR_SUITE_RUN: '1' } });
@@ -113,12 +151,21 @@ for (const suite of suites) {
     process.stdout.write(`${C.green}${C.bold}✓ [${result.executed}/${suite.count} PASSED${skipNote}]${mismatchNote}${C.reset}\n`);
     totalTests += result.executed;
     totalSkipped += result.skipped;
+    reportRows.push({ name: suite.name, file: suite.file, executed: result.executed, skipped: result.skipped,
+      expectedCount: suite.count, countMismatch: result.countMismatch, exitCode: 0,
+      durationSeconds: (Date.now() - suiteStarted) / 1000, output: output.toString() });
   } catch (err) {
     process.stdout.write(`\x1b[91m\x1b[1mFAILED\x1b[0m\n`);
     console.error(err.stdout ? err.stdout.toString() : err.message);
+    reportRows.push({ name: suite.name, file: suite.file, executed: 0, skipped: 0,
+      expectedCount: suite.count, exitCode: typeof err.status === 'number' ? err.status : 1,
+      durationSeconds: (Date.now() - suiteStarted) / 1000,
+      output: (err.stdout?.toString() || '') + (err.stderr?.toString() || '') + String(err.message || '') });
+    writeReports();
     process.exit(1);
   }
 }
+writeReports();
 
 const elapsedSec = ((Date.now() - startTime) / 1000).toFixed(2);
 
