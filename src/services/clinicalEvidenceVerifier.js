@@ -24,6 +24,7 @@ import { SPEAKER, ENTITY_TYPE, VERIFICATION_STATUS } from './clinicalEvidenceTyp
 // Indic negation markers: substring match (existing contract).
 const NEGATION_MARKERS_INDIC = [
   'లేదు', 'కాదు', 'వద్దు', // Telugu: no/not/don't want
+  'లేదండి', 'కాదండి',        // Telugu polite forms (not substrings of the bare markers above)
   'नहीं', 'ना'             // Hindi: no/not
 ];
 // English negation: word-boundary match so "another", "notable" or
@@ -85,8 +86,10 @@ export function verifyCandidate(session, candidate) {
   const hi = Math.min(utterance.text.length, candidate.endOffset + 40);
   const window = (utterance.text.slice(lo, candidate.startOffset) + ' ' + utterance.text.slice(candidate.endOffset, hi)).toLowerCase();
   // Short Hindi marker 'ना' is also a substring of unrelated words (e.g. खाना),
-  // so it must match as a whole token; the other markers keep substring matching
-  // so suffixed forms (e.g. లేదండి) stay negated.
+  // so it must match as a whole token; the other markers keep substring matching.
+  // Substring matching does NOT cover polite suffixed forms such as లేదండి
+  // (the bare marker ends in a different vowel sign), so those are listed
+  // explicitly in NEGATION_MARKERS_INDIC.
   const WHOLE_TOKEN = new Set(['ना']);
   const negated = NEGATION_MARKERS_INDIC.some(m => WHOLE_TOKEN.has(m)
     ? new RegExp('(?<![\\p{L}\\p{N}\\p{M}])' + m + '(?![\\p{L}\\p{N}\\p{M}])', 'u').test(window)

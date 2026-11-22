@@ -489,6 +489,17 @@ await record('question is not a finding; Hindi ना only as whole token', asyn
   assert(v3[1].isNegatedContext === true, 'standalone ना still negates');
 });
 
+await record('Telugu polite negation forms hold the denied symptom from export', async () => {
+  for (const text of ['నాకు జ్వరం లేదండి.', 'నాకు జ్వరం కాదండి.']) {
+    const s = mkSession();
+    addUtts(s, [{ speaker: SPEAKER.PATIENT, language: 'Telugu', text, sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+    const v = verifyEvidence(s, extractWithFallback(s).candidates).verified;
+    assert(v.length === 1 && v[0].isNegatedContext === true, 'polite negation flagged: ' + text);
+    const approved = v.map(x => applyReviewAction(x, { type: 'APPROVE' }, { identity: 'test', isDemo: true }, 'stress'));
+    assert(selectApprovedForExport(approved).length === 0, 'denied symptom not exported: ' + text);
+  }
+});
+
 const failed = results.filter(r => !r.ok);
 for (const r of results) console.log(`${r.ok ? 'PASS' : 'FAIL'} ${r.name}${r.ok ? '' : ' :: ' + (r.err?.message || r.err)}`);
 console.log(`\nclinical_evidence_engine: ${results.length - failed.length}/${results.length} passed`);
