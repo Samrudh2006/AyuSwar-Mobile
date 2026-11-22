@@ -1,0 +1,5 @@
+date,model,split,n,wer_pct,cer_pct,wer_female_pct,cer_female_pct,wer_male_pct,cer_male_pct,source_json
+2026-11-22,local-onnx-conformer-ctc-int8-hi,dev,239,11.87,4.84,14.08,6.12,9.89,3.71,benchmarks/results/2026-11-22-fleurs-hi_in-dev.json
+2026-11-22,local-onnx-conformer-ctc-int8-hi,test,418,11.19,4.68,12.07,5.25,10.26,4.08,benchmarks/results/2026-11-22-fleurs-hi_in-test.json
+2026-11-22,local-onnx-conformer-ctc-int8-te,dev,311,22.11,6.7,20.49,5.36,22.62,7.11,benchmarks/results/2026-11-22-fleurs-te_in-dev.json
+2026-11-22,local-onnx-conformer-ctc-int8-te,test,472,23.46,7.93,21.45,6.51,24.16,8.43,benchmarks/results/2026-11-22-fleurs-te_in-test.json

@@ -1,0 +1,87 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "timestamp": "2026-11-22T09:59:38.546Z",
+  "meta": {
+    "tag": [
+      {
+        "system": "urn:ayuswar:prototype",
+        "code": "synthetic-research-draft",
+        "display": "Synthetic practice only; not ABDM validated"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "QuestionnaireResponse",
+        "status": "completed",
+        "item": [
+          {
+            "linkId": "source-mode",
+            "text": "Input source",
+            "answer": [
+              {
+                "valueString": "Explicit scripted sample transcript"
+              }
+            ]
+          },
+          {
+            "linkId": "source-transcript",
+            "text": "Source transcript",
+            "answer": [
+              {
+                "valueString": "DOCTOR: Synthetic structural fixture only.\nPATIENT: No real patient or consultation."
+              }
+            ]
+          },
+          {
+            "linkId": "subjective",
+            "text": "Subjective",
+            "answer": [
+              {
+                "valueString": "Explicit synthetic transcript copy for structural evaluation."
+              }
+            ]
+          },
+          {
+            "linkId": "objective",
+            "text": "Objective",
+            "answer": [
+              {
+                "valueString": "Not documented"
+              }
+            ]
+          },
+          {
+            "linkId": "assessment",
+            "text": "Assessment",
+            "answer": [
+              {
+                "valueString": "Clinician review required"
+              }
+            ]
+          },
+          {
+            "linkId": "plan",
+            "text": "Plan",
+            "answer": [
+              {
+                "valueString": "Not documented"
+              }
+            ]
+          },
+          {
+            "linkId": "bestMatterVernacular",
+            "text": "Reviewed voice summary",
+            "answer": [
+              {
+                "valueString": "Not documented"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

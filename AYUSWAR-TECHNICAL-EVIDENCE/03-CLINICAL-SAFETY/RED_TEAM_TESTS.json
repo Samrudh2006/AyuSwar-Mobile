@@ -1,0 +1,746 @@
+{
+ "scope": "Executed deterministic safety checks from the recorded suite run. Text-level guards; NOT the proposed 30-50 audio-level red-team lab with per-scenario clinical narratives. Scenario names are verbatim from the run log.",
+ "generatedFrom": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT.log",
+ "runCommit": "1447957",
+ "scenarioCount": 82,
+ "scenarios": [
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "telugu exact source matching",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "english exact source matching",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "code-mixed offsets",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "missing evidence rejected",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "unsupported diagnosis never supported",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "patient medication mention is not instruction",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "patient negation flagged",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "contradictory statements conflict",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "same-batch conflicting claims caught by verifyEvidence",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "export gate excludes negated findings",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "invalid offsets rejected",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "tampered quotation rejected",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "timestamps honest",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "model unavailable states",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "fallback labelled deterministically",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "transcript injection does not bypass verification",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "clinician approve and reject",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "correction history preserves original extraction",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "synthetic labelling",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "export gate blocks unapproved",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "persistence opt-in and consent enforcement",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 40: Clinical Evidence Engine",
+   "testFile": "test/clinical_evidence_engine.test.js",
+   "scenario": "registry deterministic ids",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "jsx components bundle with repo rolldown",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "card renders status, quote, fallback + synthetic labels",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "card hides actions after review",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "unsupported card shows failure status and no actions",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "timeline highlights span and labels scripted demo, no fake timestamps",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 41: Clinical Evidence Review UI",
+   "testFile": "test/clinical_evidence_ui.test.js",
+   "scenario": "timeline renders multi-speaker labels",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "no direct setMedications(parsed.medications) acceptance remains",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "model-supplied medications are discarded with a logged reason",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "scripted vitals fallback is gated on an all-scripted session",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "live/mixed sessions purge scripted sample medications at draft time",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "live-session objective fallback states no vitals were captured",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "objective section is deterministic via soapDraftSafeguards (model objective never used)",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "JSON parse-error path never embeds raw model output in the assessment",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 42: SOAP Draft Deterministic Safeguards",
+   "testFile": "test/phase42_soap_draft_safeguards.test.js",
+   "scenario": "assessment and plan are fixed safe strings (model text discarded unconditionally)",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "transcript vital pair appears in objective, labelled not measured",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "keyword co-occurrence with unrelated % number yields no SpO2",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "no invented SpO2 from unrelated percent",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "empty transcript yields exactly the fallback",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "duration numbers never become vitals",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "assessment fixed",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "plan fixed",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "assessment contains no drug directive",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "plan contains no drug directive",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 43: Deterministic SOAP Sections",
+   "testFile": "test/phase43_soap_deterministic_sections.test.js",
+   "scenario": "SpO2 and HR pairs extracted",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "negated BP excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "denied BP excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Telugu trailing negation excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Hindi trailing negation excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "question excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "hypothetical excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Hindi hypothetical excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Telugu post-value conditional excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Telugu post-value \u0c09\u0c02\u0c1f\u0c47 conditional excluded",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "historical mention retained with historical label",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "historical label carried into objective",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "historical mention not implied current",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "time-ago historical labelled",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "pulse oximeter number is not HR",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "plain pulse still HR",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "negation in another clause does not over-exclude",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "question mark in another sentence does not exclude",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "current SpO2 and HR kept",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Telugu current mention without conditional still kept",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "subjective-not-verified label exported",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "console renders subjective-not-verified boundary",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "mobile review renders subjective-not-verified boundary",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "model+recording label says model-written and recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "model+no-recording label says model-written and source transcript",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "manual+recording label drops model-written claim",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "manual+no-recording label is neutral and transcript-scoped",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "typed-only turns do not count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "unflagged turns do not count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "scripted sample turns do not count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "WebSpeech mic turns count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "Groq Whisper mic turns count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "mixed typed+mic turns count as a recording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "empty/invalid input fails closed",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "mobile wires aiLive as modelWritten and mic-recording as hasRecording",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "console wires subjectiveFromModel and non-scripted turns as provenance",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  },
+  {
+   "suite": "Phase 44: Spoken-Vital Context Safety",
+   "testFile": "test/phase44_soap_objective_contexts.test.js",
+   "scenario": "console uses the audio-provenance predicate, not !isScripted",
+   "expectedBehaviour": "Guard holds as named",
+   "actualBehaviour": "passed",
+   "passFail": "pass",
+   "evidence": "05-ENGINEERING-QUALITY/TEST_OUTPUT.log (recorded run at commit 1447957)"
+  }
+ ]
+}
