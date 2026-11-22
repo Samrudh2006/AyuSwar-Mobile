@@ -75,12 +75,18 @@ as done in the 2026-11-22 provenance record.
 
 ## 6. Upgrade compatibility for testers
 
-- Debug builds are signed with the Android debug key. A new debug APK
-  upgrades in place over a previous debug APK signed with the SAME debug
-  key and a higher versionCode (verified 36 -> 37 for v0.3.33 ->
-  v0.3.34-debug). Do NOT advise uninstalling first.
-- An APK signed with a different key will NOT upgrade in place; Android
-  rejects it. That is expected key-mismatch behavior, not app corruption.
+- Debug builds are signed with the Android debug key. Upgrade
+  compatibility is checked build-side only: identical package name,
+  identical signer certificate SHA-256 and a strictly higher versionCode
+  are the conditions Android requires for an in-place update, and those
+  comparisons were verified for v0.3.33 -> v0.3.34-debug (codes 36 -> 37)
+  and for the staged v0.3.35-debug candidate (code 38). **No physical
+  device install or upgrade was performed**: on-device upgrade behavior
+  is untested, and the build installed on any given device may differ.
+  When the build-side conditions hold, do NOT advise uninstalling first.
+- Per platform behavior, an APK signed with a different key will NOT
+  upgrade in place; Android rejects it. That is expected key-mismatch
+  behavior, not app corruption.
 - Install requires allowing installs from unknown sources on the device
   (sideloaded debug artifact).
 
