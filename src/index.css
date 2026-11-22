@@ -258,7 +258,7 @@ select {
 
 /* Form Controls — Strict Light Mode Enforcement against Browser Auto-Darkening */
 input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),
-select:not(.sanjivani-dark-select),
+select:not(.sanjivani-dark-select):not(.m-topbar-dark-select),
 textarea:not(.sanjivani-dark-textarea) {
   background-color: #FFFFFF !important;
   color: #081C24 !important;

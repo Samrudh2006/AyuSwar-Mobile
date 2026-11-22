@@ -56,7 +56,7 @@ export default function MHome() {
       </button>
 
       <section style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        <h2 className="m-section-title">{t('services')} <small>{t('tapOpen')}</small></h2>
+        <h2 className="m-section-title m-services-title">{t('services')} <small>{t('tapOpen')}</small></h2>
         <div className="m-quickgrid">
           <button className="m-quick saffron" onClick={() => go('/audio-rx')}>
             <span className="m-quick-ic"><IconSpeaker /></span>

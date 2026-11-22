@@ -103,7 +103,7 @@
    join into one coherent surface when adjacent. */
 .m-page > .m-section-title,
 .m-page > .m-display,
-.m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-section-title {
+.m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-section-title:not(.m-services-title) {
   display: inline-block;
   background: rgba(251, 240, 223, 0.88);
   -webkit-backdrop-filter: blur(8px) saturate(1.15);
@@ -123,6 +123,23 @@
   padding: 3px 12px 5px;
   margin-left: -12px;
 }
+.m-page .m-services-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #155C3E, #0C3B27);
+  color: #FFF6E6;
+  border-radius: 14px;
+  padding: 8px 14px;
+  margin-left: 0;
+  box-shadow: var(--m-shadow-1);
+  text-shadow: none;
+}
+.m-page .m-services-title small { color: #E8C87E; font-weight: 700; }
+
 .m-page .m-section-title:has(+ .m-sub),
 .m-page .m-display:has(+ .m-sub) {
   border-bottom-left-radius: 0;
@@ -170,14 +187,16 @@
 /* Home brand chip: emblem + name composed as one unit (no floating logo) */
 .m-topbar-brand {
   display: flex; align-items: center; gap: 10px;
-  background: rgba(255, 253, 246, 0.92);
-  border: 1px solid var(--m-border-soft);
+  background: linear-gradient(135deg, #134E35, #0C3B27);
+  border: 1px solid rgba(255, 246, 230, 0.38);
   border-radius: 16px;
   padding: 6px 14px 6px 6px;
   box-shadow: var(--m-shadow-1);
   backdrop-filter: blur(6px);
 }
-.m-topbar-brand .m-topbar-logo { width: 40px; height: 40px; border-radius: 11px; box-shadow: none; }
+.m-topbar-brand .m-topbar-logo { width: 40px; height: 40px; border-radius: 11px; box-shadow: none; background: #FFFDF6; padding: 2px; box-sizing: border-box; }
+.m-topbar-brand .m-topbar-title b { color: #FFF6E6; }
+.m-topbar-brand .m-topbar-title span { color: #C2D9C9; }
 .m-topbar-brand .m-topbar-title { background: transparent; border-radius: 0; padding: 0; backdrop-filter: none; box-shadow: none; }
 .m-topbar-brand .m-topbar-title b,
 .m-topbar-brand .m-topbar-title span { text-shadow: none; }
@@ -1047,19 +1066,21 @@
   flex: 0 0 auto;
   min-width: 0;
   max-width: 108px;
-  border: 1.5px solid var(--m-border);
+  border: 1px solid rgba(255, 246, 230, 0.38);
   border-radius: 12px;
   padding: 5px 7px;
-  color: var(--m-green-deep);
-  background: #FFFDF6;
-  box-shadow: 0 1px 3px rgba(40, 58, 45, 0.07);
+  color: #FFF6E6;
+  background: linear-gradient(135deg, #134E35, #0C3B27);
+  box-shadow: 0 1px 3px rgba(23, 53, 45, 0.22);
 }
-.m-topbar-lang select {
+.m-topbar-lang svg { color: #E8C87E; }
+.m-app .m-topbar-lang select {
   min-width: 0;
   max-width: 72px;
   border: 0;
   background: transparent;
-  color: var(--m-green-deep);
+  background-color: transparent;
+  color: #FFF6E6;
   font: inherit;
   font-size: 11px;
   font-weight: 800;

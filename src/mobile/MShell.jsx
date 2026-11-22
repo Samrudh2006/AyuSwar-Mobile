@@ -99,7 +99,7 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
         <label className="m-topbar-lang">
           <span className="sr-only">{t('language')}</span>
           <IconGlobe size={16} aria-hidden="true" />
-          <select aria-label={`${t('language')}: ${currentLanguage?.name || currentLanguage?.label || selectedLanguage}`} title={`${t('language')}: ${currentLanguage?.name || currentLanguage?.label || selectedLanguage}`} value={selectedLanguage} onChange={changeLanguage}>
+          <select className="m-topbar-dark-select" aria-label={`${t('language')}: ${currentLanguage?.name || currentLanguage?.label || selectedLanguage}`} title={`${t('language')}: ${currentLanguage?.name || currentLanguage?.label || selectedLanguage}`} value={selectedLanguage} onChange={changeLanguage}>
             {supportedLanguages.map(lang => <option key={lang.code} value={lang.code}>{lang.vernacular || lang.label}</option>)}
           </select>
         </label>
