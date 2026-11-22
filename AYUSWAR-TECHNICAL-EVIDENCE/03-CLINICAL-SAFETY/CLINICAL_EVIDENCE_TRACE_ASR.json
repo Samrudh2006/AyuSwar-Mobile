@@ -1,0 +1,322 @@
+{
+  "scope": "Real local-ASR path over synthetic TTS clips: utterance text is genuine output of the sha256-pinned local ONNX Telugu ASR on in-repo synthetic gnani TTS audio. Extraction is the explicitly labelled deterministic fallback (NOT a live model run - no authorized model route exists from this environment). Reviewer is a DEMO reviewer. No patient data, no real consultations, no audio timestamps.",
+  "generatedAt": "2026-11-22T11:44:13.163Z",
+  "revision": "d218a72b943fad90b46784f48e2d4cfc857b19a8",
+  "trackedWorkingTreeDirty": false,
+  "transcriptSource": "LOCAL_ONNX_ASR",
+  "extractionMethod": "DETERMINISTIC_FALLBACK",
+  "extractionStatus": "FALLBACK_USED",
+  "fallbackReason": "no model caller supplied",
+  "modelRoute": "UNAVAILABLE - the app routes model extraction through the server-side /api/groq/chat proxy on the frozen web deployment (server-held key, client key storage disabled); no direct key or other authorized free route exists from this environment. This trace therefore does not exercise MODEL_LIVE extraction and does not claim to.",
+  "audioTimestamps": "not available - CTC frame alignment is an estimate and is not emitted as clinical timing; timestamp fields absent, never invented",
+  "asrProvenance": {
+    "modelDir": "/tmp/asr-te",
+    "modelFile": "model.matmul-int8.onnx",
+    "modelSha256": "a67b8aa4840fd78934f6246e626c183f9a07773fa910e3012349a6081fbeb1aa",
+    "preprocessorSha256": "1566e840c72d032dfb31166b924d96fe2a6c8a6c29393da8e83c19d99de0eb76",
+    "vocabSha256": "dc0b7bbb9eca8d3c8aebf1eb86e3144c90d692b4008cf5a32d46437b942b23ac",
+    "manifestPin": "src/services/localVoice/localAsrManifest.js (AI4Bharat Telugu IndicConformer, OpenVoiceOS conversion, repo int8 derivative)",
+    "runtime": "onnxruntime-node 1.31.1",
+    "decode": "greedy argmax CTC collapse, blank = last vocab id; same math as benchmarks/fleurs_local_asr.mjs"
+  },
+  "inputs": [
+    {
+      "repoPath": "public/audio/gnani_telugu_rx_respiratory.wav",
+      "role": "clinical",
+      "speaker": "DOCTOR",
+      "language": "Telugu",
+      "sourceSha256": "6554f4c8ed179d8e9b079ef351729b63f9fb60df6f477e36187bbbbc240f04ff",
+      "failure": null,
+      "decodeCommand": "ffmpeg -i public/audio/gnani_telugu_rx_respiratory.wav -ar 16000 -ac 1 -c:a pcm_s16le <derived 16 kHz mono wav>",
+      "derived16kSha256": "00c03e38ea116da22865520c2c5164b220fe7063a076dc605deef045d4477fc4",
+      "durationSecAt16k": 17.92,
+      "transcriptRaw": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి"
+    },
+    {
+      "repoPath": "public/audio/gnani_telugu_rx_narayana_rao.wav",
+      "role": "clinical",
+      "speaker": "DOCTOR",
+      "language": "Telugu",
+      "sourceSha256": "7bc36b22837ea5be00319658af522a025c54f5afd9cae9b1f3d11bcc8d9d5889",
+      "failure": null,
+      "decodeCommand": "ffmpeg -i public/audio/gnani_telugu_rx_narayana_rao.wav -ar 16000 -ac 1 -c:a pcm_s16le <derived 16 kHz mono wav>",
+      "derived16kSha256": "8c6f4eb97d77c5c7923ed544f7f6bca5022016c9ce91411d5f01252869a4f10f",
+      "durationSecAt16k": 12.48,
+      "transcriptRaw": "నారాయణరావుగారు వినండి ఈ ఆకుపచ్చ రంగు మాత్ర ఉదయం టిఫిన్ తర్వాత ఒకటి వేసుకోవాలి ఈ నీలం రంగు మాత్ర రాత్రి భోజనం తర్వాత ఒకటి వేసుకోవాలి కూరల్లో ఉప్పు బాగా తగ్గించండి"
+    },
+    {
+      "repoPath": "public/audio/gnani_lang_te.wav",
+      "role": "prescription-instruction clip containing no fallback-lexicon terms; illustrates documented fail-closed silence (zero candidates expected from the fallback extractor)",
+      "speaker": "DOCTOR",
+      "language": "Telugu",
+      "sourceSha256": "014b8013554268a06d79ef4d2540aee05e3c5388bd148bd01f89485d4d458f3a",
+      "failure": null,
+      "decodeCommand": "ffmpeg -i public/audio/gnani_lang_te.wav -ar 16000 -ac 1 -c:a pcm_s16le <derived 16 kHz mono wav>",
+      "derived16kSha256": "d20b602b04de267fd2dfc699fcb3f7d37db746b2623d7017ae51d0df326d0acc",
+      "durationSecAt16k": 3.52,
+      "transcriptRaw": "ఈ ఆకుపచ్చ మాత్ర ఉదయం టిఫిన్ తర్వాత ఒకటి వేసుకోవాలి"
+    }
+  ],
+  "session": {
+    "sessionId": "sess_asr_synthetic_tts_1",
+    "utterances": [
+      {
+        "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+        "sessionId": "sess_asr_synthetic_tts_1",
+        "sequence": 0,
+        "speaker": "DOCTOR",
+        "language": "Telugu",
+        "text": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_asr_synthetic_tts_1_1",
+        "sessionId": "sess_asr_synthetic_tts_1",
+        "sequence": 1,
+        "speaker": "DOCTOR",
+        "language": "Telugu",
+        "text": "నారాయణరావుగారు వినండి ఈ ఆకుపచ్చ రంగు మాత్ర ఉదయం టిఫిన్ తర్వాత ఒకటి వేసుకోవాలి ఈ నీలం రంగు మాత్ర రాత్రి భోజనం తర్వాత ఒకటి వేసుకోవాలి కూరల్లో ఉప్పు బాగా తగ్గించండి",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_asr_synthetic_tts_1_2",
+        "sessionId": "sess_asr_synthetic_tts_1",
+        "sequence": 2,
+        "speaker": "DOCTOR",
+        "language": "Telugu",
+        "text": "ఈ ఆకుపచ్చ మాత్ర ఉదయం టిఫిన్ తర్వాత ఒకటి వేసుకోవాలి",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      }
+    ]
+  },
+  "rejected": [],
+  "verificationCounts": {
+    "SUPPORTED": 3
+  },
+  "evidence": [
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_1",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "జలుబు",
+      "sourceQuote": "జలుబు",
+      "startOffset": 14,
+      "endOffset": 19,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "జలుబు",
+      "originalExtraction": {
+        "sourceQuote": "జలుబు",
+        "normalizedConcept": "జలుబు",
+        "startOffset": 14,
+        "endOffset": 19
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "జలుబు"
+        }
+      ],
+      "isRealSignOff": false
+    },
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_2",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 20,
+      "endOffset": 25,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false
+    },
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_3",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 20,
+      "endOffset": 25,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false
+    }
+  ],
+  "approvedForExport": [
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_1",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "జలుబు",
+      "sourceQuote": "జలుబు",
+      "startOffset": 14,
+      "endOffset": 19,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "జలుబు",
+      "originalExtraction": {
+        "sourceQuote": "జలుబు",
+        "normalizedConcept": "జలుబు",
+        "startOffset": 14,
+        "endOffset": 19
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "జలుబు"
+        }
+      ],
+      "isRealSignOff": false,
+      "sourceContext": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "exportNote": "source-supported; not clinically confirmed"
+    },
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_2",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 20,
+      "endOffset": 25,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false,
+      "sourceContext": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "exportNote": "source-supported; not clinically confirmed"
+    },
+    {
+      "evidenceId": "ev_sess_asr_synthetic_tts_1_3",
+      "utteranceId": "utt_sess_asr_synthetic_tts_1_0",
+      "entityType": "SYMPTOM",
+      "originalText": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 20,
+      "endOffset": 25,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "temporalStatus": "UNKNOWN",
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 20,
+        "endOffset": 25
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795347853159,
+          "reason": "export demo: mark supported ASR-trace candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false,
+      "sourceContext": "నమస్కారం మీకు జలుబు దగ్గు గొంతు నొప్పి మరియు జ్వరంకోసం మందులు సూచించబడ్డాయి పసుపు టాబ్లెట్ ఉదయం మరియు రాత్రి భోజనం తర్వాత వేసుకోండి నీలం ట్యాబ్లెట్ రాత్రి పడుకునే ముందు వేసుకోండి ఆకుపచ్చ దగ్గు సిరప్ రెండు పూటలా తీసుకోండి గోరువెచ్చని నీరు త్రాగండి మరియు త్వరగా కోల్కోండి",
+      "exportNote": "source-supported; not clinically confirmed"
+    }
+  ],
+  "relatedArtifacts": {
+    "fixtureTrace": "CLINICAL_EVIDENCE_TRACE.json (3 records, deterministic fallback over 6 scripted fixture utterances; separate record, not overwritten by this file)"
+  }
+}
