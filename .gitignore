@@ -73,3 +73,5 @@ _*.mjs
 eval-data/
 test/reports/
 test/.tmp-evidence-ui/
+
+test/.tmp-pixel/
