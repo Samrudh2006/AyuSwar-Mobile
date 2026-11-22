@@ -1,0 +1,15 @@
+PASS home patient portal row
+PASS demo patient auth
+PASS mobile portal export reachable
+PASS missing declaration refuses save
+PASS declared entry saved
+PASS declared entry saved
+PASS declared entry saved
+PASS all rows unchecked by default
+PASS cross-subject tick refused for same labels
+PASS one actual file export captured
+PASS person-neutral filename
+PASS one anonymous Patient and three Observations
+PASS same labels and self keep three stable local identities
+PASS no local IDs or labels in file
+Mobile-width flow only, no Android device or native runtime claim.

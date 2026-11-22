@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { buildManualVital, formatManualVital } from '../utils/vitalsEntry';
+import { loadVitalSubjects, subjectStorageKey, declareVitalSubject } from '../utils/vitalSubjects';
 import { classifyVitalsForExport, buildVitalsBundle } from '../utils/vitalsExport';
 import { exportTextFile } from '../services/exportFileService';
 import { useForm } from 'react-hook-form';
@@ -101,7 +102,13 @@ import { triggerHaptic } from '../utils/haptics';
  * 7. Health Goals (10k steps tracker, hydration glasses, medication adherence streak, sleep tracker)
  * 8. Settings (Indic dialect selector, demo family-view controls, local reminder preferences)
  */
-export default function PatientPortal({ 
+// Remount all profile-local state when the profile changes. In particular,
+// never write a previous profile's vitals/subjects into another profile key.
+export default function PatientPortal(props) {
+  const scope = props.patientProfile?.abhaId || DEMO_PATIENTS[0].abhaId;
+  return <PatientPortalForProfile key={scope} {...props} />;
+}
+function PatientPortalForProfile({
   patientProfile, 
   onOpenDoctorAuthModal, 
   onLogoutPatient, 
@@ -449,6 +456,14 @@ export default function PatientPortal({
     } catch {}
   }, [vitalsHistory, abhaId]);
 
+  const [vitalSubjects, setVitalSubjects] = useState(() => loadVitalSubjects(localStorage, abhaId));
+  const [vitalSubjectChoice, setVitalSubjectChoice] = useState('');
+  const [vitalSubjectLabel, setVitalSubjectLabel] = useState('');
+  const [vitalSubjectError, setVitalSubjectError] = useState('');
+  useEffect(() => {
+    try { localStorage.setItem(subjectStorageKey(abhaId), JSON.stringify(vitalSubjects)); } catch {}
+  }, [vitalSubjects, abhaId]);
+
   // Modal State for Manual Vitals Entry
   const [isAddVitalsModalOpen, setIsAddVitalsModalOpen] = useState(false);
   const EMPTY_VITALS_FORM = {
@@ -495,12 +510,17 @@ export default function PatientPortal({
       );
       return;
     }
+    const declaration = declareVitalSubject(vitalSubjects, vitalSubjectChoice, vitalSubjectLabel);
+    if (!declaration) { setVitalSubjectError('Choose whose readings these are before saving.'); return; }
+    setVitalSubjectError('');
+    setVitalSubjects(declaration.records);
     vitalsSavingRef.current = true;
-    const newVital = formatManualVital(result.values, 'vit_manual_' + Date.now());
+    const newVital = { ...formatManualVital(result.values, 'vit_manual_' + Date.now()), subjectId: declaration.subjectId };
     setVitalsHistory(prev => [newVital, ...prev]);
     setIsAddVitalsModalOpen(false);
     vitalsSavingRef.current = false;
     resetVitalsForm(EMPTY_VITALS_FORM);
+    setVitalSubjectChoice(''); setVitalSubjectLabel(''); setVitalSubjectError('');
     showVitalsToast('New vitals recorded manually and saved to longitudinal history!');
   };
 
@@ -508,6 +528,7 @@ export default function PatientPortal({
     // Explicit confirm before any entered draft is discarded.
     if (!window.confirm('Clear every value you entered in this form?')) return;
     resetVitalsForm(EMPTY_VITALS_FORM);
+    setVitalSubjectChoice(''); setVitalSubjectLabel(''); setVitalSubjectError('');
   };
 
   const handleSyncVitalsFromReports = () => {
@@ -564,15 +585,21 @@ export default function PatientPortal({
   // Export of the user's own typed readings (see utils/vitalsExport.js).
   const [vitalsExportOpen, setVitalsExportOpen] = useState(false);
   const [vitalsExportPicked, setVitalsExportPicked] = useState([]); // nothing ticked by default
-  const vitalsExportPlan = classifyVitalsForExport(vitalsHistory);
-  const toggleVitalsExportPick = (id) =>
-    setVitalsExportPicked(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]));
+  const vitalsExportPlan = classifyVitalsForExport(vitalsHistory, vitalSubjects);
+  const toggleVitalsExportPick = (id) => {
+    const target = vitalsExportPlan.eligible.find(e => e.id === id);
+    const picked = vitalsExportPlan.eligible.filter(e => vitalsExportPicked.includes(e.id));
+    if (!vitalsExportPicked.includes(id) && picked.some(e => e.subjectId !== target?.subjectId)) {
+      showVitalsToast('Export one person at a time. Untick the current selection first.'); return;
+    }
+    setVitalsExportPicked(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
   const handleExportVitals = async () => {
-    const bundle = buildVitalsBundle(vitalsHistory, vitalsExportPicked);
+    const bundle = buildVitalsBundle(vitalsHistory, vitalsExportPicked, vitalSubjects);
     if (!bundle) { showVitalsToast('Tick at least one reading to export.'); return; }
     try {
       const result = await exportTextFile({
-        filename: `ayuswar-my-readings-${new Date().toISOString().slice(0, 10)}.json`,
+        filename: `ayuswar-readings-${new Date().toISOString().slice(0, 10)}.json`,
         text: JSON.stringify(bundle, null, 2),
         shareTitle: 'AyuSwar self-entered readings (FHIR R4 JSON)'
       });
@@ -2381,18 +2408,21 @@ export default function PatientPortal({
                     aria-expanded={vitalsExportOpen}
                     style={{ background: '#FAF8F5', color: '#0F4C5C', border: '1.5px solid rgba(0,0,0,0.16)', borderRadius: '10px', padding: '8px 14px', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}
                   >
-                    Export my readings
+                    Export readings
                   </button>
                   {vitalsExportOpen && (
                     <div style={{ marginTop: '10px', padding: '14px', background: '#FFFFFF', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '12px', fontSize: '12px', color: '#334155' }}>
                       <p style={{ margin: '0 0 8px 0' }}>
-                        Only readings you typed into this app (with a date you chose) can be exported, as a file you then share yourself. The file has no name or ID, only the numbers, the date and a note that you typed them in. It is not verified by any clinician and not an ABDM record. Sample and older entries, SpO2 and blood glucose are not exported yet.
+                        Export only readings entered with a chosen date and a declared person. One person per file. The file omits names, local person labels, relationships and identifiers. Verification is not recorded; this is not an ABDM record. Sample and older entries, SpO2 and blood glucose are not exported.
+                      </p>
+                      <p role="note" style={{ padding: '10px', background: '#FFF7ED', border: '1px solid #C2410C', borderRadius: '8px', fontWeight: 700 }}>
+                        The recipient cannot tell whose readings these are from this file. Tell them separately, and keep different people's files separate. A file handed over by someone does not establish whose readings it contains.
                       </p>
                       {vitalsExportPlan.eligible.length === 0 && <p style={{ margin: 0, fontWeight: 700 }}>No exportable readings yet. Use Add Vitals Manually first.</p>}
                       {vitalsExportPlan.eligible.map(e => (
                         <label key={e.id} style={{ display: 'block', margin: '6px 0' }}>
                           <input type="checkbox" checked={vitalsExportPicked.includes(e.id)} onChange={() => toggleVitalsExportPick(e.id)} />{' '}
-                          <strong>{e.dateIso}</strong>: {e.readings.map(r => r.label).join(', ')}
+                          <strong>{vitalSubjects.find(s => s.id === e.subjectId)?.label} (local person {vitalSubjects.findIndex(s => s.id === e.subjectId) + 1}) · {e.dateIso}</strong>: {e.readings.map(r => r.label).join(', ')}
                           {e.notExported.map(n => <span key={n} style={{ display: 'block', marginLeft: '22px', color: '#64748B' }}>{n}</span>)}
                         </label>
                       ))}
@@ -2636,6 +2666,22 @@ export default function PatientPortal({
                           </ul>
                         </div>
                       )}
+                      <fieldset style={{ border: '1px solid #CBD5E1', borderRadius: '10px', padding: '12px' }}>
+                        <legend>Whose readings are you entering?</legend>
+                        <p style={{ fontSize: '12px' }}>Declare the person for this entry. This cannot be changed after saving. For a mistake, delete the entry and enter it again. Labels stay on this device and are not exported.</p>
+                        <label>Person
+                          <select aria-label="Whose readings" value={vitalSubjectChoice} onChange={e => { setVitalSubjectChoice(e.target.value); setVitalSubjectError(''); }} style={{ display: 'block', width: '100%', padding: '10px' }}>
+                            <option value="">Choose a person</option>
+                            <option value="__self__">My own readings</option>
+                            {vitalSubjects.filter(s => s.kind === 'cared-for').map(s => <option key={s.id} value={s.id}>{s.label} (local person {vitalSubjects.indexOf(s) + 1})</option>)}
+                            <option value="__new__">Add another person I care for</option>
+                          </select>
+                        </label>
+                        {vitalSubjectChoice === '__new__' && <label>Local label (optional, not exported)
+                          <input aria-label="Local person label" maxLength={60} value={vitalSubjectLabel} onChange={e => setVitalSubjectLabel(e.target.value)} style={{ width: '100%', padding: '10px', boxSizing: 'border-box' }} />
+                        </label>}
+                        {vitalSubjectError && <p role="alert" style={{ color: '#B91C1C' }}>{vitalSubjectError}</p>}
+                      </fieldset>
                       {/* Date & Recording Context */}
                       <div className="patient-vitals-modal-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', width: '100%' }}>
                         <div>

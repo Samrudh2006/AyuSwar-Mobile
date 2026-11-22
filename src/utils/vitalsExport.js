@@ -8,8 +8,8 @@
 //   'manual'. Everything else is excluded with a visible reason.
 // - Date only. The form's time and "source note" are pre-filled defaults, so
 //   they are never exported as captured facts.
-// - No Patient, no performer, no profile claim (HL7 vital-signs profiles
-//   require a subject), no interpretation or status labels from the app.
+// - One anonymous Patient per export, based on a per-entry declaration.
+//   No local subject IDs, labels, performer, or profile claims leave the app.
 // - SpO2 and blood glucose are not exported yet: their coding needs
 //   measurement semantics (SpO2: arterial vs pulse-oximetry coding) or
 //   context (glucose: fasting/random) the app does not capture.
@@ -21,6 +21,7 @@ import { CAPTURE_ORIGIN, CAPTURE_VERSION, parseIsoDate } from './vitalsEntry.js'
 
 export const EXCLUDE = {
   notNewEntry: 'Not typed in this version of the app (demo sample or older entry), so it is not exported.',
+  noSubject: 'Whose reading this is was not recorded, or the local person record is unavailable.',
   noDate: 'No structured measurement date was captured, so none is guessed.',
   noValues: 'No exportable reading (blood pressure, pulse or weight) with a structured value.'
 };
@@ -48,7 +49,7 @@ export function exportableReadings(row) {
   return out;
 }
 
-export function classifyVitalsForExport(history) {
+export function classifyVitalsForExport(history, subjects = []) {
   const eligible = [];
   const excluded = [];
   for (const row of Array.isArray(history) ? history : []) {
@@ -58,6 +59,7 @@ export function classifyVitalsForExport(history) {
       excluded.push({ id, reason: EXCLUDE.notNewEntry });
       continue;
     }
+    if (!row.subjectId || !subjects.some(s => s.id === row.subjectId)) { excluded.push({ id, reason: EXCLUDE.noSubject }); continue; }
     const dateIso = parseIsoDate(row.recordedDateIso);
     if (!dateIso) { excluded.push({ id, reason: EXCLUDE.noDate }); continue; }
     const readings = exportableReadings(row);
@@ -65,7 +67,7 @@ export function classifyVitalsForExport(history) {
     const notExported = [];
     if (row.spo2Value != null || row.spo2) notExported.push(NOT_EXPORTED_METRICS.spo2);
     if (row.bloodSugar) notExported.push(NOT_EXPORTED_METRICS.bloodSugar);
-    eligible.push({ id, dateIso, readings, notExported });
+    eligible.push({ id, subjectId: row.subjectId, dateIso, readings, notExported });
   }
   return { eligible, excluded };
 }
@@ -93,10 +95,13 @@ function observation({ code, display, dateIso, extra, summary }) {
 const qty = (value, unit, code) => ({ value, unit, system: UCUM, code });
 
 // selectedIds: ids the user explicitly ticked. Nothing is exported by default.
-export function buildVitalsBundle(history, selectedIds) {
+export function buildVitalsBundle(history, selectedIds, subjects = []) {
   const wanted = new Set(selectedIds || []);
-  const { eligible } = classifyVitalsForExport(history);
+  const { eligible } = classifyVitalsForExport(history, subjects);
   const rowsById = new Map((history || []).map(r => [r.id, r]));
+  const selected = eligible.filter(e => wanted.has(e.id));
+  if (new Set(selected.map(e => e.subjectId)).size > 1) throw new Error('Select readings for only one person per file.');
+  const patientUrl = `urn:uuid:${globalThis.crypto.randomUUID()}`;
   const entry = [];
   for (const e of eligible) {
     if (!wanted.has(e.id)) continue;
@@ -129,6 +134,8 @@ export function buildVitalsBundle(history, selectedIds) {
     }
   }
   if (entry.length === 0) return null; // nothing selected, nothing exported
+  for (const e of entry) e.resource.subject = { reference: patientUrl };
+  entry.unshift({ fullUrl: patientUrl, resource: { resourceType: 'Patient', text: narrative('The app user declared that these readings are about one person. This file omits their name, local label, relationship and identifiers. It does not record who measured, with what device, or whether anyone verified the readings.') } });
   return {
     resourceType: 'Bundle', type: 'collection', timestamp: new Date().toISOString(),
     entry

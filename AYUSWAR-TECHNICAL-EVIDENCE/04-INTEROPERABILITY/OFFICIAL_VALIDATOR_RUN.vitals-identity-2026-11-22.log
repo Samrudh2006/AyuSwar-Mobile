@@ -1,0 +1,49 @@
+FHIR Validation tool Version 7.0.6 (Git# 86bf796ddc97). Built 2026-11-13T23:28:34.381Z (8 days old)
+  Java:   21.0.13.1 from /home/sandbox/jdk21 on amd64 (64bit). 483MB available
+  Paths:  Current = /tmp/ayuswar-mobile-review/AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY, Package Cache = /home/sandbox/.fhir/packages
+  Params: SELF_ENTERED_VITALS_IDENTITY_SYNTHETIC_FIXTURE_2026-11-22.json -version 4.0.1 -tx n/a
+  Locale: United States/US
+  Jurisdiction: United States of America
+Loading
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:09.536)
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:01.730)
+  Loaded FHIR - 8265 resources (00:00.000)
+  Terminology Cache at /tmp/default-tx-cache/r4
+  Terminology server null - Version n/a: No Terminology Server (00:00.065)
+  Load hl7.terminology#7.5.0 - 4190 resources (00:01.505)
+  Load hl7.terminology.r5#7.5.0 - 4190 resources (00:00.401)
+  Load hl7.fhir.uv.extensions#5.4.0 - 885 resources (00:00.868)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.1.0, hl7.terminology.r4#6.2.0, hl7.fhir.uv.extensions.r4#5.2.0, hl7.terminology#7.5.0, hl7.terminology.r5#7.5.0, hl7.fhir.uv.extensions#5.4.0]
+  Get set... 
+  ...go! (00:01.858)
+Cached new session. Cache size = 1
+Sources to validate: SELF_ENTERED_VITALS_IDENTITY_SYNTHETIC_FIXTURE_2026-11-22.json
+Validating
+  Validate SELF_ENTERED_VITALS_IDENTITY_SYNTHETIC_FIXTURE_2026-11-22.json
+ 00:00.666
+Done. Times: Loading: 00:16.116, validation: 00:00.668. Memory = 460Mb
+
+Success: 0 errors, 10 warnings, 11 notes
+  Information @ Bundle.entry[1].resource/*Observation/null*/ (line 18, col8): Validate Observation against the Blood pressure systolic and diastolic profile (http://hl7.org/fhir/StructureDefinition/bp) which is required by the FHIR specification because the LOINC code 85354-9 was found, validating against Base FHIR Standard
+  Information @ Bundle.entry[1].resource/*Observation/null*/.code (line 36, col10): Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service, validating against Base FHIR Standard
+  Information @ Bundle.entry[1].resource/*Observation/null*/.component[0].code (line 52, col14): Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service, validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Observation/null*/.component[0].value.ofType(Quantity) (line 61, col14): Unable to validate code without using server because: Resolved system http://unitsofmeasure.org (v3.0.1), but the definition doesn't include any codes, so the code has not been validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[1].resource/*Observation/null*/.component[1].code (line 69, col14): Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service, validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Observation/null*/.component[1].value.ofType(Quantity) (line 78, col14): Unable to validate code without using server because: Resolved system http://unitsofmeasure.org (v3.0.1), but the definition doesn't include any codes, so the code has not been validated, validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Observation/null*/ (line 18, col8): Best Practice Recommendation: In general, all observations should have a performer
+  Warning @ Bundle.entry[1].resource/*Observation/null*/.component[0].value.ofType(Quantity) (line 61, col14): Unable to validate code 'mm[Hg]' in system 'http://unitsofmeasure.org' because the validator is running without terminology services, validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Observation/null*/.component[1].value.ofType(Quantity) (line 78, col14): Unable to validate code 'mm[Hg]' in system 'http://unitsofmeasure.org' because the validator is running without terminology services, validating against Base FHIR Standard
+  Information @ Bundle.entry[2].resource/*Observation/null*/ (line 93, col8): Validate Observation against the Heart rate profile (http://hl7.org/fhir/StructureDefinition/heartrate) which is required by the FHIR specification because the LOINC code 8867-4 was found, validating against Base FHIR Standard
+  Information @ Bundle.entry[2].resource/*Observation/null*/.code (line 111, col10): Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service, validating against Base FHIR Standard
+  Warning @ Bundle.entry[2].resource/*Observation/null*/.value.ofType(Quantity) (line 125, col10): Unable to validate code '/min' in system 'http://unitsofmeasure.org' because the validator is running without terminology services, validating against Base FHIR Standard
+  Warning @ Bundle.entry[2].resource/*Observation/null*/ (line 93, col8): Best Practice Recommendation: In general, all observations should have a performer
+  Information @ Bundle.entry[3].resource/*Observation/null*/ (line 138, col8): Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found, validating against Base FHIR Standard
+  Information @ Bundle.entry[3].resource/*Observation/null*/.code (line 156, col10): Could not confirm that the codes provided are from the extensible value set http://hl7.org/fhir/ValueSet/observation-vitalsignresult|4.0.1 because there is no terminology service, validating against Base FHIR Standard
+  Warning @ Bundle.entry[3].resource/*Observation/null*/.value.ofType(Quantity) (line 170, col10): Unable to validate code 'kg' in system 'http://unitsofmeasure.org' because the validator is running without terminology services, validating against Base FHIR Standard
+  Warning @ Bundle.entry[3].resource/*Observation/null*/.value.ofType(Quantity).code (line 174, col23): Unable to validate code without using server because: Resolved system http://unitsofmeasure.org (v3.0.1), but the definition doesn't include any codes, so the code has not been validated, validating against Base FHIR Standard
+  Warning @ Bundle.entry[3].resource/*Observation/null*/ (line 138, col8): Best Practice Recommendation: In general, all observations should have a performer
+  Information @ Bundle.entry[1].resource (line 18, col8): Validate Observation against the Blood pressure systolic and diastolic profile (http://hl7.org/fhir/StructureDefinition/bp) which is required by the FHIR specification because the LOINC code 85354-9 was found, validating against Base FHIR Standard
+  Information @ Bundle.entry[2].resource (line 93, col8): Validate Observation against the Heart rate profile (http://hl7.org/fhir/StructureDefinition/heartrate) which is required by the FHIR specification because the LOINC code 8867-4 was found, validating against Base FHIR Standard
+  Information @ Bundle.entry[3].resource (line 138, col8): Validate Observation against the Body weight profile (http://hl7.org/fhir/StructureDefinition/bodyweight) which is required by the FHIR specification because the LOINC code 29463-7 was found, validating against Base FHIR Standard
+Done. Times: Loading: 00:16.116, validation: 00:00.668. Max Memory = 483Mb
