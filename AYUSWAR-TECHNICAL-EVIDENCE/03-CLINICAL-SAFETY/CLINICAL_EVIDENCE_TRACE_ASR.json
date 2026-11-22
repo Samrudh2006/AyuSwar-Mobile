@@ -1,8 +1,8 @@
 {
   "scope": "Real local-ASR path over synthetic TTS clips: utterance text is genuine output of the sha256-pinned local ONNX Telugu ASR on in-repo synthetic gnani TTS audio. Extraction is the explicitly labelled deterministic fallback (NOT a live model run - no authorized model route exists from this environment). Reviewer is a DEMO reviewer. No patient data, no real consultations, no audio timestamps.",
-  "generatedAt": "2026-11-22T11:44:13.163Z",
-  "revision": "d218a72b943fad90b46784f48e2d4cfc857b19a8",
-  "trackedWorkingTreeDirty": false,
+  "generatedAt": "2026-11-22T11:48:43.310Z",
+  "revision": "b79e257e01a4f1ab9e9df1cc196f499c3b7a79af",
+  "trackedWorkingTreeDirty": true,
   "transcriptSource": "LOCAL_ONNX_ASR",
   "extractionMethod": "DETERMINISTIC_FALLBACK",
   "extractionStatus": "FALLBACK_USED",
@@ -124,7 +124,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "జలుబు"
@@ -159,7 +159,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"
@@ -194,7 +194,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"
@@ -231,7 +231,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "జలుబు"
@@ -268,7 +268,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"
@@ -305,7 +305,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795347853159,
+          "reviewTimestampMs": 1795348123310,
           "reason": "export demo: mark supported ASR-trace candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"
@@ -317,6 +317,6 @@
     }
   ],
   "relatedArtifacts": {
-    "fixtureTrace": "CLINICAL_EVIDENCE_TRACE.json (3 records, deterministic fallback over 6 scripted fixture utterances; separate record, not overwritten by this file)"
+    "fixtureTrace": "CLINICAL_EVIDENCE_TRACE.json (6 evidence records over 6 scripted fixture utterances - SUPPORTED:4, AMBIGUOUS:2, 2 approved-for-export - deterministic fallback, generated at revision 9248d7c; separate record, not overwritten by this file)"
   }
 }

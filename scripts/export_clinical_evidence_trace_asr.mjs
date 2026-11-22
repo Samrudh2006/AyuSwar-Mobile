@@ -163,7 +163,7 @@ const trace = {
   evidence: reviewed,
   approvedForExport,
   relatedArtifacts: {
-    fixtureTrace: 'CLINICAL_EVIDENCE_TRACE.json (3 records, deterministic fallback over 6 scripted fixture utterances; separate record, not overwritten by this file)'
+    fixtureTrace: 'CLINICAL_EVIDENCE_TRACE.json (6 evidence records over 6 scripted fixture utterances - SUPPORTED:4, AMBIGUOUS:2, 2 approved-for-export - deterministic fallback, generated at revision 9248d7c; separate record, not overwritten by this file)'
   }
 };
 mkdirSync(outDir, { recursive: true });
