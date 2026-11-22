@@ -1,0 +1,107 @@
+# Proposal Completion Matrix — 2026-11-22
+
+Status of the Nov 22 "AyuSwar Clinical Intelligence 2.0" proposal against what
+is actually implemented in this repository (`Samrudh2006/AyuSwar-Mobile`,
+branch `feat/clinical-evidence-engine`, commit `338e92a`).
+
+Scope note: the proposal was written against the web project and website
+(`Ayuswar-Ai`). The mobile repository is the active engineering surface; web
+items are marked out-of-scope here and are not silently dropped.
+
+Labels: **DONE** = implemented and tested today; **PARTIAL** = real
+implementation exists but the original deliverable or full scope is not met;
+**DEFERRED** = not implemented, with reason and next usable work.
+
+## 1. Indic Clinical Accuracy Lab
+
+| Proposal item | Status | Evidence / notes |
+|---|---|---|
+| Compare reference transcripts vs ASR output; WER | **DONE** | `benchmarks/RESULTS.md`: Telugu FLEURS test WER 23.46, Hindi FLEURS test WER 11.19 |
+| CER | **DONE** | Same source: te CER 7.93, hi CER 4.68 |
+| Upload/select synthetic audio samples | **DONE** | Benchmark harness runs against labelled FLEURS splits; reproducible commands in `benchmarks/` |
+| Medical-term accuracy measured separately | **DEFERRED** | No medical-entity recall metric exists. Next usable work: a labelled medical-term list per language + recall computation in the benchmark harness |
+| Code-switching (Tenglish) and dialect evaluation | **DEFERRED** | No Tenglish corpus. Next usable work: small consented synthetic Tenglish set, same WER/CER pipeline |
+| Clean vs noisy audio comparison | **DEFERRED** | Single-condition runs only. Next usable work: noise-augmented copies of the same splits, delta reporting |
+| Deliverable INDIC_ASR_EVALUATION_REPORT.pdf | **DEFERRED** | Numbers exist in `benchmarks/RESULTS.md` (Markdown, honest scope); no rendered PDF. Next usable work: render the existing tables |
+
+## 2. Clinical Evidence & Hallucination Firewall
+
+| Proposal item | Status | Evidence / notes |
+|---|---|---|
+| Original transcript evidence per clinical entity | **DONE** | Evidence-verification phases (40-42); candidates verified against source spans, unsupported claims rejected |
+| Extracted entity + doctor verification status | **DONE** | Clinician review/edit flow; deterministic objective/assessment/plan (Phases 43-44) |
+| Unsupported-claim rejection | **DONE** | Model text for objective/assessment/plan is discarded; assessment/plan are fixed safe strings |
+| Subjective draft honesty | **DONE** | Per-section "model-written draft, NOT verified against source evidence" label in desktop console and mobile review (this branch) |
+| Audio timestamp per entity | **PARTIAL** | Transcript-span evidence exists; the ASR pipeline does not emit per-utterance audio timestamps, so none are shown. Next usable work: timestamped ASR segments, then wire spans to times |
+| Normalized medical terminology per entity | **PARTIAL** | Vitals normalized to fixed labels (BP/SpO2/HR/Temp); no terminology-service normalization (e.g. SNOMED/LOINC mapping). Next usable work: map the fixed vital labels to standard codes in the FHIR export |
+| Deliverable CLINICAL_EVIDENCE_TRACE.json | **PARTIAL** | Evidence data exists in the review flow; no export under that exact name. Next usable work: serialize the existing evidence records to that filename |
+
+## 3. FHIR R4 Validation Engine
+
+| Proposal item | Status | Evidence / notes |
+|---|---|---|
+| FHIR Bundle structure validation | **PARTIAL** | Phase 46: live-bundle validation against a vendored JSON Schema (`benchmarks/fhir/fhir.schema.json`, sha256 recorded) plus structural invariants |
+| Patient/Encounter/Condition/Observation/MedicationRequest resource validation | **PARTIAL** | Structural checks cover what the app actually emits; there is no per-resource profile validation for all five named resources |
+| Required-field + referential-integrity checks | **PARTIAL** | Invariant checks exist; full referential-integrity coverage not claimed |
+| Invalid bundle rejection with error explanations | **DONE** | Phase 46 negative fixtures reject invalid bundles with explanations |
+| Official FHIR R4 profiles / ABDM implementation specs | **DEFERRED** | JSON Schema + invariants only; no official-profile or ABDM validation run, and none is claimed. Next usable work: run the emitted bundles through an official validator (e.g. HL7/OHN tooling) and record results |
+| Deliverables FHIR_VALIDATION_REPORT.json, sample-valid/invalid-bundle.json, FHIR_INTEROPERABILITY_TESTS.md | **PARTIAL** | Test fixtures and results exist inside the suite; the four named files do not exist under those names. Next usable work: emit them from the Phase 46 harness |
+
+## 4. Clinical Safety Red-Team Lab
+
+| Proposal item | Status | Evidence / notes |
+|---|---|---|
+| Adversarial scenarios: dosage directives, batch order, semantic collisions, negation/hypothetical/historical speech, appended directives | **DONE** | Phases 42-44, fail-closed behavior tests, deterministic sections |
+| 30-50 synthetic adversarial scenarios with expected/actual/pass-fail/evidence per scenario | **PARTIAL** | Guard classes are tested with multiple cases each; not a 30-50 scenario lab with per-scenario evidence records |
+| Doctor-patient conflict, overlapping speakers, unknown dialect, noise-changed medical word | **DEFERRED** | These scenario classes need audio-level simulation the current text-level harness does not cover |
+| Deliverable CLINICAL_SAFETY_RED_TEAM_REPORT.pdf | **DEFERRED** | No rendered report. Next usable work: scenario ledger from Phases 42-44 exported to a report |
+
+## 5. Real Offline-First PHC Simulation
+
+| Proposal item | Status | Evidence / notes |
+|---|---|---|
+| IndexedDB encounter queue | **DONE** | Offline queue with encrypted payloads; IDB retention verified in a real browser build (seeded IndexedDB rows) |
+| Offline draft creation | **DONE** | Offline extraction path; failure visibility and recovery UI (Phase 47) |
+| Connection recovery detection | **DONE** | Offline sync card, retry and recovery states on the clinical console |
+| Pending/synced/failed states | **DONE** | Explicit states; "no confirmed successful sync on this device" wording (no exactly-once claims) |
+| Retry with exponential backoff | **PARTIAL** | Bounded retries with attempt stamps exist; backoff is not exponential. Next usable work: exponential schedule in the sync worker |
+| Duplicate prevention using idempotency keys | **DEFERRED** | Queue is append-only with no server dedup verified; no idempotency keys. Honestly documented as a limitation. Next usable work: client-generated idempotency key per queued record, surfaced in the sync payload |
+| Sync conflict detection | **N/A — documented** | Inserts are append-only with no server versioning, so no write-write conflict class exists; this is stated in `docs/CLINICAL_EVIDENCE_DATA_MODEL.md` rather than claimed as handled |
+| Reproducible offline-to-online sync test | **DONE** | Phase 47 plus browser-verified IDB scrub/retention proofs |
+
+## Optional features
+
+| Proposal item | Status | Notes |
+|---|---|---|
+| A. Doctor correction learning loop | **DEFERRED** | Corrections are captured in the review flow but not stored as labelled evaluation examples. Requires consent/de-identification controls per the proposal; not started |
+| B. Prescription comprehension testing | **DEFERRED** | Not started. Next usable work: synthetic comprehension scenarios against the Audio-Rx path |
+
+## Technical corrections called out in the proposal
+
+| Item | Status | Notes |
+|---|---|---|
+| Acoustic biomarker stage labelled experimental | **DONE (mobile)** | Acoustic lab is labelled experimental/prototype in the mobile app; web labelling is out of scope here |
+| Separate simulated vs measured vs validated metrics | **DONE** | Sample data tagged; benchmark numbers scoped to their splits; no externally-validated claims |
+| Publish test logs, names, environment, reproducible commands | **DONE** | `test/run_all.js` prints per-phase counts (369 executed, 3 conditional skips at `338e92a`); `benchmarks/RESULTS.md` carries commands and environment |
+| Demonstrate actual offline operation and recovery | **DONE** | Phase 47 + browser-verified IDB proofs |
+| DPDP data flows / consent / retention / deletion documented | **DONE (mobile)** | `docs/CLINICAL_EVIDENCE_DATA_MODEL.md` and `docs/CLINICAL_EVIDENCE_SECURITY.md`: storage classes, encryption, retention, scrub behavior, delivery semantics |
+| Repo visibility check (web repo appears private) | **OUT OF SCOPE (mobile task)** | Flagged for the owner; no change made from this repository |
+| FHIR interoperability validated against applicable profiles | **DEFERRED** | See section 3 |
+
+## AYUSWAR-TECHNICAL-EVIDENCE folder
+
+**PARTIAL.** The named folder does not exist. Equivalent coverage in `docs/`:
+`CLINICAL_EVIDENCE_ENGINE.md` (architecture), `CLINICAL_EVIDENCE_DATA_MODEL.md`
+(data flow/storage), `CLINICAL_EVIDENCE_SECURITY.md` (security audit),
+`CLINICAL_EVIDENCE_EVALUATION.md` (evaluation summary), `benchmarks/RESULTS.md`
+(ASR benchmarks), `docs/APK-PROVENANCE-2026-11-22.md` (build provenance).
+Next usable work: either rename/restructure into the proposed folder layout or
+add an index file mapping the existing documents to the proposed sections.
+
+## What is NOT claimed
+
+- No per-utterance audio timestamps, no terminology-service normalization.
+- No ABDM or official FHIR profile validation; JSON Schema + invariants only.
+- No 30-50 scenario red-team lab or rendered red-team/evaluation PDFs.
+- No exponential backoff, no idempotency keys, no exactly-once delivery.
+- No native install, device runtime, or production deployment claims.
