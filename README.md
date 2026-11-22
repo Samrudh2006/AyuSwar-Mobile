@@ -169,6 +169,16 @@ Earlier Lighthouse and performance figures were measured on the **old live web b
 
 ---
 
+## 🧾 Evidence reports (synthetic and public-corpus data only)
+
+| Report | What it covers | Scope and currentness | Not claimed |
+|---|---|---|---|
+| [Indic ASR evaluation report (PDF)](AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/INDIC_ASR_EVALUATION_REPORT.pdf) | Offline Telugu and Hindi ASR on the public FLEURS corpus (WER/CER on full splits), plus one controlled-noise run (n=120) on a public-domain recording | Recorded 22 Nov 2026 from `benchmarks/RESULTS.md`; scorer command is in that file. The Telugu model is a local INT8 derivative of the OpenVoiceOS conversion: exact quantizer version and settings were not recorded, and it is not downloaded upstream bytes. The Hindi pilot model matched no file in its OpenVoiceOS repo, so its origin is unverified | Medical-term accuracy, Tenglish or dialect results, on-device or real-environment numbers, clinical validity |
+| [Clinical safety red-team report (PDF)](AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_SAFETY_RED_TEAM_REPORT.pdf) | Text-level guard checks on synthetic input: negation, medication mention vs instruction, temporal status, injection holds, export gate | Verbatim 82-check ledger from the baseline run at commit 1447957, plus an appendix with the later whole-suite state (407 passed, 3 conditional skips, 0 failed at commit 2164f36) | Audio-level testing, a real model, clinical safety, any real sign-off |
+| [Adversarial text scenarios (JSON)](AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.json) | 36 purpose-authored text scenarios, each with expected behaviour, the engine's actual decisions and PASS/FAIL | Later than the PDF above and not included in it. 33 PASS and 3 FAIL, all three the same known over-negation limitation (a true symptom near a negation word is held from export); earlier runs with failures are kept beside it. Model-path cases use simulated replies, not a provider. Independent audit of this latest set was still pending when this table was written | Audio, real consultations, dose-safety or allergy-interaction checking, clinical validation |
+
+The folder index is [AYUSWAR-TECHNICAL-EVIDENCE/README.md](AYUSWAR-TECHNICAL-EVIDENCE/README.md). Nothing here is a native-device, clinical or ABDM conformance claim.
+
 ## ⚠️ Known limitations (the honest list)
 
 - **Transcript preservation is not accuracy validation:** `normalizeCodeMixedClinicalText` does not rewrite supplied text into medicine names, strengths or diagnostic codes. Recognition errors still require clinician review. Browser/Android speech processing depends on the provider and device settings and is not guaranteed to stay on-device.
