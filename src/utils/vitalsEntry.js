@@ -22,15 +22,43 @@ export const VITALS_ERR = {
   required: 'vitals.err.required',
   positive: 'vitals.err.positive',
   spo2Max: 'vitals.err.spo2Max',
-  diaGtSys: 'vitals.err.diaGtSys'
+  diaGtSys: 'vitals.err.diaGtSys',
+  dateInvalid: 'vitals.err.dateInvalid'
 };
+
+// Strict calendar-date check for a YYYY-MM-DD string (what <input type=date>
+// produces). Returns the same string when it is a real calendar date, else null.
+export function parseIsoDate(raw) {
+  const text = String(raw ?? '').trim();
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  if (!m) return null;
+  const [y, mo, d] = [Number(m[1]), Number(m[2]), Number(m[3])];
+  const dt = new Date(Date.UTC(y, mo - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== mo - 1 || dt.getUTCDate() !== d) return null;
+  return text;
+}
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+export function displayIsoDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d} ${MONTHS[m - 1]} ${y}`;
+}
+
+// Marker stamped ONLY by formatManualVital, i.e. only on rows the user typed
+// into the entry form in this app version. Bundled demo seeds and older rows
+// do not carry it, so exports can tell real new input from seeded data.
+export const CAPTURE_ORIGIN = 'app-user-entry';
+export const CAPTURE_VERSION = 1;
 
 export function buildManualVital(form) {
   const errors = {};
   const values = {};
 
+  // The measurement date must be a real calendar date the user chose
+  // (<input type=date>); free text is not accepted and nothing is guessed.
   const date = (form.date ?? '').trim();
   if (!date) errors.date = VITALS_ERR.dateRequired;
+  else if (!parseIsoDate(date)) errors.date = VITALS_ERR.dateInvalid;
   else values.date = date;
 
   for (const field of ['systolic', 'diastolic', 'pulse', 'spo2']) {
@@ -69,7 +97,13 @@ export function buildManualVital(form) {
 export function formatManualVital(values, id) {
   return {
     id,
-    date: values.date,
+    date: displayIsoDate(values.date),
+    // Structured capture fields (new rows only; older rows are not migrated).
+    recordedDateIso: values.date,
+    pulseValue: values.pulse,
+    spo2Value: values.spo2,
+    weightValue: values.weight,
+    capture: { origin: CAPTURE_ORIGIN, version: CAPTURE_VERSION },
     relativeLabel: 'Just now',
     offsetDays: 0,
     bp: `${values.systolic}/${values.diastolic} mmHg`,

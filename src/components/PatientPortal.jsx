@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { buildManualVital, formatManualVital } from '../utils/vitalsEntry';
+import { classifyVitalsForExport, buildVitalsBundle } from '../utils/vitalsExport';
+import { exportTextFile } from '../services/exportFileService';
 import { useForm } from 'react-hook-form';
 import { useApp, SUPPORTED_LANGUAGES } from '../context/AppContext';
 import { Globe, Sunrise, Sun, Video, Building2, Lock, Scan, User } from 'lucide-react';
@@ -450,7 +452,8 @@ export default function PatientPortal({
   // Modal State for Manual Vitals Entry
   const [isAddVitalsModalOpen, setIsAddVitalsModalOpen] = useState(false);
   const EMPTY_VITALS_FORM = {
-    date: formatDemoDate(0),
+    // No pre-filled date: the user must choose the measurement date.
+    date: '',
     time: '09:30 AM',
     systolic: '',
     diastolic: '',
@@ -556,6 +559,29 @@ export default function PatientPortal({
       const combined = [...toAdd, ...prev];
       return combined.sort((a, b) => (b.offsetDays || 0) - (a.offsetDays || 0));
     });
+  };
+
+  // Export of the user's own typed readings (see utils/vitalsExport.js).
+  const [vitalsExportOpen, setVitalsExportOpen] = useState(false);
+  const [vitalsExportPicked, setVitalsExportPicked] = useState([]); // nothing ticked by default
+  const vitalsExportPlan = classifyVitalsForExport(vitalsHistory);
+  const toggleVitalsExportPick = (id) =>
+    setVitalsExportPicked(prev => (prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]));
+  const handleExportVitals = async () => {
+    const bundle = buildVitalsBundle(vitalsHistory, vitalsExportPicked);
+    if (!bundle) { showVitalsToast('Tick at least one reading to export.'); return; }
+    try {
+      const result = await exportTextFile({
+        filename: `ayuswar-my-readings-${new Date().toISOString().slice(0, 10)}.json`,
+        text: JSON.stringify(bundle, null, 2),
+        shareTitle: 'AyuSwar self-entered readings (FHIR R4 JSON)'
+      });
+      showVitalsToast(result.mode === 'native-share-sheet'
+        ? 'Readings file saved and the share sheet opened. You choose where it goes.'
+        : 'Readings file downloaded. The app sent nothing anywhere.');
+    } catch {
+      showVitalsToast('Export failed or was cancelled. Nothing was sent.');
+    }
   };
 
   const handleDeleteVital = (id) => {
@@ -2347,6 +2373,50 @@ export default function PatientPortal({
                   </div>
                 )}
 
+                {/* Export my typed readings: explicit selection, nothing ticked by default */}
+                <div data-testid="vitals-export" style={{ marginBottom: '14px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setVitalsExportOpen(o => !o)}
+                    aria-expanded={vitalsExportOpen}
+                    style={{ background: '#FAF8F5', color: '#0F4C5C', border: '1.5px solid rgba(0,0,0,0.16)', borderRadius: '10px', padding: '8px 14px', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}
+                  >
+                    Export my readings
+                  </button>
+                  {vitalsExportOpen && (
+                    <div style={{ marginTop: '10px', padding: '14px', background: '#FFFFFF', border: '1px solid rgba(0,0,0,0.10)', borderRadius: '12px', fontSize: '12px', color: '#334155' }}>
+                      <p style={{ margin: '0 0 8px 0' }}>
+                        Only readings you typed into this app (with a date you chose) can be exported, as a file you then share yourself. The file has no name or ID, only the numbers, the date and a note that you typed them in. It is not verified by any clinician and not an ABDM record. Sample and older entries, SpO2 and blood glucose are not exported yet.
+                      </p>
+                      {vitalsExportPlan.eligible.length === 0 && <p style={{ margin: 0, fontWeight: 700 }}>No exportable readings yet. Use Add Vitals Manually first.</p>}
+                      {vitalsExportPlan.eligible.map(e => (
+                        <label key={e.id} style={{ display: 'block', margin: '6px 0' }}>
+                          <input type="checkbox" checked={vitalsExportPicked.includes(e.id)} onChange={() => toggleVitalsExportPick(e.id)} />{' '}
+                          <strong>{e.dateIso}</strong>: {e.readings.map(r => r.label).join(', ')}
+                          {e.notExported.map(n => <span key={n} style={{ display: 'block', marginLeft: '22px', color: '#64748B' }}>{n}</span>)}
+                        </label>
+                      ))}
+                      {vitalsExportPlan.excluded.length > 0 && (
+                        <details style={{ marginTop: '8px' }}>
+                          <summary>{vitalsExportPlan.excluded.length} entries not exportable</summary>
+                          {vitalsExportPlan.excluded.map(x => {
+                            const row = vitalsHistory.find(v => v.id === x.id);
+                            return <div key={x.id} style={{ margin: '4px 0', color: '#64748B' }}>{row?.date || x.id} ({row?.bp || 'no BP'}): {x.reason}</div>;
+                          })}
+                        </details>
+                      )}
+                      <button
+                        type="button"
+                        disabled={vitalsExportPicked.filter(id => vitalsExportPlan.eligible.some(e => e.id === id)).length === 0}
+                        onClick={handleExportVitals}
+                        style={{ marginTop: '10px', background: '#0F4C5C', color: '#fff', border: 'none', borderRadius: '10px', padding: '8px 14px', fontSize: '12px', fontWeight: 750, cursor: 'pointer', opacity: vitalsExportPicked.length ? 1 : 0.5 }}
+                      >
+                        Export selected
+                      </button>
+                    </div>
+                  )}
+                </div>
+
                 {/* Vitals History Grid */}
                 <div className="patient-vitals-history-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px', marginBottom: '16px', width: '100%' }}>
                   {vitalsHistory.map((v, i) => {
@@ -2572,11 +2642,10 @@ export default function PatientPortal({
                           <label style={{ display: 'block', fontSize: '12px', fontWeight: 750, color: '#081C24', marginBottom: '6px' }}>{t('vitals.date')}
                           </label>
                           <input
-                            type="text"
+                            type="date"
                             {...registerVital('date')}
                               aria-invalid={vitalsErrors.date ? 'true' : undefined}
                               aria-describedby={vitalsErrors.date ? 'vitals-err-date' : undefined}
-                            placeholder="e.g. 23 Oct 2026"
                             style={{ width: '100%', padding: '9px 12px', borderRadius: '10px', border: '1px solid rgba(0, 0, 0, 0.10)', fontSize: '13px' }}
                             required
                           />
