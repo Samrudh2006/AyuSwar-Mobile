@@ -24,7 +24,7 @@ implementation exists but the original deliverable or full scope is not met;
 | Medical-term accuracy measured separately | **DEFERRED** | No medical-entity recall metric exists. Next usable work: a labelled medical-term list per language + recall computation in the benchmark harness |
 | Code-switching (Tenglish) and dialect evaluation | **DEFERRED** | No Tenglish corpus. Next usable work: small consented synthetic Tenglish set, same WER/CER pipeline |
 | Clean vs noisy audio comparison | **DONE (synthetic)** | Noise-augmented copies of the same seeded n=120 te_in test subset measured: public-domain crowd walla (Wikimedia Commons "Restaurant ambience.ogg", owning-source license verified), seeded mixing (seed 20261122), SNR 20/10/5 dB; clean 25.86% -> 30.66% WER at 5 dB. `AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/NOISY_ASR_REPORT.md` + `benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/`. Synthetic corruption of read speech, one noise recording, no VAD - not recorded clinical noise, not the capture path. An earlier MS-SNSD-babble run is retained as provisional (license unresolved) and superseded |
-| Deliverable INDIC_ASR_EVALUATION_REPORT.pdf | **DEFERRED** | Numbers exist in `benchmarks/RESULTS.md` (Markdown, honest scope); no rendered PDF. Next usable work: render the existing tables |
+| Deliverable INDIC_ASR_EVALUATION_REPORT.pdf | **DONE** | Rendered report committed: `AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/INDIC_ASR_EVALUATION_REPORT.pdf` (2 pages, measured FLEURS + license-cleared controlled-noise delta, honest scope/limits; delivered 2026-11-22) |
 
 ## 2. Clinical Evidence & Hallucination Firewall
 
@@ -56,7 +56,7 @@ implementation exists but the original deliverable or full scope is not met;
 | Adversarial scenarios: dosage directives, batch order, semantic collisions, negation/hypothetical/historical speech, appended directives | **DONE** | Phases 42-44, fail-closed behavior tests, deterministic sections |
 | 30-50 synthetic adversarial scenarios with expected/actual/pass-fail/evidence per scenario | **PARTIAL** | Guard classes are tested with multiple cases each; not a 30-50 scenario lab with per-scenario evidence records |
 | Doctor-patient conflict, overlapping speakers, unknown dialect, noise-changed medical word | **DEFERRED** | These scenario classes need audio-level simulation the current text-level harness does not cover |
-| Deliverable CLINICAL_SAFETY_RED_TEAM_REPORT.pdf | **DEFERRED** | No rendered report. Next usable work: scenario ledger from Phases 42-44 exported to a report |
+| Deliverable CLINICAL_SAFETY_RED_TEAM_REPORT.pdf | **DONE** | Rendered report committed: `AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_SAFETY_RED_TEAM_REPORT.pdf` (10 pages, verbatim 82-scenario ledger dated at baseline commit 1447957 + appendix with current suite state 407/3/0 at af92f33; text-level scope stated, not the audio-level lab; delivered 2026-11-22) |
 
 ## 5. Real Offline-First PHC Simulation
 
