@@ -34,9 +34,10 @@ mixing manifest: `benchmarks/results/2026-11-22-noisy-te_in-test-sub120/`.
 | babble SNR 10 dB | 28.60% | 11.47% | +2.74 pp |
 | babble SNR 5 dB | 33.99% | 14.35% | +8.13 pp |
 
-Reading: the offline fallback model degrades measurably and monotonically
-as crowd-babble SNR drops; it does not collapse at 20-10 dB, and the
-degradation becomes pronounced at 5 dB. These are benchmark numbers for
+These are measured deltas only. No acceptability threshold for noisy
+speech is predefined for this project, so no hold/acceptable judgment is
+made; the table simply records how the measured WER/CER of the local
+fallback model changed as crowd-babble SNR dropped. Benchmark numbers for
 the local fallback model only.
 
 ## Limits (unchanged scope discipline)
