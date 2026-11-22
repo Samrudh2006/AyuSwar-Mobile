@@ -104,11 +104,31 @@ export function verifyCandidate(session, candidate) {
  */
 export function verifyEvidence(session, candidates) {
   const verified = [];
-  const counts = {};
   for (const c of candidates) {
-    const v = verifyCandidate({ ...session, evidence: [...(session.evidence || []), ...verified] }, c);
-    verified.push(v);
-    counts[v.verificationStatus] = (counts[v.verificationStatus] || 0) + 1;
+    verified.push(verifyCandidate({ ...session, evidence: [...(session.evidence || []), ...verified] }, c));
   }
-  return { verified, counts };
+  // Set-level conflict resolution: batch order must never settle truth. If
+  // any candidate came out CONFLICTING, every other same-concept candidate
+  // with a different quote is part of the same conflict set and is downgraded
+  // too. A concept with a conflict is unresolvable by this engine; nothing in
+  // the set may reach export as SUPPORTED.
+  const conflictConcepts = new Set(
+    verified.filter(v => v.verificationStatus === VERIFICATION_STATUS.CONFLICTING).map(v => v.normalizedConcept)
+  );
+  const resolved = verified.map(v => {
+    if (v.verificationStatus !== VERIFICATION_STATUS.SUPPORTED) return v;
+    if (!v.normalizedConcept || !conflictConcepts.has(v.normalizedConcept)) return v;
+    const others = verified.filter(o =>
+      o.evidenceId !== v.evidenceId && o.normalizedConcept === v.normalizedConcept && o.sourceQuote !== v.sourceQuote
+    );
+    if (others.length === 0) return v;
+    return Object.freeze({
+      ...v,
+      verificationStatus: VERIFICATION_STATUS.CONFLICTING,
+      verificationNotes: [...(v.verificationNotes || []), `part of unresolved conflict set on "${v.normalizedConcept}" with ${others.map(o => o.evidenceId).join(', ')}`]
+    });
+  });
+  const counts = {};
+  for (const v of resolved) counts[v.verificationStatus] = (counts[v.verificationStatus] || 0) + 1;
+  return { verified: resolved, counts };
 }

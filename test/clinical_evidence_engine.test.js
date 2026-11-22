@@ -155,9 +155,14 @@ await record('same-batch conflicting claims caught by verifyEvidence', async () 
   assert(!s.evidence || s.evidence.length === 0, 'session.evidence must be empty before batch verification (production order)');
   const { verified, counts } = verifyEvidence(s, out.candidates);
   assert(verified.length === 2, 'both candidates verified');
-  assert(verified[0].verificationStatus === VERIFICATION_STATUS.SUPPORTED, `first stays SUPPORTED, got ${verified[0].verificationStatus}`);
-  assert(verified[1].verificationStatus === VERIFICATION_STATUS.CONFLICTING, `second must be CONFLICTING, got ${verified[1].verificationStatus}`);
-  assert(counts.CONFLICTING === 1, 'exactly one conflict counted');
+  // Batch order must never settle truth: the WHOLE conflict set is downgraded,
+  // so no member of an unresolved conflict can reach export as SUPPORTED.
+  assert(verified.every(v => v.verificationStatus === VERIFICATION_STATUS.CONFLICTING),
+    `whole conflict set must be CONFLICTING, got ${verified.map(v => v.verificationStatus).join(',')}`);
+  assert(counts.CONFLICTING === 2, 'both conflict members counted');
+  // And neither can be exported even after a demo approval.
+  const approved = applyReviewAction(verified[0], { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  assert(selectApprovedForExport([approved, verified[1]]).length === 0, 'conflict set never exports');
 });
 
 // 20b. Negated findings never enter positive export, even when approved
