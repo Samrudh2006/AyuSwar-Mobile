@@ -39,7 +39,10 @@ verified spoken vital values; assessment/plan always fixed safe strings,
 model text discarded), and appended directives / batch-order tricks /
 semantic collisions are adversarially covered (Phase 42). The subjective
 section remains model-written draft text that is NOT evidence-verified
-and is labelled as such next to the section in the review UI.
+and is labelled as such next to the section in the review UI. The label
+is source-aware: "model-written" appears only on model-produced drafts,
+and the confirmation target is the recording when one exists, otherwise
+the source transcript.
 
 ## Data loss and deletion semantics
 

@@ -43,8 +43,12 @@ supported records; negated findings are excluded from positive export.
 
 `{ subjective, objective, assessment, plan, bestMatterVernacular }`.
 Objective, assessment and plan are assembled deterministically (assessment
-and plan are fixed safe strings); subjective is model-written draft text
-that is NOT evidence-verified and is labelled as such in the review UI. Sections that
+and plan are fixed safe strings); subjective is draft text that is NOT
+evidence-verified and is labelled as such in the review UI (the label says
+"model-written" only on model-produced drafts and references the recording
+only when one exists). In the manual-draft path the subjective field starts
+as a clinician-entered copy of the source transcript, not model text, and
+the label says so neutrally. Sections that
 carry no verified value show an explicit "Not documented" state rather
 than invented content.
 

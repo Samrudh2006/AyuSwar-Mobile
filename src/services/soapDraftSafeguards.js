@@ -20,9 +20,11 @@
  * - Assessment and Plan are always fixed safe strings. Model text for these
  *   sections is discarded unconditionally (a disclaimer with an appended
  *   directive is still a directive).
- * - The Subjective section remains model-written draft text; it is NOT
- *   evidence-verified and the UI must say so next to the section, not only
- *   in a broad note-level disclaimer.
+ * - The Subjective section is draft text that is NOT evidence-verified; the
+ *   UI must say so next to the section, not only in a broad note-level
+ *   disclaimer. The label is source-aware: it says "model-written" only
+ *   when the model actually wrote the draft, and points at the recording
+ *   only when a recording exists (otherwise the source transcript).
  */
 
 export const SAFE_ASSESSMENT =
@@ -30,9 +32,22 @@ export const SAFE_ASSESSMENT =
 export const SAFE_PLAN =
   'No medication, dose, treatment or follow-up plan is generated.';
 
-/** Required UI label for the model-written Subjective section (auditor boundary). */
+/** Model-written Subjective label (recording present). Prefer subjectiveBoundaryLabel. */
 export const SUBJECTIVE_NOT_VERIFIED_LABEL =
   'Model-written draft text — NOT verified against source evidence. Confirm every statement against the recording before use.';
+
+/**
+ * Source-aware Subjective boundary label. The "model-written" claim is made
+ * only when the model actually produced the draft; the confirmation target
+ * is the recording when one exists, otherwise the source transcript. This
+ * keeps the warning from asserting provenance the current path does not
+ * have (manual drafts, scripted samples, keyless fallbacks).
+ */
+export function subjectiveBoundaryLabel({ modelWritten, hasRecording } = {}) {
+  const target = hasRecording ? 'the recording' : 'the source transcript';
+  const kind = modelWritten ? 'Model-written draft text' : 'Draft text';
+  return `${kind} — NOT verified against source evidence. Confirm every statement against ${target} before use.`;
+}
 
 const VITAL_PATTERNS = [
   { type: 'BP', re: /(?:\bbp\b|blood pressure|బీపీ|बीपी)[^\d]{0,25}(\d{2,3})\s*\/\s*(\d{2,3})/gi, fmt: m => `BP ${m[1]}/${m[2]}` },

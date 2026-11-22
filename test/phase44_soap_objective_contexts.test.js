@@ -6,7 +6,8 @@
  */
 import { readFileSync } from 'node:fs';
 import {
-  deterministicObjective, spokenVitalPairs, SUBJECTIVE_NOT_VERIFIED_LABEL
+  deterministicObjective, spokenVitalPairs, SUBJECTIVE_NOT_VERIFIED_LABEL,
+  subjectiveBoundaryLabel
 } from '../src/services/soapDraftSafeguards.js';
 
 let passed = 0, failed = 0;
@@ -63,9 +64,35 @@ check('subjective-not-verified label exported',
   typeof SUBJECTIVE_NOT_VERIFIED_LABEL === 'string' && /NOT verified against source evidence/.test(SUBJECTIVE_NOT_VERIFIED_LABEL));
 {
   const consoleSource = readFileSync(new URL('../src/components/ClinicalConsole.jsx', import.meta.url), 'utf8');
-  check('console renders subjective-not-verified boundary', consoleSource.includes('SUBJECTIVE_NOT_VERIFIED_LABEL'));
+  check('console renders subjective-not-verified boundary', consoleSource.includes('subjectiveBoundaryLabel'));
   const mobileSource = readFileSync(new URL('../src/mobile/MScribeFlow.jsx', import.meta.url), 'utf8');
-  check('mobile review renders subjective-not-verified boundary', mobileSource.includes('SUBJECTIVE_NOT_VERIFIED_LABEL'));
+  check('mobile review renders subjective-not-verified boundary', mobileSource.includes('subjectiveBoundaryLabel'));
+}
+
+// 8. Source-aware label: no false provenance claims
+{
+  const modelRec = subjectiveBoundaryLabel({ modelWritten: true, hasRecording: true });
+  check('model+recording label says model-written and recording',
+    /Model-written draft/.test(modelRec) && /against the recording/.test(modelRec));
+  const modelText = subjectiveBoundaryLabel({ modelWritten: true, hasRecording: false });
+  check('model+no-recording label says model-written and source transcript',
+    /Model-written draft/.test(modelText) && /against the source transcript/.test(modelText));
+  const manualRec = subjectiveBoundaryLabel({ modelWritten: false, hasRecording: true });
+  check('manual+recording label drops model-written claim',
+    !/Model-written/.test(manualRec) && /NOT verified against source evidence/.test(manualRec) && /against the recording/.test(manualRec));
+  const manualText = subjectiveBoundaryLabel({ modelWritten: false, hasRecording: false });
+  check('manual+no-recording label is neutral and transcript-scoped',
+    !/Model-written/.test(manualText) && !/against the recording/.test(manualText) && /against the source transcript/.test(manualText));
+}
+
+// 9. Call-site wiring: each surface passes its real provenance signals
+{
+  const mobileSource = readFileSync(new URL('../src/mobile/MScribeFlow.jsx', import.meta.url), 'utf8');
+  check('mobile wires aiLive as modelWritten and mic-recording as hasRecording',
+    mobileSource.includes('modelWritten: aiLive') && mobileSource.includes("state.sourceMode === 'mic'"));
+  const consoleSource = readFileSync(new URL('../src/components/ClinicalConsole.jsx', import.meta.url), 'utf8');
+  check('console wires subjectiveFromModel and non-scripted turns as provenance',
+    consoleSource.includes('modelWritten: subjectiveFromModel') && consoleSource.includes('setSubjectiveFromModel(true)'));
 }
 
 console.log(`\nphase44_soap_objective_contexts: ${passed}/${passed + failed} passed`);

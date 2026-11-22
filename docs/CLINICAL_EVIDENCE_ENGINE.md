@@ -38,7 +38,11 @@ papered over with fabricated content.
    The subjective section remains model-written draft text that is NOT
    evidence-verified; the review UI labels it as such next to the section
    and it is always presented as an editable draft in the clinician review
-   step.
+   step. The label is source-aware: it claims "model-written" only when
+   the model actually produced the draft (manual/fallback drafts start as a
+   clinician-entered copy of the source transcript and get a neutral
+   unverified-draft label), and it points at the recording only when a
+   recording exists, otherwise the source transcript.
 4. The clinician reviews, edits, accepts or rejects with reasons; only
    approved, supported records are eligible for export.
 5. Export produces the FHIR-shaped draft bundle (local research draft, not

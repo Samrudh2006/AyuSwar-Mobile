@@ -21,7 +21,9 @@ assessment and plan sections: objective is generated only from verified
 spoken vital values and assessment/plan are always fixed safe strings.
 The subjective section remains model-written draft text that is NOT
 evidence-verified; the review UI (desktop and mobile) labels it as such
-next to the section.
+next to the section with a source-aware label: "model-written" only when
+the model produced the draft, recording-referencing only when a recording
+exists (otherwise the source transcript).
 
 | Guard class | Covered by | Cases |
 |---|---|---|

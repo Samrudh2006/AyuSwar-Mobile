@@ -56,7 +56,7 @@ import { reasonClinicalNoteWithEvon, EVON_MODEL_METADATA } from '../services/gna
 import { generateAbdmFhirR4Bundle } from '../data/clinicalSafetySentinel';
 import { queryGroqApi, getGroqApiKey, transcribeAudioWithGroqWhisper } from '../services/aiBrainService';
 import ClinicalEvidencePanel from './ClinicalEvidencePanel';
-import { deterministicObjective, conservativeAssessmentPlan, SUBJECTIVE_NOT_VERIFIED_LABEL } from '../services/soapDraftSafeguards.js';
+import { deterministicObjective, conservativeAssessmentPlan, subjectiveBoundaryLabel } from '../services/soapDraftSafeguards.js';
 
 /**
  * ClinicalConsole Component — Complete Step-by-Step OPD Consultation Suite
@@ -157,6 +157,10 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
   const [aiProcessingStage, setAiProcessingStage] = useState('');
   const [editableBestMatter, setEditableBestMatter] = useState(currentEncounter.fullAudioRxTelugu);
   const [medications, setMedications] = useState(currentEncounter.medications || []);
+  // Provenance of the current Subjective text: only the live-model parse path
+  // sets this true; the initial demo content and the deterministic transcript
+  // fallback are not model-written, and the review label must not claim so.
+  const [subjectiveFromModel, setSubjectiveFromModel] = useState(false);
   const [editableSoapNote, setEditableSoapNote] = useState({
     subjective: `Patient presents with a 2-day history of palpitations ("గుండెల్లో దడ"), diaphoresis/hot flashes ("ఉడుకుబోస్తోంది"), and exertional dyspnea ("ఆయాసం") on climbing stairs. Known type-2 diabetic.`,
     objective: `Vitals: BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. Auscultation reveals clear bilateral breath sounds with mild exertional tachycardia.`,
@@ -730,6 +734,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             ? `Recorded demo vitals only (scripted sample data, not measured): BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`
             : 'No vitals or examination findings were captured in this session. A clinician must record objective findings before use.';
           if (parsed.subjective) {
+            setSubjectiveFromModel(true);
             const { assessment, plan } = conservativeAssessmentPlan();
             setEditableSoapNote({
               subjective: parsed.subjective,
@@ -766,6 +771,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                                 lowerDialogue.includes('cold') || lowerDialogue.includes('cough') || lowerDialogue.includes('fever');
 
         if (hasRespSymptoms) {
+          setSubjectiveFromModel(false);
           setEditableSoapNote({
             subjective: `Transcript draft: the patient describes cold, cough, throat discomfort or fever-like symptoms. Exact wording must be reviewed against the recording.`,
             objective: (dialogueTurns.length > 0 && dialogueTurns.every(t => t.isScripted))
@@ -2200,7 +2206,10 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                     <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                       <div style={{ fontWeight: 800, color: '#0F4C5C', marginBottom: '4px' }}>SUBJECTIVE (S):</div>
                       <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FFFBEB', border: '1px dashed #D97706', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px' }}>
-                        {SUBJECTIVE_NOT_VERIFIED_LABEL}
+                        {subjectiveBoundaryLabel({
+                          modelWritten: subjectiveFromModel,
+                          hasRecording: dialogueTurns.length > 0 && dialogueTurns.some(t => !t.isScripted)
+                        })}
                       </div>
                       <div style={{ color: '#2C4A52', lineHeight: 1.5 }}>{editableSoapNote.subjective}</div>
                     </div>
