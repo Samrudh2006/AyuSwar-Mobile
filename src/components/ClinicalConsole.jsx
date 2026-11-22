@@ -720,10 +720,6 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
           // 2. The conservative draft NEVER accepts model-supplied medications, whatever the
           //    model returns. Any non-empty array is discarded and the draft stays
           //    review-required.
-          const allTurnsScripted = dialogueTurns.length > 0 && dialogueTurns.every(t => t.isScripted);
-          const objectiveFallback = allTurnsScripted
-            ? `Recorded demo vitals only (scripted sample data, not measured): BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`
-            : 'No vitals or examination findings were captured in this session. A clinician must record objective findings before use.';
           // Deterministic sections (see services/soapDraftSafeguards.js):
           // model-written objective/assessment/plan are never used. Objective
           // is generated only from vital values actually spoken in the
