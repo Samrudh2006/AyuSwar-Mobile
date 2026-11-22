@@ -1,0 +1,7 @@
+
+> ayuswar-ai@0.3.41-debug lint
+> oxlint --quiet
+
+
+Found 2472 warnings and 0 errors.
+Finished in 144ms on 367 files with 96 rules using 1 threads.

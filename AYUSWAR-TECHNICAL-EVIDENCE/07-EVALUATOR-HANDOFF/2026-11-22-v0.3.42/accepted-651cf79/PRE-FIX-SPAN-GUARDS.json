@@ -1,0 +1,983 @@
+{
+  "scope": "Synthetic software marker/source-span policy checks through local model stub or deterministic fallback, actual verification, demo APPROVE/EDIT and export. No provider, new clinical gold labels or clinical validation.",
+  "passed": 13,
+  "failed": 27,
+  "observations": [
+    {
+      "text": "నాకు జ్వరం లేదు అని స్పష్టంగా చెప్పాను.",
+      "requestedQuote": "జ్వరం లేదు",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం లేదు",
+          "start": 5,
+          "end": 15,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "నాకు జ్వరం లేదు అని స్పష్టంగా చెప్పాను.",
+      "requestedQuote": "జ్వరం",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 5,
+          "end": 10,
+          "status": "SUPPORTED",
+          "negated": true,
+          "temporalStatus": "UNKNOWN",
+          "notes": [
+            "negation marker near span; treat as absent/ruled-out context"
+          ]
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 0,
+      "editedExportCount": 0
+    },
+    {
+      "text": "మీకు జ్వరం ఉందా? అని డాక్టర్ అడిగారు.",
+      "requestedQuote": "జ్వరం ఉందా?",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం ఉందా?",
+          "start": 5,
+          "end": 16,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "మీకు జ్వరం ఉందా? అని డాక్టర్ అడిగారు.",
+      "requestedQuote": "జ్వరం ఉందా? అని",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం ఉందా? అని",
+          "start": 5,
+          "end": 20,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "మీకు జ్వరం ఉందా? అని డాక్టర్ అడిగారు.",
+      "requestedQuote": "జ్వరం ఉందా",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం ఉందా",
+          "start": 5,
+          "end": 15,
+          "status": "AMBIGUOUS",
+          "negated": false,
+          "notes": [
+            "span is inside a question, not a finding"
+          ]
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 0,
+      "editedExportCount": 0
+    },
+    {
+      "text": "జ్వరం ఉంది అని మొదట అన్నారు, కాని తర్వాత మళ్లీ పరీక్షించినప్పుడు అసలు జ్వరం లేదు అని తేలింది.",
+      "requestedQuote": "జ్వరం",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "జ్వరం లేదు అని మొదట అన్నారు, కాని తర్వాత మళ్లీ పరీక్షించినప్పుడు నిజంగానే జ్వరం ఉంది అని తేలింది.",
+      "requestedQuote": "జ్వరం",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": true,
+          "temporalStatus": "UNKNOWN",
+          "notes": [
+            "negation marker near span; treat as absent/ruled-out context"
+          ]
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 0,
+      "editedExportCount": 0
+    },
+    {
+      "text": "no fever",
+      "requestedQuote": "no fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "no fever",
+          "start": 0,
+          "end": 8,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "not fever",
+      "requestedQuote": "not fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "not fever",
+          "start": 0,
+          "end": 9,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "never fever",
+      "requestedQuote": "never fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "never fever",
+          "start": 0,
+          "end": 11,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "without fever",
+      "requestedQuote": "without fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "without fever",
+          "start": 0,
+          "end": 13,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "cannot fever",
+      "requestedQuote": "cannot fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "cannot fever",
+          "start": 0,
+          "end": 12,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "denies fever",
+      "requestedQuote": "denies fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "denies fever",
+          "start": 0,
+          "end": 12,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "don't fever",
+      "requestedQuote": "don't fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "don't fever",
+          "start": 0,
+          "end": 11,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "don’t fever",
+      "requestedQuote": "don’t fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "don’t fever",
+          "start": 0,
+          "end": 11,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "haven't fever",
+      "requestedQuote": "haven't fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "haven't fever",
+          "start": 0,
+          "end": 13,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "haven’t fever",
+      "requestedQuote": "haven’t fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "haven’t fever",
+          "start": 0,
+          "end": 13,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever లేదు",
+      "requestedQuote": "fever లేదు",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever లేదు",
+          "start": 0,
+          "end": 10,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever కాదు",
+      "requestedQuote": "fever కాదు",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever కాదు",
+          "start": 0,
+          "end": 10,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever వద్దు",
+      "requestedQuote": "fever వద్దు",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever వద్దు",
+          "start": 0,
+          "end": 11,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever లేదండి",
+      "requestedQuote": "fever లేదండి",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever లేదండి",
+          "start": 0,
+          "end": 12,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever కాదండి",
+      "requestedQuote": "fever కాదండి",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever కాదండి",
+          "start": 0,
+          "end": 12,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever नहीं",
+      "requestedQuote": "fever नहीं",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever नहीं",
+          "start": 0,
+          "end": 10,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever ना",
+      "requestedQuote": "fever ना",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever ना",
+          "start": 0,
+          "end": 8,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever another",
+      "requestedQuote": "fever another",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever another",
+          "start": 0,
+          "end": 13,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever notable",
+      "requestedQuote": "fever notable",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever notable",
+          "start": 0,
+          "end": 13,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "fever whenever",
+      "requestedQuote": "fever whenever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever whenever",
+          "start": 0,
+          "end": 14,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "खाना खाने के बाद मुझे बुखार है",
+      "requestedQuote": "खाना खाने के बाद मुझे बुखार है",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "खाना खाने के बाद मुझे बुखार है",
+          "start": 0,
+          "end": 30,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "Do you have a fever? I have a cough.",
+      "requestedQuote": "Do you have a fever? I have a cough.",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "Do you have a fever? I have a cough.",
+          "start": 0,
+          "end": 36,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "testest",
+      "requestedQuote": "test",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "test",
+          "start": 0,
+          "end": 4,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "జ్వరం ఉంది అని మొదట అన్నారు, కాని తర్వాత మళ్లీ పరీక్షించినప్పుడు అసలు జ్వరం లేదు అని తేలింది.",
+      "requestedQuote": "జ్వరం",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "జ్వరం ఉంది అని మొదట అన్నారు, కాని తర్వాత మళ్లీ పరీక్షించినప్పుడు అసలు జ్వరం లేదు అని తేలింది.",
+      "requestedQuote": "జ్వరం",
+      "path": "DETERMINISTIC_FALLBACK",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        },
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED",
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED",
+        "EDITED"
+      ],
+      "approvedExportCount": 2,
+      "editedExportCount": 2
+    },
+    {
+      "text": "I have a fever.",
+      "requestedQuote": "fever",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "fever",
+          "start": 9,
+          "end": 14,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I have a fever.",
+      "requestedQuote": "fever",
+      "path": "DETERMINISTIC_FALLBACK",
+      "candidates": [
+        {
+          "quote": "fever",
+          "start": 9,
+          "end": 14,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I took ibuprofen last week.",
+      "requestedQuote": "ibuprofen",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "ibuprofen",
+          "start": 7,
+          "end": 16,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "HISTORICAL",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I stopped taking metformin last month.",
+      "requestedQuote": "metformin",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "metformin",
+          "start": 17,
+          "end": 26,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "HISTORICAL",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I used to take cetirizine every morning.",
+      "requestedQuote": "cetirizine",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "cetirizine",
+          "start": 15,
+          "end": 25,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "HISTORICAL",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I used to take cetirizine every morning.",
+      "requestedQuote": "I used to take cetirizine every morning.",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "I used to take cetirizine every morning.",
+          "start": 0,
+          "end": 40,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "I never took metformin yesterday.",
+      "requestedQuote": "I never took metformin yesterday.",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "I never took metformin yesterday.",
+          "start": 0,
+          "end": 33,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    },
+    {
+      "text": "జ్వరం ఉంది అని మొదట అన్నారు, కాని తర్వాత మళ్లీ పరీక్షించినప్పుడు అసలు జ్వరం లేదు అని తేలింది.",
+      "requestedQuote": "జ్వరం",
+      "path": "LOCAL_STUB_MODEL_PARSER",
+      "candidates": [
+        {
+          "quote": "జ్వరం",
+          "start": 0,
+          "end": 5,
+          "status": "SUPPORTED",
+          "negated": false,
+          "temporalStatus": "UNKNOWN",
+          "notes": []
+        }
+      ],
+      "approvedStatuses": [
+        "APPROVED"
+      ],
+      "editedStatuses": [
+        "EDITED"
+      ],
+      "approvedExportCount": 1,
+      "editedExportCount": 1
+    }
+  ]
+}

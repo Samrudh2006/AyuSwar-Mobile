@@ -1,0 +1,256 @@
+FAIL auditor interior Telugu denial stays held after APPROVE and EDIT: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:67:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:66:1
+PASS auditor single-term Telugu denial control stays held
+FAIL auditor question span held: జ్వరం ఉందా?: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:75:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:74:71
+FAIL auditor question span held: జ్వరం ఉందా? అని: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:75:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:74:71
+PASS auditor question span held: జ్వరం ఉందా
+FAIL auditor repeated quote direction 0: no occurrence is auto-selected as settled: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:84:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:81:50
+FAIL auditor repeated quote direction 1: no occurrence is auto-selected as settled: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(result.verified.every(v => v.verificationStatus === 'AMBIGUOUS'))
+
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:56:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:84:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:81:50
+FAIL interior English marker policy no: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy not: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy never: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy without: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy cannot: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy denies: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy don't: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy don’t: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy haven't: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior English marker policy haven’t: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:91:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:89:117
+FAIL interior Indic marker policy లేదు: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy కాదు: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy వద్దు: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy లేదండి: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy కాదండి: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy नहीं: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+FAIL interior Indic marker policy ना: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:95:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:93:83
+PASS interior English non-marker boundary another unchanged
+PASS interior English non-marker boundary notable unchanged
+PASS interior English non-marker boundary whenever unchanged
+PASS interior Hindi marker substring in existing food-word fixture stays non-negated
+FAIL interior question mark followed by affirmative material still holds whole quote: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:111:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:109:1
+FAIL overlapping identical occurrences also fail closed: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:115:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:113:1
+FAIL manually supplied second exact occurrence is still ambiguous: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'SUPPORTED'
+- 'AMBIGUOUS'
+
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:123:10
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:117:1
+FAIL fallback repeated quote candidates also cannot export: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+2 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at ambiguous (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:55:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:129:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:126:1
+PASS unique positive source and actual approval export preserved: stub model
+PASS unique positive source and actual approval export preserved: fallback
+PASS legacy outer-context historical cue retained: ibuprofen
+PASS legacy outer-context historical cue retained: metformin
+PASS legacy outer-context historical cue retained: cetirizine
+PASS new interior scan does not extend legacy temporal window into quote
+FAIL interior denial hold does not classify interior temporal cues: AssertionError [ERR_ASSERTION]: approve-all cannot bypass guard
+
+1 !== 0
+
+    at held (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:51:10)
+    at interiorNegated (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:59:3)
+    at file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:163:3
+    at async record (file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:13:9)
+    at async file:///tmp/ayuswar-mobile-review/test/phase53_evidence_span_guards.test.js:160:1
+PASS invalid offsets still fail before newly added holds
+phase53_evidence_span_guards: 13/40 passed

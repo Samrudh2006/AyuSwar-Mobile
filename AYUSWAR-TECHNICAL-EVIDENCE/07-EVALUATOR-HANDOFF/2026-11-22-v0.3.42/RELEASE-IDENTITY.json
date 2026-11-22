@@ -1,0 +1,16 @@
+{
+  "applicationReleaseCommit": "843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+  "acceptedEvidenceRevision": "651cf79e3b822afe7334fe3b939a120e96b0266c",
+  "release": "v0.3.42-debug",
+  "releaseUrl": "https://github.com/Samrudh2006/AyuSwar-Mobile/releases/tag/v0.3.42-debug",
+  "releaseId": 454580801,
+  "assetId": 779673281,
+  "apkUrl": "https://github.com/Samrudh2006/AyuSwar-Mobile/releases/download/v0.3.42-debug/ayuswar-v0.3.42-843ea7b-debug.apk",
+  "apkBytes": 78079710,
+  "apkSha256": "37e9875c2169440c3509e789f89c17ea2ef8a9d783fa4d6cb1507148493fd689",
+  "package": "ai.ayuswar.app",
+  "versionCode": 45,
+  "debugSignerSha256": "57d44b07e4111ec3356d6b9f27ab37afcefb8256a696e670a464e7743f0b1b31",
+  "embeddedIndexSha256": "dbd634043deb9d9600756348b61f83f4765e28749b741d636bcbaf1bac107188",
+  "scope": "Debug build and synthetic engineering evidence; no physical Android, clinical or live-provider validation. This is a documentation/evidence handoff, not a new app release."
+}

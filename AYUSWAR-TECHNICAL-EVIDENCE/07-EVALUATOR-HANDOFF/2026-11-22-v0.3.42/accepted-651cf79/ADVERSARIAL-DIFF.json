@@ -1,0 +1,50 @@
+{
+  "beforeRecordedRevision": "d440775a10a657b088656743a92e5cf347d0776d",
+  "afterRevision": "651cf79e3b822afe7334fe3b939a120e96b0266c",
+  "unchangedVerdicts": 39,
+  "unchangedActualBehaviourCases": 38,
+  "changedCases": [
+    {
+      "id": "ADV-14",
+      "authoredVerdictBefore": "PASS",
+      "authoredVerdictAfter": "PASS",
+      "before": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "cold",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "cold",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "after": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "cold",
+            "status": "AMBIGUOUS",
+            "negatedContext": false,
+            "clinicianStatus": "PENDING_REVIEW",
+            "notes": [
+              "source quote has multiple occurrences; intended occurrence is ambiguous"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,1383 @@
+{
+  "schemaVersion": 1,
+  "snapshot": "2026-11-22-v0.3.42",
+  "applicationReleaseRevision": "843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+  "acceptedFullSuiteRevision": "651cf79e3b822afe7334fe3b939a120e96b0266c",
+  "scope": "Evidence/documentation package, not an APK, full app checkout, new experiment or clinical validation. Historical inputs keep their own recorded dates/revisions. Marketing video binaries, model weights and original corpora are not included.",
+  "fullSuite": {
+    "passed": 550,
+    "actualConditionalSkips": 3,
+    "failedSuiteProcesses": 0
+  },
+  "manifestPathsExcludedFromOwnChecksum": [
+    "MANIFEST.json",
+    "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/MANIFEST.json"
+  ],
+  "files": [
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/DATA_FLOW.md",
+      "bytes": 309,
+      "sha256": "ea22e5eb9b58c5d46da3d5b62d934e61b19c528e300d48d68d19c6e463a50d8c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/DATA_FLOW.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/MODEL_INTEGRATION.md",
+      "bytes": 375,
+      "sha256": "dbd56947ed2ebd950fcbfd0c5d64dfd39acde3263de83c4ba6fd5ff1a6fea8c9",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/MODEL_INTEGRATION.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/SYSTEM_ARCHITECTURE.md",
+      "bytes": 426,
+      "sha256": "cc1e64cbe021e9aa6dc858893e6c4f03ce63c23a4da5317f1685ec6343d7c49c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/01-ARCHITECTURE/SYSTEM_ARCHITECTURE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/ASR_BENCHMARKS.csv",
+      "bytes": 658,
+      "sha256": "4229db0069042b38e412fd39b4c9bfea3055b7b1647031530dd05feda2be2129",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/ASR_BENCHMARKS.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/INDIC_ASR_EVALUATION_REPORT.pdf",
+      "bytes": 203119,
+      "sha256": "dfa618f448d768bf643a5fd4ff8a7e1323b4ea53ea3f1c92752e20b9d99fc4a4",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/INDIC_ASR_EVALUATION_REPORT.pdf@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/MEDICAL_ENTITY_EVALUATION.md",
+      "bytes": 1357,
+      "sha256": "c73ee49027f9021d6da5e2d0909d0e968a7257cf48ef7172d79161ee4f0854e8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/MEDICAL_ENTITY_EVALUATION.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/NOISY_ASR_REPORT.md",
+      "bytes": 4264,
+      "sha256": "9c781e4bf6004947db6880828fae708c9695233d3f7a0c5594d3ef7f6def4cbf",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/NOISY_ASR_REPORT.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/TERMINOLOGY_COVERAGE.json",
+      "bytes": 2579,
+      "sha256": "8022bd6a7ed8cc728d58575b05e4b11d4ec734b0a51cdeb3d4e1418659dc3d79",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/TERMINOLOGY_COVERAGE.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/TERMINOLOGY_COVERAGE.md",
+      "bytes": 2428,
+      "sha256": "915db63cde612acdee774ac4bec2187811b6ddecc285fbc4d09a191cbd92eb12",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/TERMINOLOGY_COVERAGE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/WER_CER_REPORT.md",
+      "bytes": 601,
+      "sha256": "01f2ffa1b1e1ace91a3344a47cb1f6932cab412c086a2436faf23fb0e9fd5135",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/WER_CER_REPORT.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN-2-36cases.json",
+      "bytes": 38535,
+      "sha256": "13fc9e431f3d268f762a5f95a32e32b87f2bfe0ceeceecf7cd3180726653f0d0",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN-2-36cases.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN-3-39cases.json",
+      "bytes": 41466,
+      "sha256": "16d155e0f93b99917623402d7a4529f88be46fa644e50420e5f384c904c5961a",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN-3-39cases.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN.json",
+      "bytes": 23464,
+      "sha256": "02dade8921cbc9698b6822a0a46e4804caab150be435954061ba97bd27e30b9b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.PRE-FIX-RUN.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.json",
+      "bytes": 41344,
+      "sha256": "005193d633aa91d9ac8c2f072d1ebd6c1e7361286d7fd89d0337a4429899e7d1",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-22.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE.json",
+      "bytes": 12627,
+      "sha256": "92dcc8ab24e2e89cc826e0cac4ceb14648ded7b89021c6fdf634d5e772b7b462",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE_ASR.json",
+      "bytes": 21702,
+      "sha256": "7be258f41129a8eec6977f171d3ac0547d5e81a6afdf29df22eab05d4f3dc5f3",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE_ASR.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE_ASR.md",
+      "bytes": 1713,
+      "sha256": "8e88f83c9c9e81043977f5e770fdfacfd567ab2e1b9288afb62e90f9a479f9b8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE_ASR.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_SAFETY_RED_TEAM_REPORT.pdf",
+      "bytes": 678327,
+      "sha256": "19d033e00641e44a38cb78be541f08166ede4a2fb48cd29051a71dd72f848a9f",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_SAFETY_RED_TEAM_REPORT.pdf@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/HALLUCINATION_ANALYSIS.md",
+      "bytes": 518,
+      "sha256": "d4fcad5ff492673b2ca0d823112b3004c87ee22d75cb84655d673b8d51d468a0",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/HALLUCINATION_ANALYSIS.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/HUMAN_OVERSIGHT.md",
+      "bytes": 471,
+      "sha256": "603c4b9409401d38872e7dc3157943c3cc37b71a574d2daf99d74090f8d23066",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/HUMAN_OVERSIGHT.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/RED_TEAM_TESTS.json",
+      "bytes": 31142,
+      "sha256": "1436112a46ef6f52ece5b4b78e642469cefa956e088cf0ef7b972ac0a1bf5f4b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/RED_TEAM_TESTS.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/RED_TEAM_TESTS_2026-11-22_current.json",
+      "bytes": 38567,
+      "sha256": "56f5546de8d105eab691b50017b7aea22338e415592be54746985dc99007e18a",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/RED_TEAM_TESTS_2026-11-22_current.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_FLOW_2026-11-22.log",
+      "bytes": 950,
+      "sha256": "fecbac889ef9dd800ffb21f8ed8e696cec98e1cd30d3d7c18578bb6c5ecf862e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_FLOW_2026-11-22.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_GATE_2026-11-22.md",
+      "bytes": 5105,
+      "sha256": "c3e628014703abb888430f2beee6923738e0f196869699c02a9c3eac809244cb",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_GATE_2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_TARGETED_2026-11-22.log",
+      "bytes": 2702,
+      "sha256": "3c98a4012b931c014de701e37beb7640eb07268c8a920cefbfaa1c5956082333",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/EXPORT_INTEGRITY_TARGETED_2026-11-22.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/FHIR_INTEROPERABILITY_TESTS.md",
+      "bytes": 1754,
+      "sha256": "b9f741ba1bef9f372a0fbdcba3cec7b3d4ae29e27e36b6900d9f68012918e024",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/FHIR_INTEROPERABILITY_TESTS.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/FHIR_VALIDATION_REPORT.json",
+      "bytes": 399396,
+      "sha256": "fc1d78af07f14ec557c3743af3c054190b1bf271acf0780eae4313f96a9a7367",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/FHIR_VALIDATION_REPORT.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/INTEGRITY_SCRIBE_SYNTHETIC_OUTPUT_2026-11-22.json",
+      "bytes": 3487,
+      "sha256": "4b51aabb4969b63db66fb336fef30dbd91e590785d3e22a589ae832a6f3f3b1e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/INTEGRITY_SCRIBE_SYNTHETIC_OUTPUT_2026-11-22.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/INTEGRITY_VITALS_SYNTHETIC_OUTPUT_2026-11-22.json",
+      "bytes": 5659,
+      "sha256": "82112c6c2cbfe7474b87d36e1179dffa29f93cc01568ac4ba75af10073d3e490",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/INTEGRITY_VITALS_SYNTHETIC_OUTPUT_2026-11-22.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.abdm-ig.log",
+      "bytes": 2742,
+      "sha256": "1882fe9776f0d24ebe0db7ee654245eab1ba94bc2f3a0e5f0ca62c09df655ede",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.abdm-ig.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.after-fix.log",
+      "bytes": 5121,
+      "sha256": "2c32de74856fafca587be59f8858371baaea74c4ace7bff0bdc7755a12268884",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.after-fix.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.before-fix.log",
+      "bytes": 7356,
+      "sha256": "198b445176ef6be9737b76ffd84eabcf7a987c7c2a62b83c92e900dfd33eb49c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.before-fix.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.md",
+      "bytes": 3889,
+      "sha256": "4cd11bb6cf13154d5a67c9b45441026f2c9291b7e766e69acb28650ff3a60879",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.self-entered-vitals-2026-11-22.log",
+      "bytes": 8738,
+      "sha256": "65d1da9dee63b2534290afc26be4c5bff46308edfe6339bd03993589d3f3a8ba",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.self-entered-vitals-2026-11-22.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.vitals-identity-2026-11-22.log",
+      "bytes": 7606,
+      "sha256": "467da10cdd83f350c8a4f3f360f15cc7c9fb1933f4a97bd50bf445cd0bef974e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.vitals-identity-2026-11-22.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/SELF_ENTERED_VITALS_IDENTITY_SYNTHETIC_FIXTURE_2026-11-22.json",
+      "bytes": 5659,
+      "sha256": "1e0c8caddebb5bd3a2ddb6df61892b903854cd1a7eff0b3eb78ad590ee626b5f",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/SELF_ENTERED_VITALS_IDENTITY_SYNTHETIC_FIXTURE_2026-11-22.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/SELF_ENTERED_VITALS_SYNTHETIC_FIXTURE_2026-11-22.json",
+      "bytes": 4851,
+      "sha256": "366b88c18c68fcb691f289ed83fcb29ff9d44f99cac62e33817d64667335f722",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/SELF_ENTERED_VITALS_SYNTHETIC_FIXTURE_2026-11-22.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/VITALS_IDENTITY_DELTA_2026-11-22.md",
+      "bytes": 4678,
+      "sha256": "1b935a58bc8b7fbb274447a4248a997d76b530e8dd0c166f251900887ddf2f82",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/VITALS_IDENTITY_DELTA_2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/VITALS_IDENTITY_FLOW_2026-11-22.log",
+      "bytes": 567,
+      "sha256": "e85211efd77e2020aa86a87f48e0b68a01c8b31c6a076168a1cb68ccbda1ad08",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/VITALS_IDENTITY_FLOW_2026-11-22.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/01-seeds-excluded.png",
+      "bytes": 100531,
+      "sha256": "1e2c6bc9c59f07c924a872bde0d0cf8597cabf14cd79873eef98abce22346a8e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/01-seeds-excluded.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/03-vitals-blocked.png",
+      "bytes": 150413,
+      "sha256": "45db6edad4fea57bcf45beaca70b0c8eff7872be7ef1f81079f38839c5fa4923",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/03-vitals-blocked.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/04-vitals-success.png",
+      "bytes": 130053,
+      "sha256": "d2e81995d2ed7533e3e265b3972bf22b0b56a5d63611fd83d1168037b2ab5d81",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/04-vitals-success.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/05-scribe-blocked.png",
+      "bytes": 276469,
+      "sha256": "d40548400da271c15bb387014ac3cff18550bd8a514558b4a28a4fb03274fcc9",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/05-scribe-blocked.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/06-scribe-success.png",
+      "bytes": 266856,
+      "sha256": "ed082401f2d4c09639ab770a2235b5b49f518e2032537f9f3de713ca7c16069a",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/export-integrity-ui-2026-11-22/06-scribe-success.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/REPORT.md",
+      "bytes": 3575,
+      "sha256": "5b008fcfa81c442fa27c3344d82f20105a9952c1925e9145dc1c2f6ff7e66322",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/REPORT.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/VALIDATOR_RUN.log",
+      "bytes": 5611,
+      "sha256": "a4b7ddbf80fdea4bfa198ad907283820e33f703a19e8c1d02111b3be79209063",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/VALIDATOR_RUN.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/synthetic-profile-format-bundle.json",
+      "bytes": 7492,
+      "sha256": "b31cba6faeafd3c5bc26b623cbe1892b820a7aae14cdea6f05df28ff7d980c44",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/synthetic-profile-format-bundle.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json",
+      "bytes": 2403,
+      "sha256": "86cfb032c98b3d9b3b848c8e0304a3e7ee03c40c0f12c31d5323a3033ffa3478",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json",
+      "bytes": 2404,
+      "sha256": "58f25dc7b2a45eb59c1d49de5fb5f13fdc0d87337151f2a0ec560992097fd81f",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/01-before-typed-entry.png",
+      "bytes": 439511,
+      "sha256": "0af94887107b8130481156d25f883c4823a2f59cf79596372f4a6ab4f3691a6c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/01-before-typed-entry.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/02-form-empty-date.png",
+      "bytes": 405523,
+      "sha256": "ca4770812d671720a8699a9b403259a2af16845dd3f6e4d58931d3a720b7b1c3",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/02-form-empty-date.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/03-date-required.png",
+      "bytes": 404701,
+      "sha256": "e9b48d3c3e3a9a1422d81ea7506a40f2cffb3037a5032e19afbe03b107e01525",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/03-date-required.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/04-after-typed-entry-unticked.png",
+      "bytes": 436504,
+      "sha256": "1311431be6ea3cbb97e28fb5422a2a683e88ba6480094dd547834c17adc910ab",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/04-after-typed-entry-unticked.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/05-ticked.png",
+      "bytes": 436765,
+      "sha256": "6b9fcffb0e7d05cc78d82db9bf46dca50eee0223768ccd2a62a0bf846b479975",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-export-ui-2026-11-22/05-ticked.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/01-seeds-excluded.png",
+      "bytes": 100531,
+      "sha256": "1e2c6bc9c59f07c924a872bde0d0cf8597cabf14cd79873eef98abce22346a8e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/01-seeds-excluded.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/02-declaration-required.png",
+      "bytes": 48501,
+      "sha256": "a6b2e852853e5c37d266b11d4cccdbab7ffe0e5a8b5dcd2c4df2523469a734f8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/02-declaration-required.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/03-same-label-and-self-unchecked.png",
+      "bytes": 210649,
+      "sha256": "bd4c6b61783e742cdb19f2b0d12989404ea312df0768d67a900fe6fc104c2875",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/03-same-label-and-self-unchecked.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/04-cross-person-refused.png",
+      "bytes": 211072,
+      "sha256": "a7acadf312c7802d8169335930607acf44fc5942d8800bfbb999b901ae8ce54b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/04-cross-person-refused.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/05-export-complete.png",
+      "bytes": 211186,
+      "sha256": "172664132ca068ce554c29748c447890ff1659f461c5f44efd8d01c920e1fadb",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/vitals-identity-ui-2026-11-22/05-export-complete.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT.log",
+      "bytes": 41805,
+      "sha256": "faf8e71c6b2e172f2551eb4025bee85b05e3de3ab0a844c5f9b5a05f72faf902",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT_2026-11-22_current.log",
+      "bytes": 43633,
+      "sha256": "3ba3024c545175eb44571b285624012f823ccabfcabc7a4f9c646496ca234d2b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT_2026-11-22_current.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT_2026-11-22_export-integrity.log",
+      "bytes": 5712,
+      "sha256": "06e9bc7bf2da5d2931b71b99ef6c6cabcf8c2fc2c3d6abb1ed5876512681bc2b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_OUTPUT_2026-11-22_export-integrity.log@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS.json",
+      "bytes": 53250,
+      "sha256": "6d9b58544c2c7abab32a4b82313ffb53f206eaffe83352b5433082611f63a9de",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS.xml",
+      "bytes": 57048,
+      "sha256": "963e3f60ecb7bd229c2142254459ab25a83ed0910609dbbca9cdd77e5cf92caf",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS.xml@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS_2026-11-22_current.json",
+      "bytes": 55514,
+      "sha256": "9107618177e318f566cbe7b985a1620ce5a2438c3fb8fa361b841b62f79a6f41",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS_2026-11-22_current.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS_2026-11-22_current.xml",
+      "bytes": 59471,
+      "sha256": "d7e70464dc9b1668ffa60c5427c79de076370a599b303dcd2c0f9ea61a8d5b94",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/05-ENGINEERING-QUALITY/TEST_RESULTS_2026-11-22_current.xml@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/06-PERFORMANCE/PERFORMANCE_METRICS.json",
+      "bytes": 3493,
+      "sha256": "659ca5216b6cdb45dbb328ab0eb0802ca0f124834958ac9ddf37ced40fc959a0",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/06-PERFORMANCE/PERFORMANCE_METRICS.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/06-PERFORMANCE/PERFORMANCE_REPORT.md",
+      "bytes": 3675,
+      "sha256": "a498f7fae54a0fae85126f8cc8a889a48f3b7095b7027a27d46279521b4a5ef8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/06-PERFORMANCE/PERFORMANCE_REPORT.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/RELEASE-IDENTITY.json",
+      "bytes": 979,
+      "sha256": "a94f2f95249cb2fb3ff568f11680ab214f0f104a7e3af34d7189a24c66f4ec14",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/RELEASE-IDENTITY.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
+      "bytes": 6673,
+      "sha256": "75f277b4f381862b77a409635e07f44d5871d70f57b733234680efc7e035b9b1",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-CURRENT.json",
+      "bytes": 41271,
+      "sha256": "2d5818eb9b7d87ad42e7675ee0046d153c12acd6c6ca1c26c751f5d9e9111f7a",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-CURRENT.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-DIFF.json",
+      "bytes": 1359,
+      "sha256": "5a5c219b44e448a6213ee6dd002bfd6f1b4df8ed403f6ee11bdec5484827df76",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-DIFF.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.json",
+      "bytes": 26048,
+      "sha256": "67c2c6067f61f05d11687886dafa108b647e32f48f231871f56ea7e5a6ef11e4",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.log",
+      "bytes": 17911,
+      "sha256": "a605f105141eb37b191922929513e33278c71caae5aaf13db074e2f59f07e6fa",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.log",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.json",
+      "bytes": 24917,
+      "sha256": "6850f9d1840f3ab1a5bf505bd29e995f20b47307e49486de1f9ab27eb5f3eacc",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.log",
+      "bytes": 17365,
+      "sha256": "9b9ce31630a594abde45ad3576e6df7b97a3173545a57e61200901607fc0345e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.log",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/SPAN_GUARDS.json",
+      "bytes": 28370,
+      "sha256": "684fdc6e748e3c87aa3bd90278d3f1aa9d8c34a661a3103a320a02be393a670c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/SPAN_GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_OUTPUT.log",
+      "bytes": 53316,
+      "sha256": "93cff9ad5e00c74ffb1eca2da683cbca22dd8a564578ca2bd7fdd40fb301af4b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_OUTPUT.log",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.json",
+      "bytes": 66377,
+      "sha256": "769d23b1c1227d8c9407a40057adee6a5478f6ca3e49a91d5fc666528b85cddd",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.json",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.xml",
+      "bytes": 70647,
+      "sha256": "c0fed91cea4691c03c45f6d889dff47f7a4857e4c8ecce9ae0ace212516781a5",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.xml",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/lint.log",
+      "bytes": 147,
+      "sha256": "c665fe4a1953fa814574cac19ef817dca85e54c3eb62044232c132c4276b4cf8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/lint.log",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/build_package.py",
+      "bytes": 5139,
+      "sha256": "7b80872f37d8dd0f05d80e726b1d7f9cb67ea594673ee13dd480b20eda1db1b5",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/build_package.py",
+      "transform": null
+    },
+    {
+      "path": "AYUSWAR-TECHNICAL-EVIDENCE/README.md",
+      "bytes": 4835,
+      "sha256": "3bd0de198017579796a3c4410c8614b6de296f795031fb189ca63e37b98ef13d",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/README.md",
+      "transform": "New packaging index, with self-ZIP link replaced for archive use"
+    },
+    {
+      "path": "LICENSE",
+      "bytes": 10423,
+      "sha256": "610c08766a46c8763ee0d918db22f85762991e3b112efca8354859cdb91a8193",
+      "sourcePath": "LICENSE@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "NOTICE",
+      "bytes": 1558,
+      "sha256": "6f3e693e3f8fc8161ecff6be1b14552ec79e94f65274c45556168c73c90d7a36",
+      "sourcePath": "NOTICE@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "RELEASE-IDENTITY.json",
+      "bytes": 979,
+      "sha256": "a94f2f95249cb2fb3ff568f11680ab214f0f104a7e3af34d7189a24c66f4ec14",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/RELEASE-IDENTITY.json",
+      "transform": null
+    },
+    {
+      "path": "START-HERE.md",
+      "bytes": 6673,
+      "sha256": "75f277b4f381862b77a409635e07f44d5871d70f57b733234680efc7e035b9b1",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/START-HERE.md",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/ADVERSARIAL-CURRENT.json",
+      "bytes": 41271,
+      "sha256": "2d5818eb9b7d87ad42e7675ee0046d153c12acd6c6ca1c26c751f5d9e9111f7a",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-CURRENT.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/ADVERSARIAL-DIFF.json",
+      "bytes": 1359,
+      "sha256": "5a5c219b44e448a6213ee6dd002bfd6f1b4df8ed403f6ee11bdec5484827df76",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/ADVERSARIAL-DIFF.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.json",
+      "bytes": 26048,
+      "sha256": "67c2c6067f61f05d11687886dafa108b647e32f48f231871f56ea7e5a6ef11e4",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.log",
+      "bytes": 17911,
+      "sha256": "a605f105141eb37b191922929513e33278c71caae5aaf13db074e2f59f07e6fa",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-FINAL42-SPAN-GUARDS.log",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/PRE-FIX-SPAN-GUARDS.json",
+      "bytes": 24917,
+      "sha256": "6850f9d1840f3ab1a5bf505bd29e995f20b47307e49486de1f9ab27eb5f3eacc",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/PRE-FIX-SPAN-GUARDS.log",
+      "bytes": 17365,
+      "sha256": "9b9ce31630a594abde45ad3576e6df7b97a3173545a57e61200901607fc0345e",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/PRE-FIX-SPAN-GUARDS.log",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/SPAN_GUARDS.json",
+      "bytes": 28370,
+      "sha256": "684fdc6e748e3c87aa3bd90278d3f1aa9d8c34a661a3103a320a02be393a670c",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/SPAN_GUARDS.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/TEST_OUTPUT.log",
+      "bytes": 53316,
+      "sha256": "93cff9ad5e00c74ffb1eca2da683cbca22dd8a564578ca2bd7fdd40fb301af4b",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_OUTPUT.log",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/TEST_RESULTS.json",
+      "bytes": 66377,
+      "sha256": "769d23b1c1227d8c9407a40057adee6a5478f6ca3e49a91d5fc666528b85cddd",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.json",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/TEST_RESULTS.xml",
+      "bytes": 70647,
+      "sha256": "c0fed91cea4691c03c45f6d889dff47f7a4857e4c8ecce9ae0ace212516781a5",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/TEST_RESULTS.xml",
+      "transform": null
+    },
+    {
+      "path": "accepted-651cf79/lint.log",
+      "bytes": 147,
+      "sha256": "c665fe4a1953fa814574cac19ef817dca85e54c3eb62044232c132c4276b4cf8",
+      "sourcePath": "AYUSWAR-TECHNICAL-EVIDENCE/07-EVALUATOR-HANDOFF/2026-11-22-v0.3.42/accepted-651cf79/lint.log",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/NOTICE.md",
+      "bytes": 1724,
+      "sha256": "2731448eb50fc05371a006fbf91c40864102c5a109b27e113c86f4151a291789",
+      "sourcePath": "benchmarks/NOTICE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/RESULTS.md",
+      "bytes": 15658,
+      "sha256": "b6d2252be0ea26b41ae4849523c7ecfc79d0922838bcc408bdbd4bf34e52eac9",
+      "sourcePath": "benchmarks/RESULTS.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/ayuswar_stt_results_browser_stt.csv",
+      "bytes": 10941,
+      "sha256": "72f25e7ca9e44e94769611d2c08fe771e7991c16b56715a86393f09663cc1e29",
+      "sourcePath": "benchmarks/ayuswar_stt_results_browser_stt.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/ayuswar_stt_results_gnani_prisma.csv",
+      "bytes": 10463,
+      "sha256": "54103d0cd9214ac7dbdc44543a46e869649b34facbc92222370bcf3b1f36e5fa",
+      "sourcePath": "benchmarks/ayuswar_stt_results_gnani_prisma.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/benchmark_evon.py",
+      "bytes": 9330,
+      "sha256": "4f30a22f297853fbc2937a78552840b7e2412ba2a2a7e88d47e67f3c532c3dd5",
+      "sourcePath": "benchmarks/benchmark_evon.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/benchmark_tts.py",
+      "bytes": 8683,
+      "sha256": "41d5dd9f39a36f0906ebb4f5b7ec4d6df8211ec427664dd2a79357743e89aa1f",
+      "sourcePath": "benchmarks/benchmark_tts.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/ayuswar_50_eval_hyps_sample.csv",
+      "bytes": 10245,
+      "sha256": "359fa87cf31f2b614b845c460f7816d83b9fbc61008cb21e8bca1057077962fe",
+      "sourcePath": "benchmarks/data/ayuswar_50_eval_hyps_sample.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/ayuswar_50_eval_hyps_template.csv",
+      "bytes": 478,
+      "sha256": "c4f0075f7f2e52339798d33127eb794502bf2b632dfa05efa6764d546ab3288a",
+      "sourcePath": "benchmarks/data/ayuswar_50_eval_hyps_template.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/ayuswar_50_eval_refs.csv",
+      "bytes": 10430,
+      "sha256": "1bf50ed7ee5dd8ec4baa8056d60abe38696147677b3204bdb00dce9098dc57df",
+      "sourcePath": "benchmarks/data/ayuswar_50_eval_refs.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/ayuswar_evon_results.csv",
+      "bytes": 1334,
+      "sha256": "04faf74b39093cde5828eee11ec6c6b432cd435bd123d26fa83d3ce3b6739a2e",
+      "sourcePath": "benchmarks/data/ayuswar_evon_results.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/ayuswar_tts_results.csv",
+      "bytes": 1015,
+      "sha256": "0af532a337a54fbdd65f7fe64550eca4ba48c6ee11927f039e0cf07ca54fcab4",
+      "sourcePath": "benchmarks/data/ayuswar_tts_results.csv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/fleurs_format_fixture.tsv",
+      "bytes": 652,
+      "sha256": "1df29c77cd3129ce3411169025e528c98d9b6a29b8dcbfb02857224bb5d4fa32",
+      "sourcePath": "benchmarks/data/fleurs_format_fixture.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/fleurs_format_fixture_hyps.tsv",
+      "bytes": 180,
+      "sha256": "1370f3d34e646cb576dde261bd3034aee7d4d6dff70ce3aa1a53c7ec2f3124e3",
+      "sourcePath": "benchmarks/data/fleurs_format_fixture_hyps.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/synthetic_fhir/syn-patient-001.json",
+      "bytes": 4603,
+      "sha256": "a0f19d20260ec816d6554ac2818a68bea39c9ab537a9987c37cb63b75ad342bb",
+      "sourcePath": "benchmarks/data/synthetic_fhir/syn-patient-001.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/synthetic_fhir/syn-patient-002.json",
+      "bytes": 4651,
+      "sha256": "60db3a986d2eb6aee2cccf812909a6cd9bf6d1ae20d5ac876b46a3ecbf3fd8d9",
+      "sourcePath": "benchmarks/data/synthetic_fhir/syn-patient-002.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/data/synthetic_fhir/syn-patient-003.json",
+      "bytes": 4624,
+      "sha256": "3f222153a4f2d814c4209c846b116ae7991392c233d7f1c7d410f76b99d21241",
+      "sourcePath": "benchmarks/data/synthetic_fhir/syn-patient-003.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/fhir/README.md",
+      "bytes": 2544,
+      "sha256": "aadbdff12a36550b7d02a903560bd7b300497f181b7dd3cbe295089fcc7087ff",
+      "sourcePath": "benchmarks/fhir/README.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/fhir/fhir.schema.json",
+      "bytes": 3386892,
+      "sha256": "2230406893b4cf002a4ee1e5e2bbeca22ac5d2d4931b3e9ef7b9594bbc376a01",
+      "sourcePath": "benchmarks/fhir/fhir.schema.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/fleurs_eval.py",
+      "bytes": 5451,
+      "sha256": "c0cbff82c64621c46489ce1983edbd6f728bf1c257402204dccad100311205bb",
+      "sourcePath": "benchmarks/fleurs_eval.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/fleurs_local_asr.mjs",
+      "bytes": 5767,
+      "sha256": "26da210c6aeda32ddbca3fafd3215afb3994e1c4b5b7a19b3db2042bea53b8ac",
+      "sourcePath": "benchmarks/fleurs_local_asr.mjs@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/mix_controlled_noise.py",
+      "bytes": 6698,
+      "sha256": "56a4c24087c981e7b2b423949ff397d99f85b466f1c73e9b106cd8e522c250f5",
+      "sourcePath": "benchmarks/mix_controlled_noise.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv",
+      "bytes": 76861,
+      "sha256": "92da6530a7301be9013a81602b415c6bb33c70a64f7db822226dc6065a3243fd",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-hi_in-dev.json",
+      "bytes": 766,
+      "sha256": "014c12ded14b3ec3108ea14a5c48b792a355357c8b529046a24668c574356fe3",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-hi_in-dev.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-hi_in-test.hyps.tsv",
+      "bytes": 145244,
+      "sha256": "f6f99803a96b72693715bd33fcd9f6fd4205a822c959b793f7ceb680b096d8dd",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-hi_in-test.hyps.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-hi_in-test.json",
+      "bytes": 770,
+      "sha256": "695b9e0aea22428276207bcbcc125dc7097125173d03f08cfc011468b1eadc2c",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-hi_in-test.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-te_in-dev.hyps.tsv",
+      "bytes": 110717,
+      "sha256": "120731a962858ba4d1627bad4da52abe3d550599e705652fa513746566bea96e",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-te_in-dev.hyps.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-te_in-dev.json",
+      "bytes": 761,
+      "sha256": "7ef7237147c14eacc2dd568356c59c438d50453bf3636b77fa76630515df41cc",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-te_in-dev.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-te_in-test.hyps.tsv",
+      "bytes": 178345,
+      "sha256": "ce1aeecf36c425352b92d3e30d0f35abc07303f8387920fd9feadb11bcbc9ca1",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-te_in-test.hyps.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-fleurs-te_in-test.json",
+      "bytes": 765,
+      "sha256": "eb59995e858f5f381f4e84fa67eddb6b1dafb7227a14fcc54ff12957038ab639",
+      "sourcePath": "benchmarks/results/2026-11-22-fleurs-te_in-test.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr10.tsv",
+      "bytes": 45672,
+      "sha256": "33861af67a89b625029c7aa859139cb2edce01c7797236323a15929708f2cc73",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr10.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr20.tsv",
+      "bytes": 45820,
+      "sha256": "5ed5a73c647a5b2402ea1a6ad7f36bb5999acf1f083aee84c43d803bf601acc2",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr20.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr5.tsv",
+      "bytes": 45219,
+      "sha256": "977c64859fabbbecd0c1a3387192c6e78d378c304715dbf2abb0637711b0af61",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-babble-snr5.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-clean.tsv",
+      "bytes": 45831,
+      "sha256": "a573ae13a9c8ccc3a6771eabfd19f64537d1ad52d9026372506fc839e99ae8b9",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/hyps-clean.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/mix_manifest.json",
+      "bytes": 164486,
+      "sha256": "4b3ec289d66e64099b8a4d78c47b89c2452a97718eb369bddc371ce88f5be54a",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/mix_manifest.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/refs-sub120.tsv",
+      "bytes": 143590,
+      "sha256": "c88926dca4e678cc490b841c3cc8e1a5eb8a397cc1e7bba44806f6cad4418748",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/refs-sub120.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-clean.json",
+      "bytes": 716,
+      "sha256": "df5d5f8bf961b137799a1a7722a39eec37562d2cc41b8a8cdcf44bba5fabec56",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-clean.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr10.json",
+      "bytes": 721,
+      "sha256": "1ea9e940da60dc545579abfe51c1f9c74a191a0c727d7d1018442bae498d7d7b",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr10.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr20.json",
+      "bytes": 720,
+      "sha256": "eebbfa62b4fa8e9201f894087276c74df85fe5f6c10f645f17f57faf13fd0c2f",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr20.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr5.json",
+      "bytes": 713,
+      "sha256": "a6cb9752fca27e332f47e660a7a52110e9bbce74df73ef0405727d9faec444d0",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-te_in-test-sub120/score-snr5.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-clean.tsv",
+      "bytes": 45831,
+      "sha256": "a573ae13a9c8ccc3a6771eabfd19f64537d1ad52d9026372506fc839e99ae8b9",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-clean.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr10.tsv",
+      "bytes": 45866,
+      "sha256": "5b4907fe57a0218a0c87faf40ebe5a48816918eb9e8f14b2c25b33aa383587e6",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr10.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr20.tsv",
+      "bytes": 45881,
+      "sha256": "3d9483ab33036464b698a69f18774db698825d7066f05e54adac2891bfacdd20",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr20.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr5.tsv",
+      "bytes": 45625,
+      "sha256": "8167ad0794748e4a669aee1868117f420e6b0f5ab6fceaad92dfb8a4fee9bd1a",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/hyps-walla-snr5.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/mix_manifest.json",
+      "bytes": 169604,
+      "sha256": "d3f267571d50bd99e8ce8918b22c48d51728b91751342a7a7449c869a4b0681a",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/mix_manifest.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/refs-sub120.tsv",
+      "bytes": 143590,
+      "sha256": "c88926dca4e678cc490b841c3cc8e1a5eb8a397cc1e7bba44806f6cad4418748",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/refs-sub120.tsv@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-clean.json",
+      "bytes": 716,
+      "sha256": "df5d5f8bf961b137799a1a7722a39eec37562d2cc41b8a8cdcf44bba5fabec56",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-clean.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr10.json",
+      "bytes": 727,
+      "sha256": "8afc649ba42aa54d07c3054bb38c96b9b7048e14d5435be790fe24da351338c8",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr10.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr20.json",
+      "bytes": 727,
+      "sha256": "0e9959665e3a3b387c619248b421d65b53def1cc379ad40e9a33e0e2b79f3d4d",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr20.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr5.json",
+      "bytes": 727,
+      "sha256": "94ead189086b9e86fbbada1c45d90ea612f6e754267e14fe2f0e1aca79d35518",
+      "sourcePath": "benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/score-snr5.json@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/run_stt_benchmark.py",
+      "bytes": 6706,
+      "sha256": "f624fc03b7e4a93140d0a783d248cdd967baa6aa56c3c72d259f7f67a32c93ca",
+      "sourcePath": "benchmarks/run_stt_benchmark.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "benchmarks/stt_metrics.py",
+      "bytes": 2351,
+      "sha256": "111f789a18547538d08044b172014d96b00d9bd1028f623221328e8cc2b2998b",
+      "sourcePath": "benchmarks/stt_metrics.py@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.35-debug.md",
+      "bytes": 2514,
+      "sha256": "f325ec7d3b313368ae5eca7cb6ce0bf5f61f78600af11c59d7b3b4a05f521746",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.35-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.36-debug.md",
+      "bytes": 2949,
+      "sha256": "4ab1b9ce290cf82ed0460dc707205c70fbf34bed69962ba629fefae6b8f86e94",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.36-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.37-debug.md",
+      "bytes": 3536,
+      "sha256": "06c8fac5b7a7ad1d2c72cfae4c607ea1b7766043d8a36e6bc2d49af4a0ae2684",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.37-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.38-debug.md",
+      "bytes": 3180,
+      "sha256": "b0997534e1006741b057a5950f89cde5618d5e1f04cfe1da1766bf02de270e4c",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.38-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.39-debug.md",
+      "bytes": 4034,
+      "sha256": "fb5cf49bb5baffed99309485a7e61937ba4813859ae6b2fba49b59a9e4a30646",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.39-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.40-debug.md",
+      "bytes": 4599,
+      "sha256": "18892ed749542a68652b1ff1aa50d7b0c2e9bee8e38c7598d8c28e8ad8566617",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.40-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.41-debug.md",
+      "bytes": 5432,
+      "sha256": "bf1b272bc260d442605f5f6e2407b05f76405627cd942eb3af887ca4670efedc",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.41-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22-v0.3.42-debug.md",
+      "bytes": 5318,
+      "sha256": "2cfd2f927adc5837ff3bc216231cc66d51a648cc9f915a77c6c0059c7c4046e2",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22-v0.3.42-debug.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-PROVENANCE-2026-11-22.md",
+      "bytes": 5294,
+      "sha256": "0282380d59dab5e8468f5f3d0ca968e3733815b05953b5f0c46cf3c4d29d4d00",
+      "sourcePath": "docs/APK-PROVENANCE-2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/APK-SIZE-PERF.md",
+      "bytes": 4611,
+      "sha256": "403718c037973b8dca53a3e86eed3664d2f63e21f98032a7016edc28f5b193e5",
+      "sourcePath": "docs/APK-SIZE-PERF.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/ASSET-PROVENANCE.md",
+      "bytes": 2590,
+      "sha256": "0153b1fca211d278edc473170282a5209d08b3751fc3ff70d523a27c12047d22",
+      "sourcePath": "docs/ASSET-PROVENANCE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/AUDIO-RX-SOFTWARE-CONSISTENCY-2026-11-22.md",
+      "bytes": 4244,
+      "sha256": "fbfb2756e5fe48e33796ae7b7826f9ffa254eeb5c5dc0215303fe49fb86bdb46",
+      "sourcePath": "docs/AUDIO-RX-SOFTWARE-CONSISTENCY-2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md",
+      "bytes": 5326,
+      "sha256": "30fc4eb752828bd4c5355e16514c9d2e8fcf5fb5216fe38d6ed7d368077ceb6c",
+      "sourcePath": "docs/CLINICAL-EVIDENCE-ENGINE-PLAN.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/CLINICAL_EVIDENCE_DATA_MODEL.md",
+      "bytes": 3869,
+      "sha256": "d43a8fddcf90311445d68f9548e1bceb68db2ce1d29595218196e6078fe5eff7",
+      "sourcePath": "docs/CLINICAL_EVIDENCE_DATA_MODEL.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/CLINICAL_EVIDENCE_ENGINE.md",
+      "bytes": 7798,
+      "sha256": "ba4cbb091070e9c57f72fc04e216090158e5f2e980c4f28fefe43d18ba2f7109",
+      "sourcePath": "docs/CLINICAL_EVIDENCE_ENGINE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/CLINICAL_EVIDENCE_EVALUATION.md",
+      "bytes": 6240,
+      "sha256": "2dc30f9c1109a2cd431a9a643088ad216e4d5f233fe763d936647203cd5d8ca6",
+      "sourcePath": "docs/CLINICAL_EVIDENCE_EVALUATION.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/CLINICAL_EVIDENCE_SECURITY.md",
+      "bytes": 3508,
+      "sha256": "e5d82e586d4ebdca42f392234677fc44b52dd9344eabb270e95ac910eb403b30",
+      "sourcePath": "docs/CLINICAL_EVIDENCE_SECURITY.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/DEPLOYMENT_GUIDE.md",
+      "bytes": 4232,
+      "sha256": "948d5d84a396d4d47d3cc115af452b0a567b1331660cab5e73691d4aa433d524",
+      "sourcePath": "docs/DEPLOYMENT_GUIDE.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/EVAL-DATA-PLAN.md",
+      "bytes": 6759,
+      "sha256": "13ed8c3c754ac12f6e6dd77d414ac95b65af535d186df75be7618afaab5918f5",
+      "sourcePath": "docs/EVAL-DATA-PLAN.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/EVIDENCE-SPAN-GUARDS-2026-11-22.md",
+      "bytes": 4278,
+      "sha256": "abf24755e9bc0694c0218d36145498c8e7aebc158a0de54e2f1b4e56016ae7fd",
+      "sourcePath": "docs/EVIDENCE-SPAN-GUARDS-2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/OFFLINE-SYNC-IDEMPOTENCY.md",
+      "bytes": 1820,
+      "sha256": "109ed49e99c6108952880a02c6ea6c66a07a4a6fa69b7a4c9e3b279ad8df35f9",
+      "sourcePath": "docs/OFFLINE-SYNC-IDEMPOTENCY.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/PROPOSAL-COMPLETION-MATRIX-2026-11-22.md",
+      "bytes": 22684,
+      "sha256": "a5f519c7373c597d354b2aaf8a9a1fff48b405bfd034f2d9fafe4591a7957605",
+      "sourcePath": "docs/PROPOSAL-COMPLETION-MATRIX-2026-11-22.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/RELEASE-READINESS.md",
+      "bytes": 2665,
+      "sha256": "f60a9feb2668a3becb68449975824af625871db459528372b4137dd578b76ab3",
+      "sourcePath": "docs/RELEASE-READINESS.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/audit-2026-11-21.md",
+      "bytes": 43606,
+      "sha256": "52c9c795aa7aca9d3093bab048bf7a4fd93c5beff435bbc7665070c485a6bfad",
+      "sourcePath": "docs/audit-2026-11-21.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/pitch/AyuSwar_AI_Solution_Pitch.pdf",
+      "bytes": 618545,
+      "sha256": "b41fc8d0a619aa502b5ceaf64b384d75e8d6266074f10801a1a1dbd2043ceb55",
+      "sourcePath": "docs/pitch/AyuSwar_AI_Solution_Pitch.pdf@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/pitch/SOLUTION_PITCH.md",
+      "bytes": 5766,
+      "sha256": "1ddc806e0ad603b5f6725b2ecc3270a8bc9e753362ec9d5f8703c50d506509ac",
+      "sourcePath": "docs/pitch/SOLUTION_PITCH.md@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/pitch/pitch.html",
+      "bytes": 222562,
+      "sha256": "178faa8630fc4414c6f52bc175fcc76d4bbd32cfac76bd39079bf6725ddde157",
+      "sourcePath": "docs/pitch/pitch.html@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/pitch/pitch_plan_a.html",
+      "bytes": 222562,
+      "sha256": "178faa8630fc4414c6f52bc175fcc76d4bbd32cfac76bd39079bf6725ddde157",
+      "sourcePath": "docs/pitch/pitch_plan_a.html@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s01_home.png",
+      "bytes": 679036,
+      "sha256": "604ed67fd641c8b27d31058ced9b303cf9dac57275489481238fa1847a339a8a",
+      "sourcePath": "docs/screenshots/s01_home.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s02_scanner.png",
+      "bytes": 449274,
+      "sha256": "30d9676f2e5859add1455833ebec2a7d3e1137952d375cb9a08713a44208fe7b",
+      "sourcePath": "docs/screenshots/s02_scanner.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s03_patient_portal.png",
+      "bytes": 381929,
+      "sha256": "d853a0017e3e2efa22ee1377f3190a0a58d4b97aadd2325bfefb77c13ca19688",
+      "sourcePath": "docs/screenshots/s03_patient_portal.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s04_patient_appointments.png",
+      "bytes": 295026,
+      "sha256": "af66bbc5a29173ef6f29de1d323b318a08cca47b5eeb9d35ad3f59350c0f40d3",
+      "sourcePath": "docs/screenshots/s04_patient_appointments.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s05_patient_reports_lens.png",
+      "bytes": 312748,
+      "sha256": "dbbbc46f275a122cc9284cdd92584383b1d31baed49850f0cb3c97c9d2cf95b3",
+      "sourcePath": "docs/screenshots/s05_patient_reports_lens.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s06_doctor_portal.png",
+      "bytes": 570768,
+      "sha256": "d2292a0b771ae8dcd6893cfdd033a2bd889937b068c9bb39d563af82193b8915",
+      "sourcePath": "docs/screenshots/s06_doctor_portal.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s07_doctor_prescriptions_lens.png",
+      "bytes": 377337,
+      "sha256": "e49cbfbfb8f7df851c4af43b51ae2a604cf01ea8fa849899be9c8e8fdb81c438",
+      "sourcePath": "docs/screenshots/s07_doctor_prescriptions_lens.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s08_clinical_console_mobile.png",
+      "bytes": 357631,
+      "sha256": "589aee96b82438bbd7a0a0154c3b0721c7efe2d2d3fe3e74ec25f19eabda09b1",
+      "sourcePath": "docs/screenshots/s08_clinical_console_mobile.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s09_emergency.png",
+      "bytes": 372211,
+      "sha256": "fe413a5c009f180a7acf1ac913b853f7c2aa4bef3e7bd47804d993c97de50255",
+      "sourcePath": "docs/screenshots/s09_emergency.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s10_menu_drawer.png",
+      "bytes": 273741,
+      "sha256": "17b69423981a178bd247beb2d5f3a7708feed58ebbd6d5dddacccdd2ca9599c1",
+      "sourcePath": "docs/screenshots/s10_menu_drawer.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s11_pillvision_modal.png",
+      "bytes": 216827,
+      "sha256": "d2574c48d343e5685b195fcf6b3d6d49cb9b7e0d9173db2c3926b5fc6e99eb92",
+      "sourcePath": "docs/screenshots/s11_pillvision_modal.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "docs/screenshots/s12_vitals_modal.png",
+      "bytes": 405578,
+      "sha256": "a5fc950c2b61429c59f2640cbfac50959201c1b4f57f809480c56c6c39173de4",
+      "sourcePath": "docs/screenshots/s12_vitals_modal.png@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/package.json",
+      "bytes": 33,
+      "sha256": "a90fc33418afa2b9cbf4768524b021135b965ecdf993457505bfae3ac44a8428",
+      "sourcePath": "Generated module wrapper for the 42-check replay only",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/src/services/clinicalEvidenceEngine.js",
+      "bytes": 11494,
+      "sha256": "7edb4334d9c25275b68ff7d59620987f9f2a6a237e6acf0d793eb86b17172d92",
+      "sourcePath": "src/services/clinicalEvidenceEngine.js@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/src/services/clinicalEvidencePersistence.js",
+      "bytes": 6547,
+      "sha256": "c965ddf8d0a7b0f1450ab0f348380f74a7fa8146724861c6074390c09ea0e439",
+      "sourcePath": "src/services/clinicalEvidencePersistence.js@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/src/services/clinicalEvidenceTypes.js",
+      "bytes": 5512,
+      "sha256": "32529310e84cfd2b8607884a00880d5bc3ca5430ba83036a21113461f372b646",
+      "sourcePath": "src/services/clinicalEvidenceTypes.js@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/src/services/clinicalEvidenceVerifier.js",
+      "bytes": 9852,
+      "sha256": "e3eeae9dfb548f1198b7e75f4cc9698f82e4f359dbc7e14aee1fb34ff92caa04",
+      "sourcePath": "src/services/clinicalEvidenceVerifier.js@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    },
+    {
+      "path": "replay-span-guards/test/phase53_evidence_span_guards.test.js",
+      "bytes": 12186,
+      "sha256": "308be22b2cdccf0c31965aacc18749a00f277a070f82c721ee9328abc9c17f26",
+      "sourcePath": "test/phase53_evidence_span_guards.test.js@843ea7bf2b26a6d983f665e1488cb17f86d2010c",
+      "transform": null
+    }
+  ]
+}
