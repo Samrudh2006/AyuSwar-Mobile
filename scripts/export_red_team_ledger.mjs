@@ -44,7 +44,16 @@ for (const line of log.split('\n')) {
   }
 }
 if (scenarios.length === 0) throw new Error('no guard-phase scenarios found in the log - wrong log?');
-if (fails > 0) throw new Error(`${fails} failing guard checks in this run - refusing to export a red run as evidence`);
+if (fails > 0) {
+  // Refuse to publish a red run as a passing ledger, but RETAIN the raw log:
+  // failed evidence must stay visible next to the refused output path.
+  const { copyFileSync } = await import('node:fs');
+  const stamp = new Date().toISOString().slice(0, 10);
+  const retained = outPath.replace(/\.json$/, `.FAILED-RUN-${stamp}.log`);
+  mkdirSync(path.dirname(outPath), { recursive: true });
+  copyFileSync(logPath, retained);
+  throw new Error(`${fails} failing guard checks in this run - no ledger exported; raw log retained at ${retained} (failed evidence, not a passing ledger)`);
+}
 const ledger = {
   scope: 'Executed deterministic safety checks from the recorded suite run. Text-level guards; NOT the proposed 30-50 audio-level red-team lab with per-scenario clinical narratives. Scenario names are verbatim from the run log.',
   generatedFrom: evidenceRel,
