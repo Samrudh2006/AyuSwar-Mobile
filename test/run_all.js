@@ -66,7 +66,7 @@ const suites = [
   { name: 'Phase 41: Clinical Evidence Review UI', file: 'test/clinical_evidence_ui.test.js', count: 6 },
   { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 8 },
   { name: 'Phase 43: Deterministic SOAP Sections', file: 'test/phase43_soap_deterministic_sections.test.js', count: 10 },
-  { name: 'Phase 44: Spoken-Vital Context Safety', file: 'test/phase44_soap_objective_contexts.test.js', count: 18 }
+  { name: 'Phase 44: Spoken-Vital Context Safety', file: 'test/phase44_soap_objective_contexts.test.js', count: 21 }
 ];
 
 console.clear();

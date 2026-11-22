@@ -28,6 +28,8 @@ check('Hindi trailing negation excluded', spokenVitalPairs('बीपी 140/90 
 check('question excluded', spokenVitalPairs('was your BP 140/90 yesterday?').length === 0);
 check('hypothetical excluded', spokenVitalPairs('if your BP goes above 160/100, call me').length === 0);
 check('Hindi hypothetical excluded', spokenVitalPairs('अगर बीपी 150/95 हो जाए तो बताना').length === 0);
+check('Telugu post-value conditional excluded', spokenVitalPairs('బీపీ 120/80 అయితే డాక్టర్‌కు చెప్పండి').length === 0);
+check('Telugu post-value ఉంటే conditional excluded', spokenVitalPairs('బీపీ 160/100 ఉంటే వెంటనే రండి').length === 0);
 
 // 4. Historical mentions keep historical scope, never imply a current vital
 {
@@ -52,6 +54,8 @@ check('plain pulse still HR', spokenVitalPairs('pulse 72').some(v => v.label ===
   check('question mark in another sentence does not exclude', q.some(v => v.label === 'BP 120/80'));
   const multi = spokenVitalPairs('SpO2 98% and heart rate 72 bpm today');
   check('current SpO2 and HR kept', multi.some(v => v.label === 'SpO2 98%') && multi.some(v => v.label === 'HR 72 bpm'));
+  const current = spokenVitalPairs('బీపీ 120/80 ఉంది, డాక్టర్ చూశారు');
+  check('Telugu current mention without conditional still kept', current.some(v => v.label === 'BP 120/80' && v.scope === 'current'));
 }
 
 // 7. Subjective boundary: explicit label exists and the console renders it

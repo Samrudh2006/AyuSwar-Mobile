@@ -77,8 +77,9 @@ function classifyContext(transcript, matchStart, matchEnd) {
   // Negation: within ~60 chars before the keyword or ~30 chars after the value
   // (Indic negation follows the noun/value).
   if (NEGATION_RE.test(before.slice(-60)) || NEGATION_RE.test(after.slice(0, 30))) return 'excluded';
-  // Hypothetical phrasing in the clause before the value.
-  if (HYPOTHETICAL_RE.test(before)) return 'excluded';
+  // Hypothetical phrasing in the clause around the value. Indic conditionals
+  // commonly FOLLOW the value (అయితే/ఉంటే/ఏమైనా), so both sides are checked.
+  if (HYPOTHETICAL_RE.test(before) || HYPOTHETICAL_RE.test(after.slice(0, 40))) return 'excluded';
   // Historical scope: keep, but label it as spoken history.
   if (HISTORICAL_RE.test(before) || HISTORICAL_RE.test(after.slice(0, 40))) return 'historical';
   return 'current';
