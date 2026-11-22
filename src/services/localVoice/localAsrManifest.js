@@ -3,11 +3,12 @@
  *
  * Model: AI4Bharat Telugu IndicConformer (CTC), community ONNX conversion by
  * OpenVoiceOS (repo pinned below). The SHIPPING weights are the pilot-qualified
- * local MatMul/Gemm-only dynamic-INT8 derivative of the pinned FP32 original:
- * the repo's own int8 file fails ConvInteger on the tested CPU/WASM runtimes,
- * so the pilot generated this derivative with onnxruntime 1.23.2
- * quantize_dynamic(MatMul,Gemm). It is NOT an AI4Bharat or OpenVoiceOS
- * official artifact - retain this disclosure with the pack.
+ * local dynamic-INT8 derivative of the pinned FP32 original (file name marks
+ * MatMul-node quantization): the repo's own int8 file fails ConvInteger on the
+ * tested CPU/WASM runtimes, so the pilot generated this derivative locally.
+ * The exact quantizer version, settings and op list were NOT recorded. It is
+ * NOT an AI4Bharat or OpenVoiceOS official artifact - retain this disclosure
+ * with the pack.
  *
  * Preprocessor: nemo80_conv.onnx from the onnx-asr==0.12.0 package (MIT),
  * convolutional spectral preprocessing (no browser-unsupported STFT ops).
@@ -63,7 +64,7 @@ export const ASR_MODELS = Object.freeze({
       originalRepo: 'OpenVoiceOS/ai4bharat-indicconformer-te-onnx',
       originalRevision: 'd952dec2a1d256a1569cdfc9a9615cba05a1a2e3',
       originalFp32Sha256: '3ed6bfab7afc58a7b6924c6f45c060c75e7d45172dd624e51c38482f882514cc',
-      derivative: 'local MatMul/Gemm dynamic INT8 quantization (onnxruntime 1.23.2); not an official AI4Bharat/OpenVoiceOS artifact',
+      derivative: 'local dynamic INT8 quantization of the pinned fp32 (MatMul-node per file name; exact tool version/config unrecorded); not an official AI4Bharat/OpenVoiceOS artifact',
       baseModel: 'ai4bharat/indicconformer_stt_te_hybrid_ctc_rnnt_large',
       license: 'MIT (conversion card and original model family); onnx-asr preprocessor MIT'
     },
