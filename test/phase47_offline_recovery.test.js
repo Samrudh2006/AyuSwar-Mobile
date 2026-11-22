@@ -166,6 +166,17 @@ await record('error categories are bounded; raw upstream text/identifiers never 
   }
 });
 
+await record('legacy raw error string is scrubbed on next sync cycle, downgraded to category', async () => {
+  seedLS([mk('RL1', { syncAttempts: 2, lastSyncError: 'HTTP 500 for abha 91-4521-8820-9102' })]);
+  failInsert();
+  await sync.syncAllPendingRecords();
+  const raw = globalThis.localStorage.getItem(QUEUE_KEY);
+  assert(!raw.includes('91-4521'), 'legacy raw identifier still in stored queue');
+  const rec = readLS().find((r) => r.id === 'RL1');
+  assert(!('lastSyncError' in rec), 'raw lastSyncError key survived');
+  assert(rec.lastSyncErrorCategory === 'http-5xx', `category ${rec.lastSyncErrorCategory}`);
+});
+
 await record('successful sync still clears the record and attention', async () => {
   seedLS([mk('R6', { syncAttempts: 3, lastSyncErrorCategory: 'http-5xx' })]);
   supabase.from = () => ({ insert: () => Promise.resolve({ data: [{}], error: null }) });

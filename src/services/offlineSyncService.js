@@ -283,7 +283,15 @@ const syncAllPendingRecordsInner = async () => {
     } catch {}
   }
   try {
-    const remaining = getLocalStorageQueue().filter((item) => !syncedIds.includes(item.id));
+    // Scrub any legacy raw error strings on retained rows (downgrade to a
+    // category); one full sync cycle leaves no raw upstream text in storage.
+    const remaining = getLocalStorageQueue()
+      .filter((item) => !syncedIds.includes(item.id))
+      .map((item) => {
+        if (!item.lastSyncError) return item;
+        const { lastSyncError, ...rest } = item;
+        return { ...rest, lastSyncErrorCategory: item.lastSyncErrorCategory || 'unknown' };
+      });
     if (remaining.length > 0) localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(remaining));
     else localStorage.removeItem(STORAGE_FALLBACK_KEY);
   } catch {}
@@ -317,16 +325,17 @@ function categorizeSyncError(err) {
 
 async function markSyncFailure(id, err) {
   const category = categorizeSyncError(err);
-  const patch = (rec) =>
-    rec && rec.id === id
-      ? {
-          ...rec,
-          syncAttempts: (rec.syncAttempts || 0) + 1,
-          lastSyncErrorCategory: category,
-          lastSyncError: undefined,
-          lastSyncAttemptAt: new Date().toISOString()
-        }
-      : rec;
+  const patch = (rec) => {
+    if (!rec || rec.id !== id) return rec;
+    // Drop any legacy raw error string outright; only the category survives.
+    const { lastSyncError, ...rest } = rec;
+    return {
+      ...rest,
+      syncAttempts: (rec.syncAttempts || 0) + 1,
+      lastSyncErrorCategory: category,
+      lastSyncAttemptAt: new Date().toISOString()
+    };
+  };
   const db = await openOfflineDatabase();
   if (db) {
     await new Promise((resolve) => {
