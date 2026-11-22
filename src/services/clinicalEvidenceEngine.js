@@ -121,9 +121,11 @@ const B = '(?<![\\p{L}\\p{N}])', E = '(?![\\p{L}\\p{N}])';
 // Medication citation forms: common public drug names plus the two Telugu
 // transliterations used in the synthetic fixtures, normalized to their
 // English canonical forms so terminology lookup (e.g. RxNorm) operates on
-// one language. Mention vs instruction is NOT distinguished on the
-// fallback path - all matches are MEDICATION_MENTIONED; speaker-role
-// reclassification exists only on the model path.
+// one language. The map is a hand-built LOOKUP AID for terminology
+// resolution, not validated translation accuracy. Mention vs instruction
+// is NOT distinguished on the fallback path - all matches are
+// MEDICATION_MENTIONED; speaker-role reclassification exists only on the
+// model path.
 const MEDICATION_NORMALIZATION = {
   'పెన్సిలిన్': 'penicillin',
   'పారాసిటమాల్': 'paracetamol'

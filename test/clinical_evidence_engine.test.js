@@ -230,6 +230,50 @@ await record('fallback labelled deterministically', async () => {
   assert(out.candidates.every(c => c.extractionMethod === EXTRACTION_METHOD.DETERMINISTIC_FALLBACK), 'candidates labelled');
 });
 
+// 14b. Fallback medication aliases: mentions never promoted to instructions
+await record('fallback medication mention never becomes instruction', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = extractWithFallback(s);
+  const meds = out.candidates.filter(c => c.entityType.startsWith('MEDICATION'));
+  assert(meds.length >= 3, 'fallback finds the fixture medication mentions');
+  assert(meds.every(c => c.entityType === ENTITY_TYPE.MEDICATION_MENTIONED),
+    'fallback emits mentions only, never instructions - a mention is not a prescription');
+  const doctorMed = meds.find(c => c.sourceQuote === 'paracetamol' && s.utterances.find(u => u.utteranceId === c.utteranceId).speaker === SPEAKER.DOCTOR);
+  assert(doctorMed && doctorMed.entityType === ENTITY_TYPE.MEDICATION_MENTIONED,
+    'even a doctor-uttered drug name stays a mention on the fallback path');
+});
+
+// 14c. Negated medication-allergy context: mention flagged, never exported
+await record('negated medication mention flagged and never exported', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = extractWithFallback(s);
+  const pen = out.candidates.find(c => c.entityType === ENTITY_TYPE.MEDICATION_MENTIONED && c.normalizedConcept === 'penicillin');
+  assert(pen, 'Telugu penicillin alias extracted from the negated allergy utterance');
+  assert(pen.sourceQuote === 'పెన్సిలిన్', 'source quote stays the original Telugu span');
+  const { verified } = verifyEvidence(s, out.candidates);
+  const vpen = verified.find(v => v.evidenceId === pen.evidenceId);
+  assert(vpen.isNegatedContext === true, 'negation marker (లేదు) near span flags the mention as ruled-out context');
+  const approved = applyReviewAction(vpen, { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  assert(selectApprovedForExport([approved]).length === 0,
+    'negated medication mention never exported as a positive claim, even when approved');
+});
+
+// 14d. Fallback allergy candidate in the same utterance is likewise negation-flagged
+await record('fallback negated allergy flagged and never exported', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = extractWithFallback(s);
+  const allergy = out.candidates.find(c => c.entityType === ENTITY_TYPE.ALLERGY && c.normalizedConcept === 'అలర్జీ');
+  assert(allergy, 'fallback finds the allergy keyword in the negated utterance');
+  const { verified } = verifyEvidence(s, out.candidates);
+  const vall = verified.find(v => v.evidenceId === allergy.evidenceId);
+  assert(vall.isNegatedContext === true, 'fallback-path allergy candidate flagged negated');
+  const approved = applyReviewAction(vall, { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  assert(selectApprovedForExport([approved]).length === 0, 'negated fallback allergy never exported');
+});
+
 // 15. Prompt injection inside transcript
 await record('transcript injection does not bypass verification', async () => {
   const s = mkSession();

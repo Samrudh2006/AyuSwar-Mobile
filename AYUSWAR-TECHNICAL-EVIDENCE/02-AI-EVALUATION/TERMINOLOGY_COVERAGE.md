@@ -36,9 +36,10 @@ context.
 - RxNorm covers US drug terminology with English names; Indian-market brand
   names and formulations are under-represented.
 - Telugu-script drug forms reach RxNorm only through the extractor's
-  lexicon normalization map; unmapped transliterations fail closed (no
-  match, no guess), consistent with the extractor's documented
-  citation-form-only scope.
+  lexicon normalization map, a hand-built lookup aid, not validated
+  translation accuracy; unmapped transliterations fail closed (no match,
+  no guess), consistent with the extractor's documented citation-form-only
+  scope.
 - Synthetic fixtures and public drug names only; no patient data was sent
   to the external API.
 
