@@ -9,6 +9,15 @@
   "Babble_1.wav",
   "Babble_4.wav"
  ],
+ "noise_sha256": {
+  "Babble_1.wav": "d7a64dd995a92f4790308dbff196332585eec502734ac737bfc9e2ac317dacd6",
+  "Babble_4.wav": "efe74a9f9a011c13de39e16bef362f0d60f574ce416d11b6058662bef312a80d"
+ },
+ "noise_upstream": {
+  "repo": "https://github.com/microsoft/MS-SNSD",
+  "revision": "fe61c4ba0d9ac8dd7e23d719cc79f8947e1dc742",
+  "files_uploaded_in": "2bb469c2765658dd0d7e527959876c909e14e21b"
+ },
  "method": "whole-clip speech RMS (no VAD), random noise offset, int16 clamp",
  "clips": [
   {

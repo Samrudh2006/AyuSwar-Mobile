@@ -7,10 +7,11 @@ offline fallback ASR degrade as crowd-noise SNR drops", nothing more. It is
 not recorded clinical noise and does not simulate the in-app capture path.
 
 Noise source: Microsoft MS-SNSD (https://github.com/microsoft/MS-SNSD),
-MIT license, noise_test/Babble_*.wav (16 kHz mono int16). DEMAND (CC BY-SA
-4.0) was preferred but Zenodo is unreachable from the build sandbox (HTTP
-403 on record and file routes); provenance and this substitution are
-recorded in the report.
+noise_test/Babble_*.wav (16 kHz mono int16). LICENSE UNRESOLVED: the repo
+README licenses code as MIT but noise data under upstream terms (Freesound
+CC0 selections or DEMAND CC BY-SA 3.0) with no per-file mapping, and the
+Babble files carry no metadata. Output of this script is provisional and
+not for publication until re-run with a clearly licensed noise source.
 
 Method (kept deliberately simple and fully recorded):
 - Per clip, a seeded RNG (master seed + clip filename) picks the noise file
@@ -92,7 +93,13 @@ def main():
     if not clips:
         sys.exit(f'no clips in {args.audio_dir}')
 
+    import hashlib as _hl
+    noise_pins = {n: _hl.sha256(open(os.path.join(args.noise_dir, n), 'rb').read()).hexdigest() for n, _ in noises}
     manifest = {'seed': args.seed, 'snrs': args.snrs, 'noise_files': [n for n, _ in noises],
+                'noise_sha256': noise_pins,
+                'noise_upstream': {'repo': 'https://github.com/microsoft/MS-SNSD',
+                                   'revision': 'fe61c4ba0d9ac8dd7e23d719cc79f8947e1dc742',
+                                   'files_uploaded_in': '2bb469c2765658dd0d7e527959876c909e14e21b'},
                 'method': 'whole-clip speech RMS (no VAD), random noise offset, int16 clamp',
                 'clips': []}
     for snr in args.snrs:
