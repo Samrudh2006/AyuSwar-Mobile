@@ -1,0 +1,675 @@
+=== Phase 1: API Boundary Security (test/api_security.test.js) ===
+--- RUNNING PHASE 1: API BOUNDARY SECURITY VERIFICATION TESTS ---
+✓ Test 1 Passed: Upstream host allowlist strictly permits approved domains and blocks unapproved hosts.
+✓ Test 2 Passed: In-memory rate limiter strictly enforces request thresholds.
+✓ Test 3 Passed: Error sanitizer strictly strips secrets and internal error traces.
+✓ Test 4 Passed: [Static Contract] Header-supplied keys and custom base URLs eliminated from all routes.
+✓ Test 5 Passed: [Static Contract] Client UI and localStorage verified free of API key storage.
+✓ Test 6 Passed: [Security Audit] Zero provider secrets or server credentials present in client source or built bundle.
+======================================================================
+ALL 6 PHASE 1 API BOUNDARY SECURITY TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 2: Server Triage Boundary (test/server_triage.test.js) ===
+--- RUNNING PHASE 2: SERVER TRIAGE BOUNDARY SYNTHETIC TESTS ---
+✓ Test 1 Passed: Synthetic Telugu triage scenarios correctly mapped to urgency floor (RED/YELLOW/GREEN).
+✓ Test 2 Passed: Synthetic Hindi triage scenarios correctly mapped to urgency floor.
+✓ Test 3 Passed: Synthetic English triage scenarios correctly mapped to urgency floor.
+✓ Test 4 Passed: [Critical Safety Invariant] Model advisory output NEVER downgrades urgency below rule floor.
+✓ Test 5 Passed: Unconfigured model and fallback pathways safely maintain deterministic safeguard rules.
+======================================================================
+ALL 5 PHASE 2 SERVER TRIAGE SYNTHETIC VERIFICATION TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 3: Voice Integration & Honest Status (test/voice_integration.test.js) ===
+--- RUNNING PHASE 3: VOICE INTEGRATION & HONEST STATUS TESTS ---
+✓ Test 1 Passed: Gnani status route implements honest 3-state schema (LIVE | UNAVAILABLE | UNCONFIGURED).
+✓ Test 2 Passed: Evon status route implements honest 3-state schema (LIVE | UNAVAILABLE | UNCONFIGURED).
+✓ Test 3 Passed: IndicSpeechService defaults strictly to safe browser fallback without spoofing live status.
+✓ Test 4 Passed: IndicSpeechService transitions to LIVE only upon verified roundtrip.
+✓ Test 5 Passed: Zero client secrets or header credentials detected across voice services.
+======================================================================
+ALL 5 PHASE 3 VOICE INTEGRATION & HONEST STATUS TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 4: Database & Auth Security (local demo mode) (test/database_auth.test.js) ===
+--- RUNNING PHASE 4: DATABASE & AUTHENTICATION TESTS ---
+✓ Test 1 Passed: unconfigured Supabase accurately degrades to labelled local demo persistence.
+✓ Test 2 Passed: zero server service-role keys bundled or referenced in frontend code.
+✓ Test 3 Passed: demo OTP request and verification stay explicit and synthetic.
+✓ Test 4 Passed: server-side token verification endpoint properly configured.
+↷ Test 5 Skipped: Supabase migration tree is absent; local demo persistence is the active tested mode.
+↷ Test 6 Skipped: feedback migration is absent with the optional Supabase tree.
+======================================================================
+PHASE 4 DATABASE & AUTHENTICATION CHECKS COMPLETE (4 pass, 2 conditional skips).
+======================================================================
+
+=== Phase 5: Mobile UI/UX & Safe Area Spacing (test/mobile_ui.test.js) ===
+--- RUNNING PHASE 5: MOBILE UI/UX DECLUTTER & ACCESSIBILITY TESTS ---
+✓ Test 1 Passed: HeroLanding implements responsive markup hooks for mobile viewports.
+✓ Test 2 Passed: Mobile CSS strictly eliminates hero image overlay on mobile viewports (360px & 390px).
+✓ Test 3 Passed: Mobile landing text is tightened and single dominant action is prioritized above the fold.
+✓ Test 4 Passed: Floating assistant clears bottom navigation bar with safe-area spacing.
+✓ Test 5 Passed: Mobile bottom navigation strictly enforces 5 items with verified active routes.
+======================================================================
+ALL 5 PHASE 5 MOBILE UI/UX & NAVIGATION TESTS PASSED! 🎉
+======================================================================
+✓ Test 6 Passed: OPD note textareas auto-grow so the sheet shows the full note like the paper reference.
+
+=== Phase 6: Static Code Contract Assertions (test/audit_assertions.test.js) ===
+--- RUNNING AYUSWAR AI CONTRACT & AUDIT VERIFICATION TESTS ---
+✓ Test 1 Passed: Shared persistent language configured with en-IN default & te-IN support.
+✓ Test 2 Passed: kaggleClinicalDataset does not default non-matches to COPD.
+✓ Test 3 Passed: 65% confidence floor removed and marked non-diagnostic prototype.
+✓ Test 4 Passed: Autonomous drug dosing removed from fallback logic.
+✓ Test 5 Passed: Emergency telemetry explicitly watermarked as simulation.
+✓ Test 6 Passed: Secret credentials isolated from client bundle.
+✓ Test 7 Passed: Public index.html metadata verified honest.
+✓ Test 8 Passed: Zero banned claims, 58% token claims, or unverified metrics found across src/ and README.md.
+✓ Test 9 Passed: [Static Code Contract] gnaniEvonService contains zero hardcoded/mocked Evon replies and uses server routes only.
+✓ Test 10 Passed: [Static Code Contract] Emergency RED sample labels run without fake Evon attribution.
+✓ Test 11 Passed: [Static Code Contract] Server-side Evon routes and dev proxy middleware properly configured.
+✓ Test 12 Passed: [Static Code Contract] Client-side codebase verified completely free of frontend Evon keys or tokens.
+✓ Test 13 Passed: [Static Code Contract] Evon model specification verified as 30B total (~3.5B active/token) with zero 32B claims.
+✓ Test 14 Passed: [Static Code Contract] Zero unmeasured hardcoded tokenizer calculations across codebase.
+✓ Test 15 Passed: [Static Code Contract] Honest fallback labeling enforced with zero simulated <reasoning> traces.
+✓ Test 16 Passed: [Static Code Contract] Phase 1 & 2 — 16kHz PCM audio pipeline & Indic fillers configured.
+✓ Test 17 Passed: [Static Code Contract] Phase 3, 4 & 7 — Adaptive prosody, panic modulation & bandpass filter verified.
+✓ Test 18 Passed: [Static Code Contract] Phase 5 & 14 — Code-mixed clinical normalizer & DISHA memory scrubber verified.
+✓ Test 19 Passed: [Static Code Contract] Phase 6 — Cellular SIP 108/112 telephony gateway bridge verified.
+✓ Test 20 Passed: [Static Code Contract] Sanjivani-108 full-duplex live talk, barge-in interrupt & RMS UI verified.
+✓ Test 21 Passed: [Static Code Contract] Vercel serverless functions (api/gnani/status, stt, tts) verified.
+✓ Test 22 Passed: [Static Code Contract] Zero client secrets & honest live OPD Scribe provider flow verified.
+✓ Test 23 Passed: [Static Code Contract] Free config-only Groq status endpoint verified.
+======================================================================
+ALL 23 STATIC CODE CONTRACT & INTEGRITY TESTS PASSED! 🎉
+NOTE: These 23 tests verify architectural isolation, serverless Vercel
+deployment, and zero-leak code integrity for Gnani Prisma STT & Timbre TTS.
+======================================================================
+
+=== Phase 7: Clinical Safety Sentinel (test/clinical_workflow.test.js) ===
+--- RUNNING AYUSWAR AI CLINICAL WORKFLOW & SAFETY INTEGRATION TESTS ---
+✓ Test 1 Passed: Pharmacovigilance DDI Sentinel detects Warfarin + Ciprofloxacin Critical Bleeding Risk.
+✓ Test 2 Passed: Pharmacovigilance DDI Sentinel detects Dual RAAS Blockade Contraindication.
+✓ Test 3 Passed: MEWS-shaped sample scoring returns deterministic synthetic display bands.
+✓ Test 4 Passed: Jan Aushadhi generic reference is identity-only (ingredient+strength+form) and never invents substitutions.
+✓ Test 5 Passed: Indic Vernacular Ontology translates regional metaphors directly to ICD-10 / SNOMED-CT (Telugu, Hindi, Bengali, Marathi).
+✓ Test 6 Passed: FHIR R4 JSON bundle shape smoke test (Bundle, Patient, Practitioner, Condition, MedicationRequest).
+✓ Test 7 Passed: Diagnostic reports registry contains structured findings across multiple clinical modalities.
+======================================================================
+ALL 7 CLINICAL WORKFLOW & SAFETY INTEGRATION TESTS PASSED! 🎉
+======================================================================
+
+
+=== Phase 8: Gnani Indic Voice Pipeline (test/gnani_pipeline.test.js) ===
+--- RUNNING PHASE 8: GNANI INDIC VOICE PIPELINE & METAPHOR SUITE ---
+✓ Test 1 Passed: Gnani Timbre TTS streaming buffer (RIFF 0xFFFFFFFF) repair logic accurately recalculates chunk bounds.
+✓ Test 2 Passed: Gnani Prisma STT PCM WAV container satisfies 16kHz 16-bit mono ASR specifications.
+✓ Test 3 Passed: Regional Indic Metaphor Crosswalk (9 colloquial phrases) correctly maps to ICD-10 clinical concepts.
+✓ Test 4 Passed: Indic Speech Service validates BCP-47 Indic locales (te, hi, ta, kn) with safe defaults.
+✓ Test 5 Passed: Gnani Evon 30B Sovereign Reasoner architectural metadata contract verified.
+✓ Test 6 Passed: TTS synthesis payload size constraints strictly bound at 2,000 characters.
+======================================================================
+ALL 6 PHASE 8 GNANI INDIC VOICE PIPELINE TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 9: Acoustic DSP Physical Tone Gates (test/stage2_acoustic_verify.test.js) ===
+=====================================================
+STAGE 2 ACCEPTANCE GATES VERIFICATION
+=====================================================
+
+--- CHECK (b): Individual Single-Tone Pitch Accuracy Tests ---
+Tone 120 Hz (REGRESSION CASE): Expected 120 Hz | Measured 120 Hz | Error 0.00 Hz -> PASS (+/- 2 Hz tolerance)
+Tone 280 Hz (REGRESSION CASE): Expected 280 Hz | Measured 280 Hz | Error 0.00 Hz -> PASS (+/- 2 Hz tolerance)
+Tone 110 Hz (Fresh check): Expected 110 Hz | Measured 110 Hz | Error 0.00 Hz -> PASS (+/- 2 Hz tolerance)
+Tone 220 Hz (Fresh check): Expected 220 Hz | Measured 220 Hz | Error 0.00 Hz -> PASS (+/- 2 Hz tolerance)
+
+--- REFERENCE SYNTHETIC VOWEL (F0 = 120 Hz) ---
+Synthetic Vowel (F0 120 Hz): Expected 120 Hz | Measured 120 Hz | Error 0.00 Hz -> PASS
+
+--- CHECK (c): Silent / Empty Input Test ---
+Silent input test: Threw honest error "Audio signal is silent or empty. Please record or upload audible sound." -> PASS (Lands in ERROR state, never healthy verdict)
+Empty input test: Threw honest error "Audio input is empty. Please provide valid audio." -> PASS
+
+--- CHECK (d): Unvoiced-But-Valid Input Test ---
+Unvoiced input test: Status=SUCCESS, isVoiced=false, PitchF0=null (honest unavailable), Centroid=11043 Hz -> PASS
+
+--- CHECK (a & e): State Machine Invariants ---
+State machine definitions: Verified [AWAITING_AUDIO, RECORDING, ANALYSING, SUCCESS, ERROR] -> PASS
+
+=====================================================
+ALL STAGE 2 ACCEPTANCE GATES PASSED! 🎉
+=====================================================
+
+=== Phase 10: Advanced Telephony & Clinical VAD (test/advanced_telephony_vad.test.js) ===
+--- RUNNING ADVANCED TELEPHONY & CLINICAL VAD SUITE ---
+✓ Test 1 Passed: Clinical VAD accurately rejects room silence floor (<0.008 RMS).
+✓ Test 2 Passed: Clinical VAD recognizes human voiced formant harmonics (Probability: 56.2%).
+✓ Test 3 Passed: WebRTC SIP 108 Gateway complies with RFC 3261 INVITE/BYE telephony signaling.
+✓ Test 4 Passed: Gnani WebSocket Streaming client safely implements zero-crash fallback invariant.
+======================================================================
+ALL 4 ADVANCED TELEPHONY, VAD & STREAMING TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 11: Hero Flow Turn-Taking & Mutex Isolation (test/turn_taking_hero_flow.test.js) ===
+--- RUNNING PHASE 11: HERO FLOW TURN-TAKING & ROBUSTNESS TESTS ---
+✓ Test 1 Passed: Audio coordinator guarantees single-channel mutex with zero audio overlap.
+✓ Test 2 Passed: Stale asynchronous AI reasoning responses are discarded when session evolves.
+✓ Test 3 Passed: Clinician edits strictly persist and override static defaults across summaries.
+✓ Test 4 Passed: Supplied transcripts are unchanged; heuristic roles handle the noise fixture.
+✓ Test 5 Passed: Prescription DSC signing is strictly idempotent with zero duplicate state.
+✓ Test 6 Passed: In-flight speech barge-in aborts active requests and recovers state to LISTENING.
+✓ Test 7 Passed: Provider labels strictly track active playback source without spoofing live status.
+✓ Test 8 Passed: Session isolation guarantees zero state leak between consultations, and edits persist.
+======================================================================
+ALL 8 HERO FLOW TURN-TAKING & ROBUSTNESS TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 12: Global App Localization & Solutions Nav (test/localization_and_solutions_nav.test.js) ===
+--- RUNNING PHASE 12: GLOBAL APP LOCALIZATION & SOLUTIONS MENU VERIFICATION ---
+✓ Test 1 Passed: [Nav Integrity] Solutions dropdown verified to contain exactly 4 entries; Sanjivani retained as dedicated emergency module with GIS access.
+✓ Test 2 Passed: [Dictionary Parity] 100% key parity verified across all 6 supported locales (en-IN, te-IN, hi-IN, ta-IN, kn-IN, mr-IN).
+✓ Test 3 Passed: [Resolution & Interpolation] Robust parameter interpolation and hierarchical fallback verified without throwing.
+✓ Test 4 Passed: [Formatters] Locale-aware date, number, and currency utilities verified.
+✓ Test 5 Passed: [Error Sanitization] Server status codes (401, 413, 429, 503) verified mapped to localized user-friendly messages.
+✓ Test 6 Passed: [Sync Contract] Single shared locale verified across routes, localStorage, document language, and public/portal views.
+======================================================================
+ALL 6 PHASE 12 GLOBAL LOCALIZATION & SOLUTIONS NAV TESTS PASSED! 🎉
+======================================================================
+
+=== Phase 13: Rendered-DOM Localization & Route Truth (test/rendered_dom_i18n.test.js) ===
+======================================================================
+PHASE 13: RENDERED-DOM LOCALIZATION, /ABOUT ROUTE & CLAIM TRUTH TESTS
+======================================================================
+
+▸ Test 1: DOM document.documentElement.lang syncs to BCP 47 tag...
+  ✓ Test 1 Passed: document.documentElement.lang matches "te-IN"
+
+▸ Test 2: Landing page renders Telugu headline & CTAs when te-IN active...
+  ✓ Test 2 Passed: Hero title is dynamically wired to t("landing.heroTitle")
+
+▸ Test 3: DoctorPortal renders Telugu tabs and clinical headers...
+  ✓ Test 3 Passed: DoctorPortal.jsx headers are wired to localized translation keys
+
+▸ Test 4: /about route renders dedicated AboutView (not ArchitectureView)...
+  ✓ Test 4 Passed: /about route correctly maps to AboutView
+
+▸ Test 5: Dropdown and Navigation copy contains zero misleading live telemetry claims...
+  ✓ Test 5 Passed: Navbar copy honestly states simulated telemetry
+
+======================================================================
+ALL PHASE 13 RENDERED-DOM & ROUTE TRUTH TESTS PASSED! 🎉
+======================================================================
+
+
+=== Phase 14: Audio, Assistant & Layout Diagnostics (test/audio_assistant_diagnostics.test.js) ===
+
+======================================================================
+PHASE 14 AUDIT: AUDIO, ASSISTANT, LAYOUT & SANITIZED DIAGNOSTICS
+======================================================================
+
+▸ Test 1: Verifying speech service prevents canned WAV playback for individual dosage requests...
+  ✓ Canned WAV playback strictly gated to explicit demo mode (isDemo === true).
+  ✓ Fast unconfigured degradation caching verified.
+
+▸ Test 2: Verifying Evon client query contains AbortSignal.timeout and caching...
+  ✓ AbortSignal.timeout verified in Evon client call.
+  ✓ Fast unconfigured status caching verified.
+
+▸ Test 3: Verifying zero fabricated doctor notifications in assistant fallbacks...
+  ✓ Fabricated clinical claims eliminated from FloatingAssistant fallbacks.
+  ✓ Fabricated clinical claims eliminated from PatientPortal fallbacks.
+
+▸ Test 4: Verifying diagnostic logger enforces privacy and zero secret leakage...
+  ✓ Sanitized stage logging verified with zero private/sensitive fields.
+
+▸ Test 5: Verifying AudioRx Studio WhatsApp dispatch button does not overflow container box...
+  ✓ Share actions are fully contained within the card container.
+  ✓ Overflow constraints and box-sizing verified.
+
+▸ Test 6: Verifying Synchronized Karaoke uses speech boundary/progress and does not terminate audio prematurely...
+  ✓ Word-level onboundary tracking verified in Indic Speech Service.
+  ✓ Premature audio cut-off eliminated from karaoke timers.
+  ✓ Real-time onTimeUpdate karaoke synchronization verified.
+
+======================================================================
+ALL PHASE 14 AUDIO, ASSISTANT, LAYOUT & KARAOKE TESTS PASSED! 🎉
+======================================================================
+
+
+=== Phase 15: Data Provenance & STT Metric Engine (test/data_provenance.test.js) ===
+  ✓ PMBJP reference carries live source URL and fetch date
+  ✓ PMBJP entries: match typing honest, matched rows fully sourced
+  ✓ STT benchmark runs stdlib-only with per-language breakdown
+  ✓ stt_metrics known-answer identities hold
+  ✓ fleurs_eval ingests FLEURS-format TSV with known-answer WER and pair accounting
+data_provenance: 5/5 passed
+
+=== Phase 16: Synthetic FHIR R4 Bundles (test/fhir_synthetic.test.js) ===
+  ✓ synthetic bundles exist with required resources and synthetic marker
+  ✓ base FHIR R4 validation passes (conditional: needs fhir.resources)
+fhir_synthetic: 2/2 passed (0 conditional skip)
+
+=== Phase 17: Provider-Proxy Caller Authorization (test/api_caller_auth.test.js) ===
+  ✓ demo mode: /api/gnani/stt refuses without forwarding (503)
+  ✓ production mode: missing bearer token -> 401
+  ✓ all 6 quota routes gate upstream behind verifyCallerAuthorization
+  ✓ clients attach Supabase session JWT via authHeaders()
+  ✓ QR code value carries no patient identifiers in the URL
+api_caller_auth: 5/5 passed
+
+=== Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity (test/status_cors_devproxy.test.js) ===
+[API Audit] 2026-11-22T11:53:47.844Z | GET /api/gnani/status | 200 | 0ms | Config-only status (GET never probes, no spend)
+[API Audit] 2026-11-22T11:53:47.848Z | GET /api/evon/status | 200 | 0ms | Config-only status (caller not authenticated)
+[API Audit] 2026-11-22T11:53:47.849Z | GET /api/groq/status | 200 | 0ms | GROQ_API_KEY unset
+✓ gnani/status GET: 200 free config-only CONFIGURED_NOT_PROBED, zero upstream fetches (never bills, any caller)
+✓ evon/status unauthenticated: 200 config-only AUTH_REQUIRED, zero upstream fetches
+✓ gnani/status + evon/status: caller-auth gate precedes upstream probe (static order)
+✓ CORS preflight: OPTIONS from https://localhost -> 204 with echoed origin
+✓ CORS preflight: disallowed origin gets 204 with NO Access-Control-Allow-Origin
+✓ CORS: normal GET from capacitor://localhost carries echoed ACAO
+✓ No stale opt-in API_REQUIRE_AUTH comments remain in api/ or src/
+✓ vite.config.js: dev middleware delegates to api/ handlers, no inline upstream fetch
+✓ EmergencyMap: heading number-coerced, hospital name/eta escaped in innerHTML
+status_cors_devproxy: 9/9 passed
+
+=== Phase 19: PDF Text-Layer Import & 390px Embed Contracts (test/pdf_import.test.js) ===
+--- RUNNING PHASE: PDF TEXT-LAYER IMPORT & 390PX EMBED CONTRACTS ---
+✓ Test 1 Passed: PDF import service enforces size, page, MIME and eval-safety gates.
+✓ Test 2 Passed: PDF import error taxonomy is specific; cancellation is caller-side via task destroy.
+✓ Test 3 Passed: PDF import carries per-page provenance, truncation flag and no-text detection.
+✓ Test 4 Passed: PDF text passes an explicit editable review gate before entering results.
+✓ Test 5 Passed: PDF imports are labeled as unverified PDF text everywhere, never as OCR.
+✓ Test 6 Passed: image-only pipeline UI stays out of PDF import mode; route header is capability-accurate.
+✓ Test 7 Passed: every PDF import failure has specific, actionable user-facing copy.
+✓ Test 8 Passed: embedded console avatar keeps its size and the language bridge stacks on narrow screens.
+✓ Test 9 Passed: guard and page-cap helpers behave correctly when executed (not just asserted from source).
+
+=== Phase 19b: OCR Legibility Gate (test/prescription_ocr_legibility.test.js) ===
+--- RUNNING PHASE: OCR LEGIBILITY GATE ---
+✓ Test 1 Passed: measured garbage OCR outputs are rejected by the legibility gate.
+✓ Test 2 Passed: readable OCR output passes the gate.
+✓ Test 3 Passed: gate is wired before matching and routes to the honest retry state.
+✓ Test 4 Passed: unmatched scans no longer display an unrelated medicine photo.
+✓ Test 5 Passed: every terminal error path clears the scanning flag.
+✓ Test 6 Passed: panel heading is phase-aware on terminal states.
+✓ Test 7 Passed: terminal phases keep the status panel and retry control mounted.
+
+=== Phase 20: OPD Ticket Modal & Portal Placement (test/ticket_portal.test.js) ===
+--- RUNNING PHASE: OPD TICKET MODAL & PORTAL PLACEMENT CONTRACTS ---
+✓ Test 1 Passed: ticket QR carries only the booking reference and is generated on-device.
+✓ Test 2 Passed: the ticket never invents patient demographics, refs, dates or tokens.
+✓ Test 3 Passed: ticket keeps honest prototype framing on screen and in print.
+✓ Test 4 Passed: every queue appointment card opens the reference ticket with its own data.
+✓ Test 5 Passed: demo booking is reachable from an empty queue with an exact render-time date.
+✓ Test 6 Passed: QR reference lookup resolves locally with an honest miss state and 6-locale strings.
+✓ Test 7 Passed: scan route is on-device BarcodeDetector with honest fallback states.
+
+=== Phase 39: axe-core Route Accessibility (dev-only) (test/accessibility_routes.test.js) ===
+--- RUNNING PHASE 39: AXE-CORE ROUTE ACCESSIBILITY CHECKS (DEV-ONLY) ---
+✓ Test 1 Passed: no CRITICAL axe violations on any primary route at 390px.
+✓ Test 2 Passed: scanner and ticket routes stay critical-free at 320px and 430px.
+✓ Test 3 Passed: scanner form controls all expose accessible names.
+✓ Test 4 Passed: axe JSON report written to test/reports/axe-report.json (rule, route, viewport, selector).
+
+=== Phase 19: Offline Consent & Encrypted Storage (test/offline_consent_storage.test.js) ===
+✓ no consent: saveOfflineRecord throws OfflineDataConsentRequiredError and stores nothing
+✓ no consent: cacheClinicalRecord throws OfflineDataConsentRequiredError
+✓ with consent: queue payload is encrypted at rest and decrypts on read
+✓ consent record with stale version does not satisfy the gate
+✓ tampered ciphertext: marked decryptError, skipped by sync, queue intact
+✓ AES-GCM uses a unique IV per record
+✓ legacy plaintext rows pass through decryption unchanged
+✓ static: 'online' listener cannot auto-upload without explicit approval
+offline_consent_storage: 8/8 passed
+
+=== Phase 20: DoctorPortal Offline Consent Regression & Purge (test/doctor_portal_offline_consent.test.js) ===
+✓ queueSampleRuralEncounters without consent: returns CONSENT_REQUIRED, never throws
+✓ queueSampleRuralEncounters with consent: queues 3 encrypted records
+✓ DoctorPortal: consent prompt UI, grant-and-retry, toggle revert are wired
+✓ DoctorPortal: Purge Local Records button backed by full-scope purge with honest aftermath
+✓ purgeAllOfflineClinicalData: clears records and recomputes honest remaining count
+✓ purge failure path: failed deletions are reported with honest remaining count
+doctor_portal_offline_consent: 6/6 passed
+
+=== Phase 21: Recording Consent Gate, Modal & Withdraw (test/phase21_recording_consent.test.js) ===
+  PASS  assertRecordingConsent throws without grant and passes after explicit grant
+  PASS  revokeRecordingConsent clears the grant; wording change requires re-consent
+  PASS  consultationRecorder asserts consent before getUserMedia
+  PASS  MClinical renders accessible floating consent modal (backdrop, aria-modal, Escape, focus)
+  PASS  MClinical maps consent error to modal and wires withdraw to revokeRecordingConsent
+  PASS  mobile.css carries consent modal, record-page clearance and labeled helpdesk pill
+Phase 21: 6/6 recording-consent checks passed
+
+=== Phase 22: PIN App Lock & Withdraw Semantics (test/phase22_app_lock.test.js) ===
+  PASS  enableAppLock enforces 4-6 digit PIN and verifies only the correct PIN
+  PASS  disableAppLock requires the correct PIN and clears the record
+  PASS  MobileRoot renders AppLockScreen on start when the lock is enabled
+  PASS  MShell drawer exposes a reachable App lock settings entry
+  PASS  withdraw discards pending recording and copy matches behavior
+  PASS  FloatingAssistant FAB uses assistant-mark-original.png
+  PASS  verifyAppLockGuarded bounds wrong attempts with cooldown
+  PASS  lockout expires and success clears guard
+  PASS  MobileRoot relocks on visibilitychange/pagehide
+  PASS  consultationRecorder noise gate is conservative and export-time only
+  PASS  recording UI shows noise gate toggle and honest indicator
+  PASS  assistant placeholder is demo-safe
+  PASS  lock settings localizes Close and documents forgot-PIN data loss
+Phase 22: 13/13 app-lock/withdraw checks passed
+
+=== Phase 23: Native Keystore At-Rest Protection (test/phase23_keystore.test.js) ===
+  PASS  AyuSwarKeystorePlugin has required surface and honest hardware reporting
+  PASS  MainActivity registers the Keystore plugin
+  PASS  keystoreNative bridge guards native availability and reports verbatim
+  PASS  secureOfflineStorage uses native path with honest fallback
+  PASS  WebCrypto fallback still round trips when native is absent
+  PASS  rejecting Keystore plugin degrades to labeled WebCrypto fallback
+  PASS  Keystore envelope decrypt failure is honest and unrecoverable
+  PASS  purgeDeviceKeys reports both keys explicitly
+  PASS  native platform without plugin reports failed, erasure incomplete
+  PASS  erasureComplete true only when both keys gone
+Phase 23: 10/10 keystore checks passed
+
+=== Phase 24: On-Device-First Speech Recognition (test/phase24_ondevice_asr.test.js) ===
+  PASS  plugin prefers on-device and reports the actual recognizer
+  PASS  network recognition is gated behind explicit allowNetwork
+  PASS  plugin mirrors the community speech-recognition contract
+  PASS  MainActivity registers the speech plugin
+  PASS  ayuswarSpeech bridge guards availability and mirrors the API
+  PASS  service prefers on-device engine and labels provider from the actual report
+Phase 24: 6/6 on-device ASR checks passed
+
+=== Phase 25: Background Recording Foreground Service (test/phase25_background_recording.test.js) ===
+  PASS  foreground service is microphone-type with notification, holds no audio
+  PASS  background audio plugin wraps the service with honest failure
+  PASS  manifest declares microphone foreground service and permissions
+  PASS  MainActivity registers the background audio plugin
+  PASS  backgroundAudio bridge is guarded and degrades safely
+  PASS  MClinical pairs background service lifecycle with recording and consent
+  PASS  unmount stops the foreground service, not just the recorder
+Phase 25: 7/7 background-recording checks passed
+
+=== Phase 26: Network Speech Privacy Gate (test/phase26_network_speech_gate.test.js) ===
+  PASS  service exposes network speech opt-in flag, default off
+  PASS  browser Web Speech fails closed without opt-in
+  PASS  native community-plugin fallback fails closed without opt-in
+  PASS  recognizer errors carry real reasons end to end
+  PASS  Network speech settings UI discloses and toggles the opt-in
+  PASS  turning network speech off stops an in-flight network session
+Phase 26: 6/6 network-speech gate checks passed
+
+=== Phase 27: Transcribe Upload Consent (test/phase27_transcribe_upload_consent.test.js) ===
+  PASS  recording consent discloses the transcribe upload in en/te/hi
+  PASS  transcribe-time consent dialog exists in en/te/hi with confirm and cancel
+  PASS  Transcribe button routes through the consent gate before any upload
+  PASS  fail-closed error qualifies the stay-local claim
+Phase 27: 4/4 transcribe-upload consent checks passed
+
+=== Phase 28: Certificate Pinning Config (test/phase28_certificate_pinning.test.js) ===
+  PASS  pinning config disables cleartext and carries >=2 pins
+  PASS  manifest wires the network security config
+  PASS  pin-set expiration is in the future
+  PASS  honest scope and maintenance are documented
+Phase 28: 4/4 certificate pinning checks passed
+
+=== Phase 29: Local OSS Voice Fallback (test/phase29_local_voice_fallback.test.js) ===
+  PASS  gate: only the three qualified Telugu prompts are speakable
+  PASS  consent: no download without recorded consent shown the size
+  PASS  consent: unknown network state is treated as metered (no silent Wi-Fi assumption)
+  PASS  consent: cellular blocked unless explicitly allowed
+  PASS  integrity: tampered download fails HASH_MISMATCH with REAL WebCrypto and keeps nothing
+  PASS  integrity: unsupported language is explicit
+  PASS  flow (stubbed digest): install -> installed -> synthesis via mocked worker resolves
+  PASS  flow (stubbed digest): cancellation aborts synthesis
+  PASS  flow (stubbed digest): worker error surfaces as INFERENCE_FAILED
+  PASS  flow (stubbed digest): stuck worker is terminated on timeout
+  PASS  availability: honest unavailable shape before install
+  PASS  uninstall removes cached model files
+Phase 29: 12/12 local voice fallback checks passed
+
+=== Phase 30: Local Voice Integration & Production Packaging (test/phase30_local_voice_integration.test.js) ===
+--- RUNNING PHASE 30: LOCAL VOICE INTEGRATION & PRODUCTION PACKAGING TESTS ---
+✓ Test 1 Passed: pcm16Wav encoder produces a valid WAV with exact round-trip and clamping.
+✓ Test 2 Passed: shipping voice identity is pinned to the qualified te_M and drift is refused.
+✓ Test 3 Passed: qualified prompt gate is single-sourced from localVoiceManifest.js.
+✓ Test 4 Passed: fallback chain order and honest fall-through contracts hold in source.
+✓ Test 5 Passed: production WASM packaging is grounded, same-origin, and CDN-proof.
+✓ Test 6 Passed: consent pins pack size, unknown network is metered, aborts normalize to ABORTED.
+↷ Test 7 Skipped: real-inference smoke needs AYUSWAR_VOICE_SMOKE_DIR (conditional skip this run).
+Phase 30: 6/7 passed (1 conditional skips).
+
+=== Phase 31: Sarvam Provider Integration (test/phase31_sarvam_provider.test.js) ===
+--- RUNNING PHASE 31: SARVAM PROVIDER INTEGRATION TESTS ---
+✓ Test 1 Passed: Sarvam server routes mirror the gnani security posture with the grounded contract.
+✓ Test 2 Passed: api.sarvam.ai added to the strict upstream allowlist.
+✓ Test 3 Passed: client Sarvam tier is additive, key-free, honestly gated, and degrades fast.
+✓ Test 4 Passed: dev server exercises the exact production Sarvam handlers.
+✓ Test 5 Passed: Sarvam request/response shape matches the current official contract.
+Phase 31: 5/5 passed (0 conditional skips).
+
+=== Phase 32: Speech Provider Routing & Billing Safety (test/phase32_speech_provider_routing.test.js) ===
+--- RUNNING PHASE 32: SPEECH PROVIDER ROUTING & BILLING-SAFETY BEHAVIORAL TESTS ---
+[API Audit] 2026-11-22T11:54:48.153Z | GET /api/sarvam/status | 200 | 0ms | Config-only status (no probe, no spend)
+✓ Test 1 Passed: Sarvam GET status is free, config-only, zero upstream fetches.
+[API Audit] 2026-11-22T11:54:48.155Z | GET /api/gnani/status | 200 | 0ms | Config-only status (GET never probes, no spend)
+✓ Test 2 Passed: Gnani GET status no longer spends upstream quota.
+✓ Test 3 Passed: paid probes require the operator env gate; refused clean before any fetch.
+✓ Test 4 Passed: Sarvam is explicit-opt-in, strict-mode-safe, and never shadows the on-device fallback.
+✓ Test 5 Passed: no API route publicly caches audio; both TTS routes are private, no-store.
+✓ Test 6 Passed: Sarvam opt-in disclosure UI is present and trilingual.
+Phase 32: 6/6 passed (0 conditional skips).
+
+=== Phase 33: 16kHz ASR Resampler (test/phase33_asr_resampler.test.js) ===
+--- RUNNING PHASE 33: 16kHz ASR RESAMPLER TESTS ---
+✓ Test 1 Passed: 48k→16k length ratio and DC preservation.
+✓ Test 2 Passed: 16k passthrough.
+✓ Test 3 Passed: 24k→16k preserves signal frequency (TTS-output compatible).
+✓ Test 4 Passed: stereo mix-down and validation.
+✓ Test 5 Passed: recorded-clip preparation produces 16kHz mono for the ASR worker.
+✓ Test 6 Passed: resampler single-sourced; Gnani + on-device ASR share one implementation.
+Phase 33: 6/6 passed (0 conditional skips).
+
+=== Phase 34: Offline ASR Pack (test/phase34_local_asr_pack.test.js) ===
+    (conditional skip: set AYUSWAR_ASR_SMOKE_DIR + AYUSWAR_ORT_NODE_PATH to run the real-model smoke)
+✓ manifest: pinned files sum to the exact disclosed total
+✓ consent: no download without recorded consent shown the size
+✓ consent: pack size change forces re-consent
+✓ consent: unknown network state counts as metered
+✓ integrity: tampered download fails HASH_MISMATCH and keeps nothing
+✓ integrity: tampered cache fails on load and deletes
+✓ service: pack not installed -> MODELS_NOT_INSTALLED carrying size
+✓ service: envelope enforced after 16kHz resample
+✓ service: mocked worker happy path returns a DRAFT requiring review
+✓ service: worker error and abort surface honestly
+✓ service: uninstall returns to not_installed
+--- phase34: 11/11 passed ---
+
+=== Phase 35: Local ASR Fallback Wiring (test/phase35_local_asr_fallback_wiring.test.js) ===
+✓ Test 1 Passed: no pack -> unchanged fallbackRequired contract.
+✓ Test 2 Passed: installed pack -> DRAFT-labeled local transcript with zero network use.
+✓ Test 3 Passed: local tier failure degrades to the unchanged fallback contract.
+Phase 35: 3/3 local-ASR fallback wiring checks passed
+
+=== Phase 36: Structured Assistant Answers (test/structured_answers.test.js) ===
+structured_answers: 5/5 passed
+
+=== Phase 37: Offline Sync Queue Integrity (test/phase37_offline_sync_integrity.test.js) ===
+✓ localStorage: failed upload stays queued and is not counted
+✓ localStorage: concurrent syncs cannot duplicate uploads
+✓ localStorage: record enqueued mid-sync survives unattempted
+✓ IndexedDB: failed upload stays queued and is not counted
+✓ IndexedDB: record enqueued mid-sync survives unattempted
+✓ IndexedDB: all-successful sync empties the queue
+phase37_offline_sync_integrity: 6/6 passed
+
+=== Phase 38: API Reliability Chain (test/phase38_api_reliability_chain.test.js) ===
+PASS both providers 500 -> labeled fallback, no retry, no throw
+PASS malformed JSON from groq -> fallback, no crash
+PASS emergency red-flag prompt -> deterministic protocol without any network call
+PASS strict-RAG assistant with no match -> refusal without network call
+PASS telugu emergency prompt -> telugu protocol without network
+phase38_api_reliability_chain: 5/5 passed
+
+=== Phase 40: Clinical Evidence Engine (test/clinical_evidence_engine.test.js) ===
+PASS telugu exact source matching
+PASS english exact source matching
+PASS code-mixed offsets
+PASS missing evidence rejected
+PASS unsupported diagnosis never supported
+PASS patient medication mention is not instruction
+PASS patient negation flagged
+PASS contradictory statements conflict
+PASS same-batch conflicting claims caught by verifyEvidence
+PASS export gate excludes negated findings
+PASS invalid offsets rejected
+PASS tampered quotation rejected
+PASS timestamps honest
+PASS model unavailable states
+PASS fallback labelled deterministically
+PASS fallback medication mention never becomes instruction
+PASS negated medication mention flagged and never exported
+PASS fallback negated allergy flagged and never exported
+PASS historical self-reported medication stays a mention
+PASS cross-speaker duplicate medication quote ambiguous and never exported
+PASS english contraction negation blocks medication export
+PASS english negation flags symptom and history candidates too
+PASS stopped medication exports only as HISTORICAL with source context
+PASS exported mention never auto-assigned current use
+PASS transcript injection does not bypass verification
+PASS clinician approve and reject
+PASS correction history preserves original extraction
+PASS synthetic labelling
+PASS export gate blocks unapproved
+PASS persistence opt-in and consent enforcement
+PASS registry deterministic ids
+
+clinical_evidence_engine: 31/31 passed
+
+=== Phase 41: Clinical Evidence Review UI (test/clinical_evidence_ui.test.js) ===
+PASS jsx components bundle with repo rolldown
+PASS card renders status, quote, fallback + synthetic labels
+PASS card hides actions after review
+PASS unsupported card shows failure status and no actions
+PASS timeline highlights span and labels scripted demo, no fake timestamps
+PASS timeline renders multi-speaker labels
+
+clinical_evidence_ui: 6/6 passed
+
+=== Phase 42: SOAP Draft Deterministic Safeguards (test/phase42_soap_draft_safeguards.test.js) ===
+PASS no direct setMedications(parsed.medications) acceptance remains
+PASS model-supplied medications are discarded with a logged reason
+PASS scripted vitals fallback is gated on an all-scripted session
+PASS live/mixed sessions purge scripted sample medications at draft time
+PASS live-session objective fallback states no vitals were captured
+PASS objective section is deterministic via soapDraftSafeguards (model objective never used)
+PASS JSON parse-error path never embeds raw model output in the assessment
+PASS assessment and plan are fixed safe strings (model text discarded unconditionally)
+
+phase42_soap_draft_safeguards: 8/8 passed
+
+=== Phase 43: Deterministic SOAP Sections (test/phase43_soap_deterministic_sections.test.js) ===
+PASS transcript vital pair appears in objective, labelled not measured
+PASS keyword co-occurrence with unrelated % number yields no SpO2
+PASS no invented SpO2 from unrelated percent
+PASS empty transcript yields exactly the fallback
+PASS duration numbers never become vitals
+PASS assessment fixed
+PASS plan fixed
+PASS assessment contains no drug directive
+PASS plan contains no drug directive
+PASS SpO2 and HR pairs extracted
+
+phase43_soap_deterministic_sections: 10/10 passed
+
+=== Phase 44: Spoken-Vital Context Safety (test/phase44_soap_objective_contexts.test.js) ===
+PASS negated BP excluded
+PASS denied BP excluded
+PASS Telugu trailing negation excluded
+PASS Hindi trailing negation excluded
+PASS question excluded
+PASS hypothetical excluded
+PASS Hindi hypothetical excluded
+PASS Telugu post-value conditional excluded
+PASS Telugu post-value ఉంటే conditional excluded
+PASS historical mention retained with historical label
+PASS historical label carried into objective
+PASS historical mention not implied current
+PASS time-ago historical labelled
+PASS pulse oximeter number is not HR
+PASS plain pulse still HR
+PASS negation in another clause does not over-exclude
+PASS question mark in another sentence does not exclude
+PASS current SpO2 and HR kept
+PASS Telugu current mention without conditional still kept
+PASS subjective-not-verified label exported
+PASS console renders subjective-not-verified boundary
+PASS mobile review renders subjective-not-verified boundary
+PASS model+recording label says model-written and recording
+PASS model+no-recording label says model-written and source transcript
+PASS manual+recording label drops model-written claim
+PASS manual+no-recording label is neutral and transcript-scoped
+PASS typed-only turns do not count as a recording
+PASS unflagged turns do not count as a recording
+PASS scripted sample turns do not count as a recording
+PASS WebSpeech mic turns count as a recording
+PASS Groq Whisper mic turns count as a recording
+PASS mixed typed+mic turns count as a recording
+PASS empty/invalid input fails closed
+PASS mobile wires aiLive as modelWritten and mic-recording as hasRecording
+PASS console wires subjectiveFromModel and non-scripted turns as provenance
+PASS console uses the audio-provenance predicate, not !isScripted
+
+phase44_soap_objective_contexts: 36/36 passed
+
+=== Phase 45: Built-App Browser E2E (mobile keyless flows) (test/e2e_browser.test.js) ===
+Building current working tree (npm run build)...
+Preview of built app serving at http://127.0.0.1:4174 (browser: /usr/bin/google-chrome)
+PASS landing renders with title and content
+PASS mobile record screen renders sample-demo control
+PASS review route gates without consultation
+PASS keyless failure says AI unavailable, never incomplete draft
+PASS keyless evidence check is offline-only with honest note
+PASS no page errors across all flows
+
+(6 passes, 0 conditional skips)
+e2e_browser: 6/6 passed
+
+=== Phase 46: Live Draft-Bundle FHIR R4 Conformance (test/phase46_fhir_draft_bundle.test.js) ===
+  ✓ emitted bundle satisfies FHIR R4 structural invariants
+  ✓ emitted bundle passes HL7 FHIR R4 JSON schema (conditional: schema + ajv)
+fhir_draft_bundle: 2/2 passed (0 conditional skip)
+
+=== Phase 47: Offline Queue Failure Visibility & Recovery (test/phase47_offline_recovery.test.js) ===
+  ✓ failed upload stamps attempts/category on stored record, payload untouched
+  ✓ below attention threshold, health does not flag; at threshold it flags repeated-failure
+  ✓ undecryptable record flagged, never uploaded, no attempts counted
+  ✓ no automatic destruction: repeated failures retain the record
+  ✓ discardOfflineRecord removes exactly one record
+  ✓ encounter insert error retains record + counts attempt; acknowledged success deletes
+  ✓ record type without a backend route is never counted synced and never deleted
+  ✓ error categories are bounded; raw upstream text/identifiers never stored
+  ✓ legacy raw error string is scrubbed on next sync cycle, downgraded to category
+  ✓ successful sync still clears the record and attention
+  ✓ UI contract: MClinical recovery card + confirm copy + six locale dicts
+offline_recovery: 11/11 passed (0 conditional skip)
+
+=== Phase 48: Sync Retry Exponential Backoff (test/phase48_sync_backoff.test.js) ===
+✓ delay doubles per failed attempt at fixed jitter
+✓ delay growth: base capped before jitter, top-end envelope is cap +/-25%
+✓ jitter stays within +/-25% and is stable per record
+✓ due gate: fresh record due, just-failed not due, elapsed window due
+✓ integration: failed record is deferred on the immediate next cycle
+✓ integration: record is retried once its backoff window elapses
+phase48_sync_backoff: 6/6 passed
+
+=== Phase 49: Offline Sync Idempotency Keys (test/phase49_idempotency_keys.test.js) ===
+✓ getRecordIdempotencyKey prefers stored key, falls back to queue id
+✓ probe success: insert payload carries the stored idempotency key
+✓ legacy record surfaces its queue id as the key
+✓ probe failure: key omitted, insert still succeeds (un-migrated backend safe)
+✓ probe is cached: one probe per table per session
+✓ key is stable across a failed attempt and its backoff retry
+✓ source contract: saveOfflineRecord stamps idempotencyKey at enqueue
+✓ IDB enqueue: saveOfflineRecord persists a stable ik_ key and encrypted payload
+✓ IDB enqueue->sync: upload carries the enqueued key, payload round-trips, queue drains
+phase49_idempotency_keys: 9/9 passed
