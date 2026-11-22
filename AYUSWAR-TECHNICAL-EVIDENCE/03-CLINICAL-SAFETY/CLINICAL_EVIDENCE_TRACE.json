@@ -1,0 +1,256 @@
+{
+  "scope": "One genuine engine run over scripted synthetic fixtures using the deterministic fallback extractor (no model, no audio). Reviewer is a DEMO reviewer; nothing here is a real clinical sign-off, real patient data or audio-timestamped evidence.",
+  "generatedAt": "2026-11-22T10:03:48.371Z",
+  "revision": "e08b93f5d967489c85873b542377810b9ea7cdab",
+  "trackedWorkingTreeDirty": false,
+  "extractionMethod": "DETERMINISTIC_FALLBACK",
+  "audioTimestamps": "not available - the ASR pipeline does not emit per-utterance timestamps; fields absent, never invented",
+  "session": {
+    "sessionId": "sess_synthetic_demo_1",
+    "utterances": [
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_0",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 0,
+        "speaker": "DOCTOR",
+        "language": "Telugu",
+        "text": "నమస్కారం, ఏమి సమస్య చెప్పండి?",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_1",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 1,
+        "speaker": "PATIENT",
+        "language": "Telugu",
+        "text": "నాకు మూడు రోజుల నుండి జ్వరం మరియు దగ్గు ఉంది.",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_2",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 2,
+        "speaker": "PATIENT",
+        "language": "English",
+        "text": "I already took paracetamol twice yesterday.",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_3",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 3,
+        "speaker": "DOCTOR",
+        "language": "English",
+        "text": "Take one paracetamol 500mg tablet twice daily for three days.",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_4",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 4,
+        "speaker": "PATIENT",
+        "language": "Telugu",
+        "text": "నాకు పెన్సిలిన్ అలర్జీ లేదు.",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      },
+      {
+        "utteranceId": "utt_sess_synthetic_demo_1_5",
+        "sessionId": "sess_synthetic_demo_1",
+        "sequence": 5,
+        "speaker": "DOCTOR",
+        "language": "English",
+        "text": "Come back for review after three days.",
+        "sourceType": "SCRIPTED_DEMO",
+        "isSynthetic": true
+      }
+    ]
+  },
+  "rejected": [],
+  "verificationCounts": {
+    "SUPPORTED": 3
+  },
+  "evidence": [
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_1",
+      "utteranceId": "utt_sess_synthetic_demo_1_1",
+      "entityType": "SYMPTOM",
+      "originalText": "నాకు మూడు రోజుల నుండి జ్వరం మరియు దగ్గు ఉంది.",
+      "normalizedConcept": "జ్వరం",
+      "sourceQuote": "జ్వరం",
+      "startOffset": 22,
+      "endOffset": 27,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "displayText": "జ్వరం",
+      "originalExtraction": {
+        "sourceQuote": "జ్వరం",
+        "normalizedConcept": "జ్వరం",
+        "startOffset": 22,
+        "endOffset": 27
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795341828369,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "జ్వరం"
+        }
+      ],
+      "isRealSignOff": false
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_2",
+      "utteranceId": "utt_sess_synthetic_demo_1_1",
+      "entityType": "SYMPTOM",
+      "originalText": "నాకు మూడు రోజుల నుండి జ్వరం మరియు దగ్గు ఉంది.",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 34,
+      "endOffset": 39,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 34,
+        "endOffset": 39
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795341828369,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_3",
+      "utteranceId": "utt_sess_synthetic_demo_1_4",
+      "entityType": "ALLERGY",
+      "originalText": "నాకు పెన్సిలిన్ అలర్జీ లేదు.",
+      "normalizedConcept": "అలర్జీ",
+      "sourceQuote": "అలర్జీ",
+      "startOffset": 16,
+      "endOffset": 22,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [
+        "negation marker near span; treat as absent/ruled-out context"
+      ],
+      "isNegatedContext": true,
+      "displayText": "అలర్జీ",
+      "originalExtraction": {
+        "sourceQuote": "అలర్జీ",
+        "normalizedConcept": "అలర్జీ",
+        "startOffset": 16,
+        "endOffset": 22
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795341828369,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "అలర్జీ"
+        }
+      ],
+      "isRealSignOff": false
+    }
+  ],
+  "approvedForExport": [
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_1",
+      "utteranceId": "utt_sess_synthetic_demo_1_1",
+      "entityType": "SYMPTOM",
+      "originalText": "నాకు మూడు రోజుల నుండి జ్వరం మరియు దగ్గు ఉంది.",
+      "normalizedConcept": "జ్వరం",
+      "sourceQuote": "జ్వరం",
+      "startOffset": 22,
+      "endOffset": 27,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "displayText": "జ్వరం",
+      "originalExtraction": {
+        "sourceQuote": "జ్వరం",
+        "normalizedConcept": "జ్వరం",
+        "startOffset": 22,
+        "endOffset": 27
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795341828369,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "జ్వరం"
+        }
+      ],
+      "isRealSignOff": false,
+      "exportNote": "source-supported; not clinically confirmed"
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_2",
+      "utteranceId": "utt_sess_synthetic_demo_1_1",
+      "entityType": "SYMPTOM",
+      "originalText": "నాకు మూడు రోజుల నుండి జ్వరం మరియు దగ్గు ఉంది.",
+      "normalizedConcept": "దగ్గు",
+      "sourceQuote": "దగ్గు",
+      "startOffset": 34,
+      "endOffset": 39,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [],
+      "displayText": "దగ్గు",
+      "originalExtraction": {
+        "sourceQuote": "దగ్గు",
+        "normalizedConcept": "దగ్గు",
+        "startOffset": 34,
+        "endOffset": 39
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795341828369,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "దగ్గు"
+        }
+      ],
+      "isRealSignOff": false,
+      "exportNote": "source-supported; not clinically confirmed"
+    }
+  ]
+}

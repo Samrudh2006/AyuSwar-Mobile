@@ -36,7 +36,7 @@ implementation exists but the original deliverable or full scope is not met;
 | Subjective draft honesty | **DONE** | Per-section NOT-verified label on desktop and mobile, source-aware (model-written wording only on model-produced drafts; recording referenced only when mic-captured turns exist; typed-only and sample paths get the neutral transcript-scoped label). Mode-combination and provenance-predicate tests in Phase 44; independently verified 2026-11-22 |
 | Audio timestamp per entity | **PARTIAL** | Transcript-span evidence exists; the ASR pipeline does not emit per-utterance audio timestamps, so none are shown. Next usable work: timestamped ASR segments, then wire spans to times |
 | Normalized medical terminology per entity | **PARTIAL** | Vitals normalized to fixed labels (BP/SpO2/HR/Temp); no terminology-service normalization (e.g. SNOMED/LOINC mapping). Next usable work: map the fixed vital labels to standard codes in the FHIR export |
-| Deliverable CLINICAL_EVIDENCE_TRACE.json | **PARTIAL** | Evidence data exists in the review flow; no export under that exact name. Next usable work: serialize the existing evidence records to that filename |
+| Deliverable CLINICAL_EVIDENCE_TRACE.json | **PARTIAL** | Export now exists: AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY/CLINICAL_EVIDENCE_TRACE.json via scripts/export_clinical_evidence_trace.mjs (3 records, all SUPPORTED, deterministic fallback extractor over synthetic fixtures, demo reviewer, no audio timestamps). Still PARTIAL: trace from the real model/ASR pipeline is pending |
 
 ## 3. FHIR R4 Validation Engine
 
