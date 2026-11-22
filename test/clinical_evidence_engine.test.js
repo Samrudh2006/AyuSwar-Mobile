@@ -462,6 +462,16 @@ await record('registry deterministic ids', async () => {
   assert(getEvidenceSession(s.sessionId) === s, 'session retrievable');
 });
 
+// Boundary: a lexicon form followed by a dependent vowel sign is a different word
+await record('fallback does not match a lexicon prefix inside a vowel-sign-suffixed Indic word', async () => {
+  const s = mkSession();
+  addUtts(s, [{ speaker: SPEAKER.PATIENT, language: 'Hindi', text: 'मुझे बुखारी है', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  assert(extractWithFallback(s).candidates.length === 0, 'no candidate from prefix of suffixed word');
+  const s2 = mkSession();
+  addUtts(s2, [{ speaker: SPEAKER.PATIENT, language: 'Hindi', text: 'मुझे बुखार है', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  assert(extractWithFallback(s2).candidates.length === 1, 'exact citation form still matches');
+});
+
 const failed = results.filter(r => !r.ok);
 for (const r of results) console.log(`${r.ok ? 'PASS' : 'FAIL'} ${r.name}${r.ok ? '' : ' :: ' + (r.err?.message || r.err)}`);
 console.log(`\nclinical_evidence_engine: ${results.length - failed.length}/${results.length} passed`);

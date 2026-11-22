@@ -117,7 +117,9 @@ export async function extractWithModel(session, callModel, { modelVersion } = {}
  */
 // Indic scripts are not covered by ASCII \b, so boundaries use Unicode
 // letter/number lookarounds instead.
-const B = '(?<![\\p{L}\\p{N}])', E = '(?![\\p{L}\\p{N}])';
+// \p{M} (combining marks / dependent vowel signs) counts as a word character: a
+// lexicon form followed by a vowel-sign suffix is a different, uncovered word.
+const B = '(?<![\\p{L}\\p{N}\\p{M}])', E = '(?![\\p{L}\\p{N}\\p{M}])';
 // Medication citation forms: common public drug names plus the two Telugu
 // transliterations used in the synthetic fixtures, normalized to their
 // English canonical forms so terminology lookup (e.g. RxNorm) operates on
