@@ -11,10 +11,10 @@ tag and release stay gated.
 |---|---|
 | File | `android/app/build/outputs/apk/debug/app-debug.apk` |
 | Type | Android **debug** APK (unsigned for release; debug key) |
-| Source commit | `741a8f5` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus a UI/docs-only delta — the subjective review label and engine-doc wording) |
-| Built | 2026-11-22, ~14:31 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
-| Size | 78,487,151 bytes |
-| SHA-256 | `bf7005afeb49ca3d4dfd9b0b9749707d757c6fc9eb4fb88b140c545d4c8c71f3` |
+| Source commit | `3395603` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus the source-aware subjective label and engine-doc wording) |
+| Built | 2026-11-22, ~14:40 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
+| Size | 78,487,158 bytes |
+| SHA-256 | `2fb592e16d06361f8de8086b0af0977e03aa7a226e62cdf4c6d993667da136b4` |
 | Manifest (aapt2 dump badging) | package `ai.ayuswar.app`, **versionCode 37**, **versionName 0.3.34-debug**, minSdk 24, targetSdk 36 |
 | Signer certificate (apksigner verify --print-certs) | CN=Android Debug (standard debug key); cert SHA-256 `57d44b07e4111ec3356d6b9f27ab37afcefb8256a696e670a464e7743f0b1b31` |
 
@@ -35,23 +35,26 @@ android-36 (`/home/sandbox/android-sdk`), Gradle 8.14.3 wrapper.
 ## Embedded-content consistency (this candidate)
 
 - Embedded `assets/public/index.html` SHA-256
-  `0a54afada91c1dc0370bdca4862ccfae6a64a5633f4443f85fd196e74af87566`
-  matches the workspace `dist/index.html` byte-for-byte — the APK embeds the
-  exact web bundle built from the recorded source commit.
-- The per-section Subjective safeguard label string ("NOT verified against
-  source evidence") is present in the embedded `MScribeFlow-*.js` and
-  `ClinicalConsole-*.js` bundles inside the APK.
+  `5d02efb313181e36ac76be69b5024f494787a9e3e0da8507ba7446a23b4c766d`
+  matches the workspace `dist/index.html` byte-for-byte, and the embedded
+  `soapDraftSafeguards-*.js` and `MScribeFlow-*.js` chunks hash-match their
+  `dist/` counterparts exactly — the APK embeds the exact web bundle built
+  from the recorded source commit.
+- The source-aware Subjective boundary label ("Confirm every statement
+  against ...") is present in the embedded safeguards chunk inside the APK.
 - `gradlew assembleDebug` without a preceding `npx cap sync android` reuses
-  previously synced web assets: an intermediate build of this commit chain
-  produced a different hash (`6d91f26c…`) with the pre-label bundle. The
-  hash in the table above is the post-sync build and is the only candidate.
+  previously synced web assets: intermediate builds of this commit chain
+  produced different hashes (`6d91f26c…`, `bf7005af…`) with stale bundles.
+  The hash in the table above is the post-sync build and is the only
+  candidate.
 
 ## Determinism note
 
 Earlier on 2026-11-22, two independent builds at `0174027` and `4a91026`
 (docs-only delta, version 0.3.33-debug metadata) produced a byte-identical
-APK (`5ead7499…58b9`). The 0.3.34-debug candidate above supersedes both; it
-differs by the version bump, the mobile subjective label and doc wording.
+APK (`5ead7499…58b9`). The 0.3.34-debug candidate above supersedes all of
+these; it differs by the version bump, the source-aware subjective label
+and doc wording.
 
 ## What this artifact does and does not establish
 
