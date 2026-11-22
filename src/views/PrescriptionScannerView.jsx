@@ -189,7 +189,7 @@ export default function PrescriptionScannerView() {
       extractedText: 'AMOXICILLIN 500MG CAPSULES BP BATCH: L 34512A EXP: 10/26 POTASSIUM CLAVULANATE',
       ddiConflict: 'Sample allergy-review flag only: verify allergy history with a pharmacist or qualified clinician.',
       contourDetected: true,
-      imagePlaceholderColor: '#F1F5F9',
+      imagePlaceholderColor: 'var(--m-card-cool)',
       pillColor: '#486770',
       boundingBoxes: [
         { label: 'BRAND_NAME', text: 'AMOXICILLIN 500MG', x: 26, y: 34, w: 230, h: 32, conf: 'Sample overlay' },
@@ -205,7 +205,7 @@ export default function PrescriptionScannerView() {
 
   // Current display data: live OCR result, an honest empty state after a user
   // scan that produced nothing, or the explicitly selected bundled sample.
-  const EMPTY_SCAN_RESULT = { id: 'empty-scan', brand: 'No result from this scan', keywords: [], boundingBoxes: [], extractedText: '', genericSalt: 'No text recognized - try a clearer, well-lit photo', dosageForm: '-', nfiCode: 'NO RESULT', matchType: 'No candidate', imagePlaceholderColor: '#F1F5F9', realImageUrl: null, batchNumber: 'Not identified', expiryDate: 'Not identified', vernacularTe: null, ddiConflict: null, pillColor: '#94A3B8' };
+  const EMPTY_SCAN_RESULT = { id: 'empty-scan', brand: 'No result from this scan', keywords: [], boundingBoxes: [], extractedText: '', genericSalt: 'No text recognized - try a clearer, well-lit photo', dosageForm: '-', nfiCode: 'NO RESULT', matchType: 'No candidate', imagePlaceholderColor: 'var(--m-card-cool)', realImageUrl: null, batchNumber: 'Not identified', expiryDate: 'Not identified', vernacularTe: null, ddiConflict: null, pillColor: '#94A3B8' };
   const baseSample = liveOcrResult || (userScanAttempted && !isScanning ? EMPTY_SCAN_RESULT : OCR_SAMPLES[selectedSampleIdx]);
   const currentSample = { ...baseSample, nfiCode: liveOcrResult ? (liveOcrResult.sourceKind === 'pdf-text-layer' ? 'UNVERIFIED PDF TEXT IMPORT' : 'UNVERIFIED OCR CANDIDATE') : (userScanAttempted && !isScanning ? 'NO RESULT' : 'BUNDLED SAMPLE'), vectorConfidence: 'Verify exact ingredient, strength and release form', brandedPrice: 'Not checked', janAushadhiPrice: 'Not checked', savingsPct: 'Not measured', janAushadhiGeneric: 'No live stock, price or equivalence check', vernacularTe: null };
 
@@ -455,7 +455,7 @@ export default function PrescriptionScannerView() {
           expiryDate: expiry || 'Not identified',
           ddiConflict: null,
           pillColor: '#52707C',
-          imagePlaceholderColor: '#F1F5F9'
+          imagePlaceholderColor: 'var(--m-card-cool)'
         });
       }
       setIsScanning(false);
@@ -657,7 +657,7 @@ export default function PrescriptionScannerView() {
       {/* Workspace Grid */}
       <div className="scanner-workspace-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '20px' }}>
         {/* Left Column: Interactive Input / Sample Selector */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           <div>
             <h3 style={{ fontSize: '17px', fontWeight: 800, color: '#081C24', marginBottom: '8px' }}>
               1. Input Medicine Packaging Sample
@@ -668,7 +668,7 @@ export default function PrescriptionScannerView() {
           </div>
 
           {/* Mode Switcher */}
-          <div style={{ display: 'flex', gap: '8px', background: '#FAF8F5', padding: '4px', borderRadius: '10px' }}>
+          <div style={{ display: 'flex', gap: '8px', background: 'var(--m-card)', padding: '4px', borderRadius: '10px' }}>
             <button
               onClick={() => {
                 stopWebcam();
@@ -737,7 +737,7 @@ export default function PrescriptionScannerView() {
           {/* Local PDF import: bounded text-layer extraction, reviewed before use */}
           <div style={{ marginTop: '10px' }}>
             {pdfImport.status === 'idle' && (
-              <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '8px', background: '#F1F5F9', border: '1px dashed #94A3B8', color: '#0F4C5C', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}>
+              <label style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', padding: '8px 14px', borderRadius: '8px', background: 'var(--m-card-cool)', border: '1px dashed #94A3B8', color: '#0F4C5C', fontSize: '12px', fontWeight: 750, cursor: 'pointer' }}>
                 <Upload size={13} />
                 <span>Import PDF (text layer, on-device)</span>
                 <input type="file" accept="application/pdf" onChange={handlePdfUpload} style={{ display: 'none' }} />
@@ -761,7 +761,7 @@ export default function PrescriptionScannerView() {
               </div>
             )}
             {pdfImport.status === 'review' && (
-              <div style={{ padding: '12px', borderRadius: '10px', background: '#FFFFFF', border: '1.5px solid #D0DFE2' }}>
+              <div style={{ padding: '12px', borderRadius: '10px', background: 'var(--m-card)', border: '1.5px solid #D0DFE2' }}>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: '#081C24', marginBottom: 4 }}>
                   {pdfImport.fileName} - {pdfImport.pageCount} page(s){pdfImport.truncated ? ' (first 20 pages only)' : ''}
                 </div>
@@ -916,7 +916,7 @@ export default function PrescriptionScannerView() {
                     padding: '14px',
                     borderRadius: '12px',
                     border: selectedSampleIdx === idx ? '2px solid #0F4C5C' : '1px solid #D0DFE2',
-                    background: selectedSampleIdx === idx ? '#F0FDFA' : '#FFFFFF',
+                    background: selectedSampleIdx === idx ? '#F0FDFA' : '#FFFDF8',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
@@ -1150,7 +1150,7 @@ export default function PrescriptionScannerView() {
               hidden while a PDF text import is active (no image to preprocess) */}
           {liveOcrResult?.sourceKind !== 'pdf-text-layer' && (
           <div style={{
-            background: useCvEnhancement ? '#F0FDF4' : '#F8FAFC',
+            background: useCvEnhancement ? '#F0FDF4' : 'var(--m-card-cool)',
             border: useCvEnhancement ? '1px solid #BBF7D0' : '1px solid #D0DFE2',
             borderRadius: '10px',
             padding: '10px 14px',
@@ -1176,7 +1176,7 @@ export default function PrescriptionScannerView() {
               onClick={() => setUseCvEnhancement(v => !v)}
               style={{
                 background: useCvEnhancement ? '#15803D' : '#94A3B8',
-                color: '#FFFFFF',
+                color: '#FFFDF8',
                 border: 'none',
                 borderRadius: '14px',
                 padding: '4px 10px',
@@ -1200,7 +1200,7 @@ export default function PrescriptionScannerView() {
                 borderRadius: '10px',
                 border: 'none',
                 background: '#0F4C5C',
-                color: '#FFFFFF',
+                color: '#FFFDF8',
                 fontSize: '13px',
                 fontWeight: 800,
                 cursor: isScanning ? 'not-allowed' : 'pointer',
@@ -1220,7 +1220,7 @@ export default function PrescriptionScannerView() {
         {/* Right Column: OCR Extraction & Formulary Results */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
             {/* Raw Extracted Bounding Box / OCR Tokens */}
-            <div style={{ background: '#0A2540', color: '#F1F5F9', padding: '12px 14px', borderRadius: '10px', fontSize: '11.5px', fontFamily: 'monospace', marginBottom: '18px', lineHeight: 1.5 }}>
+            <div style={{ background: '#0A2540', color: 'var(--m-card-cool)', padding: '12px 14px', borderRadius: '10px', fontSize: '11.5px', fontFamily: 'monospace', marginBottom: '18px', lineHeight: 1.5 }}>
               <div style={{ color: '#5EEAD4', fontWeight: 800, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <span>{liveOcrResult?.sourceKind === 'pdf-text-layer' ? '// PDF Text Layer Import (not OCR):' : '// Tesseract.js Extracted Text Tokens:'}</span>
                 {liveOcrResult && (
@@ -1234,12 +1234,12 @@ export default function PrescriptionScannerView() {
 
 
           {/* Card: Resolved Active Chemical Compound */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ fontSize: '12px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                 {currentSample.sourceKind === 'pdf-text-layer' ? 'PDF text import and unverified dictionary candidate' : 'OCR text and unverified dictionary candidate'}
               </div>
-              <span style={{ fontSize: '11px', fontWeight: 750, color: '#091E26', background: '#FAF8F5', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace' }}>
+              <span style={{ fontSize: '11px', fontWeight: 750, color: '#091E26', background: 'var(--m-card)', padding: '2px 8px', borderRadius: '6px', fontFamily: 'monospace' }}>
                 {currentSample.nfiCode}
               </span>
             </div>
@@ -1258,7 +1258,7 @@ export default function PrescriptionScannerView() {
                   <img 
                     src={currentSample.realImageUrl} 
                     alt={currentSample.brand} 
-                    style={{ width: '100%', height: '100%', objectFit: currentSample.isLiveExtraction ? 'contain' : 'cover', background: '#FFFFFF' }} 
+                    style={{ width: '100%', height: '100%', objectFit: currentSample.isLiveExtraction ? 'contain' : 'cover', background: 'var(--m-card)' }} 
                   />
                 </div>
               )}
@@ -1286,7 +1286,7 @@ export default function PrescriptionScannerView() {
             </div>
 
             {/* Sample Generic Cost Comparison */}
-            <div style={{ background: '#FAF8F5', borderRadius: '12px', border: '1px solid #D0DFE2', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+            <div style={{ background: 'var(--m-card)', borderRadius: '12px', border: '1px solid #D0DFE2', padding: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
               <div>
                 <div style={{ fontSize: '11px', fontWeight: 800, color: '#52707C', textTransform: 'uppercase' }}>
                   Availability and price status
@@ -1350,7 +1350,7 @@ export default function PrescriptionScannerView() {
               </div>
               <span style={{
                 background: beersSafety.color,
-                color: '#FFFFFF',
+                color: '#FFFDF8',
                 fontSize: '11px',
                 fontWeight: 800,
                 padding: '3px 10px',
@@ -1362,7 +1362,7 @@ export default function PrescriptionScannerView() {
 
             {/* Interactive Clinical Controls: Age Profile & eGFR Level */}
             <div style={{
-              background: '#FFFFFF',
+              background: 'var(--m-card)',
               borderRadius: '12px',
               padding: '12px',
               border: '1px solid rgba(0,0,0,0.06)',
@@ -1382,7 +1382,7 @@ export default function PrescriptionScannerView() {
                       padding: '4px 10px',
                       borderRadius: '8px',
                       border: patientAgeProfile === 'adult' ? '1.5px solid #0F4C5C' : '1px solid #D0DFE2',
-                      background: patientAgeProfile === 'adult' ? '#E6FAF8' : '#F8FAFC',
+                      background: patientAgeProfile === 'adult' ? '#E6FAF8' : 'var(--m-card-cool)',
                       color: patientAgeProfile === 'adult' ? '#0F4C5C' : '#52707C',
                       fontSize: '11.5px',
                       fontWeight: 750,
@@ -1397,7 +1397,7 @@ export default function PrescriptionScannerView() {
                       padding: '4px 10px',
                       borderRadius: '8px',
                       border: patientAgeProfile === 'geriatric' ? '1.5px solid #B91C1C' : '1px solid #D0DFE2',
-                      background: patientAgeProfile === 'geriatric' ? '#FEE2E2' : '#F8FAFC',
+                      background: patientAgeProfile === 'geriatric' ? '#FEE2E2' : 'var(--m-card-cool)',
                       color: patientAgeProfile === 'geriatric' ? '#B91C1C' : '#52707C',
                       fontSize: '11.5px',
                       fontWeight: 750,
@@ -1427,7 +1427,7 @@ export default function PrescriptionScannerView() {
                         padding: '4px 8px',
                         borderRadius: '8px',
                         border: patientEgfrProfile === eg.id ? '1.5px solid #0A2540' : '1px solid #D0DFE2',
-                        background: patientEgfrProfile === eg.id ? '#0A2540' : '#F8FAFC',
+                        background: patientEgfrProfile === eg.id ? '#0A2540' : 'var(--m-card-cool)',
                         color: patientEgfrProfile === eg.id ? '#FFFFFF' : '#52707C',
                         fontSize: '11px',
                         fontWeight: 750,

@@ -986,7 +986,7 @@
 .m-whatsapp-share span { flex: 1; }
 .m-whatsapp-share b { display: block; font: 700 15px var(--m-font-ui); }
 .m-whatsapp-share small { display: block; font: 12px/1.45 var(--m-font-ui); margin-top: 4px; color: #49664e; }
-.m-final-draft { white-space: pre-wrap; font: 12px/1.55 var(--m-font-ui); margin: 8px 0 0; color: var(--m-ink); max-height: 260px; overflow-y: auto; display: block; scrollbar-width: thin; -webkit-overflow-scrolling: touch; border: 1px solid var(--m-border, #c9d4c3); border-radius: 8px; padding: 8px; background: #ffffff; }
+.m-final-draft { white-space: pre-wrap; font: 12px/1.55 var(--m-font-ui); margin: 8px 0 0; color: var(--m-ink); max-height: 260px; overflow-y: auto; display: block; scrollbar-width: thin; -webkit-overflow-scrolling: touch; border: 1px solid var(--m-border, #c9d4c3); border-radius: 8px; padding: 8px; background: #FFFDF8; }
 .m-flow-short > section { flex: 1; display: flex; flex-direction: column; }
 .m-flow-short > section > .m-card { flex: 1; display: flex; flex-direction: column; }
 .m-flow-short > section > .m-card > .m-clin-rec { margin-top: auto; }
@@ -1263,13 +1263,13 @@
 .m-auth2-wordmark i { font-style: normal; font-size: 24px; font-weight: 800; color: #E8A33D; font-family: var(--m-font-display); }
 .m-auth2-body { position: relative; z-index: 2; padding: 14px 2px 120px; }
 .m-auth2-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 2px 0 14px; }
-.m-auth2-role { display: flex; align-items: center; gap: 10px; padding: 12px; background: #ffffff; border: 1.5px solid #CFE6DE; border-radius: 16px; cursor: pointer; text-align: left; box-shadow: 0 2px 8px rgba(8,28,36,0.05); }
+.m-auth2-role { display: flex; align-items: center; gap: 10px; padding: 12px; background: var(--m-card-warm); border: 1.5px solid #CFE6DE; border-radius: 16px; cursor: pointer; text-align: left; box-shadow: 0 2px 8px rgba(8,28,36,0.05); }
 .m-auth2-role.active { border-color: #0F4C5C; background: #E4F4EE; box-shadow: 0 4px 14px rgba(15,76,92,0.14), inset 0 0 0 1px #0F4C5C; }
 .m-auth2-role-ic { width: 38px; height: 38px; border-radius: 50%; background: #EAF6F1; color: #0F4C5C; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .m-auth2-role.active .m-auth2-role-ic { background: #0F4C5C; color: #ffffff; }
 .m-auth2-role-tx b { display: block; font-size: 14.5px; font-weight: 800; color: #081C24; }
 .m-auth2-role-tx small { font-size: 10.5px; color: #52707C; font-weight: 600; }
-.m-auth2-form { background: #ffffff; border: 1px solid rgba(15,76,92,0.08); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 28px rgba(8,28,36,0.09), 0 2px 8px rgba(8,28,36,0.05); }
+.m-auth2-form { background: var(--m-card); border: 1px solid rgba(15,76,92,0.08); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 28px rgba(8,28,36,0.09), 0 2px 8px rgba(8,28,36,0.05); }
 .m-auth2-field { display: flex; flex-direction: column; gap: 6px; }
 .m-auth2-field > span { font-size: 12px; font-weight: 700; color: #1F4550; }
 .m-auth2-field input { height: 48px; border: 1.5px solid #CFE0DA; border-radius: 12px; background: #FBFEFD; padding: 0 14px; font-size: 14.5px; color: #081C24; outline: none; width: 100%; }
@@ -1282,7 +1282,7 @@
 .m-auth2-sub { font-size: 12.5px; color: #4A6B74; margin: 0 0 12px; }
 .m-auth2-tabs { display: grid; grid-template-columns: 1fr 1fr; background: #E3F1EB; border-radius: 999px; padding: 4px; margin-bottom: 12px; }
 .m-auth2-tabs button { height: 38px; border: none; border-radius: 999px; background: transparent; font-size: 13.5px; font-weight: 700; color: #4A6B74; cursor: pointer; }
-.m-auth2-tabs button.active { background: #ffffff; color: #0F4C5C; box-shadow: 0 2px 8px rgba(8,28,36,0.1); }
+.m-auth2-tabs button.active { background: var(--m-card); color: #0F4C5C; box-shadow: 0 2px 8px rgba(8,28,36,0.1); }
 .m-auth2-row { display: flex; align-items: center; justify-content: space-between; }
 .m-auth2-remember { display: flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600; color: #1F4550; }
 .m-auth2-forgot { font-size: 12px; font-weight: 700; color: #0F4C5C; }
@@ -1449,7 +1449,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 }
 .m-assistant .fa-body { flex: 1 1 auto !important; overflow-y: auto !important; min-height: 0 !important; }
 .m-assistant .fa-controls {
-  position: sticky !important; bottom: 0 !important; background: #ffffff !important;
+  position: sticky !important; bottom: 0 !important; background: #FFFDF6 !important;
   padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important; z-index: 2 !important;
 }
 .m-assistant .fa-panel {
@@ -1461,7 +1461,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 
 .m-assistant .fa-controls {
   position: fixed !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
-  background: #ffffff !important; padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+  background: #FFFDF6 !important; padding: 10px 20px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
   border-top: 1px solid #D0DFE2 !important; margin-top: 0 !important; z-index: 3 !important;
   box-shadow: 0 -4px 14px rgba(8,28,36,0.06) !important;
 }
@@ -1469,7 +1469,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 /* full-screen v2: visible composer (text input + send) above control bar */
 .m-assistant .fa-typeform {
   position: fixed !important; left: 0 !important; right: 0 !important; bottom: 62px !important;
-  background: #ffffff !important; padding: 8px 20px !important; margin-top: 0 !important;
+  background: #FFFDF6 !important; padding: 8px 20px !important; margin-top: 0 !important;
   border-top: 1px solid #EDF3F4 !important; z-index: 3 !important; display: flex !important; gap: 8px !important;
 }
 .m-assistant .fa-typeform input { font-size: 14px !important; padding: 11px 14px !important; border-radius: 12px !important; }
@@ -1548,7 +1548,7 @@ button.m-auth2-forgot { background: none; border: none; padding: 0; cursor: poin
 }
 .m-applock-card {
   width: 100%; max-width: 360px;
-  background: #ffffff; border: 1px solid var(--m-border, #e2e8e4);
+  background: var(--m-card); border: 1px solid var(--m-border, #e2e8e4);
   border-radius: 18px; padding: 22px;
   box-shadow: 0 18px 48px rgba(8, 28, 36, 0.18);
   display: flex; flex-direction: column; gap: 12px;

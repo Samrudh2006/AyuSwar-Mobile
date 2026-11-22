@@ -203,7 +203,7 @@ export default function ArchitectureView() {
             Proposed DevOps, Observability & GitOps Infrastructure
           </h2>
           <p style={{ fontSize: '13.5px', color: '#37525C', maxWidth: '850px', lineHeight: 1.5, margin: 0 }}>
-            Review deployment configuration files in <code style={{ background: '#F1F5F9', padding: '2px 6px', borderRadius: '4px', fontSize: '12.5px', color: '#0F4C5C' }}>deploy/</code>. This workspace did not deploy or verify the topology; production security and data-residency claims remain pending.
+            Review deployment configuration files in <code style={{ background: 'var(--m-card-cool)', padding: '2px 6px', borderRadius: '4px', fontSize: '12.5px', color: '#0F4C5C' }}>deploy/</code>. This workspace did not deploy or verify the topology; production security and data-residency claims remain pending.
           </p>
         </div>
 
@@ -215,7 +215,7 @@ export default function ArchitectureView() {
           marginBottom: '20px'
         }}>
           {/* 1. K3s / Kubernetes */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(15, 76, 92, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F4C5C' }}>
                 <Server size={20} />
@@ -236,7 +236,7 @@ export default function ArchitectureView() {
           </div>
 
           {/* 2. Prometheus & Grafana */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(234, 88, 12, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#EA580C' }}>
                 <BarChart3 size={20} />
@@ -257,7 +257,7 @@ export default function ArchitectureView() {
           </div>
 
           {/* 3. ArgoCD GitOps */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(2, 132, 199, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0284C7' }}>
                 <GitBranch size={20} />
@@ -278,7 +278,7 @@ export default function ArchitectureView() {
           </div>
 
           {/* 4. Traefik & Sovereign Mesh */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '20px', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.02)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
               <div style={{ width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(16, 185, 129, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#047857' }}>
                 <Radio size={20} />
@@ -351,7 +351,7 @@ export default function ArchitectureView() {
               <div
                 key={idx}
                 style={{
-                  background: '#FFFFFF',
+                  background: 'var(--m-card)',
                   borderRadius: '16px',
                   border: '1px solid #D0DFE2',
                   padding: '20px',

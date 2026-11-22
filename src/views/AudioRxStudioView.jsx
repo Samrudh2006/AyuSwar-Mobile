@@ -672,7 +672,7 @@ Text only. No audio attachment. Not automatically sent.`;
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
           {/* Live Waveform Studio Card */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Mic size={18} color="#0F4C5C" />
@@ -776,7 +776,7 @@ Text only. No audio attachment. Not automatically sent.`;
                     padding: '12px 16px',
                     borderRadius: '12px',
                     border: '1px solid #D0DFE2',
-                    background: '#FAF8F5',
+                    background: 'var(--m-card)',
                     color: '#081C24',
                     fontSize: '13px',
                     fontWeight: 750,
@@ -871,7 +871,7 @@ Text only. No audio attachment. Not automatically sent.`;
 
             {/* Recorded Audio Audio Element */}
             {liveRecordedAudioUrl && (
-              <div style={{ background: '#FAF8F5', padding: '10px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
+              <div style={{ background: 'var(--m-card)', padding: '10px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                 <div style={{ fontSize: '11px', fontWeight: 700, color: '#047857', marginBottom: '6px' }}>
  ✓ Live Voice Note Recorded Ready for WhatsApp Dispatch:
                 </div>
@@ -881,7 +881,7 @@ Text only. No audio attachment. Not automatically sent.`;
           </div>
 
           {/* Karaoke Telemetry Box */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                 <span style={{ fontSize: '13px', fontWeight: 800, color: '#081C24' }}>Synthesized Mother Tongue Readout:</span>
@@ -922,7 +922,7 @@ Text only. No audio attachment. Not automatically sent.`;
                       fontSize: '11px',
                       fontWeight: 700,
                       color: '#081C24',
-                      background: '#FFFFFF',
+                      background: 'var(--m-card)',
                       outline: 'none',
                       cursor: 'pointer'
                     }}
@@ -956,7 +956,7 @@ Text only. No audio attachment. Not automatically sent.`;
                       padding: '5px 10px',
                       borderRadius: '8px',
                       border: 'none',
-                      background: activeLang === lang.code ? '#0F4C5C' : '#F1F5F9',
+                      background: activeLang === lang.code ? '#0F4C5C' : 'var(--m-card-cool)',
                       color: activeLang === lang.code ? '#FFFFFF' : '#486770',
                       fontSize: '11.5px',
                       fontWeight: 750,
@@ -1054,7 +1054,7 @@ Text only. No audio attachment. Not automatically sent.`;
                   padding: '12px 16px',
                   borderRadius: '12px',
                   border: '1.5px solid #0F4C5C',
-                  background: '#FAF8F5',
+                  background: 'var(--m-card)',
                   color: '#0F4C5C',
                   fontSize: '13px',
                   fontWeight: 800,
@@ -1093,7 +1093,7 @@ Text only. No audio attachment. Not automatically sent.`;
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
           {/* Visual Pill Cards */}
-          <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
             <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#081C24', marginBottom: '14px' }}>
               Color-Coded Visual Pill Chronotherapy Schedule
             </h3>
@@ -1104,7 +1104,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 padding: '16px',
                 borderRadius: '12px',
                 border: activePillHighlight === 'morning' ? '2.5px solid #F59E0B' : '1px solid #D0DFE2',
-                background: activePillHighlight === 'morning' ? '#FEF3C7' : '#F8FAFC',
+                background: activePillHighlight === 'morning' ? '#FEF3C7' : 'var(--m-card-cool)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -1131,7 +1131,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 padding: '16px',
                 borderRadius: '12px',
                 border: activePillHighlight === 'night' ? '2.5px solid #C2410C' : '1px solid #D0DFE2',
-                background: activePillHighlight === 'night' ? '#FFF7ED' : '#FAF8F5',
+                background: activePillHighlight === 'night' ? '#FFF7ED' : 'var(--m-card)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '14px',
@@ -1218,7 +1218,7 @@ Text only. No audio attachment. Not automatically sent.`;
 
             {teachBackModalOpen && (
               <div style={{
-                background: '#FFFFFF',
+                background: 'var(--m-card)',
                 borderRadius: '12px',
                 padding: '14px',
                 border: '1px solid #FDE68A',
@@ -1239,7 +1239,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         padding: '8px',
                         borderRadius: '8px',
                         border: teachBackAnswers.q1 === 0 ? '2px solid #047857' : '1px solid #D0DFE2',
-                        background: teachBackAnswers.q1 === 0 ? '#DCFCE7' : '#F8FAFC',
+                        background: teachBackAnswers.q1 === 0 ? '#DCFCE7' : 'var(--m-card-cool)',
                         color: teachBackAnswers.q1 === 0 ? '#166534' : '#2C4A52',
                         fontSize: '11px',
                         fontWeight: 750,
@@ -1255,7 +1255,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         padding: '8px',
                         borderRadius: '8px',
                         border: teachBackAnswers.q1 === 1 ? '2px solid #B91C1C' : '1px solid #D0DFE2',
-                        background: teachBackAnswers.q1 === 1 ? '#FEE2E2' : '#F8FAFC',
+                        background: teachBackAnswers.q1 === 1 ? '#FEE2E2' : 'var(--m-card-cool)',
                         color: teachBackAnswers.q1 === 1 ? '#991B1B' : '#2C4A52',
                         fontSize: '11px',
                         fontWeight: 750,
@@ -1280,7 +1280,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         padding: '8px',
                         borderRadius: '8px',
                         border: teachBackAnswers.q2 === 0 ? '2px solid #047857' : '1px solid #D0DFE2',
-                        background: teachBackAnswers.q2 === 0 ? '#DCFCE7' : '#F8FAFC',
+                        background: teachBackAnswers.q2 === 0 ? '#DCFCE7' : 'var(--m-card-cool)',
                         color: teachBackAnswers.q2 === 0 ? '#166534' : '#2C4A52',
                         fontSize: '11px',
                         fontWeight: 750,
@@ -1296,7 +1296,7 @@ Text only. No audio attachment. Not automatically sent.`;
                         padding: '8px',
                         borderRadius: '8px',
                         border: teachBackAnswers.q2 === 1 ? '2px solid #B91C1C' : '1px solid #D0DFE2',
-                        background: teachBackAnswers.q2 === 1 ? '#FEE2E2' : '#F8FAFC',
+                        background: teachBackAnswers.q2 === 1 ? '#FEE2E2' : 'var(--m-card-cool)',
                         color: teachBackAnswers.q2 === 1 ? '#991B1B' : '#2C4A52',
                         fontSize: '11px',
                         fontWeight: 750,
@@ -1389,7 +1389,7 @@ Text only. No audio attachment. Not automatically sent.`;
                     padding: '9px 12px',
                     borderRadius: '8px',
                     border: '1px solid #86EFAC',
-                    background: '#FFFFFF',
+                    background: 'var(--m-card)',
                     color: '#166534',
                     fontSize: '12px',
                     fontWeight: 700,
@@ -1415,7 +1415,7 @@ Text only. No audio attachment. Not automatically sent.`;
                     padding: '9px 12px',
                     borderRadius: '8px',
                     border: '1px solid #86EFAC',
-                    background: '#FFFFFF',
+                    background: 'var(--m-card)',
                     color: '#166534',
                     fontSize: '12px',
                     fontWeight: 700,
@@ -1445,7 +1445,7 @@ Text only. No audio attachment. Not automatically sent.`;
       {/* Feature 3: Practice Clinical SOAP Note & ICD-10 Export Studio */}
       <div style={{
         marginTop: '24px',
-        background: '#FFFFFF',
+        background: 'var(--m-card)',
         borderRadius: '16px',
         border: '1.5px solid #D0DFE2',
         padding: '24px',
@@ -1474,7 +1474,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 padding: '8px 14px',
                 borderRadius: '8px',
                 border: '1px solid #D0DFE2',
-                background: '#FFFFFF',
+                background: 'var(--m-card)',
                 color: '#081C24',
                 fontSize: '12px',
                 fontWeight: 750,

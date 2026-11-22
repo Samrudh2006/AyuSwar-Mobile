@@ -18,7 +18,7 @@ export default function NotFoundView() {
         maxWidth: '640px',
         width: '100%',
         textAlign: 'center',
-        background: '#FFFFFF',
+        background: 'var(--m-card)',
         borderRadius: '24px',
         border: '1px solid #D0DFE2',
         boxShadow: '0 20px 40px -15px rgba(0, 0, 0, 0.07)',
@@ -63,7 +63,7 @@ export default function NotFoundView() {
             style={{
               padding: '14px 16px',
               borderRadius: '12px',
-              background: '#FAF8F5',
+              background: 'var(--m-card)',
               border: '1px solid #D0DFE2',
               textDecoration: 'none',
               display: 'flex',
@@ -84,7 +84,7 @@ export default function NotFoundView() {
             style={{
               padding: '14px 16px',
               borderRadius: '12px',
-              background: '#FAF8F5',
+              background: 'var(--m-card)',
               border: '1px solid #D0DFE2',
               textDecoration: 'none',
               display: 'flex',
@@ -105,7 +105,7 @@ export default function NotFoundView() {
             style={{
               padding: '14px 16px',
               borderRadius: '12px',
-              background: '#FAF8F5',
+              background: 'var(--m-card)',
               border: '1px solid #D0DFE2',
               textDecoration: 'none',
               display: 'flex',
@@ -126,7 +126,7 @@ export default function NotFoundView() {
             style={{
               padding: '14px 16px',
               borderRadius: '12px',
-              background: '#FAF8F5',
+              background: 'var(--m-card)',
               border: '1px solid #D0DFE2',
               textDecoration: 'none',
               display: 'flex',

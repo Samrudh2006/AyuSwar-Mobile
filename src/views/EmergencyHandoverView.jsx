@@ -39,7 +39,7 @@ export default function EmergencyHandoverView() {
             padding: '10px 18px',
             borderRadius: '10px',
             border: '1px solid #D0DFE2',
-            background: '#FFFFFF',
+            background: 'var(--m-card)',
             color: '#081C24',
             fontSize: '13px',
             fontWeight: 750,
@@ -64,7 +64,7 @@ export default function EmergencyHandoverView() {
 
       {/* Handover Document Paper Container */}
       <div style={{
-        background: '#FFFFFF',
+        background: 'var(--m-card)',
         borderRadius: '16px',
         border: '1px solid #D0DFE2',
         boxShadow: '0 8px 30px rgba(0, 0, 0, 0.04)',
@@ -117,24 +117,24 @@ export default function EmergencyHandoverView() {
         </div>
 
         {/* Section 2: Vitals at Scene */}
-        <div style={{ background: '#FAF8F5', borderRadius: '12px', padding: '16px', marginBottom: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '12px', padding: '16px', marginBottom: '24px' }}>
           <div style={{ fontSize: '12px', fontWeight: 800, color: '#081C24', textTransform: 'uppercase', marginBottom: '10px' }}>
             Pre-Hospital Vital Signs Baseline:
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 130px), 1fr))', gap: '10px', textAlign: 'center' }}>
-            <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
+            <div style={{ background: 'var(--m-card)', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
               <div style={{ fontSize: '11px', color: '#52707C' }}>Blood Pressure</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#DC2626' }}>90/60 mmHg</div>
             </div>
-            <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
+            <div style={{ background: 'var(--m-card)', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
               <div style={{ fontSize: '11px', color: '#52707C' }}>Heart Rate</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#081C24' }}>118 bpm</div>
             </div>
-            <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
+            <div style={{ background: 'var(--m-card)', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
               <div style={{ fontSize: '11px', color: '#52707C' }}>Oxygen (SpO2)</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#B45309' }}>91% on room air</div>
             </div>
-            <div style={{ background: '#FFFFFF', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
+            <div style={{ background: 'var(--m-card)', padding: '10px', borderRadius: '8px', border: '1px solid #D0DFE2' }}>
               <div style={{ fontSize: '11px', color: '#52707C' }}>GCS Scale</div>
               <div style={{ fontSize: '15px', fontWeight: 850, color: '#081C24' }}>14/15</div>
             </div>

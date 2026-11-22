@@ -57,7 +57,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
   if (!pitchTrack || pitchTrack.length === 0) {
     return (
       <div style={{
-        background: '#FAF8F5',
+        background: 'var(--m-card)',
         border: '1px dashed #D0DFE2',
         borderRadius: '10px',
         padding: '24px',
@@ -103,7 +103,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
   const meanY = meanF0 ? getY(meanF0) : null;
 
   return (
-    <div style={{ background: '#061626', borderRadius: '12px', padding: '14px 16px', border: '1px solid #1E293B', color: '#F8FAFC' }}>
+    <div style={{ background: '#061626', borderRadius: '12px', padding: '14px 16px', border: '1px solid #1E293B', color: 'var(--m-card-cool)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: 6 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{ fontSize: '12px', fontWeight: 800, color: '#047857', letterSpacing: '0.04em' }}>
@@ -114,7 +114,7 @@ function PitchMovementTrajectory({ pitchTrack, durationSec, meanF0 }) {
           </span>
         </div>
         <div style={{ fontSize: '11px', color: '#94A3B8', fontFamily: 'monospace' }}>
-          Min: <strong style={{ color: '#F8FAFC' }}>{minF0} Hz</strong> • Max: <strong style={{ color: '#F8FAFC' }}>{maxF0} Hz</strong> • Mean: <strong style={{ color: '#047857' }}>{meanF0} Hz</strong>
+          Min: <strong style={{ color: 'var(--m-card-cool)' }}>{minF0} Hz</strong> • Max: <strong style={{ color: 'var(--m-card-cool)' }}>{maxF0} Hz</strong> • Mean: <strong style={{ color: '#047857' }}>{meanF0} Hz</strong>
         </div>
       </div>
 
@@ -1257,7 +1257,7 @@ export default function AcousticBiomarkerLabView() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
           <span style={{
             fontSize: '11px',
-            background: '#F1F5F9',
+            background: 'var(--m-card-cool)',
             border: '1px solid #D0DFE2',
             color: '#2C4A52',
             padding: '5px 12px',
@@ -1286,7 +1286,7 @@ export default function AcousticBiomarkerLabView() {
               gap: 6,
               padding: '5px 12px',
               borderRadius: 16,
-              background: gnaniSpeechStatus?.available ? '#E6F7F8' : '#F1F5F9',
+              background: gnaniSpeechStatus?.available ? '#E6F7F8' : 'var(--m-card-cool)',
               border: '1px solid',
               borderColor: gnaniSpeechStatus?.available ? '#0F4C5C' : '#D0DFE2',
               color: gnaniSpeechStatus?.available ? '#0F4C5C' : '#486770',
@@ -1337,7 +1337,7 @@ export default function AcousticBiomarkerLabView() {
       <div className="acoustic-lab-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '20px' }}>
         
         {/* Left Column: Visualizer, Controls, Tone Generator */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
           {/* Visualizer Header */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
@@ -1361,7 +1361,7 @@ export default function AcousticBiomarkerLabView() {
                   padding: '6px 12px',
                   borderRadius: 8,
                   border: '1px solid #D0DFE2',
-                  background: '#FAF8F5',
+                  background: 'var(--m-card)',
                   color: '#081C24',
                   fontSize: '11.5px',
                   fontWeight: 700,
@@ -1380,7 +1380,7 @@ export default function AcousticBiomarkerLabView() {
                     borderRadius: 8,
                     border: 'none',
                     background: '#B91C1C',
-                    color: '#FFFFFF',
+                    color: '#FFFDF8',
                     fontSize: '11.5px',
                     fontWeight: 800,
                     cursor: 'pointer',
@@ -1493,7 +1493,7 @@ export default function AcousticBiomarkerLabView() {
                 borderRadius: '10px',
                 border: 'none',
                 background: isRecordingMic && !isSamplingAudio ? '#DC2626' : '#0F4C5C',
-                color: '#FFFFFF',
+                color: '#FFFDF8',
                 fontSize: '12.5px',
                 fontWeight: 800,
                 cursor: 'pointer',
@@ -1516,7 +1516,7 @@ export default function AcousticBiomarkerLabView() {
                 borderRadius: '10px',
                 border: 'none',
                 background: '#047857',
-                color: '#FFFFFF',
+                color: '#FFFDF8',
                 fontSize: '12.5px',
                 fontWeight: 800,
                 cursor: 'pointer',
@@ -1539,7 +1539,7 @@ export default function AcousticBiomarkerLabView() {
                 padding: '12px 14px',
                 borderRadius: '10px',
                 border: '1.5px solid #D0DFE2',
-                background: '#FAF8F5',
+                background: 'var(--m-card)',
                 color: '#081C24',
                 fontSize: '12.5px',
                 fontWeight: 800,
@@ -1570,7 +1570,7 @@ export default function AcousticBiomarkerLabView() {
                 padding: '12px 14px',
                 borderRadius: '10px',
                 border: '1.5px solid #D0DFE2',
-                background: '#FAF8F5',
+                background: 'var(--m-card)',
                 color: '#2C4A52',
                 fontSize: '12.5px',
                 fontWeight: 800,
@@ -1588,7 +1588,7 @@ export default function AcousticBiomarkerLabView() {
           </div>
 
           {/* Interactive Live Tone Slider */}
-          <div style={{ background: '#FAF8F5', padding: '14px 16px', borderRadius: 12, border: '1px solid #D0DFE2' }}>
+          <div style={{ background: 'var(--m-card)', padding: '14px 16px', borderRadius: 12, border: '1px solid #D0DFE2' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '12px', fontWeight: 800, color: '#2C4A52' }}>
                 <Sliders size={14} color="#0F4C5C" />
@@ -1602,7 +1602,7 @@ export default function AcousticBiomarkerLabView() {
                   borderRadius: 6,
                   border: 'none',
                   background: isToneActive ? '#B91C1C' : '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '11px',
                   fontWeight: 800,
                   cursor: 'pointer'
@@ -1648,25 +1648,25 @@ export default function AcousticBiomarkerLabView() {
                 </div>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
+                <div style={{ background: 'var(--m-card)', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                   <span style={{ fontSize: '11px', color: '#52707C' }}>Candidate pitch F0 (experimental)</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.pitchF0 !== null ? `${dspMetrics.pitchF0} Hz` : 'Unavailable'}
                   </div>
                 </div>
-                <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
+                <div style={{ background: 'var(--m-card)', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                   <span style={{ fontSize: '11px', color: '#52707C' }}>Pitch reliability</span>
                   <div style={{ fontSize: '15px', fontWeight: 850, color: '#0F4C5C' }}>
                     {dspMetrics.pitchRegister}
                   </div>
                 </div>
-                <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
+                <div style={{ background: 'var(--m-card)', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                   <span style={{ fontSize: '11px', color: '#52707C' }}>HNR estimate (YIN residual)</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.hnrDb !== null ? `${dspMetrics.hnrDb} dB` : 'Unavailable'}
                   </div>
                 </div>
-                <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
+                <div style={{ background: 'var(--m-card)', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                   <span style={{ fontSize: '11px', color: '#52707C' }}>Spectral Centroid</span>
                   <div style={{ fontSize: '18px', fontWeight: 850, color: '#081C24' }}>
                     {dspMetrics.spectralCentroid !== null ? `${dspMetrics.spectralCentroid} Hz` : 'Unavailable'}
@@ -1698,7 +1698,7 @@ export default function AcousticBiomarkerLabView() {
                     borderRadius: '10px',
                     border: '1.5px solid',
                     borderColor: activeSoundName === ACOUSTIC_CLUSTER_PROFILES[item.key]?.label ? '#0F4C5C' : '#D0DFE2',
-                    background: activeSoundName === ACOUSTIC_CLUSTER_PROFILES[item.key]?.label ? '#E6F7F8' : '#FFFFFF',
+                    background: activeSoundName === ACOUSTIC_CLUSTER_PROFILES[item.key]?.label ? '#E6F7F8' : '#FFFDF8',
                     color: '#081C24',
                     textAlign: 'left',
                     cursor: 'pointer',
@@ -1728,7 +1728,7 @@ export default function AcousticBiomarkerLabView() {
               onDragLeave={(e) => { e.preventDefault(); setIsDraggingFile(false); }}
               onDrop={handleFileDrop}
               style={{
-                background: isDraggingFile ? '#E6F7F8' : '#FFFFFF',
+                background: isDraggingFile ? '#E6F7F8' : '#FFFDF8',
                 borderRadius: '16px',
                 border: isDraggingFile ? '2px dashed #0F4C5C' : '1.5px dashed #D0DFE2',
                 padding: '48px 24px',
@@ -1767,7 +1767,7 @@ export default function AcousticBiomarkerLabView() {
                 gap: 8,
                 padding: '8px 16px',
                 borderRadius: '20px',
-                background: '#F1F5F9',
+                background: 'var(--m-card-cool)',
                 border: '1px solid #D0DFE2',
                 fontSize: '12px',
                 color: '#486770',
@@ -1781,7 +1781,7 @@ export default function AcousticBiomarkerLabView() {
           {/* STATE 2: RECORDING */}
           {labState === LAB_STATES.RECORDING && (
             <div style={{
-              background: '#FFFFFF',
+              background: 'var(--m-card)',
               borderRadius: '16px',
               border: '2px solid #B91C1C',
               padding: '40px 24px',
@@ -1821,7 +1821,7 @@ export default function AcousticBiomarkerLabView() {
                   borderRadius: '8px',
                   border: 'none',
                   background: '#DC2626',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '13px',
                   fontWeight: 800,
                   cursor: 'pointer',
@@ -1839,7 +1839,7 @@ export default function AcousticBiomarkerLabView() {
           {/* STATE 3: ANALYSING — real local DSP pipeline (staged, duration = actual compute) */}
           {labState === LAB_STATES.ANALYSING && (
             <div style={{
-              background: '#FFFFFF',
+              background: 'var(--m-card)',
               borderRadius: '16px',
               border: '1.5px solid #D0DFE2',
               padding: '40px 24px',
@@ -1885,7 +1885,7 @@ export default function AcousticBiomarkerLabView() {
                   <span>STAGE {analyzingStage} OF 3</span>
                   <span style={{ color: '#0F4C5C', fontWeight: 800 }}>{analyzingProgress}%</span>
                 </div>
-                <div style={{ height: '8px', background: '#F1F5F9', borderRadius: '4px', overflow: 'hidden', border: '1px solid #D0DFE2' }}>
+                <div style={{ height: '8px', background: 'var(--m-card-cool)', borderRadius: '4px', overflow: 'hidden', border: '1px solid #D0DFE2' }}>
                   <div style={{
                     width: `${analyzingProgress}%`,
                     height: '100%',
@@ -1904,7 +1904,7 @@ export default function AcousticBiomarkerLabView() {
               </p>
 
               {/* Step Telemetry Checklist */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', maxWidth: '390px', textAlign: 'left', fontSize: '11.5px', background: '#F8FAFC', padding: '12px 16px', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%', maxWidth: '390px', textAlign: 'left', fontSize: '11.5px', background: 'var(--m-card-cool)', padding: '12px 16px', borderRadius: '10px', border: '1px solid #E2E8F0' }}>
                 {[
                   { stage: 1, label: '48kHz Frame Windowing & YIN Autocorrelation' },
                   { stage: 2, label: 'Frame Period & RMS Variation (Not Cycle Jitter/Shimmer)' },
@@ -1962,7 +1962,7 @@ export default function AcousticBiomarkerLabView() {
                   borderRadius: '8px',
                   border: 'none',
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '12px',
                   fontWeight: 800,
                   cursor: 'pointer'
@@ -1979,7 +1979,7 @@ export default function AcousticBiomarkerLabView() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
               {/* Comprehensive Clinical Pathology Card */}
               <div style={{
-                background: '#FFFFFF',
+                background: 'var(--m-card)',
                 borderRadius: '16px',
                 border: '1.5px solid #D0DFE2',
                 boxShadow: '0 8px 30px rgba(15, 76, 92, 0.08)',
@@ -1988,7 +1988,7 @@ export default function AcousticBiomarkerLabView() {
                 {/* Hospital Header with Official AyuSwar AI Emblem */}
                 <div style={{
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   padding: '20px 24px',
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -2058,7 +2058,7 @@ export default function AcousticBiomarkerLabView() {
                         borderRadius: 8,
                         border: '1px solid rgba(255, 255, 255, 0.3)',
                         background: 'rgba(255, 255, 255, 0.1)',
-                        color: '#FFFFFF',
+                        color: '#FFFDF8',
                         fontSize: '12px',
                         fontWeight: 700,
                         cursor: 'pointer'
@@ -2071,7 +2071,7 @@ export default function AcousticBiomarkerLabView() {
 
                 <div style={{ padding: '24px' }}>
                   {/* Accession & Telemetry Metadata Grid */}
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', background: '#F8FAFC', padding: '12px 16px', borderRadius: '10px', border: '1px solid #D0DFE2', marginBottom: '20px', fontSize: '11.5px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px', background: 'var(--m-card-cool)', padding: '12px 16px', borderRadius: '10px', border: '1px solid #D0DFE2', marginBottom: '20px', fontSize: '11.5px' }}>
                     <div>
                       <span style={{ color: '#52707C', display: 'block', fontSize: '10.5px' }}>Specimen Source:</span>
                       <strong style={{ color: '#081C24' }}>{sampleSummary?.fileName || 'Microphone research audio'}</strong>
@@ -2163,7 +2163,7 @@ export default function AcousticBiomarkerLabView() {
                           borderRadius: 6,
                           border: 'none',
                           background: isSpeakingReadout ? '#B91C1C' : '#0F4C5C',
-                          color: '#FFFFFF',
+                          color: '#FFFDF8',
                           fontSize: '11.5px',
                           fontWeight: 800,
                           cursor: 'pointer',
@@ -2184,7 +2184,7 @@ export default function AcousticBiomarkerLabView() {
                   baselines is not validated and implies disease-pattern inference. Hidden until a
                   validated reference dataset justifies it (research track). */}
               {false && analysisResult && (
-                <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+                <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
                   <div style={{ fontSize: '12px', fontWeight: 800, color: '#0F4C5C', textTransform: 'uppercase', letterSpacing: '0.04em', marginBottom: '8px' }}>
                     Acoustic Reference Pattern Distance
                   </div>
@@ -2198,7 +2198,7 @@ export default function AcousticBiomarkerLabView() {
                           <span style={{ fontWeight: 750, color: '#081C24' }}>{match.label}</span>
                           <span style={{ color: '#52707C', fontFamily: 'monospace' }}>Reference similarity: {match.similarityScore}/100</span>
                         </div>
-                        <div style={{ height: '8px', background: '#FAF8F5', borderRadius: '4px', overflow: 'hidden' }}>
+                        <div style={{ height: '8px', background: 'var(--m-card)', borderRadius: '4px', overflow: 'hidden' }}>
                           <div style={{
                             width: `${match.similarityScore}%`,
                             height: '100%',
@@ -2216,7 +2216,7 @@ export default function AcousticBiomarkerLabView() {
           )}
 
           {/* Clinical Safety Protocol Footer */}
-          <div style={{ background: '#FAF8F5', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '16px', fontSize: '12px', color: '#486770', lineHeight: 1.6 }}>
+          <div style={{ background: 'var(--m-card)', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '16px', fontSize: '12px', color: '#486770', lineHeight: 1.6 }}>
             <strong>Clinical Safety Protocol:</strong> Quantitative physical acoustics vary with recording equipment, microphone distance, ambient noise, and vocal technique. Features serve as digital engineering aids and cannot substitute for physical auscultation, stethoscopy, or spirometry.
           </div>
         </div>

@@ -603,7 +603,7 @@ export default function ClinicalBenchmarkView() {
           display: 'flex',
           gap: '8px',
           marginTop: '20px',
-          background: '#FAF8F5',
+          background: 'var(--m-card)',
           padding: '4px',
           borderRadius: '12px',
           maxWidth: 'fit-content'
@@ -665,7 +665,7 @@ export default function ClinicalBenchmarkView() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
           {/* Key Metric Highlights Band */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '16px' }}>
-            <div style={{ background: '#FFFFFF', border: '1.5px solid #CCFBF1', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)' }}>
+            <div style={{ background: 'var(--m-card)', border: '1.5px solid #CCFBF1', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)' }}>
               <div style={{ fontSize: '11px', color: '#0F766E', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Documentation Target</div>
               <div style={{ fontSize: '32px', fontWeight: 900, color: '#0F766E', margin: '6px 0 2px 0' }}>~1.8 mins</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
@@ -673,7 +673,7 @@ export default function ClinicalBenchmarkView() {
               </div>
             </div>
 
-            <div style={{ background: '#FFFFFF', border: '1.5px solid #D0DFE2', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+            <div style={{ background: 'var(--m-card)', border: '1.5px solid #D0DFE2', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
               <div style={{ fontSize: '11px', color: '#0284C7', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Clinician Oversight</div>
               <div style={{ fontSize: '32px', fontWeight: 900, color: '#0284C7', margin: '6px 0 2px 0' }}>100%</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
@@ -681,7 +681,7 @@ export default function ClinicalBenchmarkView() {
               </div>
             </div>
 
-            <div style={{ background: '#FFFFFF', border: '1.5px solid #D0DFE2', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+            <div style={{ background: 'var(--m-card)', border: '1.5px solid #D0DFE2', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
               <div style={{ fontSize: '11px', color: '#15803D', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Vocabulary Alignment</div>
               <div style={{ fontSize: '32px', fontWeight: 900, color: '#15803D', margin: '6px 0 2px 0' }}>WHO ICD-10</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
@@ -689,7 +689,7 @@ export default function ClinicalBenchmarkView() {
               </div>
             </div>
 
-            <div style={{ background: '#FFFFFF', border: '1.5px solid #FDE68A', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(217,119,6,0.06)' }}>
+            <div style={{ background: 'var(--m-card)', border: '1.5px solid #FDE68A', borderRadius: '16px', padding: '22px', boxShadow: '0 4px 16px rgba(217,119,6,0.06)' }}>
               <div style={{ fontSize: '11px', color: '#B45309', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.4px' }}>Patient Guidance</div>
               <div style={{ fontSize: '32px', fontWeight: 900, color: '#B45309', margin: '6px 0 2px 0' }}>Vernacular</div>
               <div style={{ fontSize: '12px', color: '#486770', lineHeight: 1.4 }}>
@@ -699,7 +699,7 @@ export default function ClinicalBenchmarkView() {
           </div>
 
           {/* Time-Motion Observational Study Panel */}
-          <div style={{ background: '#FFFFFF', border: '1px solid #D0DFE2', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: 'var(--m-card)', border: '1px solid #D0DFE2', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '20px' }}>
               <div>
                 <h3 style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', margin: 0 }}>
@@ -717,7 +717,7 @@ export default function ClinicalBenchmarkView() {
                     borderRadius: '8px',
                     border: '1px solid',
                     borderColor: selectedCaseStudy === 'phc_kurnool' ? '#0F4C5C' : '#D0DFE2',
-                    background: selectedCaseStudy === 'phc_kurnool' ? '#F0FDFA' : '#FFFFFF',
+                    background: selectedCaseStudy === 'phc_kurnool' ? '#F0FDFA' : '#FFFDF8',
                     color: selectedCaseStudy === 'phc_kurnool' ? '#0F4C5C' : '#486770',
                     fontSize: '12px',
                     fontWeight: 750,
@@ -733,7 +733,7 @@ export default function ClinicalBenchmarkView() {
                     borderRadius: '8px',
                     border: '1px solid',
                     borderColor: selectedCaseStudy === 'warangal_rural' ? '#0F4C5C' : '#D0DFE2',
-                    background: selectedCaseStudy === 'warangal_rural' ? '#F0FDFA' : '#FFFFFF',
+                    background: selectedCaseStudy === 'warangal_rural' ? '#F0FDFA' : '#FFFDF8',
                     color: selectedCaseStudy === 'warangal_rural' ? '#0F4C5C' : '#486770',
                     fontSize: '12px',
                     fontWeight: 750,
@@ -746,7 +746,7 @@ export default function ClinicalBenchmarkView() {
             </div>
 
             {/* Time Comparison Horizontal Bars */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', background: '#FAF8F5', padding: '20px', borderRadius: '14px', border: '1px solid #D0DFE2' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', background: 'var(--m-card)', padding: '20px', borderRadius: '14px', border: '1px solid #D0DFE2' }}>
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', fontWeight: 800, marginBottom: '6px' }}>
                   <span style={{ color: '#DC2626' }}>Conventional Desktop EHR Documentation (Status Quo)</span>
@@ -776,7 +776,7 @@ export default function ClinicalBenchmarkView() {
           </div>
 
           {/* Diagnostic & Acoustic Biomarker Concordance Table */}
-          <div style={{ background: '#FFFFFF', border: '1px solid #D0DFE2', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
+          <div style={{ background: 'var(--m-card)', border: '1px solid #D0DFE2', borderRadius: '20px', padding: '28px', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
             <h3 style={{ fontSize: '20px', fontWeight: 850, color: '#081C24', marginBottom: '6px' }}>
               Acoustic Biomarker Signal Analysis Parameters (Prototype)
             </h3>
@@ -787,7 +787,7 @@ export default function ClinicalBenchmarkView() {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '13px' }}>
                 <thead>
-                  <tr style={{ background: '#FAF8F5', borderBottom: '2px solid #D0DFE2' }}>
+                  <tr style={{ background: 'var(--m-card)', borderBottom: '2px solid #D0DFE2' }}>
                     <th style={{ padding: '12px 16px', fontWeight: 800, color: '#081C24' }}>Clinical Category</th>
                     <th style={{ padding: '12px 16px', fontWeight: 800, color: '#081C24' }}>Signal Biomarker</th>
                     <th style={{ padding: '12px 16px', fontWeight: 800, color: '#0F4C5C' }}>Target Bandwidth</th>
@@ -844,7 +844,7 @@ export default function ClinicalBenchmarkView() {
       {activeTab === 'qa' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {/* Action Controls Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', background: '#FFFFFF', border: '1px solid #D0DFE2', padding: '16px 20px', borderRadius: '14px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px', background: 'var(--m-card)', border: '1px solid #D0DFE2', padding: '16px 20px', borderRadius: '14px' }}>
             <div>
               <div style={{ fontSize: '15px', fontWeight: 800, color: '#081C24' }}>In-Browser Contract Verification Runner</div>
               <div style={{ fontSize: '12.5px', color: '#52707C' }}>Executes actual JavaScript methods against local services, speech API, and DSP math boundaries.</div>
@@ -859,7 +859,7 @@ export default function ClinicalBenchmarkView() {
                   borderRadius: '10px',
                   border: 'none',
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '13px',
                   fontWeight: 800,
                   cursor: isRunningAll ? 'not-allowed' : 'pointer',
@@ -880,7 +880,7 @@ export default function ClinicalBenchmarkView() {
                   padding: '10px 16px',
                   borderRadius: '10px',
                   border: '1px solid #D0DFE2',
-                  background: '#FFFFFF',
+                  background: 'var(--m-card)',
                   color: '#081C24',
                   fontSize: '13px',
                   fontWeight: 750,
@@ -897,7 +897,7 @@ export default function ClinicalBenchmarkView() {
           </div>
 
           {/* Real Execution Metrics Bar */}
-          <div className="benchmark-metrics-summary-bar" style={{ background: '#FFFFFF', border: '1px solid #D0DFE2', borderRadius: '16px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
+          <div className="benchmark-metrics-summary-bar" style={{ background: 'var(--m-card)', border: '1px solid #D0DFE2', borderRadius: '16px', padding: '16px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px' }}>
             <div className="benchmark-metrics-counts-row" style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap', minWidth: 0 }}>
               <div style={{ minWidth: '70px' }}>
                 <div style={{ fontSize: '11px', color: '#52707C', fontWeight: 800, textTransform: 'uppercase' }}>Executed Tests</div>
@@ -930,7 +930,7 @@ export default function ClinicalBenchmarkView() {
                     padding: '6px 12px',
                     borderRadius: '8px',
                     border: 'none',
-                    background: activeFilter === f ? '#0A2540' : '#F1F5F9',
+                    background: activeFilter === f ? '#0A2540' : 'var(--m-card-cool)',
                     color: activeFilter === f ? '#FFFFFF' : '#52707C',
                     fontSize: '11.5px',
                     fontWeight: 750,
@@ -954,7 +954,7 @@ export default function ClinicalBenchmarkView() {
                 <div
                   key={test.id}
                   style={{
-                    background: '#FFFFFF',
+                    background: 'var(--m-card)',
                     borderRadius: '12px',
                     border: '1px solid #D0DFE2',
                     padding: '16px 18px',
@@ -1026,7 +1026,7 @@ export default function ClinicalBenchmarkView() {
                         padding: '6px 12px',
                         borderRadius: '8px',
                         border: '1px solid #D0DFE2',
-                        background: '#FFFFFF',
+                        background: 'var(--m-card)',
                         color: '#081C24',
                         fontSize: '11.5px',
                         fontWeight: 750,

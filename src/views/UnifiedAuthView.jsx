@@ -329,7 +329,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
         height: '100vh',
         maxHeight: '100vh',
         overflow: 'hidden',
-        background: '#FFFFFF',
+        background: 'var(--m-cream, #FAF5EA)',
         display: 'flex',
         alignItems: 'stretch',
         fontFamily: 'Inter, system-ui, -apple-system, sans-serif'
@@ -424,7 +424,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
               width: '46px',
               height: '46px',
               borderRadius: '50%',
-              background: '#FAF8F5',
+              background: 'var(--m-card)',
               border: '2px solid #D4AF37',
               display: 'flex',
               alignItems: 'center',
@@ -437,7 +437,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
               <img src="/assets/ayuswar_emblem_mark.webp" alt="AyuSwar AI" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
             </div>
             <div>
-              <div className="auth-hero-wordmark" style={{ fontSize: '22px', fontWeight: 900, color: '#FFFFFF', fontFamily: 'var(--font-main)', letterSpacing: '-0.3px' }}>
+              <div className="auth-hero-wordmark" style={{ fontSize: '22px', fontWeight: 900, color: '#FFFDF8', fontFamily: 'var(--font-main)', letterSpacing: '-0.3px' }}>
                 AyuSwar AI
               </div>
               <div className="auth-hero-tagline" style={{ fontSize: '11px', color: '#D4AF37', fontWeight: 700, letterSpacing: '0.2px' }}>
@@ -484,7 +484,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
           <h1 style={{
             fontSize: 'clamp(28px, 2.8vw, 42px)',
             fontWeight: 900,
-            color: '#FFFFFF',
+            color: '#FFFDF8',
             lineHeight: 1.18,
             letterSpacing: '-0.7px',
             marginBottom: '12px',
@@ -540,7 +540,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
             boxShadow: '0 12px 30px rgba(0, 0, 0, 0.4)',
             boxSizing: 'border-box'
           }}>
-            <p style={{ fontSize: '12.5px', color: '#F1F5F9', fontStyle: 'italic', lineHeight: 1.5, margin: '0 0 10px 0' }}>
+            <p style={{ fontSize: '12.5px', color: 'var(--m-card-cool)', fontStyle: 'italic', lineHeight: 1.5, margin: '0 0 10px 0' }}>
               "The demo lets a reviewer speak, inspect the transcript, edit the draft, and choose whether to export it locally."
             </p>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingTop: '10px', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
@@ -579,7 +579,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
           height: '100vh',
           maxHeight: '100vh',
           overflow: 'hidden',
-          background: '#FAF8F5',
+          background: 'var(--m-card)',
           padding: 'clamp(10px, 1.2vw, 18px)',
           display: 'flex',
           flexDirection: 'column',
@@ -591,7 +591,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
           style={{
             flex: 1,
             height: '100%',
-            background: '#FFFFFF',
+            background: 'var(--m-card)',
             borderRadius: '24px',
             border: '2.5px solid #0F766E',
             boxShadow: '0 16px 40px -10px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04)',
@@ -618,7 +618,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   borderRadius: '24px',
                   border: '2px solid #2DD4BF',
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '13px',
                   fontWeight: 800,
                   letterSpacing: '0.2px',
@@ -642,7 +642,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   borderRadius: '24px',
                   border: '2px solid #2DD4BF',
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '13px',
                   fontWeight: 800,
                   letterSpacing: '0.2px',
@@ -723,7 +723,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
               borderRadius: '24px',
               border: '2px solid #2DD4BF',
               background: '#0F4C5C',
-              color: '#FFFFFF',
+              color: '#FFFDF8',
               fontSize: '13px',
               fontWeight: 800,
               letterSpacing: '0.2px',
@@ -826,7 +826,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   width: '30px',
                   height: '30px',
                   borderRadius: '50%',
-                  background: signupStep >= 1 ? '#0F4C5C' : '#F1F5F9',
+                  background: signupStep >= 1 ? '#0F4C5C' : 'var(--m-card-cool)',
                   color: signupStep >= 1 ? '#FFFFFF' : '#52707C',
                   border: signupStep >= 1 ? '1.5px solid #0F4C5C' : '1.5px solid #D0DFE2',
                   fontWeight: 800,
@@ -852,7 +852,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   width: '30px',
                   height: '30px',
                   borderRadius: '50%',
-                  background: signupStep >= 2 ? '#0F4C5C' : '#F1F5F9',
+                  background: signupStep >= 2 ? '#0F4C5C' : 'var(--m-card-cool)',
                   color: signupStep >= 2 ? '#FFFFFF' : '#52707C',
                   border: signupStep >= 2 ? '1.5px solid #0F4C5C' : '1.5px solid #D0DFE2',
                   fontWeight: 800,
@@ -878,7 +878,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   width: '30px',
                   height: '30px',
                   borderRadius: '50%',
-                  background: signupStep === 3 ? '#047857' : '#F1F5F9',
+                  background: signupStep === 3 ? '#047857' : 'var(--m-card-cool)',
                   color: signupStep === 3 ? '#FFFFFF' : '#52707C',
                   border: signupStep === 3 ? '1.5px solid #047857' : '1.5px solid #D0DFE2',
                   fontWeight: 800,
@@ -901,7 +901,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
               <div>
                 {/* 1-Tap Demo Fill Helper */}
                 <div style={{
-                  background: '#FAF8F5',
+                  background: 'var(--m-card)',
                   border: '1px dashed #D0DFE2',
                   borderRadius: '10px',
                   padding: '8px 12px',
@@ -948,7 +948,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                         padding: '12px 10px',
                         borderRadius: '10px',
                         border: userType === 'doctor' ? '2px solid #0F4C5C' : '1.5px solid #D0DFE2',
-                        background: userType === 'doctor' ? '#F0FDFA' : '#FFFFFF',
+                        background: userType === 'doctor' ? '#F0FDFA' : '#FFFDF8',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -971,7 +971,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                         padding: '12px 10px',
                         borderRadius: '10px',
                         border: userType === 'patient' ? '2px solid #0F4C5C' : '1.5px solid #D0DFE2',
-                        background: userType === 'patient' ? '#F0FDFA' : '#FFFFFF',
+                        background: userType === 'patient' ? '#F0FDFA' : '#FFFDF8',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -1015,8 +1015,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 12px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1047,8 +1047,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 12px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1082,8 +1082,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 12px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1114,8 +1114,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 12px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1149,8 +1149,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 36px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1196,8 +1196,8 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             padding: '10px 36px 10px 36px',
                             borderRadius: '9px',
                             border: '1.5px solid #D0DFE2',
-                            background: '#FFFFFF',
-                            backgroundColor: '#FFFFFF',
+                            background: '#FFFDF8',
+                            backgroundColor: '#FFFDF8',
                             fontSize: '13px',
                             color: '#081C24',
                             outline: 'none',
@@ -1228,7 +1228,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
 
                   {/* Password Requirement Badges */}
                   <div style={{
-                    background: '#FAF8F5',
+                    background: 'var(--m-card)',
                     borderRadius: '8px',
                     padding: '8px 12px',
                     border: '1px solid #D0DFE2',
@@ -1274,7 +1274,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             outline: 'none',
                             appearance: 'none',
                             cursor: 'pointer',
-                            background: '#FFFFFF'
+                            background: '#FFFDF8'
                           }}
                         >
                           <option value="Telugu">Telugu (తెలుగు)</option>
@@ -1311,7 +1311,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                             outline: 'none',
                             appearance: 'none',
                             cursor: 'pointer',
-                            background: '#FFFFFF'
+                            background: '#FFFDF8'
                           }}
                         >
                           <option value="(GMT+05:30) Asia/Kolkata">(GMT+05:30) Asia/Kolkata (IST)</option>
@@ -1337,7 +1337,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                       borderRadius: '10px',
                       border: 'none',
                       background: '#006D6D',
-                      color: '#FFFFFF',
+                      color: '#FFFDF8',
                       fontSize: '14px',
                       fontWeight: 800,
                       cursor: 'pointer',
@@ -1431,7 +1431,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                       borderRadius: '8px',
                       border: 'none',
                       background: '#0F4C5C',
-                      color: '#FFFFFF',
+                      color: '#FFFDF8',
                       fontSize: '11.5px',
                       fontWeight: 800,
                       cursor: 'pointer'
@@ -1475,7 +1475,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                           fontWeight: 800,
                           borderRadius: '10px',
                           border: digit ? '2px solid #0F4C5C' : '1.5px solid #D0DFE2',
-                          background: digit ? '#F0FDFA' : '#FFFFFF',
+                          background: digit ? '#F0FDFA' : '#FFFDF8',
                           color: '#081C24',
                           outline: 'none'
                         }}
@@ -1521,7 +1521,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                         padding: '12px 14px',
                         borderRadius: '10px',
                         border: '1.5px solid #D0DFE2',
-                        background: '#FFFFFF',
+                        background: 'var(--m-cream, #FAF5EA)',
                         color: '#2C4A52',
                         fontSize: '13px',
                         fontWeight: 700,
@@ -1538,7 +1538,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                         borderRadius: '10px',
                         border: 'none',
                         background: '#044E4E',
-                        color: '#FFFFFF',
+                        color: '#FFFDF8',
                         fontSize: '13.5px',
                         fontWeight: 800,
                         cursor: 'pointer',
@@ -1584,7 +1584,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
 
                 {/* Profile Confirmation Card */}
                 <div style={{
-                  background: '#FAF8F5',
+                  background: 'var(--m-card)',
                   border: '1.5px solid #D0DFE2',
                   borderRadius: '14px',
                   padding: '16px 20px',
@@ -1662,7 +1662,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                     borderRadius: '10px',
                     border: 'none',
                     background: '#044E4E',
-                    color: '#FFFFFF',
+                    color: '#FFFDF8',
                     fontSize: '14.5px',
                     fontWeight: 800,
                     cursor: 'pointer',
@@ -1785,7 +1785,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                     padding: '9px 12px',
                     borderRadius: '8px',
                     border: userType === 'doctor' && identifier ? '2px solid #0F4C5C' : '1.5px solid #D0DFE2',
-                    background: userType === 'doctor' && identifier ? '#E6F7F8' : '#FFFFFF',
+                    background: userType === 'doctor' && identifier ? '#E6F7F8' : '#FFFDF8',
                     color: '#081C24',
                     fontSize: '12.5px',
                     fontWeight: 750,
@@ -1807,7 +1807,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                     padding: '9px 12px',
                     borderRadius: '8px',
                     border: userType === 'patient' && identifier ? '2px solid #0F4C5C' : '1.5px solid #D0DFE2',
-                    background: userType === 'patient' && identifier ? '#E6F7F8' : '#FFFFFF',
+                    background: userType === 'patient' && identifier ? '#E6F7F8' : '#FFFDF8',
                     color: '#081C24',
                     fontSize: '12.5px',
                     fontWeight: 750,
@@ -1840,7 +1840,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                       padding: '12px 16px 12px 44px',
                       borderRadius: '10px',
                       border: '1.5px solid #D0DFE2',
-                      background: '#FAF8F5',
+                      background: 'var(--m-card)',
                       fontSize: '14.5px',
                       color: '#081C24',
                       fontWeight: 650,
@@ -1881,7 +1881,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                       padding: '12px 16px 12px 44px',
                       borderRadius: '10px',
                       border: '1.5px solid #D0DFE2',
-                      background: '#FFFFFF',
+                      background: 'var(--m-cream, #FAF5EA)',
                       fontSize: '14.5px',
                       color: '#081C24',
                       outline: 'none',
@@ -1925,7 +1925,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                       padding: '12px 44px 12px 44px',
                       borderRadius: '10px',
                       border: '1.5px solid #D0DFE2',
-                      background: '#FFFFFF',
+                      background: 'var(--m-cream, #FAF5EA)',
                       fontSize: '14.5px',
                       color: '#081C24',
                       outline: 'none',
@@ -1982,7 +1982,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   borderRadius: '11px',
                   border: 'none',
                   background: '#0F4C5C',
-                  color: '#FFFFFF',
+                  color: '#FFFDF8',
                   fontSize: '15.5px',
                   fontWeight: 800,
                   letterSpacing: '0.2px',
@@ -2030,7 +2030,7 @@ export default function UnifiedAuthView({ defaultUserType = 'doctor' }) {
                   padding: '11.5px 20px',
                   borderRadius: '11px',
                   border: '1.5px solid #D0DFE2',
-                  background: '#FFFFFF',
+                  background: 'var(--m-cream, #FAF5EA)',
                   color: '#081C24',
                   fontSize: '14.5px',
                   fontWeight: 750,

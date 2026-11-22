@@ -53,7 +53,7 @@ export default function AboutView() {
 
       {/* Lead Systems Architect Card */}
       <section style={{ 
-        background: '#FFFFFF', 
+        background: 'var(--m-card)', 
         borderRadius: '16px', 
         border: '1.5px solid #D0DFE2', 
         padding: '28px', 
@@ -144,7 +144,7 @@ export default function AboutView() {
                   padding: '10px 18px',
                   borderRadius: '10px',
                   border: '2px solid #0F4C5C',
-                  background: '#FAF8F5',
+                  background: 'var(--m-card)',
                   color: '#0F4C5C',
                   fontSize: '13.5px',
                   fontWeight: 700,
@@ -161,7 +161,7 @@ export default function AboutView() {
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
                   e.currentTarget.style.boxShadow = '0 2px 8px rgba(15, 76, 92, 0.08)';
-                  e.currentTarget.style.background = '#FAF8F5';
+                  e.currentTarget.style.background = 'var(--m-card)';
                 }}
               >
                 <Terminal size={16} />
@@ -175,7 +175,7 @@ export default function AboutView() {
 
       {/* The Mission: Restoring the Human Doctor-Patient Connection */}
       <section style={{ 
-        background: '#FAF8F5', 
+        background: 'var(--m-card)', 
         borderRadius: '16px', 
         border: '1px solid #D0DFE2', 
         padding: '24px', 
@@ -202,7 +202,7 @@ export default function AboutView() {
         gap: '20px',
         marginBottom: '32px'
       }}>
-        <div style={{ background: '#FFFFFF', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#B45309', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
             <Award size={18} />
             <span>Gnani.ai Challenge Context</span>
@@ -212,7 +212,7 @@ export default function AboutView() {
           </p>
         </div>
 
-        <div style={{ background: '#FFFFFF', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '14px', border: '1px solid #D0DFE2', padding: '20px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#047857', fontWeight: 800, fontSize: '14px', marginBottom: '8px' }}>
             <ShieldCheck size={18} />
             <span>Ethical Prototype Safeguards</span>

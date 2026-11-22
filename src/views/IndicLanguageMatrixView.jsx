@@ -131,7 +131,7 @@ export default function IndicLanguageMatrixView() {
             <div 
               key={item.code}
               style={{
-                background: '#FFFFFF',
+                background: 'var(--m-card)',
                 borderRadius: '16px',
                 border: isSelected ? '2px solid #0F4C5C' : '1px solid #D1E1E6',
                 boxShadow: isSelected ? '0 10px 25px rgba(0, 0, 0, 0.08)' : '0 4px 14px rgba(0, 0, 0, 0.03)',
@@ -156,7 +156,7 @@ export default function IndicLanguageMatrixView() {
                 <button
                   onClick={() => setSelectedLanguage(item.code)}
                   style={{
-                    background: isSelected ? '#0F4C5C' : '#FAF8F5',
+                    background: isSelected ? '#0F4C5C' : 'var(--m-card)',
                     color: isSelected ? '#FFFFFF' : '#0F4C5C',
                     border: isSelected ? 'none' : '1px solid #D1E1E6',
                     padding: '6px 14px',
@@ -176,7 +176,7 @@ export default function IndicLanguageMatrixView() {
               </div>
 
               {/* Engine Details */}
-              <div style={{ background: '#FAF8F5', borderRadius: '10px', border: '1px solid #E5ECEF', padding: '12px 14px', fontSize: '12.5px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ background: 'var(--m-card)', borderRadius: '10px', border: '1px solid #E5ECEF', padding: '12px 14px', fontSize: '12.5px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#3D545E' }}>Speech-to-Text (ASR):</span>
                   <span style={{ color: '#091E26', fontWeight: 700 }}>{item.asrEngine}</span>
@@ -198,7 +198,7 @@ export default function IndicLanguageMatrixView() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   {item.dialectRegions.map((region, idx) => (
-                    <div key={idx} style={{ background: '#FAF8F5', borderRadius: '8px', padding: '8px 12px', fontSize: '12px' }}>
+                    <div key={idx} style={{ background: 'var(--m-card)', borderRadius: '8px', padding: '8px 12px', fontSize: '12px' }}>
                       <span style={{ fontWeight: 750, color: '#081C24' }}>{region.region}: </span>
                       <span style={{ color: '#2C4A52' }}>"{region.sampleMetaphor}"</span>
                     </div>

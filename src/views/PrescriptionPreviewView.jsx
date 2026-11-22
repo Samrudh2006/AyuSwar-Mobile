@@ -227,7 +227,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
           top: '20px',
           right: '20px',
           background: '#065F46',
-          color: '#FFFFFF',
+          color: '#FFFDF8',
           padding: '12px 20px',
           borderRadius: '10px',
           boxShadow: '0 10px 25px rgba(6, 95, 70, 0.3)',
@@ -327,7 +327,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               padding: '10px 16px',
               borderRadius: '10px',
               border: '1px solid #D0DFE2',
-              background: '#FFFFFF',
+              background: 'var(--m-card)',
               color: '#081C24',
               fontSize: '13px',
               fontWeight: 750,
@@ -348,7 +348,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               borderRadius: '10px',
               border: 'none',
               background: '#0F4C5C',
-              color: '#FFFFFF',
+              color: '#FFFDF8',
               fontSize: '13px',
               fontWeight: 800,
               cursor: 'pointer',
@@ -393,7 +393,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
             padding: '12px 18px',
             borderRadius: '12px',
             border: '1px solid #047857',
-            background: '#FFFFFF',
+            background: 'var(--m-card)',
             color: '#065F46',
             fontSize: '13px',
             fontWeight: 850,
@@ -410,7 +410,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
 
       {/* Search bundled generic samples */}
       <div style={{ 
-        background: '#FFFFFF', 
+        background: 'var(--m-card)', 
         borderRadius: '14px', 
         border: '1px solid #D0DFE2', 
         padding: '18px 22px', 
@@ -465,7 +465,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
         {searchResults.length > 0 && (
           <div style={{
             marginTop: '10px',
-            background: '#FFFFFF',
+            background: 'var(--m-card)',
             border: '1px solid #D0DFE2',
             borderRadius: '10px',
             boxShadow: '0 8px 20px rgba(0,0,0,0.08)',
@@ -484,8 +484,8 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                   alignItems: 'center',
                   transition: 'background 0.2s ease'
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.background = '#F8FAFC'}
-                onMouseLeave={(e) => e.currentTarget.style.background = '#FFFFFF'}
+                onMouseEnter={(e) => e.currentTarget.style.background = 'var(--m-card-cool)'}
+                onMouseLeave={(e) => e.currentTarget.style.background = '#FFFDF8'}
               >
                 <div>
                   <div style={{ fontSize: '13.5px', fontWeight: 800, color: '#081C24' }}>
@@ -507,7 +507,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                       borderRadius: '8px',
                       border: 'none',
                       background: '#0F4C5C',
-                      color: '#FFFFFF',
+                      color: '#FFFDF8',
                       fontSize: '12px',
                       fontWeight: 750,
                       cursor: 'pointer',
@@ -536,7 +536,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               padding: '5px 12px',
               borderRadius: '8px',
               border: rxPadStyle === 'sketch' ? '2px solid #0F4C5C' : '1px solid #CBD5E1',
-              background: rxPadStyle === 'sketch' ? '#E6FFFA' : '#FFFFFF',
+              background: rxPadStyle === 'sketch' ? '#E6FFFA' : '#FFFDF8',
               color: rxPadStyle === 'sketch' ? '#0F4C5C' : '#64748B',
               fontSize: '11.5px',
               fontWeight: 800,
@@ -554,7 +554,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
               padding: '5px 12px',
               borderRadius: '8px',
               border: rxPadStyle === 'clean' ? '2px solid #0F4C5C' : '1px solid #CBD5E1',
-              background: rxPadStyle === 'clean' ? '#E6FFFA' : '#FFFFFF',
+              background: rxPadStyle === 'clean' ? '#E6FFFA' : '#FFFDF8',
               color: rxPadStyle === 'clean' ? '#0F4C5C' : '#64748B',
               fontSize: '11.5px',
               fontWeight: 800,
@@ -573,7 +573,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
         id="prescription-sheet"
         className="prescription-sheet-card"
         style={{
-          background: rxPadStyle === 'sketch' ? '#FAF8F3' : '#FFFFFF',
+          background: rxPadStyle === 'sketch' ? '#FAF8F3' : '#FFFDF8',
           backgroundImage: rxPadStyle === 'sketch' 
             ? `linear-gradient(to right, rgba(203, 194, 180, 0.28) 1px, transparent 1px),
                linear-gradient(to bottom, rgba(203, 194, 180, 0.28) 1px, transparent 1px)`
@@ -621,7 +621,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
 
         {/* Patient Demographics */}
         <div style={{ 
-          background: '#FAF8F5', 
+          background: 'var(--m-card)', 
           borderRadius: '12px', 
           padding: '16px', 
           marginBottom: '24px', 
@@ -688,7 +688,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                       : (med.isJanAushadhi ? '1.5px solid #BBF7D0' : '1px solid #D0DFE2'), 
                     borderRadius: rxPadStyle === 'sketch' ? '14px' : '12px', 
                     padding: '16px 18px', 
-                    background: med.isJanAushadhi ? '#F0FDF4' : '#FFFFFF',
+                    background: med.isJanAushadhi ? '#F0FDF4' : '#FFFDF8',
                     boxShadow: rxPadStyle === 'sketch' ? '2px 3px 0px rgba(0,0,0,0.08)' : 'none',
                     transition: 'all 0.2s ease'
                   }}
@@ -734,7 +734,7 @@ export default function PrescriptionPreviewView({ isPublicDemoSlip = false }) {
                           padding: '6px 12px',
                           borderRadius: '8px',
                           border: med.isJanAushadhi ? '1px solid #047857' : '1px solid #D0DFE2',
-                          background: med.isJanAushadhi ? '#ECFDF5' : '#F8FAFC',
+                          background: med.isJanAushadhi ? '#ECFDF5' : 'var(--m-card-cool)',
                           color: med.isJanAushadhi ? '#065F46' : '#486770',
                           fontSize: '11.5px',
                           fontWeight: 750,

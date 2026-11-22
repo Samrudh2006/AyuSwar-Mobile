@@ -50,7 +50,7 @@ export default function TermsOfServiceView() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', color: '#2C4A52', lineHeight: 1.7, fontSize: '14.5px' }}>
         {/* Section 1 */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px' }}>
             1. Clinician-in-the-Loop Requirement
           </h2>
@@ -60,7 +60,7 @@ export default function TermsOfServiceView() {
         </div>
 
         {/* Section 2 */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px' }}>
             2. Jan Aushadhi & Generic Substitution Guidance
           </h2>
@@ -70,7 +70,7 @@ export default function TermsOfServiceView() {
         </div>
 
         {/* Section 3 */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px' }}>
             3. Emergency Telemetry & Distress Situations
           </h2>
@@ -82,7 +82,7 @@ export default function TermsOfServiceView() {
         </div>
 
         {/* Section 4 */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px' }}>
             4. Open Source Apache 2.0 Licensing
           </h2>

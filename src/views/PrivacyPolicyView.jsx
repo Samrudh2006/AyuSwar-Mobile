@@ -39,7 +39,7 @@ export default function PrivacyPolicyView() {
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', color: '#2C4A52', lineHeight: 1.7, fontSize: '14.5px' }}>
         {/* Core Principles */}
-        <div style={{ background: '#FAF8F5', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <ShieldCheck size={20} color="#0F4C5C" />
             1. Executive Privacy Principles for Bharat
@@ -50,7 +50,7 @@ export default function PrivacyPolicyView() {
         </div>
 
         {/* Real-time Web Audio */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <EyeOff size={20} color="#0F4C5C" />
             2. Real-Time Client-Side Audio Signal Processing
@@ -65,7 +65,7 @@ export default function PrivacyPolicyView() {
         </div>
 
         {/* Serverless Speech Inference */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Server size={20} color="#0F4C5C" />
             3. Serverless Speech Transcription & Secret Isolation
@@ -80,7 +80,7 @@ export default function PrivacyPolicyView() {
         </div>
 
         {/* Synthetic Safe Data */}
-        <div style={{ background: '#FFFFFF', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
+        <div style={{ background: 'var(--m-card)', borderRadius: '16px', border: '1px solid #D0DFE2', padding: '24px' }}>
           <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#081C24', marginTop: 0, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Lock size={20} color="#0F4C5C" />
             4. Synthetic Demo Data & Non-Diagnostic Status
