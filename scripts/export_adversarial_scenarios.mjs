@@ -174,6 +174,18 @@ const S = [
    utts: [u(P,'Hindi','खाना खाने के बाद मुझे बुखार है')],
    expected: 'The Hindi marker "ना" occurs only inside the unrelated word "खाना" (food). Fever is affirmed and must NOT be treated as negated.',
    check: r => has(r, c => c.sourceQuote==='बुखार' && !c.isNegatedContext) },
+ { id: 'ADV-37', category: 'Telugu polite negation (లేదండి)', path: 'fallback',
+   utts: [u(P,'Telugu','నాకు జ్వరం లేదండి.')],
+   expected: 'Polite Telugu denial "లేదండి" (I do not have fever) must flag the fever candidate as negated and hold it from export.',
+   check: r => has(r, c => c.sourceQuote==='జ్వరం' && c.isNegatedContext) && !exportedHas(r, c => c.sourceQuote==='జ్వరం') },
+ { id: 'ADV-38', category: 'Telugu polite negation (కాదండి)', path: 'fallback',
+   utts: [u(P,'Telugu','నాకు జ్వరం కాదండి.')],
+   expected: 'Polite Telugu negation "కాదండి" must flag the fever candidate as negated and hold it from export.',
+   check: r => has(r, c => c.sourceQuote==='జ్వరం' && c.isNegatedContext) && !exportedHas(r, c => c.sourceQuote==='జ్వరం') },
+ { id: 'ADV-39', category: 'Affirmed clause ending in a question', path: 'fallback',
+   utts: [u(P,'English','I have a fever, do you know why?')],
+   expected: 'The patient affirms fever and then asks a question. The affirmed fever should stay exportable after review; holding it only because the sentence ends in "?" would drop a true symptom.',
+   check: r => exportedHas(r, c => /fever/i.test(c.sourceQuote)) },
 ];
 
 const results = [];
