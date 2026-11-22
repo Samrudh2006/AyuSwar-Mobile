@@ -67,7 +67,8 @@ const suites = [
   { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 8 },
   { name: 'Phase 43: Deterministic SOAP Sections', file: 'test/phase43_soap_deterministic_sections.test.js', count: 10 },
   { name: 'Phase 44: Spoken-Vital Context Safety', file: 'test/phase44_soap_objective_contexts.test.js', count: 21 },
-  { name: 'Phase 45: Built-App Browser E2E (mobile keyless flows)', file: 'test/e2e_browser.test.js', count: 6 }
+  { name: 'Phase 45: Built-App Browser E2E (mobile keyless flows)', file: 'test/e2e_browser.test.js', count: 6 },
+  { name: 'Phase 46: Live Draft-Bundle FHIR R4 Conformance', file: 'test/phase46_fhir_draft_bundle.test.js', count: 2 }
 ];
 
 console.clear();
