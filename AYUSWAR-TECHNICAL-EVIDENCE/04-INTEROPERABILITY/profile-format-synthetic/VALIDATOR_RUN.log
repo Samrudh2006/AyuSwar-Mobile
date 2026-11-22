@@ -1,0 +1,44 @@
+FHIR Validation tool Version 7.0.6 (Git# 86bf796ddc97). Built 2026-11-13T23:28:34.381Z (8 days old)
+  Java:   21.0.13.1 from /home/sandbox/jdk21 on amd64 (64bit). 483MB available
+  Paths:  Current = /tmp/ayuswar-mobile-review, Package Cache = /home/sandbox/.fhir/packages
+  Params: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/synthetic-profile-format-bundle.json -version 4.0.1 -ig /tmp/abdm-ig-package.tgz
+  Locale: United States/US
+  Jurisdiction: United States of America
+Loading
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:12.071)
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:01.757)
+  Loaded FHIR - 8265 resources (00:00.000)
+  Terminology Cache at /tmp/default-tx-cache/r4
+  Terminology server https://tx.fhir.org - Version Connected to Terminology Server at https://tx.fhir.org (00:01.897)
+  Load hl7.terminology#7.5.0 - 4190 resources (00:00.865)
+  Load hl7.terminology.r5#7.5.0 - 4190 resources (00:00.544)
+  Load hl7.fhir.uv.extensions#5.4.0 - 885 resources (00:00.925)
+  Load hl7.terminology.r4#6.0.2 - 4244 resources (00:00.817)
+  Load hl7.fhir.uv.extensions.r4#5.1.0 - 1397 resources (00:01.146)
+  Load /tmp/abdm-ig-package.tgz#6.5.0 - 131 resources (00:00.605)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.1.0, hl7.terminology.r4#6.2.0, hl7.fhir.uv.extensions.r4#5.2.0, hl7.terminology#7.5.0, hl7.terminology.r5#7.5.0, hl7.fhir.uv.extensions#5.4.0, hl7.terminology.r4#6.0.2, hl7.fhir.uv.extensions.r4#5.1.0, ndhm.in#6.5.0]
+  Get set... 
+  ...go! (00:02.790)
+Cached new session. Cache size = 1
+Sources to validate: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/synthetic-profile-format-bundle.json
+Validating
+  Validate AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/profile-format-synthetic/synthetic-profile-format-bundle.json
+ 00:01.865
+Done. Times: Loading: 00:24.462, validation: 00:01.866. Memory = 493Mb
+
+Success: 0 errors, 6 warnings, 7 notes
+  Information @ Bundle.meta.tag[0].system (line 7, col8): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[0].resource/*Patient/11111111-1111-4111-8111-111111111111*/.meta.tag[0].system (line 25, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Warning @ Bundle.entry[0].resource/*Patient/11111111-1111-4111-8111-111111111111*/.identifier[0].type (line 38, col14): No code provided, and a code should be provided from the value set 'IdentifierType' (http://hl7.org/fhir/ValueSet/identifier-type|4.0.1), validating against Base FHIR Standard
+  Warning @ Bundle.entry[0].resource/*Patient/11111111-1111-4111-8111-111111111111*/.identifier[0].type (line 38, col14): No code provided, and a code should be provided from the value set 'Identifier Type' (https://nrces.in/ndhm/fhir/r4/ValueSet/ndhm-identifier-type-code|6.5.0), validating against FHIR Implementation Guide for ABDM v6.5.0
+  Information @ Bundle.entry[1].resource/*Practitioner/22222222-2222-4222-8222-222222222222*/.meta.tag[0].system (line 63, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Practitioner/22222222-2222-4222-8222-222222222222*/.identifier[0].type (line 76, col14): No code provided, and a code should be provided from the value set 'IdentifierType' (http://hl7.org/fhir/ValueSet/identifier-type|4.0.1), validating against Base FHIR Standard
+  Warning @ Bundle.entry[1].resource/*Practitioner/22222222-2222-4222-8222-222222222222*/.identifier[0].type (line 76, col14): No code provided, and a code should be provided from the value set 'Identifier Type' (https://nrces.in/ndhm/fhir/r4/ValueSet/ndhm-identifier-type-code|6.5.0), validating against FHIR Implementation Guide for ABDM v6.5.0
+  Information @ Bundle.entry[2].resource/*Encounter/33333333-3333-4333-8333-333333333333*/.meta.tag[0].system (line 100, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[3].resource/*Condition/44444444-4444-4444-8444-444444444444*/.meta.tag[0].system (line 132, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Warning @ Bundle.entry[4].resource/*Observation/55555555-5555-4555-8555-555555555555*/ (line 153, col8): Best Practice Recommendation: In general, all observations should have a performer
+  Warning @ Bundle.entry[4].resource/*Observation/55555555-5555-4555-8555-555555555555*/ (line 153, col8): Best Practice Recommendation: In general, all observations should have an effective[x] ()
+  Information @ Bundle.entry[4].resource/*Observation/55555555-5555-4555-8555-555555555555*/.meta.tag[0].system (line 161, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[5].resource/*MedicationRequest/66666666-6666-4666-8666-666666666666*/.meta.tag[0].system (line 192, col14): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+Done. Times: Loading: 00:24.462, validation: 00:01.866. Max Memory = 483Mb

@@ -1,0 +1,223 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "meta": {
+    "tag": [
+      {
+        "system": "urn:ayuswar:prototype",
+        "code": "synthetic-profile-format-test",
+        "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:11111111-1111-4111-8111-111111111111",
+      "resource": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "resourceType": "Patient",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Patient"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test patient for profile-format validation only. Not a real person.</div>"
+        },
+        "identifier": [
+          {
+            "type": {
+              "text": "synthetic-test-identifier"
+            },
+            "system": "urn:ayuswar:synthetic-identifier",
+            "value": "SYNTH-PAT-0001"
+          }
+        ],
+        "name": [
+          {
+            "text": "SYNTHETIC TEST PATIENT (not a real person)"
+          }
+        ],
+        "gender": "other"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:22222222-2222-4222-8222-222222222222",
+      "resource": {
+        "id": "22222222-2222-4222-8222-222222222222",
+        "resourceType": "Practitioner",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Practitioner"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test practitioner for profile-format validation only. Not a real provider.</div>"
+        },
+        "identifier": [
+          {
+            "type": {
+              "text": "synthetic-test-identifier"
+            },
+            "system": "urn:ayuswar:synthetic-identifier",
+            "value": "SYNTH-PRAC-0001"
+          }
+        ],
+        "name": [
+          {
+            "text": "SYNTHETIC TEST PRACTITIONER (not a real provider)"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:33333333-3333-4333-8333-333333333333",
+      "resource": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "resourceType": "Encounter",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Encounter"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test encounter for profile-format validation only.</div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-1111-4111-8111-111111111111"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:44444444-4444-4444-8444-444444444444",
+      "resource": {
+        "id": "44444444-4444-4444-8444-444444444444",
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Condition"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test condition for profile-format validation only. Not a diagnosis.</div>"
+        },
+        "code": {
+          "text": "synthetic condition text - not a real or validated diagnosis"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-1111-4111-8111-111111111111"
+        }
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:55555555-5555-4555-8555-555555555555",
+      "resource": {
+        "id": "55555555-5555-4555-8555-555555555555",
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/Observation"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test observation for profile-format validation only. Not a measurement.</div>"
+        },
+        "status": "final",
+        "code": {
+          "text": "synthetic observation label - not a coded clinical concept"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-1111-4111-8111-111111111111"
+        },
+        "valueString": "synthetic value - format test only"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:66666666-6666-4666-8666-666666666666",
+      "resource": {
+        "id": "66666666-6666-4666-8666-666666666666",
+        "resourceType": "MedicationRequest",
+        "meta": {
+          "profile": [
+            "https://nrces.in/ndhm/fhir/r4/StructureDefinition/MedicationRequest"
+          ],
+          "tag": [
+            {
+              "system": "urn:ayuswar:prototype",
+              "code": "synthetic-profile-format-test",
+              "display": "Synthetic profile-format fixture only; not a clinical record; not ABDM conformance evidence"
+            }
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Synthetic test medication request for profile-format validation only. Not a prescription.</div>"
+        },
+        "status": "draft",
+        "intent": "proposal",
+        "medicationCodeableConcept": {
+          "text": "synthetic demo medication only - not a real product or instruction"
+        },
+        "subject": {
+          "reference": "urn:uuid:11111111-1111-4111-8111-111111111111"
+        },
+        "authoredOn": "2026-01-01",
+        "requester": {
+          "reference": "urn:uuid:22222222-2222-4222-8222-222222222222"
+        },
+        "dosageInstruction": [
+          {
+            "text": "synthetic dosage text - not a real instruction"
+          }
+        ]
+      }
+    }
+  ]
+}
