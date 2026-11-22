@@ -18,6 +18,11 @@ const DB_NAME = 'ayuswar_clinical_offline_db';
 const DB_VERSION = 2;
 const STORAGE_FALLBACK_KEY = 'ayuswar_offline_sync_queue_v2';
 
+// A record is surfaced as needing user attention after this many failed sync
+// attempts. Failed and undecryptable records are NEVER auto-deleted: recovery
+// is an explicit, user-confirmed discard in the UI.
+export const SYNC_ATTENTION_THRESHOLD = 3;
+
 let dbInstance = null;
 
 // Cross-tab broadcast channel for instant multi-window sync status
@@ -259,6 +264,7 @@ const syncAllPendingRecordsInner = async () => {
       }
     } catch (e) {
       console.warn('[OfflineSync] Item sync error, will retry on next cycle:', item.id, e);
+      await markSyncFailure(item.id, e);
     }
   }
 
@@ -281,6 +287,104 @@ const syncAllPendingRecordsInner = async () => {
   const remainingQueue = await getPendingOfflineQueue();
   notifyQueueUpdate(remainingQueue.length);
   return { syncedCount: successfulSyncs, success: true };
+};
+
+/**
+ * Record a failed sync attempt on the STORED record. Patches cleartext queue
+ * metadata only (syncAttempts, lastSyncError, lastSyncAttemptAt); the raw
+ * stored row is read and rewritten so an already-decrypted in-memory payload
+ * is never persisted. Error text is truncated and carries no payload content.
+ */
+async function markSyncFailure(id, err) {
+  const message = String((err && err.message) || err || 'sync failed').slice(0, 200);
+  const patch = (rec) =>
+    rec && rec.id === id
+      ? {
+          ...rec,
+          syncAttempts: (rec.syncAttempts || 0) + 1,
+          lastSyncError: message,
+          lastSyncAttemptAt: new Date().toISOString()
+        }
+      : rec;
+  const db = await openOfflineDatabase();
+  if (db) {
+    await new Promise((resolve) => {
+      try {
+        const tx = db.transaction('pending_sync_queue', 'readwrite');
+        const store = tx.objectStore('pending_sync_queue');
+        const getReq = store.get(id);
+        getReq.onsuccess = () => {
+          if (!getReq.result) return resolve();
+          const putReq = store.put(patch(getReq.result));
+          putReq.onsuccess = () => resolve();
+          putReq.onerror = () => resolve();
+        };
+        getReq.onerror = () => resolve();
+      } catch {
+        resolve();
+      }
+    });
+    return;
+  }
+  try {
+    const queue = getLocalStorageQueue();
+    if (queue.some((r) => r.id === id)) {
+      localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(queue.map(patch)));
+    }
+  } catch {}
+}
+
+/**
+ * Queue health for the UI: how many records are pending, and which ones need
+ * user attention. A record needs attention when its payload can never be
+ * decrypted on this device (locked key or tamper; it is never uploaded) or
+ * when repeated sync attempts have failed. Diagnostics are privacy-safe:
+ * type/timestamps/attempt count/error string only, never payload content.
+ */
+export const getOfflineQueueHealth = async () => {
+  const queue = await getPendingOfflineQueue();
+  const needsAttention = queue
+    .filter((item) => item.decryptError || (item.syncAttempts || 0) >= SYNC_ATTENTION_THRESHOLD)
+    .map((item) => ({
+      id: item.id,
+      type: item.type,
+      createdAt: item.createdAt,
+      reason: item.decryptError ? 'undecryptable' : 'repeated-failure',
+      syncAttempts: item.syncAttempts || 0,
+      lastSyncError: item.lastSyncError || null,
+      lastSyncAttemptAt: item.lastSyncAttemptAt || null
+    }));
+  return { pendingCount: queue.length, needsAttention };
+};
+
+/**
+ * Explicit, user-confirmed recovery: permanently delete ONE queued record.
+ * This is the only deletion path for failed or undecryptable records and is
+ * never invoked automatically by the sync loop; the UI must confirm the
+ * irreversible data loss with the user before calling this.
+ */
+export const discardOfflineRecord = async (id) => {
+  const db = await openOfflineDatabase();
+  if (db) {
+    await new Promise((resolve) => {
+      try {
+        const tx = db.transaction('pending_sync_queue', 'readwrite');
+        const delReq = tx.objectStore('pending_sync_queue').delete(id);
+        delReq.onsuccess = () => resolve();
+        delReq.onerror = () => resolve();
+      } catch {
+        resolve();
+      }
+    });
+  }
+  try {
+    const remaining = getLocalStorageQueue().filter((r) => r.id !== id);
+    if (remaining.length > 0) localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(remaining));
+    else localStorage.removeItem(STORAGE_FALLBACK_KEY);
+  } catch {}
+  const remainingQueue = await getPendingOfflineQueue();
+  notifyQueueUpdate(remainingQueue.length);
+  return { discarded: id };
 };
 
 /**

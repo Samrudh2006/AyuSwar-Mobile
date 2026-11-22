@@ -8,6 +8,7 @@ import { openConsultationRecorder } from './consultationRecorder';
 import { startBackgroundAudio, stopBackgroundAudio } from './backgroundAudio.js';
 import { getRecordingConsent, grantRecordingConsent, revokeRecordingConsent, RecordingConsentRequiredError, CONSENT_TEXT_VERSION } from './recordingConsent';
 import { IconMic, IconChevronR, IconHeart } from './MIcons';
+import { getOfflineQueueHealth, syncAllPendingRecords, discardOfflineRecord } from '../services/offlineSyncService';
 
 const CONSENT_COPY = {
   'en-IN': {
@@ -86,6 +87,79 @@ const GATE_COPY = {
   }
 };
 const gateCopy = lang => GATE_COPY[lang] || GATE_COPY['en-IN'];
+
+/**
+ * On-device offline queue status and recovery. Read-only by default; the only
+ * destructive action (discard) requires an explicit in-card confirmation that
+ * states the data loss. Nothing here auto-deletes failed or unreadable rows.
+ */
+function OfflineSyncCard({ t }) {
+  const [health, setHealth] = React.useState(null);
+  const [confirmId, setConfirmId] = React.useState(null);
+  const [busy, setBusy] = React.useState(false);
+  const reload = React.useCallback(async () => {
+    try {
+      setHealth(await getOfflineQueueHealth());
+    } catch {
+      setHealth(null);
+    }
+  }, []);
+  React.useEffect(() => {
+    let active = true;
+    const safeReload = async () => { if (active) await reload(); };
+    safeReload();
+    window.addEventListener('ayuswar:offline_queue_updated', safeReload);
+    return () => {
+      active = false;
+      window.removeEventListener('ayuswar:offline_queue_updated', safeReload);
+    };
+  }, [reload]);
+  if (!health) return null;
+  const retry = async () => {
+    setBusy(true);
+    try { await syncAllPendingRecords(); } catch {}
+    setBusy(false);
+    reload();
+  };
+  const discard = async (id) => {
+    setBusy(true);
+    try { await discardOfflineRecord(id); } catch {}
+    setBusy(false);
+    setConfirmId(null);
+    reload();
+  };
+  return (
+    <section className="m-card m-card-pad m-tint-sky m-offlinesync-card">
+      <h2 className="m-steps-title">{t('offlineSyncTitle')}</h2>
+      <p className="m-record-intro">
+        {health.pendingCount === 0 ? t('offlineSyncEmpty') : <>{t('offlineSyncPending')}: <b>{health.pendingCount}</b></>}
+      </p>
+      {health.pendingCount > 0 && (
+        <div className="m-record-modes">
+          <button className="m-btn m-btn-soft" disabled={busy} onClick={retry}>{t('offlineSyncRetry')}</button>
+        </div>
+      )}
+      {health.needsAttention.map((item) => (
+        <div className="m-offlinesync-item" key={item.id}>
+          <p className="m-record-intro">
+            <b>{item.type}</b> · {item.reason === 'undecryptable'
+              ? t('offlineSyncUndecryptable')
+              : `${t('offlineSyncRepeatedFailure')} (${t('offlineSyncAttempts')}: ${item.syncAttempts})`}
+          </p>
+          {confirmId === item.id ? (
+            <div className="m-record-modes m-offlinesync-confirm">
+              <p className="m-offlinesync-warn" role="alert">{t('offlineSyncDiscardConfirm')}</p>
+              <button className="m-btn m-btn-primary" disabled={busy} onClick={() => discard(item.id)}>{t('offlineSyncDiscardYes')}</button>
+              <button className="m-btn m-btn-ghost" disabled={busy} onClick={() => setConfirmId(null)}>{t('offlineSyncCancel')}</button>
+            </div>
+          ) : (
+            <button className="m-btn m-btn-ghost" disabled={busy} onClick={() => setConfirmId(item.id)}>{t('offlineSyncDiscard')}</button>
+          )}
+        </div>
+      ))}
+    </section>
+  );
+}
 
 export default function MClinical() {
   const navigate = useNavigate();
@@ -303,6 +377,7 @@ export default function MClinical() {
       </section>
       {turns.length > 0 && <section className="m-card m-card-pad m-tint-sky"><h2 className="m-steps-title">{t('checkTranscript')}</h2><p className="m-record-intro">{mode === 'sample' ? t('scriptedSample') : t('correctRecognition')}</p>{turns.map((t, i) => <label key={i} className="m-flow-field"><span>{t.speaker}</span><textarea rows={3} value={t.text} onChange={e => setTurns(previous => previous.map((line, index) => index === i ? { ...line, text: e.target.value } : line))} /></label>)}</section>}
       <button className="m-btn m-btn-primary m-record-continue" disabled={!ready} onClick={() => navigate('/clinical-console/review', { state: { encounter: mode === 'mic' ? { id: 'recorded-practice', language: encounter.language, langCode: encounter.langCode, patient: { name: t('practiceParticipant') } } : encounter, turns, sourceMode: mode, recording: audio ? { duration: audio.duration, bytes: audio.blob.size } : null } })}>{t('generateDraft')} <IconChevronR size={18} /></button>
+      <OfflineSyncCard t={t} />
       <p className="m-sanj-note">{t('prototypeNote')}</p>
     </main>
   );
