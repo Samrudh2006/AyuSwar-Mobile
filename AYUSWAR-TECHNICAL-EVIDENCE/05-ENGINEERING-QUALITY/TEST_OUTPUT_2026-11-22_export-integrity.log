@@ -1,0 +1,76 @@
+
+> ayuswar-ai@0.3.39-debug test
+> node test/run_all.js
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║    AYUSWAR AI (ఆయుస్వర) — AUTOMATED VERIFICATION SUITE                ║
+║      Synthetic fixtures; external provider availability not proved      ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+▸ Running Phase 1: API Boundary Security... ✓ [6/6 PASSED]
+▸ Running Phase 2: Server Triage Boundary... ✓ [5/5 PASSED]
+▸ Running Phase 3: Voice Integration & Honest Status... ✓ [5/5 PASSED]
+▸ Running Phase 4: Database & Auth Security (local demo mode)... ✓ [4/4 PASSED, 2 SKIPPED (this run)]
+▸ Running Phase 5: Mobile UI/UX & Safe Area Spacing... ✓ [6/6 PASSED]
+▸ Running Phase 6: Static Code Contract Assertions... ✓ [23/23 PASSED]
+▸ Running Phase 7: Clinical Safety Sentinel... ✓ [7/7 PASSED]
+▸ Running Phase 8: Gnani Indic Voice Pipeline... ✓ [6/6 PASSED]
+▸ Running Phase 9: Acoustic DSP Physical Tone Gates... ✓ [8/8 PASSED]
+▸ Running Phase 10: Advanced Telephony & Clinical VAD... ✓ [4/4 PASSED]
+▸ Running Phase 11: Hero Flow Turn-Taking & Mutex Isolation... ✓ [8/8 PASSED]
+▸ Running Phase 12: Global App Localization & Solutions Nav... ✓ [6/6 PASSED]
+▸ Running Phase 13: Rendered-DOM Localization & Route Truth... ✓ [5/5 PASSED]
+▸ Running Phase 14: Audio, Assistant & Layout Diagnostics... ✓ [6/6 PASSED]
+▸ Running Phase 15: Data Provenance & STT Metric Engine... ✓ [5/5 PASSED]
+▸ Running Phase 16: Synthetic FHIR R4 Bundles... ✓ [2/2 PASSED]
+▸ Running Phase 17: Provider-Proxy Caller Authorization... ✓ [5/5 PASSED]
+▸ Running Phase 18: Status Gating, CORS Boundary & Dev-Proxy Parity... ✓ [9/9 PASSED]
+▸ Running Phase 19: PDF Text-Layer Import & 390px Embed Contracts... ✓ [9/9 PASSED]
+▸ Running Phase 19b: OCR Legibility Gate... ✓ [7/7 PASSED]
+▸ Running Phase 20: OPD Ticket Modal & Portal Placement... ✓ [7/7 PASSED]
+▸ Running Phase 39: axe-core Route Accessibility (dev-only)... ✓ [4/4 PASSED]
+▸ Running Phase 19: Offline Consent & Encrypted Storage... ✓ [8/8 PASSED]
+▸ Running Phase 20: DoctorPortal Offline Consent Regression & Purge... ✓ [6/6 PASSED]
+▸ Running Phase 21: Recording Consent Gate, Modal & Withdraw... ✓ [6/6 PASSED]
+▸ Running Phase 22: PIN App Lock & Withdraw Semantics... ✓ [13/13 PASSED]
+▸ Running Phase 23: Native Keystore At-Rest Protection... ✓ [10/10 PASSED]
+▸ Running Phase 24: On-Device-First Speech Recognition... ✓ [6/6 PASSED]
+▸ Running Phase 25: Background Recording Foreground Service... ✓ [7/7 PASSED]
+▸ Running Phase 26: Network Speech Privacy Gate... ✓ [6/6 PASSED]
+▸ Running Phase 27: Transcribe Upload Consent... ✓ [4/4 PASSED]
+▸ Running Phase 28: Certificate Pinning Config... ✓ [4/4 PASSED]
+▸ Running Phase 29: Local OSS Voice Fallback... ✓ [12/12 PASSED]
+▸ Running Phase 30: Local Voice Integration & Production Packaging... ✓ [6/6 PASSED, 1 SKIPPED (this run)]
+▸ Running Phase 31: Sarvam Provider Integration... ✓ [5/5 PASSED]
+▸ Running Phase 32: Speech Provider Routing & Billing Safety... ✓ [6/6 PASSED]
+▸ Running Phase 33: 16kHz ASR Resampler... ✓ [6/6 PASSED]
+▸ Running Phase 34: Offline ASR Pack... ✓ [11/11 PASSED]
+▸ Running Phase 35: Local ASR Fallback Wiring... ✓ [3/3 PASSED]
+▸ Running Phase 36: Structured Assistant Answers... ✓ [5/5 PASSED]
+▸ Running Phase 37: Offline Sync Queue Integrity... ✓ [6/6 PASSED]
+▸ Running Phase 38: API Reliability Chain... ✓ [5/5 PASSED]
+▸ Running Phase 40: Clinical Evidence Engine... ✓ [34/22 PASSED] [expected 22]
+▸ Running Phase 41: Clinical Evidence Review UI... ✓ [6/6 PASSED]
+▸ Running Phase 42: SOAP Draft Deterministic Safeguards... ✓ [8/8 PASSED]
+▸ Running Phase 43: Deterministic SOAP Sections... ✓ [10/10 PASSED]
+▸ Running Phase 44: Spoken-Vital Context Safety... ✓ [36/36 PASSED]
+▸ Running Phase 45: Built-App Browser E2E (mobile keyless flows)... ✓ [6/6 PASSED]
+▸ Running Phase 46: Live Draft-Bundle FHIR R4 Conformance... ✓ [2/2 PASSED]
+▸ Running Phase 47: Offline Queue Failure Visibility & Recovery... ✓ [11/11 PASSED]
+▸ Running Phase 48: Sync Retry Exponential Backoff... ✓ [6/6 PASSED]
+▸ Running Phase 49: Offline Sync Idempotency Keys... ✓ [9/9 PASSED]
+▸ Running Phase 50: Self-entered Vitals Export... ✓ [31/31 PASSED]
+▸ Running Phase 51: Local Export Integrity Gate... ✓ [38/38 PASSED]
+
+==========================================================================
+  EXECUTIVE VERIFICATION SUMMARY — 479 EXECUTED + PASSED, 3 ACTUAL CONDITIONAL SKIPS (THIS RUN)
+==========================================================================
+  Platform: AyuSwar AI (React/Vite + Web Audio DSP + Capacitor Android)
+  Indic Voice Stack: client/provider boundary tests only; live TTS/STT availability is not proved here
+  Acoustic DSP: synthetic fixture tones measured within ±2Hz locally
+  Clinical Grounding: synthetic rules and FHIR-shaped local drafts; no live ABDM/registry access
+  Total Test Specs: 479 executed and passed, 3 actual conditional skips this run, 0 failed
+  Execution Duration: 82.67 seconds
+  Audit Invariant: No live provider, native Android runtime, or production deployment claim is made by this suite.
+==========================================================================
+

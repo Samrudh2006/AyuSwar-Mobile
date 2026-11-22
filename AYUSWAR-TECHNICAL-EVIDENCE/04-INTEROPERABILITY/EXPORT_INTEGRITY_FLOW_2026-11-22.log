@@ -1,0 +1,22 @@
+PASS home patient portal row
+PASS demo patient auth
+PASS mobile portal export reachable
+PASS declared entry saved
+PASS vitals integrity failure creates no file
+PASS vitals shows fixed actionable duplicate-ID error
+PASS vitals success retries normally after transient fault
+PASS vitals previous failure clears on retry
+PASS scribe explicit sample mode
+PASS scribe sample selected
+PASS scribe review route
+PASS scribe explicit manual fallback
+PASS scribe reviewed manual draft
+PASS scribe share stage
+PASS scribe demo acknowledgement
+PASS scribe export action
+PASS scribe integrity failure creates no file
+PASS scribe shows fixed actionable identity error
+PASS scribe diagnostics do not echo corrupt identity
+PASS scribe success retries normally after transient fault
+Only crypto.randomUUID was fault-injected in the browser. Production app has no test bypass or fault hook.
+Browser transport only, no Android native-runtime claim. All data synthetic.

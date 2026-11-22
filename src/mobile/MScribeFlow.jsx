@@ -1,4 +1,4 @@
-import { exportTextFile } from '../services/exportFileService';
+import { exportCheckedCollection } from '../services/checkedCollectionExport';
 import { Capacitor, registerPlugin } from '@capacitor/core';
 // AyuSwar Mobile — OPD scribe journey: record (done in MClinical) -> AI processing ->
 // doctor review & edit -> voice note -> sign & dispatch.
@@ -199,14 +199,14 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
 
   const downloadFhir = async () => {
     // Built from the CURRENT (possibly doctor-edited) draft at tap time.
-    const bundle = buildDraftBundle(soap, turns, state.sourceMode);
     const filename = `ayuswar-demo-fhir-${encounter.id}.json`;
     try {
-      const result = await exportTextFile({
-        filename,
-        text: JSON.stringify(bundle, null, 2),
+      const bundle = buildDraftBundle(soap, turns, state.sourceMode);
+      const result = await exportCheckedCollection({
+        bundle, kind: 'scribe', filename,
         shareTitle: t('AyuSwar FHIR-format research draft')
       });
+      if (result.mode === 'blocked') { setShared(result.message); return; }
       setShared(result.mode === 'native-share-sheet'
         ? t('FHIR-format research draft saved and the share sheet opened - you choose where it goes. Not ABDM validated.')
         : t('FHIR-format research draft downloaded with all reviewed fields. Not ABDM validated.'));
@@ -425,7 +425,7 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
               </div>
             )}
             {alertState ? <p className="m-clin-status">{alertState}</p> : null}
-            {shared ? <p className="m-clin-status">{shared}</p> : null}
+            {shared ? <p role="status" aria-live="polite" className="m-clin-status">{shared}</p> : null}
             <button className="m-btn m-btn-ghost" style={{ marginTop: 8 }} onClick={() => setStep(1)}>{t('Back')}</button>
           </div>
           <p className="m-sanj-note">{t('Synthetic practice only. AI and speech services process input when requested. Signing is a demo acknowledgement, not a digital signature. Nothing is dispatched to WhatsApp or ABDM.')}</p>

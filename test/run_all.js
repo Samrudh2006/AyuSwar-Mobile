@@ -75,7 +75,8 @@ const suites = [
   { name: 'Phase 47: Offline Queue Failure Visibility & Recovery', file: 'test/phase47_offline_recovery.test.js', count: 11 },
   { name: 'Phase 48: Sync Retry Exponential Backoff', file: 'test/phase48_sync_backoff.test.js', count: 6 },
   { name: 'Phase 49: Offline Sync Idempotency Keys', file: 'test/phase49_idempotency_keys.test.js', count: 9 },
-  { name: 'Phase 50: Self-entered Vitals Export', file: 'test/phase50_vitals_export.test.js', count: 31 }
+  { name: 'Phase 50: Self-entered Vitals Export', file: 'test/phase50_vitals_export.test.js', count: 31 },
+  { name: 'Phase 51: Local Export Integrity Gate', file: 'test/phase51_export_integrity.test.js', count: 38 }
 ];
 
 console.clear();

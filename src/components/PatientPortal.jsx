@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { buildManualVital, formatManualVital } from '../utils/vitalsEntry';
 import { loadVitalSubjects, subjectStorageKey, declareVitalSubject } from '../utils/vitalSubjects';
 import { classifyVitalsForExport, buildVitalsBundle } from '../utils/vitalsExport';
-import { exportTextFile } from '../services/exportFileService';
+import { exportCheckedCollection } from '../services/checkedCollectionExport';
 import { useForm } from 'react-hook-form';
 import { useApp, SUPPORTED_LANGUAGES } from '../context/AppContext';
 import { Globe, Sunrise, Sun, Video, Building2, Lock, Scan, User } from 'lucide-react';
@@ -583,6 +583,7 @@ function PatientPortalForProfile({
   };
 
   // Export of the user's own typed readings (see utils/vitalsExport.js).
+  const [vitalsExportError, setVitalsExportError] = useState('');
   const [vitalsExportOpen, setVitalsExportOpen] = useState(false);
   const [vitalsExportPicked, setVitalsExportPicked] = useState([]); // nothing ticked by default
   const vitalsExportPlan = classifyVitalsForExport(vitalsHistory, vitalSubjects);
@@ -595,19 +596,21 @@ function PatientPortalForProfile({
     setVitalsExportPicked(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
   };
   const handleExportVitals = async () => {
-    const bundle = buildVitalsBundle(vitalsHistory, vitalsExportPicked, vitalSubjects);
-    if (!bundle) { showVitalsToast('Tick at least one reading to export.'); return; }
+    setVitalsExportError('');
     try {
-      const result = await exportTextFile({
+      const bundle = buildVitalsBundle(vitalsHistory, vitalsExportPicked, vitalSubjects);
+      if (!bundle) { showVitalsToast('Tick at least one reading to export.'); return; }
+      const result = await exportCheckedCollection({
+        bundle, kind: 'vitals',
         filename: `ayuswar-readings-${new Date().toISOString().slice(0, 10)}.json`,
-        text: JSON.stringify(bundle, null, 2),
         shareTitle: 'AyuSwar self-entered readings (FHIR R4 JSON)'
       });
+      if (result.mode === 'blocked') { setVitalsExportError(result.message); return; }
       showVitalsToast(result.mode === 'native-share-sheet'
         ? 'Readings file saved and the share sheet opened. You choose where it goes.'
         : 'Readings file downloaded. The app sent nothing anywhere.');
     } catch {
-      showVitalsToast('Export failed or was cancelled. Nothing was sent.');
+      setVitalsExportError('Export failed or was cancelled. Nothing was sent.');
     }
   };
 
@@ -2435,6 +2438,7 @@ function PatientPortalForProfile({
                           })}
                         </details>
                       )}
+                      {vitalsExportError && <p role="alert" data-testid="vitals-export-error" style={{ background: '#FEF2F2', color: '#991B1B', padding: '10px', border: '1px solid #B91C1C', borderRadius: '8px' }}>{vitalsExportError}</p>}
                       <button
                         type="button"
                         disabled={vitalsExportPicked.filter(id => vitalsExportPlan.eligible.some(e => e.id === id)).length === 0}

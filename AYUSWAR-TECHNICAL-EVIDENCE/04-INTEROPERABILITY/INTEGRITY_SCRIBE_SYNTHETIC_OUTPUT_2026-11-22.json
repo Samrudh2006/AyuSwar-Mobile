@@ -1,0 +1,92 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "timestamp": "2026-11-22T14:47:52.588Z",
+  "meta": {
+    "tag": [
+      {
+        "system": "urn:ayuswar:prototype",
+        "code": "synthetic-research-draft",
+        "display": "Synthetic practice only; not ABDM validated"
+      }
+    ]
+  },
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:84caa188-ebb8-4cf8-aa23-97dcc3601af5",
+      "resource": {
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">AyuSwar synthetic practice draft - not a prescription or clinical record.</div>"
+        },
+        "resourceType": "QuestionnaireResponse",
+        "status": "completed",
+        "item": [
+          {
+            "linkId": "source-mode",
+            "text": "Input source",
+            "answer": [
+              {
+                "valueString": "Explicit scripted sample transcript"
+              }
+            ]
+          },
+          {
+            "linkId": "source-transcript",
+            "text": "Source transcript",
+            "answer": [
+              {
+                "valueString": "Patient: డాక్టర్ గారు, నేను నా లక్షణాల గురించి వివరించాలనుకుంటున్నాను.\nDoctor: This demo records and reviews documentation only. No diagnosis, medicine, dose, treatment, or discharge instruction is generated.\nPatient: దయచేసి ఇది నమూనా రికార్డింగ్ అని గుర్తుంచుకోండి.\nDoctor: A qualified clinician must review the actual conversation before any care decision."
+              }
+            ]
+          },
+          {
+            "linkId": "subjective",
+            "text": "Subjective",
+            "answer": [
+              {
+                "valueString": "Patient: డాక్టర్ గారు, నేను నా లక్షణాల గురించి వివరించాలనుకుంటున్నాను.\nDoctor: This demo records and reviews documentation only. No diagnosis, medicine, dose, treatment, or discharge instruction is generated.\nPatient: దయచేసి ఇది నమూనా రికార్డింగ్ అని గుర్తుంచుకోండి.\nDoctor: A qualified clinician must review the actual conversation before any care decision."
+              }
+            ]
+          },
+          {
+            "linkId": "objective",
+            "text": "Objective",
+            "answer": [
+              {
+                "valueString": "Not documented in the source transcript."
+              }
+            ]
+          },
+          {
+            "linkId": "assessment",
+            "text": "Assessment",
+            "answer": [
+              {
+                "valueString": "Clinician review required. No AI draft or diagnosis was generated."
+              }
+            ]
+          },
+          {
+            "linkId": "plan",
+            "text": "Plan",
+            "answer": [
+              {
+                "valueString": "Not documented. Add only clinician-reviewed instructions."
+              }
+            ]
+          },
+          {
+            "linkId": "bestMatterVernacular",
+            "text": "Reviewed voice summary",
+            "answer": [
+              {
+                "valueString": "Synthetic practice summary only."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

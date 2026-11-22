@@ -1,0 +1,39 @@
+PASS scribe: actual emitter passes without mutation
+PASS scribe: actual transport called once with unchanged serialized output
+PASS vitals: actual emitter passes without mutation
+PASS vitals: actual transport called once with unchanged serialized output
+PASS blocked: wrong collection type, no transport, value-free diagnostics
+PASS blocked: empty entries, no transport, value-free diagnostics
+PASS blocked: missing timestamp, no transport, value-free diagnostics
+PASS blocked: impossible timestamp day, no transport, value-free diagnostics
+PASS blocked: missing fullUrl, no transport, value-free diagnostics
+PASS blocked: invalid fullUrl, no transport, value-free diagnostics
+PASS blocked: duplicate fullUrls, no transport, value-free diagnostics
+PASS blocked: case-variant duplicate fullUrls, no transport, value-free diagnostics
+PASS blocked: null entry, no transport, value-free diagnostics
+PASS blocked: missing narrative, no transport, value-free diagnostics
+PASS blocked: unsupported resource, no transport, value-free diagnostics
+PASS blocked: missing draft section, no transport, value-free diagnostics
+PASS blocked: duplicate draft section, no transport, value-free diagnostics
+PASS blocked: non-string draft answer, no transport, value-free diagnostics
+PASS blocked: invalid draft workflow status, no transport, value-free diagnostics
+PASS blocked: missing synthetic draft label, no transport, value-free diagnostics
+PASS blocked: unexpected draft reference, no transport, value-free diagnostics
+PASS blocked: missing Patient, no transport, value-free diagnostics
+PASS blocked: multiple Patients, no transport, value-free diagnostics
+PASS blocked: missing subject, no transport, value-free diagnostics
+PASS blocked: dangling subject, no transport, value-free diagnostics
+PASS blocked: external subject, no transport, value-free diagnostics
+PASS blocked: wrong resource target, no transport, value-free diagnostics
+PASS blocked: hidden nested external reference, no transport, value-free diagnostics
+PASS blocked: invalid reading date, no transport, value-free diagnostics
+PASS blocked: non-numeric reading, no transport, value-free diagnostics
+PASS blocked: wrong UCUM unit code, no transport, value-free diagnostics
+PASS blocked: unexpected coded metric, no transport, value-free diagnostics
+PASS blocked: missing BP component, no transport, value-free diagnostics
+PASS blocked: non-array category, no transport, value-free diagnostics
+PASS blocked: identity expansion not accepted, no transport, value-free diagnostics
+PASS unknown shape cannot bypass gate
+PASS null input cannot bypass gate
+PASS reference cycle fails closed without throwing
+phase51_export_integrity: 38 passed, 0 failed
