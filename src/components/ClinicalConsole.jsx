@@ -55,6 +55,7 @@ import {
 import { reasonClinicalNoteWithEvon, EVON_MODEL_METADATA } from '../services/gnaniEvonService';
 import { generateAbdmFhirR4Bundle } from '../data/clinicalSafetySentinel';
 import { queryGroqApi, getGroqApiKey, transcribeAudioWithGroqWhisper } from '../services/aiBrainService';
+import ClinicalEvidencePanel from './ClinicalEvidencePanel';
 
 /**
  * ClinicalConsole Component — Complete Step-by-Step OPD Consultation Suite
@@ -107,6 +108,7 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
   const isRecordingRef = useRef(false);
   const [recordedSeconds, setRecordedSeconds] = useState(0);
   const [dialogueTurns, setDialogueTurns] = useState([]);
+  const [showEvidenceReview, setShowEvidenceReview] = useState(false);
   const [newSpeakerRole, setNewSpeakerRole] = useState('Doctor');
   const [newSpeakerText, setNewSpeakerText] = useState('');
   const [showAddTurnModal, setShowAddTurnModal] = useState(false);
@@ -295,14 +297,14 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
       // Simulate real-time streaming of dialogue turns
       let nextTurnIndex = dialogueTurns.length;
       if (dialogueTurns.length === 0 && currentEncounter.dialogue.length > 0) {
-        setDialogueTurns([currentEncounter.dialogue[0]]);
+        setDialogueTurns([{ ...currentEncounter.dialogue[0], isScripted: true }]);
         nextTurnIndex = 1;
       }
       if (simIntervalRef.current) clearInterval(simIntervalRef.current);
       simIntervalRef.current = setInterval(() => {
         if (nextTurnIndex < currentEncounter.dialogue.length) {
           const nextTurn = currentEncounter.dialogue[nextTurnIndex];
-          setDialogueTurns(prev => [...prev, nextTurn]);
+          setDialogueTurns(prev => [...prev, { ...nextTurn, isScripted: true }]);
           nextTurnIndex++;
         }
         // Animate VU meter
@@ -523,7 +525,9 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
                   text: normalizedText,
                   time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
                   linguisticRole: linguisticRole || undefined,
-                  pitchF0: detectedPitch || undefined
+                  pitchF0: detectedPitch || undefined,
+                  isWebSpeech: true,
+                  capturedAtMs: Date.now()
                 }
               ]);
               setLiveTranscriptionText('');
@@ -568,14 +572,14 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
       // Automatically fallback to streaming dialogue turns so screen NEVER remains empty!
       let nextTurnIndex = dialogueTurns.length;
       if (dialogueTurns.length === 0 && currentEncounter.dialogue.length > 0) {
-        setDialogueTurns([currentEncounter.dialogue[0]]);
+        setDialogueTurns([{ ...currentEncounter.dialogue[0], isScripted: true }]);
         nextTurnIndex = 1;
       }
       if (simIntervalRef.current) clearInterval(simIntervalRef.current);
       simIntervalRef.current = setInterval(() => {
         if (nextTurnIndex < currentEncounter.dialogue.length) {
           const nextTurn = currentEncounter.dialogue[nextTurnIndex];
-          setDialogueTurns(prev => [...prev, nextTurn]);
+          setDialogueTurns(prev => [...prev, { ...nextTurn, isScripted: true }]);
           nextTurnIndex++;
         }
         setMicVolume(Math.floor(25 + Math.random() * 55));
@@ -614,7 +618,9 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
             speaker: role.includes('Doctor') ? 'Doctor (Live Mic)' : 'Patient (Live Mic)',
             text: cleanSentence,
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-            source: 'Groq whisper-large-v3-turbo'
+            source: 'Groq whisper-large-v3-turbo',
+            isGroqWhisper: true,
+            capturedAtMs: Date.now()
           };
         });
 
@@ -706,10 +712,21 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
         try {
           const cleanedJson = aiResponse.replace(/```json/g, '').replace(/```/g, '').trim();
           const parsed = JSON.parse(cleanedJson);
+          // Deterministic safeguards (not prompt-only guarantees):
+          // 1. Vitals come from the scripted sample encounter. They may only appear in a
+          //    draft when every turn in this session is scripted sample data, and then only
+          //    explicitly labeled. A live or mixed session never inherits scripted vitals.
+          // 2. The conservative draft NEVER accepts model-supplied medications, whatever the
+          //    model returns. Any non-empty array is discarded and the draft stays
+          //    review-required.
+          const allTurnsScripted = dialogueTurns.length > 0 && dialogueTurns.every(t => t.isScripted);
+          const objectiveFallback = allTurnsScripted
+            ? `Recorded demo vitals only (scripted sample data, not measured): BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`
+            : 'No vitals or examination findings were captured in this session. A clinician must record objective findings before use.';
           if (parsed.subjective) {
             setEditableSoapNote({
               subjective: parsed.subjective,
-              objective: parsed.objective || `Vitals: BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}.`,
+              objective: parsed.objective || objectiveFallback,
               assessment: parsed.assessment || 'Clinical Assessment pending review.',
               plan: parsed.plan || 'No medication or treatment plan is generated.'
             });
@@ -719,7 +736,11 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
             setEditableBestMatter(parsed.bestMatterVernacular);
           }
           if (Array.isArray(parsed.medications) && parsed.medications.length > 0) {
-            setMedications(parsed.medications);
+            console.warn('Conservative draft mode: discarded model-supplied medications; clinician entry only.');
+          }
+          if (!allTurnsScripted) {
+            // Live or mixed session: scripted sample medications must not leak into the draft.
+            setMedications([]);
           }
         } catch {
           setEditableSoapNote(prev => ({
@@ -740,7 +761,9 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
         if (hasRespSymptoms) {
           setEditableSoapNote({
             subjective: `Transcript draft: the patient describes cold, cough, throat discomfort or fever-like symptoms. Exact wording must be reviewed against the recording.`,
-            objective: `Recorded demo vitals only: BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`,
+            objective: (dialogueTurns.length > 0 && dialogueTurns.every(t => t.isScripted))
+              ? `Recorded demo vitals only (scripted sample data, not measured): BP ${currentEncounter.vitals.bp}, HR ${currentEncounter.vitals.heartRate}, SpO2 ${currentEncounter.vitals.spo2}. No examination findings were captured.`
+              : 'No vitals or examination findings were captured in this session. A clinician must record objective findings before use.',
             assessment: `No diagnosis is generated by this prototype. A qualified clinician must review the recording and examine the patient.`,
             plan: `No medication, dose, treatment or follow-up plan is generated.`
           });
@@ -1822,7 +1845,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   </div>
                   <div style={{ display: 'flex', gap: '8px', marginTop: '6px', flexWrap: 'wrap', justifyContent: 'center' }}>
                     <button
-                      onClick={() => setDialogueTurns(currentEncounter.dialogue)}
+                      onClick={() => setDialogueTurns(currentEncounter.dialogue.map(t => ({ ...t, isScripted: true })))}
                       style={{
                         background: '#ffffff',
                         color: '#0F4C5C',
@@ -2379,6 +2402,38 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
               </div>
             </>
           )}
+
+          {/* Clinical Evidence Review (BETA, opt-in): every AI claim is shown with its
+              verbatim transcript source span and verification status before export. */}
+          <div style={{ marginTop: '18px', borderTop: '2px dashed #cbd5e1', paddingTop: '14px' }}>
+            <button
+              onClick={() => setShowEvidenceReview(v => !v)}
+              style={{
+                background: showEvidenceReview ? '#0F4C5C' : '#ffffff',
+                color: showEvidenceReview ? '#ffffff' : '#0F4C5C',
+                border: '1.5px solid #0F4C5C',
+                borderRadius: '10px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              {showEvidenceReview ? 'Hide Clinical Evidence Review (Beta)' : 'Show Clinical Evidence Review (Beta)'}
+            </button>
+            <div style={{ fontSize: '12px', color: '#475569', marginTop: '6px' }}>
+              Verifies each extracted clinical fact against the exact words captured in this session. Nothing is marked verified without a visible source span.
+            </div>
+            {showEvidenceReview && (
+              <ClinicalEvidencePanel
+                dialogueTurns={dialogueTurns}
+                isScriptedDemo={false}
+                callModel={(prompt) => queryGroqApi(prompt, 'You are a clinical entity extraction adapter. Output valid JSON only.', 'llama-3.3-70b-versatile', 1200)}
+                modelVersion="llama-3.3-70b-versatile"
+                reviewerIdentity="Clinician (demo)"
+              />
+            )}
+          </div>
         </div>
       )}
 

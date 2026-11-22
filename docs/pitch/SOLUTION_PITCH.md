@@ -1,7 +1,7 @@
 # AyuSwar AI
 *Ayu (life) + Swar (voice) — Voice-First Sovereign Health Assistant for Bharat*  
 One-page solution pitch · Gnani's Great Indian AI Internship Challenge 2026  
-Live app: [ayuswar-ai.vercel.app](https://ayuswar-ai.vercel.app) · Code: [github.com/Samrudh2006/Ayuswar-Ai](https://github.com/Samrudh2006/Ayuswar-Ai)
+Web prototype: [ayuswar-ai.vercel.app](https://ayuswar-ai.vercel.app) (separate repo [Ayuswar-Ai](https://github.com/Samrudh2006/Ayuswar-Ai)) · This repo: [github.com/Samrudh2006/AyuSwar-Mobile](https://github.com/Samrudh2006/AyuSwar-Mobile)
 
 ---
 
@@ -24,22 +24,22 @@ In rural Primary Health Centres (PHCs), 1 doctor serves over 2,500 villagers dai
 ### ⚙️ GNANI.AI INDIC ENGINE UNDER THE HOOD
 | 🎙️ PRISMA V3 (STT) | 📊 TIMBRE V2.5 (TTS) | 🧠 EVON 30B (LLM) |
 | :--- | :--- | :--- |
-| Rayalaseema Telugu dialect ASR + linguistic diarization separating doctor & patient speech without manual buttons. | Nalini 24kHz maternal voice reading prescriptions aloud with 1:1 karaoke highlighting and Telugu food cues. | Maps colloquial Telugu symptom idioms to WHO ICD-10 (e.g. K21.9 for GERD, R00.2) & SNOMED-CT without hallucinations. |
+| Rayalaseema Telugu dialect ASR + linguistic diarization separating doctor & patient speech without manual buttons. | Nalini 24kHz maternal voice reading prescriptions aloud with 1:1 karaoke highlighting and Telugu food cues. | Maps colloquial Telugu symptom idioms toward WHO ICD-10 (e.g. K21.9 for GERD, R00.2) & SNOMED-CT; every suggestion is a draft for clinician review, never auto-accepted. |
 
 ---
 
-### THREE PRODUCTION WORKFLOWS
+### THREE PROTOTYPE WORKFLOWS
 
 | 🩺 AMBIENT OPD SCRIBE | 🚑 SANJIVANI EMERGENCY TRIAGE | 📊 ACOUSTIC VOICE LAB |
 | :--- | :--- | :--- |
 | Transcribes consultations in regional Telugu dialects using automated pitch DSP diarization. Suggests WHO ICD-10 & SNOMED-CT codes for physician review with zero manual button pressing. The system assists; it never decides.<br><br>*Includes PMBJP generic substitution saving up to 86% on routine medication.* | Voice symptom intake for 108 emergency triage, rules-based red/yellow/green severity sorting, GPS nearest hospital routing, and structured clinician handover summaries with live ambulance coordination telemetry.<br><br>*Research simulation; emergency ambulance dispatch is an interface demo.* | Records voice and breathing sounds to compute on-device signal features (pitch F0, Harmonics-to-Noise Ratio, 380–450Hz wheeze harmonics) via Web Audio API with bilingual voice readouts.<br><br>*Physical signal screening demonstration, not clinical diagnosis.* |
 
-**Plus:** **PMBJP Jan Aushadhi** generic savings · **Audio-Rx** spoken prescriptions in native dialect with **WhatsApp** delivery · **ABDM M3 FHIR** zero-network offline sync
+**Plus:** **PMBJP Jan Aushadhi** generic savings · **Audio-Rx** spoken prescriptions in native dialect with **WhatsApp** delivery · **FHIR R4-shaped** local draft bundles with encrypted offline sync (no live ABDM connection)
 
 ---
 
 ### 🛡️ ARCHITECTURE & ZERO-MOCK TESTING
-React + Vite PWA on Vercel with native Capacitor wrapper. Provider calls route through a secure serverless gateway (`/api/gnani/stt`, `/api/gnani/tts`, `/api/evon`) keeping API keys strictly server-side, rate-limiting requests, and failing closed honestly when unconfigured. Client-side 48kHz audio DSP analysis runs directly on the device. Protected by **74 automated clinical & safety test specifications passing 100% green**.
+React + Vite PWA on Vercel with native Capacitor wrapper. Provider calls route through a secure serverless gateway (`/api/gnani/stt`, `/api/gnani/tts`, `/api/evon`) keeping API keys strictly server-side, rate-limiting requests, and failing closed honestly when unconfigured. Client-side 48kHz audio DSP analysis runs directly on the device. Protected by **313 automated clinical & safety test specifications passing green** (3 environment-conditional skips, e.g. browser/OS-gated checks; see `test/run_all.js` scorecard).
 
 > **Stated plainly:** AyuSwar AI is a working prototype built on synthetic benchmark profiles and open government formularies — not a medical device, not clinically validated, not a diagnostic tool, and designed strictly to keep a certified doctor in the loop. Emergency workflows are labelled simulations; for a real emergency, India dials **112** or **108**.
 
@@ -55,9 +55,9 @@ India-first healthcare needs Indic-first voice — exactly the stack Gnani has p
 
 ---
 
-| 💊 86% SAVINGS | 📊 48kHz DSP | 🛡️ 74 / 74 GREEN | 🩺 ABDM M3 READY |
+| 💊 86% SAVINGS | 📊 48kHz DSP | 🛡️ 313 GREEN | 🩺 FHIR R4 DRAFTS |
 | :---: | :---: | :---: | :---: |
-| PMBJP Jan Aushadhi Generic Substitution | WebAudio Client Wheeze Harmonics (380-450Hz) | Zero-Mock Clinical Invariant Tests Passed | FHIR R4 JSON & Encrypted Offline Buffer |
+| PMBJP Jan Aushadhi Generic Substitution | WebAudio Client Wheeze Harmonics (380-450Hz) | Clinical Invariant Tests Passed (313 run, 3 conditional skips) | Local FHIR-shaped JSON & Encrypted Offline Buffer (no live ABDM link) |
 
 ---
 
