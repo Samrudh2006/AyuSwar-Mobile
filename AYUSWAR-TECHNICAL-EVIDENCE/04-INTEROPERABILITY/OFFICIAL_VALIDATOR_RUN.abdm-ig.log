@@ -1,0 +1,45 @@
+FHIR Validation tool Version 7.0.6 (Git# 86bf796ddc97). Built 2026-11-13T23:28:34.381Z (8 days old)
+  Java:   21.0.13.1 from /home/sandbox/jdk21 on amd64 (64bit). 483MB available
+  Paths:  Current = /tmp/ayuswar-mobile-review, Package Cache = /home/sandbox/.fhir/packages
+  Params: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json -version 4.0.1 -ig /tmp/abdm-ig-package.tgz
+  Locale: United States/US
+  Jurisdiction: United States of America
+Loading
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:09.189)
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:01.593)
+  Loaded FHIR - 8265 resources (00:00.001)
+  Terminology Cache at /tmp/default-tx-cache/r4
+  Terminology server https://tx.fhir.org - Version Connected to Terminology Server at https://tx.fhir.org (00:01.141)
+  Load hl7.terminology#7.5.0 - 4190 resources (00:00.770)
+  Load hl7.terminology.r5#7.5.0 - 4190 resources (00:00.528)
+  Load hl7.fhir.uv.extensions#5.4.0 - 885 resources (00:01.039)
+Installing hl7.terminology.r4#6.0.2 to the package cache
+  Fetching:
+
+Installing hl7.terminology.r4#6.0.2
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.terminology.r4#6.0.2
+  Load hl7.terminology.r4#6.0.2 - 4244 resources (00:02.652)
+Installing hl7.fhir.uv.extensions.r4#5.1.0 to the package cache
+  Fetching:
+
+Installing hl7.fhir.uv.extensions.r4#5.1.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.fhir.uv.extensions.r4#5.1.0
+  Load hl7.fhir.uv.extensions.r4#5.1.0 - 1397 resources (00:01.635)
+  Load /tmp/abdm-ig-package.tgz#6.5.0 - 131 resources (00:00.657)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.1.0, hl7.terminology.r4#6.2.0, hl7.fhir.uv.extensions.r4#5.2.0, hl7.terminology#7.5.0, hl7.terminology.r5#7.5.0, hl7.fhir.uv.extensions#5.4.0, hl7.terminology.r4#6.0.2, hl7.fhir.uv.extensions.r4#5.1.0, ndhm.in#6.5.0]
+  Get set... 
+  ...go! (00:02.290)
+Cached new session. Cache size = 1
+Sources to validate: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json
+Validating
+  Validate AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json
+ 00:00.665
+Done. Times: Loading: 00:21.654, validation: 00:00.665. Memory = 557Mb
+
+Success: 0 errors, 0 warnings, 2 notes
+  Information @ Bundle.meta.tag[0].system (line 7, col8): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/ (line 17, col8): No questionnaire is identified, so no validation can be performed against the base questionnaire
+Done. Times: Loading: 00:21.654, validation: 00:00.665. Max Memory = 483Mb

@@ -47,6 +47,25 @@ CodeSystem (it marks the bundle as a synthetic research draft), and no base
 Questionnaire is identified, so questionnaire-content validation cannot be
 performed.
 
+## Run 3: ABDM Implementation Guide context (offline, no account)
+
+The official ABDM FHIR IG package is public: `ndhm.in` v6.5.0 (FHIR
+4.0.1), downloaded from the NRCeS publication
+(https://www.nrces.in/ndhm/fhir/r4/package.tgz, 6,897,227 bytes, SHA-256
+`41fa99955adbd1983a235d7c7136b30f423ce34ff541d86b354d95b7704527d4`).
+The validator loaded it offline (`Load package.tgz#6.5.0 - 131 resources`)
+and the emitted fixture passed 0 errors / 0 warnings / the same 2 inherent
+notes. Verbatim record: `OFFICIAL_VALIDATOR_RUN.abdm-ig.log`.
+
+Honest reading: this demonstrates the offline ABDM-IG validation ROUTE
+works without any account. It is NOT ABDM profile conformance: the emitted
+bundle asserts no ABDM profile (no meta.profile) and its
+QuestionnaireResponse is not one of the ABDM document-profile resource
+types, so the validator evaluated it against the base standard in the IG's
+context. Emitting ABDM-profiled documents is unimplemented scope. ABDM
+sandbox SERVICE integration is a separate matter and does require
+credentials.
+
 ## Reproduce
 
 ```bash
@@ -56,6 +75,12 @@ java -jar validator_cli.jar \
   AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json \
   AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json \
   -version 4.0.1
+
+# with the ABDM IG loaded:
+curl -LO https://www.nrces.in/ndhm/fhir/r4/package.tgz
+java -jar validator_cli.jar \
+  AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json \
+  -version 4.0.1 -ig package.tgz
 ```
 
 First run downloads the public hl7.fhir.r4.core package (no account).
