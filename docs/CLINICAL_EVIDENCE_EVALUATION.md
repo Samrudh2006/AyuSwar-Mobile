@@ -2,7 +2,8 @@
 
 **Status:** engineering verification only. Nothing on this page is clinical
 validation, user feedback, or a live-provider result.
-**As of:** 2026-11-22, branch `feat/clinical-evidence-engine`, commit `3f3598f`.
+**As of:** 2026-11-22, branch `feat/clinical-evidence-engine`, commit `0174027`
+(last code-affecting commit; `4a91026` adds documentation only).
 Suite at that commit: **368 executed and passed, 3 conditional skips, 0 failed**
 (`node test/run_all.js`).
 

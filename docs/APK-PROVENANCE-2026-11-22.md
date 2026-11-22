@@ -11,8 +11,8 @@ tag and release stay gated.
 |---|---|
 | File | `android/app/build/outputs/apk/debug/app-debug.apk` |
 | Type | Android **debug** APK (unsigned for release; debug key) |
-| Source commit | `01740279a93743494538b401710d90d5214e5a53` (branch `feat/clinical-evidence-engine`) |
-| Built | 2026-11-22, ~14:17 IST |
+| Source commit | `4a9102611372cc0a5f9be939f68024aa8b1df536` (branch `feat/clinical-evidence-engine`; code identical to `0174027`, docs-only delta) |
+| Built | 2026-11-22, ~14:21 IST (rebuild; first build ~14:17 IST at `0174027`) |
 | Size | 78,469,555 bytes |
 | SHA-256 | `5ead74993acfb69f01698631a96bb8e03d85ad44c8e565b40efb7581e8be58b9` |
 
@@ -29,6 +29,15 @@ sha256sum app/build/outputs/apk/debug/app-debug.apk
 
 Toolchain used here: OpenJDK 21 (`/home/sandbox/jdk21`), Android SDK platform
 android-36 (`/home/sandbox/android-sdk`), Gradle 8.14.3 wrapper.
+
+## Determinism check
+
+Two independent `gradlew assembleDebug` runs — at `0174027` and again at
+`4a91026` (docs-only delta) — produced a **byte-identical APK** (same size and
+SHA-256 above), consistent with the docs-only source difference.
+
+This provenance file itself lands in a later docs-only commit on top of the
+recorded source commit; it does not alter the build inputs.
 
 ## What this artifact does and does not establish
 
