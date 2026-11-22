@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-22T09:59:38.616Z",
-  "revision": "1385d272c1d0bb3d9cf23cb374ec394965207203",
-  "trackedWorkingTreeDirty": false,
+  "generatedAt": "2026-11-22T10:26:46.221Z",
+  "revision": "21f6f12b76b317b1b80bd65c4bba028d1db7344a",
+  "trackedWorkingTreeDirty": true,
   "scope": "FHIR R4 JSON Schema plus project draft-emitter invariants only. Not profile, terminology, ABDM, or clinical validation.",
   "schemaSha256": "2230406893b4cf002a4ee1e5e2bbeca22ac5d2d4931b3e9ef7b9594bbc376a01",
   "validator": "ajv@6.12.6",
@@ -809,6 +809,15 @@
           "dataPath": ".entry[0].resource",
           "schemaPath": "#/additionalProperties",
           "params": {
+            "additionalProperty": "text"
+          },
+          "message": "should NOT have additional properties"
+        },
+        {
+          "keyword": "additionalProperties",
+          "dataPath": ".entry[0].resource",
+          "schemaPath": "#/additionalProperties",
+          "params": {
             "additionalProperty": "status"
           },
           "message": "should NOT have additional properties"
@@ -896,6 +905,15 @@
             "missingProperty": "patient"
           },
           "message": "should have required property 'patient'"
+        },
+        {
+          "keyword": "additionalProperties",
+          "dataPath": ".entry[0].resource",
+          "schemaPath": "#/additionalProperties",
+          "params": {
+            "additionalProperty": "text"
+          },
+          "message": "should NOT have additional properties"
         },
         {
           "keyword": "additionalProperties",
@@ -5453,6 +5471,15 @@
           "dataPath": ".entry[0].resource",
           "schemaPath": "#/additionalProperties",
           "params": {
+            "additionalProperty": "text"
+          },
+          "message": "should NOT have additional properties"
+        },
+        {
+          "keyword": "additionalProperties",
+          "dataPath": ".entry[0].resource",
+          "schemaPath": "#/additionalProperties",
+          "params": {
             "additionalProperty": "status"
           },
           "message": "should NOT have additional properties"
@@ -9566,6 +9593,15 @@
             "allowedValue": "List"
           },
           "message": "should be equal to constant"
+        },
+        {
+          "keyword": "additionalProperties",
+          "dataPath": ".entry[0]",
+          "schemaPath": "#/additionalProperties",
+          "params": {
+            "additionalProperty": "fullUrl"
+          },
+          "message": "should NOT have additional properties"
         },
         {
           "keyword": "additionalProperties",

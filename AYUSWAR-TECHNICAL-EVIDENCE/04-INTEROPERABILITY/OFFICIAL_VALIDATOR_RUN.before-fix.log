@@ -1,0 +1,92 @@
+FHIR Validation tool Version 7.0.6 (Git# 86bf796ddc97). Built 2026-11-13T23:28:34.381Z (8 days old)
+  Java:   21.0.13.1 from /home/sandbox/jdk21 on amd64 (64bit). 483MB available
+  Paths:  Current = /tmp/ayuswar-mobile-review, Package Cache = /home/sandbox/.fhir/packages
+  Params: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json -version 4.0.1
+  Locale: United States/US
+  Jurisdiction: United States of America
+Loading
+  Loading FHIR v4.0.1 from hl7.fhir.r4.core#4.0.1
+Installing hl7.fhir.r4.core#4.0.1 to the package cache
+  Fetching:
+
+Installing hl7.fhir.r4.core#4.0.1
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.fhir.r4.core#4.0.1
+Installing hl7.fhir.xver-extensions#0.1.0 to the package cache
+  Fetching:
+
+Installing hl7.fhir.xver-extensions#0.1.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.fhir.xver-extensions#0.1.0
+Installing hl7.terminology.r4#6.2.0 to the package cache
+  Fetching:
+
+Installing hl7.terminology.r4#6.2.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.terminology.r4#6.2.0
+  Load hl7.terminology.r4#6.2.0 - 4288 resources (00:14.692)
+Installing hl7.fhir.uv.extensions.r4#5.2.0 to the package cache
+  Fetching:
+
+Installing hl7.fhir.uv.extensions.r4#5.2.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.fhir.uv.extensions.r4#5.2.0
+  Load hl7.fhir.uv.extensions.r4#5.2.0 - 759 resources (00:02.005)
+  Loaded FHIR - 8265 resources (00:00.002)
+  Terminology Cache at /tmp/default-tx-cache/r4
+  Terminology server https://tx.fhir.org - Version Connected to Terminology Server at https://tx.fhir.org (00:00.556)
+Installing hl7.terminology#7.5.0 to the package cache
+  Fetching:
+
+Installing hl7.terminology#7.5.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.terminology#7.5.0
+  Load hl7.terminology#7.5.0 - 4190 resources (00:01.410)
+Installing hl7.fhir.uv.extensions#5.4.0 to the package cache
+  Fetching:
+
+Installing hl7.fhir.uv.extensions#5.4.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.fhir.uv.extensions#5.4.0
+Installing hl7.terminology.r5#7.5.0 to the package cache
+  Fetching:
+
+Installing hl7.terminology.r5#7.5.0
+ done.
+ loaded @ /home/sandbox/.fhir/packages/hl7.terminology.r5#7.5.0
+  Load hl7.terminology.r5#7.5.0 - 4190 resources (00:01.550)
+  Load hl7.fhir.uv.extensions#5.4.0 - 885 resources (00:01.226)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.1.0, hl7.terminology.r4#6.2.0, hl7.fhir.uv.extensions.r4#5.2.0, hl7.terminology#7.5.0, hl7.terminology.r5#7.5.0, hl7.fhir.uv.extensions#5.4.0]
+  Get set... 
+  ...go! (00:01.931)
+Cached new session. Cache size = 1
+Sources to validate: AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.jsonAYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json
+Validating
+  Validate AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json
+ 00:00.643
+  Validate AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json
+ 00:00.237
+Done. Times: Loading: 00:23.533, validation: 00:00.882 (#2). Memory = 495Mb
+
+-- AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-valid-bundle.json -------------------------------------------------------------------------------
+*FAILURE*: 1 errors, 1 warnings, 2 notes
+  Information @ Bundle.meta.tag[0].system (line 7, col8): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Information @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/ (line 16, col8): No questionnaire is identified, so no validation can be performed against the base questionnaire
+  Warning @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/ (line 16, col8): Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation), validating against Base FHIR Standard
+  Error @ Bundle.entry[0] (line 15, col6): Except for transactions and batches, each entry in a Bundle must have a fullUrl which is the identity of the resource in the entry
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/sample-invalid-bundle.json ---------------------------------------------------------------------------------
+*FAILURE*: 6 errors, 1 warnings, 2 notes
+  Error @ Bundle.entry[0].resource.status (line 18, col20): Error parsing JSON: the primitive value must be a string
+  Information @ Bundle.meta.tag[0].system (line 7, col8): A definition for CodeSystem 'urn:ayuswar:prototype' could not be found, so the code cannot be validated, validating against Base FHIR Standard
+  Error @ Bundle.type (line 3, col32): The System URI could not be determined for the code 'INVALID-BUNDLE-TYPE' in the ValueSet 'http://hl7.org/fhir/ValueSet/bundle-type|4.0.1', validating against Base FHIR Standard
+  Error @ Bundle.type (line 3, col32): The value provided ('INVALID-BUNDLE-TYPE') was not found in the value set 'BundleType' (http://hl7.org/fhir/ValueSet/bundle-type|4.0.1), and a code is required from this value set  (error message = The System URI could not be determined for the code 'INVALID-BUNDLE-TYPE' in the ValueSet 'http://hl7.org/fhir/ValueSet/bundle-type|4.0.1'; The provided code '#INVALID-BUNDLE-TYPE' was not found in the value set 'http://hl7.org/fhir/ValueSet/bundle-type|4.0.1'), validating against Base FHIR Standard
+  Information @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/ (line 16, col8): No questionnaire is identified, so no validation can be performed against the base questionnaire
+  Error @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/.status (line 18, col20): The System URI could not be determined for the code '9' in the ValueSet 'http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1', validating against Base FHIR Standard
+  Error @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/.status (line 18, col20): The value provided ('9') was not found in the value set 'QuestionnaireResponseStatus' (http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1), and a code is required from this value set  (error message = The System URI could not be determined for the code '9' in the ValueSet 'http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1'; The provided code '#9' was not found in the value set 'http://hl7.org/fhir/ValueSet/questionnaire-answers-status|4.0.1'), validating against Base FHIR Standard
+  Warning @ Bundle.entry[0].resource/*QuestionnaireResponse/null*/ (line 16, col8): Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation), validating against Base FHIR Standard
+  Error @ Bundle.entry[0] (line 15, col6): Except for transactions and batches, each entry in a Bundle must have a fullUrl which is the identity of the resource in the entry
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Done. Times: Loading: 00:23.533, validation: 00:00.882 (#2). Max Memory = 483Mb

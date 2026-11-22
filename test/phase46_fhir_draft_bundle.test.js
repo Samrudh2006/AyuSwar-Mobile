@@ -58,7 +58,12 @@ check('emitted bundle satisfies FHIR R4 structural invariants', () => {
   const tags = (bundle.meta?.tag || []).map((t) => t.code);
   assert(tags.includes('synthetic-research-draft'), `synthetic meta.tag missing: ${tags}`);
   assert(Array.isArray(bundle.entry) && bundle.entry.length === 1, 'expected exactly one entry');
+  // Official HL7 validator (7.0.6) finding: collection entries need fullUrl.
+  assert(/^urn:uuid:[0-9a-f-]{36}$/.test(bundle.entry[0].fullUrl || ''),
+    'collection entry must carry a urn:uuid fullUrl');
   const qr = bundle.entry[0].resource;
+  assert(qr.text && qr.text.status === 'generated' && qr.text.div && qr.text.div.startsWith('<div xmlns="http://www.w3.org/1999/xhtml">'),
+    'generated narrative missing (dom-6 best practice)');
   assert(qr.resourceType === 'QuestionnaireResponse', 'entry must be QuestionnaireResponse');
   assert(['in-progress', 'completed', 'amended', 'entered-in-error', 'stopped'].includes(qr.status),
     `status not in R4 enum: ${qr.status}`);

@@ -8,7 +8,12 @@ export function buildDraftBundle(soap, turns, sourceMode) {
   return {
     resourceType: 'Bundle', type: 'collection', timestamp: new Date().toISOString(),
     meta: { tag: [{ system: 'urn:ayuswar:prototype', code: 'synthetic-research-draft', display: 'Synthetic practice only; not ABDM validated' }] },
-    entry: [{ resource: {
+    entry: [{
+      // R4: collection-bundle entries must carry a fullUrl identity.
+      fullUrl: `urn:uuid:${crypto.randomUUID()}`,
+      resource: {
+      // dom-6 best practice: every resource carries a generated narrative.
+      text: { status: 'generated', div: '<div xmlns="http://www.w3.org/1999/xhtml">AyuSwar synthetic practice draft - not a prescription or clinical record.</div>' },
       resourceType: 'QuestionnaireResponse', status: 'completed',
       item: [
         { linkId: 'source-mode', text: 'Input source', answer: [{ valueString: sourceMode === 'mic' ? 'Recorded practice audio transcript' : 'Explicit scripted sample transcript' }] },

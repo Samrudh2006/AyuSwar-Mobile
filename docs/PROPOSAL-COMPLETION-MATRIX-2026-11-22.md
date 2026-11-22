@@ -42,7 +42,7 @@ implementation exists but the original deliverable or full scope is not met;
 
 | Proposal item | Status | Evidence / notes |
 |---|---|---|
-| FHIR Bundle structure validation | **PARTIAL** | Phase 46: live-bundle validation against a vendored JSON Schema (`benchmarks/fhir/fhir.schema.json`, sha256 recorded) plus structural invariants |
+| FHIR Bundle structure validation | **PARTIAL** | Phase 46: live-bundle validation against a vendored JSON Schema (`benchmarks/fhir/fhir.schema.json`, sha256 recorded) plus structural invariants. Additionally: official HL7 FHIR Validator 7.0.6 R4 base validation of the emitted fixture passes (0 errors / 0 warnings / 2 inherent notes) after a real fullUrl defect it caught was fixed - see `AYUSWAR-TECHNICAL-EVIDENCE/04-INTEROPERABILITY/OFFICIAL_VALIDATOR_RUN.md`. Still PARTIAL: base validation is not profile conformance; no terminology-service or ABDM validation |
 | Patient/Encounter/Condition/Observation/MedicationRequest resource validation | **PARTIAL** | Structural checks cover what the app actually emits; there is no per-resource profile validation for all five named resources |
 | Required-field + referential-integrity checks | **PARTIAL** | Invariant checks exist; full referential-integrity coverage not claimed |
 | Invalid bundle rejection with error explanations | **DONE** | Phase 46 negative fixtures reject invalid bundles with explanations |

@@ -1,7 +1,7 @@
 {
   "resourceType": "Bundle",
   "type": "INVALID-BUNDLE-TYPE",
-  "timestamp": "2026-11-22T09:59:38.546Z",
+  "timestamp": "2026-11-22T10:26:46.121Z",
   "meta": {
     "tag": [
       {
@@ -13,7 +13,12 @@
   },
   "entry": [
     {
+      "fullUrl": "urn:uuid:fbcdb6a6-c2da-4eae-a93c-162945e3f720",
       "resource": {
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">AyuSwar synthetic practice draft - not a prescription or clinical record.</div>"
+        },
         "resourceType": "QuestionnaireResponse",
         "status": 9,
         "item": [
