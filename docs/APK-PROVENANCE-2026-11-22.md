@@ -2,7 +2,7 @@
 
 Verifiable build record for the debug APK candidate built from
 `feat/clinical-evidence-engine`. This is provenance preparation only: **not a
-release**, not a signed artifact, and not a device-verified install. Merge,
+release**, not a production-signed artifact, and not a device-verified install. Merge,
 tag and release stay gated.
 
 ## Artifact
@@ -11,10 +11,10 @@ tag and release stay gated.
 |---|---|
 | File | `android/app/build/outputs/apk/debug/app-debug.apk` |
 | Type | Android **debug** APK (unsigned for release; debug key) |
-| Source commit | `ad55365` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus the source-aware subjective label, audio-provenance predicate, engine-doc wording and the mobile colour/readability pass) |
-| Built | 2026-11-22, ~14:58 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
-| Size | 78,487,184 bytes |
-| SHA-256 | `5d41bb462dcd83ed0cf9f979d75b9646ee50a63c84ff044a874cf73869785137` |
+| Source commit | `faea07f` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus the source-aware subjective label, audio-provenance predicate, engine-doc wording and the mobile colour/readability pass) |
+| Built | 2026-11-22, ~15:23 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
+| Size | 78,487,226 bytes |
+| SHA-256 | `d90b291cc28481700b6873a371365e20d4db61a2fc1628db9e3152fc5896e316` |
 | Manifest (aapt2 dump badging) | package `ai.ayuswar.app`, **versionCode 37**, **versionName 0.3.34-debug**, minSdk 24, targetSdk 36 |
 | Signer certificate (apksigner verify --print-certs) | CN=Android Debug (standard debug key); cert SHA-256 `57d44b07e4111ec3356d6b9f27ab37afcefb8256a696e670a464e7743f0b1b31` |
 
@@ -35,7 +35,7 @@ android-36 (`/home/sandbox/android-sdk`), Gradle 8.14.3 wrapper.
 ## Embedded-content consistency (this candidate)
 
 - Embedded `assets/public/index.html` SHA-256
-  `3fa91b8c7046a574a7653736972c0e5e8dbbec6866bd8aded32e8d62677fe11b`
+  `c4b0504b249a182fe2b13ae7893d3522fde7d8a622ebaa0f8d52f7b0e20ed589`
   matches the workspace `dist/index.html` byte-for-byte, and the embedded
   `soapDraftSafeguards-*.js` and `MScribeFlow-*.js` chunks hash-match their
   `dist/` counterparts exactly — the APK embeds the exact web bundle built
@@ -70,3 +70,13 @@ and doc wording.
   owner-API checks, not an independent binary re-hash.
 - The earlier recorded debug APK (20 Nov, `d295d34`, sha256 `7170DFF0…B4B`)
   predates this branch and is superseded as the current candidate.
+
+## Current staging
+
+- Draft release ID `454316589`, asset ID `778592242`, filename
+  `ayuswar-v0.3.34-faea07f-debug.apk`. Remains draft, not published.
+- All 288 comparable embedded assets hash-match the current `dist` files.
+- Owner-authenticated API re-download hash verified after upload. This is
+  build-side verification, not independent device runtime verification.
+- Source checks: 383 passed, 3 conditional skips, 0 failures.
+- Draft access is restricted to repository push access, not owner-only.
