@@ -76,6 +76,10 @@ def main():
     ap.add_argument('--snrs', type=float, nargs='+', required=True)
     ap.add_argument('--seed', type=int, required=True)
     ap.add_argument('--noise-glob', default='Babble_*.wav')
+    ap.add_argument('--noise-source', default='MS-SNSD noise_test (LICENSE UNRESOLVED - see header)')
+    ap.add_argument('--noise-source-url', default='https://github.com/microsoft/MS-SNSD')
+    ap.add_argument('--noise-license', default='UNRESOLVED (code MIT; data upstream Freesound-CC0 or DEMAND CC BY-SA 3.0, no per-file mapping)')
+    ap.add_argument('--noise-revision', default='fe61c4ba0d9ac8dd7e23d719cc79f8947e1dc742')
     args = ap.parse_args()
 
     import glob, random
@@ -97,9 +101,8 @@ def main():
     noise_pins = {n: _hl.sha256(open(os.path.join(args.noise_dir, n), 'rb').read()).hexdigest() for n, _ in noises}
     manifest = {'seed': args.seed, 'snrs': args.snrs, 'noise_files': [n for n, _ in noises],
                 'noise_sha256': noise_pins,
-                'noise_upstream': {'repo': 'https://github.com/microsoft/MS-SNSD',
-                                   'revision': 'fe61c4ba0d9ac8dd7e23d719cc79f8947e1dc742',
-                                   'files_uploaded_in': '2bb469c2765658dd0d7e527959876c909e14e21b'},
+                'noise_upstream': {'source': args.noise_source, 'url': args.noise_source_url,
+                                   'license': args.noise_license, 'revision': args.noise_revision},
                 'method': 'whole-clip speech RMS (no VAD), random noise offset, int16 clamp',
                 'clips': []}
     for snr in args.snrs:

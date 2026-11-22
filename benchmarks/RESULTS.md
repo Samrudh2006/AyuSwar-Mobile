@@ -26,19 +26,21 @@ docs/EVAL-DATA-PLAN.md; the test rows are the final reported figures. FLEURS is 
 news/web text, not code-mixed clinical speech; these numbers do not transfer to
 consultation audio.
 
-### Controlled-noise delta (2026-11-22, babble, n=120 subset)
+### Controlled-noise delta (2026-11-22, crowd walla, n=120 subset)
 
-PROVISIONAL (noise license unresolved, pending re-run with a clearly
-licensed source; MS-SNSD code is MIT but its noise data is upstream
-Freesound-CC0 or DEMAND-CC-BY-SA-3.0 with no per-file mapping, and
-Babble_1/Babble_4 could not be traced). Synthetic corruption of real read
-speech (MS-SNSD babble; seeded mixing, whole-clip RMS SNR scaling; same
-seeded n=120 te_in test subset at every level; seed 20261122): clean 25.86% WER / 10.43% CER; SNR 20 dB
-26.40% / 10.72%; SNR 10 dB 28.60% / 11.47%; SNR 5 dB 33.99% / 14.35%.
-Same offline benchmark runner and scorer; 0 failures. Full record:
-`benchmarks/results/2026-11-22-noisy-te_in-test-sub120/` and
+Synthetic corruption of real read speech (public-domain crowd recording
+"Restaurant ambience.ogg", owning-source Commons file page verified
+2026-11-22; seeded mixing, whole-clip RMS SNR scaling; same seeded n=120
+te_in test subset at every level; seed 20261122): clean 25.86% WER /
+10.43% CER; SNR 20 dB 25.91% / 10.64%; SNR 10 dB 27.08% / 10.97%; SNR
+5 dB 30.66% / 12.00%. Same offline benchmark runner and scorer; 0
+failures. Full record:
+`benchmarks/results/2026-11-22-noisy-wallapd-te_in-test-sub120/` and
 `AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/NOISY_ASR_REPORT.md`. Not
-recorded clinical noise, not the capture path, not the full test set.
+recorded clinical noise, not the capture path, not the full test set. An
+earlier MS-SNSD-babble run is retained as PROVISIONAL (noise license
+unresolved) in `benchmarks/results/2026-11-22-noisy-te_in-test-sub120/`;
+it is superseded by this run and withheld from final checkpoint materials.
 
 ### Runner scope: benchmark numbers are NOT shipping app-path quality
 

@@ -1,0 +1,8991 @@
+{
+ "seed": 20261122,
+ "snrs": [
+  20.0,
+  10.0,
+  5.0
+ ],
+ "noise_files": [
+  "Restaurant_walla_PD.wav"
+ ],
+ "noise_sha256": {
+  "Restaurant_walla_PD.wav": "1bedd85ed1395fdb6856589868db5287a4298411a3f88527b833dc9dec37a80e"
+ },
+ "noise_upstream": {
+  "source": "Wikimedia Commons 'Restaurant ambience.ogg' (recorded 2007 by stephan, pdsounds.org)",
+  "url": "https://commons.wikimedia.org/wiki/File:Restaurant_ambience.ogg",
+  "license": "Public domain (owning-source file page, verified 2026-11-22; source ogg sha256 0aeb1fa7a3d9647d3284e97d9880b6375b54db2eda6a517c64e3bb02ac8a51cc)",
+  "revision": "commons-file-2013-01-19"
+ },
+ "method": "whole-clip speech RMS (no VAD), random noise offset, int16 clamp",
+ "clips": [
+  {
+   "clip": "10054709042905280078.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01570351,
+   "levels": {
+    "snr20": {
+     "offset": 895725,
+     "noise_gain": 0.01801661
+    },
+    "snr10": {
+     "offset": 451568,
+     "noise_gain": 0.08023757
+    },
+    "snr5": {
+     "offset": 455444,
+     "noise_gain": 0.14039229
+    }
+   }
+  },
+  {
+   "clip": "10085601229183142282.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05313531,
+   "levels": {
+    "snr20": {
+     "offset": 885960,
+     "noise_gain": 0.05819536
+    },
+    "snr10": {
+     "offset": 362706,
+     "noise_gain": 0.30700976
+    },
+    "snr5": {
+     "offset": 757270,
+     "noise_gain": 0.3499669
+    }
+   }
+  },
+  {
+   "clip": "10097262201978333927.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05671513,
+   "levels": {
+    "snr20": {
+     "offset": 958856,
+     "noise_gain": 0.06363139
+    },
+    "snr10": {
+     "offset": 1056964,
+     "noise_gain": 0.20881764
+    },
+    "snr5": {
+     "offset": 1015790,
+     "noise_gain": 0.32953184
+    }
+   }
+  },
+  {
+   "clip": "10145424547032356574.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05254779,
+   "levels": {
+    "snr20": {
+     "offset": 719158,
+     "noise_gain": 0.05541874
+    },
+    "snr10": {
+     "offset": 217300,
+     "noise_gain": 0.30833758
+    },
+    "snr5": {
+     "offset": 247308,
+     "noise_gain": 0.53632236
+    }
+   }
+  },
+  {
+   "clip": "10145868845413764406.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03258024,
+   "levels": {
+    "snr20": {
+     "offset": 515639,
+     "noise_gain": 0.04378397
+    },
+    "snr10": {
+     "offset": 738850,
+     "noise_gain": 0.10910796
+    },
+    "snr5": {
+     "offset": 955752,
+     "noise_gain": 0.20498506
+    }
+   }
+  },
+  {
+   "clip": "1018616296093099687.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01342187,
+   "levels": {
+    "snr20": {
+     "offset": 1100271,
+     "noise_gain": 0.01478588
+    },
+    "snr10": {
+     "offset": 119161,
+     "noise_gain": 0.06404712
+    },
+    "snr5": {
+     "offset": 640568,
+     "noise_gain": 0.0875677
+    }
+   }
+  },
+  {
+   "clip": "10217994866191966871.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05883216,
+   "levels": {
+    "snr20": {
+     "offset": 434085,
+     "noise_gain": 0.10046155
+    },
+    "snr10": {
+     "offset": 939532,
+     "noise_gain": 0.25242849
+    },
+    "snr5": {
+     "offset": 660397,
+     "noise_gain": 0.35746395
+    }
+   }
+  },
+  {
+   "clip": "10252770362041562600.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00814134,
+   "levels": {
+    "snr20": {
+     "offset": 251836,
+     "noise_gain": 0.01434167
+    },
+    "snr10": {
+     "offset": 437373,
+     "noise_gain": 0.03697318
+    },
+    "snr5": {
+     "offset": 735714,
+     "noise_gain": 0.04979981
+    }
+   }
+  },
+  {
+   "clip": "10291149870624674262.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02268893,
+   "levels": {
+    "snr20": {
+     "offset": 834765,
+     "noise_gain": 0.02474967
+    },
+    "snr10": {
+     "offset": 817231,
+     "noise_gain": 0.07726581
+    },
+    "snr5": {
+     "offset": 465461,
+     "noise_gain": 0.17593426
+    }
+   }
+  },
+  {
+   "clip": "10373756234313480430.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0463335,
+   "levels": {
+    "snr20": {
+     "offset": 892594,
+     "noise_gain": 0.05069243
+    },
+    "snr10": {
+     "offset": 568714,
+     "noise_gain": 0.1730408
+    },
+    "snr5": {
+     "offset": 472915,
+     "noise_gain": 0.33593157
+    }
+   }
+  },
+  {
+   "clip": "1038171316850556262.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01268804,
+   "levels": {
+    "snr20": {
+     "offset": 329815,
+     "noise_gain": 0.02249019
+    },
+    "snr10": {
+     "offset": 464854,
+     "noise_gain": 0.06089365
+    },
+    "snr5": {
+     "offset": 233462,
+     "noise_gain": 0.12638575
+    }
+   }
+  },
+  {
+   "clip": "10421077295670162774.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0721629,
+   "levels": {
+    "snr20": {
+     "offset": 366082,
+     "noise_gain": 0.11847939
+    },
+    "snr10": {
+     "offset": 64168,
+     "noise_gain": 0.3281052
+    },
+    "snr5": {
+     "offset": 763524,
+     "noise_gain": 0.43611002
+    }
+   }
+  },
+  {
+   "clip": "10495283664299809767.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0584014,
+   "levels": {
+    "snr20": {
+     "offset": 684762,
+     "noise_gain": 0.06610849
+    },
+    "snr10": {
+     "offset": 792978,
+     "noise_gain": 0.20589933
+    },
+    "snr5": {
+     "offset": 649734,
+     "noise_gain": 0.37290033
+    }
+   }
+  },
+  {
+   "clip": "10529075416468337996.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01895218,
+   "levels": {
+    "snr20": {
+     "offset": 353104,
+     "noise_gain": 0.02871373
+    },
+    "snr10": {
+     "offset": 595063,
+     "noise_gain": 0.06859272
+    },
+    "snr5": {
+     "offset": 537325,
+     "noise_gain": 0.12802563
+    }
+   }
+  },
+  {
+   "clip": "10571599409452355137.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01178044,
+   "levels": {
+    "snr20": {
+     "offset": 397908,
+     "noise_gain": 0.01928774
+    },
+    "snr10": {
+     "offset": 709792,
+     "noise_gain": 0.04034176
+    },
+    "snr5": {
+     "offset": 3882,
+     "noise_gain": 0.0922828
+    }
+   }
+  },
+  {
+   "clip": "10646866174304187145.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0387995,
+   "levels": {
+    "snr20": {
+     "offset": 15953,
+     "noise_gain": 0.05532078
+    },
+    "snr10": {
+     "offset": 39325,
+     "noise_gain": 0.17885134
+    },
+    "snr5": {
+     "offset": 311275,
+     "noise_gain": 0.36984811
+    }
+   }
+  },
+  {
+   "clip": "10647602998943232854.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01326307,
+   "levels": {
+    "snr20": {
+     "offset": 789566,
+     "noise_gain": 0.01444153
+    },
+    "snr10": {
+     "offset": 249448,
+     "noise_gain": 0.07378084
+    },
+    "snr5": {
+     "offset": 146962,
+     "noise_gain": 0.1248321
+    }
+   }
+  },
+  {
+   "clip": "10654337921395647790.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03170377,
+   "levels": {
+    "snr20": {
+     "offset": 349996,
+     "noise_gain": 0.05533924
+    },
+    "snr10": {
+     "offset": 700356,
+     "noise_gain": 0.10414583
+    },
+    "snr5": {
+     "offset": 100011,
+     "noise_gain": 0.23499984
+    }
+   }
+  },
+  {
+   "clip": "10678516065550448203.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03325843,
+   "levels": {
+    "snr20": {
+     "offset": 204392,
+     "noise_gain": 0.05881188
+    },
+    "snr10": {
+     "offset": 419387,
+     "noise_gain": 0.1478003
+    },
+    "snr5": {
+     "offset": 412640,
+     "noise_gain": 0.26839045
+    }
+   }
+  },
+  {
+   "clip": "10695835431845558330.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03961693,
+   "levels": {
+    "snr20": {
+     "offset": 224403,
+     "noise_gain": 0.07034549
+    },
+    "snr10": {
+     "offset": 676424,
+     "noise_gain": 0.14096602
+    },
+    "snr5": {
+     "offset": 376119,
+     "noise_gain": 0.38764702
+    }
+   }
+  },
+  {
+   "clip": "10725877689074209222.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02995222,
+   "levels": {
+    "snr20": {
+     "offset": 238603,
+     "noise_gain": 0.054184
+    },
+    "snr10": {
+     "offset": 739871,
+     "noise_gain": 0.1039553
+    },
+    "snr5": {
+     "offset": 445930,
+     "noise_gain": 0.23971321
+    }
+   }
+  },
+  {
+   "clip": "10732354101888311918.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02989307,
+   "levels": {
+    "snr20": {
+     "offset": 673936,
+     "noise_gain": 0.03268936
+    },
+    "snr10": {
+     "offset": 833479,
+     "noise_gain": 0.10040099
+    },
+    "snr5": {
+     "offset": 270271,
+     "noise_gain": 0.29199378
+    }
+   }
+  },
+  {
+   "clip": "10742717828213690189.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03388478,
+   "levels": {
+    "snr20": {
+     "offset": 296330,
+     "noise_gain": 0.05935572
+    },
+    "snr10": {
+     "offset": 94726,
+     "noise_gain": 0.15998618
+    },
+    "snr5": {
+     "offset": 799137,
+     "noise_gain": 0.21879291
+    }
+   }
+  },
+  {
+   "clip": "10801958075443782386.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00750933,
+   "levels": {
+    "snr20": {
+     "offset": 669720,
+     "noise_gain": 0.00841635
+    },
+    "snr10": {
+     "offset": 568020,
+     "noise_gain": 0.03091385
+    },
+    "snr5": {
+     "offset": 151475,
+     "noise_gain": 0.06603116
+    }
+   }
+  },
+  {
+   "clip": "10803837844244681170.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03629747,
+   "levels": {
+    "snr20": {
+     "offset": 32664,
+     "noise_gain": 0.04811086
+    },
+    "snr10": {
+     "offset": 496271,
+     "noise_gain": 0.17293084
+    },
+    "snr5": {
+     "offset": 69381,
+     "noise_gain": 0.28433554
+    }
+   }
+  },
+  {
+   "clip": "10900306686093962519.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03638037,
+   "levels": {
+    "snr20": {
+     "offset": 364401,
+     "noise_gain": 0.06225122
+    },
+    "snr10": {
+     "offset": 455586,
+     "noise_gain": 0.17316216
+    },
+    "snr5": {
+     "offset": 931857,
+     "noise_gain": 0.23783092
+    }
+   }
+  },
+  {
+   "clip": "10929767086764622169.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01340775,
+   "levels": {
+    "snr20": {
+     "offset": 295847,
+     "noise_gain": 0.02341495
+    },
+    "snr10": {
+     "offset": 112066,
+     "noise_gain": 0.06527386
+    },
+    "snr5": {
+     "offset": 114734,
+     "noise_gain": 0.1202735
+    }
+   }
+  },
+  {
+   "clip": "10937130790312519888.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00943032,
+   "levels": {
+    "snr20": {
+     "offset": 21848,
+     "noise_gain": 0.01340986
+    },
+    "snr10": {
+     "offset": 192663,
+     "noise_gain": 0.05377114
+    },
+    "snr5": {
+     "offset": 579997,
+     "noise_gain": 0.06172863
+    }
+   }
+  },
+  {
+   "clip": "11109327045538113410.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01264283,
+   "levels": {
+    "snr20": {
+     "offset": 916635,
+     "noise_gain": 0.01449948
+    },
+    "snr10": {
+     "offset": 586247,
+     "noise_gain": 0.04666876
+    },
+    "snr5": {
+     "offset": 643953,
+     "noise_gain": 0.08249307
+    }
+   }
+  },
+  {
+   "clip": "11159315830289882640.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05665774,
+   "levels": {
+    "snr20": {
+     "offset": 384894,
+     "noise_gain": 0.09996646
+    },
+    "snr10": {
+     "offset": 763046,
+     "noise_gain": 0.19795696
+    },
+    "snr5": {
+     "offset": 879990,
+     "noise_gain": 0.35872427
+    }
+   }
+  },
+  {
+   "clip": "11183151184555863988.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01353357,
+   "levels": {
+    "snr20": {
+     "offset": 509293,
+     "noise_gain": 0.01853172
+    },
+    "snr10": {
+     "offset": 655635,
+     "noise_gain": 0.04760912
+    },
+    "snr5": {
+     "offset": 822767,
+     "noise_gain": 0.08088337
+    }
+   }
+  },
+  {
+   "clip": "11199556481223489621.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01234162,
+   "levels": {
+    "snr20": {
+     "offset": 960688,
+     "noise_gain": 0.01384895
+    },
+    "snr10": {
+     "offset": 319368,
+     "noise_gain": 0.06600477
+    },
+    "snr5": {
+     "offset": 449728,
+     "noise_gain": 0.10746455
+    }
+   }
+  },
+  {
+   "clip": "11230545327404776983.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02593369,
+   "levels": {
+    "snr20": {
+     "offset": 812176,
+     "noise_gain": 0.0291004
+    },
+    "snr10": {
+     "offset": 153810,
+     "noise_gain": 0.13306351
+    },
+    "snr5": {
+     "offset": 848336,
+     "noise_gain": 0.16604809
+    }
+   }
+  },
+  {
+   "clip": "11343877899980638969.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01229105,
+   "levels": {
+    "snr20": {
+     "offset": 505632,
+     "noise_gain": 0.01659165
+    },
+    "snr10": {
+     "offset": 924087,
+     "noise_gain": 0.04511994
+    },
+    "snr5": {
+     "offset": 960854,
+     "noise_gain": 0.07757505
+    }
+   }
+  },
+  {
+   "clip": "11357068267453344044.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01599964,
+   "levels": {
+    "snr20": {
+     "offset": 1011469,
+     "noise_gain": 0.01659837
+    },
+    "snr10": {
+     "offset": 815569,
+     "noise_gain": 0.05723129
+    },
+    "snr5": {
+     "offset": 763252,
+     "noise_gain": 0.09616227
+    }
+   }
+  },
+  {
+   "clip": "11420958400387010893.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03441436,
+   "levels": {
+    "snr20": {
+     "offset": 882850,
+     "noise_gain": 0.03528714
+    },
+    "snr10": {
+     "offset": 760885,
+     "noise_gain": 0.11455262
+    },
+    "snr5": {
+     "offset": 659290,
+     "noise_gain": 0.21630109
+    }
+   }
+  },
+  {
+   "clip": "1152675118770462164.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06602027,
+   "levels": {
+    "snr20": {
+     "offset": 410744,
+     "noise_gain": 0.10700408
+    },
+    "snr10": {
+     "offset": 1054162,
+     "noise_gain": 0.23559392
+    },
+    "snr5": {
+     "offset": 859401,
+     "noise_gain": 0.41481114
+    }
+   }
+  },
+  {
+   "clip": "11530728089455611800.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.09722746,
+   "levels": {
+    "snr20": {
+     "offset": 849668,
+     "noise_gain": 0.11092544
+    },
+    "snr10": {
+     "offset": 996666,
+     "noise_gain": 0.32407613
+    },
+    "snr5": {
+     "offset": 959671,
+     "noise_gain": 0.61430695
+    }
+   }
+  },
+  {
+   "clip": "1155737170846284065.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0651907,
+   "levels": {
+    "snr20": {
+     "offset": 506265,
+     "noise_gain": 0.08040464
+    },
+    "snr10": {
+     "offset": 309120,
+     "noise_gain": 0.31467442
+    },
+    "snr5": {
+     "offset": 671898,
+     "noise_gain": 0.41534987
+    }
+   }
+  },
+  {
+   "clip": "11601927595613225994.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01485227,
+   "levels": {
+    "snr20": {
+     "offset": 490775,
+     "noise_gain": 0.02160669
+    },
+    "snr10": {
+     "offset": 22006,
+     "noise_gain": 0.06506615
+    },
+    "snr5": {
+     "offset": 735893,
+     "noise_gain": 0.09443559
+    }
+   }
+  },
+  {
+   "clip": "11744822484959253541.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00891008,
+   "levels": {
+    "snr20": {
+     "offset": 405850,
+     "noise_gain": 0.01524357
+    },
+    "snr10": {
+     "offset": 449762,
+     "noise_gain": 0.04438354
+    },
+    "snr5": {
+     "offset": 971995,
+     "noise_gain": 0.05395375
+    }
+   }
+  },
+  {
+   "clip": "11785526232364778972.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02795426,
+   "levels": {
+    "snr20": {
+     "offset": 627032,
+     "noise_gain": 0.03444628
+    },
+    "snr10": {
+     "offset": 338304,
+     "noise_gain": 0.15558746
+    },
+    "snr5": {
+     "offset": 59246,
+     "noise_gain": 0.21911502
+    }
+   }
+  },
+  {
+   "clip": "11800201787645436840.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00766171,
+   "levels": {
+    "snr20": {
+     "offset": 593727,
+     "noise_gain": 0.00905649
+    },
+    "snr10": {
+     "offset": 956504,
+     "noise_gain": 0.02707908
+    },
+    "snr5": {
+     "offset": 946142,
+     "noise_gain": 0.048645
+    }
+   }
+  },
+  {
+   "clip": "11805494484399312802.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05695243,
+   "levels": {
+    "snr20": {
+     "offset": 754980,
+     "noise_gain": 0.0645999
+    },
+    "snr10": {
+     "offset": 173667,
+     "noise_gain": 0.29359577
+    },
+    "snr5": {
+     "offset": 790077,
+     "noise_gain": 0.35303404
+    }
+   }
+  },
+  {
+   "clip": "11899046494525689376.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02879253,
+   "levels": {
+    "snr20": {
+     "offset": 58353,
+     "noise_gain": 0.04086053
+    },
+    "snr10": {
+     "offset": 930250,
+     "noise_gain": 0.10866827
+    },
+    "snr5": {
+     "offset": 34481,
+     "noise_gain": 0.21885773
+    }
+   }
+  },
+  {
+   "clip": "11991138478326084243.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05408516,
+   "levels": {
+    "snr20": {
+     "offset": 425087,
+     "noise_gain": 0.08844915
+    },
+    "snr10": {
+     "offset": 225946,
+     "noise_gain": 0.29892545
+    },
+    "snr5": {
+     "offset": 379315,
+     "noise_gain": 0.52267748
+    }
+   }
+  },
+  {
+   "clip": "11994346634291898641.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01107209,
+   "levels": {
+    "snr20": {
+     "offset": 609500,
+     "noise_gain": 0.0129331
+    },
+    "snr10": {
+     "offset": 74739,
+     "noise_gain": 0.05259208
+    },
+    "snr5": {
+     "offset": 144557,
+     "noise_gain": 0.10427767
+    }
+   }
+  },
+  {
+   "clip": "12040205849954416549.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06921534,
+   "levels": {
+    "snr20": {
+     "offset": 457081,
+     "noise_gain": 0.09640009
+    },
+    "snr10": {
+     "offset": 3775,
+     "noise_gain": 0.32671229
+    },
+    "snr5": {
+     "offset": 878347,
+     "noise_gain": 0.42087969
+    }
+   }
+  },
+  {
+   "clip": "120526665116427588.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00976557,
+   "levels": {
+    "snr20": {
+     "offset": 538712,
+     "noise_gain": 0.01322506
+    },
+    "snr10": {
+     "offset": 449887,
+     "noise_gain": 0.04944946
+    },
+    "snr5": {
+     "offset": 199441,
+     "noise_gain": 0.10498181
+    }
+   }
+  },
+  {
+   "clip": "12071995649421315271.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03973123,
+   "levels": {
+    "snr20": {
+     "offset": 157157,
+     "noise_gain": 0.06130412
+    },
+    "snr10": {
+     "offset": 817017,
+     "noise_gain": 0.12767821
+    },
+    "snr5": {
+     "offset": 397447,
+     "noise_gain": 0.39079481
+    }
+   }
+  },
+  {
+   "clip": "12117222453775356498.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06118462,
+   "levels": {
+    "snr20": {
+     "offset": 853807,
+     "noise_gain": 0.06633233
+    },
+    "snr10": {
+     "offset": 382569,
+     "noise_gain": 0.32188268
+    },
+    "snr5": {
+     "offset": 12156,
+     "noise_gain": 0.47233196
+    }
+   }
+  },
+  {
+   "clip": "12125941011208490554.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0162384,
+   "levels": {
+    "snr20": {
+     "offset": 844362,
+     "noise_gain": 0.01761791
+    },
+    "snr10": {
+     "offset": 919572,
+     "noise_gain": 0.05697808
+    },
+    "snr5": {
+     "offset": 774329,
+     "noise_gain": 0.10061386
+    }
+   }
+  },
+  {
+   "clip": "12175817476601380411.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0618571,
+   "levels": {
+    "snr20": {
+     "offset": 767754,
+     "noise_gain": 0.0655794
+    },
+    "snr10": {
+     "offset": 519409,
+     "noise_gain": 0.23961383
+    },
+    "snr5": {
+     "offset": 68768,
+     "noise_gain": 0.52935007
+    }
+   }
+  },
+  {
+   "clip": "12185150433001129739.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01433203,
+   "levels": {
+    "snr20": {
+     "offset": 206604,
+     "noise_gain": 0.02633879
+    },
+    "snr10": {
+     "offset": 211204,
+     "noise_gain": 0.08231475
+    },
+    "snr5": {
+     "offset": 745955,
+     "noise_gain": 0.09393623
+    }
+   }
+  },
+  {
+   "clip": "12221186966012528575.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07476035,
+   "levels": {
+    "snr20": {
+     "offset": 442072,
+     "noise_gain": 0.11739908
+    },
+    "snr10": {
+     "offset": 1094398,
+     "noise_gain": 0.2606017
+    },
+    "snr5": {
+     "offset": 638308,
+     "noise_gain": 0.49623364
+    }
+   }
+  },
+  {
+   "clip": "12248585152137390232.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02142883,
+   "levels": {
+    "snr20": {
+     "offset": 769685,
+     "noise_gain": 0.02229893
+    },
+    "snr10": {
+     "offset": 715226,
+     "noise_gain": 0.07355696
+    },
+    "snr5": {
+     "offset": 124242,
+     "noise_gain": 0.1925802
+    }
+   }
+  },
+  {
+   "clip": "12283511119418369837.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01252625,
+   "levels": {
+    "snr20": {
+     "offset": 853208,
+     "noise_gain": 0.01379185
+    },
+    "snr10": {
+     "offset": 409301,
+     "noise_gain": 0.06374562
+    },
+    "snr5": {
+     "offset": 88364,
+     "noise_gain": 0.10236015
+    }
+   }
+  },
+  {
+   "clip": "12338079544923946892.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01077509,
+   "levels": {
+    "snr20": {
+     "offset": 875300,
+     "noise_gain": 0.01194424
+    },
+    "snr10": {
+     "offset": 666771,
+     "noise_gain": 0.03864389
+    },
+    "snr5": {
+     "offset": 562160,
+     "noise_gain": 0.08092857
+    }
+   }
+  },
+  {
+   "clip": "12351094474383461539.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04237506,
+   "levels": {
+    "snr20": {
+     "offset": 118249,
+     "noise_gain": 0.06679915
+    },
+    "snr10": {
+     "offset": 733898,
+     "noise_gain": 0.14597666
+    },
+    "snr5": {
+     "offset": 645837,
+     "noise_gain": 0.26944599
+    }
+   }
+  },
+  {
+   "clip": "12356525553516063852.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05527601,
+   "levels": {
+    "snr20": {
+     "offset": 1088312,
+     "noise_gain": 0.0598763
+    },
+    "snr10": {
+     "offset": 580817,
+     "noise_gain": 0.22291712
+    },
+    "snr5": {
+     "offset": 416586,
+     "noise_gain": 0.52722985
+    }
+   }
+  },
+  {
+   "clip": "12366480436562345665.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01258978,
+   "levels": {
+    "snr20": {
+     "offset": 1101198,
+     "noise_gain": 0.01383255
+    },
+    "snr10": {
+     "offset": 518481,
+     "noise_gain": 0.05524815
+    },
+    "snr5": {
+     "offset": 539774,
+     "noise_gain": 0.09527042
+    }
+   }
+  },
+  {
+   "clip": "12378438174678150767.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02422795,
+   "levels": {
+    "snr20": {
+     "offset": 570500,
+     "noise_gain": 0.02934367
+    },
+    "snr10": {
+     "offset": 165432,
+     "noise_gain": 0.12391247
+    },
+    "snr5": {
+     "offset": 435919,
+     "noise_gain": 0.2080833
+    }
+   }
+  },
+  {
+   "clip": "12386742514066475207.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04055792,
+   "levels": {
+    "snr20": {
+     "offset": 607081,
+     "noise_gain": 0.04675202
+    },
+    "snr10": {
+     "offset": 1002357,
+     "noise_gain": 0.13680676
+    },
+    "snr5": {
+     "offset": 1026160,
+     "noise_gain": 0.24092653
+    }
+   }
+  },
+  {
+   "clip": "12390331146953556140.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01038636,
+   "levels": {
+    "snr20": {
+     "offset": 349139,
+     "noise_gain": 0.01808509
+    },
+    "snr10": {
+     "offset": 561636,
+     "noise_gain": 0.04345567
+    },
+    "snr5": {
+     "offset": 271879,
+     "noise_gain": 0.10259407
+    }
+   }
+  },
+  {
+   "clip": "12420313077650920990.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04132235,
+   "levels": {
+    "snr20": {
+     "offset": 502441,
+     "noise_gain": 0.05863361
+    },
+    "snr10": {
+     "offset": 959590,
+     "noise_gain": 0.14333878
+    },
+    "snr5": {
+     "offset": 490910,
+     "noise_gain": 0.34621379
+    }
+   }
+  },
+  {
+   "clip": "12421261037291882826.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05509616,
+   "levels": {
+    "snr20": {
+     "offset": 690758,
+     "noise_gain": 0.05890126
+    },
+    "snr10": {
+     "offset": 682243,
+     "noise_gain": 0.18620209
+    },
+    "snr5": {
+     "offset": 760070,
+     "noise_gain": 0.35088675
+    }
+   }
+  },
+  {
+   "clip": "1243426477625760707.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0362571,
+   "levels": {
+    "snr20": {
+     "offset": 1077642,
+     "noise_gain": 0.04002727
+    },
+    "snr10": {
+     "offset": 923803,
+     "noise_gain": 0.13358795
+    },
+    "snr5": {
+     "offset": 615387,
+     "noise_gain": 0.24163157
+    }
+   }
+  },
+  {
+   "clip": "12478032241047162095.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04370088,
+   "levels": {
+    "snr20": {
+     "offset": 441948,
+     "noise_gain": 0.07548134
+    },
+    "snr10": {
+     "offset": 260779,
+     "noise_gain": 0.23926237
+    },
+    "snr5": {
+     "offset": 1125381,
+     "noise_gain": 0.25341425
+    }
+   }
+  },
+  {
+   "clip": "12498770425106753479.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05772008,
+   "levels": {
+    "snr20": {
+     "offset": 475423,
+     "noise_gain": 0.08774683
+    },
+    "snr10": {
+     "offset": 317452,
+     "noise_gain": 0.30645991
+    },
+    "snr5": {
+     "offset": 917814,
+     "noise_gain": 0.42330008
+    }
+   }
+  },
+  {
+   "clip": "12580058940162831280.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00651926,
+   "levels": {
+    "snr20": {
+     "offset": 836846,
+     "noise_gain": 0.0069166
+    },
+    "snr10": {
+     "offset": 650960,
+     "noise_gain": 0.02646395
+    },
+    "snr5": {
+     "offset": 531727,
+     "noise_gain": 0.05291854
+    }
+   }
+  },
+  {
+   "clip": "12588886511473191330.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0097722,
+   "levels": {
+    "snr20": {
+     "offset": 904638,
+     "noise_gain": 0.01065395
+    },
+    "snr10": {
+     "offset": 164135,
+     "noise_gain": 0.04859841
+    },
+    "snr5": {
+     "offset": 558355,
+     "noise_gain": 0.07310131
+    }
+   }
+  },
+  {
+   "clip": "12613889496305561238.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02490291,
+   "levels": {
+    "snr20": {
+     "offset": 722925,
+     "noise_gain": 0.02752487
+    },
+    "snr10": {
+     "offset": 932677,
+     "noise_gain": 0.08815073
+    },
+    "snr5": {
+     "offset": 987302,
+     "noise_gain": 0.15279377
+    }
+   }
+  },
+  {
+   "clip": "12681391522981367101.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05054493,
+   "levels": {
+    "snr20": {
+     "offset": 374608,
+     "noise_gain": 0.08330179
+    },
+    "snr10": {
+     "offset": 9177,
+     "noise_gain": 0.22072945
+    },
+    "snr5": {
+     "offset": 161863,
+     "noise_gain": 0.46332727
+    }
+   }
+  },
+  {
+   "clip": "12687447370749589600.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01014493,
+   "levels": {
+    "snr20": {
+     "offset": 736375,
+     "noise_gain": 0.011332
+    },
+    "snr10": {
+     "offset": 475099,
+     "noise_gain": 0.04671255
+    },
+    "snr5": {
+     "offset": 722678,
+     "noise_gain": 0.06346889
+    }
+   }
+  },
+  {
+   "clip": "12751854645204591914.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03494421,
+   "levels": {
+    "snr20": {
+     "offset": 407509,
+     "noise_gain": 0.05343072
+    },
+    "snr10": {
+     "offset": 767765,
+     "noise_gain": 0.12112459
+    },
+    "snr5": {
+     "offset": 398977,
+     "noise_gain": 0.30751795
+    }
+   }
+  },
+  {
+   "clip": "12774737540790218914.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01124974,
+   "levels": {
+    "snr20": {
+     "offset": 205993,
+     "noise_gain": 0.02045034
+    },
+    "snr10": {
+     "offset": 154332,
+     "noise_gain": 0.05213746
+    },
+    "snr5": {
+     "offset": 917221,
+     "noise_gain": 0.08354779
+    }
+   }
+  },
+  {
+   "clip": "12812633792031662051.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04226971,
+   "levels": {
+    "snr20": {
+     "offset": 979777,
+     "noise_gain": 0.0452423
+    },
+    "snr10": {
+     "offset": 33152,
+     "noise_gain": 0.1909823
+    },
+    "snr5": {
+     "offset": 647752,
+     "noise_gain": 0.27633185
+    }
+   }
+  },
+  {
+   "clip": "12839279305661677316.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01481911,
+   "levels": {
+    "snr20": {
+     "offset": 817868,
+     "noise_gain": 0.01512695
+    },
+    "snr10": {
+     "offset": 496462,
+     "noise_gain": 0.06916499
+    },
+    "snr5": {
+     "offset": 589017,
+     "noise_gain": 0.10647056
+    }
+   }
+  },
+  {
+   "clip": "12976899983715724941.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0354668,
+   "levels": {
+    "snr20": {
+     "offset": 400812,
+     "noise_gain": 0.06243134
+    },
+    "snr10": {
+     "offset": 510192,
+     "noise_gain": 0.16237379
+    },
+    "snr5": {
+     "offset": 845848,
+     "noise_gain": 0.20104099
+    }
+   }
+  },
+  {
+   "clip": "12996576979011201856.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04594075,
+   "levels": {
+    "snr20": {
+     "offset": 20335,
+     "noise_gain": 0.06586635
+    },
+    "snr10": {
+     "offset": 762142,
+     "noise_gain": 0.15994455
+    },
+    "snr5": {
+     "offset": 433639,
+     "noise_gain": 0.38203596
+    }
+   }
+  },
+  {
+   "clip": "12998963082398095353.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01840366,
+   "levels": {
+    "snr20": {
+     "offset": 155927,
+     "noise_gain": 0.02851839
+    },
+    "snr10": {
+     "offset": 506680,
+     "noise_gain": 0.0812002
+    },
+    "snr5": {
+     "offset": 420566,
+     "noise_gain": 0.17218149
+    }
+   }
+  },
+  {
+   "clip": "1300324935168020593.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0145053,
+   "levels": {
+    "snr20": {
+     "offset": 397759,
+     "noise_gain": 0.02204541
+    },
+    "snr10": {
+     "offset": 489159,
+     "noise_gain": 0.06256563
+    },
+    "snr5": {
+     "offset": 236074,
+     "noise_gain": 0.14613035
+    }
+   }
+  },
+  {
+   "clip": "13019169537354220273.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01725576,
+   "levels": {
+    "snr20": {
+     "offset": 598751,
+     "noise_gain": 0.02003566
+    },
+    "snr10": {
+     "offset": 125955,
+     "noise_gain": 0.08943469
+    },
+    "snr5": {
+     "offset": 954172,
+     "noise_gain": 0.10666101
+    }
+   }
+  },
+  {
+   "clip": "13037566131055873676.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05441521,
+   "levels": {
+    "snr20": {
+     "offset": 243532,
+     "noise_gain": 0.096734
+    },
+    "snr10": {
+     "offset": 388595,
+     "noise_gain": 0.28760598
+    },
+    "snr5": {
+     "offset": 332034,
+     "noise_gain": 0.53182617
+    }
+   }
+  },
+  {
+   "clip": "13039377649780953636.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02640579,
+   "levels": {
+    "snr20": {
+     "offset": 892695,
+     "noise_gain": 0.03039859
+    },
+    "snr10": {
+     "offset": 679104,
+     "noise_gain": 0.09329283
+    },
+    "snr5": {
+     "offset": 389717,
+     "noise_gain": 0.25782718
+    }
+   }
+  },
+  {
+   "clip": "13057612386580237345.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0092553,
+   "levels": {
+    "snr20": {
+     "offset": 784891,
+     "noise_gain": 0.00992289
+    },
+    "snr10": {
+     "offset": 350012,
+     "noise_gain": 0.05027918
+    },
+    "snr5": {
+     "offset": 899720,
+     "noise_gain": 0.05378149
+    }
+   }
+  },
+  {
+   "clip": "13085055815956013786.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00917558,
+   "levels": {
+    "snr20": {
+     "offset": 758487,
+     "noise_gain": 0.01027856
+    },
+    "snr10": {
+     "offset": 222387,
+     "noise_gain": 0.05141183
+    },
+    "snr5": {
+     "offset": 308939,
+     "noise_gain": 0.08544278
+    }
+   }
+  },
+  {
+   "clip": "13087652165225568507.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03229133,
+   "levels": {
+    "snr20": {
+     "offset": 270277,
+     "noise_gain": 0.05650445
+    },
+    "snr10": {
+     "offset": 1021206,
+     "noise_gain": 0.10432419
+    },
+    "snr5": {
+     "offset": 593187,
+     "noise_gain": 0.21506318
+    }
+   }
+  },
+  {
+   "clip": "13110211309303433308.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01653154,
+   "levels": {
+    "snr20": {
+     "offset": 873753,
+     "noise_gain": 0.01824015
+    },
+    "snr10": {
+     "offset": 381260,
+     "noise_gain": 0.09049817
+    },
+    "snr5": {
+     "offset": 274507,
+     "noise_gain": 0.16336816
+    }
+   }
+  },
+  {
+   "clip": "13151459927887695150.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0259192,
+   "levels": {
+    "snr20": {
+     "offset": 1052295,
+     "noise_gain": 0.02839694
+    },
+    "snr10": {
+     "offset": 1003588,
+     "noise_gain": 0.08596232
+    },
+    "snr5": {
+     "offset": 188997,
+     "noise_gain": 0.24097612
+    }
+   }
+  },
+  {
+   "clip": "13168854378197621019.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00723777,
+   "levels": {
+    "snr20": {
+     "offset": 743273,
+     "noise_gain": 0.00831891
+    },
+    "snr10": {
+     "offset": 502485,
+     "noise_gain": 0.02915414
+    },
+    "snr5": {
+     "offset": 655548,
+     "noise_gain": 0.04365577
+    }
+   }
+  },
+  {
+   "clip": "13179158985429870175.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03847904,
+   "levels": {
+    "snr20": {
+     "offset": 35662,
+     "noise_gain": 0.05608898
+    },
+    "snr10": {
+     "offset": 86818,
+     "noise_gain": 0.18527398
+    },
+    "snr5": {
+     "offset": 791324,
+     "noise_gain": 0.24618837
+    }
+   }
+  },
+  {
+   "clip": "13219795004816330488.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01444162,
+   "levels": {
+    "snr20": {
+     "offset": 782515,
+     "noise_gain": 0.01582479
+    },
+    "snr10": {
+     "offset": 198864,
+     "noise_gain": 0.08081784
+    },
+    "snr5": {
+     "offset": 57599,
+     "noise_gain": 0.11373059
+    }
+   }
+  },
+  {
+   "clip": "13316949509066148883.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06372899,
+   "levels": {
+    "snr20": {
+     "offset": 915674,
+     "noise_gain": 0.07292999
+    },
+    "snr10": {
+     "offset": 159989,
+     "noise_gain": 0.32422544
+    },
+    "snr5": {
+     "offset": 1009719,
+     "noise_gain": 0.36731862
+    }
+   }
+  },
+  {
+   "clip": "13330275279601866477.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01058059,
+   "levels": {
+    "snr20": {
+     "offset": 268909,
+     "noise_gain": 0.01849794
+    },
+    "snr10": {
+     "offset": 596532,
+     "noise_gain": 0.03933414
+    },
+    "snr5": {
+     "offset": 507331,
+     "noise_gain": 0.07996826
+    }
+   }
+  },
+  {
+   "clip": "13364127718692670507.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01094129,
+   "levels": {
+    "snr20": {
+     "offset": 159525,
+     "noise_gain": 0.01717515
+    },
+    "snr10": {
+     "offset": 673450,
+     "noise_gain": 0.03844751
+    },
+    "snr5": {
+     "offset": 469754,
+     "noise_gain": 0.09189282
+    }
+   }
+  },
+  {
+   "clip": "13397478532291769112.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01350728,
+   "levels": {
+    "snr20": {
+     "offset": 223577,
+     "noise_gain": 0.02396607
+    },
+    "snr10": {
+     "offset": 62295,
+     "noise_gain": 0.06001107
+    },
+    "snr5": {
+     "offset": 412789,
+     "noise_gain": 0.1222786
+    }
+   }
+  },
+  {
+   "clip": "13505113116457896320.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0177147,
+   "levels": {
+    "snr20": {
+     "offset": 713418,
+     "noise_gain": 0.01831435
+    },
+    "snr10": {
+     "offset": 485188,
+     "noise_gain": 0.07743795
+    },
+    "snr5": {
+     "offset": 480395,
+     "noise_gain": 0.13904772
+    }
+   }
+  },
+  {
+   "clip": "13517516457085833867.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03259183,
+   "levels": {
+    "snr20": {
+     "offset": 494860,
+     "noise_gain": 0.0385928
+    },
+    "snr10": {
+     "offset": 477254,
+     "noise_gain": 0.12281817
+    },
+    "snr5": {
+     "offset": 444483,
+     "noise_gain": 0.21988334
+    }
+   }
+  },
+  {
+   "clip": "13641449536248601986.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01175501,
+   "levels": {
+    "snr20": {
+     "offset": 35794,
+     "noise_gain": 0.01580501
+    },
+    "snr10": {
+     "offset": 910381,
+     "noise_gain": 0.04076898
+    },
+    "snr5": {
+     "offset": 206262,
+     "noise_gain": 0.1187469
+    }
+   }
+  },
+  {
+   "clip": "1367609604905402108.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02384779,
+   "levels": {
+    "snr20": {
+     "offset": 658837,
+     "noise_gain": 0.02674392
+    },
+    "snr10": {
+     "offset": 1049128,
+     "noise_gain": 0.08339118
+    },
+    "snr5": {
+     "offset": 247770,
+     "noise_gain": 0.23689352
+    }
+   }
+  },
+  {
+   "clip": "13681191449535524860.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03908629,
+   "levels": {
+    "snr20": {
+     "offset": 532283,
+     "noise_gain": 0.05194351
+    },
+    "snr10": {
+     "offset": 605336,
+     "noise_gain": 0.14311935
+    },
+    "snr5": {
+     "offset": 1054755,
+     "noise_gain": 0.24646163
+    }
+   }
+  },
+  {
+   "clip": "13735706346151429287.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01482991,
+   "levels": {
+    "snr20": {
+     "offset": 483595,
+     "noise_gain": 0.02059684
+    },
+    "snr10": {
+     "offset": 50544,
+     "noise_gain": 0.06803089
+    },
+    "snr5": {
+     "offset": 427326,
+     "noise_gain": 0.12318451
+    }
+   }
+  },
+  {
+   "clip": "13756845604326270458.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00919418,
+   "levels": {
+    "snr20": {
+     "offset": 753512,
+     "noise_gain": 0.00981887
+    },
+    "snr10": {
+     "offset": 858913,
+     "noise_gain": 0.03064417
+    },
+    "snr5": {
+     "offset": 76624,
+     "noise_gain": 0.07415306
+    }
+   }
+  },
+  {
+   "clip": "13764709845823417049.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05542081,
+   "levels": {
+    "snr20": {
+     "offset": 939746,
+     "noise_gain": 0.0629325
+    },
+    "snr10": {
+     "offset": 186076,
+     "noise_gain": 0.27749504
+    },
+    "snr5": {
+     "offset": 488178,
+     "noise_gain": 0.42942945
+    }
+   }
+  },
+  {
+   "clip": "13773979452803403905.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03600852,
+   "levels": {
+    "snr20": {
+     "offset": 624425,
+     "noise_gain": 0.0411516
+    },
+    "snr10": {
+     "offset": 113644,
+     "noise_gain": 0.17931071
+    },
+    "snr5": {
+     "offset": 290402,
+     "noise_gain": 0.35748577
+    }
+   }
+  },
+  {
+   "clip": "13823910914118994839.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01483992,
+   "levels": {
+    "snr20": {
+     "offset": 182357,
+     "noise_gain": 0.02369766
+    },
+    "snr10": {
+     "offset": 21344,
+     "noise_gain": 0.06914804
+    },
+    "snr5": {
+     "offset": 780076,
+     "noise_gain": 0.08809376
+    }
+   }
+  },
+  {
+   "clip": "13931724726266327621.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05575725,
+   "levels": {
+    "snr20": {
+     "offset": 653492,
+     "noise_gain": 0.06223941
+    },
+    "snr10": {
+     "offset": 882774,
+     "noise_gain": 0.19706905
+    },
+    "snr5": {
+     "offset": 125720,
+     "noise_gain": 0.49118895
+    }
+   }
+  },
+  {
+   "clip": "13960821257127013763.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04168519,
+   "levels": {
+    "snr20": {
+     "offset": 546225,
+     "noise_gain": 0.05572574
+    },
+    "snr10": {
+     "offset": 960446,
+     "noise_gain": 0.14701779
+    },
+    "snr5": {
+     "offset": 732448,
+     "noise_gain": 0.25718756
+    }
+   }
+  },
+  {
+   "clip": "14020258929803350078.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04684077,
+   "levels": {
+    "snr20": {
+     "offset": 228730,
+     "noise_gain": 0.08227837
+    },
+    "snr10": {
+     "offset": 838,
+     "noise_gain": 0.21289033
+    },
+    "snr5": {
+     "offset": 219373,
+     "noise_gain": 0.46665208
+    }
+   }
+  },
+  {
+   "clip": "14034066541176867023.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03375395,
+   "levels": {
+    "snr20": {
+     "offset": 179123,
+     "noise_gain": 0.05325264
+    },
+    "snr10": {
+     "offset": 397096,
+     "noise_gain": 0.17757525
+    },
+    "snr5": {
+     "offset": 241487,
+     "noise_gain": 0.33334123
+    }
+   }
+  },
+  {
+   "clip": "14062468540202204867.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01168383,
+   "levels": {
+    "snr20": {
+     "offset": 653208,
+     "noise_gain": 0.01352457
+    },
+    "snr10": {
+     "offset": 340482,
+     "noise_gain": 0.06080358
+    },
+    "snr5": {
+     "offset": 990188,
+     "noise_gain": 0.07021963
+    }
+   }
+  },
+  {
+   "clip": "14166349555090119249.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05416403,
+   "levels": {
+    "snr20": {
+     "offset": 975538,
+     "noise_gain": 0.05999393
+    },
+    "snr10": {
+     "offset": 748785,
+     "noise_gain": 0.18155309
+    },
+    "snr5": {
+     "offset": 1022416,
+     "noise_gain": 0.31430082
+    }
+   }
+  },
+  {
+   "clip": "1424783792366806608.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.043392,
+   "levels": {
+    "snr20": {
+     "offset": 554206,
+     "noise_gain": 0.05111295
+    },
+    "snr10": {
+     "offset": 390931,
+     "noise_gain": 0.18768606
+    },
+    "snr5": {
+     "offset": 469286,
+     "noise_gain": 0.30651942
+    }
+   }
+  },
+  {
+   "clip": "14278630414602056451.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01159348,
+   "levels": {
+    "snr20": {
+     "offset": 813001,
+     "noise_gain": 0.01271549
+    },
+    "snr10": {
+     "offset": 1035201,
+     "noise_gain": 0.03778595
+    },
+    "snr5": {
+     "offset": 27343,
+     "noise_gain": 0.08816576
+    }
+   }
+  },
+  {
+   "clip": "14280755123174385611.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01198518,
+   "levels": {
+    "snr20": {
+     "offset": 675785,
+     "noise_gain": 0.01348759
+    },
+    "snr10": {
+     "offset": 908815,
+     "noise_gain": 0.04160513
+    },
+    "snr5": {
+     "offset": 761993,
+     "noise_gain": 0.0742249
+    }
+   }
+  },
+  {
+   "clip": "14330977836148923700.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06592336,
+   "levels": {
+    "snr20": {
+     "offset": 1008162,
+     "noise_gain": 0.06667888
+    },
+    "snr10": {
+     "offset": 219409,
+     "noise_gain": 0.38754935
+    },
+    "snr5": {
+     "offset": 416937,
+     "noise_gain": 0.65494489
+    }
+   }
+  },
+  {
+   "clip": "14366871298176005085.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05910084,
+   "levels": {
+    "snr20": {
+     "offset": 97503,
+     "noise_gain": 0.08842116
+    },
+    "snr10": {
+     "offset": 247972,
+     "noise_gain": 0.33271361
+    },
+    "snr5": {
+     "offset": 474142,
+     "noise_gain": 0.46174499
+    }
+   }
+  },
+  {
+   "clip": "14492308408758562575.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05901527,
+   "levels": {
+    "snr20": {
+     "offset": 491019,
+     "noise_gain": 0.0730724
+    },
+    "snr10": {
+     "offset": 646739,
+     "noise_gain": 0.20667993
+    },
+    "snr5": {
+     "offset": 261417,
+     "noise_gain": 0.55819341
+    }
+   }
+  },
+  {
+   "clip": "1450079556009217598.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01036055,
+   "levels": {
+    "snr20": {
+     "offset": 377091,
+     "noise_gain": 0.01724529
+    },
+    "snr10": {
+     "offset": 893415,
+     "noise_gain": 0.03540883
+    },
+    "snr5": {
+     "offset": 444389,
+     "noise_gain": 0.08491942
+    }
+   }
+  },
+  {
+   "clip": "14594047433590255714.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00689862,
+   "levels": {
+    "snr20": {
+     "offset": 846717,
+     "noise_gain": 0.0074509
+    },
+    "snr10": {
+     "offset": 749495,
+     "noise_gain": 0.02442127
+    },
+    "snr5": {
+     "offset": 183892,
+     "noise_gain": 0.06290089
+    }
+   }
+  },
+  {
+   "clip": "14669776183646529981.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04828461,
+   "levels": {
+    "snr20": {
+     "offset": 789653,
+     "noise_gain": 0.05166606
+    },
+    "snr10": {
+     "offset": 721118,
+     "noise_gain": 0.16561791
+    },
+    "snr5": {
+     "offset": 173533,
+     "noise_gain": 0.44453704
+    }
+   }
+  },
+  {
+   "clip": "14683060427756433571.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01208004,
+   "levels": {
+    "snr20": {
+     "offset": 1101190,
+     "noise_gain": 0.01302943
+    },
+    "snr10": {
+     "offset": 130910,
+     "noise_gain": 0.05708667
+    },
+    "snr5": {
+     "offset": 182050,
+     "noise_gain": 0.1010634
+    }
+   }
+  },
+  {
+   "clip": "14744283375136117218.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02541031,
+   "levels": {
+    "snr20": {
+     "offset": 181713,
+     "noise_gain": 0.04227285
+    },
+    "snr10": {
+     "offset": 302534,
+     "noise_gain": 0.13227716
+    },
+    "snr5": {
+     "offset": 901725,
+     "noise_gain": 0.15381049
+    }
+   }
+  },
+  {
+   "clip": "14761967464597911201.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07516158,
+   "levels": {
+    "snr20": {
+     "offset": 400309,
+     "noise_gain": 0.13286898
+    },
+    "snr10": {
+     "offset": 570955,
+     "noise_gain": 0.3087235
+    },
+    "snr5": {
+     "offset": 957668,
+     "noise_gain": 0.45607661
+    }
+   }
+  },
+  {
+   "clip": "14775692599302523850.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01173872,
+   "levels": {
+    "snr20": {
+     "offset": 140586,
+     "noise_gain": 0.01948871
+    },
+    "snr10": {
+     "offset": 29522,
+     "noise_gain": 0.05385647
+    },
+    "snr5": {
+     "offset": 441508,
+     "noise_gain": 0.09489477
+    }
+   }
+  },
+  {
+   "clip": "14844478477924592113.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0640457,
+   "levels": {
+    "snr20": {
+     "offset": 488502,
+     "noise_gain": 0.09053595
+    },
+    "snr10": {
+     "offset": 887853,
+     "noise_gain": 0.21106079
+    },
+    "snr5": {
+     "offset": 652767,
+     "noise_gain": 0.40811366
+    }
+   }
+  },
+  {
+   "clip": "14876226568377588641.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05534407,
+   "levels": {
+    "snr20": {
+     "offset": 252376,
+     "noise_gain": 0.09673721
+    },
+    "snr10": {
+     "offset": 455862,
+     "noise_gain": 0.25712136
+    },
+    "snr5": {
+     "offset": 527393,
+     "noise_gain": 0.41669655
+    }
+   }
+  },
+  {
+   "clip": "14912336945329697783.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0403685,
+   "levels": {
+    "snr20": {
+     "offset": 933880,
+     "noise_gain": 0.0462086
+    },
+    "snr10": {
+     "offset": 982429,
+     "noise_gain": 0.13719634
+    },
+    "snr5": {
+     "offset": 591772,
+     "noise_gain": 0.26250183
+    }
+   }
+  },
+  {
+   "clip": "14958514304411882872.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0131916,
+   "levels": {
+    "snr20": {
+     "offset": 126370,
+     "noise_gain": 0.02066891
+    },
+    "snr10": {
+     "offset": 1082605,
+     "noise_gain": 0.04737144
+    },
+    "snr5": {
+     "offset": 209934,
+     "noise_gain": 0.1353093
+    }
+   }
+  },
+  {
+   "clip": "14984891725297246723.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04557153,
+   "levels": {
+    "snr20": {
+     "offset": 451390,
+     "noise_gain": 0.06902516
+    },
+    "snr10": {
+     "offset": 178259,
+     "noise_gain": 0.23097915
+    },
+    "snr5": {
+     "offset": 1009207,
+     "noise_gain": 0.26552801
+    }
+   }
+  },
+  {
+   "clip": "14986133795332152546.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01238171,
+   "levels": {
+    "snr20": {
+     "offset": 543715,
+     "noise_gain": 0.01651816
+    },
+    "snr10": {
+     "offset": 1032254,
+     "noise_gain": 0.04138211
+    },
+    "snr5": {
+     "offset": 491322,
+     "noise_gain": 0.10035636
+    }
+   }
+  },
+  {
+   "clip": "14986941670305895682.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0645563,
+   "levels": {
+    "snr20": {
+     "offset": 415575,
+     "noise_gain": 0.10374593
+    },
+    "snr10": {
+     "offset": 997403,
+     "noise_gain": 0.2164024
+    },
+    "snr5": {
+     "offset": 156465,
+     "noise_gain": 0.57465993
+    }
+   }
+  },
+  {
+   "clip": "1499403117288008495.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03004172,
+   "levels": {
+    "snr20": {
+     "offset": 470094,
+     "noise_gain": 0.04254082
+    },
+    "snr10": {
+     "offset": 598748,
+     "noise_gain": 0.11008857
+    },
+    "snr5": {
+     "offset": 1025352,
+     "noise_gain": 0.17752011
+    }
+   }
+  },
+  {
+   "clip": "15000047607539169982.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01176558,
+   "levels": {
+    "snr20": {
+     "offset": 938395,
+     "noise_gain": 0.01599126
+    },
+    "snr10": {
+     "offset": 391222,
+     "noise_gain": 0.06651334
+    },
+    "snr5": {
+     "offset": 861406,
+     "noise_gain": 0.06552969
+    }
+   }
+  },
+  {
+   "clip": "15009446377620036374.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05256867,
+   "levels": {
+    "snr20": {
+     "offset": 760772,
+     "noise_gain": 0.06118062
+    },
+    "snr10": {
+     "offset": 84913,
+     "noise_gain": 0.21082801
+    },
+    "snr5": {
+     "offset": 300330,
+     "noise_gain": 0.51329262
+    }
+   }
+  },
+  {
+   "clip": "15040526488995065073.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0140142,
+   "levels": {
+    "snr20": {
+     "offset": 252453,
+     "noise_gain": 0.02453099
+    },
+    "snr10": {
+     "offset": 10018,
+     "noise_gain": 0.06548288
+    },
+    "snr5": {
+     "offset": 915844,
+     "noise_gain": 0.08879489
+    }
+   }
+  },
+  {
+   "clip": "15068336001874820048.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05663331,
+   "levels": {
+    "snr20": {
+     "offset": 415523,
+     "noise_gain": 0.09319902
+    },
+    "snr10": {
+     "offset": 427852,
+     "noise_gain": 0.28622875
+    },
+    "snr5": {
+     "offset": 839727,
+     "noise_gain": 0.36391524
+    }
+   }
+  },
+  {
+   "clip": "15161440323539130896.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0153759,
+   "levels": {
+    "snr20": {
+     "offset": 84467,
+     "noise_gain": 0.02213382
+    },
+    "snr10": {
+     "offset": 214688,
+     "noise_gain": 0.08535339
+    },
+    "snr5": {
+     "offset": 1011796,
+     "noise_gain": 0.08875599
+    }
+   }
+  },
+  {
+   "clip": "15221102882140152469.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01432522,
+   "levels": {
+    "snr20": {
+     "offset": 825730,
+     "noise_gain": 0.01520082
+    },
+    "snr10": {
+     "offset": 285873,
+     "noise_gain": 0.08000979
+    },
+    "snr5": {
+     "offset": 545998,
+     "noise_gain": 0.10714927
+    }
+   }
+  },
+  {
+   "clip": "15257352549378016359.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01488599,
+   "levels": {
+    "snr20": {
+     "offset": 831713,
+     "noise_gain": 0.01609939
+    },
+    "snr10": {
+     "offset": 142792,
+     "noise_gain": 0.07808653
+    },
+    "snr5": {
+     "offset": 410709,
+     "noise_gain": 0.12509474
+    }
+   }
+  },
+  {
+   "clip": "15289411745973667802.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00967563,
+   "levels": {
+    "snr20": {
+     "offset": 176377,
+     "noise_gain": 0.01570663
+    },
+    "snr10": {
+     "offset": 209805,
+     "noise_gain": 0.05425496
+    },
+    "snr5": {
+     "offset": 673116,
+     "noise_gain": 0.05832853
+    }
+   }
+  },
+  {
+   "clip": "15295353908057347286.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00945219,
+   "levels": {
+    "snr20": {
+     "offset": 15732,
+     "noise_gain": 0.01383222
+    },
+    "snr10": {
+     "offset": 149440,
+     "noise_gain": 0.04893299
+    },
+    "snr5": {
+     "offset": 159577,
+     "noise_gain": 0.08672116
+    }
+   }
+  },
+  {
+   "clip": "15300898462727353397.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01440311,
+   "levels": {
+    "snr20": {
+     "offset": 223032,
+     "noise_gain": 0.0262019
+    },
+    "snr10": {
+     "offset": 747893,
+     "noise_gain": 0.05484523
+    },
+    "snr5": {
+     "offset": 19905,
+     "noise_gain": 0.10956408
+    }
+   }
+  },
+  {
+   "clip": "15304894107661692305.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01395433,
+   "levels": {
+    "snr20": {
+     "offset": 684508,
+     "noise_gain": 0.01555001
+    },
+    "snr10": {
+     "offset": 306519,
+     "noise_gain": 0.07597108
+    },
+    "snr5": {
+     "offset": 237035,
+     "noise_gain": 0.13791445
+    }
+   }
+  },
+  {
+   "clip": "15328390354139884473.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04871666,
+   "levels": {
+    "snr20": {
+     "offset": 135924,
+     "noise_gain": 0.07977815
+    },
+    "snr10": {
+     "offset": 890544,
+     "noise_gain": 0.16793155
+    },
+    "snr5": {
+     "offset": 637029,
+     "noise_gain": 0.31375027
+    }
+   }
+  },
+  {
+   "clip": "15331540934720097809.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03664294,
+   "levels": {
+    "snr20": {
+     "offset": 566415,
+     "noise_gain": 0.04313586
+    },
+    "snr10": {
+     "offset": 951892,
+     "noise_gain": 0.12742442
+    },
+    "snr5": {
+     "offset": 244720,
+     "noise_gain": 0.36963053
+    }
+   }
+  },
+  {
+   "clip": "15332438158044750934.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03299838,
+   "levels": {
+    "snr20": {
+     "offset": 37767,
+     "noise_gain": 0.0457919
+    },
+    "snr10": {
+     "offset": 11368,
+     "noise_gain": 0.15562986
+    },
+    "snr5": {
+     "offset": 523944,
+     "noise_gain": 0.2497802
+    }
+   }
+  },
+  {
+   "clip": "15351816110641000271.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03166486,
+   "levels": {
+    "snr20": {
+     "offset": 727298,
+     "noise_gain": 0.03350575
+    },
+    "snr10": {
+     "offset": 731449,
+     "noise_gain": 0.10707498
+    },
+    "snr5": {
+     "offset": 786202,
+     "noise_gain": 0.2032578
+    }
+   }
+  },
+  {
+   "clip": "15352840258940115360.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02668197,
+   "levels": {
+    "snr20": {
+     "offset": 348653,
+     "noise_gain": 0.04537434
+    },
+    "snr10": {
+     "offset": 47226,
+     "noise_gain": 0.12223626
+    },
+    "snr5": {
+     "offset": 756728,
+     "noise_gain": 0.16860406
+    }
+   }
+  },
+  {
+   "clip": "1540769994138946783.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.031067,
+   "levels": {
+    "snr20": {
+     "offset": 149723,
+     "noise_gain": 0.05059782
+    },
+    "snr10": {
+     "offset": 830238,
+     "noise_gain": 0.10801039
+    },
+    "snr5": {
+     "offset": 362550,
+     "noise_gain": 0.30177081
+    }
+   }
+  },
+  {
+   "clip": "15414602918024554921.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01484069,
+   "levels": {
+    "snr20": {
+     "offset": 635781,
+     "noise_gain": 0.01696079
+    },
+    "snr10": {
+     "offset": 510811,
+     "noise_gain": 0.05954241
+    },
+    "snr5": {
+     "offset": 3586,
+     "noise_gain": 0.12446321
+    }
+   }
+  },
+  {
+   "clip": "1545893095590403759.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05767723,
+   "levels": {
+    "snr20": {
+     "offset": 690717,
+     "noise_gain": 0.06130972
+    },
+    "snr10": {
+     "offset": 359523,
+     "noise_gain": 0.30473991
+    },
+    "snr5": {
+     "offset": 89610,
+     "noise_gain": 0.49217871
+    }
+   }
+  },
+  {
+   "clip": "15461954732078804096.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04621786,
+   "levels": {
+    "snr20": {
+     "offset": 618049,
+     "noise_gain": 0.05293959
+    },
+    "snr10": {
+     "offset": 934507,
+     "noise_gain": 0.16740791
+    },
+    "snr5": {
+     "offset": 563250,
+     "noise_gain": 0.32063229
+    }
+   }
+  },
+  {
+   "clip": "15464403826497019680.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01753061,
+   "levels": {
+    "snr20": {
+     "offset": 272662,
+     "noise_gain": 0.03080553
+    },
+    "snr10": {
+     "offset": 166603,
+     "noise_gain": 0.0880695
+    },
+    "snr5": {
+     "offset": 804990,
+     "noise_gain": 0.10898561
+    }
+   }
+  },
+  {
+   "clip": "15470290521068301283.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05520847,
+   "levels": {
+    "snr20": {
+     "offset": 1040938,
+     "noise_gain": 0.06127369
+    },
+    "snr10": {
+     "offset": 142868,
+     "noise_gain": 0.27472632
+    },
+    "snr5": {
+     "offset": 76164,
+     "noise_gain": 0.44364845
+    }
+   }
+  },
+  {
+   "clip": "15533639822458529765.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01168276,
+   "levels": {
+    "snr20": {
+     "offset": 629330,
+     "noise_gain": 0.01287202
+    },
+    "snr10": {
+     "offset": 231896,
+     "noise_gain": 0.06288949
+    },
+    "snr5": {
+     "offset": 665396,
+     "noise_gain": 0.07291752
+    }
+   }
+  },
+  {
+   "clip": "15549776524780981732.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05961724,
+   "levels": {
+    "snr20": {
+     "offset": 701823,
+     "noise_gain": 0.06393249
+    },
+    "snr10": {
+     "offset": 644256,
+     "noise_gain": 0.21304828
+    },
+    "snr5": {
+     "offset": 478689,
+     "noise_gain": 0.41944537
+    }
+   }
+  },
+  {
+   "clip": "15569579024340529138.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00986254,
+   "levels": {
+    "snr20": {
+     "offset": 623083,
+     "noise_gain": 0.01157318
+    },
+    "snr10": {
+     "offset": 93448,
+     "noise_gain": 0.04182982
+    },
+    "snr5": {
+     "offset": 594338,
+     "noise_gain": 0.07091091
+    }
+   }
+  },
+  {
+   "clip": "15594945045875003265.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02658352,
+   "levels": {
+    "snr20": {
+     "offset": 643720,
+     "noise_gain": 0.0316618
+    },
+    "snr10": {
+     "offset": 460523,
+     "noise_gain": 0.13101467
+    },
+    "snr5": {
+     "offset": 74119,
+     "noise_gain": 0.19508323
+    }
+   }
+  },
+  {
+   "clip": "15595226356454783182.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01180643,
+   "levels": {
+    "snr20": {
+     "offset": 283739,
+     "noise_gain": 0.02096129
+    },
+    "snr10": {
+     "offset": 514137,
+     "noise_gain": 0.05070738
+    },
+    "snr5": {
+     "offset": 365272,
+     "noise_gain": 0.11569637
+    }
+   }
+  },
+  {
+   "clip": "15624631696857994539.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07470464,
+   "levels": {
+    "snr20": {
+     "offset": 589505,
+     "noise_gain": 0.08519007
+    },
+    "snr10": {
+     "offset": 488350,
+     "noise_gain": 0.28852901
+    },
+    "snr5": {
+     "offset": 220173,
+     "noise_gain": 0.68846327
+    }
+   }
+  },
+  {
+   "clip": "15644939854989172096.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04431181,
+   "levels": {
+    "snr20": {
+     "offset": 106454,
+     "noise_gain": 0.06616939
+    },
+    "snr10": {
+     "offset": 815375,
+     "noise_gain": 0.15213759
+    },
+    "snr5": {
+     "offset": 775930,
+     "noise_gain": 0.25191246
+    }
+   }
+  },
+  {
+   "clip": "15656332356470558037.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06004697,
+   "levels": {
+    "snr20": {
+     "offset": 788060,
+     "noise_gain": 0.06866694
+    },
+    "snr10": {
+     "offset": 543054,
+     "noise_gain": 0.23801311
+    },
+    "snr5": {
+     "offset": 327878,
+     "noise_gain": 0.55590283
+    }
+   }
+  },
+  {
+   "clip": "15697698331676127575.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01223313,
+   "levels": {
+    "snr20": {
+     "offset": 874342,
+     "noise_gain": 0.01255315
+    },
+    "snr10": {
+     "offset": 720224,
+     "noise_gain": 0.04003815
+    },
+    "snr5": {
+     "offset": 992193,
+     "noise_gain": 0.07245183
+    }
+   }
+  },
+  {
+   "clip": "1571715367513133626.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0390153,
+   "levels": {
+    "snr20": {
+     "offset": 709364,
+     "noise_gain": 0.04352031
+    },
+    "snr10": {
+     "offset": 291218,
+     "noise_gain": 0.21587058
+    },
+    "snr5": {
+     "offset": 305451,
+     "noise_gain": 0.38861366
+    }
+   }
+  },
+  {
+   "clip": "15733390625213586656.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01090011,
+   "levels": {
+    "snr20": {
+     "offset": 581711,
+     "noise_gain": 0.01366997
+    },
+    "snr10": {
+     "offset": 412440,
+     "noise_gain": 0.05574269
+    },
+    "snr5": {
+     "offset": 694929,
+     "noise_gain": 0.06698291
+    }
+   }
+  },
+  {
+   "clip": "15744481588919187588.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05075885,
+   "levels": {
+    "snr20": {
+     "offset": 1011973,
+     "noise_gain": 0.05081323
+    },
+    "snr10": {
+     "offset": 1365,
+     "noise_gain": 0.25511255
+    },
+    "snr5": {
+     "offset": 313019,
+     "noise_gain": 0.4800456
+    }
+   }
+  },
+  {
+   "clip": "15778536363919175664.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05366479,
+   "levels": {
+    "snr20": {
+     "offset": 690294,
+     "noise_gain": 0.05924681
+    },
+    "snr10": {
+     "offset": 824474,
+     "noise_gain": 0.18041625
+    },
+    "snr5": {
+     "offset": 698359,
+     "noise_gain": 0.32719184
+    }
+   }
+  },
+  {
+   "clip": "15816482388293766940.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0338302,
+   "levels": {
+    "snr20": {
+     "offset": 628326,
+     "noise_gain": 0.03949686
+    },
+    "snr10": {
+     "offset": 584527,
+     "noise_gain": 0.12480207
+    },
+    "snr5": {
+     "offset": 372866,
+     "noise_gain": 0.30502344
+    }
+   }
+  },
+  {
+   "clip": "15833131373904173796.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01331257,
+   "levels": {
+    "snr20": {
+     "offset": 565962,
+     "noise_gain": 0.01623007
+    },
+    "snr10": {
+     "offset": 435320,
+     "noise_gain": 0.06379873
+    },
+    "snr5": {
+     "offset": 401926,
+     "noise_gain": 0.12146547
+    }
+   }
+  },
+  {
+   "clip": "1583614021566736182.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04891669,
+   "levels": {
+    "snr20": {
+     "offset": 593789,
+     "noise_gain": 0.05596203
+    },
+    "snr10": {
+     "offset": 306900,
+     "noise_gain": 0.26748787
+    },
+    "snr5": {
+     "offset": 460019,
+     "noise_gain": 0.38800265
+    }
+   }
+  },
+  {
+   "clip": "15912838334392844709.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01078293,
+   "levels": {
+    "snr20": {
+     "offset": 634333,
+     "noise_gain": 0.0128295
+    },
+    "snr10": {
+     "offset": 429679,
+     "noise_gain": 0.05503026
+    },
+    "snr5": {
+     "offset": 732949,
+     "noise_gain": 0.06781051
+    }
+   }
+  },
+  {
+   "clip": "15955159498525302501.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02369377,
+   "levels": {
+    "snr20": {
+     "offset": 228970,
+     "noise_gain": 0.04203212
+    },
+    "snr10": {
+     "offset": 394536,
+     "noise_gain": 0.11710839
+    },
+    "snr5": {
+     "offset": 461378,
+     "noise_gain": 0.18702905
+    }
+   }
+  },
+  {
+   "clip": "15963922618657984247.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01051832,
+   "levels": {
+    "snr20": {
+     "offset": 600852,
+     "noise_gain": 0.01262739
+    },
+    "snr10": {
+     "offset": 1094,
+     "noise_gain": 0.05036462
+    },
+    "snr5": {
+     "offset": 268580,
+     "noise_gain": 0.1042126
+    }
+   }
+  },
+  {
+   "clip": "16005352550431737321.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04418355,
+   "levels": {
+    "snr20": {
+     "offset": 212006,
+     "noise_gain": 0.08246725
+    },
+    "snr10": {
+     "offset": 27164,
+     "noise_gain": 0.18931942
+    },
+    "snr5": {
+     "offset": 913936,
+     "noise_gain": 0.32525605
+    }
+   }
+  },
+  {
+   "clip": "16020347207687323043.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01264324,
+   "levels": {
+    "snr20": {
+     "offset": 244230,
+     "noise_gain": 0.02207865
+    },
+    "snr10": {
+     "offset": 430175,
+     "noise_gain": 0.06533745
+    },
+    "snr5": {
+     "offset": 495259,
+     "noise_gain": 0.09878021
+    }
+   }
+  },
+  {
+   "clip": "16039322756998391177.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03654899,
+   "levels": {
+    "snr20": {
+     "offset": 3543,
+     "noise_gain": 0.05137647
+    },
+    "snr10": {
+     "offset": 88874,
+     "noise_gain": 0.15075219
+    },
+    "snr5": {
+     "offset": 686118,
+     "noise_gain": 0.22091166
+    }
+   }
+  },
+  {
+   "clip": "16050903723415644837.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01370438,
+   "levels": {
+    "snr20": {
+     "offset": 754280,
+     "noise_gain": 0.01520054
+    },
+    "snr10": {
+     "offset": 1066711,
+     "noise_gain": 0.05064996
+    },
+    "snr5": {
+     "offset": 28041,
+     "noise_gain": 0.11208552
+    }
+   }
+  },
+  {
+   "clip": "1606458323483475116.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01088885,
+   "levels": {
+    "snr20": {
+     "offset": 14761,
+     "noise_gain": 0.01495438
+    },
+    "snr10": {
+     "offset": 895525,
+     "noise_gain": 0.03684673
+    },
+    "snr5": {
+     "offset": 34030,
+     "noise_gain": 0.08514851
+    }
+   }
+  },
+  {
+   "clip": "16201345362190651115.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0125303,
+   "levels": {
+    "snr20": {
+     "offset": 274300,
+     "noise_gain": 0.02190235
+    },
+    "snr10": {
+     "offset": 984952,
+     "noise_gain": 0.04287212
+    },
+    "snr5": {
+     "offset": 366741,
+     "noise_gain": 0.1226743
+    }
+   }
+  },
+  {
+   "clip": "16209426280289805124.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01111132,
+   "levels": {
+    "snr20": {
+     "offset": 787145,
+     "noise_gain": 0.01266477
+    },
+    "snr10": {
+     "offset": 735331,
+     "noise_gain": 0.03818863
+    },
+    "snr5": {
+     "offset": 836267,
+     "noise_gain": 0.06718065
+    }
+   }
+  },
+  {
+   "clip": "16286555912359681773.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0228416,
+   "levels": {
+    "snr20": {
+     "offset": 290021,
+     "noise_gain": 0.04013981
+    },
+    "snr10": {
+     "offset": 948060,
+     "noise_gain": 0.08288163
+    },
+    "snr5": {
+     "offset": 949510,
+     "noise_gain": 0.1472535
+    }
+   }
+  },
+  {
+   "clip": "16333400532657425450.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01726675,
+   "levels": {
+    "snr20": {
+     "offset": 229243,
+     "noise_gain": 0.03017465
+    },
+    "snr10": {
+     "offset": 854237,
+     "noise_gain": 0.06123797
+    },
+    "snr5": {
+     "offset": 524656,
+     "noise_gain": 0.13033193
+    }
+   }
+  },
+  {
+   "clip": "16335806196744029495.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02676516,
+   "levels": {
+    "snr20": {
+     "offset": 242002,
+     "noise_gain": 0.04911364
+    },
+    "snr10": {
+     "offset": 832041,
+     "noise_gain": 0.08751311
+    },
+    "snr5": {
+     "offset": 643691,
+     "noise_gain": 0.17373058
+    }
+   }
+  },
+  {
+   "clip": "16367448146217015414.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01770588,
+   "levels": {
+    "snr20": {
+     "offset": 841300,
+     "noise_gain": 0.02025363
+    },
+    "snr10": {
+     "offset": 119271,
+     "noise_gain": 0.09056069
+    },
+    "snr5": {
+     "offset": 779479,
+     "noise_gain": 0.10819987
+    }
+   }
+  },
+  {
+   "clip": "16369783268903440191.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04085974,
+   "levels": {
+    "snr20": {
+     "offset": 986154,
+     "noise_gain": 0.04523593
+    },
+    "snr10": {
+     "offset": 250378,
+     "noise_gain": 0.2265757
+    },
+    "snr5": {
+     "offset": 990843,
+     "noise_gain": 0.25325781
+    }
+   }
+  },
+  {
+   "clip": "16424608319349954184.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01471139,
+   "levels": {
+    "snr20": {
+     "offset": 160319,
+     "noise_gain": 0.02402071
+    },
+    "snr10": {
+     "offset": 132683,
+     "noise_gain": 0.07625477
+    },
+    "snr5": {
+     "offset": 490270,
+     "noise_gain": 0.11386858
+    }
+   }
+  },
+  {
+   "clip": "16474197169207076095.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01576393,
+   "levels": {
+    "snr20": {
+     "offset": 121450,
+     "noise_gain": 0.02343064
+    },
+    "snr10": {
+     "offset": 92092,
+     "noise_gain": 0.0635508
+    },
+    "snr5": {
+     "offset": 281013,
+     "noise_gain": 0.15352042
+    }
+   }
+  },
+  {
+   "clip": "16491693500662842324.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04946997,
+   "levels": {
+    "snr20": {
+     "offset": 586489,
+     "noise_gain": 0.06143985
+    },
+    "snr10": {
+     "offset": 724492,
+     "noise_gain": 0.16072508
+    },
+    "snr5": {
+     "offset": 97169,
+     "noise_gain": 0.4065206
+    }
+   }
+  },
+  {
+   "clip": "16504426464827960101.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00863542,
+   "levels": {
+    "snr20": {
+     "offset": 562333,
+     "noise_gain": 0.01137019
+    },
+    "snr10": {
+     "offset": 798026,
+     "noise_gain": 0.03073163
+    },
+    "snr5": {
+     "offset": 916973,
+     "noise_gain": 0.06302709
+    }
+   }
+  },
+  {
+   "clip": "16582879582049879671.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01813737,
+   "levels": {
+    "snr20": {
+     "offset": 100649,
+     "noise_gain": 0.02821015
+    },
+    "snr10": {
+     "offset": 80400,
+     "noise_gain": 0.08613084
+    },
+    "snr5": {
+     "offset": 185714,
+     "noise_gain": 0.16501524
+    }
+   }
+  },
+  {
+   "clip": "16592634096900133452.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0321613,
+   "levels": {
+    "snr20": {
+     "offset": 620472,
+     "noise_gain": 0.03683343
+    },
+    "snr10": {
+     "offset": 22138,
+     "noise_gain": 0.15075176
+    },
+    "snr5": {
+     "offset": 726437,
+     "noise_gain": 0.19461115
+    }
+   }
+  },
+  {
+   "clip": "16641697595081338661.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01047672,
+   "levels": {
+    "snr20": {
+     "offset": 516728,
+     "noise_gain": 0.01296051
+    },
+    "snr10": {
+     "offset": 971465,
+     "noise_gain": 0.03574689
+    },
+    "snr5": {
+     "offset": 605357,
+     "noise_gain": 0.06770681
+    }
+   }
+  },
+  {
+   "clip": "16798487732617159129.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03480694,
+   "levels": {
+    "snr20": {
+     "offset": 894145,
+     "noise_gain": 0.03758649
+    },
+    "snr10": {
+     "offset": 606868,
+     "noise_gain": 0.12605316
+    },
+    "snr5": {
+     "offset": 689553,
+     "noise_gain": 0.21485008
+    }
+   }
+  },
+  {
+   "clip": "16838871511448524526.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03635654,
+   "levels": {
+    "snr20": {
+     "offset": 403239,
+     "noise_gain": 0.06114623
+    },
+    "snr10": {
+     "offset": 874984,
+     "noise_gain": 0.12760342
+    },
+    "snr5": {
+     "offset": 1062102,
+     "noise_gain": 0.23113532
+    }
+   }
+  },
+  {
+   "clip": "1691544733097470684.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01237414,
+   "levels": {
+    "snr20": {
+     "offset": 415005,
+     "noise_gain": 0.02078311
+    },
+    "snr10": {
+     "offset": 243128,
+     "noise_gain": 0.07035872
+    },
+    "snr5": {
+     "offset": 700976,
+     "noise_gain": 0.07579688
+    }
+   }
+  },
+  {
+   "clip": "16933884670838413368.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01228137,
+   "levels": {
+    "snr20": {
+     "offset": 609243,
+     "noise_gain": 0.01397073
+    },
+    "snr10": {
+     "offset": 565011,
+     "noise_gain": 0.04750627
+    },
+    "snr5": {
+     "offset": 441745,
+     "noise_gain": 0.10121466
+    }
+   }
+  },
+  {
+   "clip": "16941189514075351067.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.051929,
+   "levels": {
+    "snr20": {
+     "offset": 1011998,
+     "noise_gain": 0.05466506
+    },
+    "snr10": {
+     "offset": 475284,
+     "noise_gain": 0.24426905
+    },
+    "snr5": {
+     "offset": 569135,
+     "noise_gain": 0.38321161
+    }
+   }
+  },
+  {
+   "clip": "16948389192288826297.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03916909,
+   "levels": {
+    "snr20": {
+     "offset": 840496,
+     "noise_gain": 0.04239645
+    },
+    "snr10": {
+     "offset": 126473,
+     "noise_gain": 0.20228947
+    },
+    "snr5": {
+     "offset": 624213,
+     "noise_gain": 0.25780633
+    }
+   }
+  },
+  {
+   "clip": "16961402873631276117.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.10302074,
+   "levels": {
+    "snr20": {
+     "offset": 156918,
+     "noise_gain": 0.15972137
+    },
+    "snr10": {
+     "offset": 679475,
+     "noise_gain": 0.35379421
+    },
+    "snr5": {
+     "offset": 890425,
+     "noise_gain": 0.66711632
+    }
+   }
+  },
+  {
+   "clip": "16985012550381793124.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03665828,
+   "levels": {
+    "snr20": {
+     "offset": 37844,
+     "noise_gain": 0.0528702
+    },
+    "snr10": {
+     "offset": 678660,
+     "noise_gain": 0.12948992
+    },
+    "snr5": {
+     "offset": 801483,
+     "noise_gain": 0.23861912
+    }
+   }
+  },
+  {
+   "clip": "1699928981878159252.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06653253,
+   "levels": {
+    "snr20": {
+     "offset": 610087,
+     "noise_gain": 0.08085591
+    },
+    "snr10": {
+     "offset": 98338,
+     "noise_gain": 0.29342738
+    },
+    "snr5": {
+     "offset": 732597,
+     "noise_gain": 0.41380215
+    }
+   }
+  },
+  {
+   "clip": "17070481168026615915.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07310704,
+   "levels": {
+    "snr20": {
+     "offset": 232322,
+     "noise_gain": 0.13268213
+    },
+    "snr10": {
+     "offset": 18804,
+     "noise_gain": 0.31483429
+    },
+    "snr5": {
+     "offset": 691083,
+     "noise_gain": 0.44452142
+    }
+   }
+  },
+  {
+   "clip": "17079507854325137080.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07000981,
+   "levels": {
+    "snr20": {
+     "offset": 656472,
+     "noise_gain": 0.08030219
+    },
+    "snr10": {
+     "offset": 1015694,
+     "noise_gain": 0.23486837
+    },
+    "snr5": {
+     "offset": 317434,
+     "noise_gain": 0.66592096
+    }
+   }
+  },
+  {
+   "clip": "17079540036235658567.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01108342,
+   "levels": {
+    "snr20": {
+     "offset": 173353,
+     "noise_gain": 0.01660841
+    },
+    "snr10": {
+     "offset": 201800,
+     "noise_gain": 0.06690619
+    },
+    "snr5": {
+     "offset": 272776,
+     "noise_gain": 0.10641237
+    }
+   }
+  },
+  {
+   "clip": "17096137346217051323.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0209228,
+   "levels": {
+    "snr20": {
+     "offset": 261940,
+     "noise_gain": 0.03723847
+    },
+    "snr10": {
+     "offset": 13074,
+     "noise_gain": 0.09398358
+    },
+    "snr5": {
+     "offset": 244761,
+     "noise_gain": 0.21216356
+    }
+   }
+  },
+  {
+   "clip": "1712350495319843538.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02611391,
+   "levels": {
+    "snr20": {
+     "offset": 69371,
+     "noise_gain": 0.03749627
+    },
+    "snr10": {
+     "offset": 612785,
+     "noise_gain": 0.09407983
+    },
+    "snr5": {
+     "offset": 82659,
+     "noise_gain": 0.21325936
+    }
+   }
+  },
+  {
+   "clip": "17126653717846854197.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03667837,
+   "levels": {
+    "snr20": {
+     "offset": 308796,
+     "noise_gain": 0.06111459
+    },
+    "snr10": {
+     "offset": 841960,
+     "noise_gain": 0.12612506
+    },
+    "snr5": {
+     "offset": 552583,
+     "noise_gain": 0.24886671
+    }
+   }
+  },
+  {
+   "clip": "17137265542176762743.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01060121,
+   "levels": {
+    "snr20": {
+     "offset": 500724,
+     "noise_gain": 0.0144692
+    },
+    "snr10": {
+     "offset": 13317,
+     "noise_gain": 0.04751039
+    },
+    "snr5": {
+     "offset": 821419,
+     "noise_gain": 0.06795896
+    }
+   }
+  },
+  {
+   "clip": "17182385164686221114.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02723749,
+   "levels": {
+    "snr20": {
+     "offset": 871732,
+     "noise_gain": 0.02783071
+    },
+    "snr10": {
+     "offset": 144117,
+     "noise_gain": 0.14199784
+    },
+    "snr5": {
+     "offset": 785225,
+     "noise_gain": 0.16966268
+    }
+   }
+  },
+  {
+   "clip": "17261271601043433392.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0402441,
+   "levels": {
+    "snr20": {
+     "offset": 558185,
+     "noise_gain": 0.0489322
+    },
+    "snr10": {
+     "offset": 571089,
+     "noise_gain": 0.14998653
+    },
+    "snr5": {
+     "offset": 686060,
+     "noise_gain": 0.24730434
+    }
+   }
+  },
+  {
+   "clip": "17262110188022147285.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00902659,
+   "levels": {
+    "snr20": {
+     "offset": 649709,
+     "noise_gain": 0.01022382
+    },
+    "snr10": {
+     "offset": 413984,
+     "noise_gain": 0.0470239
+    },
+    "snr5": {
+     "offset": 547186,
+     "noise_gain": 0.06724494
+    }
+   }
+  },
+  {
+   "clip": "17266124759214688015.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01136735,
+   "levels": {
+    "snr20": {
+     "offset": 941243,
+     "noise_gain": 0.01299182
+    },
+    "snr10": {
+     "offset": 576495,
+     "noise_gain": 0.04603023
+    },
+    "snr5": {
+     "offset": 811773,
+     "noise_gain": 0.06870924
+    }
+   }
+  },
+  {
+   "clip": "17402704946675006749.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05504176,
+   "levels": {
+    "snr20": {
+     "offset": 718330,
+     "noise_gain": 0.05613259
+    },
+    "snr10": {
+     "offset": 715207,
+     "noise_gain": 0.17730127
+    },
+    "snr5": {
+     "offset": 301683,
+     "noise_gain": 0.52555693
+    }
+   }
+  },
+  {
+   "clip": "17587084290265303516.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01262481,
+   "levels": {
+    "snr20": {
+     "offset": 587922,
+     "noise_gain": 0.01518404
+    },
+    "snr10": {
+     "offset": 1050268,
+     "noise_gain": 0.04417472
+    },
+    "snr5": {
+     "offset": 52432,
+     "noise_gain": 0.09509762
+    }
+   }
+  },
+  {
+   "clip": "1760251090466892572.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06216264,
+   "levels": {
+    "snr20": {
+     "offset": 35060,
+     "noise_gain": 0.08449028
+    },
+    "snr10": {
+     "offset": 869388,
+     "noise_gain": 0.20856041
+    },
+    "snr5": {
+     "offset": 491162,
+     "noise_gain": 0.49135155
+    }
+   }
+  },
+  {
+   "clip": "17664988137025969453.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01281319,
+   "levels": {
+    "snr20": {
+     "offset": 977293,
+     "noise_gain": 0.01384625
+    },
+    "snr10": {
+     "offset": 856038,
+     "noise_gain": 0.04315764
+    },
+    "snr5": {
+     "offset": 625065,
+     "noise_gain": 0.08301404
+    }
+   }
+  },
+  {
+   "clip": "17672371050652721853.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03254887,
+   "levels": {
+    "snr20": {
+     "offset": 402617,
+     "noise_gain": 0.0530291
+    },
+    "snr10": {
+     "offset": 192172,
+     "noise_gain": 0.18602913
+    },
+    "snr5": {
+     "offset": 898738,
+     "noise_gain": 0.18892504
+    }
+   }
+  },
+  {
+   "clip": "17691330375660966493.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02566212,
+   "levels": {
+    "snr20": {
+     "offset": 573073,
+     "noise_gain": 0.0301376
+    },
+    "snr10": {
+     "offset": 172358,
+     "noise_gain": 0.13038511
+    },
+    "snr5": {
+     "offset": 558710,
+     "noise_gain": 0.17511804
+    }
+   }
+  },
+  {
+   "clip": "17696787987992644164.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0532493,
+   "levels": {
+    "snr20": {
+     "offset": 60295,
+     "noise_gain": 0.07613383
+    },
+    "snr10": {
+     "offset": 570162,
+     "noise_gain": 0.21879243
+    },
+    "snr5": {
+     "offset": 848815,
+     "noise_gain": 0.32158401
+    }
+   }
+  },
+  {
+   "clip": "17714807776461768053.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02274152,
+   "levels": {
+    "snr20": {
+     "offset": 954455,
+     "noise_gain": 0.02556649
+    },
+    "snr10": {
+     "offset": 234157,
+     "noise_gain": 0.12704488
+    },
+    "snr5": {
+     "offset": 586838,
+     "noise_gain": 0.15221422
+    }
+   }
+  },
+  {
+   "clip": "17719315014064997596.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02949239,
+   "levels": {
+    "snr20": {
+     "offset": 668472,
+     "noise_gain": 0.03327008
+    },
+    "snr10": {
+     "offset": 991227,
+     "noise_gain": 0.10074626
+    },
+    "snr5": {
+     "offset": 626935,
+     "noise_gain": 0.19604572
+    }
+   }
+  },
+  {
+   "clip": "17723349754432136178.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00737685,
+   "levels": {
+    "snr20": {
+     "offset": 344240,
+     "noise_gain": 0.01223581
+    },
+    "snr10": {
+     "offset": 523245,
+     "noise_gain": 0.03107692
+    },
+    "snr5": {
+     "offset": 862078,
+     "noise_gain": 0.04269197
+    }
+   }
+  },
+  {
+   "clip": "17733943523637516997.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01189306,
+   "levels": {
+    "snr20": {
+     "offset": 535404,
+     "noise_gain": 0.01436837
+    },
+    "snr10": {
+     "offset": 130405,
+     "noise_gain": 0.0620689
+    },
+    "snr5": {
+     "offset": 77774,
+     "noise_gain": 0.1018394
+    }
+   }
+  },
+  {
+   "clip": "17734440130091015092.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07722284,
+   "levels": {
+    "snr20": {
+     "offset": 556218,
+     "noise_gain": 0.09270173
+    },
+    "snr10": {
+     "offset": 407313,
+     "noise_gain": 0.36688458
+    },
+    "snr5": {
+     "offset": 87514,
+     "noise_gain": 0.65978321
+    }
+   }
+  },
+  {
+   "clip": "17760903741331142977.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03298771,
+   "levels": {
+    "snr20": {
+     "offset": 33644,
+     "noise_gain": 0.04681589
+    },
+    "snr10": {
+     "offset": 114853,
+     "noise_gain": 0.16770903
+    },
+    "snr5": {
+     "offset": 286612,
+     "noise_gain": 0.32766107
+    }
+   }
+  },
+  {
+   "clip": "17785592983709184786.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01233273,
+   "levels": {
+    "snr20": {
+     "offset": 619544,
+     "noise_gain": 0.0141609
+    },
+    "snr10": {
+     "offset": 653718,
+     "noise_gain": 0.04508599
+    },
+    "snr5": {
+     "offset": 814110,
+     "noise_gain": 0.07883168
+    }
+   }
+  },
+  {
+   "clip": "17789050301575327044.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01005849,
+   "levels": {
+    "snr20": {
+     "offset": 710411,
+     "noise_gain": 0.01091019
+    },
+    "snr10": {
+     "offset": 997889,
+     "noise_gain": 0.03365089
+    },
+    "snr5": {
+     "offset": 378794,
+     "noise_gain": 0.09335196
+    }
+   }
+  },
+  {
+   "clip": "17807139993685686235.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01478063,
+   "levels": {
+    "snr20": {
+     "offset": 232833,
+     "noise_gain": 0.02606437
+    },
+    "snr10": {
+     "offset": 73216,
+     "noise_gain": 0.06221169
+    },
+    "snr5": {
+     "offset": 612703,
+     "noise_gain": 0.09509402
+    }
+   }
+  },
+  {
+   "clip": "17852461633299964986.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02878027,
+   "levels": {
+    "snr20": {
+     "offset": 235940,
+     "noise_gain": 0.05067874
+    },
+    "snr10": {
+     "offset": 399662,
+     "noise_gain": 0.14741186
+    },
+    "snr5": {
+     "offset": 566813,
+     "noise_gain": 0.19828553
+    }
+   }
+  },
+  {
+   "clip": "1785973493012389658.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05263163,
+   "levels": {
+    "snr20": {
+     "offset": 753315,
+     "noise_gain": 0.06055969
+    },
+    "snr10": {
+     "offset": 1056244,
+     "noise_gain": 0.20601033
+    },
+    "snr5": {
+     "offset": 544182,
+     "noise_gain": 0.40114155
+    }
+   }
+  },
+  {
+   "clip": "17864488134762236870.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00736165,
+   "levels": {
+    "snr20": {
+     "offset": 895351,
+     "noise_gain": 0.00794259
+    },
+    "snr10": {
+     "offset": 225712,
+     "noise_gain": 0.04118107
+    },
+    "snr5": {
+     "offset": 595463,
+     "noise_gain": 0.04774215
+    }
+   }
+  },
+  {
+   "clip": "17964430555724765759.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01301553,
+   "levels": {
+    "snr20": {
+     "offset": 17942,
+     "noise_gain": 0.01957683
+    },
+    "snr10": {
+     "offset": 423303,
+     "noise_gain": 0.05951007
+    },
+    "snr5": {
+     "offset": 604875,
+     "noise_gain": 0.0837509
+    }
+   }
+  },
+  {
+   "clip": "17972988491350510714.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04100274,
+   "levels": {
+    "snr20": {
+     "offset": 443344,
+     "noise_gain": 0.05840214
+    },
+    "snr10": {
+     "offset": 353759,
+     "noise_gain": 0.21211361
+    },
+    "snr5": {
+     "offset": 116889,
+     "noise_gain": 0.37537654
+    }
+   }
+  },
+  {
+   "clip": "18013764684267007660.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03443055,
+   "levels": {
+    "snr20": {
+     "offset": 651128,
+     "noise_gain": 0.03912127
+    },
+    "snr10": {
+     "offset": 1047943,
+     "noise_gain": 0.12174447
+    },
+    "snr5": {
+     "offset": 25631,
+     "noise_gain": 0.26083718
+    }
+   }
+  },
+  {
+   "clip": "18070648844142607800.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03199857,
+   "levels": {
+    "snr20": {
+     "offset": 9344,
+     "noise_gain": 0.04729053
+    },
+    "snr10": {
+     "offset": 860112,
+     "noise_gain": 0.10875092
+    },
+    "snr5": {
+     "offset": 369254,
+     "noise_gain": 0.27902959
+    }
+   }
+  },
+  {
+   "clip": "18102420842531542300.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00972876,
+   "levels": {
+    "snr20": {
+     "offset": 957632,
+     "noise_gain": 0.0103235
+    },
+    "snr10": {
+     "offset": 543198,
+     "noise_gain": 0.04197075
+    },
+    "snr5": {
+     "offset": 534069,
+     "noise_gain": 0.07394334
+    }
+   }
+  },
+  {
+   "clip": "18190353083996682065.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02966877,
+   "levels": {
+    "snr20": {
+     "offset": 660670,
+     "noise_gain": 0.03323257
+    },
+    "snr10": {
+     "offset": 552523,
+     "noise_gain": 0.11395398
+    },
+    "snr5": {
+     "offset": 370238,
+     "noise_gain": 0.26902955
+    }
+   }
+  },
+  {
+   "clip": "18223934985184821833.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00855161,
+   "levels": {
+    "snr20": {
+     "offset": 906040,
+     "noise_gain": 0.00926611
+    },
+    "snr10": {
+     "offset": 966193,
+     "noise_gain": 0.03043012
+    },
+    "snr5": {
+     "offset": 172215,
+     "noise_gain": 0.0771208
+    }
+   }
+  },
+  {
+   "clip": "18259302967161074692.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01093991,
+   "levels": {
+    "snr20": {
+     "offset": 1004364,
+     "noise_gain": 0.01144323
+    },
+    "snr10": {
+     "offset": 37044,
+     "noise_gain": 0.04897398
+    },
+    "snr5": {
+     "offset": 941210,
+     "noise_gain": 0.06988609
+    }
+   }
+  },
+  {
+   "clip": "18369273397042268620.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01221838,
+   "levels": {
+    "snr20": {
+     "offset": 135800,
+     "noise_gain": 0.02002377
+    },
+    "snr10": {
+     "offset": 747662,
+     "noise_gain": 0.04163388
+    },
+    "snr5": {
+     "offset": 1004080,
+     "noise_gain": 0.07150922
+    }
+   }
+  },
+  {
+   "clip": "18399332868055353434.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02825408,
+   "levels": {
+    "snr20": {
+     "offset": 371946,
+     "noise_gain": 0.04630258
+    },
+    "snr10": {
+     "offset": 342894,
+     "noise_gain": 0.15235008
+    },
+    "snr5": {
+     "offset": 839522,
+     "noise_gain": 0.18128247
+    }
+   }
+  },
+  {
+   "clip": "1865396101865246508.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02464494,
+   "levels": {
+    "snr20": {
+     "offset": 820659,
+     "noise_gain": 0.02759922
+    },
+    "snr10": {
+     "offset": 451133,
+     "noise_gain": 0.11692561
+    },
+    "snr5": {
+     "offset": 171124,
+     "noise_gain": 0.2228298
+    }
+   }
+  },
+  {
+   "clip": "1919466253403054855.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04871428,
+   "levels": {
+    "snr20": {
+     "offset": 895552,
+     "noise_gain": 0.05062099
+    },
+    "snr10": {
+     "offset": 594561,
+     "noise_gain": 0.18064334
+    },
+    "snr5": {
+     "offset": 178737,
+     "noise_gain": 0.43438505
+    }
+   }
+  },
+  {
+   "clip": "193052737573044728.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01037216,
+   "levels": {
+    "snr20": {
+     "offset": 357431,
+     "noise_gain": 0.01719289
+    },
+    "snr10": {
+     "offset": 100243,
+     "noise_gain": 0.0509348
+    },
+    "snr5": {
+     "offset": 133502,
+     "noise_gain": 0.09524092
+    }
+   }
+  },
+  {
+   "clip": "1952401735507636754.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06574893,
+   "levels": {
+    "snr20": {
+     "offset": 111143,
+     "noise_gain": 0.09114878
+    },
+    "snr10": {
+     "offset": 991432,
+     "noise_gain": 0.22106111
+    },
+    "snr5": {
+     "offset": 244617,
+     "noise_gain": 0.67371752
+    }
+   }
+  },
+  {
+   "clip": "1983822012355169367.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01364189,
+   "levels": {
+    "snr20": {
+     "offset": 1052861,
+     "noise_gain": 0.01500531
+    },
+    "snr10": {
+     "offset": 50356,
+     "noise_gain": 0.06314841
+    },
+    "snr5": {
+     "offset": 810391,
+     "noise_gain": 0.08111626
+    }
+   }
+  },
+  {
+   "clip": "1986680473642113308.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00868085,
+   "levels": {
+    "snr20": {
+     "offset": 968291,
+     "noise_gain": 0.00944596
+    },
+    "snr10": {
+     "offset": 953223,
+     "noise_gain": 0.02989281
+    },
+    "snr5": {
+     "offset": 733120,
+     "noise_gain": 0.05261946
+    }
+   }
+  },
+  {
+   "clip": "2028898009494741550.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00939286,
+   "levels": {
+    "snr20": {
+     "offset": 39293,
+     "noise_gain": 0.01382446
+    },
+    "snr10": {
+     "offset": 565689,
+     "noise_gain": 0.0393629
+    },
+    "snr5": {
+     "offset": 1059993,
+     "noise_gain": 0.06034595
+    }
+   }
+  },
+  {
+   "clip": "2037240753294853158.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01431891,
+   "levels": {
+    "snr20": {
+     "offset": 204559,
+     "noise_gain": 0.02681825
+    },
+    "snr10": {
+     "offset": 59068,
+     "noise_gain": 0.06197644
+    },
+    "snr5": {
+     "offset": 216132,
+     "noise_gain": 0.15064052
+    }
+   }
+  },
+  {
+   "clip": "2178574847086878124.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06284626,
+   "levels": {
+    "snr20": {
+     "offset": 584978,
+     "noise_gain": 0.07981262
+    },
+    "snr10": {
+     "offset": 260516,
+     "noise_gain": 0.34131589
+    },
+    "snr5": {
+     "offset": 1012621,
+     "noise_gain": 0.36436737
+    }
+   }
+  },
+  {
+   "clip": "222498887493339391.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02961022,
+   "levels": {
+    "snr20": {
+     "offset": 839135,
+     "noise_gain": 0.03389939
+    },
+    "snr10": {
+     "offset": 750895,
+     "noise_gain": 0.10087494
+    },
+    "snr5": {
+     "offset": 304723,
+     "noise_gain": 0.29030177
+    }
+   }
+  },
+  {
+   "clip": "225249299859956464.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05714,
+   "levels": {
+    "snr20": {
+     "offset": 747753,
+     "noise_gain": 0.06514424
+    },
+    "snr10": {
+     "offset": 771809,
+     "noise_gain": 0.18333804
+    },
+    "snr5": {
+     "offset": 644479,
+     "noise_gain": 0.35870838
+    }
+   }
+  },
+  {
+   "clip": "2311547618713018860.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00983809,
+   "levels": {
+    "snr20": {
+     "offset": 526747,
+     "noise_gain": 0.01242683
+    },
+    "snr10": {
+     "offset": 801063,
+     "noise_gain": 0.03414982
+    },
+    "snr5": {
+     "offset": 106641,
+     "noise_gain": 0.08734298
+    }
+   }
+  },
+  {
+   "clip": "2376740469015312135.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04898392,
+   "levels": {
+    "snr20": {
+     "offset": 204221,
+     "noise_gain": 0.08807862
+    },
+    "snr10": {
+     "offset": 890919,
+     "noise_gain": 0.16747441
+    },
+    "snr5": {
+     "offset": 478304,
+     "noise_gain": 0.38261392
+    }
+   }
+  },
+  {
+   "clip": "2432038726036881563.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06371049,
+   "levels": {
+    "snr20": {
+     "offset": 1006638,
+     "noise_gain": 0.0655664
+    },
+    "snr10": {
+     "offset": 375725,
+     "noise_gain": 0.35484295
+    },
+    "snr5": {
+     "offset": 188355,
+     "noise_gain": 0.54968387
+    }
+   }
+  },
+  {
+   "clip": "2459236814356682425.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05289593,
+   "levels": {
+    "snr20": {
+     "offset": 595215,
+     "noise_gain": 0.06034728
+    },
+    "snr10": {
+     "offset": 920783,
+     "noise_gain": 0.19158766
+    },
+    "snr5": {
+     "offset": 119481,
+     "noise_gain": 0.48941086
+    }
+   }
+  },
+  {
+   "clip": "2463242891498897689.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0316458,
+   "levels": {
+    "snr20": {
+     "offset": 631288,
+     "noise_gain": 0.03616448
+    },
+    "snr10": {
+     "offset": 79300,
+     "noise_gain": 0.14522487
+    },
+    "snr5": {
+     "offset": 467111,
+     "noise_gain": 0.24783951
+    }
+   }
+  },
+  {
+   "clip": "2464800702839720522.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00866908,
+   "levels": {
+    "snr20": {
+     "offset": 640822,
+     "noise_gain": 0.01027483
+    },
+    "snr10": {
+     "offset": 84878,
+     "noise_gain": 0.0372528
+    },
+    "snr5": {
+     "offset": 1006399,
+     "noise_gain": 0.05132862
+    }
+   }
+  },
+  {
+   "clip": "2468333270876055810.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00846293,
+   "levels": {
+    "snr20": {
+     "offset": 25229,
+     "noise_gain": 0.01174257
+    },
+    "snr10": {
+     "offset": 200399,
+     "noise_gain": 0.04967358
+    },
+    "snr5": {
+     "offset": 50445,
+     "noise_gain": 0.06882949
+    }
+   }
+  },
+  {
+   "clip": "2512949531760056682.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00877712,
+   "levels": {
+    "snr20": {
+     "offset": 11715,
+     "noise_gain": 0.01253287
+    },
+    "snr10": {
+     "offset": 773706,
+     "noise_gain": 0.03030112
+    },
+    "snr5": {
+     "offset": 829579,
+     "noise_gain": 0.0532704
+    }
+   }
+  },
+  {
+   "clip": "264790797188652951.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03649451,
+   "levels": {
+    "snr20": {
+     "offset": 505385,
+     "noise_gain": 0.04995475
+    },
+    "snr10": {
+     "offset": 26827,
+     "noise_gain": 0.16693157
+    },
+    "snr5": {
+     "offset": 169586,
+     "noise_gain": 0.32782809
+    }
+   }
+  },
+  {
+   "clip": "2698563962876029465.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03422198,
+   "levels": {
+    "snr20": {
+     "offset": 403738,
+     "noise_gain": 0.05536746
+    },
+    "snr10": {
+     "offset": 90954,
+     "noise_gain": 0.15374744
+    },
+    "snr5": {
+     "offset": 789134,
+     "noise_gain": 0.20427072
+    }
+   }
+  },
+  {
+   "clip": "2728506453238664805.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05189082,
+   "levels": {
+    "snr20": {
+     "offset": 695349,
+     "noise_gain": 0.05492336
+    },
+    "snr10": {
+     "offset": 277802,
+     "noise_gain": 0.28027533
+    },
+    "snr5": {
+     "offset": 1022342,
+     "noise_gain": 0.30167262
+    }
+   }
+  },
+  {
+   "clip": "2756092537124819949.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06813504,
+   "levels": {
+    "snr20": {
+     "offset": 649919,
+     "noise_gain": 0.07764742
+    },
+    "snr10": {
+     "offset": 238884,
+     "noise_gain": 0.38304035
+    },
+    "snr5": {
+     "offset": 977638,
+     "noise_gain": 0.42574191
+    }
+   }
+  },
+  {
+   "clip": "2756951331895466977.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01445509,
+   "levels": {
+    "snr20": {
+     "offset": 888538,
+     "noise_gain": 0.01545437
+    },
+    "snr10": {
+     "offset": 577489,
+     "noise_gain": 0.05400883
+    },
+    "snr5": {
+     "offset": 563754,
+     "noise_gain": 0.09777095
+    }
+   }
+  },
+  {
+   "clip": "2782320235558085989.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0162421,
+   "levels": {
+    "snr20": {
+     "offset": 982832,
+     "noise_gain": 0.01624217
+    },
+    "snr10": {
+     "offset": 682547,
+     "noise_gain": 0.05830131
+    },
+    "snr5": {
+     "offset": 879666,
+     "noise_gain": 0.09113771
+    }
+   }
+  },
+  {
+   "clip": "2819901188257576497.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04054105,
+   "levels": {
+    "snr20": {
+     "offset": 486195,
+     "noise_gain": 0.05724212
+    },
+    "snr10": {
+     "offset": 147772,
+     "noise_gain": 0.20711334
+    },
+    "snr5": {
+     "offset": 859939,
+     "noise_gain": 0.25308656
+    }
+   }
+  },
+  {
+   "clip": "2842423822116430098.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0144925,
+   "levels": {
+    "snr20": {
+     "offset": 282187,
+     "noise_gain": 0.0249387
+    },
+    "snr10": {
+     "offset": 840994,
+     "noise_gain": 0.04751801
+    },
+    "snr5": {
+     "offset": 41610,
+     "noise_gain": 0.11008383
+    }
+   }
+  },
+  {
+   "clip": "2878803212341976118.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0678626,
+   "levels": {
+    "snr20": {
+     "offset": 307783,
+     "noise_gain": 0.11899329
+    },
+    "snr10": {
+     "offset": 914003,
+     "noise_gain": 0.23678717
+    },
+    "snr5": {
+     "offset": 1029588,
+     "noise_gain": 0.38717404
+    }
+   }
+  },
+  {
+   "clip": "2887420354201128129.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05585534,
+   "levels": {
+    "snr20": {
+     "offset": 573526,
+     "noise_gain": 0.0724146
+    },
+    "snr10": {
+     "offset": 991042,
+     "noise_gain": 0.18988258
+    },
+    "snr5": {
+     "offset": 856295,
+     "noise_gain": 0.33822403
+    }
+   }
+  },
+  {
+   "clip": "3016052472630484110.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01486701,
+   "levels": {
+    "snr20": {
+     "offset": 587847,
+     "noise_gain": 0.01807311
+    },
+    "snr10": {
+     "offset": 269573,
+     "noise_gain": 0.08234398
+    },
+    "snr5": {
+     "offset": 277761,
+     "noise_gain": 0.14624096
+    }
+   }
+  },
+  {
+   "clip": "3021184871434384877.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02880563,
+   "levels": {
+    "snr20": {
+     "offset": 792256,
+     "noise_gain": 0.03074408
+    },
+    "snr10": {
+     "offset": 421776,
+     "noise_gain": 0.14881146
+    },
+    "snr5": {
+     "offset": 1025497,
+     "noise_gain": 0.16683361
+    }
+   }
+  },
+  {
+   "clip": "3036800693961545114.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01030473,
+   "levels": {
+    "snr20": {
+     "offset": 96167,
+     "noise_gain": 0.01439983
+    },
+    "snr10": {
+     "offset": 830112,
+     "noise_gain": 0.03247865
+    },
+    "snr5": {
+     "offset": 176928,
+     "noise_gain": 0.08473931
+    }
+   }
+  },
+  {
+   "clip": "3062518200130457471.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01097296,
+   "levels": {
+    "snr20": {
+     "offset": 443097,
+     "noise_gain": 0.01701801
+    },
+    "snr10": {
+     "offset": 426182,
+     "noise_gain": 0.05626328
+    },
+    "snr5": {
+     "offset": 547843,
+     "noise_gain": 0.08267817
+    }
+   }
+  },
+  {
+   "clip": "3111451519417746817.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04971754,
+   "levels": {
+    "snr20": {
+     "offset": 902352,
+     "noise_gain": 0.05381137
+    },
+    "snr10": {
+     "offset": 797040,
+     "noise_gain": 0.18128033
+    },
+    "snr5": {
+     "offset": 1003611,
+     "noise_gain": 0.29756649
+    }
+   }
+  },
+  {
+   "clip": "3122371773030012386.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07356727,
+   "levels": {
+    "snr20": {
+     "offset": 277273,
+     "noise_gain": 0.12981363
+    },
+    "snr10": {
+     "offset": 820236,
+     "noise_gain": 0.25266815
+    },
+    "snr5": {
+     "offset": 162036,
+     "noise_gain": 0.666715
+    }
+   }
+  },
+  {
+   "clip": "3122868525169124045.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01048164,
+   "levels": {
+    "snr20": {
+     "offset": 858735,
+     "noise_gain": 0.0108492
+    },
+    "snr10": {
+     "offset": 443009,
+     "noise_gain": 0.04823746
+    },
+    "snr5": {
+     "offset": 701855,
+     "noise_gain": 0.06471846
+    }
+   }
+  },
+  {
+   "clip": "3131782175864347195.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02935566,
+   "levels": {
+    "snr20": {
+     "offset": 673088,
+     "noise_gain": 0.03289345
+    },
+    "snr10": {
+     "offset": 283400,
+     "noise_gain": 0.16424186
+    },
+    "snr5": {
+     "offset": 518580,
+     "noise_gain": 0.21363992
+    }
+   }
+  },
+  {
+   "clip": "3141752475469655092.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05120697,
+   "levels": {
+    "snr20": {
+     "offset": 1063102,
+     "noise_gain": 0.06216777
+    },
+    "snr10": {
+     "offset": 9198,
+     "noise_gain": 0.22216898
+    },
+    "snr5": {
+     "offset": 987069,
+     "noise_gain": 0.31147416
+    }
+   }
+  },
+  {
+   "clip": "3143859952504202808.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.048517,
+   "levels": {
+    "snr20": {
+     "offset": 977134,
+     "noise_gain": 0.05176921
+    },
+    "snr10": {
+     "offset": 185015,
+     "noise_gain": 0.24395445
+    },
+    "snr5": {
+     "offset": 449089,
+     "noise_gain": 0.39771643
+    }
+   }
+  },
+  {
+   "clip": "3146704011463634034.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01722722,
+   "levels": {
+    "snr20": {
+     "offset": 344430,
+     "noise_gain": 0.02921424
+    },
+    "snr10": {
+     "offset": 296514,
+     "noise_gain": 0.09510484
+    },
+    "snr5": {
+     "offset": 707699,
+     "noise_gain": 0.10542752
+    }
+   }
+  },
+  {
+   "clip": "3193960220747641706.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00919287,
+   "levels": {
+    "snr20": {
+     "offset": 21396,
+     "noise_gain": 0.01260184
+    },
+    "snr10": {
+     "offset": 826342,
+     "noise_gain": 0.0305283
+    },
+    "snr5": {
+     "offset": 582366,
+     "noise_gain": 0.06613031
+    }
+   }
+  },
+  {
+   "clip": "3221007713940049750.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03453422,
+   "levels": {
+    "snr20": {
+     "offset": 272990,
+     "noise_gain": 0.06059649
+    },
+    "snr10": {
+     "offset": 289311,
+     "noise_gain": 0.19277327
+    },
+    "snr5": {
+     "offset": 51636,
+     "noise_gain": 0.28237689
+    }
+   }
+  },
+  {
+   "clip": "3223994530804233700.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07097157,
+   "levels": {
+    "snr20": {
+     "offset": 979556,
+     "noise_gain": 0.07301874
+    },
+    "snr10": {
+     "offset": 837894,
+     "noise_gain": 0.22403216
+    },
+    "snr5": {
+     "offset": 21386,
+     "noise_gain": 0.53205461
+    }
+   }
+  },
+  {
+   "clip": "3269827361066115243.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02626924,
+   "levels": {
+    "snr20": {
+     "offset": 525429,
+     "noise_gain": 0.03530321
+    },
+    "snr10": {
+     "offset": 461358,
+     "noise_gain": 0.12076369
+    },
+    "snr5": {
+     "offset": 13825,
+     "noise_gain": 0.21816473
+    }
+   }
+  },
+  {
+   "clip": "3294052298679520397.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00976523,
+   "levels": {
+    "snr20": {
+     "offset": 873645,
+     "noise_gain": 0.01085742
+    },
+    "snr10": {
+     "offset": 722737,
+     "noise_gain": 0.034187
+    },
+    "snr5": {
+     "offset": 293027,
+     "noise_gain": 0.09562321
+    }
+   }
+  },
+  {
+   "clip": "3321931854782936216.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04633987,
+   "levels": {
+    "snr20": {
+     "offset": 268891,
+     "noise_gain": 0.08138065
+    },
+    "snr10": {
+     "offset": 65764,
+     "noise_gain": 0.20291118
+    },
+    "snr5": {
+     "offset": 387477,
+     "noise_gain": 0.43365146
+    }
+   }
+  },
+  {
+   "clip": "3360440406274205225.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02330479,
+   "levels": {
+    "snr20": {
+     "offset": 436215,
+     "noise_gain": 0.03440499
+    },
+    "snr10": {
+     "offset": 950081,
+     "noise_gain": 0.08403176
+    },
+    "snr5": {
+     "offset": 27868,
+     "noise_gain": 0.18686147
+    }
+   }
+  },
+  {
+   "clip": "3468716217920938051.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01336229,
+   "levels": {
+    "snr20": {
+     "offset": 641022,
+     "noise_gain": 0.01524302
+    },
+    "snr10": {
+     "offset": 387862,
+     "noise_gain": 0.06458846
+    },
+    "snr5": {
+     "offset": 252273,
+     "noise_gain": 0.13249853
+    }
+   }
+  },
+  {
+   "clip": "3476850893335857845.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01240243,
+   "levels": {
+    "snr20": {
+     "offset": 651426,
+     "noise_gain": 0.01379467
+    },
+    "snr10": {
+     "offset": 871765,
+     "noise_gain": 0.04330796
+    },
+    "snr5": {
+     "offset": 760718,
+     "noise_gain": 0.07706941
+    }
+   }
+  },
+  {
+   "clip": "3543057947176930655.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06094265,
+   "levels": {
+    "snr20": {
+     "offset": 134681,
+     "noise_gain": 0.09609149
+    },
+    "snr10": {
+     "offset": 620167,
+     "noise_gain": 0.21787096
+    },
+    "snr5": {
+     "offset": 815477,
+     "noise_gain": 0.35190078
+    }
+   }
+  },
+  {
+   "clip": "3549313472112581898.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04126516,
+   "levels": {
+    "snr20": {
+     "offset": 222271,
+     "noise_gain": 0.07255204
+    },
+    "snr10": {
+     "offset": 631736,
+     "noise_gain": 0.1489301
+    },
+    "snr5": {
+     "offset": 408508,
+     "noise_gain": 0.38077784
+    }
+   }
+  },
+  {
+   "clip": "3556656874316029235.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05219447,
+   "levels": {
+    "snr20": {
+     "offset": 316205,
+     "noise_gain": 0.08954729
+    },
+    "snr10": {
+     "offset": 964934,
+     "noise_gain": 0.18244325
+    },
+    "snr5": {
+     "offset": 953706,
+     "noise_gain": 0.32605738
+    }
+   }
+  },
+  {
+   "clip": "3597961088198231074.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04850131,
+   "levels": {
+    "snr20": {
+     "offset": 913327,
+     "noise_gain": 0.05506933
+    },
+    "snr10": {
+     "offset": 472246,
+     "noise_gain": 0.21286516
+    },
+    "snr5": {
+     "offset": 754168,
+     "noise_gain": 0.30146099
+    }
+   }
+  },
+  {
+   "clip": "3646648583707739368.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01496346,
+   "levels": {
+    "snr20": {
+     "offset": 248252,
+     "noise_gain": 0.02626765
+    },
+    "snr10": {
+     "offset": 992010,
+     "noise_gain": 0.05092462
+    },
+    "snr5": {
+     "offset": 805371,
+     "noise_gain": 0.09105939
+    }
+   }
+  },
+  {
+   "clip": "3648529321012119161.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01291372,
+   "levels": {
+    "snr20": {
+     "offset": 161262,
+     "noise_gain": 0.02106509
+    },
+    "snr10": {
+     "offset": 205554,
+     "noise_gain": 0.07297926
+    },
+    "snr5": {
+     "offset": 578751,
+     "noise_gain": 0.08511185
+    }
+   }
+  },
+  {
+   "clip": "3667250650569168633.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02624237,
+   "levels": {
+    "snr20": {
+     "offset": 731833,
+     "noise_gain": 0.02757172
+    },
+    "snr10": {
+     "offset": 391916,
+     "noise_gain": 0.13377612
+    },
+    "snr5": {
+     "offset": 177567,
+     "noise_gain": 0.23553508
+    }
+   }
+  },
+  {
+   "clip": "3701404004770268839.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01001243,
+   "levels": {
+    "snr20": {
+     "offset": 137120,
+     "noise_gain": 0.01654026
+    },
+    "snr10": {
+     "offset": 27282,
+     "noise_gain": 0.04513382
+    },
+    "snr5": {
+     "offset": 670893,
+     "noise_gain": 0.06354536
+    }
+   }
+  },
+  {
+   "clip": "3740483813400478334.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01951588,
+   "levels": {
+    "snr20": {
+     "offset": 345536,
+     "noise_gain": 0.02916036
+    },
+    "snr10": {
+     "offset": 834655,
+     "noise_gain": 0.06654233
+    },
+    "snr5": {
+     "offset": 189293,
+     "noise_gain": 0.18302435
+    }
+   }
+  },
+  {
+   "clip": "3873693005467645684.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02511004,
+   "levels": {
+    "snr20": {
+     "offset": 776108,
+     "noise_gain": 0.02818003
+    },
+    "snr10": {
+     "offset": 113562,
+     "noise_gain": 0.10475157
+    },
+    "snr5": {
+     "offset": 391670,
+     "noise_gain": 0.2660304
+    }
+   }
+  },
+  {
+   "clip": "3905207007909365832.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0325966,
+   "levels": {
+    "snr20": {
+     "offset": 280857,
+     "noise_gain": 0.05531825
+    },
+    "snr10": {
+     "offset": 338173,
+     "noise_gain": 0.16718052
+    },
+    "snr5": {
+     "offset": 563183,
+     "noise_gain": 0.21802489
+    }
+   }
+  },
+  {
+   "clip": "3982203166439236149.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02549081,
+   "levels": {
+    "snr20": {
+     "offset": 791172,
+     "noise_gain": 0.02900136
+    },
+    "snr10": {
+     "offset": 352847,
+     "noise_gain": 0.13326524
+    },
+    "snr5": {
+     "offset": 547179,
+     "noise_gain": 0.17798929
+    }
+   }
+  },
+  {
+   "clip": "400055651005525729.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01999616,
+   "levels": {
+    "snr20": {
+     "offset": 578921,
+     "noise_gain": 0.02470569
+    },
+    "snr10": {
+     "offset": 563773,
+     "noise_gain": 0.08287061
+    },
+    "snr5": {
+     "offset": 79147,
+     "noise_gain": 0.15420081
+    }
+   }
+  },
+  {
+   "clip": "4016652471187190294.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05968601,
+   "levels": {
+    "snr20": {
+     "offset": 276697,
+     "noise_gain": 0.08959709
+    },
+    "snr10": {
+     "offset": 349302,
+     "noise_gain": 0.25410294
+    },
+    "snr5": {
+     "offset": 305301,
+     "noise_gain": 0.47785862
+    }
+   }
+  },
+  {
+   "clip": "4045322610112619250.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01011255,
+   "levels": {
+    "snr20": {
+     "offset": 279487,
+     "noise_gain": 0.01726766
+    },
+    "snr10": {
+     "offset": 151453,
+     "noise_gain": 0.0500812
+    },
+    "snr5": {
+     "offset": 234268,
+     "noise_gain": 0.10263771
+    }
+   }
+  },
+  {
+   "clip": "4057974606612439591.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06396123,
+   "levels": {
+    "snr20": {
+     "offset": 599424,
+     "noise_gain": 0.08140636
+    },
+    "snr10": {
+     "offset": 151940,
+     "noise_gain": 0.31590525
+    },
+    "snr5": {
+     "offset": 1091447,
+     "noise_gain": 0.38120128
+    }
+   }
+  },
+  {
+   "clip": "4109835095717580820.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07063227,
+   "levels": {
+    "snr20": {
+     "offset": 773406,
+     "noise_gain": 0.07141982
+    },
+    "snr10": {
+     "offset": 665090,
+     "noise_gain": 0.25304042
+    },
+    "snr5": {
+     "offset": 469666,
+     "noise_gain": 0.57826224
+    }
+   }
+  },
+  {
+   "clip": "4160045895944168946.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06315577,
+   "levels": {
+    "snr20": {
+     "offset": 261502,
+     "noise_gain": 0.11000514
+    },
+    "snr10": {
+     "offset": 181538,
+     "noise_gain": 0.31384013
+    },
+    "snr5": {
+     "offset": 442983,
+     "noise_gain": 0.56331242
+    }
+   }
+  },
+  {
+   "clip": "418161728224751625.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07037849,
+   "levels": {
+    "snr20": {
+     "offset": 549119,
+     "noise_gain": 0.09600077
+    },
+    "snr10": {
+     "offset": 982059,
+     "noise_gain": 0.24282784
+    },
+    "snr5": {
+     "offset": 1040844,
+     "noise_gain": 0.44228985
+    }
+   }
+  },
+  {
+   "clip": "4214188828290927037.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01088774,
+   "levels": {
+    "snr20": {
+     "offset": 636389,
+     "noise_gain": 0.01245952
+    },
+    "snr10": {
+     "offset": 519875,
+     "noise_gain": 0.04349699
+    },
+    "snr5": {
+     "offset": 900049,
+     "noise_gain": 0.06744169
+    }
+   }
+  },
+  {
+   "clip": "4227431294767132095.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01367184,
+   "levels": {
+    "snr20": {
+     "offset": 914495,
+     "noise_gain": 0.01752481
+    },
+    "snr10": {
+     "offset": 228552,
+     "noise_gain": 0.07816949
+    },
+    "snr5": {
+     "offset": 670223,
+     "noise_gain": 0.08554094
+    }
+   }
+  },
+  {
+   "clip": "4250000233346903811.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05237095,
+   "levels": {
+    "snr20": {
+     "offset": 759930,
+     "noise_gain": 0.05582399
+    },
+    "snr10": {
+     "offset": 723542,
+     "noise_gain": 0.18344905
+    },
+    "snr5": {
+     "offset": 506099,
+     "noise_gain": 0.3604033
+    }
+   }
+  },
+  {
+   "clip": "4275873546879517964.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04324722,
+   "levels": {
+    "snr20": {
+     "offset": 175227,
+     "noise_gain": 0.06852534
+    },
+    "snr10": {
+     "offset": 772378,
+     "noise_gain": 0.14385891
+    },
+    "snr5": {
+     "offset": 610411,
+     "noise_gain": 0.27897874
+    }
+   }
+  },
+  {
+   "clip": "4366440582559791514.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05126529,
+   "levels": {
+    "snr20": {
+     "offset": 742649,
+     "noise_gain": 0.05507059
+    },
+    "snr10": {
+     "offset": 868735,
+     "noise_gain": 0.17089459
+    },
+    "snr5": {
+     "offset": 770661,
+     "noise_gain": 0.3005404
+    }
+   }
+  },
+  {
+   "clip": "4368660601469013485.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0629682,
+   "levels": {
+    "snr20": {
+     "offset": 757276,
+     "noise_gain": 0.06959934
+    },
+    "snr10": {
+     "offset": 710046,
+     "noise_gain": 0.20613591
+    },
+    "snr5": {
+     "offset": 195577,
+     "noise_gain": 0.66269932
+    }
+   }
+  },
+  {
+   "clip": "437812100589576550.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03087541,
+   "levels": {
+    "snr20": {
+     "offset": 984852,
+     "noise_gain": 0.03421672
+    },
+    "snr10": {
+     "offset": 678600,
+     "noise_gain": 0.10860991
+    },
+    "snr5": {
+     "offset": 82278,
+     "noise_gain": 0.24241766
+    }
+   }
+  },
+  {
+   "clip": "4385304662879287232.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03424477,
+   "levels": {
+    "snr20": {
+     "offset": 342947,
+     "noise_gain": 0.05619868
+    },
+    "snr10": {
+     "offset": 847292,
+     "noise_gain": 0.11385573
+    },
+    "snr5": {
+     "offset": 525461,
+     "noise_gain": 0.23675427
+    }
+   }
+  },
+  {
+   "clip": "4393709189338932627.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04785422,
+   "levels": {
+    "snr20": {
+     "offset": 872819,
+     "noise_gain": 0.0497467
+    },
+    "snr10": {
+     "offset": 227754,
+     "noise_gain": 0.27298566
+    },
+    "snr5": {
+     "offset": 243901,
+     "noise_gain": 0.4799525
+    }
+   }
+  },
+  {
+   "clip": "4405808295778052847.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02127497,
+   "levels": {
+    "snr20": {
+     "offset": 411342,
+     "noise_gain": 0.03183821
+    },
+    "snr10": {
+     "offset": 973358,
+     "noise_gain": 0.07360258
+    },
+    "snr5": {
+     "offset": 926595,
+     "noise_gain": 0.13912256
+    }
+   }
+  },
+  {
+   "clip": "4454239018661392845.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00779986,
+   "levels": {
+    "snr20": {
+     "offset": 319213,
+     "noise_gain": 0.01336407
+    },
+    "snr10": {
+     "offset": 57042,
+     "noise_gain": 0.03567434
+    },
+    "snr5": {
+     "offset": 711510,
+     "noise_gain": 0.04666574
+    }
+   }
+  },
+  {
+   "clip": "446737604540109751.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00869282,
+   "levels": {
+    "snr20": {
+     "offset": 29604,
+     "noise_gain": 0.01210579
+    },
+    "snr10": {
+     "offset": 422514,
+     "noise_gain": 0.04897579
+    },
+    "snr5": {
+     "offset": 195188,
+     "noise_gain": 0.09152701
+    }
+   }
+  },
+  {
+   "clip": "4491092058051581295.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03497181,
+   "levels": {
+    "snr20": {
+     "offset": 889786,
+     "noise_gain": 0.03983198
+    },
+    "snr10": {
+     "offset": 749501,
+     "noise_gain": 0.13300658
+    },
+    "snr5": {
+     "offset": 252691,
+     "noise_gain": 0.34577588
+    }
+   }
+  },
+  {
+   "clip": "4524168784709627062.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06426078,
+   "levels": {
+    "snr20": {
+     "offset": 531083,
+     "noise_gain": 0.08518722
+    },
+    "snr10": {
+     "offset": 3742,
+     "noise_gain": 0.28258868
+    },
+    "snr5": {
+     "offset": 969918,
+     "noise_gain": 0.40530058
+    }
+   }
+  },
+  {
+   "clip": "4563696742795364330.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04893843,
+   "levels": {
+    "snr20": {
+     "offset": 565676,
+     "noise_gain": 0.06400864
+    },
+    "snr10": {
+     "offset": 1007346,
+     "noise_gain": 0.16599719
+    },
+    "snr5": {
+     "offset": 567798,
+     "noise_gain": 0.35822787
+    }
+   }
+  },
+  {
+   "clip": "4572047909121637125.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.008009,
+   "levels": {
+    "snr20": {
+     "offset": 353207,
+     "noise_gain": 0.01387011
+    },
+    "snr10": {
+     "offset": 79217,
+     "noise_gain": 0.03578245
+    },
+    "snr5": {
+     "offset": 256485,
+     "noise_gain": 0.07754495
+    }
+   }
+  },
+  {
+   "clip": "4573832005061155347.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00718869,
+   "levels": {
+    "snr20": {
+     "offset": 339829,
+     "noise_gain": 0.01199194
+    },
+    "snr10": {
+     "offset": 678768,
+     "noise_gain": 0.02558178
+    },
+    "snr5": {
+     "offset": 680135,
+     "noise_gain": 0.04539641
+    }
+   }
+  },
+  {
+   "clip": "4586748255024220271.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06565022,
+   "levels": {
+    "snr20": {
+     "offset": 494316,
+     "noise_gain": 0.08746825
+    },
+    "snr10": {
+     "offset": 268130,
+     "noise_gain": 0.36668733
+    },
+    "snr5": {
+     "offset": 736669,
+     "noise_gain": 0.40183644
+    }
+   }
+  },
+  {
+   "clip": "464898604614886529.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01680057,
+   "levels": {
+    "snr20": {
+     "offset": 346752,
+     "noise_gain": 0.02845683
+    },
+    "snr10": {
+     "offset": 677325,
+     "noise_gain": 0.06053065
+    },
+    "snr5": {
+     "offset": 484355,
+     "noise_gain": 0.13261134
+    }
+   }
+  },
+  {
+   "clip": "4702091319189790924.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02749042,
+   "levels": {
+    "snr20": {
+     "offset": 332682,
+     "noise_gain": 0.04581398
+    },
+    "snr10": {
+     "offset": 779140,
+     "noise_gain": 0.09755735
+    },
+    "snr5": {
+     "offset": 501471,
+     "noise_gain": 0.19982007
+    }
+   }
+  },
+  {
+   "clip": "470957723108047935.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03437056,
+   "levels": {
+    "snr20": {
+     "offset": 284185,
+     "noise_gain": 0.06043687
+    },
+    "snr10": {
+     "offset": 324252,
+     "noise_gain": 0.18988365
+    },
+    "snr5": {
+     "offset": 102176,
+     "noise_gain": 0.28630031
+    }
+   }
+  },
+  {
+   "clip": "4723581876618328134.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01088945,
+   "levels": {
+    "snr20": {
+     "offset": 60984,
+     "noise_gain": 0.0141455
+    },
+    "snr10": {
+     "offset": 406925,
+     "noise_gain": 0.05736484
+    },
+    "snr5": {
+     "offset": 983711,
+     "noise_gain": 0.06701502
+    }
+   }
+  },
+  {
+   "clip": "4730931100973468817.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01356715,
+   "levels": {
+    "snr20": {
+     "offset": 789032,
+     "noise_gain": 0.0145574
+    },
+    "snr10": {
+     "offset": 71920,
+     "noise_gain": 0.06506027
+    },
+    "snr5": {
+     "offset": 321883,
+     "noise_gain": 0.12285241
+    }
+   }
+  },
+  {
+   "clip": "4750257282625528831.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03084908,
+   "levels": {
+    "snr20": {
+     "offset": 483094,
+     "noise_gain": 0.04292772
+    },
+    "snr10": {
+     "offset": 899909,
+     "noise_gain": 0.10500886
+    },
+    "snr5": {
+     "offset": 950715,
+     "noise_gain": 0.19496173
+    }
+   }
+  },
+  {
+   "clip": "4785335701208463919.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0059408,
+   "levels": {
+    "snr20": {
+     "offset": 803431,
+     "noise_gain": 0.00661525
+    },
+    "snr10": {
+     "offset": 682040,
+     "noise_gain": 0.02159801
+    },
+    "snr5": {
+     "offset": 999073,
+     "noise_gain": 0.03502514
+    }
+   }
+  },
+  {
+   "clip": "4812626186418606344.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04054363,
+   "levels": {
+    "snr20": {
+     "offset": 636410,
+     "noise_gain": 0.04616061
+    },
+    "snr10": {
+     "offset": 1071237,
+     "noise_gain": 0.14508145
+    },
+    "snr5": {
+     "offset": 510045,
+     "noise_gain": 0.32163071
+    }
+   }
+  },
+  {
+   "clip": "4820816697937059047.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01201091,
+   "levels": {
+    "snr20": {
+     "offset": 270953,
+     "noise_gain": 0.02109237
+    },
+    "snr10": {
+     "offset": 273181,
+     "noise_gain": 0.06711399
+    },
+    "snr5": {
+     "offset": 379046,
+     "noise_gain": 0.11279463
+    }
+   }
+  },
+  {
+   "clip": "4829980808009123737.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03076397,
+   "levels": {
+    "snr20": {
+     "offset": 166707,
+     "noise_gain": 0.04976796
+    },
+    "snr10": {
+     "offset": 899663,
+     "noise_gain": 0.10129258
+    },
+    "snr5": {
+     "offset": 721268,
+     "noise_gain": 0.19171541
+    }
+   }
+  },
+  {
+   "clip": "4850881000883340670.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01193781,
+   "levels": {
+    "snr20": {
+     "offset": 943906,
+     "noise_gain": 0.01363115
+    },
+    "snr10": {
+     "offset": 465288,
+     "noise_gain": 0.05375783
+    },
+    "snr5": {
+     "offset": 379364,
+     "noise_gain": 0.11088937
+    }
+   }
+  },
+  {
+   "clip": "4889438921295509528.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03061026,
+   "levels": {
+    "snr20": {
+     "offset": 624309,
+     "noise_gain": 0.0350896
+    },
+    "snr10": {
+     "offset": 915172,
+     "noise_gain": 0.10998333
+    },
+    "snr5": {
+     "offset": 428847,
+     "noise_gain": 0.26293622
+    }
+   }
+  },
+  {
+   "clip": "4914732553650012787.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03379383,
+   "levels": {
+    "snr20": {
+     "offset": 770378,
+     "noise_gain": 0.03441382
+    },
+    "snr10": {
+     "offset": 724822,
+     "noise_gain": 0.11830228
+    },
+    "snr5": {
+     "offset": 295928,
+     "noise_gain": 0.33597796
+    }
+   }
+  },
+  {
+   "clip": "4925170991939864258.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04254031,
+   "levels": {
+    "snr20": {
+     "offset": 62478,
+     "noise_gain": 0.05709708
+    },
+    "snr10": {
+     "offset": 384945,
+     "noise_gain": 0.2343357
+    },
+    "snr5": {
+     "offset": 257234,
+     "noise_gain": 0.41499837
+    }
+   }
+  },
+  {
+   "clip": "4978090353589600213.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05159572,
+   "levels": {
+    "snr20": {
+     "offset": 670966,
+     "noise_gain": 0.05961038
+    },
+    "snr10": {
+     "offset": 495067,
+     "noise_gain": 0.25062265
+    },
+    "snr5": {
+     "offset": 163099,
+     "noise_gain": 0.43988396
+    }
+   }
+  },
+  {
+   "clip": "5006738910208163750.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0116394,
+   "levels": {
+    "snr20": {
+     "offset": 968129,
+     "noise_gain": 0.01301822
+    },
+    "snr10": {
+     "offset": 718364,
+     "noise_gain": 0.03973931
+    },
+    "snr5": {
+     "offset": 555350,
+     "noise_gain": 0.08248551
+    }
+   }
+  },
+  {
+   "clip": "5016267562601757564.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03145559,
+   "levels": {
+    "snr20": {
+     "offset": 483876,
+     "noise_gain": 0.04423174
+    },
+    "snr10": {
+     "offset": 141231,
+     "noise_gain": 0.16159217
+    },
+    "snr5": {
+     "offset": 681627,
+     "noise_gain": 0.19691517
+    }
+   }
+  },
+  {
+   "clip": "5032852899444826430.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03305062,
+   "levels": {
+    "snr20": {
+     "offset": 514268,
+     "noise_gain": 0.0444471
+    },
+    "snr10": {
+     "offset": 278532,
+     "noise_gain": 0.18488249
+    },
+    "snr5": {
+     "offset": 419030,
+     "noise_gain": 0.30476232
+    }
+   }
+  },
+  {
+   "clip": "5107330974294480063.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04277498,
+   "levels": {
+    "snr20": {
+     "offset": 941589,
+     "noise_gain": 0.04865884
+    },
+    "snr10": {
+     "offset": 869802,
+     "noise_gain": 0.13908989
+    },
+    "snr5": {
+     "offset": 602390,
+     "noise_gain": 0.27498551
+    }
+   }
+  },
+  {
+   "clip": "5130299275578440545.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05954469,
+   "levels": {
+    "snr20": {
+     "offset": 771957,
+     "noise_gain": 0.06085156
+    },
+    "snr10": {
+     "offset": 261805,
+     "noise_gain": 0.32717195
+    },
+    "snr5": {
+     "offset": 451297,
+     "noise_gain": 0.51788595
+    }
+   }
+  },
+  {
+   "clip": "5191896224392064388.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01302489,
+   "levels": {
+    "snr20": {
+     "offset": 35424,
+     "noise_gain": 0.01817097
+    },
+    "snr10": {
+     "offset": 748430,
+     "noise_gain": 0.04396153
+    },
+    "snr5": {
+     "offset": 1009136,
+     "noise_gain": 0.07560388
+    }
+   }
+  },
+  {
+   "clip": "5210239895795911470.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0441342,
+   "levels": {
+    "snr20": {
+     "offset": 333218,
+     "noise_gain": 0.07764556
+    },
+    "snr10": {
+     "offset": 365473,
+     "noise_gain": 0.23813512
+    },
+    "snr5": {
+     "offset": 518050,
+     "noise_gain": 0.33293223
+    }
+   }
+  },
+  {
+   "clip": "5281801398309290985.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02087536,
+   "levels": {
+    "snr20": {
+     "offset": 11861,
+     "noise_gain": 0.03127566
+    },
+    "snr10": {
+     "offset": 287300,
+     "noise_gain": 0.11160877
+    },
+    "snr5": {
+     "offset": 49961,
+     "noise_gain": 0.17771513
+    }
+   }
+  },
+  {
+   "clip": "5316511368426747129.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02218894,
+   "levels": {
+    "snr20": {
+     "offset": 394218,
+     "noise_gain": 0.03658469
+    },
+    "snr10": {
+     "offset": 623760,
+     "noise_gain": 0.07919034
+    },
+    "snr5": {
+     "offset": 75533,
+     "noise_gain": 0.17517036
+    }
+   }
+  },
+  {
+   "clip": "532458081983462055.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00919106,
+   "levels": {
+    "snr20": {
+     "offset": 767114,
+     "noise_gain": 0.01005509
+    },
+    "snr10": {
+     "offset": 701099,
+     "noise_gain": 0.03158393
+    },
+    "snr5": {
+     "offset": 394778,
+     "noise_gain": 0.08917965
+    }
+   }
+  },
+  {
+   "clip": "53871253020485626.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05439057,
+   "levels": {
+    "snr20": {
+     "offset": 494195,
+     "noise_gain": 0.083997
+    },
+    "snr10": {
+     "offset": 956737,
+     "noise_gain": 0.18848098
+    },
+    "snr5": {
+     "offset": 178717,
+     "noise_gain": 0.448759
+    }
+   }
+  },
+  {
+   "clip": "5398100336630225110.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0126125,
+   "levels": {
+    "snr20": {
+     "offset": 171152,
+     "noise_gain": 0.01894462
+    },
+    "snr10": {
+     "offset": 728688,
+     "noise_gain": 0.04232537
+    },
+    "snr5": {
+     "offset": 1108354,
+     "noise_gain": 0.08009021
+    }
+   }
+  },
+  {
+   "clip": "54666202074802063.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01327404,
+   "levels": {
+    "snr20": {
+     "offset": 499052,
+     "noise_gain": 0.01810097
+    },
+    "snr10": {
+     "offset": 521637,
+     "noise_gain": 0.05646604
+    },
+    "snr5": {
+     "offset": 291006,
+     "noise_gain": 0.13103682
+    }
+   }
+  },
+  {
+   "clip": "547679913808775392.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00885695,
+   "levels": {
+    "snr20": {
+     "offset": 489371,
+     "noise_gain": 0.01325878
+    },
+    "snr10": {
+     "offset": 651898,
+     "noise_gain": 0.03303586
+    },
+    "snr5": {
+     "offset": 57505,
+     "noise_gain": 0.07139389
+    }
+   }
+  },
+  {
+   "clip": "5530909766127012291.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07351829,
+   "levels": {
+    "snr20": {
+     "offset": 401280,
+     "noise_gain": 0.12694383
+    },
+    "snr10": {
+     "offset": 358018,
+     "noise_gain": 0.40763217
+    },
+    "snr5": {
+     "offset": 1033545,
+     "noise_gain": 0.40600707
+    }
+   }
+  },
+  {
+   "clip": "5605637329090441945.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01597176,
+   "levels": {
+    "snr20": {
+     "offset": 471035,
+     "noise_gain": 0.02403811
+    },
+    "snr10": {
+     "offset": 609662,
+     "noise_gain": 0.06398203
+    },
+    "snr5": {
+     "offset": 15654,
+     "noise_gain": 0.12568701
+    }
+   }
+  },
+  {
+   "clip": "5645762581619547261.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01129763,
+   "levels": {
+    "snr20": {
+     "offset": 102263,
+     "noise_gain": 0.01758963
+    },
+    "snr10": {
+     "offset": 824502,
+     "noise_gain": 0.04063894
+    },
+    "snr5": {
+     "offset": 948273,
+     "noise_gain": 0.0729486
+    }
+   }
+  },
+  {
+   "clip": "5725774791144070476.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03394456,
+   "levels": {
+    "snr20": {
+     "offset": 147665,
+     "noise_gain": 0.05613785
+    },
+    "snr10": {
+     "offset": 703557,
+     "noise_gain": 0.12161992
+    },
+    "snr5": {
+     "offset": 286611,
+     "noise_gain": 0.33553971
+    }
+   }
+  },
+  {
+   "clip": "5732237725518882704.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02423837,
+   "levels": {
+    "snr20": {
+     "offset": 177489,
+     "noise_gain": 0.03825132
+    },
+    "snr10": {
+     "offset": 709730,
+     "noise_gain": 0.08258134
+    },
+    "snr5": {
+     "offset": 996224,
+     "noise_gain": 0.14523112
+    }
+   }
+  },
+  {
+   "clip": "5842950858957909277.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07636133,
+   "levels": {
+    "snr20": {
+     "offset": 295115,
+     "noise_gain": 0.13506394
+    },
+    "snr10": {
+     "offset": 650061,
+     "noise_gain": 0.2687532
+    },
+    "snr5": {
+     "offset": 897414,
+     "noise_gain": 0.4569729
+    }
+   }
+  },
+  {
+   "clip": "585127260763939444.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03071942,
+   "levels": {
+    "snr20": {
+     "offset": 673097,
+     "noise_gain": 0.0327454
+    },
+    "snr10": {
+     "offset": 545591,
+     "noise_gain": 0.11621511
+    },
+    "snr5": {
+     "offset": 57232,
+     "noise_gain": 0.25989452
+    }
+   }
+  },
+  {
+   "clip": "5888787217675031891.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0100544,
+   "levels": {
+    "snr20": {
+     "offset": 295969,
+     "noise_gain": 0.01743622
+    },
+    "snr10": {
+     "offset": 963525,
+     "noise_gain": 0.03442445
+    },
+    "snr5": {
+     "offset": 801727,
+     "noise_gain": 0.0650535
+    }
+   }
+  },
+  {
+   "clip": "5938108038268927791.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01755342,
+   "levels": {
+    "snr20": {
+     "offset": 325389,
+     "noise_gain": 0.02886265
+    },
+    "snr10": {
+     "offset": 398101,
+     "noise_gain": 0.08409513
+    },
+    "snr5": {
+     "offset": 380496,
+     "noise_gain": 0.15651967
+    }
+   }
+  },
+  {
+   "clip": "6005012267590615464.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03875328,
+   "levels": {
+    "snr20": {
+     "offset": 260581,
+     "noise_gain": 0.06849683
+    },
+    "snr10": {
+     "offset": 259905,
+     "noise_gain": 0.21589619
+    },
+    "snr5": {
+     "offset": 987614,
+     "noise_gain": 0.23419797
+    }
+   }
+  },
+  {
+   "clip": "6079130546522748585.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0115535,
+   "levels": {
+    "snr20": {
+     "offset": 154204,
+     "noise_gain": 0.01886744
+    },
+    "snr10": {
+     "offset": 759021,
+     "noise_gain": 0.03804335
+    },
+    "snr5": {
+     "offset": 328067,
+     "noise_gain": 0.11244506
+    }
+   }
+  },
+  {
+   "clip": "6090619944036197866.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01829691,
+   "levels": {
+    "snr20": {
+     "offset": 84169,
+     "noise_gain": 0.02523808
+    },
+    "snr10": {
+     "offset": 883774,
+     "noise_gain": 0.06391241
+    },
+    "snr5": {
+     "offset": 468653,
+     "noise_gain": 0.15023988
+    }
+   }
+  },
+  {
+   "clip": "6100649037077035327.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02808357,
+   "levels": {
+    "snr20": {
+     "offset": 844623,
+     "noise_gain": 0.03054784
+    },
+    "snr10": {
+     "offset": 787154,
+     "noise_gain": 0.09826713
+    },
+    "snr5": {
+     "offset": 496373,
+     "noise_gain": 0.19968221
+    }
+   }
+  },
+  {
+   "clip": "6123099097612898777.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04312343,
+   "levels": {
+    "snr20": {
+     "offset": 880853,
+     "noise_gain": 0.04820276
+    },
+    "snr10": {
+     "offset": 491590,
+     "noise_gain": 0.18978009
+    },
+    "snr5": {
+     "offset": 299451,
+     "noise_gain": 0.42713235
+    }
+   }
+  },
+  {
+   "clip": "6139529611272448448.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01063923,
+   "levels": {
+    "snr20": {
+     "offset": 480591,
+     "noise_gain": 0.01482016
+    },
+    "snr10": {
+     "offset": 349352,
+     "noise_gain": 0.05491022
+    },
+    "snr5": {
+     "offset": 538073,
+     "noise_gain": 0.07382844
+    }
+   }
+  },
+  {
+   "clip": "6143237088391630215.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01059235,
+   "levels": {
+    "snr20": {
+     "offset": 903522,
+     "noise_gain": 0.01231708
+    },
+    "snr10": {
+     "offset": 18111,
+     "noise_gain": 0.04588111
+    },
+    "snr5": {
+     "offset": 269172,
+     "noise_gain": 0.10383992
+    }
+   }
+  },
+  {
+   "clip": "6153514830057385360.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01642797,
+   "levels": {
+    "snr20": {
+     "offset": 623989,
+     "noise_gain": 0.01859972
+    },
+    "snr10": {
+     "offset": 310349,
+     "noise_gain": 0.08919518
+    },
+    "snr5": {
+     "offset": 961225,
+     "noise_gain": 0.10303813
+    }
+   }
+  },
+  {
+   "clip": "6229162158016805841.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03221231,
+   "levels": {
+    "snr20": {
+     "offset": 174488,
+     "noise_gain": 0.05281281
+    },
+    "snr10": {
+     "offset": 573538,
+     "noise_gain": 0.12029462
+    },
+    "snr5": {
+     "offset": 224396,
+     "noise_gain": 0.32107983
+    }
+   }
+  },
+  {
+   "clip": "6234399923518842695.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07124546,
+   "levels": {
+    "snr20": {
+     "offset": 36357,
+     "noise_gain": 0.10884306
+    },
+    "snr10": {
+     "offset": 146849,
+     "noise_gain": 0.37945188
+    },
+    "snr5": {
+     "offset": 391749,
+     "noise_gain": 0.59090028
+    }
+   }
+  },
+  {
+   "clip": "6254852635800370096.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02730208,
+   "levels": {
+    "snr20": {
+     "offset": 79727,
+     "noise_gain": 0.04147489
+    },
+    "snr10": {
+     "offset": 49291,
+     "noise_gain": 0.13066893
+    },
+    "snr5": {
+     "offset": 449101,
+     "noise_gain": 0.21647829
+    }
+   }
+  },
+  {
+   "clip": "6264507256679270751.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01502877,
+   "levels": {
+    "snr20": {
+     "offset": 1077774,
+     "noise_gain": 0.01786266
+    },
+    "snr10": {
+     "offset": 161029,
+     "noise_gain": 0.0670923
+    },
+    "snr5": {
+     "offset": 752573,
+     "noise_gain": 0.09662717
+    }
+   }
+  },
+  {
+   "clip": "6284242052692226381.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01322642,
+   "levels": {
+    "snr20": {
+     "offset": 33335,
+     "noise_gain": 0.01918622
+    },
+    "snr10": {
+     "offset": 210805,
+     "noise_gain": 0.07424529
+    },
+    "snr5": {
+     "offset": 973138,
+     "noise_gain": 0.08041285
+    }
+   }
+  },
+  {
+   "clip": "6284371934602962888.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06862935,
+   "levels": {
+    "snr20": {
+     "offset": 519644,
+     "noise_gain": 0.09198481
+    },
+    "snr10": {
+     "offset": 392390,
+     "noise_gain": 0.35680787
+    },
+    "snr5": {
+     "offset": 703712,
+     "noise_gain": 0.43572074
+    }
+   }
+  },
+  {
+   "clip": "6361502901440803501.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0289977,
+   "levels": {
+    "snr20": {
+     "offset": 827108,
+     "noise_gain": 0.03116036
+    },
+    "snr10": {
+     "offset": 520291,
+     "noise_gain": 0.12645827
+    },
+    "snr5": {
+     "offset": 972214,
+     "noise_gain": 0.17699996
+    }
+   }
+  },
+  {
+   "clip": "6418480557251374333.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05593311,
+   "levels": {
+    "snr20": {
+     "offset": 258466,
+     "noise_gain": 0.09789327
+    },
+    "snr10": {
+     "offset": 786388,
+     "noise_gain": 0.20239616
+    },
+    "snr5": {
+     "offset": 261419,
+     "noise_gain": 0.55138939
+    }
+   }
+  },
+  {
+   "clip": "6431605622172480163.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06679671,
+   "levels": {
+    "snr20": {
+     "offset": 601080,
+     "noise_gain": 0.07790231
+    },
+    "snr10": {
+     "offset": 951847,
+     "noise_gain": 0.23354227
+    },
+    "snr5": {
+     "offset": 669826,
+     "noise_gain": 0.40222799
+    }
+   }
+  },
+  {
+   "clip": "6510363154173685600.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01013908,
+   "levels": {
+    "snr20": {
+     "offset": 84265,
+     "noise_gain": 0.01506503
+    },
+    "snr10": {
+     "offset": 408733,
+     "noise_gain": 0.04909509
+    },
+    "snr5": {
+     "offset": 825460,
+     "noise_gain": 0.06165462
+    }
+   }
+  },
+  {
+   "clip": "6555764459937093245.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03618805,
+   "levels": {
+    "snr20": {
+     "offset": 332064,
+     "noise_gain": 0.06315092
+    },
+    "snr10": {
+     "offset": 533544,
+     "noise_gain": 0.15183856
+    },
+    "snr5": {
+     "offset": 242308,
+     "noise_gain": 0.36054752
+    }
+   }
+  },
+  {
+   "clip": "6571118833577433426.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04455817,
+   "levels": {
+    "snr20": {
+     "offset": 330958,
+     "noise_gain": 0.07367004
+    },
+    "snr10": {
+     "offset": 242269,
+     "noise_gain": 0.25369146
+    },
+    "snr5": {
+     "offset": 551918,
+     "noise_gain": 0.3139006
+    }
+   }
+  },
+  {
+   "clip": "6620979815643862702.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06688476,
+   "levels": {
+    "snr20": {
+     "offset": 629801,
+     "noise_gain": 0.0768553
+    },
+    "snr10": {
+     "offset": 505580,
+     "noise_gain": 0.2862472
+    },
+    "snr5": {
+     "offset": 183671,
+     "noise_gain": 0.59980279
+    }
+   }
+  },
+  {
+   "clip": "6643287718479013596.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07810396,
+   "levels": {
+    "snr20": {
+     "offset": 909614,
+     "noise_gain": 0.09770709
+    },
+    "snr10": {
+     "offset": 439648,
+     "noise_gain": 0.3950297
+    },
+    "snr5": {
+     "offset": 294891,
+     "noise_gain": 0.77008214
+    }
+   }
+  },
+  {
+   "clip": "6670200578200292156.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04982551,
+   "levels": {
+    "snr20": {
+     "offset": 940301,
+     "noise_gain": 0.05706529
+    },
+    "snr10": {
+     "offset": 798964,
+     "noise_gain": 0.17712773
+    },
+    "snr5": {
+     "offset": 52485,
+     "noise_gain": 0.39323947
+    }
+   }
+  },
+  {
+   "clip": "668154000819427998.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01024706,
+   "levels": {
+    "snr20": {
+     "offset": 155638,
+     "noise_gain": 0.0169469
+    },
+    "snr10": {
+     "offset": 638102,
+     "noise_gain": 0.03558151
+    },
+    "snr5": {
+     "offset": 186270,
+     "noise_gain": 0.0952006
+    }
+   }
+  },
+  {
+   "clip": "6686890445003158035.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01190333,
+   "levels": {
+    "snr20": {
+     "offset": 634858,
+     "noise_gain": 0.01394816
+    },
+    "snr10": {
+     "offset": 194508,
+     "noise_gain": 0.06760385
+    },
+    "snr5": {
+     "offset": 714878,
+     "noise_gain": 0.06979722
+    }
+   }
+  },
+  {
+   "clip": "6876240360271938764.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04153666,
+   "levels": {
+    "snr20": {
+     "offset": 447473,
+     "noise_gain": 0.06356851
+    },
+    "snr10": {
+     "offset": 496871,
+     "noise_gain": 0.18017448
+    },
+    "snr5": {
+     "offset": 414231,
+     "noise_gain": 0.38477819
+    }
+   }
+  },
+  {
+   "clip": "6932484482317401893.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0694605,
+   "levels": {
+    "snr20": {
+     "offset": 304548,
+     "noise_gain": 0.12318379
+    },
+    "snr10": {
+     "offset": 896231,
+     "noise_gain": 0.22857885
+    },
+    "snr5": {
+     "offset": 164540,
+     "noise_gain": 0.62511989
+    }
+   }
+  },
+  {
+   "clip": "6955906662773915782.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.09366727,
+   "levels": {
+    "snr20": {
+     "offset": 228270,
+     "noise_gain": 0.1638593
+    },
+    "snr10": {
+     "offset": 510875,
+     "noise_gain": 0.40486796
+    },
+    "snr5": {
+     "offset": 97695,
+     "noise_gain": 0.75426541
+    }
+   }
+  },
+  {
+   "clip": "700001374311486374.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00956691,
+   "levels": {
+    "snr20": {
+     "offset": 378168,
+     "noise_gain": 0.01571593
+    },
+    "snr10": {
+     "offset": 548737,
+     "noise_gain": 0.0392691
+    },
+    "snr5": {
+     "offset": 129232,
+     "noise_gain": 0.08750343
+    }
+   }
+  },
+  {
+   "clip": "7038217659356155479.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01567437,
+   "levels": {
+    "snr20": {
+     "offset": 1066988,
+     "noise_gain": 0.01755782
+    },
+    "snr10": {
+     "offset": 307194,
+     "noise_gain": 0.08497182
+    },
+    "snr5": {
+     "offset": 757290,
+     "noise_gain": 0.10080461
+    }
+   }
+  },
+  {
+   "clip": "7038975664927295261.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01160272,
+   "levels": {
+    "snr20": {
+     "offset": 1011634,
+     "noise_gain": 0.01190708
+    },
+    "snr10": {
+     "offset": 394205,
+     "noise_gain": 0.06100651
+    },
+    "snr5": {
+     "offset": 442411,
+     "noise_gain": 0.09863395
+    }
+   }
+  },
+  {
+   "clip": "7045530160259735717.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01387566,
+   "levels": {
+    "snr20": {
+     "offset": 480231,
+     "noise_gain": 0.0197891
+    },
+    "snr10": {
+     "offset": 783112,
+     "noise_gain": 0.04621999
+    },
+    "snr5": {
+     "offset": 383727,
+     "noise_gain": 0.13446029
+    }
+   }
+  },
+  {
+   "clip": "7065673436186844799.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02206515,
+   "levels": {
+    "snr20": {
+     "offset": 782834,
+     "noise_gain": 0.02390448
+    },
+    "snr10": {
+     "offset": 415691,
+     "noise_gain": 0.10158773
+    },
+    "snr5": {
+     "offset": 741767,
+     "noise_gain": 0.14172164
+    }
+   }
+  },
+  {
+   "clip": "7077662167866875923.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02703842,
+   "levels": {
+    "snr20": {
+     "offset": 796278,
+     "noise_gain": 0.02861697
+    },
+    "snr10": {
+     "offset": 584858,
+     "noise_gain": 0.10826616
+    },
+    "snr5": {
+     "offset": 902301,
+     "noise_gain": 0.16551243
+    }
+   }
+  },
+  {
+   "clip": "7187242779372892625.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0109467,
+   "levels": {
+    "snr20": {
+     "offset": 678937,
+     "noise_gain": 0.01218501
+    },
+    "snr10": {
+     "offset": 826485,
+     "noise_gain": 0.03672003
+    },
+    "snr5": {
+     "offset": 70021,
+     "noise_gain": 0.08060181
+    }
+   }
+  },
+  {
+   "clip": "7214974173211356377.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01437714,
+   "levels": {
+    "snr20": {
+     "offset": 278551,
+     "noise_gain": 0.02516663
+    },
+    "snr10": {
+     "offset": 849139,
+     "noise_gain": 0.0514359
+    },
+    "snr5": {
+     "offset": 247128,
+     "noise_gain": 0.14303942
+    }
+   }
+  },
+  {
+   "clip": "7245347072305308672.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01217526,
+   "levels": {
+    "snr20": {
+     "offset": 296135,
+     "noise_gain": 0.0211349
+    },
+    "snr10": {
+     "offset": 812875,
+     "noise_gain": 0.04065093
+    },
+    "snr5": {
+     "offset": 1437,
+     "noise_gain": 0.09752297
+    }
+   }
+  },
+  {
+   "clip": "7253745001405734224.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01500531,
+   "levels": {
+    "snr20": {
+     "offset": 295798,
+     "noise_gain": 0.02515457
+    },
+    "snr10": {
+     "offset": 411245,
+     "noise_gain": 0.06977311
+    },
+    "snr5": {
+     "offset": 523716,
+     "noise_gain": 0.10609888
+    }
+   }
+  },
+  {
+   "clip": "731296651112798738.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00763144,
+   "levels": {
+    "snr20": {
+     "offset": 278641,
+     "noise_gain": 0.01336314
+    },
+    "snr10": {
+     "offset": 18215,
+     "noise_gain": 0.03394092
+    },
+    "snr5": {
+     "offset": 307423,
+     "noise_gain": 0.07462316
+    }
+   }
+  },
+  {
+   "clip": "733126877238529036.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07396822,
+   "levels": {
+    "snr20": {
+     "offset": 927337,
+     "noise_gain": 0.08223083
+    },
+    "snr10": {
+     "offset": 664790,
+     "noise_gain": 0.25821329
+    },
+    "snr5": {
+     "offset": 152284,
+     "noise_gain": 0.65349122
+    }
+   }
+  },
+  {
+   "clip": "7441739934575122314.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03323026,
+   "levels": {
+    "snr20": {
+     "offset": 389851,
+     "noise_gain": 0.04979937
+    },
+    "snr10": {
+     "offset": 56865,
+     "noise_gain": 0.15817079
+    },
+    "snr5": {
+     "offset": 456300,
+     "noise_gain": 0.25709767
+    }
+   }
+  },
+  {
+   "clip": "756081290855564466.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.10551699,
+   "levels": {
+    "snr20": {
+     "offset": 824995,
+     "noise_gain": 0.11540178
+    },
+    "snr10": {
+     "offset": 828318,
+     "noise_gain": 0.36363891
+    },
+    "snr5": {
+     "offset": 60078,
+     "noise_gain": 0.80605527
+    }
+   }
+  },
+  {
+   "clip": "7569767158021347647.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00963874,
+   "levels": {
+    "snr20": {
+     "offset": 649828,
+     "noise_gain": 0.01118804
+    },
+    "snr10": {
+     "offset": 353080,
+     "noise_gain": 0.05005827
+    },
+    "snr5": {
+     "offset": 710551,
+     "noise_gain": 0.05591932
+    }
+   }
+  },
+  {
+   "clip": "7698399376556797371.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03598861,
+   "levels": {
+    "snr20": {
+     "offset": 792269,
+     "noise_gain": 0.03998735
+    },
+    "snr10": {
+     "offset": 41432,
+     "noise_gain": 0.1594557
+    },
+    "snr5": {
+     "offset": 985042,
+     "noise_gain": 0.22433649
+    }
+   }
+  },
+  {
+   "clip": "7702432468736667048.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03194389,
+   "levels": {
+    "snr20": {
+     "offset": 1085067,
+     "noise_gain": 0.03405974
+    },
+    "snr10": {
+     "offset": 375150,
+     "noise_gain": 0.18123329
+    },
+    "snr5": {
+     "offset": 1053024,
+     "noise_gain": 0.21794384
+    }
+   }
+  },
+  {
+   "clip": "7716542548873265603.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02534857,
+   "levels": {
+    "snr20": {
+     "offset": 872644,
+     "noise_gain": 0.02793968
+    },
+    "snr10": {
+     "offset": 820410,
+     "noise_gain": 0.08689571
+    },
+    "snr5": {
+     "offset": 80875,
+     "noise_gain": 0.19535545
+    }
+   }
+  },
+  {
+   "clip": "7821378098828473010.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.08358591,
+   "levels": {
+    "snr20": {
+     "offset": 369573,
+     "noise_gain": 0.146462
+    },
+    "snr10": {
+     "offset": 657645,
+     "noise_gain": 0.30813584
+    },
+    "snr5": {
+     "offset": 493385,
+     "noise_gain": 0.6998608
+    }
+   }
+  },
+  {
+   "clip": "7865648199890018074.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05197155,
+   "levels": {
+    "snr20": {
+     "offset": 784751,
+     "noise_gain": 0.05876567
+    },
+    "snr10": {
+     "offset": 150848,
+     "noise_gain": 0.25829312
+    },
+    "snr5": {
+     "offset": 474496,
+     "noise_gain": 0.4504473
+    }
+   }
+  },
+  {
+   "clip": "789372152924292294.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06042966,
+   "levels": {
+    "snr20": {
+     "offset": 933174,
+     "noise_gain": 0.06935477
+    },
+    "snr10": {
+     "offset": 661876,
+     "noise_gain": 0.22008844
+    },
+    "snr5": {
+     "offset": 480591,
+     "noise_gain": 0.47361635
+    }
+   }
+  },
+  {
+   "clip": "7901586237480703684.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07246541,
+   "levels": {
+    "snr20": {
+     "offset": 7018,
+     "noise_gain": 0.10118542
+    },
+    "snr10": {
+     "offset": 197129,
+     "noise_gain": 0.42176494
+    },
+    "snr5": {
+     "offset": 79912,
+     "noise_gain": 0.54309343
+    }
+   }
+  },
+  {
+   "clip": "7910613929952732400.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.07363096,
+   "levels": {
+    "snr20": {
+     "offset": 882176,
+     "noise_gain": 0.08280022
+    },
+    "snr10": {
+     "offset": 880479,
+     "noise_gain": 0.26108269
+    },
+    "snr5": {
+     "offset": 493932,
+     "noise_gain": 0.57927803
+    }
+   }
+  },
+  {
+   "clip": "7953049425010449138.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01252706,
+   "levels": {
+    "snr20": {
+     "offset": 65759,
+     "noise_gain": 0.01799714
+    },
+    "snr10": {
+     "offset": 985840,
+     "noise_gain": 0.04280581
+    },
+    "snr5": {
+     "offset": 335654,
+     "noise_gain": 0.12070501
+    }
+   }
+  },
+  {
+   "clip": "8048830112860866979.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01137713,
+   "levels": {
+    "snr20": {
+     "offset": 243830,
+     "noise_gain": 0.01931035
+    },
+    "snr10": {
+     "offset": 12785,
+     "noise_gain": 0.05492805
+    },
+    "snr5": {
+     "offset": 180170,
+     "noise_gain": 0.10572925
+    }
+   }
+  },
+  {
+   "clip": "8053723780024339203.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06685087,
+   "levels": {
+    "snr20": {
+     "offset": 107729,
+     "noise_gain": 0.09749123
+    },
+    "snr10": {
+     "offset": 189463,
+     "noise_gain": 0.34542017
+    },
+    "snr5": {
+     "offset": 291785,
+     "noise_gain": 0.65521337
+    }
+   }
+  },
+  {
+   "clip": "8085222876899800202.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00989714,
+   "levels": {
+    "snr20": {
+     "offset": 629358,
+     "noise_gain": 0.01139554
+    },
+    "snr10": {
+     "offset": 995725,
+     "noise_gain": 0.03289181
+    },
+    "snr5": {
+     "offset": 444115,
+     "noise_gain": 0.08110889
+    }
+   }
+  },
+  {
+   "clip": "8106565973185555932.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0614763,
+   "levels": {
+    "snr20": {
+     "offset": 82852,
+     "noise_gain": 0.08910516
+    },
+    "snr10": {
+     "offset": 122846,
+     "noise_gain": 0.3191089
+    },
+    "snr5": {
+     "offset": 6199,
+     "noise_gain": 0.48226855
+    }
+   }
+  },
+  {
+   "clip": "8141664769441349405.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03966189,
+   "levels": {
+    "snr20": {
+     "offset": 489480,
+     "noise_gain": 0.05687608
+    },
+    "snr10": {
+     "offset": 164720,
+     "noise_gain": 0.19835773
+    },
+    "snr5": {
+     "offset": 661809,
+     "noise_gain": 0.24555515
+    }
+   }
+  },
+  {
+   "clip": "8146115425428746212.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01909164,
+   "levels": {
+    "snr20": {
+     "offset": 876854,
+     "noise_gain": 0.01961491
+    },
+    "snr10": {
+     "offset": 536516,
+     "noise_gain": 0.08081752
+    },
+    "snr5": {
+     "offset": 296212,
+     "noise_gain": 0.19017008
+    }
+   }
+  },
+  {
+   "clip": "8202217763385450667.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01003238,
+   "levels": {
+    "snr20": {
+     "offset": 706273,
+     "noise_gain": 0.01065459
+    },
+    "snr10": {
+     "offset": 221012,
+     "noise_gain": 0.0577407
+    },
+    "snr5": {
+     "offset": 887860,
+     "noise_gain": 0.06223941
+    }
+   }
+  },
+  {
+   "clip": "8205090447734566913.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01124335,
+   "levels": {
+    "snr20": {
+     "offset": 42098,
+     "noise_gain": 0.01589224
+    },
+    "snr10": {
+     "offset": 271857,
+     "noise_gain": 0.06340987
+    },
+    "snr5": {
+     "offset": 281629,
+     "noise_gain": 0.11329794
+    }
+   }
+  },
+  {
+   "clip": "8215837907543112955.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0105185,
+   "levels": {
+    "snr20": {
+     "offset": 711560,
+     "noise_gain": 0.01140763
+    },
+    "snr10": {
+     "offset": 302962,
+     "noise_gain": 0.05784385
+    },
+    "snr5": {
+     "offset": 533798,
+     "noise_gain": 0.0782078
+    }
+   }
+  },
+  {
+   "clip": "822189627111279291.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01116598,
+   "levels": {
+    "snr20": {
+     "offset": 382321,
+     "noise_gain": 0.01847967
+    },
+    "snr10": {
+     "offset": 864654,
+     "noise_gain": 0.03661787
+    },
+    "snr5": {
+     "offset": 47958,
+     "noise_gain": 0.09100905
+    }
+   }
+  },
+  {
+   "clip": "8235233722143201296.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03495576,
+   "levels": {
+    "snr20": {
+     "offset": 389681,
+     "noise_gain": 0.05849492
+    },
+    "snr10": {
+     "offset": 864122,
+     "noise_gain": 0.12216621
+    },
+    "snr5": {
+     "offset": 675448,
+     "noise_gain": 0.22044205
+    }
+   }
+  },
+  {
+   "clip": "8291445105204988130.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01645031,
+   "levels": {
+    "snr20": {
+     "offset": 183081,
+     "noise_gain": 0.02623111
+    },
+    "snr10": {
+     "offset": 911818,
+     "noise_gain": 0.05787064
+    },
+    "snr5": {
+     "offset": 511751,
+     "noise_gain": 0.12631921
+    }
+   }
+  },
+  {
+   "clip": "8296488573361380041.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02372352,
+   "levels": {
+    "snr20": {
+     "offset": 1036617,
+     "noise_gain": 0.02435165
+    },
+    "snr10": {
+     "offset": 201297,
+     "noise_gain": 0.14091208
+    },
+    "snr5": {
+     "offset": 678571,
+     "noise_gain": 0.14708277
+    }
+   }
+  },
+  {
+   "clip": "8374824616815826026.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0354648,
+   "levels": {
+    "snr20": {
+     "offset": 743094,
+     "noise_gain": 0.03911624
+    },
+    "snr10": {
+     "offset": 461094,
+     "noise_gain": 0.15748078
+    },
+    "snr5": {
+     "offset": 936022,
+     "noise_gain": 0.23075481
+    }
+   }
+  },
+  {
+   "clip": "8440887448038191976.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01341544,
+   "levels": {
+    "snr20": {
+     "offset": 365013,
+     "noise_gain": 0.02261496
+    },
+    "snr10": {
+     "offset": 696623,
+     "noise_gain": 0.04787508
+    },
+    "snr5": {
+     "offset": 523952,
+     "noise_gain": 0.10148876
+    }
+   }
+  },
+  {
+   "clip": "8571939333228153192.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03756756,
+   "levels": {
+    "snr20": {
+     "offset": 23504,
+     "noise_gain": 0.05335071
+    },
+    "snr10": {
+     "offset": 25720,
+     "noise_gain": 0.1694295
+    },
+    "snr5": {
+     "offset": 561337,
+     "noise_gain": 0.28150108
+    }
+   }
+  },
+  {
+   "clip": "8649051830007366343.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.13637342,
+   "levels": {
+    "snr20": {
+     "offset": 1041769,
+     "noise_gain": 0.14736905
+    },
+    "snr10": {
+     "offset": 786838,
+     "noise_gain": 0.5077145
+    },
+    "snr5": {
+     "offset": 444746,
+     "noise_gain": 1.25085917
+    }
+   }
+  },
+  {
+   "clip": "8713610288037699181.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05430284,
+   "levels": {
+    "snr20": {
+     "offset": 556745,
+     "noise_gain": 0.06972433
+    },
+    "snr10": {
+     "offset": 741714,
+     "noise_gain": 0.18321818
+    },
+    "snr5": {
+     "offset": 917378,
+     "noise_gain": 0.34993181
+    }
+   }
+  },
+  {
+   "clip": "876342125012754981.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04999224,
+   "levels": {
+    "snr20": {
+     "offset": 65253,
+     "noise_gain": 0.0720355
+    },
+    "snr10": {
+     "offset": 367680,
+     "noise_gain": 0.26160241
+    },
+    "snr5": {
+     "offset": 708803,
+     "noise_gain": 0.29225498
+    }
+   }
+  },
+  {
+   "clip": "885768039195014719.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02602972,
+   "levels": {
+    "snr20": {
+     "offset": 210418,
+     "noise_gain": 0.04649183
+    },
+    "snr10": {
+     "offset": 835297,
+     "noise_gain": 0.09168766
+    },
+    "snr5": {
+     "offset": 884811,
+     "noise_gain": 0.15636857
+    }
+   }
+  },
+  {
+   "clip": "8865342851253332683.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01380559,
+   "levels": {
+    "snr20": {
+     "offset": 331574,
+     "noise_gain": 0.02402032
+    },
+    "snr10": {
+     "offset": 226700,
+     "noise_gain": 0.07780444
+    },
+    "snr5": {
+     "offset": 1034797,
+     "noise_gain": 0.0785912
+    }
+   }
+  },
+  {
+   "clip": "8870798912204795656.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05031677,
+   "levels": {
+    "snr20": {
+     "offset": 628281,
+     "noise_gain": 0.05992783
+    },
+    "snr10": {
+     "offset": 969779,
+     "noise_gain": 0.17455432
+    },
+    "snr5": {
+     "offset": 147878,
+     "noise_gain": 0.45434761
+    }
+   }
+  },
+  {
+   "clip": "8945461003856142849.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06744486,
+   "levels": {
+    "snr20": {
+     "offset": 812990,
+     "noise_gain": 0.07589485
+    },
+    "snr10": {
+     "offset": 253397,
+     "noise_gain": 0.37270026
+    },
+    "snr5": {
+     "offset": 382761,
+     "noise_gain": 0.63109551
+    }
+   }
+  },
+  {
+   "clip": "8953546487034324961.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00939841,
+   "levels": {
+    "snr20": {
+     "offset": 843798,
+     "noise_gain": 0.01069475
+    },
+    "snr10": {
+     "offset": 214657,
+     "noise_gain": 0.05220272
+    },
+    "snr5": {
+     "offset": 828395,
+     "noise_gain": 0.05838553
+    }
+   }
+  },
+  {
+   "clip": "9092990657477980396.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01116648,
+   "levels": {
+    "snr20": {
+     "offset": 529527,
+     "noise_gain": 0.01488046
+    },
+    "snr10": {
+     "offset": 205640,
+     "noise_gain": 0.06461581
+    },
+    "snr5": {
+     "offset": 144209,
+     "noise_gain": 0.10114164
+    }
+   }
+  },
+  {
+   "clip": "9095591970015229188.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02487163,
+   "levels": {
+    "snr20": {
+     "offset": 405738,
+     "noise_gain": 0.03941728
+    },
+    "snr10": {
+     "offset": 752950,
+     "noise_gain": 0.0859117
+    },
+    "snr5": {
+     "offset": 460875,
+     "noise_gain": 0.19846494
+    }
+   }
+  },
+  {
+   "clip": "9171335606836908161.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01095775,
+   "levels": {
+    "snr20": {
+     "offset": 225060,
+     "noise_gain": 0.01973551
+    },
+    "snr10": {
+     "offset": 682042,
+     "noise_gain": 0.03793338
+    },
+    "snr5": {
+     "offset": 141300,
+     "noise_gain": 0.09773751
+    }
+   }
+  },
+  {
+   "clip": "9229965631113754754.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00649456,
+   "levels": {
+    "snr20": {
+     "offset": 475129,
+     "noise_gain": 0.00899416
+    },
+    "snr10": {
+     "offset": 407710,
+     "noise_gain": 0.03243109
+    },
+    "snr5": {
+     "offset": 803851,
+     "noise_gain": 0.04188752
+    }
+   }
+  },
+  {
+   "clip": "9252584911623990794.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05335484,
+   "levels": {
+    "snr20": {
+     "offset": 955546,
+     "noise_gain": 0.05956253
+    },
+    "snr10": {
+     "offset": 801990,
+     "noise_gain": 0.1885496
+    },
+    "snr5": {
+     "offset": 969405,
+     "noise_gain": 0.33317678
+    }
+   }
+  },
+  {
+   "clip": "9263061890494719705.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00825091,
+   "levels": {
+    "snr20": {
+     "offset": 389928,
+     "noise_gain": 0.01489638
+    },
+    "snr10": {
+     "offset": 559280,
+     "noise_gain": 0.03437126
+    },
+    "snr5": {
+     "offset": 868141,
+     "noise_gain": 0.04871231
+    }
+   }
+  },
+  {
+   "clip": "9318726654273482703.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03732695,
+   "levels": {
+    "snr20": {
+     "offset": 704612,
+     "noise_gain": 0.0416927
+    },
+    "snr10": {
+     "offset": 852209,
+     "noise_gain": 0.12999478
+    },
+    "snr5": {
+     "offset": 77072,
+     "noise_gain": 0.31964614
+    }
+   }
+  },
+  {
+   "clip": "9324205630601994657.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.00881908,
+   "levels": {
+    "snr20": {
+     "offset": 733301,
+     "noise_gain": 0.00960378
+    },
+    "snr10": {
+     "offset": 748383,
+     "noise_gain": 0.03165293
+    },
+    "snr5": {
+     "offset": 1025501,
+     "noise_gain": 0.05094704
+    }
+   }
+  },
+  {
+   "clip": "9341139376010199088.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03988156,
+   "levels": {
+    "snr20": {
+     "offset": 711673,
+     "noise_gain": 0.04317404
+    },
+    "snr10": {
+     "offset": 778101,
+     "noise_gain": 0.13837724
+    },
+    "snr5": {
+     "offset": 730617,
+     "noise_gain": 0.24340649
+    }
+   }
+  },
+  {
+   "clip": "9351443914714370815.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04206287,
+   "levels": {
+    "snr20": {
+     "offset": 829683,
+     "noise_gain": 0.04332982
+    },
+    "snr10": {
+     "offset": 78111,
+     "noise_gain": 0.16854315
+    },
+    "snr5": {
+     "offset": 920164,
+     "noise_gain": 0.30875761
+    }
+   }
+  },
+  {
+   "clip": "9364733198801663962.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05155298,
+   "levels": {
+    "snr20": {
+     "offset": 1092522,
+     "noise_gain": 0.05716108
+    },
+    "snr10": {
+     "offset": 579200,
+     "noise_gain": 0.20992918
+    },
+    "snr5": {
+     "offset": 951728,
+     "noise_gain": 0.38516923
+    }
+   }
+  },
+  {
+   "clip": "9369488952554756636.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03530721,
+   "levels": {
+    "snr20": {
+     "offset": 203569,
+     "noise_gain": 0.06537066
+    },
+    "snr10": {
+     "offset": 435046,
+     "noise_gain": 0.1815946
+    },
+    "snr5": {
+     "offset": 1049732,
+     "noise_gain": 0.21695762
+    }
+   }
+  },
+  {
+   "clip": "9429607152902547579.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03785867,
+   "levels": {
+    "snr20": {
+     "offset": 489943,
+     "noise_gain": 0.05459515
+    },
+    "snr10": {
+     "offset": 214143,
+     "noise_gain": 0.21600255
+    },
+    "snr5": {
+     "offset": 546663,
+     "noise_gain": 0.2817311
+    }
+   }
+  },
+  {
+   "clip": "9436555997414605875.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01003345,
+   "levels": {
+    "snr20": {
+     "offset": 210559,
+     "noise_gain": 0.0175607
+    },
+    "snr10": {
+     "offset": 765831,
+     "noise_gain": 0.03340084
+    },
+    "snr5": {
+     "offset": 536754,
+     "noise_gain": 0.07485764
+    }
+   }
+  },
+  {
+   "clip": "9463227508001465543.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.010244,
+   "levels": {
+    "snr20": {
+     "offset": 240189,
+     "noise_gain": 0.01837767
+    },
+    "snr10": {
+     "offset": 588828,
+     "noise_gain": 0.04113638
+    },
+    "snr5": {
+     "offset": 253193,
+     "noise_gain": 0.09907305
+    }
+   }
+  },
+  {
+   "clip": "9479049491803127245.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05622094,
+   "levels": {
+    "snr20": {
+     "offset": 507404,
+     "noise_gain": 0.06862669
+    },
+    "snr10": {
+     "offset": 618839,
+     "noise_gain": 0.19640963
+    },
+    "snr5": {
+     "offset": 134268,
+     "noise_gain": 0.53157645
+    }
+   }
+  },
+  {
+   "clip": "9485119391339255336.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01336464,
+   "levels": {
+    "snr20": {
+     "offset": 825254,
+     "noise_gain": 0.01430142
+    },
+    "snr10": {
+     "offset": 939593,
+     "noise_gain": 0.04875416
+    },
+    "snr5": {
+     "offset": 815461,
+     "noise_gain": 0.08235593
+    }
+   }
+  },
+  {
+   "clip": "9542840288670069779.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02875437,
+   "levels": {
+    "snr20": {
+     "offset": 1010220,
+     "noise_gain": 0.02956164
+    },
+    "snr10": {
+     "offset": 76034,
+     "noise_gain": 0.13029741
+    },
+    "snr5": {
+     "offset": 68789,
+     "noise_gain": 0.22841971
+    }
+   }
+  },
+  {
+   "clip": "9636427158980175264.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03185754,
+   "levels": {
+    "snr20": {
+     "offset": 903699,
+     "noise_gain": 0.03454678
+    },
+    "snr10": {
+     "offset": 841936,
+     "noise_gain": 0.11552926
+    },
+    "snr5": {
+     "offset": 129991,
+     "noise_gain": 0.29322683
+    }
+   }
+  },
+  {
+   "clip": "9713497386384276489.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01939379,
+   "levels": {
+    "snr20": {
+     "offset": 33892,
+     "noise_gain": 0.02734235
+    },
+    "snr10": {
+     "offset": 519491,
+     "noise_gain": 0.08186014
+    },
+    "snr5": {
+     "offset": 887297,
+     "noise_gain": 0.11751566
+    }
+   }
+  },
+  {
+   "clip": "9742635733451539676.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03494183,
+   "levels": {
+    "snr20": {
+     "offset": 553973,
+     "noise_gain": 0.04794783
+    },
+    "snr10": {
+     "offset": 953119,
+     "noise_gain": 0.11862092
+    },
+    "snr5": {
+     "offset": 1033630,
+     "noise_gain": 0.19787488
+    }
+   }
+  },
+  {
+   "clip": "979050829530509593.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.02575644,
+   "levels": {
+    "snr20": {
+     "offset": 366486,
+     "noise_gain": 0.04382141
+    },
+    "snr10": {
+     "offset": 486294,
+     "noise_gain": 0.11548336
+    },
+    "snr5": {
+     "offset": 898144,
+     "noise_gain": 0.15040346
+    }
+   }
+  },
+  {
+   "clip": "9841500017256771838.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06692676,
+   "levels": {
+    "snr20": {
+     "offset": 1036085,
+     "noise_gain": 0.07039442
+    },
+    "snr10": {
+     "offset": 921285,
+     "noise_gain": 0.24687297
+    },
+    "snr5": {
+     "offset": 124900,
+     "noise_gain": 0.57497776
+    }
+   }
+  },
+  {
+   "clip": "9845468940855298564.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.01094847,
+   "levels": {
+    "snr20": {
+     "offset": 400231,
+     "noise_gain": 0.01653499
+    },
+    "snr10": {
+     "offset": 5214,
+     "noise_gain": 0.05022611
+    },
+    "snr5": {
+     "offset": 540531,
+     "noise_gain": 0.07692039
+    }
+   }
+  },
+  {
+   "clip": "9886982489635000440.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.0110091,
+   "levels": {
+    "snr20": {
+     "offset": 34336,
+     "noise_gain": 0.01595733
+    },
+    "snr10": {
+     "offset": 253629,
+     "noise_gain": 0.06184862
+    },
+    "snr5": {
+     "offset": 276207,
+     "noise_gain": 0.10903579
+    }
+   }
+  },
+  {
+   "clip": "9906733203503567169.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.04137656,
+   "levels": {
+    "snr20": {
+     "offset": 906670,
+     "noise_gain": 0.04529198
+    },
+    "snr10": {
+     "offset": 118073,
+     "noise_gain": 0.21332773
+    },
+    "snr5": {
+     "offset": 49241,
+     "noise_gain": 0.34083459
+    }
+   }
+  },
+  {
+   "clip": "9919391704764167443.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.05056891,
+   "levels": {
+    "snr20": {
+     "offset": 771048,
+     "noise_gain": 0.05548273
+    },
+    "snr10": {
+     "offset": 56094,
+     "noise_gain": 0.22703052
+    },
+    "snr5": {
+     "offset": 182597,
+     "noise_gain": 0.43326826
+    }
+   }
+  },
+  {
+   "clip": "9923390461393752691.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.06673721,
+   "levels": {
+    "snr20": {
+     "offset": 903762,
+     "noise_gain": 0.07768179
+    },
+    "snr10": {
+     "offset": 795953,
+     "noise_gain": 0.24329702
+    },
+    "snr5": {
+     "offset": 638397,
+     "noise_gain": 0.42616112
+    }
+   }
+  },
+  {
+   "clip": "9949778835161724340.wav",
+   "noise": "Restaurant_walla_PD.wav",
+   "speech_rms": 0.03200114,
+   "levels": {
+    "snr20": {
+     "offset": 639630,
+     "noise_gain": 0.03655857
+    },
+    "snr10": {
+     "offset": 752587,
+     "noise_gain": 0.10708196
+    },
+    "snr5": {
+     "offset": 1016705,
+     "noise_gain": 0.1855042
+    }
+   }
+  }
+ ]
+}
