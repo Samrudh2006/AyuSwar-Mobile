@@ -169,7 +169,7 @@ function OpdDualSpeakerStudio({ onLaunchInteractiveModal }) {
                   padding: '2px 8px',
                   borderRadius: '10px',
                   background: isPlaying ? 'rgba(16, 185, 129, 0.2)' : 'rgba(148, 163, 184, 0.2)',
-                  color: isPlaying ? '#34D399' : '#94A3B8',
+                  color: isPlaying ? '#6EE7B7' : '#E2E8F0',
                   border: isPlaying ? '1px solid #047857' : '1px solid #486770'
                 }}>
                   {isPlaying ? '● PLAYING SAMPLE' : 'PAUSED'}

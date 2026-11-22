@@ -261,7 +261,7 @@ export default function MobileRoot() {
             <MShell><MSolutions /></MShell>
           } />
           <Route path="/solutions/:moduleId" element={
-            <Embedded title="Module" showBack>
+            <Embedded title={location.pathname.endsWith('/opd_ambient_scribe') ? "OPD Scribe" : "Services"} showBack>
               <DetailedModuleView onLaunchInteractiveModal={(k) => {
                 if (k === 'sanjivani') navigate('/sanjivani');
                 else if (k === 'scanner') navigate('/scanner');

@@ -701,7 +701,7 @@ Text only. No audio attachment. Not automatically sent.`;
               />
 
               {/* Overlay HUD Telemetry */}
-              <div style={{
+              <div className="m-waveform-hud" style={{
                 position: 'absolute',
                 top: '10px',
                 left: '12px',
@@ -713,7 +713,7 @@ Text only. No audio attachment. Not automatically sent.`;
                 color: '#94A3B8',
                 pointerEvents: 'none'
               }}>
-                <span style={{ color: '#047857', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                <span style={{ color: '#6EE7B7', display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <Activity size={12} /> Live microphone amplitude
                 </span>
                 <span>

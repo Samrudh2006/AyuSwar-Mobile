@@ -1043,7 +1043,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
   const effectivePatientName = customPatientName || currentEncounter.patient.name;
 
   return (
-    <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '16px 24px 80px 24px', fontFamily: 'var(--font-main)' }}>
+    <div className="clinical-console-workspace" style={{ maxWidth: '1440px', margin: '0 auto', padding: '16px 24px 80px 24px', fontFamily: 'var(--font-main)' }}>
       
       {/* =====================================================================
           TOP BAR & NAVIGATION BACK

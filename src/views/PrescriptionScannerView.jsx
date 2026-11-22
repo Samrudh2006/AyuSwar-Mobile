@@ -567,7 +567,7 @@ export default function PrescriptionScannerView() {
 
   return (
     <div className="scanner-view-container" style={{ padding: '36px 24px', maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ background: 'rgba(255,253,246,0.92)', borderRadius: '16px', padding: '14px 18px 18px', marginBottom: '28px', boxShadow: '0 2px 12px rgba(8,28,36,0.08)', backdropFilter: 'blur(6px)' }}>
+      <div style={{ background: 'var(--m-card-warm)', borderRadius: '16px', padding: '14px 18px 18px', marginBottom: '28px', boxShadow: '0 2px 12px rgba(8,28,36,0.08)', backdropFilter: 'blur(6px)' }}>
       {/* Breadcrumb Navigation */}
       <div className="m-view-breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '24px' }}>
         <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#0F4C5C', textDecoration: 'none', fontSize: '13px', fontWeight: 700 }}>
