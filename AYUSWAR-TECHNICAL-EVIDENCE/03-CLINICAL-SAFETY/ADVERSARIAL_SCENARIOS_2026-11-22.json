@@ -1,12 +1,12 @@
 {
   "scope": "TEXT-LEVEL synthetic adversarial scenarios, purpose-authored per case (expected written before observing engine output), run through the real extract/verify/review/export code. Not audio, not a real model (model-path cases use a simulated adversarial reply), not clinical validation. FAIL rows are retained and reflect real gaps.",
-  "generatedAt": "2026-11-22T12:36:41.854Z",
-  "revision": "33a220e6d0b07031ee94a8d4cc8b32d700c38470",
-  "trackedWorkingTreeDirty": false,
+  "generatedAt": "2026-11-22T12:48:31.666Z",
+  "revision": "498b28f644a132e0eff80259ae97bce992decb1b",
+  "trackedWorkingTreeDirty": true,
   "totals": {
-    "scenarios": 22,
-    "pass": 21,
-    "fail": 1
+    "scenarios": 36,
+    "pass": 33,
+    "fail": 3
   },
   "scenarios": [
     {
@@ -634,6 +634,454 @@
           {
             "entityType": "SYMPTOM",
             "quote": "fever",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-23",
+      "proposalCategory": "Double negation / unclear polarity",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I can't say I have no fever."
+      ],
+      "expectedBehaviour": "Polarity is unclear (double negation). The fever candidate must not export as a confirmed positive; holding it for human review is the safe outcome.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "fever",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-24",
+      "proposalCategory": "Contraction negation (haven't)",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I haven't had a cough at all."
+      ],
+      "expectedBehaviour": "The \"haven't\" contraction negates the cough: held from export.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "cough",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-25",
+      "proposalCategory": "Negation by preposition (\"without\")",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I came with a headache but without fever."
+      ],
+      "expectedBehaviour": "\"without fever\" negates fever (held); the affirmed headache must stay exportable. Over-negation of the headache would silently drop a true symptom.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "headache",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          },
+          {
+            "entityType": "SYMPTOM",
+            "quote": "fever",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "FAIL"
+    },
+    {
+      "id": "ADV-26",
+      "proposalCategory": "Negation by \"never\" (history)",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I have never had diabetes."
+      ],
+      "expectedBehaviour": "\"never had diabetes\" must not export a positive diabetes history.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "MEDICAL_HISTORY",
+            "quote": "diabetes",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-27",
+      "proposalCategory": "Text code-switching (Telugu+English) mixed polarity",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [Tenglish]: నాకు fever ఉంది but cough లేదు"
+      ],
+      "expectedBehaviour": "Code-switched utterance: the affirmed English \"fever\" must stay exportable while \"cough ... లేదు\" is held. (A window-based negation heuristic may over-negate the nearby fever.)",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "fever",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          },
+          {
+            "entityType": "SYMPTOM",
+            "quote": "cough",
+            "status": "SUPPORTED",
+            "negatedContext": true,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": [
+              "negation marker near span; treat as absent/ruled-out context"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "FAIL"
+    },
+    {
+      "id": "ADV-28",
+      "proposalCategory": "Text code-switching: positive allergy to a drug",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [Tenglish]: నాకు paracetamol allergy ఉంది"
+      ],
+      "expectedBehaviour": "A positive code-switched allergy statement is extracted and exportable after review (ALLERGY entity, not negated); the drug mention stays a mention.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "ALLERGY",
+            "quote": "allergy",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "paracetamol",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "ALLERGY",
+            "quote": "allergy",
+            "temporalStatus": "UNKNOWN"
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "paracetamol",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-29",
+      "proposalCategory": "Allergy vs prescribed medicine interaction",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I am allergic to penicillin.",
+        "DOCTOR [English]: Take amoxicillin twice daily."
+      ],
+      "expectedBehaviour": "The engine performs NO allergy-drug interaction check (documented non-capability). Required behaviour: both facts surface as separate source-supported items, the drug is never labelled an instruction or \"cleared\", and the allergy is exported so a human can see the conflict. Interaction safety is NOT claimed.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "ALLERGY",
+            "quote": "allergic",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "penicillin",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "amoxicillin",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "ALLERGY",
+            "quote": "allergic",
+            "temporalStatus": "UNKNOWN"
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "penicillin",
+            "temporalStatus": "UNKNOWN"
+          },
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "amoxicillin",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-30",
+      "proposalCategory": "Temporal export: past use cue",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I used to take cetirizine every night."
+      ],
+      "expectedBehaviour": "Cetirizine exports only as a HISTORICAL mention (cue \"used to\").",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "cetirizine",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "HISTORICAL",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "cetirizine",
+            "temporalStatus": "HISTORICAL"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-31",
+      "proposalCategory": "Temporal export: future intent",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [English]: I will start metformin tomorrow."
+      ],
+      "expectedBehaviour": "A future intention must never export as current use: temporalStatus must not be CURRENT (UNKNOWN is acceptable; the engine never assigns CURRENT).",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "metformin",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "metformin",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-32",
+      "proposalCategory": "Question is not a finding",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "DOCTOR [English]: Do you have a fever?"
+      ],
+      "expectedBehaviour": "A doctor QUESTION about fever is not a clinical finding; \"fever\" must not export as a positive symptom from it.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "fever",
+            "status": "AMBIGUOUS",
+            "negatedContext": false,
+            "clinicianStatus": "PENDING_REVIEW",
+            "notes": [
+              "span is inside a question, not a finding"
+            ]
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-33",
+      "proposalCategory": "Cross-utterance misattribution",
+      "extractionPath": "SIMULATED_ADVERSARIAL_MODEL_REPLY (real parser/verifier)",
+      "utterances": [
+        "PATIENT [English]: I have a headache.",
+        "DOCTOR [English]: Take paracetamol after food."
+      ],
+      "expectedBehaviour": "A simulated model attributes a quote that exists only in utterance 2 (doctor) to utterance 1 (patient). The quote is not in the referenced utterance, so it is rejected, not re-homed.",
+      "actualBehaviour": {
+        "candidates": [],
+        "rejectedBeforeEvidence": [
+          "sourceQuote is not a verbatim substring of the utterance"
+        ],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-34",
+      "proposalCategory": "Cross-utterance spanning quote",
+      "extractionPath": "SIMULATED_ADVERSARIAL_MODEL_REPLY (real parser/verifier)",
+      "utterances": [
+        "PATIENT [English]: I have a fever.",
+        "DOCTOR [English]: Take paracetamol."
+      ],
+      "expectedBehaviour": "A quote stitched across two utterances is not a substring of any single utterance and is rejected.",
+      "actualBehaviour": {
+        "candidates": [],
+        "rejectedBeforeEvidence": [
+          "sourceQuote is not a verbatim substring of the utterance"
+        ],
+        "exportedAfterApproveAll": []
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-35",
+      "proposalCategory": "Speaker relabel (OTHER/bystander as doctor)",
+      "extractionPath": "SIMULATED_ADVERSARIAL_MODEL_REPLY (real parser/verifier)",
+      "utterances": [
+        "OTHER [English]: My neighbour says take ibuprofen three times a day."
+      ],
+      "expectedBehaviour": "An instruction heard from a non-doctor (bystander) must be downgraded to a mention and never exported as a MEDICATION_INSTRUCTION.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "take ibuprofen three times a day",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "MEDICATION_MENTIONED",
+            "quote": "take ibuprofen three times a day",
+            "temporalStatus": "UNKNOWN"
+          }
+        ]
+      },
+      "result": "PASS"
+    },
+    {
+      "id": "ADV-36",
+      "proposalCategory": "Hindi negation marker as substring of an unrelated word",
+      "extractionPath": "DETERMINISTIC_FALLBACK",
+      "utterances": [
+        "PATIENT [Hindi]: खाना खाने के बाद मुझे बुखार है"
+      ],
+      "expectedBehaviour": "The Hindi marker \"ना\" occurs only inside the unrelated word \"खाना\" (food). Fever is affirmed and must NOT be treated as negated.",
+      "actualBehaviour": {
+        "candidates": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "बुखार",
+            "status": "SUPPORTED",
+            "negatedContext": false,
+            "temporalStatus": "UNKNOWN",
+            "clinicianStatus": "APPROVED",
+            "notes": []
+          }
+        ],
+        "rejectedBeforeEvidence": [],
+        "exportedAfterApproveAll": [
+          {
+            "entityType": "SYMPTOM",
+            "quote": "बुखार",
             "temporalStatus": "UNKNOWN"
           }
         ]
