@@ -35,9 +35,16 @@ before `npm install`).
 
 ## Scope of this evidence — what it is and is not
 
-**Is:** JSON-schema structural conformance of the emitted Bundle and its
-QuestionnaireResponse entry against the HL7-published FHIR R4 JSON schema
-(required fields, cardinalities, primitive formats, enum value sets).
+**Is:** JSON-schema conformance of the emitted Bundle and its
+QuestionnaireResponse entry against the HL7-published FHIR R4 JSON schema.
+The official schema reliably enforces primitive formats (regex), inline
+enum value sets, and resource shape (known properties and their types).
+It does NOT enforce every required field or cardinality from the FHIR
+specification — those are covered separately by the project invariant
+check in Phase 46, check 1 (resourceType/type/timestamp/meta.tag presence,
+entry count, status enum membership, linkId uniqueness and coverage,
+valueString-only answers). The two checks together are the verified
+coverage; neither alone is sufficient.
 
 **Is NOT:**
 
