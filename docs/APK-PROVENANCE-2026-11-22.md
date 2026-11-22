@@ -11,10 +11,10 @@ tag and release stay gated.
 |---|---|
 | File | `android/app/build/outputs/apk/debug/app-debug.apk` |
 | Type | Android **debug** APK (unsigned for release; debug key) |
-| Source commit | `3395603` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus the source-aware subjective label and engine-doc wording) |
-| Built | 2026-11-22, ~14:40 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
-| Size | 78,487,158 bytes |
-| SHA-256 | `2fb592e16d06361f8de8086b0af0977e03aa7a226e62cdf4c6d993667da136b4` |
+| Source commit | `ad55365` (branch `feat/clinical-evidence-engine`; version bump commit `4e5a8f5` plus the source-aware subjective label, audio-provenance predicate, engine-doc wording and the mobile colour/readability pass) |
+| Built | 2026-11-22, ~14:58 IST (rebuilt after `npx cap sync android` re-embedded the updated web bundle) |
+| Size | 78,487,184 bytes |
+| SHA-256 | `5d41bb462dcd83ed0cf9f979d75b9646ee50a63c84ff044a874cf73869785137` |
 | Manifest (aapt2 dump badging) | package `ai.ayuswar.app`, **versionCode 37**, **versionName 0.3.34-debug**, minSdk 24, targetSdk 36 |
 | Signer certificate (apksigner verify --print-certs) | CN=Android Debug (standard debug key); cert SHA-256 `57d44b07e4111ec3356d6b9f27ab37afcefb8256a696e670a464e7743f0b1b31` |
 
@@ -35,7 +35,7 @@ android-36 (`/home/sandbox/android-sdk`), Gradle 8.14.3 wrapper.
 ## Embedded-content consistency (this candidate)
 
 - Embedded `assets/public/index.html` SHA-256
-  `5d02efb313181e36ac76be69b5024f494787a9e3e0da8507ba7446a23b4c766d`
+  `3fa91b8c7046a574a7653736972c0e5e8dbbec6866bd8aded32e8d62677fe11b`
   matches the workspace `dist/index.html` byte-for-byte, and the embedded
   `soapDraftSafeguards-*.js` and `MScribeFlow-*.js` chunks hash-match their
   `dist/` counterparts exactly — the APK embeds the exact web bundle built
@@ -44,7 +44,8 @@ android-36 (`/home/sandbox/android-sdk`), Gradle 8.14.3 wrapper.
   against ...") is present in the embedded safeguards chunk inside the APK.
 - `gradlew assembleDebug` without a preceding `npx cap sync android` reuses
   previously synced web assets: intermediate builds of this commit chain
-  produced different hashes (`6d91f26c…`, `bf7005af…`) with stale bundles.
+  produced different hashes (`6d91f26c…`, `bf7005af…`, `2fb592e1…`) with
+  stale bundles.
   The hash in the table above is the post-sync build and is the only
   candidate.
 
