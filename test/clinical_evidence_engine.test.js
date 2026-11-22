@@ -302,6 +302,73 @@ await record('cross-speaker duplicate medication quote ambiguous and never expor
   assert(selectApprovedForExport(approved).length === 0, 'AMBIGUOUS records never export');
 });
 
+// 14g. English contraction negation (straight AND curly apostrophe) blocks export
+await record('english contraction negation blocks medication export', async () => {
+  for (const text of ["I don't take cetirizine.", 'I don’t take cetirizine.']) {
+    const s = mkSession();
+    addUtts(s, [{ speaker: SPEAKER.PATIENT, language: 'English', text, sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+    const out = extractWithFallback(s);
+    const med = out.candidates.find(c => c.entityType === ENTITY_TYPE.MEDICATION_MENTIONED);
+    assert(med && med.normalizedConcept === 'cetirizine', `mention extracted from: ${text}`);
+    const { verified } = verifyEvidence(s, out.candidates);
+    assert(verified[0].isNegatedContext === true, `contraction negation flags the mention: ${text}`);
+    const approved = applyReviewAction(verified[0], { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+    assert(selectApprovedForExport([approved]).length === 0, 'negated mention denied export even after approval');
+  }
+});
+
+// 14h. English negation applies across entity paths, not only medications
+await record('english negation flags symptom and history candidates too', async () => {
+  const s = mkSession();
+  addUtts(s, [
+    { speaker: SPEAKER.PATIENT, language: 'English', text: 'I do not have fever.', sourceType: SOURCE_TYPE.SCRIPTED_DEMO },
+    { speaker: SPEAKER.PATIENT, language: 'English', text: 'I never had diabetes.', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }
+  ]);
+  const out = extractWithFallback(s);
+  const { verified } = verifyEvidence(s, out.candidates);
+  const fever = verified.find(v => v.normalizedConcept === 'fever');
+  const diabetes = verified.find(v => v.normalizedConcept === 'diabetes');
+  assert(fever && fever.isNegatedContext === true, 'symptom candidate flagged negated');
+  assert(diabetes && diabetes.isNegatedContext === true, 'history candidate flagged negated');
+  const approved = verified.map(v => applyReviewAction(v, { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok'));
+  assert(selectApprovedForExport(approved).length === 0, 'no negated entity exports on any path');
+});
+
+// 14i. Stopped medication: kept as explicit HISTORICAL with source context,
+// never a plain unqualified mention
+await record('stopped medication exports only as HISTORICAL with source context', async () => {
+  const s = mkSession();
+  const text = 'I stopped taking metformin last month.';
+  addUtts(s, [{ speaker: SPEAKER.PATIENT, language: 'English', text, sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  const out = extractWithFallback(s);
+  const med = out.candidates.find(c => c.entityType === ENTITY_TYPE.MEDICATION_MENTIONED && c.normalizedConcept === 'metformin');
+  assert(med, 'metformin mention extracted');
+  const { verified } = verifyEvidence(s, out.candidates);
+  assert(verified[0].verificationStatus === VERIFICATION_STATUS.SUPPORTED, 'stopped mention still source-verifiable');
+  assert(verified[0].temporalStatus === 'HISTORICAL', 'cessation cue marks HISTORICAL');
+  const approved = applyReviewAction(verified[0], { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  const exported = selectApprovedForExport([approved]);
+  assert(exported.length === 1, 'historical mention kept as history');
+  assert(exported[0].temporalStatus === 'HISTORICAL', 'export carries explicit HISTORICAL status');
+  assert(exported[0].sourceContext === text, 'export preserves full source utterance');
+});
+
+// 14j. Default temporal status is UNKNOWN - the engine never auto-assigns current use
+await record('exported mention never auto-assigned current use', async () => {
+  const s = mkSession();
+  const text = 'I take paracetamol sometimes.';
+  addUtts(s, [{ speaker: SPEAKER.PATIENT, language: 'English', text, sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  const out = extractWithFallback(s);
+  const { verified } = verifyEvidence(s, out.candidates);
+  assert(verified[0].temporalStatus === 'UNKNOWN', 'no temporal cue -> explicitly UNKNOWN');
+  const approved = applyReviewAction(verified[0], { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok');
+  const exported = selectApprovedForExport([approved]);
+  assert(exported.length === 1, 'plain mention exports');
+  assert(exported[0].temporalStatus === 'UNKNOWN', 'exported status stays UNKNOWN');
+  assert(!('CURRENT' === exported[0].temporalStatus), 'never CURRENT');
+  assert(exported[0].sourceContext === text, 'source context preserved');
+});
+
 // 15. Prompt injection inside transcript
 await record('transcript injection does not bypass verification', async () => {
   const s = mkSession();

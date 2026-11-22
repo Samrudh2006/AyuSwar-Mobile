@@ -143,6 +143,13 @@ export function selectApprovedForExport(verifiedRecords) {
     !r.isNegatedContext
   ).map(r => Object.freeze({
     ...r,
+    // Standalone-export contract: the original utterance is preserved
+    // explicitly, and temporal status is NEVER auto-assigned as current
+    // use - UNKNOWN unless a cessation/past cue marked it HISTORICAL at
+    // verification time. A stopped or past medication therefore never
+    // exports as a plain unqualified mention.
+    sourceContext: r.originalText,
+    temporalStatus: r.temporalStatus === 'HISTORICAL' ? 'HISTORICAL' : 'UNKNOWN',
     exportNote: r.entityType === ENTITY_TYPE.MEDICATION_INSTRUCTION
       ? 'source-supported instruction reviewed by a human; not an autonomous prescription'
       : 'source-supported; not clinically confirmed'

@@ -21,11 +21,21 @@
 
 import { SPEAKER, ENTITY_TYPE, VERIFICATION_STATUS } from './clinicalEvidenceTypes.js';
 
-const NEGATION_MARKERS = [
+// Indic negation markers: substring match (existing contract).
+const NEGATION_MARKERS_INDIC = [
   'లేదు', 'కాదు', 'వద్దు', // Telugu: no/not/don't want
-  'नहीं', 'ना',           // Hindi: no/not
-  ' no ', ' not ', 'never', 'without'
+  'नहीं', 'ना'             // Hindi: no/not
 ];
+// English negation: word-boundary match so "another", "notable" or
+// "whenever" never false-positive, with straight AND curly apostrophe
+// contractions (don't / don’t). This is marker coverage, not full
+// negation semantics: double negation, sarcasm, hedging and cross-sentence
+// scope are OUT OF SCOPE and remain documented limits.
+const NEGATION_ENGLISH = /\b(no|not|never|without|cannot|denies|denied|deny|refuses?|refused|avoids?)\b|\b(don|doesn|didn|won|can|couldn|shouldn|isn|aren|wasn|weren|hasn|haven|hadn)['’]t\b/i;
+// Temporal cues: the engine NEVER assigns current use. A mention near a
+// cessation/past cue is labelled HISTORICAL; everything else stays
+// explicitly UNKNOWN. Cue matching is heuristic, not tense parsing.
+const TEMPORAL_HISTORICAL_ENGLISH = /\b(stopped|stops|quit|previously|yesterday|took|formerly)\b|\bused to\b|\blast (week|month|year)\b/i;
 
 /**
  * Verify one candidate against the session registry.
@@ -59,8 +69,9 @@ export function verifyCandidate(session, candidate) {
   const lo = Math.max(0, candidate.startOffset - 40);
   const hi = Math.min(utterance.text.length, candidate.endOffset + 40);
   const window = (utterance.text.slice(lo, candidate.startOffset) + ' ' + utterance.text.slice(candidate.endOffset, hi)).toLowerCase();
-  const negated = NEGATION_MARKERS.some(m => window.includes(m.toLowerCase()));
+  const negated = NEGATION_MARKERS_INDIC.some(m => window.includes(m.toLowerCase())) || NEGATION_ENGLISH.test(window);
   if (negated) notes.push('negation marker near span; treat as absent/ruled-out context');
+  const temporalStatus = TEMPORAL_HISTORICAL_ENGLISH.test(window) ? 'HISTORICAL' : 'UNKNOWN';
 
   // Contradiction: same normalized concept, incompatible other candidate.
   const siblings = (session.evidence || []).filter(e =>
@@ -88,7 +99,10 @@ export function verifyCandidate(session, candidate) {
     ...candidate,
     verificationStatus: VERIFICATION_STATUS.SUPPORTED,
     verificationNotes: notes,
-    isNegatedContext: negated || undefined
+    isNegatedContext: negated || undefined,
+    // Engine never assigns CURRENT: UNKNOWN unless a cessation/past cue
+    // marks the mention HISTORICAL. Reviewer supplies clinical temporality.
+    temporalStatus
   });
 }
 

@@ -61,10 +61,23 @@ The deterministic fallback is deliberately conservative about medications:
   historical uses ("I already took paracetamol twice yesterday") all
   surface as plain mentions; the engine makes no current-use claim and the
   reviewer supplies that context.
-- Negation stays fail-closed: a negation marker near the span (e.g.
-  "పెన్సిలిన్ అలర్జీ లేదు", no penicillin allergy) flags the candidate
-  `isNegatedContext`, and the export gate excludes negated records even
-  when a reviewer approved the extraction.
+- Negation stays fail-closed: a negation marker near the span (Telugu:
+  "అలర్జీ లేదు"; English: word-boundary `no/not/never/without/cannot/
+  denies/...` and straight- or curly-apostrophe contractions like
+  `don't` / `don’t`) flags the candidate `isNegatedContext`, and the
+  export gate excludes negated records even when a reviewer approved the
+  extraction. This is marker coverage, NOT full negation semantics:
+  double negation, hedging, sarcasm and cross-sentence scope are not
+  handled and remain open limits; the flag forces review rather than
+  claiming understanding.
+- Temporal status is explicit and conservative: every exported record
+  carries `temporalStatus` = `UNKNOWN` unless a cessation/past cue
+  (stopped, quit, used to, no longer, previously, yesterday, took, last
+  week/month/year) marks it `HISTORICAL`, plus `sourceContext` with the
+  full original utterance. The engine NEVER assigns current use; a
+  stopped medication exports only as HISTORICAL with its context, and
+  the reviewer supplies clinical temporality. Cue matching is heuristic,
+  not tense parsing.
 - Attribution ambiguity stays fail-closed: the same drug quoted by both
   patient and doctor verifies AMBIGUOUS, never SUPPORTED, and never
   exports.
