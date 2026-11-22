@@ -68,12 +68,29 @@ export function verifyCandidate(session, candidate) {
     return fail(VERIFICATION_STATUS.INVALID_SOURCE, 'medication instruction attributed to a non-doctor utterance');
   }
 
+  // A span inside a question is not a finding ("Do you have a fever?").
+  {
+    const before = utterance.text.slice(0, candidate.startOffset).split(/[.!?\u0964]/).pop();
+    const after = utterance.text.slice(candidate.endOffset);
+    const tail = after.split(/[.!?\u0964]/)[0];
+    const endChar = after.charAt(tail.length);
+    if (endChar === '?' && before !== undefined) {
+      return fail(VERIFICATION_STATUS.AMBIGUOUS, 'span is inside a question, not a finding');
+    }
+  }
+
   // Negation window: negation marker within 40 chars on either side of the
   // span (Telugu/Hindi negation often FOLLOWS the noun: "అలర్జీ లేదు").
   const lo = Math.max(0, candidate.startOffset - 40);
   const hi = Math.min(utterance.text.length, candidate.endOffset + 40);
   const window = (utterance.text.slice(lo, candidate.startOffset) + ' ' + utterance.text.slice(candidate.endOffset, hi)).toLowerCase();
-  const negated = NEGATION_MARKERS_INDIC.some(m => window.includes(m.toLowerCase())) || NEGATION_ENGLISH.test(window);
+  // Short Hindi marker 'ना' is also a substring of unrelated words (e.g. खाना),
+  // so it must match as a whole token; the other markers keep substring matching
+  // so suffixed forms (e.g. లేదండి) stay negated.
+  const WHOLE_TOKEN = new Set(['ना']);
+  const negated = NEGATION_MARKERS_INDIC.some(m => WHOLE_TOKEN.has(m)
+    ? new RegExp('(?<![\\p{L}\\p{N}\\p{M}])' + m + '(?![\\p{L}\\p{N}\\p{M}])', 'u').test(window)
+    : window.includes(m.toLowerCase())) || NEGATION_ENGLISH.test(window);
   if (negated) notes.push('negation marker near span; treat as absent/ruled-out context');
   const temporalStatus = TEMPORAL_HISTORICAL_ENGLISH.test(window) ? 'HISTORICAL' : 'UNKNOWN';
 

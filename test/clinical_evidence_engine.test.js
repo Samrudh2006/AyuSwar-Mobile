@@ -472,6 +472,23 @@ await record('fallback does not match a lexicon prefix inside a vowel-sign-suffi
   assert(extractWithFallback(s2).candidates.length === 1, 'exact citation form still matches');
 });
 
+await record('question is not a finding; Hindi ना only as whole token', async () => {
+  const s = mkSession();
+  addUtts(s, [{ speaker: SPEAKER.DOCTOR, language: 'English', text: 'Do you have a fever?', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  const v = verifyEvidence(s, extractWithFallback(s).candidates).verified;
+  assert(v.length === 1 && v[0].verificationStatus === 'AMBIGUOUS' && selectApprovedForExport(v).length === 0, 'question held');
+  const s2 = mkSession();
+  addUtts(s2, [{ speaker: SPEAKER.PATIENT, language: 'English', text: 'I have a fever. Do you know why?', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  const v2 = verifyEvidence(s2, extractWithFallback(s2).candidates).verified;
+  assert(v2.length === 1 && v2[0].verificationStatus === 'SUPPORTED', 'statement before a later question stays supported');
+  const s3 = mkSession();
+  addUtts(s3, [{ speaker: SPEAKER.PATIENT, language: 'Hindi', text: 'खाना खाने के बाद मुझे बुखार है', sourceType: SOURCE_TYPE.SCRIPTED_DEMO },
+               { speaker: SPEAKER.PATIENT, language: 'Hindi', text: 'मुझे बुखार ना', sourceType: SOURCE_TYPE.SCRIPTED_DEMO }]);
+  const v3 = verifyEvidence(s3, extractWithFallback(s3).candidates).verified;
+  assert(v3[0].isNegatedContext !== true, 'ना inside खाना is not negation');
+  assert(v3[1].isNegatedContext === true, 'standalone ना still negates');
+});
+
 const failed = results.filter(r => !r.ok);
 for (const r of results) console.log(`${r.ok ? 'PASS' : 'FAIL'} ${r.name}${r.ok ? '' : ' :: ' + (r.err?.message || r.err)}`);
 console.log(`\nclinical_evidence_engine: ${results.length - failed.length}/${results.length} passed`);
