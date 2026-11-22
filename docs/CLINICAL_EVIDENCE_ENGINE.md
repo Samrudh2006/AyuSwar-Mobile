@@ -71,13 +71,16 @@ The deterministic fallback is deliberately conservative about medications:
   handled and remain open limits; the flag forces review rather than
   claiming understanding.
 - Temporal status is explicit and conservative: every exported record
-  carries `temporalStatus` = `UNKNOWN` unless a cessation/past cue
-  (stopped, quit, used to, no longer, previously, yesterday, took, last
+  carries `temporalStatus` = `UNKNOWN` unless an English cessation/past
+  cue (stopped, quit, used to, previously, yesterday, took, last
   week/month/year) marks it `HISTORICAL`, plus `sourceContext` with the
   full original utterance. The engine NEVER assigns current use; a
   stopped medication exports only as HISTORICAL with its context, and
   the reviewer supplies clinical temporality. Cue matching is heuristic,
-  not tense parsing.
+  not tense parsing. Two bounded gaps: cues are English-only (Telugu/
+  Hindi cessation keeps UNKNOWN with source context preserved), and
+  "no longer" matches negation first, so those mentions are HELD from
+  export rather than exported as HISTORICAL.
 - Attribution ambiguity stays fail-closed: the same drug quoted by both
   patient and doctor verifies AMBIGUOUS, never SUPPORTED, and never
   exports.

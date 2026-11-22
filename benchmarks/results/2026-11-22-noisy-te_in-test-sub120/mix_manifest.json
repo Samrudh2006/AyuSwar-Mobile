@@ -1,0 +1,8983 @@
+{
+ "seed": 20261122,
+ "snrs": [
+  20.0,
+  10.0,
+  5.0
+ ],
+ "noise_files": [
+  "Babble_1.wav",
+  "Babble_4.wav"
+ ],
+ "method": "whole-clip speech RMS (no VAD), random noise offset, int16 clamp",
+ "clips": [
+  {
+   "clip": "10054709042905280078.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01570351,
+   "levels": {
+    "snr20": {
+     "offset": 447862,
+     "noise_gain": 0.01427054
+    },
+    "snr10": {
+     "offset": 225784,
+     "noise_gain": 0.03411493
+    },
+    "snr5": {
+     "offset": 634971,
+     "noise_gain": 0.0784791
+    }
+   }
+  },
+  {
+   "clip": "10085601229183142282.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05313531,
+   "levels": {
+    "snr20": {
+     "offset": 885960,
+     "noise_gain": 0.11283923
+    },
+    "snr10": {
+     "offset": 362706,
+     "noise_gain": 0.22205119
+    },
+    "snr5": {
+     "offset": 1279026,
+     "noise_gain": 0.58186259
+    }
+   }
+  },
+  {
+   "clip": "10097262201978333927.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05671513,
+   "levels": {
+    "snr20": {
+     "offset": 554631,
+     "noise_gain": 0.05275885
+    },
+    "snr10": {
+     "offset": 479428,
+     "noise_gain": 0.16998657
+    },
+    "snr5": {
+     "offset": 633111,
+     "noise_gain": 0.29091346
+    }
+   }
+  },
+  {
+   "clip": "10145424547032356574.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05254779,
+   "levels": {
+    "snr20": {
+     "offset": 1623153,
+     "noise_gain": 0.0870446
+    },
+    "snr10": {
+     "offset": 719158,
+     "noise_gain": 0.28501578
+    },
+    "snr5": {
+     "offset": 217300,
+     "noise_gain": 0.40230833
+    }
+   }
+  },
+  {
+   "clip": "10145868845413764406.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03258024,
+   "levels": {
+    "snr20": {
+     "offset": 257819,
+     "noise_gain": 0.0258118
+    },
+    "snr10": {
+     "offset": 544387,
+     "noise_gain": 0.09645072
+    },
+    "snr5": {
+     "offset": 772790,
+     "noise_gain": 0.17457112
+    }
+   }
+  },
+  {
+   "clip": "1018616296093099687.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01342187,
+   "levels": {
+    "snr20": {
+     "offset": 1425763,
+     "noise_gain": 0.01929376
+    },
+    "snr10": {
+     "offset": 1100271,
+     "noise_gain": 0.05723805
+    },
+    "snr5": {
+     "offset": 119161,
+     "noise_gain": 0.09567329
+    }
+   }
+  },
+  {
+   "clip": "10217994866191966871.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05883216,
+   "levels": {
+    "snr20": {
+     "offset": 851462,
+     "noise_gain": 0.05697004
+    },
+    "snr10": {
+     "offset": 580561,
+     "noise_gain": 0.17626861
+    },
+    "snr5": {
+     "offset": 217042,
+     "noise_gain": 0.20076862
+    }
+   }
+  },
+  {
+   "clip": "10252770362041562600.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00814134,
+   "levels": {
+    "snr20": {
+     "offset": 503672,
+     "noise_gain": 0.01271151
+    },
+    "snr10": {
+     "offset": 874747,
+     "noise_gain": 0.03872131
+    },
+    "snr5": {
+     "offset": 1471429,
+     "noise_gain": 0.07010839
+    }
+   }
+  },
+  {
+   "clip": "10291149870624674262.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02268893,
+   "levels": {
+    "snr20": {
+     "offset": 930923,
+     "noise_gain": 0.03362161
+    },
+    "snr10": {
+     "offset": 454760,
+     "noise_gain": 0.10061996
+    },
+    "snr5": {
+     "offset": 644375,
+     "noise_gain": 0.24142352
+    }
+   }
+  },
+  {
+   "clip": "10373756234313480430.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0463335,
+   "levels": {
+    "snr20": {
+     "offset": 568714,
+     "noise_gain": 0.04258628
+    },
+    "snr10": {
+     "offset": 472915,
+     "noise_gain": 0.13280002
+    },
+    "snr5": {
+     "offset": 575396,
+     "noise_gain": 0.23899398
+    }
+   }
+  },
+  {
+   "clip": "1038171316850556262.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01268804,
+   "levels": {
+    "snr20": {
+     "offset": 560540,
+     "noise_gain": 0.01191772
+    },
+    "snr10": {
+     "offset": 164907,
+     "noise_gain": 0.02224118
+    },
+    "snr5": {
+     "offset": 232427,
+     "noise_gain": 0.05042257
+    }
+   }
+  },
+  {
+   "clip": "10421077295670162774.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0721629,
+   "levels": {
+    "snr20": {
+     "offset": 732165,
+     "noise_gain": 0.14454193
+    },
+    "snr10": {
+     "offset": 128337,
+     "noise_gain": 0.30762142
+    },
+    "snr5": {
+     "offset": 1527049,
+     "noise_gain": 0.67283493
+    }
+   }
+  },
+  {
+   "clip": "10495283664299809767.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0584014,
+   "levels": {
+    "snr20": {
+     "offset": 1369525,
+     "noise_gain": 0.09721562
+    },
+    "snr10": {
+     "offset": 1585956,
+     "noise_gain": 0.28259972
+    },
+    "snr5": {
+     "offset": 1299468,
+     "noise_gain": 0.65673673
+    }
+   }
+  },
+  {
+   "clip": "10529075416468337996.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01895218,
+   "levels": {
+    "snr20": {
+     "offset": 353104,
+     "noise_gain": 0.01754476
+    },
+    "snr10": {
+     "offset": 595063,
+     "noise_gain": 0.05473014
+    },
+    "snr5": {
+     "offset": 537325,
+     "noise_gain": 0.09893421
+    }
+   }
+  },
+  {
+   "clip": "10571599409452355137.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01178044,
+   "levels": {
+    "snr20": {
+     "offset": 397908,
+     "noise_gain": 0.01112907
+    },
+    "snr10": {
+     "offset": 709792,
+     "noise_gain": 0.03442022
+    },
+    "snr5": {
+     "offset": 3882,
+     "noise_gain": 0.03765517
+    }
+   }
+  },
+  {
+   "clip": "10646866174304187145.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0387995,
+   "levels": {
+    "snr20": {
+     "offset": 31906,
+     "noise_gain": 0.04957509
+    },
+    "snr10": {
+     "offset": 78650,
+     "noise_gain": 0.17693524
+    },
+    "snr5": {
+     "offset": 622550,
+     "noise_gain": 0.36616644
+    }
+   }
+  },
+  {
+   "clip": "10647602998943232854.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01326307,
+   "levels": {
+    "snr20": {
+     "offset": 789566,
+     "noise_gain": 0.01295657
+    },
+    "snr10": {
+     "offset": 249448,
+     "noise_gain": 0.0321179
+    },
+    "snr5": {
+     "offset": 146962,
+     "noise_gain": 0.04250969
+    }
+   }
+  },
+  {
+   "clip": "10654337921395647790.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03170377,
+   "levels": {
+    "snr20": {
+     "offset": 349996,
+     "noise_gain": 0.05665187
+    },
+    "snr10": {
+     "offset": 700356,
+     "noise_gain": 0.17976719
+    },
+    "snr5": {
+     "offset": 1214838,
+     "noise_gain": 0.2390246
+    }
+   }
+  },
+  {
+   "clip": "10678516065550448203.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03325843,
+   "levels": {
+    "snr20": {
+     "offset": 408785,
+     "noise_gain": 0.04790657
+    },
+    "snr10": {
+     "offset": 838775,
+     "noise_gain": 0.1655465
+    },
+    "snr5": {
+     "offset": 825280,
+     "noise_gain": 0.29542806
+    }
+   }
+  },
+  {
+   "clip": "10695835431845558330.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03961693,
+   "levels": {
+    "snr20": {
+     "offset": 1529550,
+     "noise_gain": 0.0665126
+    },
+    "snr10": {
+     "offset": 224403,
+     "noise_gain": 0.17306658
+    },
+    "snr5": {
+     "offset": 676424,
+     "noise_gain": 0.39283714
+    }
+   }
+  },
+  {
+   "clip": "10725877689074209222.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02995222,
+   "levels": {
+    "snr20": {
+     "offset": 477207,
+     "noise_gain": 0.04421494
+    },
+    "snr10": {
+     "offset": 1479743,
+     "noise_gain": 0.14161719
+    },
+    "snr5": {
+     "offset": 891861,
+     "noise_gain": 0.24812859
+    }
+   }
+  },
+  {
+   "clip": "10732354101888311918.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02989307,
+   "levels": {
+    "snr20": {
+     "offset": 673936,
+     "noise_gain": 0.04958248
+    },
+    "snr10": {
+     "offset": 1557941,
+     "noise_gain": 0.16162641
+    },
+    "snr5": {
+     "offset": 833479,
+     "noise_gain": 0.38997968
+    }
+   }
+  },
+  {
+   "clip": "10742717828213690189.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03388478,
+   "levels": {
+    "snr20": {
+     "offset": 296330,
+     "noise_gain": 0.02952956
+    },
+    "snr10": {
+     "offset": 94726,
+     "noise_gain": 0.05982455
+    },
+    "snr5": {
+     "offset": 484529,
+     "noise_gain": 0.17861091
+    }
+   }
+  },
+  {
+   "clip": "10801958075443782386.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00750933,
+   "levels": {
+    "snr20": {
+     "offset": 334860,
+     "noise_gain": 0.00678814
+    },
+    "snr10": {
+     "offset": 284010,
+     "noise_gain": 0.01949457
+    },
+    "snr5": {
+     "offset": 663374,
+     "noise_gain": 0.03760081
+    }
+   }
+  },
+  {
+   "clip": "10803837844244681170.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03629747,
+   "levels": {
+    "snr20": {
+     "offset": 705608,
+     "noise_gain": 0.03334453
+    },
+    "snr10": {
+     "offset": 815591,
+     "noise_gain": 0.10495033
+    },
+    "snr5": {
+     "offset": 16332,
+     "noise_gain": 0.1192553
+    }
+   }
+  },
+  {
+   "clip": "10900306686093962519.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03638037,
+   "levels": {
+    "snr20": {
+     "offset": 1081346,
+     "noise_gain": 0.05035784
+    },
+    "snr10": {
+     "offset": 1584954,
+     "noise_gain": 0.17865719
+    },
+    "snr5": {
+     "offset": 364401,
+     "noise_gain": 0.27490457
+    }
+   }
+  },
+  {
+   "clip": "10929767086764622169.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01340775,
+   "levels": {
+    "snr20": {
+     "offset": 591695,
+     "noise_gain": 0.02067207
+    },
+    "snr10": {
+     "offset": 224132,
+     "noise_gain": 0.0602941
+    },
+    "snr5": {
+     "offset": 229469,
+     "noise_gain": 0.11257329
+    }
+   }
+  },
+  {
+   "clip": "10937130790312519888.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00943032,
+   "levels": {
+    "snr20": {
+     "offset": 43696,
+     "noise_gain": 0.01245794
+    },
+    "snr10": {
+     "offset": 385327,
+     "noise_gain": 0.0412646
+    },
+    "snr5": {
+     "offset": 1159995,
+     "noise_gain": 0.08567353
+    }
+   }
+  },
+  {
+   "clip": "11109327045538113410.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01264283,
+   "levels": {
+    "snr20": {
+     "offset": 1172494,
+     "noise_gain": 0.02069572
+    },
+    "snr10": {
+     "offset": 1287907,
+     "noise_gain": 0.07708583
+    },
+    "snr5": {
+     "offset": 1160787,
+     "noise_gain": 0.1158077
+    }
+   }
+  },
+  {
+   "clip": "11159315830289882640.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05665774,
+   "levels": {
+    "snr20": {
+     "offset": 581139,
+     "noise_gain": 0.05155177
+    },
+    "snr10": {
+     "offset": 192447,
+     "noise_gain": 0.10639339
+    },
+    "snr5": {
+     "offset": 381523,
+     "noise_gain": 0.28622485
+    }
+   }
+  },
+  {
+   "clip": "11183151184555863988.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01353357,
+   "levels": {
+    "snr20": {
+     "offset": 254646,
+     "noise_gain": 0.01010461
+    },
+    "snr10": {
+     "offset": 327817,
+     "noise_gain": 0.03817307
+    },
+    "snr5": {
+     "offset": 723647,
+     "noise_gain": 0.06979647
+    }
+   }
+  },
+  {
+   "clip": "11199556481223489621.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01234162,
+   "levels": {
+    "snr20": {
+     "offset": 689009,
+     "noise_gain": 0.01121978
+    },
+    "snr10": {
+     "offset": 739409,
+     "noise_gain": 0.03712092
+    },
+    "snr5": {
+     "offset": 480344,
+     "noise_gain": 0.06579449
+    }
+   }
+  },
+  {
+   "clip": "11230545327404776983.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02593369,
+   "levels": {
+    "snr20": {
+     "offset": 1624353,
+     "noise_gain": 0.03225189
+    },
+    "snr10": {
+     "offset": 307621,
+     "noise_gain": 0.10572999
+    },
+    "snr5": {
+     "offset": 93126,
+     "noise_gain": 0.20923973
+    }
+   }
+  },
+  {
+   "clip": "11343877899980638969.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01229105,
+   "levels": {
+    "snr20": {
+     "offset": 609493,
+     "noise_gain": 0.01105975
+    },
+    "snr10": {
+     "offset": 252816,
+     "noise_gain": 0.02974751
+    },
+    "snr5": {
+     "offset": 462043,
+     "noise_gain": 0.06354107
+    }
+   }
+  },
+  {
+   "clip": "11357068267453344044.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01599964,
+   "levels": {
+    "snr20": {
+     "offset": 763252,
+     "noise_gain": 0.01561829
+    },
+    "snr10": {
+     "offset": 451978,
+     "noise_gain": 0.04639418
+    },
+    "snr5": {
+     "offset": 539144,
+     "noise_gain": 0.08403193
+    }
+   }
+  },
+  {
+   "clip": "11420958400387010893.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03441436,
+   "levels": {
+    "snr20": {
+     "offset": 1521771,
+     "noise_gain": 0.05682885
+    },
+    "snr10": {
+     "offset": 1318581,
+     "noise_gain": 0.21280851
+    },
+    "snr5": {
+     "offset": 1055909,
+     "noise_gain": 0.27466441
+    }
+   }
+  },
+  {
+   "clip": "1152675118770462164.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06602027,
+   "levels": {
+    "snr20": {
+     "offset": 205372,
+     "noise_gain": 0.04224334
+    },
+    "snr10": {
+     "offset": 685313,
+     "noise_gain": 0.19219135
+    },
+    "snr5": {
+     "offset": 662575,
+     "noise_gain": 0.33869279
+    }
+   }
+  },
+  {
+   "clip": "11530728089455611800.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.09722746,
+   "levels": {
+    "snr20": {
+     "offset": 391684,
+     "noise_gain": 0.09019008
+    },
+    "snr10": {
+     "offset": 742308,
+     "noise_gain": 0.29368374
+    },
+    "snr5": {
+     "offset": 771920,
+     "noise_gain": 0.5301676
+    }
+   }
+  },
+  {
+   "clip": "1155737170846284065.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0651907,
+   "levels": {
+    "snr20": {
+     "offset": 506265,
+     "noise_gain": 0.06052231
+    },
+    "snr10": {
+     "offset": 309120,
+     "noise_gain": 0.18781918
+    },
+    "snr5": {
+     "offset": 15257,
+     "noise_gain": 0.21979822
+    }
+   }
+  },
+  {
+   "clip": "11601927595613225994.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01485227,
+   "levels": {
+    "snr20": {
+     "offset": 245387,
+     "noise_gain": 0.01068313
+    },
+    "snr10": {
+     "offset": 11003,
+     "noise_gain": 0.02758146
+    },
+    "snr5": {
+     "offset": 367946,
+     "noise_gain": 0.07567341
+    }
+   }
+  },
+  {
+   "clip": "11744822484959253541.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00891008,
+   "levels": {
+    "snr20": {
+     "offset": 1510184,
+     "noise_gain": 0.01298542
+    },
+    "snr10": {
+     "offset": 1301196,
+     "noise_gain": 0.06563039
+    },
+    "snr5": {
+     "offset": 405850,
+     "noise_gain": 0.06773855
+    }
+   }
+  },
+  {
+   "clip": "11785526232364778972.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02795426,
+   "levels": {
+    "snr20": {
+     "offset": 313516,
+     "noise_gain": 0.02420866
+    },
+    "snr10": {
+     "offset": 858107,
+     "noise_gain": 0.08960329
+    },
+    "snr5": {
+     "offset": 169152,
+     "noise_gain": 0.08517357
+    }
+   }
+  },
+  {
+   "clip": "11800201787645436840.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00766171,
+   "levels": {
+    "snr20": {
+     "offset": 1296001,
+     "noise_gain": 0.0156069
+    },
+    "snr10": {
+     "offset": 593727,
+     "noise_gain": 0.03787653
+    },
+    "snr5": {
+     "offset": 956504,
+     "noise_gain": 0.05919883
+    }
+   }
+  },
+  {
+   "clip": "11805494484399312802.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05695243,
+   "levels": {
+    "snr20": {
+     "offset": 173667,
+     "noise_gain": 0.03810356
+    },
+    "snr10": {
+     "offset": 148767,
+     "noise_gain": 0.11288045
+    },
+    "snr5": {
+     "offset": 606124,
+     "noise_gain": 0.29000804
+    }
+   }
+  },
+  {
+   "clip": "11899046494525689376.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02879253,
+   "levels": {
+    "snr20": {
+     "offset": 1177079,
+     "noise_gain": 0.03920661
+    },
+    "snr10": {
+     "offset": 58353,
+     "noise_gain": 0.16165162
+    },
+    "snr5": {
+     "offset": 930250,
+     "noise_gain": 0.23549331
+    }
+   }
+  },
+  {
+   "clip": "11991138478326084243.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05408516,
+   "levels": {
+    "snr20": {
+     "offset": 212543,
+     "noise_gain": 0.03577618
+    },
+    "snr10": {
+     "offset": 112973,
+     "noise_gain": 0.09263838
+    },
+    "snr5": {
+     "offset": 734572,
+     "noise_gain": 0.28658968
+    }
+   }
+  },
+  {
+   "clip": "11994346634291898641.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01107209,
+   "levels": {
+    "snr20": {
+     "offset": 1219001,
+     "noise_gain": 0.01947176
+    },
+    "snr10": {
+     "offset": 149479,
+     "noise_gain": 0.04619539
+    },
+    "snr5": {
+     "offset": 289114,
+     "noise_gain": 0.08632833
+    }
+   }
+  },
+  {
+   "clip": "12040205849954416549.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06921534,
+   "levels": {
+    "snr20": {
+     "offset": 457081,
+     "noise_gain": 0.06305684
+    },
+    "snr10": {
+     "offset": 3775,
+     "noise_gain": 0.12201841
+    },
+    "snr5": {
+     "offset": 505389,
+     "noise_gain": 0.3620278
+    }
+   }
+  },
+  {
+   "clip": "120526665116427588.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00976557,
+   "levels": {
+    "snr20": {
+     "offset": 538712,
+     "noise_gain": 0.01432954
+    },
+    "snr10": {
+     "offset": 1234389,
+     "noise_gain": 0.04917577
+    },
+    "snr5": {
+     "offset": 449887,
+     "noise_gain": 0.07220212
+    }
+   }
+  },
+  {
+   "clip": "12071995649421315271.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03973123,
+   "levels": {
+    "snr20": {
+     "offset": 829478,
+     "noise_gain": 0.03739016
+    },
+    "snr10": {
+     "offset": 78578,
+     "noise_gain": 0.0692062
+    },
+    "snr5": {
+     "offset": 408508,
+     "noise_gain": 0.20331654
+    }
+   }
+  },
+  {
+   "clip": "12117222453775356498.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06118462,
+   "levels": {
+    "snr20": {
+     "offset": 765138,
+     "noise_gain": 0.12059109
+    },
+    "snr10": {
+     "offset": 24312,
+     "noise_gain": 0.26088468
+    },
+    "snr5": {
+     "offset": 805098,
+     "noise_gain": 0.75717286
+    }
+   }
+  },
+  {
+   "clip": "12125941011208490554.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0162384,
+   "levels": {
+    "snr20": {
+     "offset": 1548658,
+     "noise_gain": 0.02108886
+    },
+    "snr10": {
+     "offset": 887791,
+     "noise_gain": 0.07673788
+    },
+    "snr5": {
+     "offset": 476647,
+     "noise_gain": 0.13832069
+    }
+   }
+  },
+  {
+   "clip": "12175817476601380411.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0618571,
+   "levels": {
+    "snr20": {
+     "offset": 519409,
+     "noise_gain": 0.05832906
+    },
+    "snr10": {
+     "offset": 68768,
+     "noise_gain": 0.11563543
+    },
+    "snr5": {
+     "offset": 170429,
+     "noise_gain": 0.23871227
+    }
+   }
+  },
+  {
+   "clip": "12185150433001129739.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01433203,
+   "levels": {
+    "snr20": {
+     "offset": 206604,
+     "noise_gain": 0.01836992
+    },
+    "snr10": {
+     "offset": 211204,
+     "noise_gain": 0.0591503
+    },
+    "snr5": {
+     "offset": 745955,
+     "noise_gain": 0.13996464
+    }
+   }
+  },
+  {
+   "clip": "12221186966012528575.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07476035,
+   "levels": {
+    "snr20": {
+     "offset": 1185913,
+     "noise_gain": 0.10051205
+    },
+    "snr10": {
+     "offset": 1706982,
+     "noise_gain": 0.23641987
+    },
+    "snr5": {
+     "offset": 442072,
+     "noise_gain": 0.54211115
+    }
+   }
+  },
+  {
+   "clip": "12248585152137390232.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02142883,
+   "levels": {
+    "snr20": {
+     "offset": 769685,
+     "noise_gain": 0.02052901
+    },
+    "snr10": {
+     "offset": 715226,
+     "noise_gain": 0.06222829
+    },
+    "snr5": {
+     "offset": 124242,
+     "noise_gain": 0.06612323
+    }
+   }
+  },
+  {
+   "clip": "12283511119418369837.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01252625,
+   "levels": {
+    "snr20": {
+     "offset": 409301,
+     "noise_gain": 0.01184654
+    },
+    "snr10": {
+     "offset": 88364,
+     "noise_gain": 0.02165504
+    },
+    "snr5": {
+     "offset": 332757,
+     "noise_gain": 0.06167291
+    }
+   }
+  },
+  {
+   "clip": "12338079544923946892.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01077509,
+   "levels": {
+    "snr20": {
+     "offset": 875300,
+     "noise_gain": 0.0180414
+    },
+    "snr10": {
+     "offset": 666771,
+     "noise_gain": 0.05716056
+    },
+    "snr5": {
+     "offset": 1121908,
+     "noise_gain": 0.08624442
+    }
+   }
+  },
+  {
+   "clip": "12351094474383461539.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04237506,
+   "levels": {
+    "snr20": {
+     "offset": 59124,
+     "noise_gain": 0.02269386
+    },
+    "snr10": {
+     "offset": 366949,
+     "noise_gain": 0.12190788
+    },
+    "snr5": {
+     "offset": 322918,
+     "noise_gain": 0.20848401
+    }
+   }
+  },
+  {
+   "clip": "12356525553516063852.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05527601,
+   "levels": {
+    "snr20": {
+     "offset": 1088312,
+     "noise_gain": 0.07881885
+    },
+    "snr10": {
+     "offset": 580817,
+     "noise_gain": 0.22755907
+    },
+    "snr5": {
+     "offset": 416586,
+     "noise_gain": 0.40357294
+    }
+   }
+  },
+  {
+   "clip": "12366480436562345665.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01258978,
+   "levels": {
+    "snr20": {
+     "offset": 674818,
+     "noise_gain": 0.01121335
+    },
+    "snr10": {
+     "offset": 574218,
+     "noise_gain": 0.03752546
+    },
+    "snr5": {
+     "offset": 797916,
+     "noise_gain": 0.06539626
+    }
+   }
+  },
+  {
+   "clip": "12378438174678150767.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02422795,
+   "levels": {
+    "snr20": {
+     "offset": 1141001,
+     "noise_gain": 0.03780974
+    },
+    "snr10": {
+     "offset": 330864,
+     "noise_gain": 0.10946823
+    },
+    "snr5": {
+     "offset": 871838,
+     "noise_gain": 0.22949762
+    }
+   }
+  },
+  {
+   "clip": "12386742514066475207.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04055792,
+   "levels": {
+    "snr20": {
+     "offset": 1141662,
+     "noise_gain": 0.05961154
+    },
+    "snr10": {
+     "offset": 1429123,
+     "noise_gain": 0.19463604
+    },
+    "snr5": {
+     "offset": 607081,
+     "noise_gain": 0.3606707
+    }
+   }
+  },
+  {
+   "clip": "12390331146953556140.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01038636,
+   "levels": {
+    "snr20": {
+     "offset": 1491390,
+     "noise_gain": 0.01510549
+    },
+    "snr10": {
+     "offset": 349139,
+     "noise_gain": 0.04586115
+    },
+    "snr5": {
+     "offset": 1663405,
+     "noise_gain": 0.06426462
+    }
+   }
+  },
+  {
+   "clip": "12420313077650920990.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04132235,
+   "levels": {
+    "snr20": {
+     "offset": 1453053,
+     "noise_gain": 0.06260637
+    },
+    "snr10": {
+     "offset": 1471578,
+     "noise_gain": 0.18804069
+    },
+    "snr5": {
+     "offset": 502441,
+     "noise_gain": 0.34845198
+    }
+   }
+  },
+  {
+   "clip": "12421261037291882826.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05509616,
+   "levels": {
+    "snr20": {
+     "offset": 690758,
+     "noise_gain": 0.05136793
+    },
+    "snr10": {
+     "offset": 682243,
+     "noise_gain": 0.16086709
+    },
+    "snr5": {
+     "offset": 318761,
+     "noise_gain": 0.27916519
+    }
+   }
+  },
+  {
+   "clip": "1243426477625760707.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0362571,
+   "levels": {
+    "snr20": {
+     "offset": 538821,
+     "noise_gain": 0.03553996
+    },
+    "snr10": {
+     "offset": 461901,
+     "noise_gain": 0.10603803
+    },
+    "snr5": {
+     "offset": 307693,
+     "noise_gain": 0.18041665
+    }
+   }
+  },
+  {
+   "clip": "12478032241047162095.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04370088,
+   "levels": {
+    "snr20": {
+     "offset": 441948,
+     "noise_gain": 0.05077491
+    },
+    "snr10": {
+     "offset": 260779,
+     "noise_gain": 0.17969411
+    },
+    "snr5": {
+     "offset": 1125381,
+     "noise_gain": 0.48798002
+    }
+   }
+  },
+  {
+   "clip": "12498770425106753479.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05772008,
+   "levels": {
+    "snr20": {
+     "offset": 237711,
+     "noise_gain": 0.04053878
+    },
+    "snr10": {
+     "offset": 158726,
+     "noise_gain": 0.09818436
+    },
+    "snr5": {
+     "offset": 458907,
+     "noise_gain": 0.29468953
+    }
+   }
+  },
+  {
+   "clip": "12580058940162831280.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00651926,
+   "levels": {
+    "snr20": {
+     "offset": 752580,
+     "noise_gain": 0.00694556
+    },
+    "snr10": {
+     "offset": 726288,
+     "noise_gain": 0.01933931
+    },
+    "snr5": {
+     "offset": 418423,
+     "noise_gain": 0.03225922
+    }
+   }
+  },
+  {
+   "clip": "12588886511473191330.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0097722,
+   "levels": {
+    "snr20": {
+     "offset": 904638,
+     "noise_gain": 0.01485548
+    },
+    "snr10": {
+     "offset": 1636263,
+     "noise_gain": 0.04579774
+    },
+    "snr5": {
+     "offset": 1266641,
+     "noise_gain": 0.10730139
+    }
+   }
+  },
+  {
+   "clip": "12613889496305561238.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02490291,
+   "levels": {
+    "snr20": {
+     "offset": 361462,
+     "noise_gain": 0.02234014
+    },
+    "snr10": {
+     "offset": 466338,
+     "noise_gain": 0.07385591
+    },
+    "snr5": {
+     "offset": 742206,
+     "noise_gain": 0.13210057
+    }
+   }
+  },
+  {
+   "clip": "12681391522981367101.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05054493,
+   "levels": {
+    "snr20": {
+     "offset": 749216,
+     "noise_gain": 0.10133796
+    },
+    "snr10": {
+     "offset": 18354,
+     "noise_gain": 0.21473109
+    },
+    "snr5": {
+     "offset": 323726,
+     "noise_gain": 0.39015634
+    }
+   }
+  },
+  {
+   "clip": "12687447370749589600.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01014493,
+   "levels": {
+    "snr20": {
+     "offset": 736375,
+     "noise_gain": 0.01961765
+    },
+    "snr10": {
+     "offset": 1357120,
+     "noise_gain": 0.05870453
+    },
+    "snr5": {
+     "offset": 475099,
+     "noise_gain": 0.0835863
+    }
+   }
+  },
+  {
+   "clip": "12751854645204591914.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03494421,
+   "levels": {
+    "snr20": {
+     "offset": 815019,
+     "noise_gain": 0.0622477
+    },
+    "snr10": {
+     "offset": 1535530,
+     "noise_gain": 0.1718583
+    },
+    "snr5": {
+     "offset": 797954,
+     "noise_gain": 0.37968572
+    }
+   }
+  },
+  {
+   "clip": "12774737540790218914.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01124974,
+   "levels": {
+    "snr20": {
+     "offset": 589572,
+     "noise_gain": 0.01033303
+    },
+    "snr10": {
+     "offset": 848596,
+     "noise_gain": 0.03388956
+    },
+    "snr5": {
+     "offset": 707773,
+     "noise_gain": 0.05677779
+    }
+   }
+  },
+  {
+   "clip": "12812633792031662051.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04226971,
+   "levels": {
+    "snr20": {
+     "offset": 66304,
+     "noise_gain": 0.05791207
+    },
+    "snr10": {
+     "offset": 1295504,
+     "noise_gain": 0.25633021
+    },
+    "snr5": {
+     "offset": 45566,
+     "noise_gain": 0.31653116
+    }
+   }
+  },
+  {
+   "clip": "12839279305661677316.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01481911,
+   "levels": {
+    "snr20": {
+     "offset": 817868,
+     "noise_gain": 0.03677124
+    },
+    "snr10": {
+     "offset": 496462,
+     "noise_gain": 0.07311551
+    },
+    "snr5": {
+     "offset": 1621298,
+     "noise_gain": 0.13245618
+    }
+   }
+  },
+  {
+   "clip": "12976899983715724941.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0354668,
+   "levels": {
+    "snr20": {
+     "offset": 200406,
+     "noise_gain": 0.01964412
+    },
+    "snr10": {
+     "offset": 255096,
+     "noise_gain": 0.08038167
+    },
+    "snr5": {
+     "offset": 422924,
+     "noise_gain": 0.17581961
+    }
+   }
+  },
+  {
+   "clip": "12996576979011201856.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04594075,
+   "levels": {
+    "snr20": {
+     "offset": 20335,
+     "noise_gain": 0.02558007
+    },
+    "snr10": {
+     "offset": 433639,
+     "noise_gain": 0.13454801
+    },
+    "snr5": {
+     "offset": 535400,
+     "noise_gain": 0.23696062
+    }
+   }
+  },
+  {
+   "clip": "12998963082398095353.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01840366,
+   "levels": {
+    "snr20": {
+     "offset": 747619,
+     "noise_gain": 0.01757609
+    },
+    "snr10": {
+     "offset": 773620,
+     "noise_gain": 0.05465222
+    },
+    "snr5": {
+     "offset": 77963,
+     "noise_gain": 0.05690348
+    }
+   }
+  },
+  {
+   "clip": "1300324935168020593.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0145053,
+   "levels": {
+    "snr20": {
+     "offset": 397759,
+     "noise_gain": 0.01354777
+    },
+    "snr10": {
+     "offset": 489159,
+     "noise_gain": 0.04274517
+    },
+    "snr5": {
+     "offset": 236074,
+     "noise_gain": 0.06372558
+    }
+   }
+  },
+  {
+   "clip": "13019169537354220273.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01725576,
+   "levels": {
+    "snr20": {
+     "offset": 1197502,
+     "noise_gain": 0.02783632
+    },
+    "snr10": {
+     "offset": 251910,
+     "noise_gain": 0.07657161
+    },
+    "snr5": {
+     "offset": 316299,
+     "noise_gain": 0.13119377
+    }
+   }
+  },
+  {
+   "clip": "13037566131055873676.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05441521,
+   "levels": {
+    "snr20": {
+     "offset": 487065,
+     "noise_gain": 0.08166752
+    },
+    "snr10": {
+     "offset": 777191,
+     "noise_gain": 0.33459452
+    },
+    "snr5": {
+     "offset": 664068,
+     "noise_gain": 0.54662976
+    }
+   }
+  },
+  {
+   "clip": "13039377649780953636.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02640579,
+   "levels": {
+    "snr20": {
+     "offset": 446347,
+     "noise_gain": 0.0241258
+    },
+    "snr10": {
+     "offset": 339552,
+     "noise_gain": 0.07347871
+    },
+    "snr5": {
+     "offset": 194858,
+     "noise_gain": 0.089425
+    }
+   }
+  },
+  {
+   "clip": "13057612386580237345.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0092553,
+   "levels": {
+    "snr20": {
+     "offset": 743664,
+     "noise_gain": 0.00884382
+    },
+    "snr10": {
+     "offset": 392445,
+     "noise_gain": 0.02688147
+    },
+    "snr5": {
+     "offset": 175006,
+     "noise_gain": 0.03146589
+    }
+   }
+  },
+  {
+   "clip": "13085055815956013786.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00917558,
+   "levels": {
+    "snr20": {
+     "offset": 222387,
+     "noise_gain": 0.00708576
+    },
+    "snr10": {
+     "offset": 308939,
+     "noise_gain": 0.02628825
+    },
+    "snr5": {
+     "offset": 204370,
+     "noise_gain": 0.0373962
+    }
+   }
+  },
+  {
+   "clip": "13087652165225568507.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03229133,
+   "levels": {
+    "snr20": {
+     "offset": 679505,
+     "noise_gain": 0.02924434
+    },
+    "snr10": {
+     "offset": 135138,
+     "noise_gain": 0.05616106
+    },
+    "snr5": {
+     "offset": 510603,
+     "noise_gain": 0.17355199
+    }
+   }
+  },
+  {
+   "clip": "13110211309303433308.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01653154,
+   "levels": {
+    "snr20": {
+     "offset": 436876,
+     "noise_gain": 0.0151589
+    },
+    "snr10": {
+     "offset": 626359,
+     "noise_gain": 0.04704275
+    },
+    "snr5": {
+     "offset": 190630,
+     "noise_gain": 0.05634532
+    }
+   }
+  },
+  {
+   "clip": "13151459927887695150.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0259192,
+   "levels": {
+    "snr20": {
+     "offset": 1097292,
+     "noise_gain": 0.03409448
+    },
+    "snr10": {
+     "offset": 1052295,
+     "noise_gain": 0.11965666
+    },
+    "snr5": {
+     "offset": 1003588,
+     "noise_gain": 0.17661676
+    }
+   }
+  },
+  {
+   "clip": "13168854378197621019.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00723777,
+   "levels": {
+    "snr20": {
+     "offset": 1486546,
+     "noise_gain": 0.01050015
+    },
+    "snr10": {
+     "offset": 1004971,
+     "noise_gain": 0.0305062
+    },
+    "snr5": {
+     "offset": 1311096,
+     "noise_gain": 0.06988703
+    }
+   }
+  },
+  {
+   "clip": "13179158985429870175.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03847904,
+   "levels": {
+    "snr20": {
+     "offset": 71325,
+     "noise_gain": 0.05391441
+    },
+    "snr10": {
+     "offset": 173636,
+     "noise_gain": 0.15526648
+    },
+    "snr5": {
+     "offset": 1582648,
+     "noise_gain": 0.26585983
+    }
+   }
+  },
+  {
+   "clip": "13219795004816330488.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01444162,
+   "levels": {
+    "snr20": {
+     "offset": 782515,
+     "noise_gain": 0.0139603
+    },
+    "snr10": {
+     "offset": 198864,
+     "noise_gain": 0.02950931
+    },
+    "snr5": {
+     "offset": 57599,
+     "noise_gain": 0.04381117
+    }
+   }
+  },
+  {
+   "clip": "13316949509066148883.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06372899,
+   "levels": {
+    "snr20": {
+     "offset": 319978,
+     "noise_gain": 0.08470902
+    },
+    "snr10": {
+     "offset": 471499,
+     "noise_gain": 0.29095936
+    },
+    "snr5": {
+     "offset": 657326,
+     "noise_gain": 0.61804076
+    }
+   }
+  },
+  {
+   "clip": "13330275279601866477.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01058059,
+   "levels": {
+    "snr20": {
+     "offset": 650626,
+     "noise_gain": 0.0096321
+    },
+    "snr10": {
+     "offset": 134454,
+     "noise_gain": 0.01814296
+    },
+    "snr5": {
+     "offset": 298266,
+     "noise_gain": 0.05273411
+    }
+   }
+  },
+  {
+   "clip": "13364127718692670507.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01094129,
+   "levels": {
+    "snr20": {
+     "offset": 762000,
+     "noise_gain": 0.01048376
+    },
+    "snr10": {
+     "offset": 79762,
+     "noise_gain": 0.01850561
+    },
+    "snr5": {
+     "offset": 336725,
+     "noise_gain": 0.05468586
+    }
+   }
+  },
+  {
+   "clip": "13397478532291769112.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01350728,
+   "levels": {
+    "snr20": {
+     "offset": 447155,
+     "noise_gain": 0.01755839
+    },
+    "snr10": {
+     "offset": 124591,
+     "noise_gain": 0.05960454
+    },
+    "snr5": {
+     "offset": 825579,
+     "noise_gain": 0.17704648
+    }
+   }
+  },
+  {
+   "clip": "13505113116457896320.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0177147,
+   "levels": {
+    "snr20": {
+     "offset": 713418,
+     "noise_gain": 0.01648453
+    },
+    "snr10": {
+     "offset": 485188,
+     "noise_gain": 0.05297108
+    },
+    "snr5": {
+     "offset": 480395,
+     "noise_gain": 0.09400321
+    }
+   }
+  },
+  {
+   "clip": "13517516457085833867.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03259183,
+   "levels": {
+    "snr20": {
+     "offset": 483746,
+     "noise_gain": 0.03076901
+    },
+    "snr10": {
+     "offset": 247430,
+     "noise_gain": 0.08743308
+    },
+    "snr5": {
+     "offset": 238627,
+     "noise_gain": 0.1553376
+    }
+   }
+  },
+  {
+   "clip": "13641449536248601986.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01175501,
+   "levels": {
+    "snr20": {
+     "offset": 17897,
+     "noise_gain": 0.00672263
+    },
+    "snr10": {
+     "offset": 455190,
+     "noise_gain": 0.03434343
+    },
+    "snr5": {
+     "offset": 103131,
+     "noise_gain": 0.03581662
+    }
+   }
+  },
+  {
+   "clip": "1367609604905402108.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02384779,
+   "levels": {
+    "snr20": {
+     "offset": 329418,
+     "noise_gain": 0.02078677
+    },
+    "snr10": {
+     "offset": 524564,
+     "noise_gain": 0.07216549
+    },
+    "snr5": {
+     "offset": 123885,
+     "noise_gain": 0.07243785
+    }
+   }
+  },
+  {
+   "clip": "13681191449535524860.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03908629,
+   "levels": {
+    "snr20": {
+     "offset": 1472236,
+     "noise_gain": 0.0565521
+    },
+    "snr10": {
+     "offset": 1451678,
+     "noise_gain": 0.19219592
+    },
+    "snr5": {
+     "offset": 1127653,
+     "noise_gain": 0.32593439
+    }
+   }
+  },
+  {
+   "clip": "13735706346151429287.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01482991,
+   "levels": {
+    "snr20": {
+     "offset": 967190,
+     "noise_gain": 0.02102225
+    },
+    "snr10": {
+     "offset": 101089,
+     "noise_gain": 0.06824891
+    },
+    "snr5": {
+     "offset": 854652,
+     "noise_gain": 0.14509806
+    }
+   }
+  },
+  {
+   "clip": "13756845604326270458.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00919418,
+   "levels": {
+    "snr20": {
+     "offset": 753512,
+     "noise_gain": 0.00892025
+    },
+    "snr10": {
+     "offset": 76624,
+     "noise_gain": 0.0156659
+    },
+    "snr5": {
+     "offset": 458500,
+     "noise_gain": 0.0478083
+    }
+   }
+  },
+  {
+   "clip": "13764709845823417049.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05542081,
+   "levels": {
+    "snr20": {
+     "offset": 186076,
+     "noise_gain": 0.03549903
+    },
+    "snr10": {
+     "offset": 488178,
+     "noise_gain": 0.16666548
+    },
+    "snr5": {
+     "offset": 448161,
+     "noise_gain": 0.28510099
+    }
+   }
+  },
+  {
+   "clip": "13773979452803403905.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03600852,
+   "levels": {
+    "snr20": {
+     "offset": 1248851,
+     "noise_gain": 0.06477567
+    },
+    "snr10": {
+     "offset": 227288,
+     "noise_gain": 0.16878968
+    },
+    "snr5": {
+     "offset": 580805,
+     "noise_gain": 0.30052528
+    }
+   }
+  },
+  {
+   "clip": "13823910914118994839.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01483992,
+   "levels": {
+    "snr20": {
+     "offset": 1291516,
+     "noise_gain": 0.02951376
+    },
+    "snr10": {
+     "offset": 182357,
+     "noise_gain": 0.05730353
+    },
+    "snr5": {
+     "offset": 21344,
+     "noise_gain": 0.11410931
+    }
+   }
+  },
+  {
+   "clip": "13931724726266327621.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05575725,
+   "levels": {
+    "snr20": {
+     "offset": 653492,
+     "noise_gain": 0.09278434
+    },
+    "snr10": {
+     "offset": 882774,
+     "noise_gain": 0.29329779
+    },
+    "snr5": {
+     "offset": 1090257,
+     "noise_gain": 0.41564517
+    }
+   }
+  },
+  {
+   "clip": "13960821257127013763.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04168519,
+   "levels": {
+    "snr20": {
+     "offset": 273112,
+     "noise_gain": 0.0344659
+    },
+    "snr10": {
+     "offset": 549392,
+     "noise_gain": 0.12603852
+    },
+    "snr5": {
+     "offset": 480223,
+     "noise_gain": 0.22107436
+    }
+   }
+  },
+  {
+   "clip": "14020258929803350078.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04684077,
+   "levels": {
+    "snr20": {
+     "offset": 695705,
+     "noise_gain": 0.04332152
+    },
+    "snr10": {
+     "offset": 693502,
+     "noise_gain": 0.13724586
+    },
+    "snr5": {
+     "offset": 815668,
+     "noise_gain": 0.25178736
+    }
+   }
+  },
+  {
+   "clip": "14034066541176867023.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03375395,
+   "levels": {
+    "snr20": {
+     "offset": 800777,
+     "noise_gain": 0.03181826
+    },
+    "snr10": {
+     "offset": 615255,
+     "noise_gain": 0.09411072
+    },
+    "snr5": {
+     "offset": 703944,
+     "noise_gain": 0.16962074
+    }
+   }
+  },
+  {
+   "clip": "14062468540202204867.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01168383,
+   "levels": {
+    "snr20": {
+     "offset": 653208,
+     "noise_gain": 0.01053519
+    },
+    "snr10": {
+     "offset": 340482,
+     "noise_gain": 0.03312149
+    },
+    "snr5": {
+     "offset": 198597,
+     "noise_gain": 0.04366542
+    }
+   }
+  },
+  {
+   "clip": "14166349555090119249.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05416403,
+   "levels": {
+    "snr20": {
+     "offset": 1497571,
+     "noise_gain": 0.08184768
+    },
+    "snr10": {
+     "offset": 463416,
+     "noise_gain": 0.24422257
+    },
+    "snr5": {
+     "offset": 1619860,
+     "noise_gain": 0.39922689
+    }
+   }
+  },
+  {
+   "clip": "1424783792366806608.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.043392,
+   "levels": {
+    "snr20": {
+     "offset": 554206,
+     "noise_gain": 0.04022089
+    },
+    "snr10": {
+     "offset": 390931,
+     "noise_gain": 0.12486448
+    },
+    "snr5": {
+     "offset": 469286,
+     "noise_gain": 0.22667563
+    }
+   }
+  },
+  {
+   "clip": "14278630414602056451.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01159348,
+   "levels": {
+    "snr20": {
+     "offset": 1626944,
+     "noise_gain": 0.01508163
+    },
+    "snr10": {
+     "offset": 813001,
+     "noise_gain": 0.07938132
+    },
+    "snr5": {
+     "offset": 1035201,
+     "noise_gain": 0.09968485
+    }
+   }
+  },
+  {
+   "clip": "14280755123174385611.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01198518,
+   "levels": {
+    "snr20": {
+     "offset": 675785,
+     "noise_gain": 0.02072942
+    },
+    "snr10": {
+     "offset": 1254111,
+     "noise_gain": 0.0706691
+    },
+    "snr5": {
+     "offset": 908815,
+     "noise_gain": 0.10359016
+    }
+   }
+  },
+  {
+   "clip": "14330977836148923700.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06592336,
+   "levels": {
+    "snr20": {
+     "offset": 1008162,
+     "noise_gain": 0.08979936
+    },
+    "snr10": {
+     "offset": 1467914,
+     "noise_gain": 0.29812232
+    },
+    "snr5": {
+     "offset": 219409,
+     "noise_gain": 0.50914739
+    }
+   }
+  },
+  {
+   "clip": "14366871298176005085.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05910084,
+   "levels": {
+    "snr20": {
+     "offset": 195006,
+     "noise_gain": 0.07990163
+    },
+    "snr10": {
+     "offset": 495945,
+     "noise_gain": 0.27378702
+    },
+    "snr5": {
+     "offset": 948285,
+     "noise_gain": 0.45569317
+    }
+   }
+  },
+  {
+   "clip": "14492308408758562575.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05901527,
+   "levels": {
+    "snr20": {
+     "offset": 491019,
+     "noise_gain": 0.05530958
+    },
+    "snr10": {
+     "offset": 646739,
+     "noise_gain": 0.17430465
+    },
+    "snr5": {
+     "offset": 261417,
+     "noise_gain": 0.28103163
+    }
+   }
+  },
+  {
+   "clip": "1450079556009217598.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01036055,
+   "levels": {
+    "snr20": {
+     "offset": 754182,
+     "noise_gain": 0.02080373
+    },
+    "snr10": {
+     "offset": 888778,
+     "noise_gain": 0.05522184
+    },
+    "snr5": {
+     "offset": 628831,
+     "noise_gain": 0.09795589
+    }
+   }
+  },
+  {
+   "clip": "14594047433590255714.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00689862,
+   "levels": {
+    "snr20": {
+     "offset": 1498991,
+     "noise_gain": 0.01038827
+    },
+    "snr10": {
+     "offset": 367785,
+     "noise_gain": 0.03048591
+    },
+    "snr5": {
+     "offset": 1021862,
+     "noise_gain": 0.05423105
+    }
+   }
+  },
+  {
+   "clip": "14669776183646529981.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04828461,
+   "levels": {
+    "snr20": {
+     "offset": 1579307,
+     "noise_gain": 0.05927933
+    },
+    "snr10": {
+     "offset": 1442237,
+     "noise_gain": 0.2429578
+    },
+    "snr5": {
+     "offset": 347067,
+     "noise_gain": 0.39422713
+    }
+   }
+  },
+  {
+   "clip": "14683060427756433571.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01208004,
+   "levels": {
+    "snr20": {
+     "offset": 825075,
+     "noise_gain": 0.01097183
+    },
+    "snr10": {
+     "offset": 827451,
+     "noise_gain": 0.03493693
+    },
+    "snr5": {
+     "offset": 550595,
+     "noise_gain": 0.06645398
+    }
+   }
+  },
+  {
+   "clip": "14744283375136117218.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02541031,
+   "levels": {
+    "snr20": {
+     "offset": 363426,
+     "noise_gain": 0.035717
+    },
+    "snr10": {
+     "offset": 605068,
+     "noise_gain": 0.14187252
+    },
+    "snr5": {
+     "offset": 554549,
+     "noise_gain": 0.23264717
+    }
+   }
+  },
+  {
+   "clip": "14761967464597911201.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07516158,
+   "levels": {
+    "snr20": {
+     "offset": 400309,
+     "noise_gain": 0.09631114
+    },
+    "snr10": {
+     "offset": 1338420,
+     "noise_gain": 0.49672453
+    },
+    "snr5": {
+     "offset": 570955,
+     "noise_gain": 0.56657255
+    }
+   }
+  },
+  {
+   "clip": "14775692599302523850.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01173872,
+   "levels": {
+    "snr20": {
+     "offset": 140586,
+     "noise_gain": 0.00705291
+    },
+    "snr10": {
+     "offset": 29522,
+     "noise_gain": 0.02071823
+    },
+    "snr5": {
+     "offset": 441508,
+     "noise_gain": 0.06085606
+    }
+   }
+  },
+  {
+   "clip": "14844478477924592113.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0640457,
+   "levels": {
+    "snr20": {
+     "offset": 488502,
+     "noise_gain": 0.09591667
+    },
+    "snr10": {
+     "offset": 887853,
+     "noise_gain": 0.33225992
+    },
+    "snr5": {
+     "offset": 652767,
+     "noise_gain": 0.61024204
+    }
+   }
+  },
+  {
+   "clip": "14876226568377588641.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05534407,
+   "levels": {
+    "snr20": {
+     "offset": 252376,
+     "noise_gain": 0.04285432
+    },
+    "snr10": {
+     "offset": 455862,
+     "noise_gain": 0.16036092
+    },
+    "snr5": {
+     "offset": 527393,
+     "noise_gain": 0.29724604
+    }
+   }
+  },
+  {
+   "clip": "14912336945329697783.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0403685,
+   "levels": {
+    "snr20": {
+     "offset": 591772,
+     "noise_gain": 0.0365793
+    },
+    "snr10": {
+     "offset": 666138,
+     "noise_gain": 0.1148767
+    },
+    "snr5": {
+     "offset": 428303,
+     "noise_gain": 0.20844504
+    }
+   }
+  },
+  {
+   "clip": "14958514304411882872.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0131916,
+   "levels": {
+    "snr20": {
+     "offset": 126370,
+     "noise_gain": 0.0173793
+    },
+    "snr10": {
+     "offset": 1082605,
+     "noise_gain": 0.05597409
+    },
+    "snr5": {
+     "offset": 1441189,
+     "noise_gain": 0.11384807
+    }
+   }
+  },
+  {
+   "clip": "14984891725297246723.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04557153,
+   "levels": {
+    "snr20": {
+     "offset": 225695,
+     "noise_gain": 0.03270179
+    },
+    "snr10": {
+     "offset": 652847,
+     "noise_gain": 0.13224268
+    },
+    "snr5": {
+     "offset": 89129,
+     "noise_gain": 0.1396133
+    }
+   }
+  },
+  {
+   "clip": "14986133795332152546.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01238171,
+   "levels": {
+    "snr20": {
+     "offset": 271857,
+     "noise_gain": 0.00988209
+    },
+    "snr10": {
+     "offset": 516127,
+     "noise_gain": 0.03812185
+    },
+    "snr5": {
+     "offset": 245661,
+     "noise_gain": 0.05062371
+    }
+   }
+  },
+  {
+   "clip": "14986941670305895682.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0645563,
+   "levels": {
+    "snr20": {
+     "offset": 809512,
+     "noise_gain": 0.06107998
+    },
+    "snr10": {
+     "offset": 618037,
+     "noise_gain": 0.17808397
+    },
+    "snr5": {
+     "offset": 207787,
+     "noise_gain": 0.23077192
+    }
+   }
+  },
+  {
+   "clip": "1499403117288008495.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03004172,
+   "levels": {
+    "snr20": {
+     "offset": 940189,
+     "noise_gain": 0.04143804
+    },
+    "snr10": {
+     "offset": 1197496,
+     "noise_gain": 0.14434278
+    },
+    "snr5": {
+     "offset": 450198,
+     "noise_gain": 0.21819042
+    }
+   }
+  },
+  {
+   "clip": "15000047607539169982.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01176558,
+   "levels": {
+    "snr20": {
+     "offset": 938395,
+     "noise_gain": 0.01715493
+    },
+    "snr10": {
+     "offset": 391222,
+     "noise_gain": 0.04794266
+    },
+    "snr5": {
+     "offset": 1673999,
+     "noise_gain": 0.09135139
+    }
+   }
+  },
+  {
+   "clip": "15009446377620036374.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05256867,
+   "levels": {
+    "snr20": {
+     "offset": 760772,
+     "noise_gain": 0.0978094
+    },
+    "snr10": {
+     "offset": 84913,
+     "noise_gain": 0.27337338
+    },
+    "snr5": {
+     "offset": 1434602,
+     "noise_gain": 0.43722659
+    }
+   }
+  },
+  {
+   "clip": "15040526488995065073.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0140142,
+   "levels": {
+    "snr20": {
+     "offset": 252453,
+     "noise_gain": 0.02081998
+    },
+    "snr10": {
+     "offset": 1419765,
+     "noise_gain": 0.06655707
+    },
+    "snr5": {
+     "offset": 10018,
+     "noise_gain": 0.11050983
+    }
+   }
+  },
+  {
+   "clip": "15068336001874820048.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05663331,
+   "levels": {
+    "snr20": {
+     "offset": 207761,
+     "noise_gain": 0.03718477
+    },
+    "snr10": {
+     "offset": 213926,
+     "noise_gain": 0.12196219
+    },
+    "snr5": {
+     "offset": 594257,
+     "noise_gain": 0.28079264
+    }
+   }
+  },
+  {
+   "clip": "15161440323539130896.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0153759,
+   "levels": {
+    "snr20": {
+     "offset": 168934,
+     "noise_gain": 0.01891625
+    },
+    "snr10": {
+     "offset": 429377,
+     "noise_gain": 0.06584471
+    },
+    "snr5": {
+     "offset": 320305,
+     "noise_gain": 0.11672698
+    }
+   }
+  },
+  {
+   "clip": "15221102882140152469.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01432522,
+   "levels": {
+    "snr20": {
+     "offset": 825730,
+     "noise_gain": 0.03368166
+    },
+    "snr10": {
+     "offset": 285873,
+     "noise_gain": 0.06567272
+    },
+    "snr5": {
+     "offset": 1581770,
+     "noise_gain": 0.13145343
+    }
+   }
+  },
+  {
+   "clip": "15257352549378016359.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01488599,
+   "levels": {
+    "snr20": {
+     "offset": 285584,
+     "noise_gain": 0.02049952
+    },
+    "snr10": {
+     "offset": 821419,
+     "noise_gain": 0.08580369
+    },
+    "snr5": {
+     "offset": 1536385,
+     "noise_gain": 0.12305025
+    }
+   }
+  },
+  {
+   "clip": "15289411745973667802.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00967563,
+   "levels": {
+    "snr20": {
+     "offset": 176377,
+     "noise_gain": 0.00645691
+    },
+    "snr10": {
+     "offset": 209805,
+     "noise_gain": 0.02228763
+    },
+    "snr5": {
+     "offset": 673116,
+     "noise_gain": 0.04979063
+    }
+   }
+  },
+  {
+   "clip": "15295353908057347286.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00945219,
+   "levels": {
+    "snr20": {
+     "offset": 689740,
+     "noise_gain": 0.00859631
+    },
+    "snr10": {
+     "offset": 7866,
+     "noise_gain": 0.01706306
+    },
+    "snr5": {
+     "offset": 531833,
+     "noise_gain": 0.05032146
+    }
+   }
+  },
+  {
+   "clip": "15300898462727353397.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01440311,
+   "levels": {
+    "snr20": {
+     "offset": 223032,
+     "noise_gain": 0.01860178
+    },
+    "snr10": {
+     "offset": 1598494,
+     "noise_gain": 0.07361611
+    },
+    "snr5": {
+     "offset": 747893,
+     "noise_gain": 0.15512191
+    }
+   }
+  },
+  {
+   "clip": "15304894107661692305.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01395433,
+   "levels": {
+    "snr20": {
+     "offset": 619230,
+     "noise_gain": 0.01230613
+    },
+    "snr10": {
+     "offset": 342254,
+     "noise_gain": 0.03858049
+    },
+    "snr5": {
+     "offset": 153259,
+     "noise_gain": 0.04305221
+    }
+   }
+  },
+  {
+   "clip": "15328390354139884473.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04871666,
+   "levels": {
+    "snr20": {
+     "offset": 271848,
+     "noise_gain": 0.06645785
+    },
+    "snr10": {
+     "offset": 1274059,
+     "noise_gain": 0.26112208
+    },
+    "snr5": {
+     "offset": 756755,
+     "noise_gain": 0.56282953
+    }
+   }
+  },
+  {
+   "clip": "15331540934720097809.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03664294,
+   "levels": {
+    "snr20": {
+     "offset": 566415,
+     "noise_gain": 0.03387562
+    },
+    "snr10": {
+     "offset": 244720,
+     "noise_gain": 0.0913505
+    },
+    "snr5": {
+     "offset": 708522,
+     "noise_gain": 0.19205754
+    }
+   }
+  },
+  {
+   "clip": "15332438158044750934.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03299838,
+   "levels": {
+    "snr20": {
+     "offset": 37767,
+     "noise_gain": 0.01837688
+    },
+    "snr10": {
+     "offset": 11368,
+     "noise_gain": 0.05913918
+    },
+    "snr5": {
+     "offset": 523944,
+     "noise_gain": 0.17744506
+    }
+   }
+  },
+  {
+   "clip": "15351816110641000271.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03166486,
+   "levels": {
+    "snr20": {
+     "offset": 1454596,
+     "noise_gain": 0.05090415
+    },
+    "snr10": {
+     "offset": 1462898,
+     "noise_gain": 0.16000822
+    },
+    "snr5": {
+     "offset": 1572405,
+     "noise_gain": 0.23389672
+    }
+   }
+  },
+  {
+   "clip": "15352840258940115360.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02668197,
+   "levels": {
+    "snr20": {
+     "offset": 174326,
+     "noise_gain": 0.01517156
+    },
+    "snr10": {
+     "offset": 23613,
+     "noise_gain": 0.04988055
+    },
+    "snr5": {
+     "offset": 378364,
+     "noise_gain": 0.1353828
+    }
+   }
+  },
+  {
+   "clip": "1540769994138946783.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.031067,
+   "levels": {
+    "snr20": {
+     "offset": 149723,
+     "noise_gain": 0.04048777
+    },
+    "snr10": {
+     "offset": 830238,
+     "noise_gain": 0.21794395
+    },
+    "snr5": {
+     "offset": 362550,
+     "noise_gain": 0.23847821
+    }
+   }
+  },
+  {
+   "clip": "15414602918024554921.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01484069,
+   "levels": {
+    "snr20": {
+     "offset": 1271562,
+     "noise_gain": 0.02518837
+    },
+    "snr10": {
+     "offset": 1021623,
+     "noise_gain": 0.06618775
+    },
+    "snr5": {
+     "offset": 7173,
+     "noise_gain": 0.10769147
+    }
+   }
+  },
+  {
+   "clip": "1545893095590403759.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05767723,
+   "levels": {
+    "snr20": {
+     "offset": 1381434,
+     "noise_gain": 0.09378572
+    },
+    "snr10": {
+     "offset": 719046,
+     "noise_gain": 0.36640664
+    },
+    "snr5": {
+     "offset": 179220,
+     "noise_gain": 0.41048327
+    }
+   }
+  },
+  {
+   "clip": "15461954732078804096.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04621786,
+   "levels": {
+    "snr20": {
+     "offset": 618049,
+     "noise_gain": 0.04265717
+    },
+    "snr10": {
+     "offset": 563250,
+     "noise_gain": 0.13248629
+    },
+    "snr5": {
+     "offset": 129304,
+     "noise_gain": 0.14991695
+    }
+   }
+  },
+  {
+   "clip": "15464403826497019680.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01753061,
+   "levels": {
+    "snr20": {
+     "offset": 136331,
+     "noise_gain": 0.00967874
+    },
+    "snr10": {
+     "offset": 659632,
+     "noise_gain": 0.05090367
+    },
+    "snr5": {
+     "offset": 83301,
+     "noise_gain": 0.05355222
+    }
+   }
+  },
+  {
+   "clip": "15470290521068301283.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05520847,
+   "levels": {
+    "snr20": {
+     "offset": 704463,
+     "noise_gain": 0.0502636
+    },
+    "snr10": {
+     "offset": 520469,
+     "noise_gain": 0.16894804
+    },
+    "snr5": {
+     "offset": 814333,
+     "noise_gain": 0.28443369
+    }
+   }
+  },
+  {
+   "clip": "15533639822458529765.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01168276,
+   "levels": {
+    "snr20": {
+     "offset": 1258660,
+     "noise_gain": 0.01990329
+    },
+    "snr10": {
+     "offset": 463793,
+     "noise_gain": 0.05792836
+    },
+    "snr5": {
+     "offset": 1330792,
+     "noise_gain": 0.1099573
+    }
+   }
+  },
+  {
+   "clip": "15549776524780981732.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05961724,
+   "levels": {
+    "snr20": {
+     "offset": 1403647,
+     "noise_gain": 0.09189204
+    },
+    "snr10": {
+     "offset": 1288512,
+     "noise_gain": 0.3216868
+    },
+    "snr5": {
+     "offset": 957378,
+     "noise_gain": 0.47242941
+    }
+   }
+  },
+  {
+   "clip": "15569579024340529138.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00986254,
+   "levels": {
+    "snr20": {
+     "offset": 623083,
+     "noise_gain": 0.01554446
+    },
+    "snr10": {
+     "offset": 93448,
+     "noise_gain": 0.04969938
+    },
+    "snr5": {
+     "offset": 594338,
+     "noise_gain": 0.08257209
+    }
+   }
+  },
+  {
+   "clip": "15594945045875003265.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02658352,
+   "levels": {
+    "snr20": {
+     "offset": 1330902,
+     "noise_gain": 0.05354058
+    },
+    "snr10": {
+     "offset": 643720,
+     "noise_gain": 0.15428093
+    },
+    "snr5": {
+     "offset": 1452048,
+     "noise_gain": 0.22688779
+    }
+   }
+  },
+  {
+   "clip": "15595226356454783182.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01180643,
+   "levels": {
+    "snr20": {
+     "offset": 1724676,
+     "noise_gain": 0.01170572
+    },
+    "snr10": {
+     "offset": 283739,
+     "noise_gain": 0.05178763
+    },
+    "snr5": {
+     "offset": 514137,
+     "noise_gain": 0.09446578
+    }
+   }
+  },
+  {
+   "clip": "15624631696857994539.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07470464,
+   "levels": {
+    "snr20": {
+     "offset": 1179011,
+     "noise_gain": 0.11910844
+    },
+    "snr10": {
+     "offset": 976701,
+     "noise_gain": 0.35011044
+    },
+    "snr5": {
+     "offset": 440346,
+     "noise_gain": 0.62548982
+    }
+   }
+  },
+  {
+   "clip": "15644939854989172096.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04431181,
+   "levels": {
+    "snr20": {
+     "offset": 53227,
+     "noise_gain": 0.02449281
+    },
+    "snr10": {
+     "offset": 626160,
+     "noise_gain": 0.1271602
+    },
+    "snr5": {
+     "offset": 407687,
+     "noise_gain": 0.2310208
+    }
+   }
+  },
+  {
+   "clip": "15656332356470558037.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06004697,
+   "levels": {
+    "snr20": {
+     "offset": 1576121,
+     "noise_gain": 0.07967805
+    },
+    "snr10": {
+     "offset": 1086108,
+     "noise_gain": 0.2594972
+    },
+    "snr5": {
+     "offset": 655756,
+     "noise_gain": 0.620948
+    }
+   }
+  },
+  {
+   "clip": "15697698331676127575.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01223313,
+   "levels": {
+    "snr20": {
+     "offset": 720224,
+     "noise_gain": 0.0113462
+    },
+    "snr10": {
+     "offset": 554446,
+     "noise_gain": 0.03482259
+    },
+    "snr5": {
+     "offset": 449124,
+     "noise_gain": 0.06290214
+    }
+   }
+  },
+  {
+   "clip": "1571715367513133626.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0390153,
+   "levels": {
+    "snr20": {
+     "offset": 709364,
+     "noise_gain": 0.07564087
+    },
+    "snr10": {
+     "offset": 1167450,
+     "noise_gain": 0.18497837
+    },
+    "snr5": {
+     "offset": 291218,
+     "noise_gain": 0.32042419
+    }
+   }
+  },
+  {
+   "clip": "15733390625213586656.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01090011,
+   "levels": {
+    "snr20": {
+     "offset": 290855,
+     "noise_gain": 0.00949841
+    },
+    "snr10": {
+     "offset": 206220,
+     "noise_gain": 0.02199988
+    },
+    "snr5": {
+     "offset": 705938,
+     "noise_gain": 0.05554428
+    }
+   }
+  },
+  {
+   "clip": "15744481588919187588.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05075885,
+   "levels": {
+    "snr20": {
+     "offset": 1011973,
+     "noise_gain": 0.0678183
+    },
+    "snr10": {
+     "offset": 1336283,
+     "noise_gain": 0.35633958
+    },
+    "snr5": {
+     "offset": 1365,
+     "noise_gain": 0.31723529
+    }
+   }
+  },
+  {
+   "clip": "15778536363919175664.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05366479,
+   "levels": {
+    "snr20": {
+     "offset": 345147,
+     "noise_gain": 0.04735881
+    },
+    "snr10": {
+     "offset": 412237,
+     "noise_gain": 0.15484013
+    },
+    "snr5": {
+     "offset": 349179,
+     "noise_gain": 0.26731406
+    }
+   }
+  },
+  {
+   "clip": "15816482388293766940.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0338302,
+   "levels": {
+    "snr20": {
+     "offset": 628326,
+     "noise_gain": 0.03073931
+    },
+    "snr10": {
+     "offset": 584527,
+     "noise_gain": 0.0991054
+    },
+    "snr5": {
+     "offset": 372866,
+     "noise_gain": 0.17797578
+    }
+   }
+  },
+  {
+   "clip": "15833131373904173796.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01331257,
+   "levels": {
+    "snr20": {
+     "offset": 1131924,
+     "noise_gain": 0.02069739
+    },
+    "snr10": {
+     "offset": 870640,
+     "noise_gain": 0.07140576
+    },
+    "snr5": {
+     "offset": 803852,
+     "noise_gain": 0.16615596
+    }
+   }
+  },
+  {
+   "clip": "1583614021566736182.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04891669,
+   "levels": {
+    "snr20": {
+     "offset": 593789,
+     "noise_gain": 0.04479444
+    },
+    "snr10": {
+     "offset": 306900,
+     "noise_gain": 0.13557951
+    },
+    "snr5": {
+     "offset": 460019,
+     "noise_gain": 0.25551146
+    }
+   }
+  },
+  {
+   "clip": "15912838334392844709.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01078293,
+   "levels": {
+    "snr20": {
+     "offset": 634333,
+     "noise_gain": 0.01881104
+    },
+    "snr10": {
+     "offset": 1194887,
+     "noise_gain": 0.0471399
+    },
+    "snr5": {
+     "offset": 1297647,
+     "noise_gain": 0.13222307
+    }
+   }
+  },
+  {
+   "clip": "15955159498525302501.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02369377,
+   "levels": {
+    "snr20": {
+     "offset": 228970,
+     "noise_gain": 0.01835274
+    },
+    "snr10": {
+     "offset": 394536,
+     "noise_gain": 0.06999881
+    },
+    "snr5": {
+     "offset": 461378,
+     "noise_gain": 0.12255745
+    }
+   }
+  },
+  {
+   "clip": "15963922618657984247.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01051832,
+   "levels": {
+    "snr20": {
+     "offset": 1201705,
+     "noise_gain": 0.01570365
+    },
+    "snr10": {
+     "offset": 2189,
+     "noise_gain": 0.04732347
+    },
+    "snr5": {
+     "offset": 537161,
+     "noise_gain": 0.08778398
+    }
+   }
+  },
+  {
+   "clip": "16005352550431737321.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04418355,
+   "levels": {
+    "snr20": {
+     "offset": 106003,
+     "noise_gain": 0.02407981
+    },
+    "snr10": {
+     "offset": 13582,
+     "noise_gain": 0.08045275
+    },
+    "snr5": {
+     "offset": 456968,
+     "noise_gain": 0.22210242
+    }
+   }
+  },
+  {
+   "clip": "16020347207687323043.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01264324,
+   "levels": {
+    "snr20": {
+     "offset": 244230,
+     "noise_gain": 0.01861072
+    },
+    "snr10": {
+     "offset": 1700205,
+     "noise_gain": 0.04072842
+    },
+    "snr5": {
+     "offset": 1465574,
+     "noise_gain": 0.10480514
+    }
+   }
+  },
+  {
+   "clip": "16039322756998391177.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03654899,
+   "levels": {
+    "snr20": {
+     "offset": 1771,
+     "noise_gain": 0.02081353
+    },
+    "snr10": {
+     "offset": 44437,
+     "noise_gain": 0.06727052
+    },
+    "snr5": {
+     "offset": 738066,
+     "noise_gain": 0.19413684
+    }
+   }
+  },
+  {
+   "clip": "16050903723415644837.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01370438,
+   "levels": {
+    "snr20": {
+     "offset": 754280,
+     "noise_gain": 0.0278417
+    },
+    "snr10": {
+     "offset": 1066711,
+     "noise_gain": 0.05928024
+    },
+    "snr5": {
+     "offset": 28041,
+     "noise_gain": 0.1118073
+    }
+   }
+  },
+  {
+   "clip": "1606458323483475116.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01088885,
+   "levels": {
+    "snr20": {
+     "offset": 14761,
+     "noise_gain": 0.00613361
+    },
+    "snr10": {
+     "offset": 34030,
+     "noise_gain": 0.018956
+    },
+    "snr5": {
+     "offset": 187756,
+     "noise_gain": 0.03890831
+    }
+   }
+  },
+  {
+   "clip": "16201345362190651115.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0125303,
+   "levels": {
+    "snr20": {
+     "offset": 137150,
+     "noise_gain": 0.00660868
+    },
+    "snr10": {
+     "offset": 660532,
+     "noise_gain": 0.03536549
+    },
+    "snr5": {
+     "offset": 492476,
+     "noise_gain": 0.06824135
+    }
+   }
+  },
+  {
+   "clip": "16209426280289805124.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01111132,
+   "levels": {
+    "snr20": {
+     "offset": 1574291,
+     "noise_gain": 0.01379802
+    },
+    "snr10": {
+     "offset": 1470662,
+     "noise_gain": 0.05339721
+    },
+    "snr5": {
+     "offset": 1097767,
+     "noise_gain": 0.08662959
+    }
+   }
+  },
+  {
+   "clip": "16286555912359681773.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0228416,
+   "levels": {
+    "snr20": {
+     "offset": 290021,
+     "noise_gain": 0.01970456
+    },
+    "snr10": {
+     "offset": 411364,
+     "noise_gain": 0.06778348
+    },
+    "snr5": {
+     "offset": 72463,
+     "noise_gain": 0.06998393
+    }
+   }
+  },
+  {
+   "clip": "16333400532657425450.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01726675,
+   "levels": {
+    "snr20": {
+     "offset": 114621,
+     "noise_gain": 0.00947311
+    },
+    "snr10": {
+     "offset": 427118,
+     "noise_gain": 0.05067779
+    },
+    "snr5": {
+     "offset": 262328,
+     "noise_gain": 0.07806594
+    }
+   }
+  },
+  {
+   "clip": "16335806196744029495.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02676516,
+   "levels": {
+    "snr20": {
+     "offset": 596964,
+     "noise_gain": 0.02391852
+    },
+    "snr10": {
+     "offset": 121001,
+     "noise_gain": 0.04402001
+    },
+    "snr5": {
+     "offset": 732102,
+     "noise_gain": 0.14438355
+    }
+   }
+  },
+  {
+   "clip": "16367448146217015414.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01770588,
+   "levels": {
+    "snr20": {
+     "offset": 238543,
+     "noise_gain": 0.0273076
+    },
+    "snr10": {
+     "offset": 1558958,
+     "noise_gain": 0.08745482
+    },
+    "snr5": {
+     "offset": 1413246,
+     "noise_gain": 0.15374353
+    }
+   }
+  },
+  {
+   "clip": "16369783268903440191.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04085974,
+   "levels": {
+    "snr20": {
+     "offset": 593780,
+     "noise_gain": 0.03590432
+    },
+    "snr10": {
+     "offset": 775657,
+     "noise_gain": 0.12214295
+    },
+    "snr5": {
+     "offset": 493077,
+     "noise_gain": 0.22092572
+    }
+   }
+  },
+  {
+   "clip": "16424608319349954184.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01471139,
+   "levels": {
+    "snr20": {
+     "offset": 320639,
+     "noise_gain": 0.02006317
+    },
+    "snr10": {
+     "offset": 265367,
+     "noise_gain": 0.06773699
+    },
+    "snr5": {
+     "offset": 980540,
+     "noise_gain": 0.11362341
+    }
+   }
+  },
+  {
+   "clip": "16474197169207076095.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01576393,
+   "levels": {
+    "snr20": {
+     "offset": 60725,
+     "noise_gain": 0.00884699
+    },
+    "snr10": {
+     "offset": 46046,
+     "noise_gain": 0.02967806
+    },
+    "snr5": {
+     "offset": 569786,
+     "noise_gain": 0.0837134
+    }
+   }
+  },
+  {
+   "clip": "16491693500662842324.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04946997,
+   "levels": {
+    "snr20": {
+     "offset": 760303,
+     "noise_gain": 0.04888525
+    },
+    "snr10": {
+     "offset": 293244,
+     "noise_gain": 0.12909327
+    },
+    "snr5": {
+     "offset": 362246,
+     "noise_gain": 0.26600996
+    }
+   }
+  },
+  {
+   "clip": "16504426464827960101.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00863542,
+   "levels": {
+    "snr20": {
+     "offset": 562333,
+     "noise_gain": 0.01234044
+    },
+    "snr10": {
+     "offset": 1686862,
+     "noise_gain": 0.03107384
+    },
+    "snr5": {
+     "offset": 1187460,
+     "noise_gain": 0.0640372
+    }
+   }
+  },
+  {
+   "clip": "16582879582049879671.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01813737,
+   "levels": {
+    "snr20": {
+     "offset": 201299,
+     "noise_gain": 0.02549935
+    },
+    "snr10": {
+     "offset": 160800,
+     "noise_gain": 0.07367458
+    },
+    "snr5": {
+     "offset": 371428,
+     "noise_gain": 0.14077039
+    }
+   }
+  },
+  {
+   "clip": "16592634096900133452.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0321613,
+   "levels": {
+    "snr20": {
+     "offset": 310236,
+     "noise_gain": 0.02815734
+    },
+    "snr10": {
+     "offset": 11069,
+     "noise_gain": 0.05764319
+    },
+    "snr5": {
+     "offset": 753964,
+     "noise_gain": 0.17439554
+    }
+   }
+  },
+  {
+   "clip": "16641697595081338661.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01047672,
+   "levels": {
+    "snr20": {
+     "offset": 516728,
+     "noise_gain": 0.0096017
+    },
+    "snr10": {
+     "offset": 605357,
+     "noise_gain": 0.03020276
+    },
+    "snr5": {
+     "offset": 35534,
+     "noise_gain": 0.03280643
+    }
+   }
+  },
+  {
+   "clip": "16798487732617159129.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03480694,
+   "levels": {
+    "snr20": {
+     "offset": 606868,
+     "noise_gain": 0.0316178
+    },
+    "snr10": {
+     "offset": 689553,
+     "noise_gain": 0.10469347
+    },
+    "snr5": {
+     "offset": 673514,
+     "noise_gain": 0.18279015
+    }
+   }
+  },
+  {
+   "clip": "16838871511448524526.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03635654,
+   "levels": {
+    "snr20": {
+     "offset": 1550751,
+     "noise_gain": 0.06374354
+    },
+    "snr10": {
+     "offset": 403239,
+     "noise_gain": 0.15814832
+    },
+    "snr5": {
+     "offset": 874984,
+     "noise_gain": 0.45606914
+    }
+   }
+  },
+  {
+   "clip": "1691544733097470684.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01237414,
+   "levels": {
+    "snr20": {
+     "offset": 688548,
+     "noise_gain": 0.01149962
+    },
+    "snr10": {
+     "offset": 207502,
+     "noise_gain": 0.02428917
+    },
+    "snr5": {
+     "offset": 121564,
+     "noise_gain": 0.03694558
+    }
+   }
+  },
+  {
+   "clip": "16933884670838413368.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01228137,
+   "levels": {
+    "snr20": {
+     "offset": 609243,
+     "noise_gain": 0.01122644
+    },
+    "snr10": {
+     "offset": 565011,
+     "noise_gain": 0.03496221
+    },
+    "snr5": {
+     "offset": 441745,
+     "noise_gain": 0.06325001
+    }
+   }
+  },
+  {
+   "clip": "16941189514075351067.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.051929,
+   "levels": {
+    "snr20": {
+     "offset": 1011998,
+     "noise_gain": 0.06296257
+    },
+    "snr10": {
+     "offset": 1458567,
+     "noise_gain": 0.24905096
+    },
+    "snr5": {
+     "offset": 475284,
+     "noise_gain": 0.43378876
+    }
+   }
+  },
+  {
+   "clip": "16948389192288826297.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03916909,
+   "levels": {
+    "snr20": {
+     "offset": 252947,
+     "noise_gain": 0.0539082
+    },
+    "snr10": {
+     "offset": 1248426,
+     "noise_gain": 0.22377633
+    },
+    "snr5": {
+     "offset": 1512770,
+     "noise_gain": 0.32504523
+    }
+   }
+  },
+  {
+   "clip": "16961402873631276117.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.10302074,
+   "levels": {
+    "snr20": {
+     "offset": 78459,
+     "noise_gain": 0.05665766
+    },
+    "snr10": {
+     "offset": 853883,
+     "noise_gain": 0.33365865
+    },
+    "snr5": {
+     "offset": 632920,
+     "noise_gain": 0.50549941
+    }
+   }
+  },
+  {
+   "clip": "16985012550381793124.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03665828,
+   "levels": {
+    "snr20": {
+     "offset": 37844,
+     "noise_gain": 0.02047502
+    },
+    "snr10": {
+     "offset": 678660,
+     "noise_gain": 0.10571969
+    },
+    "snr5": {
+     "offset": 421449,
+     "noise_gain": 0.19085951
+    }
+   }
+  },
+  {
+   "clip": "1699928981878159252.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06653253,
+   "levels": {
+    "snr20": {
+     "offset": 610087,
+     "noise_gain": 0.10230623
+    },
+    "snr10": {
+     "offset": 1382593,
+     "noise_gain": 0.3811163
+    },
+    "snr5": {
+     "offset": 98338,
+     "noise_gain": 0.5508373
+    }
+   }
+  },
+  {
+   "clip": "17070481168026615915.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07310704,
+   "levels": {
+    "snr20": {
+     "offset": 614199,
+     "noise_gain": 0.06550998
+    },
+    "snr10": {
+     "offset": 711123,
+     "noise_gain": 0.2181636
+    },
+    "snr5": {
+     "offset": 611364,
+     "noise_gain": 0.36772909
+    }
+   }
+  },
+  {
+   "clip": "17079507854325137080.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07000981,
+   "levels": {
+    "snr20": {
+     "offset": 1312944,
+     "noise_gain": 0.13445142
+    },
+    "snr10": {
+     "offset": 634868,
+     "noise_gain": 0.37826184
+    },
+    "snr5": {
+     "offset": 371997,
+     "noise_gain": 0.56086043
+    }
+   }
+  },
+  {
+   "clip": "17079540036235658567.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01108342,
+   "levels": {
+    "snr20": {
+     "offset": 1349104,
+     "noise_gain": 0.02193796
+    },
+    "snr10": {
+     "offset": 173353,
+     "noise_gain": 0.04136985
+    },
+    "snr5": {
+     "offset": 201800,
+     "noise_gain": 0.08427611
+    }
+   }
+  },
+  {
+   "clip": "17096137346217051323.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0209228,
+   "levels": {
+    "snr20": {
+     "offset": 671834,
+     "noise_gain": 0.01773814
+    },
+    "snr10": {
+     "offset": 130970,
+     "noise_gain": 0.0334451
+    },
+    "snr5": {
+     "offset": 6537,
+     "noise_gain": 0.06773762
+    }
+   }
+  },
+  {
+   "clip": "1712350495319843538.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02611391,
+   "levels": {
+    "snr20": {
+     "offset": 69371,
+     "noise_gain": 0.01409549
+    },
+    "snr10": {
+     "offset": 612785,
+     "noise_gain": 0.07561149
+    },
+    "snr5": {
+     "offset": 82659,
+     "noise_gain": 0.08036191
+    }
+   }
+  },
+  {
+   "clip": "17126653717846854197.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03667837,
+   "levels": {
+    "snr20": {
+     "offset": 308796,
+     "noise_gain": 0.03289899
+    },
+    "snr10": {
+     "offset": 552583,
+     "noise_gain": 0.10866724
+    },
+    "snr5": {
+     "offset": 444700,
+     "noise_gain": 0.1881714
+    }
+   }
+  },
+  {
+   "clip": "17137265542176762743.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01060121,
+   "levels": {
+    "snr20": {
+     "offset": 1001448,
+     "noise_gain": 0.0145759
+    },
+    "snr10": {
+     "offset": 26634,
+     "noise_gain": 0.04222805
+    },
+    "snr5": {
+     "offset": 810052,
+     "noise_gain": 0.10922805
+    }
+   }
+  },
+  {
+   "clip": "17182385164686221114.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02723749,
+   "levels": {
+    "snr20": {
+     "offset": 288234,
+     "noise_gain": 0.03709524
+    },
+    "snr10": {
+     "offset": 1570450,
+     "noise_gain": 0.12973113
+    },
+    "snr5": {
+     "offset": 145689,
+     "noise_gain": 0.19115221
+    }
+   }
+  },
+  {
+   "clip": "17261271601043433392.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0402441,
+   "levels": {
+    "snr20": {
+     "offset": 558185,
+     "noise_gain": 0.03724169
+    },
+    "snr10": {
+     "offset": 571089,
+     "noise_gain": 0.11684511
+    },
+    "snr5": {
+     "offset": 686060,
+     "noise_gain": 0.2069763
+    }
+   }
+  },
+  {
+   "clip": "17262110188022147285.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00902659,
+   "levels": {
+    "snr20": {
+     "offset": 324854,
+     "noise_gain": 0.00807551
+    },
+    "snr10": {
+     "offset": 564286,
+     "noise_gain": 0.02679358
+    },
+    "snr5": {
+     "offset": 206992,
+     "noise_gain": 0.03178178
+    }
+   }
+  },
+  {
+   "clip": "17266124759214688015.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01136735,
+   "levels": {
+    "snr20": {
+     "offset": 704729,
+     "noise_gain": 0.01020633
+    },
+    "snr10": {
+     "offset": 470621,
+     "noise_gain": 0.03380477
+    },
+    "snr5": {
+     "offset": 288247,
+     "noise_gain": 0.05531221
+    }
+   }
+  },
+  {
+   "clip": "17402704946675006749.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05504176,
+   "levels": {
+    "snr20": {
+     "offset": 359165,
+     "noise_gain": 0.05220987
+    },
+    "snr10": {
+     "offset": 893482,
+     "noise_gain": 0.18247001
+    },
+    "snr5": {
+     "offset": 357603,
+     "noise_gain": 0.29302457
+    }
+   }
+  },
+  {
+   "clip": "17587084290265303516.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01262481,
+   "levels": {
+    "snr20": {
+     "offset": 1337086,
+     "noise_gain": 0.02604085
+    },
+    "snr10": {
+     "offset": 587922,
+     "noise_gain": 0.05642005
+    },
+    "snr5": {
+     "offset": 1050268,
+     "noise_gain": 0.10803904
+    }
+   }
+  },
+  {
+   "clip": "1760251090466892572.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06216264,
+   "levels": {
+    "snr20": {
+     "offset": 35060,
+     "noise_gain": 0.08475131
+    },
+    "snr10": {
+     "offset": 869388,
+     "noise_gain": 0.32188472
+    },
+    "snr5": {
+     "offset": 491162,
+     "noise_gain": 0.52303594
+    }
+   }
+  },
+  {
+   "clip": "17664988137025969453.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01281319,
+   "levels": {
+    "snr20": {
+     "offset": 1250131,
+     "noise_gain": 0.02360072
+    },
+    "snr10": {
+     "offset": 1282881,
+     "noise_gain": 0.07678346
+    },
+    "snr5": {
+     "offset": 717292,
+     "noise_gain": 0.14325342
+    }
+   }
+  },
+  {
+   "clip": "17672371050652721853.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03254887,
+   "levels": {
+    "snr20": {
+     "offset": 201308,
+     "noise_gain": 0.02073175
+    },
+    "snr10": {
+     "offset": 96086,
+     "noise_gain": 0.05601766
+    },
+    "snr5": {
+     "offset": 622558,
+     "noise_gain": 0.16557216
+    }
+   }
+  },
+  {
+   "clip": "17691330375660966493.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02566212,
+   "levels": {
+    "snr20": {
+     "offset": 573073,
+     "noise_gain": 0.02361057
+    },
+    "snr10": {
+     "offset": 172358,
+     "noise_gain": 0.05202605
+    },
+    "snr5": {
+     "offset": 558710,
+     "noise_gain": 0.13351988
+    }
+   }
+  },
+  {
+   "clip": "17696787987992644164.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0532493,
+   "levels": {
+    "snr20": {
+     "offset": 30147,
+     "noise_gain": 0.03174383
+    },
+    "snr10": {
+     "offset": 285081,
+     "noise_gain": 0.13875039
+    },
+    "snr5": {
+     "offset": 424407,
+     "noise_gain": 0.26816785
+    }
+   }
+  },
+  {
+   "clip": "17714807776461768053.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02274152,
+   "levels": {
+    "snr20": {
+     "offset": 234157,
+     "noise_gain": 0.01690877
+    },
+    "snr10": {
+     "offset": 586838,
+     "noise_gain": 0.06384033
+    },
+    "snr5": {
+     "offset": 282148,
+     "noise_gain": 0.10987328
+    }
+   }
+  },
+  {
+   "clip": "17719315014064997596.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02949239,
+   "levels": {
+    "snr20": {
+     "offset": 715827,
+     "noise_gain": 0.02696166
+    },
+    "snr10": {
+     "offset": 800559,
+     "noise_gain": 0.0884106
+    },
+    "snr5": {
+     "offset": 334236,
+     "noise_gain": 0.14388997
+    }
+   }
+  },
+  {
+   "clip": "17723349754432136178.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00737685,
+   "levels": {
+    "snr20": {
+     "offset": 344240,
+     "noise_gain": 0.00658152
+    },
+    "snr10": {
+     "offset": 523245,
+     "noise_gain": 0.02192588
+    },
+    "snr5": {
+     "offset": 316140,
+     "noise_gain": 0.03633218
+    }
+   }
+  },
+  {
+   "clip": "17733943523637516997.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01189306,
+   "levels": {
+    "snr20": {
+     "offset": 535404,
+     "noise_gain": 0.0111937
+    },
+    "snr10": {
+     "offset": 130405,
+     "noise_gain": 0.02386063
+    },
+    "snr5": {
+     "offset": 77774,
+     "noise_gain": 0.03978404
+    }
+   }
+  },
+  {
+   "clip": "17734440130091015092.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07722284,
+   "levels": {
+    "snr20": {
+     "offset": 556218,
+     "noise_gain": 0.07144679
+    },
+    "snr10": {
+     "offset": 407313,
+     "noise_gain": 0.22882988
+    },
+    "snr5": {
+     "offset": 87514,
+     "noise_gain": 0.24944425
+    }
+   }
+  },
+  {
+   "clip": "17760903741331142977.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03298771,
+   "levels": {
+    "snr20": {
+     "offset": 33644,
+     "noise_gain": 0.01834163
+    },
+    "snr10": {
+     "offset": 114853,
+     "noise_gain": 0.06052589
+    },
+    "snr5": {
+     "offset": 286612,
+     "noise_gain": 0.1590757
+    }
+   }
+  },
+  {
+   "clip": "17785592983709184786.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01233273,
+   "levels": {
+    "snr20": {
+     "offset": 619544,
+     "noise_gain": 0.01135142
+    },
+    "snr10": {
+     "offset": 653718,
+     "noise_gain": 0.03515674
+    },
+    "snr5": {
+     "offset": 470136,
+     "noise_gain": 0.06461023
+    }
+   }
+  },
+  {
+   "clip": "17789050301575327044.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01005849,
+   "levels": {
+    "snr20": {
+     "offset": 1420822,
+     "noise_gain": 0.01534343
+    },
+    "snr10": {
+     "offset": 757589,
+     "noise_gain": 0.06332943
+    },
+    "snr5": {
+     "offset": 1458495,
+     "noise_gain": 0.08623682
+    }
+   }
+  },
+  {
+   "clip": "17807139993685686235.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01478063,
+   "levels": {
+    "snr20": {
+     "offset": 116416,
+     "noise_gain": 0.00800539
+    },
+    "snr10": {
+     "offset": 683903,
+     "noise_gain": 0.04332927
+    },
+    "snr5": {
+     "offset": 700695,
+     "noise_gain": 0.07619769
+    }
+   }
+  },
+  {
+   "clip": "17852461633299964986.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02878027,
+   "levels": {
+    "snr20": {
+     "offset": 471881,
+     "noise_gain": 0.04249908
+    },
+    "snr10": {
+     "offset": 799324,
+     "noise_gain": 0.20070322
+    },
+    "snr5": {
+     "offset": 1133626,
+     "noise_gain": 0.25281336
+    }
+   }
+  },
+  {
+   "clip": "1785973493012389658.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05263163,
+   "levels": {
+    "snr20": {
+     "offset": 1534910,
+     "noise_gain": 0.08671329
+    },
+    "snr10": {
+     "offset": 1301323,
+     "noise_gain": 0.37063585
+    },
+    "snr5": {
+     "offset": 753315,
+     "noise_gain": 0.54473254
+    }
+   }
+  },
+  {
+   "clip": "17864488134762236870.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00736165,
+   "levels": {
+    "snr20": {
+     "offset": 225712,
+     "noise_gain": 0.00558332
+    },
+    "snr10": {
+     "offset": 595463,
+     "noise_gain": 0.02127564
+    },
+    "snr5": {
+     "offset": 734213,
+     "noise_gain": 0.03972984
+    }
+   }
+  },
+  {
+   "clip": "17964430555724765759.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01301553,
+   "levels": {
+    "snr20": {
+     "offset": 35884,
+     "noise_gain": 0.01719662
+    },
+    "snr10": {
+     "offset": 846606,
+     "noise_gain": 0.0633793
+    },
+    "snr5": {
+     "offset": 1209750,
+     "noise_gain": 0.12106838
+    }
+   }
+  },
+  {
+   "clip": "17972988491350510714.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04100274,
+   "levels": {
+    "snr20": {
+     "offset": 443344,
+     "noise_gain": 0.03764766
+    },
+    "snr10": {
+     "offset": 353759,
+     "noise_gain": 0.1195675
+    },
+    "snr5": {
+     "offset": 116889,
+     "noise_gain": 0.13786376
+    }
+   }
+  },
+  {
+   "clip": "18013764684267007660.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03443055,
+   "levels": {
+    "snr20": {
+     "offset": 651128,
+     "noise_gain": 0.05813643
+    },
+    "snr10": {
+     "offset": 1047943,
+     "noise_gain": 0.15565211
+    },
+    "snr5": {
+     "offset": 25631,
+     "noise_gain": 0.25824088
+    }
+   }
+  },
+  {
+   "clip": "18070648844142607800.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03199857,
+   "levels": {
+    "snr20": {
+     "offset": 9344,
+     "noise_gain": 0.01780118
+    },
+    "snr10": {
+     "offset": 369254,
+     "noise_gain": 0.09410666
+    },
+    "snr5": {
+     "offset": 149653,
+     "noise_gain": 0.1140081
+    }
+   }
+  },
+  {
+   "clip": "18102420842531542300.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00972876,
+   "levels": {
+    "snr20": {
+     "offset": 478816,
+     "noise_gain": 0.00937148
+    },
+    "snr10": {
+     "offset": 271599,
+     "noise_gain": 0.02417751
+    },
+    "snr5": {
+     "offset": 651251,
+     "noise_gain": 0.04722496
+    }
+   }
+  },
+  {
+   "clip": "18190353083996682065.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02966877,
+   "levels": {
+    "snr20": {
+     "offset": 660670,
+     "noise_gain": 0.02694773
+    },
+    "snr10": {
+     "offset": 552523,
+     "noise_gain": 0.08637845
+    },
+    "snr5": {
+     "offset": 370238,
+     "noise_gain": 0.1570892
+    }
+   }
+  },
+  {
+   "clip": "18223934985184821833.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00855161,
+   "levels": {
+    "snr20": {
+     "offset": 172215,
+     "noise_gain": 0.00529996
+    },
+    "snr10": {
+     "offset": 373314,
+     "noise_gain": 0.02497574
+    },
+    "snr5": {
+     "offset": 528383,
+     "noise_gain": 0.04493852
+    }
+   }
+  },
+  {
+   "clip": "18259302967161074692.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01093991,
+   "levels": {
+    "snr20": {
+     "offset": 37044,
+     "noise_gain": 0.00601296
+    },
+    "snr10": {
+     "offset": 311043,
+     "noise_gain": 0.03020771
+    },
+    "snr5": {
+     "offset": 685375,
+     "noise_gain": 0.05556813
+    }
+   }
+  },
+  {
+   "clip": "18369273397042268620.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01221838,
+   "levels": {
+    "snr20": {
+     "offset": 271601,
+     "noise_gain": 0.01671644
+    },
+    "snr10": {
+     "offset": 1495325,
+     "noise_gain": 0.06016687
+    },
+    "snr5": {
+     "offset": 1440917,
+     "noise_gain": 0.10628691
+    }
+   }
+  },
+  {
+   "clip": "18399332868055353434.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02825408,
+   "levels": {
+    "snr20": {
+     "offset": 371946,
+     "noise_gain": 0.02596156
+    },
+    "snr10": {
+     "offset": 342894,
+     "noise_gain": 0.07915932
+    },
+    "snr5": {
+     "offset": 14986,
+     "noise_gain": 0.09054952
+    }
+   }
+  },
+  {
+   "clip": "1865396101865246508.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02464494,
+   "levels": {
+    "snr20": {
+     "offset": 451133,
+     "noise_gain": 0.02254186
+    },
+    "snr10": {
+     "offset": 171124,
+     "noise_gain": 0.04721686
+    },
+    "snr5": {
+     "offset": 236592,
+     "noise_gain": 0.10322113
+    }
+   }
+  },
+  {
+   "clip": "1919466253403054855.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04871428,
+   "levels": {
+    "snr20": {
+     "offset": 895552,
+     "noise_gain": 0.07847417
+    },
+    "snr10": {
+     "offset": 594561,
+     "noise_gain": 0.24535967
+    },
+    "snr5": {
+     "offset": 178737,
+     "noise_gain": 0.32177918
+    }
+   }
+  },
+  {
+   "clip": "193052737573044728.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01037216,
+   "levels": {
+    "snr20": {
+     "offset": 714862,
+     "noise_gain": 0.02057439
+    },
+    "snr10": {
+     "offset": 200487,
+     "noise_gain": 0.04616575
+    },
+    "snr5": {
+     "offset": 267004,
+     "noise_gain": 0.07853758
+    }
+   }
+  },
+  {
+   "clip": "1952401735507636754.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06574893,
+   "levels": {
+    "snr20": {
+     "offset": 111143,
+     "noise_gain": 0.09655583
+    },
+    "snr10": {
+     "offset": 1705763,
+     "noise_gain": 0.20960095
+    },
+    "snr5": {
+     "offset": 991432,
+     "noise_gain": 0.54528611
+    }
+   }
+  },
+  {
+   "clip": "1983822012355169367.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01364189,
+   "levels": {
+    "snr20": {
+     "offset": 1619305,
+     "noise_gain": 0.02059145
+    },
+    "snr10": {
+     "offset": 1513801,
+     "noise_gain": 0.06371155
+    },
+    "snr5": {
+     "offset": 1052861,
+     "noise_gain": 0.11203812
+    }
+   }
+  },
+  {
+   "clip": "1986680473642113308.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00868085,
+   "levels": {
+    "snr20": {
+     "offset": 733120,
+     "noise_gain": 0.0084228
+    },
+    "snr10": {
+     "offset": 443494,
+     "noise_gain": 0.02522709
+    },
+    "snr5": {
+     "offset": 208098,
+     "noise_gain": 0.03500397
+    }
+   }
+  },
+  {
+   "clip": "2028898009494741550.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00939286,
+   "levels": {
+    "snr20": {
+     "offset": 1519590,
+     "noise_gain": 0.01385436
+    },
+    "snr10": {
+     "offset": 39293,
+     "noise_gain": 0.0414631
+    },
+    "snr5": {
+     "offset": 1577767,
+     "noise_gain": 0.08658489
+    }
+   }
+  },
+  {
+   "clip": "2037240753294853158.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01431891,
+   "levels": {
+    "snr20": {
+     "offset": 102279,
+     "noise_gain": 0.00780044
+    },
+    "snr10": {
+     "offset": 29534,
+     "noise_gain": 0.02760847
+    },
+    "snr5": {
+     "offset": 108066,
+     "noise_gain": 0.04339586
+    }
+   }
+  },
+  {
+   "clip": "2178574847086878124.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06284626,
+   "levels": {
+    "snr20": {
+     "offset": 1624157,
+     "noise_gain": 0.09887942
+    },
+    "snr10": {
+     "offset": 584978,
+     "noise_gain": 0.26278519
+    },
+    "snr5": {
+     "offset": 260516,
+     "noise_gain": 0.50562453
+    }
+   }
+  },
+  {
+   "clip": "222498887493339391.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02961022,
+   "levels": {
+    "snr20": {
+     "offset": 750895,
+     "noise_gain": 0.02883717
+    },
+    "snr10": {
+     "offset": 304723,
+     "noise_gain": 0.0818551
+    },
+    "snr5": {
+     "offset": 691308,
+     "noise_gain": 0.15218335
+    }
+   }
+  },
+  {
+   "clip": "225249299859956464.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05714,
+   "levels": {
+    "snr20": {
+     "offset": 813825,
+     "noise_gain": 0.05505417
+    },
+    "snr10": {
+     "offset": 700523,
+     "noise_gain": 0.16213212
+    },
+    "snr5": {
+     "offset": 689539,
+     "noise_gain": 0.2987034
+    }
+   }
+  },
+  {
+   "clip": "2311547618713018860.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00983809,
+   "levels": {
+    "snr20": {
+     "offset": 1053495,
+     "noise_gain": 0.01368473
+    },
+    "snr10": {
+     "offset": 1602127,
+     "noise_gain": 0.0372492
+    },
+    "snr5": {
+     "offset": 213283,
+     "noise_gain": 0.07509035
+    }
+   }
+  },
+  {
+   "clip": "2376740469015312135.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04898392,
+   "levels": {
+    "snr20": {
+     "offset": 408442,
+     "noise_gain": 0.06922786
+    },
+    "snr10": {
+     "offset": 956609,
+     "noise_gain": 0.21350831
+    },
+    "snr5": {
+     "offset": 1130530,
+     "noise_gain": 0.43076753
+    }
+   }
+  },
+  {
+   "clip": "2432038726036881563.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06371049,
+   "levels": {
+    "snr20": {
+     "offset": 1006638,
+     "noise_gain": 0.0870141
+    },
+    "snr10": {
+     "offset": 375725,
+     "noise_gain": 0.25602491
+    },
+    "snr5": {
+     "offset": 1285569,
+     "noise_gain": 0.7523618
+    }
+   }
+  },
+  {
+   "clip": "2459236814356682425.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05289593,
+   "levels": {
+    "snr20": {
+     "offset": 1190430,
+     "noise_gain": 0.082551
+    },
+    "snr10": {
+     "offset": 238963,
+     "noise_gain": 0.2618752
+    },
+    "snr5": {
+     "offset": 350284,
+     "noise_gain": 0.4260085
+    }
+   }
+  },
+  {
+   "clip": "2463242891498897689.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0316458,
+   "levels": {
+    "snr20": {
+     "offset": 631288,
+     "noise_gain": 0.02929762
+    },
+    "snr10": {
+     "offset": 79300,
+     "noise_gain": 0.05494654
+    },
+    "snr5": {
+     "offset": 467111,
+     "noise_gain": 0.16542821
+    }
+   }
+  },
+  {
+   "clip": "2464800702839720522.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00866908,
+   "levels": {
+    "snr20": {
+     "offset": 623434,
+     "noise_gain": 0.00764739
+    },
+    "snr10": {
+     "offset": 320411,
+     "noise_gain": 0.02456359
+    },
+    "snr5": {
+     "offset": 636724,
+     "noise_gain": 0.04396839
+    }
+   }
+  },
+  {
+   "clip": "2468333270876055810.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00846293,
+   "levels": {
+    "snr20": {
+     "offset": 12614,
+     "noise_gain": 0.0049703
+    },
+    "snr10": {
+     "offset": 617377,
+     "noise_gain": 0.02329184
+    },
+    "snr5": {
+     "offset": 100199,
+     "noise_gain": 0.02531408
+    }
+   }
+  },
+  {
+   "clip": "2512949531760056682.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00877712,
+   "levels": {
+    "snr20": {
+     "offset": 11715,
+     "noise_gain": 0.004817
+    },
+    "snr10": {
+     "offset": 53356,
+     "noise_gain": 0.01523282
+    },
+    "snr5": {
+     "offset": 591195,
+     "noise_gain": 0.04515943
+    }
+   }
+  },
+  {
+   "clip": "264790797188652951.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03649451,
+   "levels": {
+    "snr20": {
+     "offset": 505385,
+     "noise_gain": 0.05335881
+    },
+    "snr10": {
+     "offset": 26827,
+     "noise_gain": 0.16890448
+    },
+    "snr5": {
+     "offset": 1364802,
+     "noise_gain": 0.37143262
+    }
+   }
+  },
+  {
+   "clip": "2698563962876029465.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03422198,
+   "levels": {
+    "snr20": {
+     "offset": 403738,
+     "noise_gain": 0.04881044
+    },
+    "snr10": {
+     "offset": 90954,
+     "noise_gain": 0.15049335
+    },
+    "snr5": {
+     "offset": 1235208,
+     "noise_gain": 0.31801137
+    }
+   }
+  },
+  {
+   "clip": "2728506453238664805.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05189082,
+   "levels": {
+    "snr20": {
+     "offset": 347674,
+     "noise_gain": 0.04718799
+    },
+    "snr10": {
+     "offset": 138901,
+     "noise_gain": 0.08531483
+    },
+    "snr5": {
+     "offset": 511171,
+     "noise_gain": 0.28586379
+    }
+   }
+  },
+  {
+   "clip": "2756092537124819949.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06813504,
+   "levels": {
+    "snr20": {
+     "offset": 649919,
+     "noise_gain": 0.06278406
+    },
+    "snr10": {
+     "offset": 238884,
+     "noise_gain": 0.16239621
+    },
+    "snr5": {
+     "offset": 365094,
+     "noise_gain": 0.34744089
+    }
+   }
+  },
+  {
+   "clip": "2756951331895466977.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01445509,
+   "levels": {
+    "snr20": {
+     "offset": 577489,
+     "noise_gain": 0.01320506
+    },
+    "snr10": {
+     "offset": 563754,
+     "noise_gain": 0.04210189
+    },
+    "snr5": {
+     "offset": 166258,
+     "noise_gain": 0.05547838
+    }
+   }
+  },
+  {
+   "clip": "2782320235558085989.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0162421,
+   "levels": {
+    "snr20": {
+     "offset": 982832,
+     "noise_gain": 0.02303195
+    },
+    "snr10": {
+     "offset": 1462726,
+     "noise_gain": 0.07002304
+    },
+    "snr5": {
+     "offset": 682547,
+     "noise_gain": 0.20067625
+    }
+   }
+  },
+  {
+   "clip": "2819901188257576497.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04054105,
+   "levels": {
+    "snr20": {
+     "offset": 773176,
+     "noise_gain": 0.03828189
+    },
+    "snr10": {
+     "offset": 734788,
+     "noise_gain": 0.12035494
+    },
+    "snr5": {
+     "offset": 243097,
+     "noise_gain": 0.16829123
+    }
+   }
+  },
+  {
+   "clip": "2842423822116430098.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0144925,
+   "levels": {
+    "snr20": {
+     "offset": 282187,
+     "noise_gain": 0.02029947
+    },
+    "snr10": {
+     "offset": 840994,
+     "noise_gain": 0.10326175
+    },
+    "snr5": {
+     "offset": 1623969,
+     "noise_gain": 0.13513724
+    }
+   }
+  },
+  {
+   "clip": "2878803212341976118.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0678626,
+   "levels": {
+    "snr20": {
+     "offset": 153891,
+     "noise_gain": 0.03808978
+    },
+    "snr10": {
+     "offset": 532471,
+     "noise_gain": 0.20314139
+    },
+    "snr5": {
+     "offset": 457001,
+     "noise_gain": 0.35248122
+    }
+   }
+  },
+  {
+   "clip": "2887420354201128129.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05585534,
+   "levels": {
+    "snr20": {
+     "offset": 573526,
+     "noise_gain": 0.07707659
+    },
+    "snr10": {
+     "offset": 991042,
+     "noise_gain": 0.22355384
+    },
+    "snr5": {
+     "offset": 856295,
+     "noise_gain": 0.66329553
+    }
+   }
+  },
+  {
+   "clip": "3016052472630484110.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01486701,
+   "levels": {
+    "snr20": {
+     "offset": 563033,
+     "noise_gain": 0.01373252
+    },
+    "snr10": {
+     "offset": 293923,
+     "noise_gain": 0.04173733
+    },
+    "snr5": {
+     "offset": 134786,
+     "noise_gain": 0.04498665
+    }
+   }
+  },
+  {
+   "clip": "3021184871434384877.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02880563,
+   "levels": {
+    "snr20": {
+     "offset": 396128,
+     "noise_gain": 0.02652653
+    },
+    "snr10": {
+     "offset": 725832,
+     "noise_gain": 0.08345447
+    },
+    "snr5": {
+     "offset": 763840,
+     "noise_gain": 0.15527035
+    }
+   }
+  },
+  {
+   "clip": "3036800693961545114.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01030473,
+   "levels": {
+    "snr20": {
+     "offset": 601478,
+     "noise_gain": 0.00927758
+    },
+    "snr10": {
+     "offset": 48083,
+     "noise_gain": 0.01921598
+    },
+    "snr5": {
+     "offset": 415056,
+     "noise_gain": 0.05170002
+    }
+   }
+  },
+  {
+   "clip": "3062518200130457471.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01097296,
+   "levels": {
+    "snr20": {
+     "offset": 533674,
+     "noise_gain": 0.01046992
+    },
+    "snr10": {
+     "offset": 608373,
+     "noise_gain": 0.03071141
+    },
+    "snr5": {
+     "offset": 221548,
+     "noise_gain": 0.0435939
+    }
+   }
+  },
+  {
+   "clip": "3111451519417746817.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04971754,
+   "levels": {
+    "snr20": {
+     "offset": 1594080,
+     "noise_gain": 0.0650033
+    },
+    "snr10": {
+     "offset": 10738,
+     "noise_gain": 0.20502467
+    },
+    "snr5": {
+     "offset": 563488,
+     "noise_gain": 0.44238997
+    }
+   }
+  },
+  {
+   "clip": "3122371773030012386.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07356727,
+   "levels": {
+    "snr20": {
+     "offset": 277273,
+     "noise_gain": 0.06177439
+    },
+    "snr10": {
+     "offset": 162036,
+     "noise_gain": 0.14555892
+    },
+    "snr5": {
+     "offset": 424124,
+     "noise_gain": 0.38473074
+    }
+   }
+  },
+  {
+   "clip": "3122868525169124045.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01048164,
+   "levels": {
+    "snr20": {
+     "offset": 886018,
+     "noise_gain": 0.01768936
+    },
+    "snr10": {
+     "offset": 1403710,
+     "noise_gain": 0.05243071
+    },
+    "snr5": {
+     "offset": 1441718,
+     "noise_gain": 0.09197787
+    }
+   }
+  },
+  {
+   "clip": "3131782175864347195.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02935566,
+   "levels": {
+    "snr20": {
+     "offset": 673088,
+     "noise_gain": 0.02666857
+    },
+    "snr10": {
+     "offset": 283400,
+     "noise_gain": 0.07931186
+    },
+    "snr5": {
+     "offset": 518580,
+     "noise_gain": 0.15225366
+    }
+   }
+  },
+  {
+   "clip": "3141752475469655092.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05120697,
+   "levels": {
+    "snr20": {
+     "offset": 1063102,
+     "noise_gain": 0.06859746
+    },
+    "snr10": {
+     "offset": 9198,
+     "noise_gain": 0.19510872
+    },
+    "snr5": {
+     "offset": 1518932,
+     "noise_gain": 0.40789086
+    }
+   }
+  },
+  {
+   "clip": "3143859952504202808.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.048517,
+   "levels": {
+    "snr20": {
+     "offset": 370030,
+     "noise_gain": 0.06979721
+    },
+    "snr10": {
+     "offset": 898178,
+     "noise_gain": 0.25352804
+    },
+    "snr5": {
+     "offset": 1129791,
+     "noise_gain": 0.42833735
+    }
+   }
+  },
+  {
+   "clip": "3146704011463634034.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01722722,
+   "levels": {
+    "snr20": {
+     "offset": 344430,
+     "noise_gain": 0.01528702
+    },
+    "snr10": {
+     "offset": 296514,
+     "noise_gain": 0.04740117
+    },
+    "snr5": {
+     "offset": 707699,
+     "noise_gain": 0.08923744
+    }
+   }
+  },
+  {
+   "clip": "3193960220747641706.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00919287,
+   "levels": {
+    "snr20": {
+     "offset": 10698,
+     "noise_gain": 0.00539953
+    },
+    "snr10": {
+     "offset": 784698,
+     "noise_gain": 0.02711845
+    },
+    "snr5": {
+     "offset": 831589,
+     "noise_gain": 0.04981382
+    }
+   }
+  },
+  {
+   "clip": "3221007713940049750.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03453422,
+   "levels": {
+    "snr20": {
+     "offset": 545981,
+     "noise_gain": 0.05529357
+    },
+    "snr10": {
+     "offset": 578623,
+     "noise_gain": 0.16245324
+    },
+    "snr5": {
+     "offset": 103273,
+     "noise_gain": 0.27074898
+    }
+   }
+  },
+  {
+   "clip": "3223994530804233700.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07097157,
+   "levels": {
+    "snr20": {
+     "offset": 489778,
+     "noise_gain": 0.06940389
+    },
+    "snr10": {
+     "offset": 737452,
+     "noise_gain": 0.21912301
+    },
+    "snr5": {
+     "offset": 702975,
+     "noise_gain": 0.35727612
+    }
+   }
+  },
+  {
+   "clip": "3269827361066115243.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02626924,
+   "levels": {
+    "snr20": {
+     "offset": 525429,
+     "noise_gain": 0.03858179
+    },
+    "snr10": {
+     "offset": 1651216,
+     "noise_gain": 0.09411886
+    },
+    "snr5": {
+     "offset": 461358,
+     "noise_gain": 0.21001478
+    }
+   }
+  },
+  {
+   "clip": "3294052298679520397.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00976523,
+   "levels": {
+    "snr20": {
+     "offset": 436822,
+     "noise_gain": 0.00887595
+    },
+    "snr10": {
+     "offset": 361368,
+     "noise_gain": 0.0276919
+    },
+    "snr5": {
+     "offset": 146513,
+     "noise_gain": 0.02958718
+    }
+   }
+  },
+  {
+   "clip": "3321931854782936216.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04633987,
+   "levels": {
+    "snr20": {
+     "offset": 134445,
+     "noise_gain": 0.02561281
+    },
+    "snr10": {
+     "offset": 32882,
+     "noise_gain": 0.08265179
+    },
+    "snr5": {
+     "offset": 193738,
+     "noise_gain": 0.16323006
+    }
+   }
+  },
+  {
+   "clip": "3360440406274205225.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02330479,
+   "levels": {
+    "snr20": {
+     "offset": 436215,
+     "noise_gain": 0.02160535
+    },
+    "snr10": {
+     "offset": 27868,
+     "noise_gain": 0.04099393
+    },
+    "snr5": {
+     "offset": 167218,
+     "noise_gain": 0.08263292
+    }
+   }
+  },
+  {
+   "clip": "3468716217920938051.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01336229,
+   "levels": {
+    "snr20": {
+     "offset": 1282044,
+     "noise_gain": 0.02300943
+    },
+    "snr10": {
+     "offset": 775724,
+     "noise_gain": 0.07255565
+    },
+    "snr5": {
+     "offset": 504546,
+     "noise_gain": 0.11778731
+    }
+   }
+  },
+  {
+   "clip": "3476850893335857845.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01240243,
+   "levels": {
+    "snr20": {
+     "offset": 1419762,
+     "noise_gain": 0.01879389
+    },
+    "snr10": {
+     "offset": 1208709,
+     "noise_gain": 0.05917215
+    },
+    "snr5": {
+     "offset": 651426,
+     "noise_gain": 0.11647295
+    }
+   }
+  },
+  {
+   "clip": "3543057947176930655.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06094265,
+   "levels": {
+    "snr20": {
+     "offset": 67340,
+     "noise_gain": 0.03344738
+    },
+    "snr10": {
+     "offset": 310083,
+     "noise_gain": 0.17079072
+    },
+    "snr5": {
+     "offset": 407738,
+     "noise_gain": 0.31318743
+    }
+   }
+  },
+  {
+   "clip": "3549313472112581898.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04126516,
+   "levels": {
+    "snr20": {
+     "offset": 222271,
+     "noise_gain": 0.02950574
+    },
+    "snr10": {
+     "offset": 631736,
+     "noise_gain": 0.12054394
+    },
+    "snr5": {
+     "offset": 408508,
+     "noise_gain": 0.21809364
+    }
+   }
+  },
+  {
+   "clip": "3556656874316029235.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05219447,
+   "levels": {
+    "snr20": {
+     "offset": 158102,
+     "noise_gain": 0.02850129
+    },
+    "snr10": {
+     "offset": 812186,
+     "noise_gain": 0.15484936
+    },
+    "snr5": {
+     "offset": 628546,
+     "noise_gain": 0.25890263
+    }
+   }
+  },
+  {
+   "clip": "3597961088198231074.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04850131,
+   "levels": {
+    "snr20": {
+     "offset": 944492,
+     "noise_gain": 0.06860394
+    },
+    "snr10": {
+     "offset": 1508337,
+     "noise_gain": 0.2368103
+    },
+    "snr5": {
+     "offset": 193940,
+     "noise_gain": 0.37227867
+    }
+   }
+  },
+  {
+   "clip": "3646648583707739368.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01496346,
+   "levels": {
+    "snr20": {
+     "offset": 1366020,
+     "noise_gain": 0.02745545
+    },
+    "snr10": {
+     "offset": 248252,
+     "noise_gain": 0.06907892
+    },
+    "snr5": {
+     "offset": 1163742,
+     "noise_gain": 0.12347561
+    }
+   }
+  },
+  {
+   "clip": "3648529321012119161.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01291372,
+   "levels": {
+    "snr20": {
+     "offset": 161262,
+     "noise_gain": 0.00815233
+    },
+    "snr10": {
+     "offset": 205554,
+     "noise_gain": 0.02899111
+    },
+    "snr5": {
+     "offset": 578751,
+     "noise_gain": 0.06719095
+    }
+   }
+  },
+  {
+   "clip": "3667250650569168633.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02624237,
+   "levels": {
+    "snr20": {
+     "offset": 1463666,
+     "noise_gain": 0.04103242
+    },
+    "snr10": {
+     "offset": 783832,
+     "noise_gain": 0.16733228
+    },
+    "snr5": {
+     "offset": 355134,
+     "noise_gain": 0.21558822
+    }
+   }
+  },
+  {
+   "clip": "3701404004770268839.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01001243,
+   "levels": {
+    "snr20": {
+     "offset": 274240,
+     "noise_gain": 0.01346446
+    },
+    "snr10": {
+     "offset": 54564,
+     "noise_gain": 0.04403237
+    },
+    "snr5": {
+     "offset": 1341786,
+     "noise_gain": 0.09544624
+    }
+   }
+  },
+  {
+   "clip": "3740483813400478334.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01951588,
+   "levels": {
+    "snr20": {
+     "offset": 691072,
+     "noise_gain": 0.03507296
+    },
+    "snr10": {
+     "offset": 378586,
+     "noise_gain": 0.0893982
+    },
+    "snr5": {
+     "offset": 421734,
+     "noise_gain": 0.16295027
+    }
+   }
+  },
+  {
+   "clip": "3873693005467645684.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02511004,
+   "levels": {
+    "snr20": {
+     "offset": 776108,
+     "noise_gain": 0.04364266
+    },
+    "snr10": {
+     "offset": 1220947,
+     "noise_gain": 0.10812237
+    },
+    "snr5": {
+     "offset": 113562,
+     "noise_gain": 0.20654937
+    }
+   }
+  },
+  {
+   "clip": "3905207007909365832.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0325966,
+   "levels": {
+    "snr20": {
+     "offset": 280857,
+     "noise_gain": 0.02813401
+    },
+    "snr10": {
+     "offset": 338173,
+     "noise_gain": 0.09465403
+    },
+    "snr5": {
+     "offset": 563183,
+     "noise_gain": 0.17059316
+    }
+   }
+  },
+  {
+   "clip": "3982203166439236149.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02549081,
+   "levels": {
+    "snr20": {
+     "offset": 352847,
+     "noise_gain": 0.02339238
+    },
+    "snr10": {
+     "offset": 547179,
+     "noise_gain": 0.07483967
+    },
+    "snr5": {
+     "offset": 200857,
+     "noise_gain": 0.09937716
+    }
+   }
+  },
+  {
+   "clip": "400055651005525729.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01999616,
+   "levels": {
+    "snr20": {
+     "offset": 743045,
+     "noise_gain": 0.01913406
+    },
+    "snr10": {
+     "offset": 634751,
+     "noise_gain": 0.05745436
+    },
+    "snr5": {
+     "offset": 289460,
+     "noise_gain": 0.098672
+    }
+   }
+  },
+  {
+   "clip": "4016652471187190294.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05968601,
+   "levels": {
+    "snr20": {
+     "offset": 138348,
+     "noise_gain": 0.04254989
+    },
+    "snr10": {
+     "offset": 412988,
+     "noise_gain": 0.17381199
+    },
+    "snr5": {
+     "offset": 174651,
+     "noise_gain": 0.2527439
+    }
+   }
+  },
+  {
+   "clip": "4045322610112619250.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01011255,
+   "levels": {
+    "snr20": {
+     "offset": 279487,
+     "noise_gain": 0.01420445
+    },
+    "snr10": {
+     "offset": 151453,
+     "noise_gain": 0.03763968
+    },
+    "snr5": {
+     "offset": 1696430,
+     "noise_gain": 0.06142625
+    }
+   }
+  },
+  {
+   "clip": "4057974606612439591.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06396123,
+   "levels": {
+    "snr20": {
+     "offset": 299712,
+     "noise_gain": 0.05421014
+    },
+    "snr10": {
+     "offset": 75970,
+     "noise_gain": 0.11010448
+    },
+    "snr5": {
+     "offset": 545723,
+     "noise_gain": 0.35077671
+    }
+   }
+  },
+  {
+   "clip": "4109835095717580820.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07063227,
+   "levels": {
+    "snr20": {
+     "offset": 773406,
+     "noise_gain": 0.13817063
+    },
+    "snr10": {
+     "offset": 665090,
+     "noise_gain": 0.37800023
+    },
+    "snr5": {
+     "offset": 1404984,
+     "noise_gain": 0.61819663
+    }
+   }
+  },
+  {
+   "clip": "4160045895944168946.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06315577,
+   "levels": {
+    "snr20": {
+     "offset": 778879,
+     "noise_gain": 0.05911449
+    },
+    "snr10": {
+     "offset": 753931,
+     "noise_gain": 0.19262989
+    },
+    "snr5": {
+     "offset": 130751,
+     "noise_gain": 0.18987133
+    }
+   }
+  },
+  {
+   "clip": "418161728224751625.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07037849,
+   "levels": {
+    "snr20": {
+     "offset": 1652186,
+     "noise_gain": 0.10266601
+    },
+    "snr10": {
+     "offset": 1171911,
+     "noise_gain": 0.30320834
+    },
+    "snr5": {
+     "offset": 549119,
+     "noise_gain": 0.57406322
+    }
+   }
+  },
+  {
+   "clip": "4214188828290927037.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01088774,
+   "levels": {
+    "snr20": {
+     "offset": 636389,
+     "noise_gain": 0.00998091
+    },
+    "snr10": {
+     "offset": 519875,
+     "noise_gain": 0.03214187
+    },
+    "snr5": {
+     "offset": 475367,
+     "noise_gain": 0.05613264
+    }
+   }
+  },
+  {
+   "clip": "4227431294767132095.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01367184,
+   "levels": {
+    "snr20": {
+     "offset": 914495,
+     "noise_gain": 0.02072402
+    },
+    "snr10": {
+     "offset": 228552,
+     "noise_gain": 0.05934926
+    },
+    "snr5": {
+     "offset": 670223,
+     "noise_gain": 0.12607518
+    }
+   }
+  },
+  {
+   "clip": "4250000233346903811.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05237095,
+   "levels": {
+    "snr20": {
+     "offset": 1519861,
+     "noise_gain": 0.0652794
+    },
+    "snr10": {
+     "offset": 1447084,
+     "noise_gain": 0.25286708
+    },
+    "snr5": {
+     "offset": 1012199,
+     "noise_gain": 0.39659699
+    }
+   }
+  },
+  {
+   "clip": "4275873546879517964.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04324722,
+   "levels": {
+    "snr20": {
+     "offset": 350454,
+     "noise_gain": 0.06034494
+    },
+    "snr10": {
+     "offset": 1544756,
+     "noise_gain": 0.22831743
+    },
+    "snr5": {
+     "offset": 1220823,
+     "noise_gain": 0.40759591
+    }
+   }
+  },
+  {
+   "clip": "4366440582559791514.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05126529,
+   "levels": {
+    "snr20": {
+     "offset": 742649,
+     "noise_gain": 0.04912235
+    },
+    "snr10": {
+     "offset": 770661,
+     "noise_gain": 0.15578328
+    },
+    "snr5": {
+     "offset": 801698,
+     "noise_gain": 0.28040895
+    }
+   }
+  },
+  {
+   "clip": "4368660601469013485.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0629682,
+   "levels": {
+    "snr20": {
+     "offset": 757276,
+     "noise_gain": 0.10755722
+    },
+    "snr10": {
+     "offset": 710046,
+     "noise_gain": 0.35097785
+    },
+    "snr5": {
+     "offset": 195577,
+     "noise_gain": 0.45157037
+    }
+   }
+  },
+  {
+   "clip": "437812100589576550.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03087541,
+   "levels": {
+    "snr20": {
+     "offset": 1328467,
+     "noise_gain": 0.0627512
+    },
+    "snr10": {
+     "offset": 1434996,
+     "noise_gain": 0.15285101
+    },
+    "snr5": {
+     "offset": 1435345,
+     "noise_gain": 0.27248589
+    }
+   }
+  },
+  {
+   "clip": "4385304662879287232.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03424477,
+   "levels": {
+    "snr20": {
+     "offset": 685895,
+     "noise_gain": 0.07088561
+    },
+    "snr10": {
+     "offset": 1050923,
+     "noise_gain": 0.15010506
+    },
+    "snr5": {
+     "offset": 289014,
+     "noise_gain": 0.26259209
+    }
+   }
+  },
+  {
+   "clip": "4393709189338932627.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04785422,
+   "levels": {
+    "snr20": {
+     "offset": 1583305,
+     "noise_gain": 0.08589596
+    },
+    "snr10": {
+     "offset": 872819,
+     "noise_gain": 0.31176723
+    },
+    "snr5": {
+     "offset": 1716267,
+     "noise_gain": 0.27146325
+    }
+   }
+  },
+  {
+   "clip": "4405808295778052847.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02127497,
+   "levels": {
+    "snr20": {
+     "offset": 411342,
+     "noise_gain": 0.02000088
+    },
+    "snr10": {
+     "offset": 43036,
+     "noise_gain": 0.03763956
+    },
+    "snr5": {
+     "offset": 169878,
+     "noise_gain": 0.07770879
+    }
+   }
+  },
+  {
+   "clip": "4454239018661392845.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00779986,
+   "levels": {
+    "snr20": {
+     "offset": 1368969,
+     "noise_gain": 0.01488822
+    },
+    "snr10": {
+     "offset": 319213,
+     "noise_gain": 0.03833341
+    },
+    "snr5": {
+     "offset": 57042,
+     "noise_gain": 0.06752244
+    }
+   }
+  },
+  {
+   "clip": "446737604540109751.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00869282,
+   "levels": {
+    "snr20": {
+     "offset": 14802,
+     "noise_gain": 0.00505742
+    },
+    "snr10": {
+     "offset": 650067,
+     "noise_gain": 0.02414935
+    },
+    "snr5": {
+     "offset": 211257,
+     "noise_gain": 0.02801545
+    }
+   }
+  },
+  {
+   "clip": "4491092058051581295.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03497181,
+   "levels": {
+    "snr20": {
+     "offset": 742492,
+     "noise_gain": 0.03328623
+    },
+    "snr10": {
+     "offset": 444893,
+     "noise_gain": 0.0984454
+    },
+    "snr5": {
+     "offset": 640703,
+     "noise_gain": 0.16996225
+    }
+   }
+  },
+  {
+   "clip": "4524168784709627062.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06426078,
+   "levels": {
+    "snr20": {
+     "offset": 1062167,
+     "noise_gain": 0.08710375
+    },
+    "snr10": {
+     "offset": 7484,
+     "noise_gain": 0.26232994
+    },
+    "snr5": {
+     "offset": 1573781,
+     "noise_gain": 0.54577779
+    }
+   }
+  },
+  {
+   "clip": "4563696742795364330.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04893843,
+   "levels": {
+    "snr20": {
+     "offset": 718685,
+     "noise_gain": 0.04441738
+    },
+    "snr10": {
+     "offset": 641372,
+     "noise_gain": 0.14015123
+    },
+    "snr5": {
+     "offset": 282838,
+     "noise_gain": 0.23570111
+    }
+   }
+  },
+  {
+   "clip": "4572047909121637125.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.008009,
+   "levels": {
+    "snr20": {
+     "offset": 732181,
+     "noise_gain": 0.00766947
+    },
+    "snr10": {
+     "offset": 176603,
+     "noise_gain": 0.01385571
+    },
+    "snr5": {
+     "offset": 697872,
+     "noise_gain": 0.04126659
+    }
+   }
+  },
+  {
+   "clip": "4573832005061155347.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00718869,
+   "levels": {
+    "snr20": {
+     "offset": 679658,
+     "noise_gain": 0.01434487
+    },
+    "snr10": {
+     "offset": 1357536,
+     "noise_gain": 0.03774508
+    },
+    "snr5": {
+     "offset": 1360270,
+     "noise_gain": 0.06649469
+    }
+   }
+  },
+  {
+   "clip": "4586748255024220271.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06565022,
+   "levels": {
+    "snr20": {
+     "offset": 988632,
+     "noise_gain": 0.09034004
+    },
+    "snr10": {
+     "offset": 536261,
+     "noise_gain": 0.33487901
+    },
+    "snr5": {
+     "offset": 1473338,
+     "noise_gain": 0.55803893
+    }
+   }
+  },
+  {
+   "clip": "464898604614886529.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01680057,
+   "levels": {
+    "snr20": {
+     "offset": 346752,
+     "noise_gain": 0.01491927
+    },
+    "snr10": {
+     "offset": 677325,
+     "noise_gain": 0.04795634
+    },
+    "snr5": {
+     "offset": 484355,
+     "noise_gain": 0.09045584
+    }
+   }
+  },
+  {
+   "clip": "4702091319189790924.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02749042,
+   "levels": {
+    "snr20": {
+     "offset": 665365,
+     "noise_gain": 0.05238757
+    },
+    "snr10": {
+     "offset": 1558281,
+     "noise_gain": 0.11851345
+    },
+    "snr5": {
+     "offset": 1002942,
+     "noise_gain": 0.21049751
+    }
+   }
+  },
+  {
+   "clip": "470957723108047935.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03437056,
+   "levels": {
+    "snr20": {
+     "offset": 142092,
+     "noise_gain": 0.01866514
+    },
+    "snr10": {
+     "offset": 162126,
+     "noise_gain": 0.06172572
+    },
+    "snr5": {
+     "offset": 51088,
+     "noise_gain": 0.10754366
+    }
+   }
+  },
+  {
+   "clip": "4723581876618328134.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01088945,
+   "levels": {
+    "snr20": {
+     "offset": 60984,
+     "noise_gain": 0.01587452
+    },
+    "snr10": {
+     "offset": 406925,
+     "noise_gain": 0.04686503
+    },
+    "snr5": {
+     "offset": 1418953,
+     "noise_gain": 0.09003213
+    }
+   }
+  },
+  {
+   "clip": "4730931100973468817.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01356715,
+   "levels": {
+    "snr20": {
+     "offset": 143841,
+     "noise_gain": 0.01850316
+    },
+    "snr10": {
+     "offset": 643766,
+     "noise_gain": 0.08105855
+    },
+    "snr5": {
+     "offset": 374233,
+     "noise_gain": 0.10534493
+    }
+   }
+  },
+  {
+   "clip": "4750257282625528831.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03084908,
+   "levels": {
+    "snr20": {
+     "offset": 483094,
+     "noise_gain": 0.02926049
+    },
+    "snr10": {
+     "offset": 63120,
+     "noise_gain": 0.05299568
+    },
+    "snr5": {
+     "offset": 261051,
+     "noise_gain": 0.14190594
+    }
+   }
+  },
+  {
+   "clip": "4785335701208463919.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0059408,
+   "levels": {
+    "snr20": {
+     "offset": 682040,
+     "noise_gain": 0.005386
+    },
+    "snr10": {
+     "offset": 491877,
+     "noise_gain": 0.01789874
+    },
+    "snr5": {
+     "offset": 225108,
+     "noise_gain": 0.02431551
+    }
+   }
+  },
+  {
+   "clip": "4812626186418606344.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04054363,
+   "levels": {
+    "snr20": {
+     "offset": 808980,
+     "noise_gain": 0.03744059
+    },
+    "snr10": {
+     "offset": 318205,
+     "noise_gain": 0.11383738
+    },
+    "snr5": {
+     "offset": 535618,
+     "noise_gain": 0.2230018
+    }
+   }
+  },
+  {
+   "clip": "4820816697937059047.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01201091,
+   "levels": {
+    "snr20": {
+     "offset": 270953,
+     "noise_gain": 0.01815188
+    },
+    "snr10": {
+     "offset": 273181,
+     "noise_gain": 0.05770508
+    },
+    "snr5": {
+     "offset": 1450491,
+     "noise_gain": 0.10371007
+    }
+   }
+  },
+  {
+   "clip": "4829980808009123737.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03076397,
+   "levels": {
+    "snr20": {
+     "offset": 700616,
+     "noise_gain": 0.0276163
+    },
+    "snr10": {
+     "offset": 83353,
+     "noise_gain": 0.05205966
+    },
+    "snr5": {
+     "offset": 697041,
+     "noise_gain": 0.15597791
+    }
+   }
+  },
+  {
+   "clip": "4850881000883340670.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01193781,
+   "levels": {
+    "snr20": {
+     "offset": 930576,
+     "noise_gain": 0.01860937
+    },
+    "snr10": {
+     "offset": 758729,
+     "noise_gain": 0.07424931
+    },
+    "snr5": {
+     "offset": 169143,
+     "noise_gain": 0.08312928
+    }
+   }
+  },
+  {
+   "clip": "4889438921295509528.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03061026,
+   "levels": {
+    "snr20": {
+     "offset": 624309,
+     "noise_gain": 0.02841536
+    },
+    "snr10": {
+     "offset": 428847,
+     "noise_gain": 0.08913639
+    },
+    "snr5": {
+     "offset": 771631,
+     "noise_gain": 0.16814869
+    }
+   }
+  },
+  {
+   "clip": "4914732553650012787.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03379383,
+   "levels": {
+    "snr20": {
+     "offset": 1574970,
+     "noise_gain": 0.05538665
+    },
+    "snr10": {
+     "offset": 770378,
+     "noise_gain": 0.20773628
+    },
+    "snr5": {
+     "offset": 1642034,
+     "noise_gain": 0.24404561
+    }
+   }
+  },
+  {
+   "clip": "4925170991939864258.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04254031,
+   "levels": {
+    "snr20": {
+     "offset": 571481,
+     "noise_gain": 0.03921342
+    },
+    "snr10": {
+     "offset": 739137,
+     "noise_gain": 0.12736515
+    },
+    "snr5": {
+     "offset": 772363,
+     "noise_gain": 0.22601046
+    }
+   }
+  },
+  {
+   "clip": "4978090353589600213.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05159572,
+   "levels": {
+    "snr20": {
+     "offset": 1147012,
+     "noise_gain": 0.0853206
+    },
+    "snr10": {
+     "offset": 670966,
+     "noise_gain": 0.29245815
+    },
+    "snr5": {
+     "offset": 495067,
+     "noise_gain": 0.55001883
+    }
+   }
+  },
+  {
+   "clip": "5006738910208163750.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0116394,
+   "levels": {
+    "snr20": {
+     "offset": 718364,
+     "noise_gain": 0.01075071
+    },
+    "snr10": {
+     "offset": 555350,
+     "noise_gain": 0.033433
+    },
+    "snr5": {
+     "offset": 357936,
+     "noise_gain": 0.0592352
+    }
+   }
+  },
+  {
+   "clip": "5016267562601757564.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03145559,
+   "levels": {
+    "snr20": {
+     "offset": 241938,
+     "noise_gain": 0.02324534
+    },
+    "snr10": {
+     "offset": 711352,
+     "noise_gain": 0.09086782
+    },
+    "snr5": {
+     "offset": 70615,
+     "noise_gain": 0.09371751
+    }
+   }
+  },
+  {
+   "clip": "5032852899444826430.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03305062,
+   "levels": {
+    "snr20": {
+     "offset": 257134,
+     "noise_gain": 0.02585672
+    },
+    "snr10": {
+     "offset": 139266,
+     "noise_gain": 0.05768595
+    },
+    "snr5": {
+     "offset": 209515,
+     "noise_gain": 0.12294859
+    }
+   }
+  },
+  {
+   "clip": "5107330974294480063.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04277498,
+   "levels": {
+    "snr20": {
+     "offset": 1204781,
+     "noise_gain": 0.06697769
+    },
+    "snr10": {
+     "offset": 648730,
+     "noise_gain": 0.24002677
+    },
+    "snr5": {
+     "offset": 226794,
+     "noise_gain": 0.34996104
+    }
+   }
+  },
+  {
+   "clip": "5130299275578440545.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05954469,
+   "levels": {
+    "snr20": {
+     "offset": 385978,
+     "noise_gain": 0.05401674
+    },
+    "snr10": {
+     "offset": 130902,
+     "noise_gain": 0.10195545
+    },
+    "snr5": {
+     "offset": 560227,
+     "noise_gain": 0.31059174
+    }
+   }
+  },
+  {
+   "clip": "5191896224392064388.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01302489,
+   "levels": {
+    "snr20": {
+     "offset": 70848,
+     "noise_gain": 0.0173849
+    },
+    "snr10": {
+     "offset": 1496861,
+     "noise_gain": 0.06364888
+    },
+    "snr5": {
+     "offset": 252671,
+     "noise_gain": 0.11254754
+    }
+   }
+  },
+  {
+   "clip": "5210239895795911470.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0441342,
+   "levels": {
+    "snr20": {
+     "offset": 1320464,
+     "noise_gain": 0.08976571
+    },
+    "snr10": {
+     "offset": 1431875,
+     "noise_gain": 0.21646705
+    },
+    "snr5": {
+     "offset": 333218,
+     "noise_gain": 0.3487907
+    }
+   }
+  },
+  {
+   "clip": "5281801398309290985.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02087536,
+   "levels": {
+    "snr20": {
+     "offset": 11861,
+     "noise_gain": 0.01178255
+    },
+    "snr10": {
+     "offset": 287300,
+     "noise_gain": 0.05823037
+    },
+    "snr5": {
+     "offset": 49961,
+     "noise_gain": 0.06845158
+    }
+   }
+  },
+  {
+   "clip": "5316511368426747129.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02218894,
+   "levels": {
+    "snr20": {
+     "offset": 394218,
+     "noise_gain": 0.02056373
+    },
+    "snr10": {
+     "offset": 623760,
+     "noise_gain": 0.06419583
+    },
+    "snr5": {
+     "offset": 75533,
+     "noise_gain": 0.06712358
+    }
+   }
+  },
+  {
+   "clip": "532458081983462055.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00919106,
+   "levels": {
+    "snr20": {
+     "offset": 767114,
+     "noise_gain": 0.01809456
+    },
+    "snr10": {
+     "offset": 1659036,
+     "noise_gain": 0.03604284
+    },
+    "snr5": {
+     "offset": 1673155,
+     "noise_gain": 0.05896962
+    }
+   }
+  },
+  {
+   "clip": "53871253020485626.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05439057,
+   "levels": {
+    "snr20": {
+     "offset": 494195,
+     "noise_gain": 0.10337675
+    },
+    "snr10": {
+     "offset": 956737,
+     "noise_gain": 0.24161963
+    },
+    "snr5": {
+     "offset": 1228372,
+     "noise_gain": 0.45133793
+    }
+   }
+  },
+  {
+   "clip": "5398100336630225110.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0126125,
+   "levels": {
+    "snr20": {
+     "offset": 837085,
+     "noise_gain": 0.01194073
+    },
+    "snr10": {
+     "offset": 639531,
+     "noise_gain": 0.03425444
+    },
+    "snr5": {
+     "offset": 700453,
+     "noise_gain": 0.06461189
+    }
+   }
+  },
+  {
+   "clip": "54666202074802063.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01327404,
+   "levels": {
+    "snr20": {
+     "offset": 998104,
+     "noise_gain": 0.01837758
+    },
+    "snr10": {
+     "offset": 1043275,
+     "noise_gain": 0.0611753
+    },
+    "snr5": {
+     "offset": 582013,
+     "noise_gain": 0.11464182
+    }
+   }
+  },
+  {
+   "clip": "547679913808775392.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00885695,
+   "levels": {
+    "snr20": {
+     "offset": 244685,
+     "noise_gain": 0.00630938
+    },
+    "snr10": {
+     "offset": 742695,
+     "noise_gain": 0.02672265
+    },
+    "snr5": {
+     "offset": 325949,
+     "noise_gain": 0.04488118
+    }
+   }
+  },
+  {
+   "clip": "5530909766127012291.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07351829,
+   "levels": {
+    "snr20": {
+     "offset": 762738,
+     "noise_gain": 0.07435193
+    },
+    "snr10": {
+     "offset": 200640,
+     "noise_gain": 0.12594066
+    },
+    "snr5": {
+     "offset": 179009,
+     "noise_gain": 0.21968506
+    }
+   }
+  },
+  {
+   "clip": "5605637329090441945.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01597176,
+   "levels": {
+    "snr20": {
+     "offset": 471035,
+     "noise_gain": 0.0255106
+    },
+    "snr10": {
+     "offset": 1126097,
+     "noise_gain": 0.07939095
+    },
+    "snr5": {
+     "offset": 609662,
+     "noise_gain": 0.13021966
+    }
+   }
+  },
+  {
+   "clip": "5645762581619547261.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01129763,
+   "levels": {
+    "snr20": {
+     "offset": 204527,
+     "noise_gain": 0.01535294
+    },
+    "snr10": {
+     "offset": 549945,
+     "noise_gain": 0.05638941
+    },
+    "snr5": {
+     "offset": 580864,
+     "noise_gain": 0.0952015
+    }
+   }
+  },
+  {
+   "clip": "5725774791144070476.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03394456,
+   "levels": {
+    "snr20": {
+     "offset": 147665,
+     "noise_gain": 0.04464034
+    },
+    "snr10": {
+     "offset": 1187186,
+     "noise_gain": 0.16115982
+    },
+    "snr5": {
+     "offset": 1650084,
+     "noise_gain": 0.21808502
+    }
+   }
+  },
+  {
+   "clip": "5732237725518882704.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02423837,
+   "levels": {
+    "snr20": {
+     "offset": 88744,
+     "noise_gain": 0.01290767
+    },
+    "snr10": {
+     "offset": 796031,
+     "noise_gain": 0.0717144
+    },
+    "snr5": {
+     "offset": 702161,
+     "noise_gain": 0.12450935
+    }
+   }
+  },
+  {
+   "clip": "5842950858957909277.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.07636133,
+   "levels": {
+    "snr20": {
+     "offset": 1583753,
+     "noise_gain": 0.12216873
+    },
+    "snr10": {
+     "offset": 295115,
+     "noise_gain": 0.36643707
+    },
+    "snr5": {
+     "offset": 650061,
+     "noise_gain": 0.71371383
+    }
+   }
+  },
+  {
+   "clip": "585127260763939444.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03071942,
+   "levels": {
+    "snr20": {
+     "offset": 673097,
+     "noise_gain": 0.02813736
+    },
+    "snr10": {
+     "offset": 545591,
+     "noise_gain": 0.09092603
+    },
+    "snr5": {
+     "offset": 57232,
+     "noise_gain": 0.09778071
+    }
+   }
+  },
+  {
+   "clip": "5888787217675031891.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0100544,
+   "levels": {
+    "snr20": {
+     "offset": 295969,
+     "noise_gain": 0.0087849
+    },
+    "snr10": {
+     "offset": 224943,
+     "noise_gain": 0.02426681
+    },
+    "snr5": {
+     "offset": 633925,
+     "noise_gain": 0.0514999
+    }
+   }
+  },
+  {
+   "clip": "5938108038268927791.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01755342,
+   "levels": {
+    "snr20": {
+     "offset": 325389,
+     "noise_gain": 0.0157545
+    },
+    "snr10": {
+     "offset": 398101,
+     "noise_gain": 0.05188516
+    },
+    "snr5": {
+     "offset": 380496,
+     "noise_gain": 0.09213286
+    }
+   }
+  },
+  {
+   "clip": "6005012267590615464.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03875328,
+   "levels": {
+    "snr20": {
+     "offset": 260581,
+     "noise_gain": 0.03147205
+    },
+    "snr10": {
+     "offset": 259905,
+     "noise_gain": 0.09934797
+    },
+    "snr5": {
+     "offset": 665651,
+     "noise_gain": 0.19582213
+    }
+   }
+  },
+  {
+   "clip": "6079130546522748585.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0115535,
+   "levels": {
+    "snr20": {
+     "offset": 1457201,
+     "noise_gain": 0.0174527
+    },
+    "snr10": {
+     "offset": 154204,
+     "noise_gain": 0.04713216
+    },
+    "snr5": {
+     "offset": 759021,
+     "noise_gain": 0.12715858
+    }
+   }
+  },
+  {
+   "clip": "6090619944036197866.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01829691,
+   "levels": {
+    "snr20": {
+     "offset": 601661,
+     "noise_gain": 0.01592775
+    },
+    "snr10": {
+     "offset": 42084,
+     "noise_gain": 0.03306846
+    },
+    "snr5": {
+     "offset": 606677,
+     "noise_gain": 0.08980485
+    }
+   }
+  },
+  {
+   "clip": "6100649037077035327.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02808357,
+   "levels": {
+    "snr20": {
+     "offset": 1574308,
+     "noise_gain": 0.03489833
+    },
+    "snr10": {
+     "offset": 992747,
+     "noise_gain": 0.12217418
+    },
+    "snr5": {
+     "offset": 531591,
+     "noise_gain": 0.25426157
+    }
+   }
+  },
+  {
+   "clip": "6123099097612898777.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04312343,
+   "levels": {
+    "snr20": {
+     "offset": 1151721,
+     "noise_gain": 0.0624766
+    },
+    "snr10": {
+     "offset": 1393400,
+     "noise_gain": 0.21091193
+    },
+    "snr5": {
+     "offset": 1204792,
+     "noise_gain": 0.35037663
+    }
+   }
+  },
+  {
+   "clip": "6139529611272448448.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01063923,
+   "levels": {
+    "snr20": {
+     "offset": 961182,
+     "noise_gain": 0.01470553
+    },
+    "snr10": {
+     "offset": 698705,
+     "noise_gain": 0.06919354
+    },
+    "snr5": {
+     "offset": 1076147,
+     "noise_gain": 0.08023254
+    }
+   }
+  },
+  {
+   "clip": "6143237088391630215.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01059235,
+   "levels": {
+    "snr20": {
+     "offset": 903522,
+     "noise_gain": 0.01632596
+    },
+    "snr10": {
+     "offset": 1413276,
+     "noise_gain": 0.04906648
+    },
+    "snr5": {
+     "offset": 18111,
+     "noise_gain": 0.08273118
+    }
+   }
+  },
+  {
+   "clip": "6153514830057385360.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01642797,
+   "levels": {
+    "snr20": {
+     "offset": 1247979,
+     "noise_gain": 0.03012285
+    },
+    "snr10": {
+     "offset": 620698,
+     "noise_gain": 0.08293456
+    },
+    "snr5": {
+     "offset": 924626,
+     "noise_gain": 0.14933954
+    }
+   }
+  },
+  {
+   "clip": "6229162158016805841.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03221231,
+   "levels": {
+    "snr20": {
+     "offset": 174488,
+     "noise_gain": 0.02213189
+    },
+    "snr10": {
+     "offset": 573538,
+     "noise_gain": 0.09340734
+    },
+    "snr5": {
+     "offset": 224396,
+     "noise_gain": 0.14048338
+    }
+   }
+  },
+  {
+   "clip": "6234399923518842695.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07124546,
+   "levels": {
+    "snr20": {
+     "offset": 36357,
+     "noise_gain": 0.04220626
+    },
+    "snr10": {
+     "offset": 146849,
+     "noise_gain": 0.14920637
+    },
+    "snr5": {
+     "offset": 391749,
+     "noise_gain": 0.37396459
+    }
+   }
+  },
+  {
+   "clip": "6254852635800370096.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02730208,
+   "levels": {
+    "snr20": {
+     "offset": 79727,
+     "noise_gain": 0.01596569
+    },
+    "snr10": {
+     "offset": 49291,
+     "noise_gain": 0.04941365
+    },
+    "snr5": {
+     "offset": 449101,
+     "noise_gain": 0.13965778
+    }
+   }
+  },
+  {
+   "clip": "6264507256679270751.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01502877,
+   "levels": {
+    "snr20": {
+     "offset": 538887,
+     "noise_gain": 0.01554773
+    },
+    "snr10": {
+     "offset": 80514,
+     "noise_gain": 0.02703728
+    },
+    "snr5": {
+     "offset": 822449,
+     "noise_gain": 0.07418981
+    }
+   }
+  },
+  {
+   "clip": "6284242052692226381.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01322642,
+   "levels": {
+    "snr20": {
+     "offset": 33335,
+     "noise_gain": 0.00735805
+    },
+    "snr10": {
+     "offset": 210805,
+     "noise_gain": 0.03024404
+    },
+    "snr5": {
+     "offset": 406592,
+     "noise_gain": 0.06952437
+    }
+   }
+  },
+  {
+   "clip": "6284371934602962888.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06862935,
+   "levels": {
+    "snr20": {
+     "offset": 541868,
+     "noise_gain": 0.06517422
+    },
+    "snr10": {
+     "offset": 620715,
+     "noise_gain": 0.19641923
+    },
+    "snr5": {
+     "offset": 556899,
+     "noise_gain": 0.35955177
+    }
+   }
+  },
+  {
+   "clip": "6361502901440803501.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0289977,
+   "levels": {
+    "snr20": {
+     "offset": 413554,
+     "noise_gain": 0.02654442
+    },
+    "snr10": {
+     "offset": 260145,
+     "noise_gain": 0.0701411
+    },
+    "snr5": {
+     "offset": 765928,
+     "noise_gain": 0.15494632
+    }
+   }
+  },
+  {
+   "clip": "6418480557251374333.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05593311,
+   "levels": {
+    "snr20": {
+     "offset": 258466,
+     "noise_gain": 0.04552929
+    },
+    "snr10": {
+     "offset": 261419,
+     "noise_gain": 0.14529664
+    },
+    "snr5": {
+     "offset": 153774,
+     "noise_gain": 0.19795549
+    }
+   }
+  },
+  {
+   "clip": "6431605622172480163.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06679671,
+   "levels": {
+    "snr20": {
+     "offset": 1202161,
+     "noise_gain": 0.10612904
+    },
+    "snr10": {
+     "offset": 1339652,
+     "noise_gain": 0.35652784
+    },
+    "snr5": {
+     "offset": 848060,
+     "noise_gain": 0.65943147
+    }
+   }
+  },
+  {
+   "clip": "6510363154173685600.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01013908,
+   "levels": {
+    "snr20": {
+     "offset": 84265,
+     "noise_gain": 0.00567136
+    },
+    "snr10": {
+     "offset": 408733,
+     "noise_gain": 0.02986626
+    },
+    "snr5": {
+     "offset": 143093,
+     "noise_gain": 0.03414255
+    }
+   }
+  },
+  {
+   "clip": "6555764459937093245.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03618805,
+   "levels": {
+    "snr20": {
+     "offset": 166032,
+     "noise_gain": 0.02093266
+    },
+    "snr10": {
+     "offset": 266772,
+     "noise_gain": 0.09281288
+    },
+    "snr5": {
+     "offset": 121154,
+     "noise_gain": 0.11037692
+    }
+   }
+  },
+  {
+   "clip": "6571118833577433426.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04455817,
+   "levels": {
+    "snr20": {
+     "offset": 661916,
+     "noise_gain": 0.08237683
+    },
+    "snr10": {
+     "offset": 484538,
+     "noise_gain": 0.2098912
+    },
+    "snr5": {
+     "offset": 1103836,
+     "noise_gain": 0.34485871
+    }
+   }
+  },
+  {
+   "clip": "6620979815643862702.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06688476,
+   "levels": {
+    "snr20": {
+     "offset": 629801,
+     "noise_gain": 0.06228969
+    },
+    "snr10": {
+     "offset": 505580,
+     "noise_gain": 0.20124568
+    },
+    "snr5": {
+     "offset": 183671,
+     "noise_gain": 0.23938651
+    }
+   }
+  },
+  {
+   "clip": "6643287718479013596.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07810396,
+   "levels": {
+    "snr20": {
+     "offset": 454807,
+     "noise_gain": 0.07020218
+    },
+    "snr10": {
+     "offset": 219824,
+     "noise_gain": 0.16151781
+    },
+    "snr5": {
+     "offset": 784550,
+     "noise_gain": 0.40880178
+    }
+   }
+  },
+  {
+   "clip": "6670200578200292156.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.04982551,
+   "levels": {
+    "snr20": {
+     "offset": 1597928,
+     "noise_gain": 0.07474339
+    },
+    "snr10": {
+     "offset": 104970,
+     "noise_gain": 0.22169342
+    },
+    "snr5": {
+     "offset": 277896,
+     "noise_gain": 0.39574006
+    }
+   }
+  },
+  {
+   "clip": "668154000819427998.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01024706,
+   "levels": {
+    "snr20": {
+     "offset": 311276,
+     "noise_gain": 0.01460967
+    },
+    "snr10": {
+     "offset": 1276204,
+     "noise_gain": 0.05501948
+    },
+    "snr5": {
+     "offset": 372541,
+     "noise_gain": 0.0795759
+    }
+   }
+  },
+  {
+   "clip": "6686890445003158035.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01190333,
+   "levels": {
+    "snr20": {
+     "offset": 634858,
+     "noise_gain": 0.01087157
+    },
+    "snr10": {
+     "offset": 194508,
+     "noise_gain": 0.02533573
+    },
+    "snr5": {
+     "offset": 714878,
+     "noise_gain": 0.06251609
+    }
+   }
+  },
+  {
+   "clip": "6876240360271938764.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04153666,
+   "levels": {
+    "snr20": {
+     "offset": 223736,
+     "noise_gain": 0.0296986
+    },
+    "snr10": {
+     "offset": 553366,
+     "noise_gain": 0.12241477
+    },
+    "snr5": {
+     "offset": 248435,
+     "noise_gain": 0.17708267
+    }
+   }
+  },
+  {
+   "clip": "6932484482317401893.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0694605,
+   "levels": {
+    "snr20": {
+     "offset": 304548,
+     "noise_gain": 0.0608398
+    },
+    "snr10": {
+     "offset": 164540,
+     "noise_gain": 0.12990781
+    },
+    "snr5": {
+     "offset": 525804,
+     "noise_gain": 0.37149061
+    }
+   }
+  },
+  {
+   "clip": "6955906662773915782.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.09366727,
+   "levels": {
+    "snr20": {
+     "offset": 1114693,
+     "noise_gain": 0.11995593
+    },
+    "snr10": {
+     "offset": 228270,
+     "noise_gain": 0.4233646
+    },
+    "snr5": {
+     "offset": 510875,
+     "noise_gain": 0.76662098
+    }
+   }
+  },
+  {
+   "clip": "700001374311486374.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00956691,
+   "levels": {
+    "snr20": {
+     "offset": 756336,
+     "noise_gain": 0.01904598
+    },
+    "snr10": {
+     "offset": 1097475,
+     "noise_gain": 0.0395011
+    },
+    "snr5": {
+     "offset": 258465,
+     "noise_gain": 0.08224534
+    }
+   }
+  },
+  {
+   "clip": "7038217659356155479.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01567437,
+   "levels": {
+    "snr20": {
+     "offset": 1610964,
+     "noise_gain": 0.02504055
+    },
+    "snr10": {
+     "offset": 1350191,
+     "noise_gain": 0.10155548
+    },
+    "snr5": {
+     "offset": 1066988,
+     "noise_gain": 0.12559844
+    }
+   }
+  },
+  {
+   "clip": "7038975664927295261.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01160272,
+   "levels": {
+    "snr20": {
+     "offset": 788411,
+     "noise_gain": 0.02369681
+    },
+    "snr10": {
+     "offset": 884823,
+     "noise_gain": 0.06188256
+    },
+    "snr5": {
+     "offset": 311860,
+     "noise_gain": 0.0841412
+    }
+   }
+  },
+  {
+   "clip": "7045530160259735717.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01387566,
+   "levels": {
+    "snr20": {
+     "offset": 681062,
+     "noise_gain": 0.01275349
+    },
+    "snr10": {
+     "offset": 240115,
+     "noise_gain": 0.0324024
+    },
+    "snr5": {
+     "offset": 807332,
+     "noise_gain": 0.07530533
+    }
+   }
+  },
+  {
+   "clip": "7065673436186844799.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02206515,
+   "levels": {
+    "snr20": {
+     "offset": 415691,
+     "noise_gain": 0.0205387
+    },
+    "snr10": {
+     "offset": 668069,
+     "noise_gain": 0.06399785
+    },
+    "snr5": {
+     "offset": 640973,
+     "noise_gain": 0.11366169
+    }
+   }
+  },
+  {
+   "clip": "7077662167866875923.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02703842,
+   "levels": {
+    "snr20": {
+     "offset": 398139,
+     "noise_gain": 0.0246847
+    },
+    "snr10": {
+     "offset": 292429,
+     "noise_gain": 0.07463971
+    },
+    "snr5": {
+     "offset": 451150,
+     "noise_gain": 0.13961145
+    }
+   }
+  },
+  {
+   "clip": "7187242779372892625.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0109467,
+   "levels": {
+    "snr20": {
+     "offset": 1598619,
+     "noise_gain": 0.01733648
+    },
+    "snr10": {
+     "offset": 678937,
+     "noise_gain": 0.06428962
+    },
+    "snr5": {
+     "offset": 1684677,
+     "noise_gain": 0.06389719
+    }
+   }
+  },
+  {
+   "clip": "7214974173211356377.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01437714,
+   "levels": {
+    "snr20": {
+     "offset": 800076,
+     "noise_gain": 0.01371773
+    },
+    "snr10": {
+     "offset": 139275,
+     "noise_gain": 0.02477958
+    },
+    "snr5": {
+     "offset": 424569,
+     "noise_gain": 0.07483489
+    }
+   }
+  },
+  {
+   "clip": "7245347072305308672.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01217526,
+   "levels": {
+    "snr20": {
+     "offset": 296135,
+     "noise_gain": 0.01793603
+    },
+    "snr10": {
+     "offset": 1439851,
+     "noise_gain": 0.0589586
+    },
+    "snr5": {
+     "offset": 812875,
+     "noise_gain": 0.15524452
+    }
+   }
+  },
+  {
+   "clip": "7253745001405734224.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01500531,
+   "levels": {
+    "snr20": {
+     "offset": 591597,
+     "noise_gain": 0.02373194
+    },
+    "snr10": {
+     "offset": 822490,
+     "noise_gain": 0.08643241
+    },
+    "snr5": {
+     "offset": 1047433,
+     "noise_gain": 0.11841
+    }
+   }
+  },
+  {
+   "clip": "731296651112798738.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00763144,
+   "levels": {
+    "snr20": {
+     "offset": 557283,
+     "noise_gain": 0.01194549
+    },
+    "snr10": {
+     "offset": 36431,
+     "noise_gain": 0.03074593
+    },
+    "snr5": {
+     "offset": 614847,
+     "noise_gain": 0.06838685
+    }
+   }
+  },
+  {
+   "clip": "733126877238529036.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07396822,
+   "levels": {
+    "snr20": {
+     "offset": 463668,
+     "noise_gain": 0.06958836
+    },
+    "snr10": {
+     "offset": 332395,
+     "noise_gain": 0.20736967
+    },
+    "snr5": {
+     "offset": 766140,
+     "noise_gain": 0.39672967
+    }
+   }
+  },
+  {
+   "clip": "7441739934575122314.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03323026,
+   "levels": {
+    "snr20": {
+     "offset": 389851,
+     "noise_gain": 0.0311228
+    },
+    "snr10": {
+     "offset": 56865,
+     "noise_gain": 0.06074894
+    },
+    "snr5": {
+     "offset": 456300,
+     "noise_gain": 0.16964439
+    }
+   }
+  },
+  {
+   "clip": "756081290855564466.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.10551699,
+   "levels": {
+    "snr20": {
+     "offset": 824995,
+     "noise_gain": 0.230425
+    },
+    "snr10": {
+     "offset": 1455971,
+     "noise_gain": 0.50422469
+    },
+    "snr5": {
+     "offset": 828318,
+     "noise_gain": 1.30844781
+    }
+   }
+  },
+  {
+   "clip": "7569767158021347647.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00963874,
+   "levels": {
+    "snr20": {
+     "offset": 1299656,
+     "noise_gain": 0.01858095
+    },
+    "snr10": {
+     "offset": 706160,
+     "noise_gain": 0.06123749
+    },
+    "snr5": {
+     "offset": 1421103,
+     "noise_gain": 0.08246291
+    }
+   }
+  },
+  {
+   "clip": "7698399376556797371.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03598861,
+   "levels": {
+    "snr20": {
+     "offset": 792269,
+     "noise_gain": 0.03546711
+    },
+    "snr10": {
+     "offset": 41432,
+     "noise_gain": 0.06249867
+    },
+    "snr5": {
+     "offset": 601827,
+     "noise_gain": 0.18173627
+    }
+   }
+  },
+  {
+   "clip": "7702432468736667048.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03194389,
+   "levels": {
+    "snr20": {
+     "offset": 1085067,
+     "noise_gain": 0.04351194
+    },
+    "snr10": {
+     "offset": 1405230,
+     "noise_gain": 0.17372458
+    },
+    "snr5": {
+     "offset": 1567003,
+     "noise_gain": 0.29530211
+    }
+   }
+  },
+  {
+   "clip": "7716542548873265603.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02534857,
+   "levels": {
+    "snr20": {
+     "offset": 1263537,
+     "noise_gain": 0.04976413
+    },
+    "snr10": {
+     "offset": 872644,
+     "noise_gain": 0.14396785
+    },
+    "snr5": {
+     "offset": 1241674,
+     "noise_gain": 0.23267418
+    }
+   }
+  },
+  {
+   "clip": "7821378098828473010.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.08358591,
+   "levels": {
+    "snr20": {
+     "offset": 369573,
+     "noise_gain": 0.10771556
+    },
+    "snr10": {
+     "offset": 657645,
+     "noise_gain": 0.48888009
+    },
+    "snr5": {
+     "offset": 493385,
+     "noise_gain": 0.73449332
+    }
+   }
+  },
+  {
+   "clip": "7865648199890018074.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05197155,
+   "levels": {
+    "snr20": {
+     "offset": 784751,
+     "noise_gain": 0.10320328
+    },
+    "snr10": {
+     "offset": 1305960,
+     "noise_gain": 0.39061174
+    },
+    "snr5": {
+     "offset": 1680999,
+     "noise_gain": 0.33983931
+    }
+   }
+  },
+  {
+   "clip": "789372152924292294.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06042966,
+   "levels": {
+    "snr20": {
+     "offset": 1323752,
+     "noise_gain": 0.10193247
+    },
+    "snr10": {
+     "offset": 961183,
+     "noise_gain": 0.2646872
+    },
+    "snr5": {
+     "offset": 84212,
+     "noise_gain": 0.49525893
+    }
+   }
+  },
+  {
+   "clip": "7901586237480703684.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07246541,
+   "levels": {
+    "snr20": {
+     "offset": 778873,
+     "noise_gain": 0.06759425
+    },
+    "snr10": {
+     "offset": 3509,
+     "noise_gain": 0.1342355
+    },
+    "snr5": {
+     "offset": 98564,
+     "noise_gain": 0.21627718
+    }
+   }
+  },
+  {
+   "clip": "7910613929952732400.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.07363096,
+   "levels": {
+    "snr20": {
+     "offset": 677172,
+     "noise_gain": 0.06805825
+    },
+    "snr10": {
+     "offset": 583875,
+     "noise_gain": 0.20756569
+    },
+    "snr5": {
+     "offset": 441088,
+     "noise_gain": 0.38196778
+    }
+   }
+  },
+  {
+   "clip": "7953049425010449138.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01252706,
+   "levels": {
+    "snr20": {
+     "offset": 65759,
+     "noise_gain": 0.00676922
+    },
+    "snr10": {
+     "offset": 335654,
+     "noise_gain": 0.03521896
+    },
+    "snr5": {
+     "offset": 199499,
+     "noise_gain": 0.04604132
+    }
+   }
+  },
+  {
+   "clip": "8048830112860866979.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01137713,
+   "levels": {
+    "snr20": {
+     "offset": 243830,
+     "noise_gain": 0.00928213
+    },
+    "snr10": {
+     "offset": 12785,
+     "noise_gain": 0.02071689
+    },
+    "snr5": {
+     "offset": 180170,
+     "noise_gain": 0.04479395
+    }
+   }
+  },
+  {
+   "clip": "8053723780024339203.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06685087,
+   "levels": {
+    "snr20": {
+     "offset": 761205,
+     "noise_gain": 0.0640135
+    },
+    "snr10": {
+     "offset": 53864,
+     "noise_gain": 0.11853161
+    },
+    "snr5": {
+     "offset": 94731,
+     "noise_gain": 0.20156589
+    }
+   }
+  },
+  {
+   "clip": "8085222876899800202.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00989714,
+   "levels": {
+    "snr20": {
+     "offset": 1258717,
+     "noise_gain": 0.01864936
+    },
+    "snr10": {
+     "offset": 888231,
+     "noise_gain": 0.05270129
+    },
+    "snr5": {
+     "offset": 730017,
+     "noise_gain": 0.11259712
+    }
+   }
+  },
+  {
+   "clip": "8106565973185555932.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0614763,
+   "levels": {
+    "snr20": {
+     "offset": 165704,
+     "noise_gain": 0.07737684
+    },
+    "snr10": {
+     "offset": 245693,
+     "noise_gain": 0.30209403
+    },
+    "snr5": {
+     "offset": 12398,
+     "noise_gain": 0.45145823
+    }
+   }
+  },
+  {
+   "clip": "8141664769441349405.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03966189,
+   "levels": {
+    "snr20": {
+     "offset": 244740,
+     "noise_gain": 0.02912861
+    },
+    "snr10": {
+     "offset": 82360,
+     "noise_gain": 0.06635809
+    },
+    "snr5": {
+     "offset": 686778,
+     "noise_gain": 0.20592953
+    }
+   }
+  },
+  {
+   "clip": "8146115425428746212.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01909164,
+   "levels": {
+    "snr20": {
+     "offset": 1073032,
+     "noise_gain": 0.0257678
+    },
+    "snr10": {
+     "offset": 592425,
+     "noise_gain": 0.09315285
+    },
+    "snr5": {
+     "offset": 1530606,
+     "noise_gain": 0.18466627
+    }
+   }
+  },
+  {
+   "clip": "8202217763385450667.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01003238,
+   "levels": {
+    "snr20": {
+     "offset": 706273,
+     "noise_gain": 0.01785923
+    },
+    "snr10": {
+     "offset": 221012,
+     "noise_gain": 0.03987791
+    },
+    "snr5": {
+     "offset": 1569882,
+     "noise_gain": 0.09437307
+    }
+   }
+  },
+  {
+   "clip": "8205090447734566913.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01124335,
+   "levels": {
+    "snr20": {
+     "offset": 42098,
+     "noise_gain": 0.00617985
+    },
+    "snr10": {
+     "offset": 271857,
+     "noise_gain": 0.02990426
+    },
+    "snr5": {
+     "offset": 281629,
+     "noise_gain": 0.05371462
+    }
+   }
+  },
+  {
+   "clip": "8215837907543112955.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.0105185,
+   "levels": {
+    "snr20": {
+     "offset": 711560,
+     "noise_gain": 0.00969928
+    },
+    "snr10": {
+     "offset": 302962,
+     "noise_gain": 0.02902461
+    },
+    "snr5": {
+     "offset": 533798,
+     "noise_gain": 0.05567417
+    }
+   }
+  },
+  {
+   "clip": "822189627111279291.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01116598,
+   "levels": {
+    "snr20": {
+     "offset": 382321,
+     "noise_gain": 0.01042246
+    },
+    "snr10": {
+     "offset": 47958,
+     "noise_gain": 0.01947965
+    },
+    "snr5": {
+     "offset": 260866,
+     "noise_gain": 0.05120778
+    }
+   }
+  },
+  {
+   "clip": "8235233722143201296.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03495576,
+   "levels": {
+    "snr20": {
+     "offset": 389681,
+     "noise_gain": 0.04819461
+    },
+    "snr10": {
+     "offset": 864122,
+     "noise_gain": 0.188598
+    },
+    "snr5": {
+     "offset": 1186779,
+     "noise_gain": 0.29023931
+    }
+   }
+  },
+  {
+   "clip": "8291445105204988130.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01645031,
+   "levels": {
+    "snr20": {
+     "offset": 91540,
+     "noise_gain": 0.00875968
+    },
+    "snr10": {
+     "offset": 616554,
+     "noise_gain": 0.04529356
+    },
+    "snr5": {
+     "offset": 455909,
+     "noise_gain": 0.0858073
+    }
+   }
+  },
+  {
+   "clip": "8296488573361380041.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02372352,
+   "levels": {
+    "snr20": {
+     "offset": 518308,
+     "noise_gain": 0.02310271
+    },
+    "snr10": {
+     "offset": 100648,
+     "noise_gain": 0.04101693
+    },
+    "snr5": {
+     "offset": 859108,
+     "noise_gain": 0.13487846
+    }
+   }
+  },
+  {
+   "clip": "8374824616815826026.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0354648,
+   "levels": {
+    "snr20": {
+     "offset": 1486188,
+     "noise_gain": 0.05547685
+    },
+    "snr10": {
+     "offset": 922188,
+     "noise_gain": 0.15757409
+    },
+    "snr5": {
+     "offset": 352818,
+     "noise_gain": 0.29162913
+    }
+   }
+  },
+  {
+   "clip": "8440887448038191976.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01341544,
+   "levels": {
+    "snr20": {
+     "offset": 365013,
+     "noise_gain": 0.01216823
+    },
+    "snr10": {
+     "offset": 696623,
+     "noise_gain": 0.03811331
+    },
+    "snr5": {
+     "offset": 523952,
+     "noise_gain": 0.07221902
+    }
+   }
+  },
+  {
+   "clip": "8571939333228153192.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03756756,
+   "levels": {
+    "snr20": {
+     "offset": 11752,
+     "noise_gain": 0.02196144
+    },
+    "snr10": {
+     "offset": 12860,
+     "noise_gain": 0.06947668
+    },
+    "snr5": {
+     "offset": 280668,
+     "noise_gain": 0.17499109
+    }
+   }
+  },
+  {
+   "clip": "8649051830007366343.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.13637342,
+   "levels": {
+    "snr20": {
+     "offset": 520884,
+     "noise_gain": 0.1356255
+    },
+    "snr10": {
+     "offset": 393419,
+     "noise_gain": 0.38748946
+    },
+    "snr5": {
+     "offset": 734417,
+     "noise_gain": 0.7609639
+    }
+   }
+  },
+  {
+   "clip": "8713610288037699181.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05430284,
+   "levels": {
+    "snr20": {
+     "offset": 1113490,
+     "noise_gain": 0.07055826
+    },
+    "snr10": {
+     "offset": 1483429,
+     "noise_gain": 0.25258914
+    },
+    "snr5": {
+     "offset": 478449,
+     "noise_gain": 0.44045635
+    }
+   }
+  },
+  {
+   "clip": "876342125012754981.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04999224,
+   "levels": {
+    "snr20": {
+     "offset": 65253,
+     "noise_gain": 0.0270839
+    },
+    "snr10": {
+     "offset": 367680,
+     "noise_gain": 0.14638546
+    },
+    "snr5": {
+     "offset": 708803,
+     "noise_gain": 0.26068974
+    }
+   }
+  },
+  {
+   "clip": "885768039195014719.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.02602972,
+   "levels": {
+    "snr20": {
+     "offset": 1158761,
+     "noise_gain": 0.03875147
+    },
+    "snr10": {
+     "offset": 210418,
+     "noise_gain": 0.1102603
+    },
+    "snr5": {
+     "offset": 835297,
+     "noise_gain": 0.32498622
+    }
+   }
+  },
+  {
+   "clip": "8865342851253332683.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01380559,
+   "levels": {
+    "snr20": {
+     "offset": 165787,
+     "noise_gain": 0.00737675
+    },
+    "snr10": {
+     "offset": 113350,
+     "noise_gain": 0.02306572
+    },
+    "snr5": {
+     "offset": 517398,
+     "noise_gain": 0.07538229
+    }
+   }
+  },
+  {
+   "clip": "8870798912204795656.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05031677,
+   "levels": {
+    "snr20": {
+     "offset": 314140,
+     "noise_gain": 0.04479275
+    },
+    "snr10": {
+     "offset": 484889,
+     "noise_gain": 0.15125197
+    },
+    "snr5": {
+     "offset": 633017,
+     "noise_gain": 0.2573872
+    }
+   }
+  },
+  {
+   "clip": "8945461003856142849.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.06744486,
+   "levels": {
+    "snr20": {
+     "offset": 253397,
+     "noise_gain": 0.05308685
+    },
+    "snr10": {
+     "offset": 382761,
+     "noise_gain": 0.19645449
+    },
+    "snr5": {
+     "offset": 630586,
+     "noise_gain": 0.35177623
+    }
+   }
+  },
+  {
+   "clip": "8953546487034324961.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00939841,
+   "levels": {
+    "snr20": {
+     "offset": 421899,
+     "noise_gain": 0.00873074
+    },
+    "snr10": {
+     "offset": 107328,
+     "noise_gain": 0.01616376
+    },
+    "snr5": {
+     "offset": 414197,
+     "noise_gain": 0.0490771
+    }
+   }
+  },
+  {
+   "clip": "9092990657477980396.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01116648,
+   "levels": {
+    "snr20": {
+     "offset": 1518237,
+     "noise_gain": 0.0165662
+    },
+    "snr10": {
+     "offset": 1247377,
+     "noise_gain": 0.06092874
+    },
+    "snr5": {
+     "offset": 529527,
+     "noise_gain": 0.09301679
+    }
+   }
+  },
+  {
+   "clip": "9095591970015229188.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02487163,
+   "levels": {
+    "snr20": {
+     "offset": 405738,
+     "noise_gain": 0.02349294
+    },
+    "snr10": {
+     "offset": 752950,
+     "noise_gain": 0.07729749
+    },
+    "snr5": {
+     "offset": 460875,
+     "noise_gain": 0.13031931
+    }
+   }
+  },
+  {
+   "clip": "9171335606836908161.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01095775,
+   "levels": {
+    "snr20": {
+     "offset": 1204008,
+     "noise_gain": 0.01456214
+    },
+    "snr10": {
+     "offset": 225060,
+     "noise_gain": 0.04425907
+    },
+    "snr5": {
+     "offset": 1466775,
+     "noise_gain": 0.08821522
+    }
+   }
+  },
+  {
+   "clip": "9229965631113754754.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00649456,
+   "levels": {
+    "snr20": {
+     "offset": 950259,
+     "noise_gain": 0.00901078
+    },
+    "snr10": {
+     "offset": 815421,
+     "noise_gain": 0.0401774
+    },
+    "snr5": {
+     "offset": 1607702,
+     "noise_gain": 0.04589428
+    }
+   }
+  },
+  {
+   "clip": "9252584911623990794.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05335484,
+   "levels": {
+    "snr20": {
+     "offset": 1603981,
+     "noise_gain": 0.0808783
+    },
+    "snr10": {
+     "offset": 865707,
+     "noise_gain": 0.27845985
+    },
+    "snr5": {
+     "offset": 994818,
+     "noise_gain": 0.39946557
+    }
+   }
+  },
+  {
+   "clip": "9263061890494719705.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.00825091,
+   "levels": {
+    "snr20": {
+     "offset": 710157,
+     "noise_gain": 0.00768164
+    },
+    "snr10": {
+     "offset": 836990,
+     "noise_gain": 0.02511393
+    },
+    "snr5": {
+     "offset": 194964,
+     "noise_gain": 0.02693437
+    }
+   }
+  },
+  {
+   "clip": "9318726654273482703.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03732695,
+   "levels": {
+    "snr20": {
+     "offset": 77072,
+     "noise_gain": 0.02256062
+    },
+    "snr10": {
+     "offset": 626927,
+     "noise_gain": 0.10912336
+    },
+    "snr5": {
+     "offset": 368486,
+     "noise_gain": 0.19566258
+    }
+   }
+  },
+  {
+   "clip": "9324205630601994657.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.00881908,
+   "levels": {
+    "snr20": {
+     "offset": 733301,
+     "noise_gain": 0.0170482
+    },
+    "snr10": {
+     "offset": 1691433,
+     "noise_gain": 0.02910076
+    },
+    "snr5": {
+     "offset": 1156921,
+     "noise_gain": 0.07308999
+    }
+   }
+  },
+  {
+   "clip": "9341139376010199088.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03988156,
+   "levels": {
+    "snr20": {
+     "offset": 1423346,
+     "noise_gain": 0.05389438
+    },
+    "snr10": {
+     "offset": 1186764,
+     "noise_gain": 0.1996368
+    },
+    "snr5": {
+     "offset": 1102941,
+     "noise_gain": 0.35061553
+    }
+   }
+  },
+  {
+   "clip": "9351443914714370815.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04206287,
+   "levels": {
+    "snr20": {
+     "offset": 645381,
+     "noise_gain": 0.03638979
+    },
+    "snr10": {
+     "offset": 762599,
+     "noise_gain": 0.12532229
+    },
+    "snr5": {
+     "offset": 414841,
+     "noise_gain": 0.21404627
+    }
+   }
+  },
+  {
+   "clip": "9364733198801663962.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05155298,
+   "levels": {
+    "snr20": {
+     "offset": 1203606,
+     "noise_gain": 0.06168528
+    },
+    "snr10": {
+     "offset": 1400595,
+     "noise_gain": 0.33150053
+    },
+    "snr5": {
+     "offset": 1092522,
+     "noise_gain": 0.36452106
+    }
+   }
+  },
+  {
+   "clip": "9369488952554756636.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03530721,
+   "levels": {
+    "snr20": {
+     "offset": 203569,
+     "noise_gain": 0.04486965
+    },
+    "snr10": {
+     "offset": 1512540,
+     "noise_gain": 0.16660753
+    },
+    "snr5": {
+     "offset": 1383772,
+     "noise_gain": 0.31341787
+    }
+   }
+  },
+  {
+   "clip": "9429607152902547579.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03785867,
+   "levels": {
+    "snr20": {
+     "offset": 489943,
+     "noise_gain": 0.05801976
+    },
+    "snr10": {
+     "offset": 1372532,
+     "noise_gain": 0.21535671
+    },
+    "snr5": {
+     "offset": 214143,
+     "noise_gain": 0.27126004
+    }
+   }
+  },
+  {
+   "clip": "9436555997414605875.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01003345,
+   "levels": {
+    "snr20": {
+     "offset": 210559,
+     "noise_gain": 0.00682382
+    },
+    "snr10": {
+     "offset": 765831,
+     "noise_gain": 0.03066823
+    },
+    "snr5": {
+     "offset": 536754,
+     "noise_gain": 0.05299625
+    }
+   }
+  },
+  {
+   "clip": "9463227508001465543.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.010244,
+   "levels": {
+    "snr20": {
+     "offset": 240189,
+     "noise_gain": 0.01558385
+    },
+    "snr10": {
+     "offset": 588828,
+     "noise_gain": 0.04409966
+    },
+    "snr5": {
+     "offset": 1158622,
+     "noise_gain": 0.08180589
+    }
+   }
+  },
+  {
+   "clip": "9479049491803127245.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.05622094,
+   "levels": {
+    "snr20": {
+     "offset": 507404,
+     "noise_gain": 0.05258728
+    },
+    "snr10": {
+     "offset": 618839,
+     "noise_gain": 0.16463759
+    },
+    "snr5": {
+     "offset": 134268,
+     "noise_gain": 0.20772722
+    }
+   }
+  },
+  {
+   "clip": "9485119391339255336.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01336464,
+   "levels": {
+    "snr20": {
+     "offset": 741277,
+     "noise_gain": 0.01311498
+    },
+    "snr10": {
+     "offset": 62177,
+     "noise_gain": 0.02327103
+    },
+    "snr5": {
+     "offset": 305350,
+     "noise_gain": 0.06639592
+    }
+   }
+  },
+  {
+   "clip": "9542840288670069779.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02875437,
+   "levels": {
+    "snr20": {
+     "offset": 813996,
+     "noise_gain": 0.02635116
+    },
+    "snr10": {
+     "offset": 505110,
+     "noise_gain": 0.08899632
+    },
+    "snr5": {
+     "offset": 774273,
+     "noise_gain": 0.15008503
+    }
+   }
+  },
+  {
+   "clip": "9636427158980175264.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.03185754,
+   "levels": {
+    "snr20": {
+     "offset": 129991,
+     "noise_gain": 0.01811939
+    },
+    "snr10": {
+     "offset": 192884,
+     "noise_gain": 0.06504326
+    },
+    "snr5": {
+     "offset": 207180,
+     "noise_gain": 0.12121699
+    }
+   }
+  },
+  {
+   "clip": "9713497386384276489.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.01939379,
+   "levels": {
+    "snr20": {
+     "offset": 33892,
+     "noise_gain": 0.0107258
+    },
+    "snr10": {
+     "offset": 519491,
+     "noise_gain": 0.05740287
+    },
+    "snr5": {
+     "offset": 650494,
+     "noise_gain": 0.0983471
+    }
+   }
+  },
+  {
+   "clip": "9742635733451539676.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03494183,
+   "levels": {
+    "snr20": {
+     "offset": 553973,
+     "noise_gain": 0.04948341
+    },
+    "snr10": {
+     "offset": 1472458,
+     "noise_gain": 0.15526732
+    },
+    "snr5": {
+     "offset": 1456991,
+     "noise_gain": 0.28967034
+    }
+   }
+  },
+  {
+   "clip": "979050829530509593.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.02575644,
+   "levels": {
+    "snr20": {
+     "offset": 183243,
+     "noise_gain": 0.01594883
+    },
+    "snr10": {
+     "offset": 243147,
+     "noise_gain": 0.06140132
+    },
+    "snr5": {
+     "offset": 449072,
+     "noise_gain": 0.13284116
+    }
+   }
+  },
+  {
+   "clip": "9841500017256771838.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06692676,
+   "levels": {
+    "snr20": {
+     "offset": 1390736,
+     "noise_gain": 0.12071406
+    },
+    "snr10": {
+     "offset": 1336375,
+     "noise_gain": 0.42793389
+    },
+    "snr5": {
+     "offset": 1177208,
+     "noise_gain": 0.51739651
+    }
+   }
+  },
+  {
+   "clip": "9845468940855298564.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.01094847,
+   "levels": {
+    "snr20": {
+     "offset": 800462,
+     "noise_gain": 0.01960742
+    },
+    "snr10": {
+     "offset": 10428,
+     "noise_gain": 0.04322533
+    },
+    "snr5": {
+     "offset": 1081063,
+     "noise_gain": 0.08503445
+    }
+   }
+  },
+  {
+   "clip": "9886982489635000440.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.0110091,
+   "levels": {
+    "snr20": {
+     "offset": 68673,
+     "noise_gain": 0.0150433
+    },
+    "snr10": {
+     "offset": 507259,
+     "noise_gain": 0.05308809
+    },
+    "snr5": {
+     "offset": 552415,
+     "noise_gain": 0.09988613
+    }
+   }
+  },
+  {
+   "clip": "9906733203503567169.wav",
+   "noise": "Babble_1.wav",
+   "speech_rms": 0.04137656,
+   "levels": {
+    "snr20": {
+     "offset": 118073,
+     "noise_gain": 0.02468573
+    },
+    "snr10": {
+     "offset": 49241,
+     "noise_gain": 0.07276849
+    },
+    "snr5": {
+     "offset": 5168,
+     "noise_gain": 0.12820255
+    }
+   }
+  },
+  {
+   "clip": "9919391704764167443.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.05056891,
+   "levels": {
+    "snr20": {
+     "offset": 771048,
+     "noise_gain": 0.09346725
+    },
+    "snr10": {
+     "offset": 56094,
+     "noise_gain": 0.28416602
+    },
+    "snr5": {
+     "offset": 182597,
+     "noise_gain": 0.35624348
+    }
+   }
+  },
+  {
+   "clip": "9923390461393752691.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.06673721,
+   "levels": {
+    "snr20": {
+     "offset": 903762,
+     "noise_gain": 0.14062932
+    },
+    "snr10": {
+     "offset": 795953,
+     "noise_gain": 0.50209285
+    },
+    "snr5": {
+     "offset": 1668241,
+     "noise_gain": 0.53546035
+    }
+   }
+  },
+  {
+   "clip": "9949778835161724340.wav",
+   "noise": "Babble_4.wav",
+   "speech_rms": 0.03200114,
+   "levels": {
+    "snr20": {
+     "offset": 639630,
+     "noise_gain": 0.05369789
+    },
+    "snr10": {
+     "offset": 752587,
+     "noise_gain": 0.20021958
+    },
+    "snr5": {
+     "offset": 1016705,
+     "noise_gain": 0.24414625
+    }
+   }
+  }
+ ]
+}

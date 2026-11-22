@@ -35,6 +35,10 @@ const NEGATION_ENGLISH = /\b(no|not|never|without|cannot|denies|denied|deny|refu
 // Temporal cues: the engine NEVER assigns current use. A mention near a
 // cessation/past cue is labelled HISTORICAL; everything else stays
 // explicitly UNKNOWN. Cue matching is heuristic, not tense parsing.
+// English-only: Indic cessation cues are not implemented, so Telugu/Hindi
+// mentions keep UNKNOWN (with sourceContext preserved). "No longer" is
+// deliberately NOT here: it matches the negation rule first, so such
+// mentions are held from export entirely rather than exported HISTORICAL.
 const TEMPORAL_HISTORICAL_ENGLISH = /\b(stopped|stops|quit|previously|yesterday|took|formerly)\b|\bused to\b|\blast (week|month|year)\b/i;
 
 /**

@@ -26,6 +26,17 @@ docs/EVAL-DATA-PLAN.md; the test rows are the final reported figures. FLEURS is 
 news/web text, not code-mixed clinical speech; these numbers do not transfer to
 consultation audio.
 
+### Controlled-noise delta (2026-11-22, babble, n=120 subset)
+
+Synthetic corruption of real read speech (MS-SNSD babble, MIT; seeded
+mixing, whole-clip RMS SNR scaling; same seeded n=120 te_in test subset at
+every level; seed 20261122): clean 25.86% WER / 10.43% CER; SNR 20 dB
+26.40% / 10.72%; SNR 10 dB 28.60% / 11.47%; SNR 5 dB 33.99% / 14.35%.
+Same offline benchmark runner and scorer; 0 failures. Full record:
+`benchmarks/results/2026-11-22-noisy-te_in-test-sub120/` and
+`AYUSWAR-TECHNICAL-EVIDENCE/02-AI-EVALUATION/NOISY_ASR_REPORT.md`. Not
+recorded clinical noise, not the capture path, not the full test set.
+
 ### Runner scope: benchmark numbers are NOT shipping app-path quality
 
 `benchmarks/fleurs_local_asr.mjs` is an UNCAPPED benchmark runner: it feeds
