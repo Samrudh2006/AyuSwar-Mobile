@@ -56,7 +56,7 @@ import { reasonClinicalNoteWithEvon, EVON_MODEL_METADATA } from '../services/gna
 import { generateAbdmFhirR4Bundle } from '../data/clinicalSafetySentinel';
 import { queryGroqApi, getGroqApiKey, transcribeAudioWithGroqWhisper } from '../services/aiBrainService';
 import ClinicalEvidencePanel from './ClinicalEvidencePanel';
-import { deterministicObjective, conservativeAssessmentPlan, subjectiveBoundaryLabel } from '../services/soapDraftSafeguards.js';
+import { deterministicObjective, conservativeAssessmentPlan, subjectiveBoundaryLabel, turnsHaveRecordedAudio } from '../services/soapDraftSafeguards.js';
 
 /**
  * ClinicalConsole Component — Complete Step-by-Step OPD Consultation Suite
@@ -672,6 +672,7 @@ export default function ClinicalConsole({ doctorProfile, initialEncounterIndex =
       {
         speaker: newSpeakerRole,
         text: newSpeakerText.trim(),
+        isTyped: true,
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
       }
     ]);
@@ -2208,7 +2209,7 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                       <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FFFBEB', border: '1px dashed #D97706', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px' }}>
                         {subjectiveBoundaryLabel({
                           modelWritten: subjectiveFromModel,
-                          hasRecording: dialogueTurns.length > 0 && dialogueTurns.some(t => !t.isScripted)
+                          hasRecording: turnsHaveRecordedAudio(dialogueTurns)
                         })}
                       </div>
                       <div style={{ color: '#2C4A52', lineHeight: 1.5 }}>{editableSoapNote.subjective}</div>

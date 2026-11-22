@@ -43,6 +43,16 @@ export const SUBJECTIVE_NOT_VERIFIED_LABEL =
  * keeps the warning from asserting provenance the current path does not
  * have (manual drafts, scripted samples, keyless fallbacks).
  */
+/**
+ * Audio provenance for console dialogue turns: true only when at least one
+ * turn actually came from a microphone pipeline (WebSpeech or Groq Whisper).
+ * Scripted sample turns and custom typed turns carry no audio, so unknown or
+ * unflagged turn kinds fail closed (no recording claimed).
+ */
+export function turnsHaveRecordedAudio(turns) {
+  return Array.isArray(turns) && turns.some(t => !!(t && (t.isWebSpeech || t.isGroqWhisper)));
+}
+
 export function subjectiveBoundaryLabel({ modelWritten, hasRecording } = {}) {
   const target = hasRecording ? 'the recording' : 'the source transcript';
   const kind = modelWritten ? 'Model-written draft text' : 'Draft text';

@@ -7,7 +7,7 @@
 import { readFileSync } from 'node:fs';
 import {
   deterministicObjective, spokenVitalPairs, SUBJECTIVE_NOT_VERIFIED_LABEL,
-  subjectiveBoundaryLabel
+  subjectiveBoundaryLabel, turnsHaveRecordedAudio
 } from '../src/services/soapDraftSafeguards.js';
 
 let passed = 0, failed = 0;
@@ -85,7 +85,25 @@ check('subjective-not-verified label exported',
     !/Model-written/.test(manualText) && !/against the recording/.test(manualText) && /against the source transcript/.test(manualText));
 }
 
-// 9. Call-site wiring: each surface passes its real provenance signals
+// 9. Audio provenance predicate: only real mic pipelines count (fail-closed)
+{
+  check('typed-only turns do not count as a recording',
+    turnsHaveRecordedAudio([{ speaker: 'Doctor', text: 'typed note', isTyped: true }]) === false);
+  check('unflagged turns do not count as a recording',
+    turnsHaveRecordedAudio([{ speaker: 'Doctor', text: 'custom' }]) === false);
+  check('scripted sample turns do not count as a recording',
+    turnsHaveRecordedAudio([{ speaker: 'Doctor', text: 'sample', isScripted: true }]) === false);
+  check('WebSpeech mic turns count as a recording',
+    turnsHaveRecordedAudio([{ speaker: 'Doctor (Live Mic)', text: 'mic', isWebSpeech: true }]) === true);
+  check('Groq Whisper mic turns count as a recording',
+    turnsHaveRecordedAudio([{ speaker: 'Patient (Live Mic)', text: 'mic', isGroqWhisper: true }]) === true);
+  check('mixed typed+mic turns count as a recording',
+    turnsHaveRecordedAudio([{ isTyped: true }, { isWebSpeech: true }]) === true);
+  check('empty/invalid input fails closed',
+    turnsHaveRecordedAudio([]) === false && turnsHaveRecordedAudio(null) === false);
+}
+
+// 10. Call-site wiring: each surface passes its real provenance signals
 {
   const mobileSource = readFileSync(new URL('../src/mobile/MScribeFlow.jsx', import.meta.url), 'utf8');
   check('mobile wires aiLive as modelWritten and mic-recording as hasRecording',
@@ -93,6 +111,8 @@ check('subjective-not-verified label exported',
   const consoleSource = readFileSync(new URL('../src/components/ClinicalConsole.jsx', import.meta.url), 'utf8');
   check('console wires subjectiveFromModel and non-scripted turns as provenance',
     consoleSource.includes('modelWritten: subjectiveFromModel') && consoleSource.includes('setSubjectiveFromModel(true)'));
+  check('console uses the audio-provenance predicate, not !isScripted',
+    consoleSource.includes('hasRecording: turnsHaveRecordedAudio(dialogueTurns)') && !/some\(t => !t\.isScripted\)/.test(consoleSource));
 }
 
 console.log(`\nphase44_soap_objective_contexts: ${passed}/${passed + failed} passed`);
