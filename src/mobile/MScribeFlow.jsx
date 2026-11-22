@@ -80,6 +80,15 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
     queryGroqApi(prompt, 'You are AyuSwar Clinical Scribe AI. Output valid JSON only.', 'llama-3.3-70b-versatile', 700)
       .then((raw) => {
         if (sessionRef.current !== token) return;
+        if (typeof raw !== 'string' || !raw.trim()) {
+          // No model response arrived (proxy route missing, unconfigured or
+          // unreachable). Nothing may be attributed to the AI here.
+          setSoap(null);
+          setFailure(t('AI is unavailable. No model response was received. The source transcript is retained; no draft or sample was substituted.'));
+          setAiLive(false);
+          setProcessing(false);
+          return;
+        }
         try {
           const parsed = JSON.parse(String(raw).replace(/```json|```/g, '').trim());
           if (!parsed || !['subjective', 'objective', 'assessment', 'plan', 'bestMatterVernacular'].every(key => typeof parsed[key] === 'string' && parsed[key].trim())) throw new Error('incomplete');
