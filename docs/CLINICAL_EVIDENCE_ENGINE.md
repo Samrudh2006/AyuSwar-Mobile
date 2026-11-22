@@ -69,7 +69,16 @@ The deterministic fallback is deliberately conservative about medications:
   extraction. This is marker coverage, NOT full negation semantics:
   double negation, hedging, sarcasm and cross-sentence scope are not
   handled and remain open limits; the flag forces review rather than
-  claiming understanding.
+  claiming understanding. The same marker rules also scan the verbatim quote
+  interior, so a multiword quote cannot hide a denial from the outer window.
+- A question mark inside the quote is held AMBIGUOUS, just like a question
+  delimiter immediately following its surrounding clause. A quote with more
+  than one exact substring occurrence in its source utterance is also held
+  AMBIGUOUS; the engine does not select the first occurrence as settled evidence.
+  This deliberately includes repeated substrings inside longer words. These
+  guards can add conservative holds; they do not resolve linguistic scope.
+  Approval or a display-text edit cannot bypass either hold. The existing
+  temporal-cue window remains unchanged and still excludes the quote interior.
 - Temporal status is explicit and conservative: every exported record
   carries `temporalStatus` = `UNKNOWN` unless an English cessation/past
   cue (stopped, quit, used to, previously, yesterday, took, last

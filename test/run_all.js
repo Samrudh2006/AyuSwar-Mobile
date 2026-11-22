@@ -78,7 +78,8 @@ const suites = [
   { name: 'Phase 50: Self-entered Vitals Export', file: 'test/phase50_vitals_export.test.js', count: 31 },
   { name: 'Phase 51: Local Export Integrity Gate', file: 'test/phase51_export_integrity.test.js', count: 38 },
   { name: 'Phase 52: Audio-Rx Source and Quiz Consistency', file: 'test/phase52_audio_rx_consistency.test.js', count: 22 },
-  { name: 'Phase 52b: Built Audio-Rx Phone-Width Flows', file: 'test/phase52_audio_rx_browser.test.js', count: 7 }
+  { name: 'Phase 52b: Built Audio-Rx Phone-Width Flows', file: 'test/phase52_audio_rx_browser.test.js', count: 7 },
+  { name: 'Phase 53: Evidence Quote-Interior and Occurrence Guards', file: 'test/phase53_evidence_span_guards.test.js', count: 42 }
 ];
 
 console.clear();

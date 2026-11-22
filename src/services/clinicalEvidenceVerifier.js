@@ -75,7 +75,7 @@ export function verifyCandidate(session, candidate) {
     const after = utterance.text.slice(candidate.endOffset);
     const tail = after.split(/[.!?\u0964]/)[0];
     const endChar = after.charAt(tail.length);
-    if (endChar === '?' && before !== undefined) {
+    if (candidate.sourceQuote.includes('?') || (endChar === '?' && before !== undefined)) {
       return fail(VERIFICATION_STATUS.AMBIGUOUS, 'span is inside a question, not a finding');
     }
   }
@@ -91,10 +91,14 @@ export function verifyCandidate(session, candidate) {
   // (the bare marker ends in a different vowel sign), so those are listed
   // explicitly in NEGATION_MARKERS_INDIC.
   const WHOLE_TOKEN = new Set(['ना']);
-  const negated = NEGATION_MARKERS_INDIC.some(m => WHOLE_TOKEN.has(m)
-    ? new RegExp('(?<![\\p{L}\\p{N}\\p{M}])' + m + '(?![\\p{L}\\p{N}\\p{M}])', 'u').test(window)
-    : window.includes(m.toLowerCase())) || NEGATION_ENGLISH.test(window);
-  if (negated) notes.push('negation marker near span; treat as absent/ruled-out context');
+  const containsNegationMarker = text => NEGATION_MARKERS_INDIC.some(m => WHOLE_TOKEN.has(m)
+    ? new RegExp('(?<![\\p{L}\\p{N}\\p{M}])' + m + '(?![\\p{L}\\p{N}\\p{M}])', 'u').test(text)
+    : text.includes(m.toLowerCase())) || NEGATION_ENGLISH.test(text);
+  const negatedContext = containsNegationMarker(window);
+  const negatedQuote = containsNegationMarker(candidate.sourceQuote.toLowerCase());
+  const negated = negatedContext || negatedQuote;
+  if (negatedContext) notes.push('negation marker near span; treat as absent/ruled-out context');
+  if (negatedQuote) notes.push('negation marker in source quote; treat as absent/ruled-out context');
   const temporalStatus = TEMPORAL_HISTORICAL_ENGLISH.test(window) ? 'HISTORICAL' : 'UNKNOWN';
 
   // Contradiction: same normalized concept, incompatible other candidate.
@@ -117,6 +121,12 @@ export function verifyCandidate(session, candidate) {
   );
   if (elsewhere.length > 0) {
     return fail(VERIFICATION_STATUS.AMBIGUOUS, 'same quote appears under a different speaker elsewhere');
+  }
+
+  // Materialization uses the first exact occurrence. A repeated quote cannot
+  // establish which occurrence was intended, even with valid source offsets.
+  if (utterance.text.indexOf(candidate.sourceQuote) !== utterance.text.lastIndexOf(candidate.sourceQuote)) {
+    return fail(VERIFICATION_STATUS.AMBIGUOUS, 'source quote has multiple occurrences; intended occurrence is ambiguous');
   }
 
   return Object.freeze({
