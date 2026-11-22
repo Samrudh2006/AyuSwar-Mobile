@@ -18,8 +18,9 @@ exists. An index is not proof that every proposal item is complete.
 | ASR evaluation | [Measured FLEURS rows and replay](../benchmarks/RESULTS.md), `benchmarks/results/2026-11-22-fleurs-*.json` | Offline fallback model benchmark, not shipping capture-path, clinical, Tenglish or noisy-speech evaluation |
 | Clinical safety and human review | [Evaluation](../docs/CLINICAL_EVIDENCE_EVALUATION.md), `test/clinical_evidence_engine.test.js`, phases42-44 | Text fixtures and source-span guards, not clinical validation or audio-level red-team lab |
 | FHIR structure | [FHIR replay and scope](../benchmarks/fhir/README.md), phase46 | JSON Schema plus project invariants, not official-profile, terminology or ABDM validation |
-| Offline recovery | Phase37 and phase47, [storage/security scope](../docs/CLINICAL_EVIDENCE_SECURITY.md) | No verified backend deduplication, idempotency key or exactly-once claim |
+| Offline recovery | Phase37/47/48/49, [storage/security scope](../docs/CLINICAL_EVIDENCE_SECURITY.md), [idempotency scope](../docs/OFFLINE-SYNC-IDEMPOTENCY.md) | Client idempotency keys with probed payload surfacing and exponential backoff exist; server-side dedupe not applied or verified; no exactly-once claim |
 | Engineering test executions | `05-ENGINEERING-QUALITY/TEST_RESULTS.json`, `TEST_RESULTS.xml`, `TEST_OUTPUT.log` after replay | JUnit records represent suite processes. Assertion counts and conditional skips are separate properties |
+| Performance | `06-PERFORMANCE/PERFORMANCE_REPORT.md`, `PERFORMANCE_METRICS.json` via `scripts/measure_performance.mjs` | Build-step, bundle-size and suite-duration measurements on one sandbox; NOT app startup, render, ASR/native runtime or network performance |
 | Unfinished original requirements | [Proposal completion matrix](../docs/PROPOSAL-COMPLETION-MATRIX-2026-11-22.md) | Partial/deferred rows remain open; named PDFs and broader scenario/metric work are not implied by this folder |
 
 ## Replay engineering reports

@@ -1,0 +1,167 @@
+{
+  "scope": "Build-time and bundle-size metrics from one sandbox machine. No Android device, runtime, battery, memory-under-load or network performance measured or claimed.",
+  "generatedAt": "2026-11-22T10:15:19.119Z",
+  "revision": "89aad44db7edb9682dd18b66b530e61efb8c9126",
+  "trackedWorkingTreeDirty": true,
+  "environment": {
+    "node": "v22.23.5",
+    "platform": "linux",
+    "arch": "x64",
+    "cpus": 1,
+    "cpuModel": "Intel(R) Xeon(R) 6975P-C",
+    "totalMemoryMB": 1993
+  },
+  "build": {
+    "steps": [
+      {
+        "name": "vite build",
+        "wallMs": 3495
+      },
+      {
+        "name": "prerender",
+        "wallMs": 40
+      },
+      {
+        "name": "generate-sw-manifest",
+        "wallMs": 26
+      }
+    ],
+    "totalWallMs": 3561
+  },
+  "bundle": {
+    "distFileCount": 289,
+    "distTotalBytes": 119169686,
+    "byExtension": {
+      ".txt": {
+        "count": 7,
+        "bytes": 22937
+      },
+      ".html": {
+        "count": 25,
+        "bytes": 821476
+      },
+      "(none)": {
+        "count": 2,
+        "bytes": 12528
+      },
+      ".js": {
+        "count": 99,
+        "bytes": 18997115
+      },
+      ".css": {
+        "count": 4,
+        "bytes": 204990
+      },
+      ".ttf": {
+        "count": 1,
+        "bytes": 427360
+      },
+      ".png": {
+        "count": 45,
+        "bytes": 8926146
+      },
+      ".jpg": {
+        "count": 25,
+        "bytes": 8760106
+      },
+      ".webp": {
+        "count": 16,
+        "bytes": 834160
+      },
+      ".svg": {
+        "count": 15,
+        "bytes": 207346
+      },
+      ".mjs": {
+        "count": 3,
+        "bytes": 1343903
+      },
+      ".wav": {
+        "count": 20,
+        "bytes": 4785280
+      },
+      ".mp3": {
+        "count": 2,
+        "bytes": 261888
+      },
+      ".woff2": {
+        "count": 7,
+        "bytes": 330196
+      },
+      ".traineddata": {
+        "count": 1,
+        "bytes": 4113088
+      },
+      ".wasm": {
+        "count": 5,
+        "bytes": 52945051
+      },
+      ".md": {
+        "count": 1,
+        "bytes": 1172
+      },
+      ".bin": {
+        "count": 4,
+        "bytes": 16038316
+      },
+      ".json": {
+        "count": 4,
+        "bytes": 118169
+      },
+      ".csv": {
+        "count": 1,
+        "bytes": 14096
+      },
+      ".webmanifest": {
+        "count": 1,
+        "bytes": 2032
+      },
+      ".xml": {
+        "count": 1,
+        "bytes": 2331
+      }
+    },
+    "largestFiles": [
+      {
+        "file": "ort-wasm/ort-wasm-simd-threaded.jsep.wasm",
+        "bytes": 29520971
+      },
+      {
+        "file": "ort-wasm/ort-wasm-simd-threaded.wasm",
+        "bytes": 14848852
+      },
+      {
+        "file": "models/yamnet-v1/group1-shard1of4.bin",
+        "bytes": 4194304
+      },
+      {
+        "file": "models/yamnet-v1/group1-shard2of4.bin",
+        "bytes": 4194304
+      },
+      {
+        "file": "models/yamnet-v1/group1-shard3of4.bin",
+        "bytes": 4194304
+      },
+      {
+        "file": "models/tessdata/eng.traineddata",
+        "bytes": 4113088
+      },
+      {
+        "file": "models/tesseract-core/tesseract-core-relaxedsimd-lstm.wasm.js",
+        "bytes": 3905767
+      },
+      {
+        "file": "models/tesseract-core/tesseract-core-simd-lstm.wasm.js",
+        "bytes": 3899472
+      },
+      {
+        "file": "models/tesseract-core/tesseract-core-lstm.wasm.js",
+        "bytes": 3896484
+      },
+      {
+        "file": "models/yamnet-v1/group1-shard4of4.bin",
+        "bytes": 3455404
+      }
+    ]
+  }
+}
