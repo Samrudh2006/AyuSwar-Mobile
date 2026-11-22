@@ -24,9 +24,11 @@ const STORAGE_FALLBACK_KEY = 'ayuswar_offline_sync_queue_v2';
 export const SYNC_ATTENTION_THRESHOLD = 3;
 
 // Exponential backoff for failed sync retries. A failed record becomes
-// eligible again after base * 2^(attempts-1) ms, capped, with a stable
-// per-record jitter derived from its id so the schedule does not flap
-// between cycles. Retries are NOT hard-capped: failed records are never
+// eligible again after base * 2^(attempts-1) ms. The exponential base is
+// capped at SYNC_RETRY_CAP_MS BEFORE the +/-25% jitter is applied, so the
+// effective top-end window is 22.5-37.5 minutes, not a hard 30-minute
+// ceiling; the spread at the top end is intentional. Jitter is stable per
+// record (derived from its id) so the schedule does not flap between cycles. Retries are NOT hard-capped: failed records are never
 // auto-deleted (recovery is an explicit user-confirmed discard), so the
 // schedule caps its growth instead of giving up.
 export const SYNC_RETRY_BASE_MS = 30 * 1000;
@@ -55,6 +57,33 @@ export const isSyncRetryDue = (item, nowMs = Date.now()) => {
   const lastAt = item && item.lastSyncAttemptAt ? Date.parse(item.lastSyncAttemptAt) : NaN;
   if (!attempts || !Number.isFinite(lastAt)) return true;
   return nowMs >= lastAt + computeSyncRetryDelayMs(attempts, hashToUnitInterval(item.id));
+};
+
+// Idempotency keys. Every queued record carries a stable client-generated
+// key (records enqueued before this change fall back to their queue id).
+// The key is surfaced in the sync payload ONLY when the backend table
+// advertises an idempotency_key column: support is probed once per table
+// per session, because PostgREST rejects inserts naming a column missing
+// from the schema cache (PGRST204) and an un-migrated backend must keep
+// syncing unchanged. Server-side dedupe itself (UNIQUE index + upsert) is
+// documented in docs/OFFLINE-SYNC-IDEMPOTENCY.md and is NOT claimed here.
+export const getRecordIdempotencyKey = (item) => item.idempotencyKey || item.id;
+
+const idempotencyColumnSupport = new Map();
+
+export const __resetIdempotencyProbeCacheForTests = () => idempotencyColumnSupport.clear();
+
+const supportsIdempotencyColumn = async (table) => {
+  if (idempotencyColumnSupport.has(table)) return idempotencyColumnSupport.get(table);
+  let supported = false;
+  try {
+    const res = await supabase.from(table).select('idempotency_key', { head: true });
+    supported = !(res && res.error);
+  } catch {
+    supported = false;
+  }
+  idempotencyColumnSupport.set(table, supported);
+  return supported;
 };
 
 let dbInstance = null;
@@ -189,6 +218,7 @@ export const saveOfflineRecord = async (type, payload) => {
   const encryptedPayload = await encryptRecord({ type, payload });
   const newRecord = {
     id: `off_${Date.now()}_${Math.random().toString(36).substring(2, 8)}`,
+    idempotencyKey: `ik_${Date.now()}_${Math.random().toString(36).substring(2, 10)}`,
     type, // 'vital' | 'encounter' | 'prescription' | 'appointment' | 'triage'
     payload: encryptedPayload,
     payloadEncrypted: true,
@@ -272,7 +302,7 @@ const syncAllPendingRecordsInner = async () => {
       }
       if (supabase) {
         if (item.type === 'vital' && item.payload) {
-          const vitalsResult = await supabase.from('patient_vitals_log').insert({
+          const vitalsRow = {
             abha_id: item.payload.abhaId || '91-4521-8820-9102',
             bp_systolic: item.payload.bpSystolic ? parseInt(item.payload.bpSystolic) : null,
             bp_diastolic: item.payload.bpDiastolic ? parseInt(item.payload.bpDiastolic) : null,
@@ -280,18 +310,26 @@ const syncAllPendingRecordsInner = async () => {
             spo2_pct: item.payload.spo2 ? parseInt(item.payload.spo2) : null,
             source_type: 'manual',
             created_at: item.createdAt
-          });
+          };
+          if (await supportsIdempotencyColumn('patient_vitals_log')) {
+            vitalsRow.idempotency_key = getRecordIdempotencyKey(item);
+          }
+          const vitalsResult = await supabase.from('patient_vitals_log').insert(vitalsRow);
           if (vitalsResult && vitalsResult.error) throw new Error(vitalsResult.error.message || 'Supabase vitals insert failed');
           successfulSyncs++;
           syncedIds.push(item.id);
         } else if (item.type === 'encounter' && item.payload) {
-          const encountersResult = await supabase.from('clinical_encounters').insert({
+          const encountersRow = {
             abha_id: item.payload.abhaId || 'DEMO-91-4521',
             patient_name: item.payload.patientName || 'Patient',
             clinical_notes: item.payload.notes || '',
             diagnosis_codes: item.payload.diagnoses || [],
             created_at: item.createdAt
-          });
+          };
+          if (await supportsIdempotencyColumn('clinical_encounters')) {
+            encountersRow.idempotency_key = getRecordIdempotencyKey(item);
+          }
+          const encountersResult = await supabase.from('clinical_encounters').insert(encountersRow);
           if (encountersResult && encountersResult.error) throw new Error(encountersResult.error.message || 'Supabase encounter insert failed');
           successfulSyncs++;
           syncedIds.push(item.id);

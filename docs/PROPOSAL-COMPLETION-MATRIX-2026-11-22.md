@@ -66,8 +66,8 @@ implementation exists but the original deliverable or full scope is not met;
 | Offline draft creation | **DONE** | Offline extraction path; failure visibility and recovery UI (Phase 47) |
 | Connection recovery detection | **DONE** | Offline sync card, retry and recovery states on the clinical console |
 | Pending/synced/failed states | **DONE** | Explicit states; "no confirmed successful sync on this device" wording (no exactly-once claims) |
-| Retry with exponential backoff | **DONE** | Exponential schedule in the sync worker: 30s base doubling per failed attempt, capped at 30min, stable per-record id-hash jitter (no flapping between cycles); due-gate in the sync loop reports deferredCount. Tested in phase48 (doubling, cap, jitter envelope/stability, due-gate, defer-then-retry integration). Retries stay uncapped by design: failed records are never auto-deleted; recovery is a user-confirmed discard |
-| Duplicate prevention using idempotency keys | **DEFERRED** | Queue is append-only with no server dedup verified; no idempotency keys. Honestly documented as a limitation. Next usable work: client-generated idempotency key per queued record, surfaced in the sync payload |
+| Retry with exponential backoff | **DONE** | Exponential schedule in the sync worker: 30s base doubling per failed attempt, base capped at 30min BEFORE +/-25% jitter (effective top-end window 22.5-37.5min, not a hard 30min ceiling), stable per-record id-hash jitter (no flapping between cycles); due-gate in the sync loop reports deferredCount. Tested in phase48 (doubling, cap, jitter envelope/stability, due-gate, defer-then-retry integration). Retries stay uncapped by design: failed records are never auto-deleted; recovery is a user-confirmed discard |
+| Duplicate prevention using idempotency keys | **PARTIAL** | Client-generated stable idempotency key per queued record (idempotencyKey stamped at enqueue; legacy records fall back to queue id), surfaced in the sync payload as idempotency_key only when the table advertises the column (per-session probe; omitted on probe failure so un-migrated backends keep syncing). Server-side dedupe (UNIQUE index + upsert) is documented with migration SQL in docs/OFFLINE-SYNC-IDEMPOTENCY.md but NOT applied or verified against the live backend; exactly-once is not claimed |
 | Sync conflict detection | **N/A — documented** | Inserts are append-only with no server versioning, so no write-write conflict class exists; this is stated in `docs/CLINICAL_EVIDENCE_DATA_MODEL.md` rather than claimed as handled |
 | Reproducible offline-to-online sync test | **DONE** | Phase 47 plus browser-verified IDB scrub/retention proofs |
 
@@ -104,5 +104,5 @@ Remaining gaps inside the folder: no PERFORMANCE_REPORT (no performance metrics 
 - No per-utterance audio timestamps, no terminology-service normalization.
 - No ABDM or official FHIR profile validation; JSON Schema + invariants only.
 - No 30-50 scenario red-team lab or rendered red-team/evaluation PDFs.
-- No exponential backoff, no idempotency keys, no exactly-once delivery.
+- Exactly-once delivery is not claimed: exponential backoff exists, and client idempotency keys are generated and surfaced when the backend advertises the column; server-side dedupe (UNIQUE + upsert) is documented but not applied or verified.
 - No native install, device runtime, or production deployment claims.

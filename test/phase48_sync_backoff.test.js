@@ -59,7 +59,7 @@ await record('delay doubles per failed attempt at fixed jitter', async () => {
   assert(d3 === 2 * d2, `attempt-3 delay ${d3} != 2x attempt-2 (${d2})`);
 });
 
-await record('delay growth is capped', async () => {
+await record('delay growth: base capped before jitter, top-end envelope is cap +/-25%', async () => {
   const dLow = sync.computeSyncRetryDelayMs(50, 0);
   const dHigh = sync.computeSyncRetryDelayMs(50, 1);
   assert(dLow === Math.round(sync.SYNC_RETRY_CAP_MS * 0.75), `capped low-jitter delay ${dLow} != cap*0.75`);
