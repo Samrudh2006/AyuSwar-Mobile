@@ -1,5 +1,31 @@
 # AyuSwar AI: Historical Benchmark Fixtures and Verification Limits
 
+## Measured FLEURS results, local offline ONNX ASR (2026-11-22)
+
+These are actual dated Node executions of the repo's offline ASR models against
+FLEURS reference audio, produced by `benchmarks/fleurs_local_asr.mjs` (no network
+calls) and scored by `benchmarks/fleurs_eval.py` (`--ref-column normalized`,
+stdlib `stt_metrics`). They measure the **local offline fallback models only**.
+They are NOT numbers for the in-app browser runner (which currently shows an
+idle 0/28 state until a run is executed there), NOT Web Speech API quality, NOT
+any cloud provider's quality, and NOT clinical validation.
+
+| Model | Split | n (matched) | Corpus WER | Corpus CER | WER F / M | CER F / M |
+| :--- | :--- | :---: | :---: | :---: | :--- | :--- |
+| local-onnx-conformer-ctc-int8-te (`/tmp/asr-te/model.matmul-int8.onnx`, sha256-pinned) | te_in dev | 311 / 311 | 22.11% | 6.70% | 20.49% / 22.62% | 5.36% / 7.11% |
+| local-onnx-conformer-ctc-int8-te | te_in test | 472 / 472 | 23.46% | 7.93% | 21.45% / 24.16% | 6.51% / 8.43% |
+| local-onnx-conformer-ctc-hi (pilot `asr-hi.onnx`) | hi_in dev | 239 / 239 | 11.87% | 4.84% | 14.08% / 9.89% | 6.12% / 3.71% |
+
+Full scorer output for each row: `benchmarks/results/2026-11-22-fleurs-*.json`.
+
+Execution notes: CPU-only onnxruntime-node, int8 quantized Conformer CTC,
+greedy argmax decode, 0 transcription failures across all runs; every reference
+matched a hypothesis (no dropped pairs). hi_in test split was not yet run at
+this date; dev splits are iteration data per docs/EVAL-DATA-PLAN.md, the te_in
+test number is the final reported figure for that model. FLEURS is read-speech
+news/web text, not code-mixed clinical speech; these numbers do not transfer to
+consultation audio.
+
 ## Current verification status
 
 The former results narrative in this file conflicts with [NOTICE.md](NOTICE.md), which identifies the CSVs as unverified template/reference fixtures. The earlier execution labels and aggregate metrics are withdrawn as evidence of current application or recognizer performance. No replacement accuracy, latency, dosage-clarity or safety metric is asserted here.

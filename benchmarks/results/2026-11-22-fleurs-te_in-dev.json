@@ -1,0 +1,31 @@
+{
+  "tool": "benchmarks/fleurs_eval.py (stdlib stt_metrics)",
+  "date": "2026-11-22",
+  "model": "local-onnx-conformer-ctc-int8-te",
+  "split": "dev",
+  "ref_column": "normalized",
+  "refs_path": "eval-data/fleurs/te_in/dev.tsv",
+  "hyps_path": "/tmp/hyps-te-dev.tsv",
+  "references_total": 311,
+  "hypotheses_total": 311,
+  "matched": 311,
+  "unmatched_references": [],
+  "unmatched_hypotheses": [],
+  "corpus": {
+    "n": 311,
+    "wer": 0.221139896373057,
+    "cer": 0.06696562850345902
+  },
+  "per_gender": {
+    "FEMALE": {
+      "n": 76,
+      "wer": 0.2048823016564952,
+      "cer": 0.053604436229205174
+    },
+    "MALE": {
+      "n": 235,
+      "wer": 0.2262098966829799,
+      "cer": 0.07110872290883037
+    }
+  }
+}
