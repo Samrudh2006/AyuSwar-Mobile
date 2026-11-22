@@ -282,6 +282,7 @@ const syncAllPendingRecordsInner = async () => {
       for (const id of syncedIds) store.delete(id);
     } catch {}
   }
+  if (db) await scrubLegacyRawErrorsIDB(db, syncedIds);
   try {
     // Scrub any legacy raw error strings on retained rows (downgrade to a
     // category); one full sync cycle leaves no raw upstream text in storage.
@@ -362,6 +363,43 @@ async function markSyncFailure(id, err) {
       localStorage.setItem(STORAGE_FALLBACK_KEY, JSON.stringify(queue.map(patch)));
     }
   } catch {}
+}
+
+/**
+ * At-rest scrub for the IndexedDB primary store: rows RETAINED after a sync
+ * cycle (failed, or undecryptable rows that are skipped before any upload
+ * attempt) keep whatever a legacy build persisted — including raw upstream
+ * error strings that can embed identifiers. Rewrite those rows without the
+ * raw key, keeping ciphertext/payload and all other metadata untouched.
+ */
+async function scrubLegacyRawErrorsIDB(db, syncedIds) {
+  await new Promise((resolve) => {
+    try {
+      const tx = db.transaction('pending_sync_queue', 'readwrite');
+      const store = tx.objectStore('pending_sync_queue');
+      const getAllReq = store.getAll();
+      getAllReq.onsuccess = () => {
+        const rows = (getAllReq.result || []).filter(
+          (r) => r && r.lastSyncError && !(syncedIds || []).includes(r.id)
+        );
+        if (rows.length === 0) return resolve();
+        let pendingWrites = rows.length;
+        for (const row of rows) {
+          const { lastSyncError, ...rest } = row;
+          const putReq = store.put({ ...rest, lastSyncErrorCategory: row.lastSyncErrorCategory || 'unknown' });
+          const done = () => {
+            pendingWrites -= 1;
+            if (pendingWrites === 0) resolve();
+          };
+          putReq.onsuccess = done;
+          putReq.onerror = done;
+        }
+      };
+      getAllReq.onerror = () => resolve();
+    } catch {
+      resolve();
+    }
+  });
 }
 
 /**

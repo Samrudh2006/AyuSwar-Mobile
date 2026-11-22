@@ -189,6 +189,8 @@ await record('successful sync still clears the record and attention', async () =
 await record('UI contract: MClinical recovery card + confirm copy + six locale dicts', async () => {
   const src = readFileSync('src/mobile/MClinical.jsx', 'utf-8');
   assert(src.includes('getOfflineQueueHealth'), 'MClinical does not read queue health');
+  const svc = readFileSync('src/services/offlineSyncService.js', 'utf-8');
+  assert(svc.includes('scrubLegacyRawErrorsIDB'), 'IDB retained-row raw-error scrub missing');
   assert(src.includes('discardOfflineRecord'), 'MClinical does not wire discard');
   assert(src.includes('offlineSyncDiscardConfirm'), 'confirmed data-loss copy missing');
   assert(!src.includes('window.confirm'), 'blocking window.confirm used instead of inline confirmation');
