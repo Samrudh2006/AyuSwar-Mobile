@@ -27,9 +27,13 @@ Transcript lifecycle today:
   keys.
 - `clinicalSafetySentinel.js`: existing local rule checks; reused, not
   replaced.
-- `test/run_all.js` exists; there is NO `test:e2e` script, so that
-  acceptance line is mapped to targeted Node tests + browser-verified
-  screenshots; the nonexistent command will not be claimed.
+- `test/run_all.js` exists. `npm run test:e2e` exists as a script but its
+  implementation (`test/e2e_browser.test.js`) hardcodes Windows Chrome paths
+  and silently exits 0 ("Skipping") everywhere else, so today it proves
+  nothing on Linux/CI. Work item: rewrite it as a real headless e2e
+  (system Chrome, preview server, demo-mode clinical workflow) that fails
+  loudly when the browser is unavailable, and wire the evidence-engine
+  regression flow into it.
 
 Consequences for provenance honesty:
 - utteranceId: new deterministic ids (`utt_<sessionId>_<seq>`), assigned at
