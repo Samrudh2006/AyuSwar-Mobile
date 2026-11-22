@@ -56,7 +56,7 @@ export default function PrivacyPolicyView() {
             2. Real-Time Client-Side Audio Signal Processing
           </h2>
           <p>
-            When utilizing the **Acoustic Biomarker Lab** or microphone input:
+            When utilizing the <strong>Acoustic Biomarker Lab</strong> or microphone input:
           </p>
           <ul style={{ paddingLeft: '20px', margin: '8px 0' }}>
             <li><strong>Feature-scoped processing:</strong> Acoustic Lab signal calculations run in the browser. Speech-to-text and text-to-speech features may send the audio/text needed for that request to the configured provider.</li>

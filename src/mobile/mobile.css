@@ -56,7 +56,7 @@
   color: var(--m-ink);
   font-family: var(--m-font-ui);
   -webkit-font-smoothing: antialiased;
-  padding-bottom: calc(var(--m-tabbar-h) + env(safe-area-inset-bottom, 0px));
+  padding-bottom: calc(var(--m-tabbar-h) + env(safe-area-inset-bottom, 0px) + 14px);
 }
 
 /* Page-level headings/text sit on the illustrated backdrop: soft light halo keeps
@@ -67,13 +67,28 @@
 .m-page:not(:has(> .m-hero)):not(:has(> .m-sanj-hero))::before {
   content: '';
   position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 190px;
-  background: linear-gradient(180deg, rgba(255, 253, 246, 0.74), rgba(255, 253, 246, 0.38) 62%, rgba(255, 253, 246, 0));
+  top: 0; left: 0; right: 0; bottom: 0;
+  /* Full-page soft wash: embedded desktop views were authored for a plain
+     white page; the wash keeps their text readable over the leafy backdrop
+     while letting the illustration stay visible. */
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.82), rgba(255, 253, 246, 0.66) 45%, rgba(255, 253, 246, 0.5));
   pointer-events: none;
   z-index: 0;
 }
 .m-page > * { position: relative; z-index: 1; }
+
+/* Embedded desktop views get the same readability wash as .m-page: they were
+   authored for a plain white page and their headings/intros otherwise sit
+   directly on the leafy backdrop. Cards and dark panels paint over the wash. */
+.m-embed-responsive { position: relative; }
+.m-embed-responsive::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.82), rgba(255, 253, 246, 0.66) 45%, rgba(255, 253, 246, 0.5));
+  pointer-events: none;
+  z-index: 0;
+}
+.m-embed-responsive > * { position: relative; z-index: 1; }
 
 /* Soft halo under every page heading: invisible on light hero text, lifts dark
    view headings (inline-styled, no classes) off the leaves/sky. */
@@ -495,7 +510,13 @@
   background: linear-gradient(90deg, #E8983F 0%, #E8983F 33%, #F3EDDC 33%, #F3EDDC 66%, #2E7D5B 66%, #2E7D5B 100%);
   opacity: 0.85;
 }
-.m-footnote { font-size: 10.5px; color: var(--m-faint); text-align: center; line-height: 1.6; padding: 4px 20px 8px; }
+.m-footnote {
+  font-size: 10.5px; color: var(--m-ink); text-align: center; line-height: 1.6;
+  padding: 8px 16px; margin: 12px 16px 8px;
+  background: rgba(255, 253, 246, 0.92);
+  border: 1px solid rgba(185, 196, 165, 0.7);
+  border-radius: 12px;
+}
 
 /* ---------- Form fields ---------- */
 .m-field { display: flex; flex-direction: column; gap: 6px; }
@@ -909,9 +930,9 @@
 }
 .m-flow-field textarea:focus { border-color: var(--m-green); box-shadow: 0 0 0 2px rgba(21, 92, 62, 0.12); }
 .m-flow-edited-note { font-size: 11.5px; color: #175C3C; background: #E8F4EC; border-radius: 8px; padding: 6px 10px; margin-bottom: 8px; }
-.m-tint-mint { background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.12); }
-.m-tint-peach { background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.12); }
-.m-tint-sky { background: #FFFFFF; border: 1px solid rgba(15, 23, 42, 0.12); }
+.m-tint-mint { background: #F0F7EE; border: 1px solid rgba(21, 92, 62, 0.38); }
+.m-tint-peach { background: #FBF0DF; border: 1px solid rgba(176, 112, 40, 0.42); }
+.m-tint-sky { background: #ECF3F6; border: 1px solid rgba(54, 94, 116, 0.38); }
 
 /* No phantom tab-bar gutter on focused workflows. Background reaches viewport. */
 .m-app-no-tabs { padding-bottom: 0; display: flex; flex-direction: column; }
@@ -955,9 +976,9 @@
 .m-flow-short > section > .m-card > .m-clin-rec { margin-top: auto; }
 /* User-directed clearer borders and quiet layered colour, 22:59. */
 :root { --m-border: #9eac94; --m-border-soft: #aab69f; }
-.m-tint-mint { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
-.m-tint-peach { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
-.m-tint-sky { background: #FFFFFF; border-color: rgba(15, 23, 42, 0.12); }
+.m-tint-mint { background: #F0F7EE; border-color: rgba(21, 92, 62, 0.38); }
+.m-tint-peach { background: #FBF0DF; border-color: rgba(176, 112, 40, 0.42); }
+.m-tint-sky { background: #ECF3F6; border-color: rgba(54, 94, 116, 0.38); }
 .m-flow-page { background: transparent; }
 .m-consultation-photo { margin: 12px 0; }
 .m-consultation-photo img { width:100%; aspect-ratio: 2.15; object-fit:cover; object-position:center 40%; border:1px solid #b1a287; border-radius:12px; }

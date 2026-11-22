@@ -20,7 +20,7 @@ import http from 'node:http';
 import { chromium } from 'playwright-core';
 
 const UNDER_SUITE = process.env.AYUSWAR_SUITE_RUN === '1';
-const TEST_COUNT = 5;
+const TEST_COUNT = 6;
 
 const CHROME_CANDIDATES = [
   process.env.CHROME_PATH,
@@ -85,9 +85,28 @@ async function main() {
   // 3. Built preview: build the current working tree, then serve dist/.
   console.log('Building current working tree (npm run build)...');
   execSync('npm run build', { stdio: 'pipe' });
+  const distIndex = fs.readFileSync('dist/index.html', 'utf8');
+  const assetHash = (distIndex.match(/assets\/index-([A-Za-z0-9_-]+)\.js/) || [])[1];
   const preview = spawn('npx', ['vite', 'preview', '--port', '4174', '--strictPort'], { stdio: 'pipe' });
   process.on('exit', () => { try { preview.kill(); } catch {} });
   await waitForServer('http://127.0.0.1:4174/');
+  // Ownership/freshness: a port already owned by an older preview must never
+  // let us test a stale build. --strictPort makes our child exit in that case;
+  // verify our child survived and that the served HTML references the exact
+  // asset hash of the build we just produced.
+  if (preview.exitCode !== null) {
+    console.error('E2E FAILED LOUDLY: spawned preview exited (port 4174 already owned by another process). Refusing to test a possibly stale build.');
+    process.exit(1);
+  }
+  const servedIndex = await new Promise((resolve, reject) => {
+    http.get('http://127.0.0.1:4174/index.html', res => {
+      let d = ''; res.on('data', c => { d += c; }); res.on('end', () => resolve(d));
+    }).on('error', reject);
+  });
+  if (assetHash && !servedIndex.includes(`index-${assetHash}.js`)) {
+    console.error('E2E FAILED LOUDLY: preview on 4174 does not serve the freshly built artifact (asset hash mismatch).');
+    process.exit(1);
+  }
   const BASE = 'http://127.0.0.1:4174';
   console.log(`Preview of built app serving at ${BASE} (browser: ${CHROME_PATH})`);
 
