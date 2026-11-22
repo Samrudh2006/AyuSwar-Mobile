@@ -21,6 +21,7 @@ exists. An index is not proof that every proposal item is complete.
 | Offline recovery | Phase37/47/48/49, [storage/security scope](../docs/CLINICAL_EVIDENCE_SECURITY.md), [idempotency scope](../docs/OFFLINE-SYNC-IDEMPOTENCY.md) | Client idempotency keys with probed payload surfacing and exponential backoff exist; server-side dedupe not applied or verified; no exactly-once claim |
 | Engineering test executions | `05-ENGINEERING-QUALITY/TEST_RESULTS.json`, `TEST_RESULTS.xml`, `TEST_OUTPUT.log` after replay | JUnit records represent suite processes. Assertion counts and conditional skips are separate properties |
 | Performance | `06-PERFORMANCE/PERFORMANCE_REPORT.md`, `PERFORMANCE_METRICS.json` via `scripts/measure_performance.mjs` | Build-step, bundle-size and suite-duration measurements on one sandbox; NOT app startup, render, ASR/native runtime or network performance |
+| Mobile build and release | [Deployment guide](../docs/DEPLOYMENT_GUIDE.md), [APK provenance](../docs/APK-PROVENANCE-2026-11-22.md) | Debug-APK path verified end-to-end; release signing, AAB and Play submission not done |
 | Unfinished original requirements | [Proposal completion matrix](../docs/PROPOSAL-COMPLETION-MATRIX-2026-11-22.md) | Partial/deferred rows remain open; named PDFs and broader scenario/metric work are not implied by this folder |
 
 ## Replay engineering reports

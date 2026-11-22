@@ -97,7 +97,7 @@ implementation exists but the original deliverable or full scope is not met;
 (data flow/storage), `CLINICAL_EVIDENCE_SECURITY.md` (security audit),
 `CLINICAL_EVIDENCE_EVALUATION.md` (evaluation summary), `benchmarks/RESULTS.md`
 (ASR benchmarks), `docs/APK-PROVENANCE-2026-11-22.md` (build provenance).
-Remaining gaps inside the folder: no DEPLOYMENT_GUIDE beyond the APK provenance recipe, and the red-team ledger is text-level only. PERFORMANCE_REPORT now exists under 06-PERFORMANCE/ with genuinely measured build-step durations, bundle composition and suite wall time (scripts/measure_performance.mjs, reproducible); it explicitly does NOT measure app startup/render/ASR/native runtime performance - those metrics and what they would need are listed in the report.
+Remaining gaps inside the folder: the red-team ledger is text-level only. DEPLOYMENT_GUIDE now exists at docs/DEPLOYMENT_GUIDE.md, scoped to the verified mobile debug-APK build/release path (release signing/AAB/Play listed as not done). PERFORMANCE_REPORT now exists under 06-PERFORMANCE/ with genuinely measured build-step durations, bundle composition and suite wall time (scripts/measure_performance.mjs, reproducible); it explicitly does NOT measure app startup/render/ASR/native runtime performance - those metrics and what they would need are listed in the report.
 
 ## What is NOT claimed
 
