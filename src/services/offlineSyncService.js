@@ -252,11 +252,15 @@ const syncAllPendingRecordsInner = async () => {
             diagnosis_codes: item.payload.diagnoses || [],
             created_at: item.createdAt
           });
-          successfulSyncs++;
-        } else {
-          // General offline telemetry or appointment
+          if (encountersResult && encountersResult.error) throw new Error(encountersResult.error.message || 'Supabase encounter insert failed');
           successfulSyncs++;
           syncedIds.push(item.id);
+        } else {
+          // No verified backend route exists for this record type. Fail
+          // closed: never counted as synced, never deleted here; it stays
+          // queued and surfaces through queue-health attention instead of a
+          // false "synced" claim.
+          throw new Error('__no_sync_route__');
         }
       } else {
         successfulSyncs++;
@@ -295,14 +299,31 @@ const syncAllPendingRecordsInner = async () => {
  * stored row is read and rewritten so an already-decrypted in-memory payload
  * is never persisted. Error text is truncated and carries no payload content.
  */
+/**
+ * Bounded error categories for queue diagnostics. Raw upstream error text is
+ * NEVER stored: it can embed payload fragments or identifiers, and a length
+ * cap alone would not make it privacy-safe. Only these fixed categories are
+ * persisted.
+ */
+function categorizeSyncError(err) {
+  const message = String((err && err.message) || err || '');
+  if (message === '__no_sync_route__') return 'no-sync-route';
+  const http = message.match(/HTTP\s*(\d)/i);
+  if (http) return http[1] === '4' ? 'http-4xx' : http[1] === '5' ? 'http-5xx' : 'http-other';
+  if (/timeout|timed out/i.test(message)) return 'timeout';
+  if (/failed to fetch|network|econn|enotfound|offline|unreachable/i.test(message)) return 'network';
+  return 'unknown';
+}
+
 async function markSyncFailure(id, err) {
-  const message = String((err && err.message) || err || 'sync failed').slice(0, 200);
+  const category = categorizeSyncError(err);
   const patch = (rec) =>
     rec && rec.id === id
       ? {
           ...rec,
           syncAttempts: (rec.syncAttempts || 0) + 1,
-          lastSyncError: message,
+          lastSyncErrorCategory: category,
+          lastSyncError: undefined,
           lastSyncAttemptAt: new Date().toISOString()
         }
       : rec;
@@ -351,7 +372,9 @@ export const getOfflineQueueHealth = async () => {
       createdAt: item.createdAt,
       reason: item.decryptError ? 'undecryptable' : 'repeated-failure',
       syncAttempts: item.syncAttempts || 0,
-      lastSyncError: item.lastSyncError || null,
+      // Legacy rows may still carry a raw lastSyncError string; downgrade it
+      // to a category and never hand raw upstream text to the UI.
+      lastSyncErrorCategory: item.lastSyncErrorCategory || (item.lastSyncError ? 'unknown' : null),
       lastSyncAttemptAt: item.lastSyncAttemptAt || null
     }));
   return { pendingCount: queue.length, needsAttention };

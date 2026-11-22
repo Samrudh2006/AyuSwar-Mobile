@@ -6,8 +6,9 @@
  * write-write "conflict" class cannot occur and is not simulated. The real
  * failure classes covered here:
  *   1. Failed upload attempts are counted on the stored record
- *      (syncAttempts/lastSyncError/lastSyncAttemptAt) without ever touching
- *      the stored payload.
+ *      (syncAttempts/lastSyncErrorCategory/lastSyncAttemptAt) without ever
+ *      touching the stored payload. Only bounded error categories are kept;
+ *      raw upstream error text (which can embed identifiers) is never stored.
  *   2. Records at/above SYNC_ATTENTION_THRESHOLD surface via
  *      getOfflineQueueHealth() as 'repeated-failure'; below threshold they
  *      do not.
@@ -64,14 +65,14 @@ const failInsert = () => {
   supabase.from = () => ({ insert: () => Promise.resolve({ data: null, error: new Error('HTTP 500 synthetic') }) });
 };
 
-await record('failed upload stamps attempts/error on stored record, payload untouched', async () => {
+await record('failed upload stamps attempts/category on stored record, payload untouched', async () => {
   seedLS([mk('R1')]);
   failInsert();
   await sync.syncAllPendingRecords();
   const rec = readLS().find((i) => i.id === 'R1');
   assert(rec, 'record missing after failed sync');
   assert(rec.syncAttempts === 1, `syncAttempts ${rec.syncAttempts}, expected 1`);
-  assert(typeof rec.lastSyncError === 'string' && rec.lastSyncError.length > 0, 'lastSyncError not set');
+  assert(rec.lastSyncErrorCategory === 'http-5xx', `category ${rec.lastSyncErrorCategory}`);
   assert(typeof rec.lastSyncAttemptAt === 'string', 'lastSyncAttemptAt not set');
   assert(JSON.stringify(rec.payload) === JSON.stringify({ abhaId: 'SYNTH', pulse: '72' }), 'stored payload was modified');
 });
@@ -88,7 +89,7 @@ await record('below attention threshold, health does not flag; at threshold it f
   const item = health.needsAttention[0];
   assert(item.reason === 'repeated-failure', `reason ${item.reason}`);
   assert(item.syncAttempts === sync.SYNC_ATTENTION_THRESHOLD, `attempts ${item.syncAttempts}`);
-  assert(item.lastSyncError && item.lastSyncError.length <= 200, 'error text missing or untruncated');
+  assert(item.lastSyncErrorCategory === 'http-5xx', `category ${item.lastSyncErrorCategory}`);
   assert(!('payload' in item), 'health diagnostic leaked payload');
 });
 
@@ -122,8 +123,51 @@ await record('discardOfflineRecord removes exactly one record', async () => {
   assert(health.pendingCount === 1 && health.needsAttention.length === 1, 'health not updated after discard');
 });
 
+await record('encounter insert error retains record + counts attempt; acknowledged success deletes', async () => {
+  seedLS([{ id: 'R8', type: 'encounter', payload: { abhaId: 'SYNTH', patientName: 'Synthetic', notes: '' }, createdAt: new Date().toISOString(), status: 'pending_sync' }]);
+  failInsert();
+  let res = await sync.syncAllPendingRecords();
+  assert(res.syncedCount === 0, `failed encounter counted synced: ${res.syncedCount}`);
+  let rec = readLS().find((i) => i.id === 'R8');
+  assert(rec && rec.syncAttempts === 1, 'failed encounter not retained with attempt');
+  supabase.from = () => ({ insert: () => Promise.resolve({ data: [{}], error: null }) });
+  res = await sync.syncAllPendingRecords();
+  assert(res.syncedCount === 1, `acknowledged encounter not synced: ${res.syncedCount}`);
+  assert(!readLS().some((i) => i.id === 'R8'), 'acknowledged encounter not removed');
+});
+
+await record('record type without a backend route is never counted synced and never deleted', async () => {
+  seedLS([{ id: 'R9', type: 'appointment', payload: { note: 'synthetic' }, createdAt: new Date().toISOString(), status: 'pending_sync' }]);
+  supabase.from = () => ({ insert: () => Promise.resolve({ data: [{}], error: null }) });
+  const res = await sync.syncAllPendingRecords();
+  assert(res.syncedCount === 0, `route-less record counted synced: ${res.syncedCount}`);
+  const rec = readLS().find((i) => i.id === 'R9');
+  assert(rec, 'route-less record was deleted');
+  assert(rec.lastSyncErrorCategory === 'no-sync-route', `category ${rec.lastSyncErrorCategory}`);
+});
+
+await record('error categories are bounded; raw upstream text/identifiers never stored', async () => {
+  const cases = [
+    ['HTTP 500 patient abha 91-4521-8820-9102', 'http-5xx'],
+    ['HTTP 404 record 91-4521 not found', 'http-4xx'],
+    ['Failed to fetch 91-4521', 'network'],
+    ['request timed out for 91-4521', 'timeout'],
+    ['weird provider text 91-4521-8820-9102', 'unknown']
+  ];
+  for (let i = 0; i < cases.length; i++) {
+    const [message, expected] = cases[i];
+    seedLS([mk(`RC${i}`)]);
+    supabase.from = () => ({ insert: () => Promise.resolve({ data: null, error: new Error(message) }) });
+    await sync.syncAllPendingRecords();
+    const rec = readLS().find((r) => r.id === `RC${i}`);
+    assert(rec.lastSyncErrorCategory === expected, `${message} -> ${rec.lastSyncErrorCategory}, expected ${expected}`);
+    const raw = globalThis.localStorage.getItem(QUEUE_KEY);
+    assert(!raw.includes('91-4521'), 'raw identifier leaked into stored queue');
+  }
+});
+
 await record('successful sync still clears the record and attention', async () => {
-  seedLS([mk('R6', { syncAttempts: 3, lastSyncError: 'HTTP 500 synthetic' })]);
+  seedLS([mk('R6', { syncAttempts: 3, lastSyncErrorCategory: 'http-5xx' })]);
   supabase.from = () => ({ insert: () => Promise.resolve({ data: [{}], error: null }) });
   const res = await sync.syncAllPendingRecords();
   assert(res.syncedCount === 1, `syncedCount ${res.syncedCount}`);

@@ -69,7 +69,7 @@ const suites = [
   { name: 'Phase 44: Spoken-Vital Context Safety', file: 'test/phase44_soap_objective_contexts.test.js', count: 21 },
   { name: 'Phase 45: Built-App Browser E2E (mobile keyless flows)', file: 'test/e2e_browser.test.js', count: 6 },
   { name: 'Phase 46: Live Draft-Bundle FHIR R4 Conformance', file: 'test/phase46_fhir_draft_bundle.test.js', count: 2 },
-  { name: 'Phase 47: Offline Queue Failure Visibility & Recovery', file: 'test/phase47_offline_recovery.test.js', count: 7 }
+  { name: 'Phase 47: Offline Queue Failure Visibility & Recovery', file: 'test/phase47_offline_recovery.test.js', count: 10 }
 ];
 
 console.clear();
