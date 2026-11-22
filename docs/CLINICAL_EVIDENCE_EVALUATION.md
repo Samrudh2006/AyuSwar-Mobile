@@ -2,9 +2,9 @@
 
 **Status:** engineering verification only. Nothing on this page is clinical
 validation, user feedback, or a live-provider result.
-**As of:** 2026-11-22, branch `feat/clinical-evidence-engine`, commit `0174027`
-(last code-affecting commit; `4a91026` adds documentation only).
-Suite at that commit: **368 executed and passed, 3 conditional skips, 0 failed**
+**As of:** 2026-11-22, branch `feat/clinical-evidence-engine`, application source `faea07f`; released provenance `b121734`.
+A later report-only harness commit `1447957` records a clean-source replay.
+Suite at that report commit: **383 executed and passed, 3 conditional skips, 0 failed**
 (`node test/run_all.js`).
 
 ## What "evaluation" means here
@@ -19,8 +19,8 @@ environment it is a labeled conditional skip, never a pass.
 The SOAP draft pipeline never trusts model text into the objective,
 assessment and plan sections: objective is generated only from verified
 spoken vital values and assessment/plan are always fixed safe strings.
-The subjective section remains model-written draft text that is NOT
-evidence-verified; the review UI (desktop and mobile) labels it as such
+The subjective section remains draft text that is NOT evidence-verified;
+its source may be a live model or the manual transcript-copy path; the review UI (desktop and mobile) labels it as such
 next to the section with a source-aware label: "model-written" only when
 the model produced the draft, recording-referencing only when a recording
 exists (otherwise the source transcript).
@@ -31,7 +31,7 @@ exists (otherwise the source transcript).
 | Review UI behavior | Phase 41 `test/clinical_evidence_ui.test.js` | 6 |
 | Deterministic safeguards (adversarial batch order, semantic collisions, appended directives) | Phase 42 | 8 |
 | Deterministic section assembly | Phase 43 | 10 |
-| Spoken-vital context: negation, question, hypothetical/conditional (including post-value Indic conditionals), historical, pulse-ox adjacency | Phase 44 | 21 |
+| Spoken-vital context: negation, question, hypothetical/conditional (including post-value Indic conditionals), historical, pulse-ox adjacency | Phase 44 | 36 |
 
 Disposition of known limits (accepted as disclosed prototype limitations, not
 blockers): zero-match sample utterances, unknown-language input, and
@@ -114,3 +114,13 @@ No clinical validation. No real-user feedback. No live provider, native
 Android runtime, or production deployment claim. No DPDP/ABDM/HIPAA
 compliance claim. Fallback output is never presented as live model output.
 No fabricated timestamps, providers, or benchmark numbers.
+
+## Machine-readable execution evidence
+
+[Technical evidence index](../AYUSWAR-TECHNICAL-EVIDENCE/README.md) links the
+actual per-suite stdout, JSON results and JUnit XML from the recorded run.
+JUnit represents suite-process executions, not 383 individually instrumented
+case elements. Passed assertion counts and conditional skips are separate
+properties. A deliberate child exit7 test verified that a failing process
+writes a failure report and the parent runner exits nonzero. That deliberate
+reporter test is not added to the 383 application assertions.

@@ -80,3 +80,21 @@ and doc wording.
   build-side verification, not independent device runtime verification.
 - Source checks: 383 passed, 3 conditional skips, 0 failures.
 - Draft access is restricted to repository push access, not owner-only.
+
+## Publication record
+
+After visual acceptance, the existing draft was published as the
+`v0.3.34-debug` GitHub pre-release, tag target `b121734` (documentation-only
+child of application source `faea07f`). Earlier draft/gate wording above is
+its build-stage history, not the current release state.
+
+- Release: https://github.com/Samrudh2006/AyuSwar-Mobile/releases/tag/v0.3.34-debug
+- APK: https://github.com/Samrudh2006/AyuSwar-Mobile/releases/download/v0.3.34-debug/ayuswar-v0.3.34-faea07f-debug.apk
+- The unauthenticated direct download was rehashed after publication and
+  matched the table above. Main was not merged and old releases were kept.
+- The preceding published `v0.3.33-debug` APK was downloaded: package
+  `ai.ayuswar.app`, versionCode36, same debug signing certificate as this
+  code37 APK. These build properties permit an in-place upgrade; no actual
+  device installation is asserted. Do not uninstall as a shortcut because
+  that can erase local data.
+- Subsequent report-only and documentation commits do not change this APK.
