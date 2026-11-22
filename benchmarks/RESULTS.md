@@ -15,14 +15,14 @@ any cloud provider's quality, and NOT clinical validation.
 | local-onnx-conformer-ctc-int8-te (`/tmp/asr-te/model.matmul-int8.onnx`, sha256-pinned) | te_in dev | 311 / 311 | 22.11% | 6.70% | 20.49% / 22.62% | 5.36% / 7.11% |
 | local-onnx-conformer-ctc-int8-te | te_in test | 472 / 472 | 23.46% | 7.93% | 21.45% / 24.16% | 6.51% / 8.43% |
 | local-onnx-conformer-ctc-hi (pilot `asr-hi.onnx`) | hi_in dev | 239 / 239 | 11.87% | 4.84% | 14.08% / 9.89% | 6.12% / 3.71% |
+| local-onnx-conformer-ctc-hi (pilot `asr-hi.onnx`) | hi_in test | 418 / 418 | 11.19% | 4.68% | 12.07% / 10.26% | 5.25% / 4.08% |
 
 Full scorer output for each row: `benchmarks/results/2026-11-22-fleurs-*.json`.
 
 Execution notes: CPU-only onnxruntime-node, int8 quantized Conformer CTC,
 greedy argmax decode, 0 transcription failures across all runs; every reference
-matched a hypothesis (no dropped pairs). hi_in test split was not yet run at
-this date; dev splits are iteration data per docs/EVAL-DATA-PLAN.md, the te_in
-test number is the final reported figure for that model. FLEURS is read-speech
+matched a hypothesis (no dropped pairs). Dev splits are iteration data per
+docs/EVAL-DATA-PLAN.md; the test rows are the final reported figures. FLEURS is read-speech
 news/web text, not code-mixed clinical speech; these numbers do not transfer to
 consultation audio.
 
@@ -52,6 +52,7 @@ independently recomputable:
 | `benchmarks/results/2026-11-22-fleurs-te_in-dev.hyps.tsv` | `120731a962858ba4d1627bad4da52abe3d550599e705652fa513746566bea96e` |
 | `benchmarks/results/2026-11-22-fleurs-te_in-test.hyps.tsv` | `ce1aeecf36c425352b92d3e30d0f35abc07303f8387920fd9feadb11bcbc9ca1` |
 | `benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv` | `92da6530a7301be9013a81602b415c6bb33c70a64f7db822226dc6065a3243fd` |
+| `benchmarks/results/2026-11-22-fleurs-hi_in-test.hyps.tsv` | `f6f99803a96b72693715bd33fcd9f6fd4205a822c959b793f7ceb680b096d8dd` |
 
 Replay (no model run needed):
 
@@ -65,6 +66,9 @@ python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/te_in/test.tsv \
 python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/hi_in/dev.tsv \
   --hyps benchmarks/results/2026-11-22-fleurs-hi_in-dev.hyps.tsv \
   --model local-onnx-conformer-ctc-int8-hi --split dev --ref-column normalized
+python3 benchmarks/fleurs_eval.py --refs eval-data/fleurs/hi_in/test.tsv \
+  --hyps benchmarks/results/2026-11-22-fleurs-hi_in-test.hyps.tsv \
+  --model local-onnx-conformer-ctc-int8-hi --split test --ref-column normalized
 ```
 
 ## Current verification status

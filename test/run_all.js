@@ -64,7 +64,8 @@ const suites = [
   { name: 'Phase 38: API Reliability Chain', file: 'test/phase38_api_reliability_chain.test.js', count: 5 },
   { name: 'Phase 40: Clinical Evidence Engine', file: 'test/clinical_evidence_engine.test.js', count: 22 },
   { name: 'Phase 41: Clinical Evidence Review UI', file: 'test/clinical_evidence_ui.test.js', count: 6 },
-  { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 8 }
+  { name: 'Phase 42: SOAP Draft Deterministic Safeguards', file: 'test/phase42_soap_draft_safeguards.test.js', count: 8 },
+  { name: 'Phase 43: Deterministic SOAP Sections', file: 'test/phase43_soap_deterministic_sections.test.js', count: 10 }
 ];
 
 console.clear();
