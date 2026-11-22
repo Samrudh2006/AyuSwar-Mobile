@@ -8,9 +8,21 @@
  * - Objective is generated only from vital values actually spoken in the
  *   transcript (same-vital keyword + same-shaped value pairs), labelled as
  *   spoken-not-measured. Model-written objective text is never used.
+ * - A spoken value is excluded fail-closed when its context is negated or
+ *   denied ("not BP 180/110", "బీపీ ... లేదు"), hypothetical or a question
+ *   ("if BP goes above 160/100", "was your BP 140/90?"), because surfacing
+ *   such a value as the objective-row vital is clinically misleading.
+ * - A value spoken as past history ("my BP was 130/85 last month") keeps its
+ *   historical scope: it is labelled as spoken history, never implied to be
+ *   a current vital.
+ * - Device-keyword ambiguity fails closed: "pulse oximeter 98" is an SpO2
+ *   device reading, never HR; without an explicit SpO2/% shape it is dropped.
  * - Assessment and Plan are always fixed safe strings. Model text for these
  *   sections is discarded unconditionally (a disclaimer with an appended
  *   directive is still a directive).
+ * - The Subjective section remains model-written draft text; it is NOT
+ *   evidence-verified and the UI must say so next to the section, not only
+ *   in a broad note-level disclaimer.
  */
 
 export const SAFE_ASSESSMENT =
@@ -18,22 +30,77 @@ export const SAFE_ASSESSMENT =
 export const SAFE_PLAN =
   'No medication, dose, treatment or follow-up plan is generated.';
 
+/** Required UI label for the model-written Subjective section (auditor boundary). */
+export const SUBJECTIVE_NOT_VERIFIED_LABEL =
+  'Model-written draft text — NOT verified against source evidence. Confirm every statement against the recording before use.';
+
 const VITAL_PATTERNS = [
   { type: 'BP', re: /(?:\bbp\b|blood pressure|బీపీ|बीपी)[^\d]{0,25}(\d{2,3})\s*\/\s*(\d{2,3})/gi, fmt: m => `BP ${m[1]}/${m[2]}` },
   { type: 'SpO2', re: /(?:spo2|sp o2|oxygen saturation|oxygen level)[^\d]{0,25}(\d{2,3})\s*%/gi, fmt: m => `SpO2 ${m[1]}%` },
-  { type: 'HR', re: /(?:\bhr\b|heart rate|pulse)[^\d]{0,25}(\d{2,3})\s*(?:bpm)?/gi, fmt: m => `HR ${m[1]} bpm` },
+  // "pulse" must not match "pulse oximeter"/"pulse oximetry" (an SpO2 device, not heart rate).
+  { type: 'HR', re: /(?:\bhr\b|heart rate|pulse(?!\s*ox))[^\d]{0,25}(\d{2,3})\s*(?:bpm)?/gi, fmt: m => `HR ${m[1]} bpm` },
   { type: 'Temp', re: /(?:temp|temperature|ఉష్ణోగ్రత)[^\d]{0,25}(\d{2,3}(?:\.\d+)?)\s*°?\s*([fc])/gi, fmt: m => `Temp ${m[1]}°${m[2].toUpperCase()}` }
 ];
 
-/** Extract vital values actually spoken in the transcript: [{type, label}]. */
+// Negation markers. Indic negation commonly FOLLOWS the noun/value, so both
+// sides of the match are checked (Unicode-safe, no \b around Indic words).
+const NEGATION_RE = /(?:\b(?:no|not|never|denies|denied|deny|without|n't|free of|ruled? out)\b|లేదు|కాదు|వద్దు|లేని|नहीं|नही|मत)/i;
+// Hypothetical / question phrasing before the value.
+const HYPOTHETICAL_RE = /(?:\b(?:if|in case|suppose|whenever|should|would|could|what if|was your|were your|did you|did your|have you|has your|is your|do you)\b|अगर|यदि|क्या|ఉంటే|అయితే|ఏమైనా)/i;
+// Historical-scope markers: the value is spoken as past, not current.
+const HISTORICAL_RE = /(?:\blast\s+(?:month|week|year|night|visit|time)\b|\b\d+\s+(?:days?|weeks?|months?|years?)\s+ago\b|\bago\b|\bprevious(?:ly)?\b|\bearlier\b|\bhistory of\b|\bused to\b|\bback in\b|ఇంతకు ముందు|మునుపు|पहले|पिछले|पिछला)/i;
+
+/** Clause around a match: text between the nearest sentence/clause boundaries. */
+function clauseAround(text, start, end) {
+  const before = text.slice(0, start);
+  const after = text.slice(end);
+  const prevBoundary = Math.max(
+    before.lastIndexOf('.'), before.lastIndexOf('!'), before.lastIndexOf('?'),
+    before.lastIndexOf('\n'), before.lastIndexOf(';'), before.lastIndexOf('।')
+  );
+  const nextBoundaries = ['.', '!', '?', '\n', ';', '।']
+    .map(c => after.indexOf(c)).filter(i => i >= 0);
+  const nextBoundary = nextBoundaries.length ? Math.min(...nextBoundaries) : after.length;
+  return {
+    // a little look-back across the boundary catches "Definitely not. BP ..."? No:
+    // negation must be in the SAME clause as the value, so keep the look-back tight.
+    before: before.slice(prevBoundary + 1),
+    after: after.slice(0, nextBoundary),
+    hasQuestionMark: after.slice(0, nextBoundary + 1).includes('?') || before.slice(prevBoundary + 1).includes('?')
+  };
+}
+
+/** Context classification for one spoken vital match. */
+function classifyContext(transcript, matchStart, matchEnd) {
+  const { before, after, hasQuestionMark } = clauseAround(transcript, matchStart, matchEnd);
+  if (hasQuestionMark) return 'excluded'; // a question is never a current finding
+  // Negation: within ~60 chars before the keyword or ~30 chars after the value
+  // (Indic negation follows the noun/value).
+  if (NEGATION_RE.test(before.slice(-60)) || NEGATION_RE.test(after.slice(0, 30))) return 'excluded';
+  // Hypothetical phrasing in the clause before the value.
+  if (HYPOTHETICAL_RE.test(before)) return 'excluded';
+  // Historical scope: keep, but label it as spoken history.
+  if (HISTORICAL_RE.test(before) || HISTORICAL_RE.test(after.slice(0, 40))) return 'historical';
+  return 'current';
+}
+
+/**
+ * Extract vital values actually spoken in the transcript.
+ * Returns [{type, label, scope}] where scope is 'current' or 'historical';
+ * negated, denied, hypothetical and questioned mentions are excluded
+ * fail-closed (they never appear in the objective at all).
+ */
 export function spokenVitalPairs(transcript) {
   const out = [];
+  const text = transcript || '';
   for (const p of VITAL_PATTERNS) {
     p.re.lastIndex = 0;
     let m;
-    while ((m = p.re.exec(transcript)) !== null) {
-      const label = p.fmt(m);
-      if (!out.some(v => v.label === label)) out.push({ type: p.type, label });
+    while ((m = p.re.exec(text)) !== null) {
+      const scope = classifyContext(text, m.index, m.index + m[0].length);
+      if (scope === 'excluded') continue;
+      const label = scope === 'historical' ? `${p.fmt(m)} (spoken as past history)` : p.fmt(m);
+      if (!out.some(v => v.label === label)) out.push({ type: p.type, label, scope });
     }
   }
   return out;
@@ -42,7 +109,9 @@ export function spokenVitalPairs(transcript) {
 /**
  * Deterministic objective section. Model objective text is never consulted.
  * Vitals appear only when the transcript itself pairs a vital keyword with a
- * vital-shaped value, and are labelled spoken-not-measured.
+ * vital-shaped value in a non-negated, non-hypothetical, non-question
+ * context, and are labelled spoken-not-measured (historical mentions keep
+ * their historical scope explicitly).
  */
 export function deterministicObjective(transcript, noVitalsFallback) {
   const pairs = spokenVitalPairs(transcript || '');

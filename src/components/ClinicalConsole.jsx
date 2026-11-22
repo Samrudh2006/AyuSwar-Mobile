@@ -56,7 +56,7 @@ import { reasonClinicalNoteWithEvon, EVON_MODEL_METADATA } from '../services/gna
 import { generateAbdmFhirR4Bundle } from '../data/clinicalSafetySentinel';
 import { queryGroqApi, getGroqApiKey, transcribeAudioWithGroqWhisper } from '../services/aiBrainService';
 import ClinicalEvidencePanel from './ClinicalEvidencePanel';
-import { deterministicObjective, conservativeAssessmentPlan } from '../services/soapDraftSafeguards.js';
+import { deterministicObjective, conservativeAssessmentPlan, SUBJECTIVE_NOT_VERIFIED_LABEL } from '../services/soapDraftSafeguards.js';
 
 /**
  * ClinicalConsole Component — Complete Step-by-Step OPD Consultation Suite
@@ -2199,6 +2199,9 @@ Create a conservative documentation draft only. Do not diagnose, prescribe, calc
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '12.5px' }}>
                     <div style={{ background: '#FAF8F5', padding: '12px', borderRadius: '10px', border: '1px solid #D0DFE2' }}>
                       <div style={{ fontWeight: 800, color: '#0F4C5C', marginBottom: '4px' }}>SUBJECTIVE (S):</div>
+                      <div style={{ fontSize: '10.5px', color: '#92400E', background: '#FFFBEB', border: '1px dashed #D97706', borderRadius: '6px', padding: '4px 8px', marginBottom: '6px' }}>
+                        {SUBJECTIVE_NOT_VERIFIED_LABEL}
+                      </div>
                       <div style={{ color: '#2C4A52', lineHeight: 1.5 }}>{editableSoapNote.subjective}</div>
                     </div>
 

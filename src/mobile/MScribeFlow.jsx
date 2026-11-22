@@ -16,6 +16,7 @@ import { IconChevronR, IconMic, IconHeart } from './MIcons';
 import { useApp } from '../context/AppContext';
 import { mt } from './mobileTranslations';
 import { MStateStyles, StateProcessing, StateError } from './MStateAnimations.jsx';
+import ClinicalEvidencePanel from '../components/ClinicalEvidencePanel';
 
 // Full 4-stage journey. Stage 1 (record) is already complete when this screen opens.
 const AyuSwarShare = registerPlugin('AyuSwarShare');
@@ -52,6 +53,7 @@ export default function MScribeFlow() {
   const [signed, setSigned] = React.useState(false);
   const [shared, setShared] = React.useState('');
   const [alertState, setAlertState] = React.useState('');
+  const [showEvidence, setShowEvidence] = React.useState(false);
   const sessionRef = React.useRef(0);
   const playTimerRef = React.useRef(null);
 
@@ -310,6 +312,24 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
                 </button>
               </div>
             </>
+          )}
+          {/* Evidence check is reachable in every step-0 state, including the
+              keyless failure state - it checks the source transcript, not the
+              draft, so it must not be gated on a draft existing. */}
+          {!processing && (
+            <div className="m-card m-card-pad m-tint-sky" style={{ marginTop: 10 }}>
+              <button className="m-btn m-btn-ghost" style={{ width: '100%' }} onClick={() => { triggerHaptic('light'); setShowEvidence(v => !v); }}>
+                {showEvidence ? t('evidenceReviewHide') : t('evidenceReviewToggle')}
+              </button>
+              <p style={{ fontSize: 12, color: 'var(--m-muted)', margin: '8px 0 0' }}>{t('evidenceReviewHint')}</p>
+              {showEvidence && (
+                <ClinicalEvidencePanel
+                  dialogueTurns={turns}
+                  isScriptedDemo={state.sourceMode === 'sample'}
+                  reviewerIdentity="Clinician (demo)"
+                />
+              )}
+            </div>
           )}
         </section>
       )}

@@ -192,9 +192,11 @@ export default function ClinicalEvidencePanel({ dialogueTurns, isScriptedDemo = 
       {phase === 'idle' && (
         <div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            <button onClick={() => runExtraction('auto')} style={primaryBtn}>
-              <FlaskConical size={13} /> Run evidence extraction (model, labelled fallback if unavailable)
-            </button>
+            {callModel && (
+              <button onClick={() => runExtraction('auto')} style={primaryBtn}>
+                <FlaskConical size={13} /> Run evidence extraction (model, labelled fallback if unavailable)
+              </button>
+            )}
             <button onClick={() => runExtraction('offline')} style={{ ...primaryBtn, background: '#FFFFFF', color: '#0F766E', border: '1.5px solid #0F766E' }}>
               Run offline extraction (no model)
             </button>
