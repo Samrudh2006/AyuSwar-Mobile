@@ -22,6 +22,7 @@ import {
   Info
 } from 'lucide-react';
 import { speechService } from '../services/indicSpeechService';
+import { getBoundSampleAudioUrl } from '../services/bundledSpeechSamples';
 import { queryGroqApi, getGroqApiKey } from '../services/aiBrainService';
 import { cleanTextForSpeech } from '../utils/speechSanitizer';
 import AbdmRegistryBadgeRow from './AbdmRegistryBadgeRow';
@@ -230,18 +231,33 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
   // never ship with packaged sample audio.
   const [audioDownloadError, setAudioDownloadError] = useState('');
   const [audioNotice, setAudioNotice] = useState('');
+  const currentAudioSourceRef = useRef(null);
+  currentAudioSourceRef.current = { text: currentRx.speechText, langCode: currentRx.langCode, isOpen };
+  const audioSourceMountedRef = useRef(true);
+  useEffect(() => {
+    audioSourceMountedRef.current = true;
+    return () => { audioSourceMountedRef.current = false; };
+  }, []);
   const handleDownloadAudioRxWav = async () => {
     setAudioDownloadError('');
-    if (effectivePrescriptionText && effectivePrescriptionText.trim() !== (baseRx.speechText || '').trim()) {
-      setAudioDownloadError('This note was edited, so no recorded audio exists for it. Revert to the sample text to download the bundled sample audio, or keep the edited text as a written note only.');
+    const sampleAudioUrl = getBoundSampleAudioUrl(currentRx.speechText, currentRx.langCode);
+    if (!sampleAudioUrl) {
+      setAudioDownloadError('No recorded audio is bound to this exact text and language. No audio was downloaded. Keep this as a written note only.');
       return;
     }
     try {
-      const sampleAudioUrl = `/audio/gnani_lang_${selectedLanguage}.wav`;
       const res = await fetch(sampleAudioUrl);
       if (!res.ok) throw new Error('audio source unavailable');
       const blob = await res.blob();
       if (!blob.type.includes('audio')) throw new Error('invalid audio response');
+      // A pending fetch must not download an earlier script after visible text
+      // or language changes, or after the modal has closed/unmounted.
+      const latest = currentAudioSourceRef.current;
+      if (!audioSourceMountedRef.current || !latest?.isOpen ||
+          getBoundSampleAudioUrl(latest.text, latest.langCode) !== sampleAudioUrl) {
+        if (audioSourceMountedRef.current) setAudioDownloadError('The note changed before the audio was ready. No audio was downloaded.');
+        return;
+      }
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -251,7 +267,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch {
-      setAudioDownloadError('Actual voice audio is unavailable right now. No synthetic tone was downloaded.');
+      if (audioSourceMountedRef.current) setAudioDownloadError('Actual voice audio is unavailable right now. No synthetic tone was downloaded.');
     }
   };
 
@@ -1143,7 +1159,7 @@ Local prototype preview only. No external link, WhatsApp delivery, registry veri
               )}
 
               {audioDownloadError && (
-                <div style={{
+                <div role="status" style={{
                   gridColumn: '1 / -1',
                   fontSize: '11px',
                   fontWeight: 650,

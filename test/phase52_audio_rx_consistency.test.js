@@ -1,0 +1,61 @@
+// Software-consistency checks only. Existing synthetic scripts and existing quiz
+// answer choices, not new clinical gold labels or patient comprehension evidence.
+import assert from 'node:assert/strict';
+import React, { act } from 'react';
+import { JSDOM } from 'jsdom';
+import { rolldown } from 'rolldown';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { getBoundSampleAudioUrl } from '../src/services/bundledSpeechSamples.js';
+const dom = new JSDOM('<div id="root"></div>', { url: 'http://localhost/' });
+globalThis.window=dom.window;globalThis.document=dom.window.document;
+Object.defineProperty(globalThis,'navigator',{value:dom.window.navigator,configurable:true});
+globalThis.HTMLElement=dom.window.HTMLElement;globalThis.IS_REACT_ACT_ENVIRONMENT=true;
+const { createRoot } = await import('react-dom/client');
+const root=createRoot(document.getElementById('root'));
+let passed=0,failed=0,key=0,fetches=[],downloads=[],spoken=[],blobs=[];
+const record=async(name,fn)=>{try{await fn();passed++;console.log(`PASS ${name}`);}catch(e){failed++;console.log(`FAIL ${name}: ${e.stack}`);}};
+const stub=`export const speechService={speak:(text,options)=>{globalThis.__audioRxSpoken.push({text,langCode:options?.langCode});return Promise.resolve()},stopSpeaking:()=>{}};
+export const queryGroqApi=()=>{throw Error('provider disabled in software test')};export const getGroqApiKey=()=>null;
+export const audioMutex={acquire:()=>{},release:()=>{}};export const useApp=()=>({selectedLanguage:'en-IN',setSelectedLanguage:()=>{},isDemoMode:true});export const INDIC_LANGUAGES=[{code:'en-IN',defaultVoice:'test-boundary'}];export const GNANI_TIMBRE_V3_VOICES=['test-boundary'];export const Link=()=>null;export const generateVoicemakerScriptWithGroq=()=>{throw Error('provider disabled')};export const analyzeAcousticSample=()=>{throw Error('recording disabled')};export default ()=>null;`;
+async function load(entry,name){
+ const build=await rolldown({input:entry,platform:'node',external:['react','react/jsx-runtime','react-dom','lucide-react'],onLog(level,log,handler){if(log.code!=='MODULE_LEVEL_DIRECTIVE')handler(level,log)},plugins:[{name:'instrument-provider-boundaries',resolveId(id){if(/(?:indicSpeechService|aiBrainService|clinicalTelemetry|AbdmRegistryBadgeRow|AppContext|acousticCoughAnalyzer|react-router-dom)$/.test(id))return 'virtual:stub'},load(id){if(id==='virtual:stub')return stub}}]});
+ const {output}=await build.generate({format:'esm'});await build.close();
+ const dir=resolve('test/.tmp-evidence-ui');mkdirSync(dir,{recursive:true});const file=resolve(dir,name+'.mjs');writeFileSync(file,output[0].code);return(await import(file)).default;
+}
+const Modal=await load('src/components/WhatsAppAudioRxModal.jsx','AudioRxModal');
+const Studio=await load('src/views/AudioRxStudioView.jsx','AudioRxStudio');
+// Read the two pre-existing canonical scripts, rather than authoring a new key.
+const scripts=[...readFileSync('src/services/bundledSpeechSamples.js','utf8').matchAll(/canonical: '([^']+)'/g)].map(m=>m[1]);assert.equal(scripts.length,2);
+const urls=['/audio/gnani_telugu_rx_narayana_rao.wav','/audio/gnani_hindi_rx_aarav_kumar.wav'];
+const blobByUrl=new Map();
+globalThis.URL.createObjectURL=b=>{blobs.push(b);const u='blob:test-'+blobs.length;blobByUrl.set(u,b);return u};globalThis.URL.revokeObjectURL=()=>{};
+dom.window.HTMLAnchorElement.prototype.click=function(){downloads.push({filename:this.download,blob:blobByUrl.get(this.href)})};
+const reset=()=>{fetches=[];downloads=[];spoken=[];blobs=[];globalThis.__audioRxSpoken=spoken;globalThis.fetch=async url=>{fetches.push(url);return new Response(readFileSync('public'+url),{status:200,headers:{'Content-Type':'audio/wav'}})}};
+const mount=async(Component,props={})=>{reset();await act(async()=>root.render(React.createElement(Component,{key:++key,isOpen:true,onClose:()=>{},...props})));};
+const click=async el=>{assert(el,'button exists');await act(async()=>el.click())};
+const button=text=>[...document.querySelectorAll('button')].find(e=>e.textContent.trim()===text);
+const download=()=>click(document.getElementById('whatsapp-audio-rx-download-wav-btn'));
+const setText=async text=>{const el=document.querySelector('textarea');await act(async()=>{Object.getOwnPropertyDescriptor(dom.window.HTMLTextAreaElement.prototype,'value').set.call(el,text);el.dispatchEvent(new dom.window.Event('input',{bubbles:true}));})};
+const assertBlocked=()=>{assert.equal(fetches.length,0);assert.equal(downloads.length,0);assert.match(document.querySelector('[role="status"]').textContent,/No recorded audio is bound/)};
+await record('shared existing canonical matching remains exact except whitespace',()=>{for(let i=0;i<2;i++){assert.equal(getBoundSampleAudioUrl(scripts[i]),urls[i]);assert.equal(getBoundSampleAudioUrl(' \n'+scripts[i].replace(/ /g,'  ')+'\n'),urls[i]);assert.equal(getBoundSampleAudioUrl(scripts[i]+'x'),null);assert.equal(getBoundSampleAudioUrl(scripts[i].slice(1)),null)}assert.equal(getBoundSampleAudioUrl(null),null);assert.equal(getBoundSampleAudioUrl(scripts[0],'hi-IN'),null)});
+for(const language of ['తెలుగు (Telugu)','हिंदी (Hindi)','English','தமிழ் (Tamil)','मराठी (Marathi)','বাংলা (Bengali)'])await record(`actual modal default ${language}: no file fetch or download`,async()=>{await mount(Modal);await click(button(language));await download();assertBlocked()});
+for(const [i,lang]of[[0,'te'],[1,'hi']])await record(`actual modal existing ${lang} canonical: unchanged real WAV bytes`,async()=>{await mount(Modal,{initialLanguage:lang,customPrescriptionText:scripts[i]});await download();assert.deepEqual(fetches,[urls[i]]);assert.equal(downloads.length,1);assert.equal(downloads[0].filename,`AyuSwar_Sample_AudioRx_DEMO_${lang}.wav`);assert.deepEqual(Buffer.from(await downloads[0].blob.arrayBuffer()),readFileSync('public'+urls[i]))});
+await record('actual modal whitespace-normalized canonical still downloads',async()=>{await mount(Modal,{customPrescriptionText:'  '+scripts[0].replace(/ /g,'\n')+'  '});await download();assert.deepEqual(fetches,[urls[0]]);assert.equal(downloads.length,1)});
+await record('actual modal edited canonical fails closed',async()=>{await mount(Modal,{customPrescriptionText:scripts[0]});await setText(scripts[0]+'x');await download();assertBlocked()});
+await record('actual modal language mismatch fails closed',async()=>{await mount(Modal,{initialLanguage:'hi',customPrescriptionText:scripts[0]});await download();assertBlocked()});
+for(const [name,response]of[['HTTP failure',()=>new Response('',{status:404})],['non-audio response',()=>new Response('not audio',{status:200,headers:{'Content-Type':'text/html'}})]])await record(`actual modal ${name}: no replacement file`,async()=>{await mount(Modal,{customPrescriptionText:scripts[0]});globalThis.fetch=async url=>{fetches.push(url);return response()};await download();assert.equal(fetches.length,1);assert.equal(downloads.length,0);assert.match(document.querySelector('[role="status"]').textContent,/unavailable/) });
+await record('actual modal pending request cannot download after source edit',async()=>{await mount(Modal,{customPrescriptionText:scripts[0]});let finish;globalThis.fetch=()=>new Promise(r=>{finish=r});await download();await setText(scripts[0]+'x');await act(async()=>finish(new Response('existing response',{headers:{'Content-Type':'audio/wav'}})));assert.equal(downloads.length,0);assert.match(document.querySelector('[role="status"]').textContent,/note changed/)});
+await record('actual modal pending request cannot download after unmount',async()=>{await mount(Modal,{customPrescriptionText:scripts[0]});let finish;globalThis.fetch=()=>new Promise(r=>{finish=r});await download();await act(async()=>root.render(null));await act(async()=>finish(new Response('existing response',{headers:{'Content-Type':'audio/wav'}})));assert.equal(downloads.length,0)});
+const openQuiz=async()=>{await mount(Studio);await click(button('Verify Patient Teach-Back Quiz (1-Click)'))};
+const choices=()=>[...document.querySelectorAll('button')].filter(e=>['ఉదయం పరగడుపున','రాత్రి భోజనం తర్వాత','ఉదయం ఖాళీ కడుపుతో'].includes(e.textContent.trim()));
+const complete=()=>document.body.textContent.includes('✓ Sample quiz complete');
+const quizJson=async()=>{await click(button('Export practice JSON'));return JSON.parse(await downloads.at(-1).blob.text())};
+const correct=async()=>{await click(choices()[0]);await click(choices()[2]);assert(complete())};
+await record('actual quiz current wrong or unanswered choices never complete',async()=>{await openQuiz();assert(!complete());await click(choices()[1]);await click(choices()[2]);assert(!complete());assert.equal(spoken.length,0)});
+await record('actual quiz both existing correct choices complete',async()=>{await openQuiz();await correct();assert.equal(spoken.length,1);assert.match(spoken[0].text,/sample answers matched/);assert.equal((await quizJson()).sampleQuizCompleted,true)});
+for(const wrong of[1,3])await record(`actual quiz correct-to-wrong ${wrong===1?'q1':'q2'} revokes completion and note status`,async()=>{await openQuiz();await correct();await click(choices()[wrong]);assert(!complete());assert(!document.body.textContent.includes('Sample quiz answers: Two sample timing questions answered correctly'));assert(document.body.textContent.includes('Sample quiz answers: Not completed'));assert(!document.body.textContent.includes('Both synthetic timing answers matched.'));assert(!document.body.textContent.includes('Both sample timing answers matched.'));assert.equal((await quizJson()).sampleQuizCompleted,false)});
+await record('actual quiz correcting the wrong choice restores existing success behavior',async()=>{await openQuiz();await correct();await click(choices()[1]);assert(!complete());await click(choices()[0]);assert(complete())});
+await record('actual Studio text edit clears both existing quiz choices and success',async()=>{await openQuiz();await correct();await setText(document.querySelector('textarea').value+' ');assert(!complete());assert.equal((await quizJson()).sampleQuizCompleted,false);await click(choices()[0]);assert(!complete());assert.equal((await quizJson()).sampleQuizCompleted,false);await click(choices()[2]);assert(complete());assert.equal((await quizJson()).sampleQuizCompleted,true)});
+await act(async()=>root.unmount());dom.window.close();
+console.log(`phase52_audio_rx_consistency: ${passed}/${passed+failed} passed`);if(failed)process.exit(1);

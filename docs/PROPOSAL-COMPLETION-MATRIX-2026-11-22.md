@@ -78,7 +78,7 @@ implementation exists but the original deliverable or full scope is not met;
 | Proposal item | Status | Notes |
 |---|---|---|
 | A. Doctor correction learning loop | **DEFERRED** | Corrections are captured in the review flow but not stored as labelled evaluation examples. Requires consent/de-identification controls per the proposal; not started |
-| B. Prescription comprehension testing | **DEFERRED** | Not started. Next usable work: synthetic comprehension scenarios against the Audio-Rx path |
+| B. Prescription comprehension testing | **DEFERRED** | No patient comprehension results. Bounded [Audio-Rx software consistency](AUDIO-RX-SOFTWARE-CONSISTENCY-2026-11-22.md) checks cover source/file binding and existing quiz-state integrity only; they do not close comprehension, intelligibility or clinician-approved-prescription matching. Next usable work: appropriately grounded comprehension evidence, not invented labels |
 
 ## Technical corrections called out in the proposal
 

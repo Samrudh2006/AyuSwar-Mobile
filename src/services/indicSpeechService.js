@@ -1,3 +1,4 @@
+import { getBoundSampleAudioUrl } from './bundledSpeechSamples';
 /**
  * AyuSwar AI — Unified Indic Speech & Voice Service (indicSpeechService.js)
  * 
@@ -349,21 +350,6 @@ export function resampleTo16k(audioBuffer, targetSampleRate = 16000) {
   return resampleFloatTo16k(audioBuffer.getChannelData(0), audioBuffer.sampleRate, targetSampleRate);
 }
 
-// Bundled sample recordings are bound to their exact canonical scripts.
-// A bundled WAV may only play when the requested text matches its canonical
-// script exactly (whitespace-normalized); keyword-only matching is not enough,
-// so edited or patient-specific text can never trigger a packaged recording.
-const BUNDLED_SAMPLE_BINDINGS = [
-  {
-    url: '/audio/gnani_telugu_rx_narayana_rao.wav',
-    canonical: 'నారాయణ రావు గారు, వినండి: ఈ ఆకుపచ్చ రంగు మాత్ర ఉదయం టిఫిన్ తర్వాత ఒకటి వేసుకోవాలి. ఈ నీలం రంగు మాత్ర రాత్రి భోజనం తర్వాత ఒకటి వేసుకోవాలి. కూరల్లో ఉప్పు బాగా తగ్గించండి.'
-  },
-  {
-    url: '/audio/gnani_hindi_rx_aarav_kumar.wav',
-    canonical: 'आरव की माता जी, ध्यान से सुनें: यह पीला सिरप रोज सुबह 5ml देना है, 3 दिन तक। और यह लाल सिरप सिर्फ तब देना है जब बुखार आए। बच्चे को गुनगुने पानी की पट्टी दें।'
-  }
-];
-const normalizeForSampleMatch = (value) => (value || '').replace(/\s+/g, ' ').trim();
 
 export class IndicSpeechService {
   constructor() {
@@ -1206,9 +1192,7 @@ export class IndicSpeechService {
     //    exactly equals the bundled recording's canonical script (whitespace-
     //    normalized). Edited or patient-specific text never triggers a recording.)
     if (isDemo === true && options.allowBundledSample === true) {
-      const requested = normalizeForSampleMatch(cleanSpeechText);
-      const binding = BUNDLED_SAMPLE_BINDINGS.find(b => normalizeForSampleMatch(b.canonical) === requested);
-      const sampleAudioUrl = binding ? binding.url : null;
+      const sampleAudioUrl = getBoundSampleAudioUrl(cleanSpeechText);
 
       if (sampleAudioUrl) {
         this.activeProvider = 'sample_recording';

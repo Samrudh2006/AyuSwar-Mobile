@@ -76,7 +76,9 @@ const suites = [
   { name: 'Phase 48: Sync Retry Exponential Backoff', file: 'test/phase48_sync_backoff.test.js', count: 6 },
   { name: 'Phase 49: Offline Sync Idempotency Keys', file: 'test/phase49_idempotency_keys.test.js', count: 9 },
   { name: 'Phase 50: Self-entered Vitals Export', file: 'test/phase50_vitals_export.test.js', count: 31 },
-  { name: 'Phase 51: Local Export Integrity Gate', file: 'test/phase51_export_integrity.test.js', count: 38 }
+  { name: 'Phase 51: Local Export Integrity Gate', file: 'test/phase51_export_integrity.test.js', count: 38 },
+  { name: 'Phase 52: Audio-Rx Source and Quiz Consistency', file: 'test/phase52_audio_rx_consistency.test.js', count: 22 },
+  { name: 'Phase 52b: Built Audio-Rx Phone-Width Flows', file: 'test/phase52_audio_rx_browser.test.js', count: 7 }
 ];
 
 console.clear();

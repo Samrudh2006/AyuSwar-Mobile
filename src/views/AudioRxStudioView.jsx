@@ -58,7 +58,7 @@ export default function AudioRxStudioView() {
   // Feature 1: Teach-Back Patient Adherence Quiz State
   const [teachBackModalOpen, setTeachBackModalOpen] = useState(false);
   const [teachBackAnswers, setTeachBackAnswers] = useState({ q1: null, q2: null });
-  const [teachBackVerified, setTeachBackVerified] = useState(false);
+  const teachBackVerified = teachBackAnswers.q1 === 0 && teachBackAnswers.q2 === 0;
 
   // Feature 2: Lancet Acoustic Cough & Breathing Biomarker State
   const [isAnalyzingCough, setIsAnalyzingCough] = useState(false);
@@ -575,7 +575,6 @@ export default function AudioRxStudioView() {
 
     // Q1: Option 0 (Morning before breakfast) is correct; Q2: Option 0 (Night after dinner) is correct
     if (updated.q1 === 0 && updated.q2 === 0) {
-      setTeachBackVerified(true);
       speechService.speak(
         activeLang === 'te-IN' 
           ? 'అభినందనలు! మందుల వేళలు మీకు సంపూర్ణంగా అర్థమయ్యాయి.' 
@@ -1007,7 +1006,7 @@ Text only. No audio attachment. Not automatically sent.`;
             </div>
 
             <div className="m-audiorx-edit-row" style={{ display: 'flex', gap: '10px' }}>
-              <label className="m-flow-field"><span>Review and edit spoken text before playback or sharing</span><textarea rows={6} value={currentScript.fullText} onChange={event => { handleStopAudio(); setTeachBackVerified(false); setCustomGroqScript({ title: 'Doctor-edited practice text', fullText: event.target.value, tokens: event.target.value.split(/\s+/).map(text => ({text,pill:null})) }); }} /></label>
+              <label className="m-flow-field"><span>Review and edit spoken text before playback or sharing</span><textarea rows={6} value={currentScript.fullText} onChange={event => { handleStopAudio(); setTeachBackAnswers({ q1: null, q2: null }); setCustomGroqScript({ title: 'Doctor-edited practice text', fullText: event.target.value, tokens: event.target.value.split(/\s+/).map(text => ({text,pill:null})) }); }} /></label>
             <button
                 onClick={handlePlayAudio}
                 style={{
