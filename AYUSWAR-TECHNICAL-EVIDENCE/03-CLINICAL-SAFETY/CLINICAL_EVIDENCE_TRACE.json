@@ -1,8 +1,8 @@
 {
   "scope": "One genuine engine run over scripted synthetic fixtures using the deterministic fallback extractor (no model, no audio). Reviewer is a DEMO reviewer; nothing here is a real clinical sign-off, real patient data or audio-timestamped evidence.",
-  "generatedAt": "2026-11-22T10:03:48.371Z",
-  "revision": "e08b93f5d967489c85873b542377810b9ea7cdab",
-  "trackedWorkingTreeDirty": false,
+  "generatedAt": "2026-11-22T10:33:27.735Z",
+  "revision": "4605b6931ec5b2ee9d17d368a712c46f21621a44",
+  "trackedWorkingTreeDirty": true,
   "extractionMethod": "DETERMINISTIC_FALLBACK",
   "audioTimestamps": "not available - the ASR pipeline does not emit per-utterance timestamps; fields absent, never invented",
   "session": {
@@ -72,7 +72,8 @@
   },
   "rejected": [],
   "verificationCounts": {
-    "SUPPORTED": 3
+    "SUPPORTED": 4,
+    "AMBIGUOUS": 2
   },
   "evidence": [
     {
@@ -101,7 +102,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795341828369,
+          "reviewTimestampMs": 1795343607733,
           "reason": "export demo: mark supported synthetic candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "జ్వరం"
@@ -135,7 +136,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795341828369,
+          "reviewTimestampMs": 1795343607733,
           "reason": "export demo: mark supported synthetic candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"
@@ -145,6 +146,42 @@
     },
     {
       "evidenceId": "ev_sess_synthetic_demo_1_3",
+      "utteranceId": "utt_sess_synthetic_demo_1_2",
+      "entityType": "MEDICATION_MENTIONED",
+      "originalText": "I already took paracetamol twice yesterday.",
+      "normalizedConcept": "paracetamol",
+      "sourceQuote": "paracetamol",
+      "startOffset": 15,
+      "endOffset": 26,
+      "language": "English",
+      "verificationStatus": "AMBIGUOUS",
+      "clinicianStatus": "PENDING_REVIEW",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [
+        "same quote appears under a different speaker elsewhere"
+      ]
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_4",
+      "utteranceId": "utt_sess_synthetic_demo_1_3",
+      "entityType": "MEDICATION_MENTIONED",
+      "originalText": "Take one paracetamol 500mg tablet twice daily for three days.",
+      "normalizedConcept": "paracetamol",
+      "sourceQuote": "paracetamol",
+      "startOffset": 9,
+      "endOffset": 20,
+      "language": "English",
+      "verificationStatus": "AMBIGUOUS",
+      "clinicianStatus": "PENDING_REVIEW",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [
+        "same quote appears under a different speaker elsewhere"
+      ]
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_5",
       "utteranceId": "utt_sess_synthetic_demo_1_4",
       "entityType": "ALLERGY",
       "originalText": "నాకు పెన్సిలిన్ అలర్జీ లేదు.",
@@ -172,10 +209,47 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795341828369,
+          "reviewTimestampMs": 1795343607733,
           "reason": "export demo: mark supported synthetic candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "అలర్జీ"
+        }
+      ],
+      "isRealSignOff": false
+    },
+    {
+      "evidenceId": "ev_sess_synthetic_demo_1_6",
+      "utteranceId": "utt_sess_synthetic_demo_1_4",
+      "entityType": "MEDICATION_MENTIONED",
+      "originalText": "నాకు పెన్సిలిన్ అలర్జీ లేదు.",
+      "normalizedConcept": "penicillin",
+      "sourceQuote": "పెన్సిలిన్",
+      "startOffset": 5,
+      "endOffset": 15,
+      "language": "Telugu",
+      "verificationStatus": "SUPPORTED",
+      "clinicianStatus": "APPROVED",
+      "extractionMethod": "DETERMINISTIC_FALLBACK",
+      "isSynthetic": true,
+      "verificationNotes": [
+        "negation marker near span; treat as absent/ruled-out context"
+      ],
+      "isNegatedContext": true,
+      "displayText": "పెన్సిలిన్",
+      "originalExtraction": {
+        "sourceQuote": "పెన్సిలిన్",
+        "normalizedConcept": "penicillin",
+        "startOffset": 5,
+        "endOffset": 15
+      },
+      "reviewHistory": [
+        {
+          "action": "APPROVE",
+          "reviewerIdentity": "DEMO:evidence-export-script",
+          "reviewTimestampMs": 1795343607733,
+          "reason": "export demo: mark supported synthetic candidates as reviewed",
+          "previousStatus": "PENDING_REVIEW",
+          "previousText": "పెన్సిలిన్"
         }
       ],
       "isRealSignOff": false
@@ -208,7 +282,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795341828369,
+          "reviewTimestampMs": 1795343607733,
           "reason": "export demo: mark supported synthetic candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "జ్వరం"
@@ -243,7 +317,7 @@
         {
           "action": "APPROVE",
           "reviewerIdentity": "DEMO:evidence-export-script",
-          "reviewTimestampMs": 1795341828369,
+          "reviewTimestampMs": 1795343607733,
           "reason": "export demo: mark supported synthetic candidates as reviewed",
           "previousStatus": "PENDING_REVIEW",
           "previousText": "దగ్గు"

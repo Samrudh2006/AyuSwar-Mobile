@@ -1,0 +1,73 @@
+{
+  "scope": "Terminology MATCH COVERAGE for extractor-emitted medication terms against RxNorm. NOT entity precision/recall: no gold-standard annotation, no error-analysis denominator. Synthetic fixtures and public drug names only.",
+  "generatedAt": "2026-11-22T10:32:30.102Z",
+  "revision": "4605b6931ec5b2ee9d17d368a712c46f21621a44",
+  "trackedWorkingTreeDirty": true,
+  "extractor": "DETERMINISTIC_FALLBACK (explicitly labelled; no model)",
+  "fixtures": [
+    "SYNTHETIC_UTTERANCE_INPUTS",
+    "CODE_MIXED_UTTERANCE"
+  ],
+  "terminologyService": {
+    "name": "NLM RxNorm REST API",
+    "base": "https://rxnav.nlm.nih.gov/REST",
+    "access": "free, no API key",
+    "coverage": "US drug terminology, English names"
+  },
+  "medicationTermsEmitted": 2,
+  "exactResolved": 1,
+  "matchCoverage": 0.5,
+  "perTerm": [
+    {
+      "term": "paracetamol",
+      "sourceQuotes": [
+        "paracetamol"
+      ],
+      "exactMatchRxCUI": [
+        "161"
+      ],
+      "approximateCandidates": [],
+      "queries": [
+        "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=paracetamol&search=0"
+      ]
+    },
+    {
+      "term": "penicillin",
+      "sourceQuotes": [
+        "పెన్సిలిన్"
+      ],
+      "exactMatchRxCUI": [],
+      "approximateCandidates": [
+        {
+          "rxcui": "7986",
+          "score": "11.751903533935547"
+        },
+        {
+          "rxcui": "7986",
+          "name": "PENICILLIN",
+          "score": "11.751903533935547"
+        },
+        {
+          "rxcui": "7986",
+          "score": "11.751903533935547"
+        }
+      ],
+      "queries": [
+        "https://rxnav.nlm.nih.gov/REST/rxcui.json?name=penicillin&search=0",
+        "https://rxnav.nlm.nih.gov/REST/approximateTerm.json?term=penicillin&maxEntries=3"
+      ]
+    }
+  ],
+  "outOfScopeExtractedTypes": {
+    "note": "Extracted non-medication entities are not looked up: RxNorm is a drug terminology and cannot resolve symptoms/history/durations. A clinical terminology (SNOMED CT/LOINC) would be needed for those; SNOMED CT requires a license/account and was not used.",
+    "counts": {
+      "SYMPTOM": 4,
+      "ALLERGY": 1
+    }
+  },
+  "caveats": [
+    "RxNorm is US-centric English drug terminology; brand names and Indian-market formulations are under-represented.",
+    "Telugu-script drug forms reach RxNorm only through the extractor lexicon normalization map; unmapped transliterations would fail closed (no match, no guess).",
+    "A resolved term means the STRING exists in RxNorm, not that the extracted mention is clinically correct in context."
+  ]
+}

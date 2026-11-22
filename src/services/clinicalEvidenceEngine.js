@@ -118,11 +118,24 @@ export async function extractWithModel(session, callModel, { modelVersion } = {}
 // Indic scripts are not covered by ASCII \b, so boundaries use Unicode
 // letter/number lookarounds instead.
 const B = '(?<![\\p{L}\\p{N}])', E = '(?![\\p{L}\\p{N}])';
+// Medication citation forms: common public drug names plus the two Telugu
+// transliterations used in the synthetic fixtures, normalized to their
+// English canonical forms so terminology lookup (e.g. RxNorm) operates on
+// one language. Mention vs instruction is NOT distinguished on the
+// fallback path - all matches are MEDICATION_MENTIONED; speaker-role
+// reclassification exists only on the model path.
+const MEDICATION_NORMALIZATION = {
+  'పెన్సిలిన్': 'penicillin',
+  'పారాసిటమాల్': 'paracetamol'
+};
 const FALLBACK_LEXICON = [
   { entityType: ENTITY_TYPE.DURATION, patterns: [new RegExp(B + '(\\d+\\s*(?:day|days|week|weeks|month|months)|రోజు|రోజులు|వారం|వారాలు|నెల|నెలలు|दिन|हफ्ते|महीने)' + E, 'giu')] },
   { entityType: ENTITY_TYPE.SYMPTOM, patterns: [new RegExp(B + '(fever|headache|cough|cold|జ్వరం|తలనొప్పి|దగ్గు|జలుబు|बुखार|सिरदर्द|खांसी)' + E, 'giu')] },
   { entityType: ENTITY_TYPE.ALLERGY, patterns: [new RegExp(B + '(allergy|allergic|అలర్జీ|एलर्जी)' + E, 'giu')] },
-  { entityType: ENTITY_TYPE.MEDICAL_HISTORY, patterns: [new RegExp(B + '(diabetes|sugar|BP|blood pressure|షుగర్|బీపీ|बीपी|शुगर)' + E, 'giu')] }
+  { entityType: ENTITY_TYPE.MEDICAL_HISTORY, patterns: [new RegExp(B + '(diabetes|sugar|BP|blood pressure|షుగర్|బీపీ|बीपी|शुगर)' + E, 'giu')] },
+  { entityType: ENTITY_TYPE.MEDICATION_MENTIONED,
+    normalize: (s) => MEDICATION_NORMALIZATION[s] || s.toLowerCase(),
+    patterns: [new RegExp(B + '(paracetamol|penicillin|amoxicillin|azithromycin|ibuprofen|cetirizine|metformin|పెన్సిలిన్|పారాసిటమాల్)' + E, 'giu')] }
 ];
 
 export function extractWithFallback(session) {
@@ -137,7 +150,7 @@ export function extractWithFallback(session) {
             utteranceId: u.utteranceId,
             entityType: rule.entityType,
             sourceQuote: m[0],
-            normalizedConcept: m[0].toLowerCase()
+            normalizedConcept: rule.normalize ? rule.normalize(m[0]) : m[0].toLowerCase()
           });
         }
       }
