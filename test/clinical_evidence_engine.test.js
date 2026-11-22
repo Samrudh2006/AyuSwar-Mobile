@@ -274,6 +274,34 @@ await record('fallback negated allergy flagged and never exported', async () => 
   assert(selectApprovedForExport([approved]).length === 0, 'negated fallback allergy never exported');
 });
 
+// 14e. Historical/self-reported medication stays a mention; the fallback
+// does NOT classify current vs stopped vs past use - all go to human review
+await record('historical self-reported medication stays a mention', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = extractWithFallback(s);
+  const patientUtt = s.utterances.find(u => u.text.includes('already took paracetamol'));
+  const past = out.candidates.filter(c => c.utteranceId === patientUtt.utteranceId && c.entityType.startsWith('MEDICATION'));
+  assert(past.length === 1, 'one medication candidate from the past-use utterance');
+  assert(past[0].entityType === ENTITY_TYPE.MEDICATION_MENTIONED,
+    'past self-reported use is a mention, not an instruction and not a current-use claim');
+});
+
+// 14f. Same drug quoted by patient and doctor: attribution unclear, both
+// AMBIGUOUS, neither exports even when approved
+await record('cross-speaker duplicate medication quote ambiguous and never exported', async () => {
+  const s = mkSession();
+  addUtts(s, SYNTHETIC_UTTERANCE_INPUTS);
+  const out = extractWithFallback(s);
+  const { verified } = verifyEvidence(s, out.candidates);
+  const paracetamol = verified.filter(v => v.normalizedConcept === 'paracetamol');
+  assert(paracetamol.length === 2, 'both speaker instances verified');
+  assert(paracetamol.every(v => v.verificationStatus === VERIFICATION_STATUS.AMBIGUOUS),
+    'cross-speaker duplicate quote is AMBIGUOUS (attribution unclear), not SUPPORTED');
+  const approved = paracetamol.map(v => applyReviewAction(v, { type: 'APPROVE' }, { identity: 'dr.rao', isDemo: true }, 'ok'));
+  assert(selectApprovedForExport(approved).length === 0, 'AMBIGUOUS records never export');
+});
+
 // 15. Prompt injection inside transcript
 await record('transcript injection does not bypass verification', async () => {
   const s = mkSession();

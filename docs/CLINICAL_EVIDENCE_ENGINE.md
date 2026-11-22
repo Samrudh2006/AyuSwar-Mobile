@@ -48,6 +48,30 @@ papered over with fabricated content.
 5. Export produces the FHIR-shaped draft bundle (local research draft, not
    an ABDM submission).
 
+### Fallback extractor contract (medications)
+
+The deterministic fallback is deliberately conservative about medications:
+
+- It emits **MEDICATION_MENTIONED only**. It never emits
+  MEDICATION_INSTRUCTION: a matched drug name is a mention for human
+  review, not a prescription, even when the speaker is the doctor.
+  Instruction classification, if it ever exists, belongs to the
+  evidence-grounded model path plus clinician review.
+- It does **not** classify temporal status. Current, past, stopped and
+  historical uses ("I already took paracetamol twice yesterday") all
+  surface as plain mentions; the engine makes no current-use claim and the
+  reviewer supplies that context.
+- Negation stays fail-closed: a negation marker near the span (e.g.
+  "పెన్సిలిన్ అలర్జీ లేదు", no penicillin allergy) flags the candidate
+  `isNegatedContext`, and the export gate excludes negated records even
+  when a reviewer approved the extraction.
+- Attribution ambiguity stays fail-closed: the same drug quoted by both
+  patient and doctor verifies AMBIGUOUS, never SUPPORTED, and never
+  exports.
+- The Telugu-to-English medication normalization map is a hand-built
+  lookup aid for terminology resolution (e.g. RxNorm), not validated
+  translation accuracy; unmapped forms fail closed.
+
 ## Spoken-vital context guards
 
 Vital-sign extraction rejects values spoken in non-asserted contexts:
