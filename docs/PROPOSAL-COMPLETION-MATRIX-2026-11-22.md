@@ -66,7 +66,7 @@ implementation exists but the original deliverable or full scope is not met;
 | Offline draft creation | **DONE** | Offline extraction path; failure visibility and recovery UI (Phase 47) |
 | Connection recovery detection | **DONE** | Offline sync card, retry and recovery states on the clinical console |
 | Pending/synced/failed states | **DONE** | Explicit states; "no confirmed successful sync on this device" wording (no exactly-once claims) |
-| Retry with exponential backoff | **PARTIAL** | Bounded retries with attempt stamps exist; backoff is not exponential. Next usable work: exponential schedule in the sync worker |
+| Retry with exponential backoff | **DONE** | Exponential schedule in the sync worker: 30s base doubling per failed attempt, capped at 30min, stable per-record id-hash jitter (no flapping between cycles); due-gate in the sync loop reports deferredCount. Tested in phase48 (doubling, cap, jitter envelope/stability, due-gate, defer-then-retry integration). Retries stay uncapped by design: failed records are never auto-deleted; recovery is a user-confirmed discard |
 | Duplicate prevention using idempotency keys | **DEFERRED** | Queue is append-only with no server dedup verified; no idempotency keys. Honestly documented as a limitation. Next usable work: client-generated idempotency key per queued record, surfaced in the sync payload |
 | Sync conflict detection | **N/A — documented** | Inserts are append-only with no server versioning, so no write-write conflict class exists; this is stated in `docs/CLINICAL_EVIDENCE_DATA_MODEL.md` rather than claimed as handled |
 | Reproducible offline-to-online sync test | **DONE** | Phase 47 plus browser-verified IDB scrub/retention proofs |

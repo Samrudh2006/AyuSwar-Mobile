@@ -61,6 +61,13 @@ const mk = (id, extra = {}) => ({
 });
 const seedLS = (items) => globalThis.localStorage.setItem(QUEUE_KEY, JSON.stringify(items));
 const readLS = () => JSON.parse(globalThis.localStorage.getItem(QUEUE_KEY) || '[]');
+// Backoff contract (phase48): a just-failed record is not due on the
+// immediate next cycle. Cases below assert retention/counting/deletion
+// semantics across cycles, not retry timing, so they backdate the stored
+// attempt to make the retry under test due now.
+const makeDue = (id) => seedLS(readLS().map((i) => i.id === id
+  ? { ...i, lastSyncAttemptAt: new Date(Date.now() - 60 * 60 * 1000).toISOString() }
+  : i));
 const failInsert = () => {
   supabase.from = () => ({ insert: () => Promise.resolve({ data: null, error: new Error('HTTP 500 synthetic') }) });
 };
@@ -107,7 +114,10 @@ await record('undecryptable record flagged, never uploaded, no attempts counted'
 await record('no automatic destruction: repeated failures retain the record', async () => {
   seedLS([mk('R4')]);
   failInsert();
-  for (let i = 0; i < 5; i++) await sync.syncAllPendingRecords();
+  for (let i = 0; i < 5; i++) {
+    await sync.syncAllPendingRecords();
+    makeDue('R4');
+  }
   const rec = readLS().find((i) => i.id === 'R4');
   assert(rec, 'record auto-deleted after repeated failures');
   assert(rec.syncAttempts === 5, `syncAttempts ${rec.syncAttempts}, expected 5`);
@@ -131,6 +141,7 @@ await record('encounter insert error retains record + counts attempt; acknowledg
   let rec = readLS().find((i) => i.id === 'R8');
   assert(rec && rec.syncAttempts === 1, 'failed encounter not retained with attempt');
   supabase.from = () => ({ insert: () => Promise.resolve({ data: [{}], error: null }) });
+  makeDue('R8');
   res = await sync.syncAllPendingRecords();
   assert(res.syncedCount === 1, `acknowledged encounter not synced: ${res.syncedCount}`);
   assert(!readLS().some((i) => i.id === 'R8'), 'acknowledged encounter not removed');

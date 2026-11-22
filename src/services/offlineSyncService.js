@@ -23,6 +23,40 @@ const STORAGE_FALLBACK_KEY = 'ayuswar_offline_sync_queue_v2';
 // is an explicit, user-confirmed discard in the UI.
 export const SYNC_ATTENTION_THRESHOLD = 3;
 
+// Exponential backoff for failed sync retries. A failed record becomes
+// eligible again after base * 2^(attempts-1) ms, capped, with a stable
+// per-record jitter derived from its id so the schedule does not flap
+// between cycles. Retries are NOT hard-capped: failed records are never
+// auto-deleted (recovery is an explicit user-confirmed discard), so the
+// schedule caps its growth instead of giving up.
+export const SYNC_RETRY_BASE_MS = 30 * 1000;
+export const SYNC_RETRY_CAP_MS = 30 * 60 * 1000;
+
+const hashToUnitInterval = (text) => {
+  // FNV-1a 32-bit; stable across cycles for a given record id.
+  let h = 0x811c9dc5;
+  const s = String(text || '');
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h / 0xffffffff;
+};
+
+export const computeSyncRetryDelayMs = (syncAttempts, jitter01 = 0) => {
+  const attempts = Math.max(1, Number(syncAttempts) || 1);
+  const exp = Math.min(SYNC_RETRY_CAP_MS, SYNC_RETRY_BASE_MS * 2 ** (attempts - 1));
+  const j = Math.min(1, Math.max(0, Number(jitter01) || 0));
+  return Math.round(exp * (0.75 + 0.5 * j));
+};
+
+export const isSyncRetryDue = (item, nowMs = Date.now()) => {
+  const attempts = (item && item.syncAttempts) || 0;
+  const lastAt = item && item.lastSyncAttemptAt ? Date.parse(item.lastSyncAttemptAt) : NaN;
+  if (!attempts || !Number.isFinite(lastAt)) return true;
+  return nowMs >= lastAt + computeSyncRetryDelayMs(attempts, hashToUnitInterval(item.id));
+};
+
 let dbInstance = null;
 
 // Cross-tab broadcast channel for instant multi-window sync status
@@ -222,12 +256,18 @@ const syncAllPendingRecordsInner = async () => {
   if (!queue || queue.length === 0) return { syncedCount: 0, success: true };
 
   let successfulSyncs = 0;
+  let deferredSyncs = 0;
   const syncedIds = [];
 
   for (const item of queue) {
     try {
       if (item.decryptError) {
         console.warn('[OfflineSync] Skipping undecryptable record (locked key or tamper):', item.id);
+        continue;
+      }
+      if (!isSyncRetryDue(item)) {
+        // Inside its backoff window: leave queued, do not hammer the backend.
+        deferredSyncs++;
         continue;
       }
       if (supabase) {
@@ -299,7 +339,7 @@ const syncAllPendingRecordsInner = async () => {
 
   const remainingQueue = await getPendingOfflineQueue();
   notifyQueueUpdate(remainingQueue.length);
-  return { syncedCount: successfulSyncs, success: true };
+  return { syncedCount: successfulSyncs, deferredCount: deferredSyncs, success: true };
 };
 
 /**
