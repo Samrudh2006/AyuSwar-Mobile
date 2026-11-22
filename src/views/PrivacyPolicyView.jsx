@@ -93,8 +93,8 @@ export default function PrivacyPolicyView() {
         {/* Contact Information */}
         <div style={{ borderTop: '1px solid #D0DFE2', paddingTop: '20px', fontSize: '13px', color: '#37525C' }}>
           For privacy or security research inquiries, visit the open repository at{' '}
-          <a href="https://github.com/Samrudh2006/Ayuswar-Ai" target="_blank" rel="noopener noreferrer" style={{ color: '#0F4C5C', fontWeight: 700 }}>
-            github.com/Samrudh2006/Ayuswar-Ai
+          <a href="https://github.com/Samrudh2006/AyuSwar-Mobile" target="_blank" rel="noopener noreferrer" style={{ color: '#0F4C5C', fontWeight: 700 }}>
+            github.com/Samrudh2006/AyuSwar-Mobile
           </a>.
         </div>
       </div>

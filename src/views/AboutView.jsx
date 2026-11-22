@@ -134,7 +134,7 @@ export default function AboutView() {
               </a>
 
               <a 
-                href="https://github.com/Samrudh2006/Ayuswar-Ai" 
+                href="https://github.com/Samrudh2006/AyuSwar-Mobile" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{

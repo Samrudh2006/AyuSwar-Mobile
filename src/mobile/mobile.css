@@ -1229,7 +1229,7 @@
 /* Recovered website section illustrations inside mobile detail sections */
 .m-detail-figure { margin: 0 0 12px; }
 .m-detail-figure img { width: 100%; height: auto; display: block; border-radius: 12px; border: 1px solid rgba(15, 23, 42, 0.12); }
-.m-detail-figure figcaption { font-size: 11px; color: var(--m-muted); margin-top: 6px; line-height: 1.45; }
+.m-detail-figure figcaption { font-size: 11px; color: #33402e; margin-top: 6px; line-height: 1.45; display: inline-block; background: rgba(255, 255, 255, 0.92); padding: 4px 10px; border-radius: 999px; box-shadow: 0 1px 3px rgba(26, 33, 24, 0.12); }
 
 /* Auth v2: reference-style welcome — mint base, hospital artwork, layered waves */
 .m-auth2 { background: linear-gradient(180deg, #F2FAF6 0%, #E9F6F0 55%, #DFF2EA 100%); position: relative; }
