@@ -7,7 +7,9 @@
 :root {
   --m-cream: #FAF5EA;
   --m-cream-2: #F3EDDC;
-  --m-card: #FFFFFF;
+  --m-card: #F0F7EE; /* soft mint card surface (approved palette; no pale white boxes) */
+  --m-card-warm: #FBF0DF; /* soft peach accent surface */
+  --m-card-cool: #ECF3F6; /* soft sky accent surface */
   --m-green: #155C3E;
   --m-green-deep: #0C3B27;
   --m-green-soft: #E3EFE6;
@@ -103,7 +105,7 @@
 .m-page > .m-display,
 .m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-section-title {
   display: inline-block;
-  background: rgba(255, 253, 246, 0.82);
+  background: rgba(251, 240, 223, 0.88);
   -webkit-backdrop-filter: blur(8px) saturate(1.15);
   backdrop-filter: blur(8px) saturate(1.15);
   border-radius: 12px;
@@ -114,7 +116,7 @@
 .m-page > .m-eyebrow,
 .m-page section:not(.m-card):not(.m-hero):not(.m-sanj-hero) > .m-sub {
   display: inline-block;
-  background: rgba(255, 253, 246, 0.82);
+  background: rgba(251, 240, 223, 0.88);
   -webkit-backdrop-filter: blur(8px) saturate(1.15);
   backdrop-filter: blur(8px) saturate(1.15);
   border-radius: 12px;
@@ -165,6 +167,20 @@
   backdrop-filter: blur(6px);
   box-shadow: 0 1px 8px rgba(8, 28, 36, 0.08);
 }
+/* Home brand chip: emblem + name composed as one unit (no floating logo) */
+.m-topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255, 253, 246, 0.92);
+  border: 1px solid var(--m-border-soft);
+  border-radius: 16px;
+  padding: 6px 14px 6px 6px;
+  box-shadow: var(--m-shadow-1);
+  backdrop-filter: blur(6px);
+}
+.m-topbar-brand .m-topbar-logo { width: 40px; height: 40px; border-radius: 11px; box-shadow: none; }
+.m-topbar-brand .m-topbar-title { background: transparent; border-radius: 0; padding: 0; backdrop-filter: none; box-shadow: none; }
+.m-topbar-brand .m-topbar-title b,
+.m-topbar-brand .m-topbar-title span { text-shadow: none; }
 .m-topbar-title b {
   font-family: var(--m-font-display);
   font-weight: 600;
@@ -790,7 +806,7 @@
   max-width: calc(100% - 16px);
   margin-left: auto;
   margin-right: auto;
-  background: rgba(255, 253, 246, 0.82);
+  background: rgba(251, 240, 223, 0.88);
   -webkit-backdrop-filter: blur(8px) saturate(1.15);
   backdrop-filter: blur(8px) saturate(1.15);
   border-radius: 12px;

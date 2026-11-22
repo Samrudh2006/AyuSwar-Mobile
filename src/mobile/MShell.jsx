@@ -80,13 +80,21 @@ export default function MShell({ children, title, subtitle, showBack, onBack, hi
           <button className="m-iconbtn" aria-label={t('back')} onClick={() => { triggerHaptic('light'); onBack ? onBack() : navigate(-1); }}>
             <IconChevronR size={20} style={{ transform: 'rotate(180deg)' }} />
           </button>
+        ) : null}
+        {!showBack ? (
+          <div className="m-topbar-brand">
+            <img className="m-topbar-logo" src="/assets/ayuswar_emblem_mark.webp" alt="AyuSwar" />
+            <div className="m-topbar-title">
+              <b>{displayTitle || 'AyuSwar'}</b>
+              <span>{subtitle || t('tagline')}</span>
+            </div>
+          </div>
         ) : (
-          <img className="m-topbar-logo" src="/assets/ayuswar_emblem_mark.webp" alt="AyuSwar" />
+          <div className="m-topbar-title">
+            <b>{displayTitle || 'AyuSwar'}</b>
+            <span>{subtitle || t('tagline')}</span>
+          </div>
         )}
-        <div className="m-topbar-title">
-          <b>{displayTitle || 'AyuSwar'}</b>
-          <span>{subtitle || t('tagline')}</span>
-        </div>
         <div className="m-topbar-spacer" />
         <label className="m-topbar-lang">
           <span className="sr-only">{t('language')}</span>
