@@ -17,6 +17,7 @@ import { useApp } from '../context/AppContext';
 import { mt } from './mobileTranslations';
 import { MStateStyles, StateProcessing, StateError } from './MStateAnimations.jsx';
 import ClinicalEvidencePanel from '../components/ClinicalEvidencePanel';
+import { SUBJECTIVE_NOT_VERIFIED_LABEL } from '../services/soapDraftSafeguards';
 
 // Full 4-stage journey. Stage 1 (record) is already complete when this screen opens.
 const AyuSwarShare = registerPlugin('AyuSwarShare');
@@ -297,6 +298,21 @@ Respond strictly as JSON with keys: "subjective", "objective", "assessment", "pl
                 {SOAP_FIELDS.map(([key, label]) => (
                   <label key={key} className="m-flow-field">
                     <span>{t(label)}</span>
+                    {key === 'subjective' && (
+                      <span style={{
+                        display: 'block',
+                        fontSize: '10.5px',
+                        lineHeight: 1.4,
+                        color: '#92400E',
+                        background: '#FFFBEB',
+                        border: '1px dashed #D97706',
+                        borderRadius: '6px',
+                        padding: '4px 8px',
+                        marginBottom: '4px'
+                      }}>
+                        {SUBJECTIVE_NOT_VERIFIED_LABEL}
+                      </span>
+                    )}
                     <textarea
                       rows={key === 'subjective' ? 3 : 2}
                       value={soap?.[key] || ''}

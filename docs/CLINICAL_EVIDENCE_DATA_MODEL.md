@@ -41,9 +41,12 @@ supported records; negated findings are excluded from positive export.
 
 ## SOAP draft object
 
-`{ subjective, objective, assessment, plan, bestMatterVernacular }`, assembled
-deterministically. Sections that carry no verified value show an explicit
-"Not documented" state rather than invented content.
+`{ subjective, objective, assessment, plan, bestMatterVernacular }`.
+Objective, assessment and plan are assembled deterministically (assessment
+and plan are fixed safe strings); subjective is model-written draft text
+that is NOT evidence-verified and is labelled as such in the review UI. Sections that
+carry no verified value show an explicit "Not documented" state rather
+than invented content.
 
 ## FHIR-shaped export bundle
 
@@ -67,8 +70,10 @@ one QuestionnaireResponse entry:
   `syncAttempts`, `lastSyncErrorCategory` (bounded enum: `http-4xx`,
   `http-5xx`, `http-other`, `network`, `timeout`, `no-sync-route`,
   `unknown`), `lastSyncAttemptAt`. Raw upstream error text is never stored.
-- `payload`: AES-256-GCM encrypted envelope (`payloadEncrypted: true`);
-  legacy plaintext rows pass through reads but are never written.
+- `payload`: AES-256-GCM encrypted envelope (`payloadEncrypted: true`).
+  New records are never saved as plaintext; legacy plaintext rows pass
+  through reads, and metadata-only rewrites (attempt stamps, raw-error
+  scrub) retain an existing legacy plaintext payload unchanged.
 - Stores: IndexedDB `pending_sync_queue` (primary) or the localStorage
   fallback key `ayuswar_offline_sync_queue_v2`.
 - Lifecycle: retained across failed cycles (no auto-delete); removed on

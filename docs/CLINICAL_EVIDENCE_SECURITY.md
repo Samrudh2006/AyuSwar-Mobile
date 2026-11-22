@@ -33,10 +33,13 @@ cycle (browser-verified). Queue-health output carries no payload fields.
 ## Injection and untrusted input
 
 Transcript text is treated as untrusted content: prompt-injection-in-
-transcript is a tested synthetic fixture (Phase 40), SOAP sections are
-assembled deterministically rather than from model prose, and appended
-directives / batch-order tricks / semantic collisions are adversarially
-covered (Phase 42).
+transcript is a tested synthetic fixture (Phase 40), the objective,
+assessment and plan SOAP sections are deterministic (objective only from
+verified spoken vital values; assessment/plan always fixed safe strings,
+model text discarded), and appended directives / batch-order tricks /
+semantic collisions are adversarially covered (Phase 42). The subjective
+section remains model-written draft text that is NOT evidence-verified
+and is labelled as such next to the section in the review UI.
 
 ## Data loss and deletion semantics
 
@@ -44,9 +47,11 @@ covered (Phase 42).
   until the user confirms discard in the UI (inline two-step confirmation
   stating the data loss).
 - Queue deletion happens only on acknowledged sync success or confirmed
-  discard. Delivery is at-least-once: a lost acknowledgement after a server
-  write can duplicate on retry; server-side dedup is not verified and not
-  claimed.
+  discard. Delivery is NOT guaranteed: records on supported routes are
+  retried while they remain queued, but a user-confirmed discard or a record
+  type with no backend route can mean the data is never delivered at all.
+  Conversely, a lost acknowledgement after a server write can duplicate on
+  retry; server-side dedup is not verified and not claimed.
 - Record types without a verified backend route are never counted as synced
   and never deleted; they remain queued and surface via attention.
 

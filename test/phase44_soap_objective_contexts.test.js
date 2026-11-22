@@ -64,6 +64,8 @@ check('subjective-not-verified label exported',
 {
   const consoleSource = readFileSync(new URL('../src/components/ClinicalConsole.jsx', import.meta.url), 'utf8');
   check('console renders subjective-not-verified boundary', consoleSource.includes('SUBJECTIVE_NOT_VERIFIED_LABEL'));
+  const mobileSource = readFileSync(new URL('../src/mobile/MScribeFlow.jsx', import.meta.url), 'utf8');
+  check('mobile review renders subjective-not-verified boundary', mobileSource.includes('SUBJECTIVE_NOT_VERIFIED_LABEL'));
 }
 
 console.log(`\nphase44_soap_objective_contexts: ${passed}/${passed + failed} passed`);

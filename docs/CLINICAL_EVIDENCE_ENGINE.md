@@ -31,9 +31,14 @@ papered over with fabricated content.
    otherwise the explicitly-labeled fallback runs, or the flow reports AI
    unavailable. A null model response is always "AI unavailable", never an
    "incomplete draft".
-3. Candidates are verified against source spans; SOAP sections are assembled
-   **deterministically** from verified values (model prose never lands in a
-   clinical section directly).
+3. Candidates are verified against source spans; the objective,
+   assessment and plan sections are **deterministic**: objective is
+   generated only from verified spoken vital values, and assessment/plan
+   are always fixed safe strings with model text discarded unconditionally.
+   The subjective section remains model-written draft text that is NOT
+   evidence-verified; the review UI labels it as such next to the section
+   and it is always presented as an editable draft in the clinician review
+   step.
 4. The clinician reviews, edits, accepts or rejects with reasons; only
    approved, supported records are eligible for export.
 5. Export produces the FHIR-shaped draft bundle (local research draft, not

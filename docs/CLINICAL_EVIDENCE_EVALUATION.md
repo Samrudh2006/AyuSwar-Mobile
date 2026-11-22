@@ -16,8 +16,12 @@ environment it is a labeled conditional skip, never a pass.
 
 ## 1. Extraction safeguards (rules layer)
 
-The SOAP draft pipeline never trusts model text into clinical sections;
-sections are assembled deterministically and vital signs pass context guards.
+The SOAP draft pipeline never trusts model text into the objective,
+assessment and plan sections: objective is generated only from verified
+spoken vital values and assessment/plan are always fixed safe strings.
+The subjective section remains model-written draft text that is NOT
+evidence-verified; the review UI (desktop and mobile) labels it as such
+next to the section.
 
 | Guard class | Covered by | Cases |
 |---|---|---|
