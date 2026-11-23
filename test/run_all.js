@@ -83,6 +83,14 @@ const suites = [
   { name: 'Phase 54: Clause-Scope Negation and Question Guards', file: 'test/phase54_clause_scope_guards.test.js', count: 14 }
 ];
 
+// Optional bounded rerun for slow environments: AYUSWAR_SUITE_RANGE="start:end"
+// (1-based inclusive positions in the list above) runs only that slice and the
+// report header records the range. Unset = the full suite, unchanged behaviour.
+const suiteRange = (process.env.AYUSWAR_SUITE_RANGE || '').match(/^(\d+):(\d+)$/);
+const rangedSuites = suiteRange
+  ? suites.slice(Math.max(0, parseInt(suiteRange[1], 10) - 1), parseInt(suiteRange[2], 10))
+  : suites;
+
 console.clear();
 console.log(`${C.gold}${C.bold}╔══════════════════════════════════════════════════════════════════════════╗${C.reset}`);
 console.log(`${C.gold}${C.bold}║    AYUSWAR AI (ఆయుస్వర) — AUTOMATED VERIFICATION SUITE                ║${C.reset}`);
@@ -148,7 +156,7 @@ function parseSuiteResult(output, expectedCount) {
   return { executed, skipped, countMismatch: executed !== expectedCount };
 }
 
-for (const suite of suites) {
+for (const suite of rangedSuites) {
   const suiteStarted = Date.now();
   process.stdout.write(`${C.cyan}▸ Running ${suite.name}...${C.reset} `);
   try {
