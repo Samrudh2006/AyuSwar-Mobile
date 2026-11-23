@@ -69,22 +69,78 @@ export function verifyCandidate(session, candidate) {
     return fail(VERIFICATION_STATUS.INVALID_SOURCE, 'medication instruction attributed to a non-doctor utterance');
   }
 
+  // Shared boundary positions for the question and negation scope rules.
+  // Sentence breaks end a statement; clause breaks (, ; :) and the
+  // contrastive conjunction "but" bound how far a FOLLOWING question mark
+  // or negation marker can reach back to this span.
+  const SENTENCE_BREAKS = ['.', '!', '?', '\u0964'];
+  const text = utterance.text;
+  const beforeSpan = text.slice(0, candidate.startOffset);
+  const afterSpan = text.slice(candidate.endOffset);
+  const sentenceStart = Math.max(...SENTENCE_BREAKS.map(c => beforeSpan.lastIndexOf(c))) + 1;
+  const sentenceEndRel = SENTENCE_BREAKS.map(c => afterSpan.indexOf(c)).filter(i => i !== -1)
+    .reduce((min, i) => Math.min(min, i), Infinity);
+  const sentenceEndChar = sentenceEndRel === Infinity ? '' : afterSpan.charAt(sentenceEndRel);
+  // English interrogative openings: wh-words, auxiliary inversions and
+  // "any ...". English-only BY DESIGN: Indic questions keep the stricter
+  // whole-sentence treatment below and are never released by clause rules.
+  const INTERROGATIVE_OPEN = /^\s*(?:what|when|where|which|who|whom|whose|why|how|any|do|does|did|is|are|was|were|am|can|could|will|would|shall|should|have|has|had|may|might|must)\b/i;
+
   // A span inside a question is not a finding ("Do you have a fever?").
+  // The question check is clause-aware: an affirmed clause that only SHARES
+  // a sentence with a later, separate question stays a finding
+  // ("I have a fever, do you know why?" - the fever is affirmed; only
+  // "do you know why?" is the question). A span whose sentence ends in "?"
+  // is still held when the sentence opens interrogatively (every span is
+  // part of the question), when the span's own clause reaches the question
+  // mark, or when the trailing clause holding the "?" is not itself
+  // interrogative (tag questions such as "You have a fever, right?" stay
+  // held). Anything unresolvable fails closed.
   {
-    const before = utterance.text.slice(0, candidate.startOffset).split(/[.!?\u0964]/).pop();
-    const after = utterance.text.slice(candidate.endOffset);
-    const tail = after.split(/[.!?\u0964]/)[0];
-    const endChar = after.charAt(tail.length);
-    if (candidate.sourceQuote.includes('?') || (endChar === '?' && before !== undefined)) {
+    if (candidate.sourceQuote.includes('?')) {
       return fail(VERIFICATION_STATUS.AMBIGUOUS, 'span is inside a question, not a finding');
+    }
+    if (sentenceEndChar === '?') {
+      const sentence = text.slice(sentenceStart, candidate.endOffset + sentenceEndRel);
+      const clauseBreakRel = afterSpan.slice(0, sentenceEndRel).search(/[,;:]/);
+      if (
+        INTERROGATIVE_OPEN.test(sentence) ||
+        clauseBreakRel === -1 ||
+        !INTERROGATIVE_OPEN.test(afterSpan.slice(clauseBreakRel + 1, sentenceEndRel))
+      ) {
+        return fail(VERIFICATION_STATUS.AMBIGUOUS, 'span is inside a question, not a finding');
+      }
+      notes.push('question mark belongs to a later separate interrogative clause; affirmed clause treated as a finding');
     }
   }
 
-  // Negation window: negation marker within 40 chars on either side of the
-  // span (Telugu/Hindi negation often FOLLOWS the noun: "అలర్జీ లేదు").
-  const lo = Math.max(0, candidate.startOffset - 40);
-  const hi = Math.min(utterance.text.length, candidate.endOffset + 40);
-  const window = (utterance.text.slice(lo, candidate.startOffset) + ' ' + utterance.text.slice(candidate.endOffset, hi)).toLowerCase();
+  // Negation scope: a marker negates the span only when it can govern it.
+  // - A marker BEFORE the span applies across the same sentence (up to 40
+  //   chars back): commas do not break forward scope, so "No fever, cough
+  //   or cold" still holds the whole list, but a sentence break does, so
+  //   "I have a cough. No fever." no longer holds the affirmed cough.
+  // - A marker AFTER the span applies only within the same clause, bounded
+  //   by , ; : a sentence break or "but": "headache but without fever"
+  //   holds fever while the affirmed headache stays exportable, and Telugu
+  //   post-noun negation ("అలర్జీ లేదు") sits in the same clause.
+  // Documented remaining limits (fail closed): double negation, sarcasm,
+  // hedging; a contrastive "but" does NOT reset forward scope, so
+  //   "no cough but fever" still holds fever; Indic clause detection uses
+  // the same punctuation set without language-specific conjunctions.
+  const preWindow = beforeSpan.slice(Math.max(sentenceStart, beforeSpan.length - 40));
+  let postLimit = afterSpan.length;
+  const clauseBreakPost = afterSpan.search(/[,;:.!?\u0964]/);
+  if (clauseBreakPost !== -1) postLimit = Math.min(postLimit, clauseBreakPost);
+  const butMatch = /\bbut\b/i.exec(afterSpan);
+  if (butMatch && butMatch.index < postLimit) postLimit = butMatch.index;
+  const postWindow = afterSpan.slice(0, Math.min(postLimit, 40));
+  const window = (preWindow + ' ' + postWindow).toLowerCase();
+  // Legacy full-context window (40 chars on both sides, crossing sentence
+  // and clause breaks). Kept for two purposes: the temporal cue scan below
+  // (a HISTORICAL label is metadata, it never gates export, so its heuristic
+  // window is deliberately unchanged) and the transparency note recording a
+  // marker that was seen but lies outside the span's grammatical scope.
+  const legacyWindow = (beforeSpan.slice(Math.max(0, beforeSpan.length - 40)) + ' ' + afterSpan.slice(0, 40)).toLowerCase();
   // Short Hindi marker 'ना' is also a substring of unrelated words (e.g. खाना),
   // so it must match as a whole token; the other markers keep substring matching.
   // Substring matching does NOT cover polite suffixed forms such as లేదండి
@@ -99,7 +155,10 @@ export function verifyCandidate(session, candidate) {
   const negated = negatedContext || negatedQuote;
   if (negatedContext) notes.push('negation marker near span; treat as absent/ruled-out context');
   if (negatedQuote) notes.push('negation marker in source quote; treat as absent/ruled-out context');
-  const temporalStatus = TEMPORAL_HISTORICAL_ENGLISH.test(window) ? 'HISTORICAL' : 'UNKNOWN';
+  if (!negatedContext && containsNegationMarker(legacyWindow)) {
+    notes.push('negation marker present outside span scope (different sentence/clause); not treated as negated context');
+  }
+  const temporalStatus = TEMPORAL_HISTORICAL_ENGLISH.test(legacyWindow) ? 'HISTORICAL' : 'UNKNOWN';
 
   // Contradiction: same normalized concept, incompatible other candidate.
   const siblings = (session.evidence || []).filter(e =>

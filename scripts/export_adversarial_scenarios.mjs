@@ -228,6 +228,9 @@ const out = {
 };
 const dir = path.resolve(root, 'AYUSWAR-TECHNICAL-EVIDENCE/03-CLINICAL-SAFETY');
 mkdirSync(dir, { recursive: true });
-writeFileSync(path.join(dir, 'ADVERSARIAL_SCENARIOS_2026-11-22.json'), JSON.stringify(out, null, 2) + '\n');
+// Output file is date-stamped from the run itself: every run writes a NEW
+// dated artifact and never overwrites an earlier accepted baseline.
+const runDate = out.generatedAt.slice(0, 10);
+writeFileSync(path.join(dir, `ADVERSARIAL_SCENARIOS_${runDate}.json`), JSON.stringify(out, null, 2) + '\n');
 console.log(JSON.stringify(out.totals));
 for (const x of results) if (x.result==='FAIL') console.log('FAIL', x.id, x.proposalCategory, JSON.stringify(x.actualBehaviour));

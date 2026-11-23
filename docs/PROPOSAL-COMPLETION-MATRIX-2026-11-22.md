@@ -119,3 +119,19 @@ Remaining gaps inside the folder: the red-team ledger is text-level only. DEPLOY
 - No 30-50 AUDIO-scenario red-team lab. There ARE 39 purpose-authored TEXT scenarios (35 PASS / 4 retained fail-closed FAILs) and delivered red-team/evaluation PDFs. Text fixtures are not audio/clinical coverage.
 - Exactly-once delivery is not claimed: exponential backoff exists, and client idempotency keys are generated and surfaced when the backend advertises the column; server-side dedupe (UNIQUE + upsert) is documented but not applied or verified.
 - No native install, device runtime, or production deployment claims.
+
+## Addendum 2026-11-23: adversarial limitation classes (a) and (b) repaired in source
+
+The two retained fail-closed limitation classes in the adversarial row above —
+(a) marker-window over-negation (ADV-03/25/27) and (b) affirmed clause ending
+in a question (ADV-39) — were repaired in source on 2026-11-23. Change record:
+`docs/EVIDENCE-SPAN-GUARDS-CLAUSE-SCOPE-2026-11-23.md`. Rerun of the unchanged
+39 purpose-authored scenarios: 39 PASS / 0 FAIL
+(`03-CLINICAL-SAFETY/ADVERSARIAL_SCENARIOS_2026-11-23.json`; the 2026-11-22
+ledger and PRE-FIX runs are preserved). ADV-19 additionally now passes
+non-vacuously: its affirmed HISTORICAL paracetamol mention exports instead of
+being silently over-held. 14 new Phase 54 regression checks pin both the
+releases and every preserved hold. Verdicts are provisional pending independent
+audit; the row above stays as the dated 2026-11-22 record. Scope unchanged:
+text-level guard checks only — audio scenarios, real consultations,
+dose-safety and allergy-interaction checking remain open as stated.

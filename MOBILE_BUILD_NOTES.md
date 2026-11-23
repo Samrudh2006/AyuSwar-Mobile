@@ -2,6 +2,13 @@
 
 Privacy-corrected historical notes: product findings, build measurements and evaluation results are retained; private conversation locators, delivery records and operational instructions are omitted. Earlier Git history and previously downloaded copies are not erased.
 
+## 2026-11-23 — clause-scope guard repair (v0.3.43 candidate)
+- Repaired the two retained fail-closed adversarial limitation classes (ADV-03/25/27 over-negation across sentence/clause breaks; ADV-39 affirmed clause before a separate question). Change record: docs/EVIDENCE-SPAN-GUARDS-CLAUSE-SCOPE-2026-11-23.md.
+- Rerun of unchanged 39 scenarios: 39/39 PASS into new dated file ADVERSARIAL_SCENARIOS_2026-11-23.json (2026-11-22 baseline + PRE-FIX runs preserved). ADV-19 now passes non-vacuously (HISTORICAL paracetamol mention exports; negated fever held).
+- New Phase 54 suite: 14 clause-scope regression checks (releases + preserved holds). Phase 53 unchanged at 42/42.
+- Adversarial exporter now date-stamps output so reruns never overwrite baselines.
+- Provisional until independent audit; no styling changes (user reviewing screens for colour/font feedback).
+
 ## Environment
 - Source: workspace box /tmp/ayuswar (from Samrudh2006/Ayuswar-Ai, 308 files, binaries re-fetched from live site)
 - Build: `cd /tmp/ayuswar && npm run build` (vite + prerender). APK: `cd /tmp/ayuswar/android && JAVA_HOME=/downloads/builddeps/jdk-21.0.13+9 ANDROID_HOME=/downloads/builddeps/android-sdk ./gradlew assembleDebug` → app/build/outputs/apk/debug/app-debug.apk
